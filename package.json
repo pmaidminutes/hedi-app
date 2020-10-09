@@ -1,0 +1,24 @@
+{
+  "name": "hedi-app",
+  "version": "0.1.0",
+  "description": "HEDI App - web server and client",
+  "author": "aidminutes GmBH",
+  "license": "MIT",
+  "scripts": {
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "9.5.4",
+    "react": "16.13.1",
+    "react-dom": "16.13.1",
+    "sass": "^1.27.0",
+    "swr": "^0.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^14.11.2",
+    "@types/react": "^16.9.49",
+    "typescript": "^4.0.2"
+  }
+}
