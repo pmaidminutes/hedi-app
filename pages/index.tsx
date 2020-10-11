@@ -11,6 +11,11 @@ export default function Index() {
           HEDI App
         </h1>
         <p>HEDI App index, up and running</p>
+        <nav>
+          choose your language
+          <li><a href="de">Deutsch</a></li>
+          <li><a href="en">English</a></li>
+        </nav>
      </main>
     </div>
   )
