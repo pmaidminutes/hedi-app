@@ -7,7 +7,9 @@
 
 import { GetStaticPaths, GetStaticProps } from 'next'
 import Head from 'next/head'
+import {Content, SideNav, SideNavLink} from 'carbon-components-react'
 import { ILanguageKey, ILanguageParam } from '../../common/types'
+
 
 export const getStaticPaths: GetStaticPaths<ILanguageParam> = async () => {
   return {
@@ -30,16 +32,20 @@ export default function IndexWithLanguage(props: ILanguageKey) {
       <Head>
         <title>HEDI App index</title>
       </Head>
-      <main>
+      <SideNav
+        isFixedNav
+        expanded={true}
+        isChildOfHeader={false}
+      >
+        <SideNavLink href={lang+'/search'}>Search</SideNavLink>
+        <SideNavLink href={lang+'/chat'}>Chat</SideNavLink>
+      </SideNav>
+      <Content>
         <h1>
           HEDI App - {lang}
         </h1>
         <p>HEDI App index in {lang}, up and running</p>
-        <nav>
-          <li><a href={lang+'/search'}>search</a></li>
-          <li><a href={lang+'/chat'}>chat</a></li>
-        </nav>
-     </main>
+     </Content>
     </div>
   )
 }
