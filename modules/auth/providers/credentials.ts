@@ -1,5 +1,5 @@
 import Providers from 'next-auth/providers';
-import { authorizeWithCredentials } from '../flow/authorizeWithCredentials';
+import { authorizeWithCredentials, IsIHTTPError } from '../flow/authorizeWithCredentials';
 
 interface ICredentials {
   csrfToken: string
@@ -21,9 +21,15 @@ export const credentialProvider =
     authorize: async (credentials: any) => { //input type is not typed correctly
       const { username, password, csrfToken } = credentials as ICredentials;
       
-      // TODO: [auth] error handling and error messages
-      if (username && password) 
-        return authorizeWithCredentials(username, password, csrfToken)
+      if (username && password) {
+        const response = await authorizeWithCredentials(username, password, csrfToken);
+        if (IsIHTTPError(response)) {
+          // Error or custom uri (as pure string) can be passed here
+          return Promise.reject(new Error(response.text));
+        } else {
+          return response;
+        }
+      }
       else
         return null;
     }

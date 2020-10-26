@@ -12,3 +12,12 @@ export interface IUserInfoResponse {
   email: string
 }
 
+// TODO discuss a common interface for all modules and refactor
+export interface IHTTPError {
+  code: number
+  text: string
+}
+
+export function IsIHTTPError(arg: any): arg is IHTTPError  {
+  return ('code' in arg) && ('text' in arg);
+}

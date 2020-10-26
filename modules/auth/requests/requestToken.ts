@@ -1,5 +1,5 @@
 import * as querystring from 'querystring';
-import { ITokenResponse } from './types';
+import { IHTTPError, ITokenResponse } from './types';
 import { csrfObject } from '../utils';
 
 export async function requestToken(username: string, password: string, csrfToken: string) {
@@ -12,7 +12,7 @@ export async function requestToken(username: string, password: string, csrfToken
     client_secret: process.env.NEXTAUTH_CMS_SECRET
   }
 
-  return fetch(
+  const response = await fetch(
     process.env.NEXTAUTH_CMS_URL+'/oauth2/token',
     {
       method: 'POST',
@@ -22,5 +22,9 @@ export async function requestToken(username: string, password: string, csrfToken
       },
       body: querystring.stringify(body)
     }
-  ).then(res => res.json() as Promise<ITokenResponse>);
+  );
+  if (response.status === 400)
+    return response.json() as Promise<ITokenResponse>;
+  else 
+    return { code: response.status, text: response.statusText } as IHTTPError;
 }
