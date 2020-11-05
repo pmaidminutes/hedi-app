@@ -3,7 +3,7 @@
  * 
  * for language switching see ../index.tsx
  */
-import Head from '../search/node_modules/next/head'
+import Head from 'next/head'
 
 export default function ChatIndex() {
   return (
