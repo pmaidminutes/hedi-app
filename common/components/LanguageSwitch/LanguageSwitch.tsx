@@ -4,14 +4,15 @@ import { ChangeEvent } from "react";
 
 interface LanguageSwitchProps {
 	locales: string[] | undefined;
-	locale: string | undefined;
+  locale: string | undefined;
+  path?: string;
 }
 
-export const LanguageSwitch = ({ locales, locale }: LanguageSwitchProps) => {
+export const LanguageSwitch = ({ locales, locale, path = '/' }: LanguageSwitchProps) => {
 	const router = useRouter();
 
 	const handleValueChange = (event: ChangeEvent<HTMLSelectElement>) => {
-		router.push("/", "/", { locale: event.currentTarget.value });
+		router.push(path, path, { locale: event.currentTarget.value });
 	};
 
 	return (
