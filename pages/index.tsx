@@ -12,6 +12,7 @@ export default function Index() {
         isFixedNav
         expanded={true}
         isChildOfHeader={false}
+        aria-label="Side Navigation"
       >
         <SideNavLink href="de">Deutsch</SideNavLink>
         <SideNavLink href="en">English</SideNavLink>
