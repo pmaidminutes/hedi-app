@@ -1,24 +1,19 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
-import { LanguageSwitch } from "../common/components";
+import { LanguageSwitch, CustomSideNavLink } from "../common/components";
 
 import {
 	Content,
 	SideNav,
-	SelectItem,
-	Select,
-	ListItem,
+  ListItem,
+  SideNavLink
 } from "carbon-components-react";
-import { ChangeEvent } from "react";
 
 export default function Index() {
 	const router = useRouter();
 	const { locale, locales, defaultLocale, pathname } = router;
 
-	const handleValueChange = (event: ChangeEvent<HTMLSelectElement>) => {
-		router.push("/", "/", { locale: event.currentTarget.value });
-	};
 	return (
 		<div>
 			<Head>
@@ -32,7 +27,9 @@ export default function Index() {
 			>
         <ListItem>
           <LanguageSwitch locale={locale} locales={locales} />
-				</ListItem>
+        </ListItem>
+        <SideNavLink href="/chat">Chat</SideNavLink>
+        <CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
 			</SideNav>
 			<Content>
 				<h1>HEDI App</h1>
