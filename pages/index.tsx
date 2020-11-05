@@ -4,19 +4,18 @@ import { useRouter } from "next/router";
 import {
 	Content,
 	SideNav,
-	SideNavLink,
 	SelectItem,
 	Select,
 	ListItem,
 } from "carbon-components-react";
+import { ChangeEvent } from "react";
 
 export default function Index() {
 	const router = useRouter();
-	const { locale, locales, defaultLocale } = router;
+	const { locale, locales, defaultLocale, pathname } = router;
 
-	const handleValueChange = (e) => {
-		console.log("change", e.currentTarget.value);
-		router.push("/", "/", { locale: e.currentTarget.value });
+	const handleValueChange = (event: ChangeEvent<HTMLSelectElement>) => {
+		router.push("/", "/", { locale: event.currentTarget.value });
 	};
 	return (
 		<div>
@@ -35,19 +34,22 @@ export default function Index() {
 						defaultValue={locale}
 						invalidText="A valid value is required"
 						labelText="Select Language"
-						onChange={handleValueChange}
+						onChange={(e: ChangeEvent<HTMLSelectElement>) =>
+							handleValueChange(e)
+						}
 					>
-						{locales.map((lang, index) => (
-							<SelectItem value={lang} text={lang} key={index} />
-						))}
+						{locales !== undefined
+							? locales.map((lang, index) => (
+									<SelectItem value={lang} text={lang} key={index} />
+							  ))
+							: null}
 					</Select>
 				</ListItem>
-				<SideNavLink href="de">Deutsch</SideNavLink>
-				<SideNavLink href="en">English</SideNavLink>
 			</SideNav>
 			<Content>
 				<h1>HEDI App</h1>
 				<p>HEDI App index, up and running</p>
+				<p>{pathname}</p>
 				<p>Current locale: {locale}</p>
 				<p>Default locale: {defaultLocale}</p>
 				<p>Configured locales: {JSON.stringify(locales)}</p>
