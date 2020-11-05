@@ -1,6 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 
+import { LanguageSwitch } from "../common/components";
+
 import {
 	Content,
 	SideNav,
@@ -28,22 +30,8 @@ export default function Index() {
 				isChildOfHeader={false}
 				aria-label="Side Navigation"
 			>
-				<ListItem>
-					<Select
-						id="language-switch"
-						defaultValue={locale}
-						invalidText="A valid value is required"
-						labelText="Select Language"
-						onChange={(e: ChangeEvent<HTMLSelectElement>) =>
-							handleValueChange(e)
-						}
-					>
-						{locales !== undefined
-							? locales.map((lang, index) => (
-									<SelectItem value={lang} text={lang} key={index} />
-							  ))
-							: null}
-					</Select>
+        <ListItem>
+          <LanguageSwitch locale={locale} locales={locales} />
 				</ListItem>
 			</SideNav>
 			<Content>
