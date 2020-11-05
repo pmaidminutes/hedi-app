@@ -9,7 +9,7 @@ export default class HEDIDocument extends Document {
     const APP_NAME = 'HEDI App';
 
     return (
-      <Html>
+      <Html >
         <Head>
           <meta name='application-name' content={APP_NAME} />
         </Head>
