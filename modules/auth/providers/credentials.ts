@@ -1,5 +1,6 @@
 import Providers from 'next-auth/providers';
-import { authorizeWithCredentials, IsIHTTPError } from '../flow/authorizeWithCredentials';
+import { authorizeWithCredentials } from '../flow';
+import { IsIHTTPError } from '../requests';
 
 interface ICredentials {
   csrfToken: string

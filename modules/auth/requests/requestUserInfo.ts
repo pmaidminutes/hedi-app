@@ -1,12 +1,16 @@
-import { IUserInfoResponse } from './types';
+import { IHTTPError, IUserInfoResponse } from './types';
 import { authHeader } from '../utils';
 
 export async function requestUserInfo(accessToken: string, csrfToken: string) {
-  return fetch(
+  const response = await fetch(
     process.env.NEXTAUTH_CMS_URL+'/oauth2/UserInfo',
     {
       method: 'GET',
       headers: authHeader({ accessToken, csrfToken })
     }
-  ).then(res => res.json() as Promise<IUserInfoResponse>)
+  );
+  if (response.status === 200)
+    return response.json() as Promise<IUserInfoResponse>;
+  else 
+    return { code: response.status, text: response.statusText } as IHTTPError;
 }
