@@ -1,10 +1,10 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import NextAuth from 'next-auth';
 import { getToken } from 'next-auth/jwt';
-import { authorizeService, IUserAuth } from './flow';
-import { getOptions } from './initOptions';
-import { IsIHTTPError } from "./requests";
-import { authHeader } from './utils';
+import { authorizeService, IAuth, IUserAuth } from '../flow';
+import { getOptions } from '../initOptions';
+import { IsIHTTPError } from "../requests";
+import { authHeader } from '../utils';
 
 export const withAuth = async (req: NextApiRequest, res: NextApiResponse, debug?: boolean) => {
   return NextAuth(req, res, getOptions(debug));
@@ -20,7 +20,11 @@ export const getUserAuthHeader = async (req: NextApiRequest):Promise<IUserAuth|o
   return (auth) ? authHeader(auth) : {};
 }
 
-export const serviceAuth = async (username: string, password: string) => {
+export const getServiceAuth = async (username: string, password: string):Promise<IAuth|object> => {
   const auth = await authorizeService(username, password);
   return IsIHTTPError(auth) ? {} : auth;
+}
+
+export const getAuthHeader = (auth: IAuth) => {
+  return authHeader(auth);
 }

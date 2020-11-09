@@ -1,12 +1,12 @@
 import { expiryObject, oauthNow } from '../utils';
 import { requestRefresh } from '../requests';
-import { IUserAuth } from './types';
+import { IAuth } from './types';
 
-export async function tryRefresh(userAuth: IUserAuth) {
-  if ( oauthNow() < (userAuth.exp - 30) )
-    return userAuth;
+export async function tryRefresh<T extends IAuth>(auth: T) {
+  if ( oauthNow() < (auth.exp - 30) )
+    return auth;
 
-  const { refreshToken, csrfToken } = userAuth;
+  const { refreshToken, csrfToken } = auth;
   const tokenResp = await requestRefresh(refreshToken, csrfToken);
   if (!tokenResp.access_token)
     return null;
@@ -14,10 +14,10 @@ export async function tryRefresh(userAuth: IUserAuth) {
   const { iat, exp } = expiryObject(tokenResp.expires_in);
   
   return {
-    ...userAuth,
+    ...auth,
     accessToken: tokenResp.access_token,
     refreshToken: tokenResp.refresh_token,
     iat,
     exp
-  } as IUserAuth; 
+  } as IAuth; 
 }
