@@ -1,15 +1,24 @@
 import Head from 'next/head';
 import useSWR from 'swr';
 import { getUser } from '../../modules/auth/client';
-import { Content, Tile } from 'carbon-components-react'
+import { Content, Tile, TextInput, Button } from 'carbon-components-react'
+import { useState, useRef } from 'react';
 
 export default function AuthSandbox() {
   // session is null, if user is not logged in
   const [ user, loading ] = getUser();
+  const [ pwd, setPwd ] = useState('');
+  const pwdInput = useRef<any>(null);
 
+  function handleClick()  {
+    const input = pwdInput.current;
+    if (input && input.value) {
+      setPwd(input.value);
+    }
+  }
   // just a demo api call, in this case it returns the authorization header
   // no need to check via session, if user is logged in. api has it's own func to know that
-  const { data, error } = useSWR('/api/sandbox/apiAuthDemo', async (url) => fetch(url).then(res => res.json()))
+  const { data, error } = useSWR(`/api/sandbox/apiAuthDemo${(pwd) ? '?pwd='+encodeURIComponent(pwd) : '' }`, async (url) => fetch(url).then(res => res.json()))
   return (
     <div>
       <Head>
@@ -33,6 +42,10 @@ export default function AuthSandbox() {
               <h3>no user stored in client session</h3>
             </Tile>
         }
+        <Tile>
+          <TextInput id="pwd" labelText="service Password" ref={pwdInput} />
+          <Button onClick={handleClick}>Send</Button>
+        </Tile>
         {
           (!error && data) ?
             <Tile>
