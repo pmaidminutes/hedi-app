@@ -22,5 +22,5 @@ export const getUserAuthHeader = async (req: NextApiRequest):Promise<IUserAuth|o
 
 export const serviceAuth = async (username: string, password: string) => {
   const auth = await authorizeService(username, password);
-  return IsIHTTPError(auth) ? null : {};
+  return IsIHTTPError(auth) ? {} : auth;
 }
