@@ -20,3 +20,13 @@ in [`tsconfig.json`](./tsconfig.json) you can configure alias routes.
 ### api
 
 `./pages/api/*` since this is not meant as an api for third party intergration but just as means of communication between HEDI client and server, the path segemnts can easily stick to module naming convention
+
+## Internationalization
+
+Configuring the available languages and add autodetection is available in the file `next.config.js`.
+To link language aware to a site with self slug, use the `next/link` component.
+
+For different slugs, we have to build our own resolver.
+
+You can use `import {useRouter} from 'next/router'` to get locale, locales, defaultLocale on the site.
+See [here](./pages/index.tsx)

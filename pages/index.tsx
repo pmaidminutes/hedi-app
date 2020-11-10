@@ -1,13 +1,13 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-
+import Link from "next/link";
 import { LanguageSwitch, CustomSideNavLink } from "../common/components";
 
 import {
 	Content,
 	SideNav,
-  ListItem,
-  SideNavLink
+	ListItem,
+	SideNavLink,
 } from "carbon-components-react";
 
 export default function Index() {
@@ -25,13 +25,16 @@ export default function Index() {
 				isChildOfHeader={false}
 				aria-label="Side Navigation"
 			>
-        <ListItem>
-          <LanguageSwitch locale={locale} locales={locales} />
+				<ListItem>
+					<LanguageSwitch locale={locale} locales={locales} />
 				</ListItem>
 				<ListItem>This link wont work with language transition</ListItem>
-        <SideNavLink href="/chat">Chat</SideNavLink>
+				<SideNavLink href="/en/chat">Chat</SideNavLink>
 				<ListItem>This link will</ListItem>
-        <CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
+				<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
+				<Link href="/search" shallow={true}>
+					Search
+				</Link>
 			</SideNav>
 			<Content>
 				<h1>HEDI App</h1>
