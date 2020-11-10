@@ -16,9 +16,8 @@ import {
 } from "carbon-components-react";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-	const segments = await getAllCategoryData()
+	// const segments = await getAllCategoryData()
 
-	console.log({segments})
 
 	const paths = [{ params: { segment: ["/start"] } }];
 	return { paths, fallback: false };

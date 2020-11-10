@@ -28,8 +28,9 @@ export async function getAllCategoryData(lang: string = "de") {
 	const result = await request(BASE_URL + GQL_PUBLIC, query)
 		.then((data) => data)
 		.catch((e) => console.warn("error", e));
-	addSlug(result.categories);
+	// const segments = addSlug(result.categories);
 	return result.categories ?? [];
+	// return segments;
 }
 
 function addSlug(categories: ICategory[]) {
