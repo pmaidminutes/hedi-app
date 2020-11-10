@@ -37,13 +37,18 @@ one index exporting them all breaks next
 * __withAuth:__ sets up NextAuth api handler (in `/api/auth[...nextauth].ts`)
 * __getUserAuthHeader:__ returns the required oauth login header, if available
 * __getUserAuth:__ returns userinfo and tokens
+* __getServiceAuth:__ log in as service user, doesn't store credentials into session, server side only use
+* __getAuthHeader:__ returnes an http auth header (csrf + auth bearer) given an IAuth structure
 
 ### client
 * __getUser:__ hook to retrieve username and email
 
 ### demo
 * `sandbox/auth` in browser
-* `/api/sandbox/auth` serverside api example
+* `/api/sandbox/authDemo` serverside api example
+* `sandbox/apiAuth` demo service api only login
+* `/api/sandbox/apiAuthDemo` demo service api only login
+
 
 ## TODOs
 * login flow error handling
