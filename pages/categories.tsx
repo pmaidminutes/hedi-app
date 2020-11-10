@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { LanguageSwitch } from "../common/components";
 import {
 	getAllCategoryData,
-	ICategories,
+	ICategory,
 } from "../modules/articles/categories";
 import { GetStaticProps } from "next";
 
@@ -14,14 +14,14 @@ export const getStaticProps: GetStaticProps<any> = async ({
 	locales,
 }) => {
 	const categories = await getAllCategoryData(locale);
-	console.log({ categories });
+
 	return { props: { locales, locale, categories } };
 };
 
 interface ICategoriesProps {
 	locales: string[];
 	locale: string;
-	categories: ICategories[];
+	categories: ICategory[];
 }
 
 export default function Categories({
@@ -30,7 +30,8 @@ export default function Categories({
 	categories,
 }: ICategoriesProps) {
 	const router = useRouter();
-	const { pathname } = router;
+  const { pathname } = router;
+  categories.forEach(category=> console.log(category.categories))
 	console.log({ categories });
 	return (
 		<div>

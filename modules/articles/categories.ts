@@ -1,5 +1,6 @@
 import { request, gql } from "graphql-request";
 import { BASE_URL, GQL_PUBLIC } from "../../common/urls";
+import { slugifyTitle } from "../../common/utils";
 
 export async function getAllCategoryData(lang: string = "de") {
 	const query = gql`
@@ -27,15 +28,33 @@ export async function getAllCategoryData(lang: string = "de") {
 	const result = await request(BASE_URL + GQL_PUBLIC, query)
 		.then((data) => data)
 		.catch((e) => console.warn("error", e));
-	return (await result?.categories) ?? [];
+	addSlug(result.categories);
+	return result.categories ?? [];
 }
 
-export interface ICategories {
+function addSlug(categories: ICategory[]) {
+	return categories.forEach((category) => {
+		traverse(category);
+	});
+}
+
+function traverse(category: ICategory) {
+	category["slug"] = slugifyTitle(category.name);
+
+	if (category.categories !== undefined) {
+		for (const child of category.categories) {
+			const sub = traverse(child);
+		}
+	}
+}
+
+export interface ICategory {
+	slug: string;
 	id: string;
 	name: string;
 	parent?: string;
 	articles: IArticles[];
-	categories: ICategories[];
+	categories: ICategory[];
 }
 
 interface IArticles {
