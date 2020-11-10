@@ -1,6 +1,5 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import Link from "next/link";
 import { LanguageSwitch, CustomSideNavLink } from "../common/components";
 
 import {
@@ -32,9 +31,6 @@ export default function Index() {
 				<SideNavLink href="/en/chat">Chat</SideNavLink>
 				<ListItem>This link will</ListItem>
 				<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
-				<Link href="/search" shallow={true}>
-					Search
-				</Link>
 			</SideNav>
 			<Content>
 				<h1>HEDI App</h1>
