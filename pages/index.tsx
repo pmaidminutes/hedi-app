@@ -27,8 +27,10 @@ export default function Index() {
 			>
         <ListItem>
           <LanguageSwitch locale={locale} locales={locales} />
-        </ListItem>
+				</ListItem>
+				<ListItem>This link wont work with language transition</ListItem>
         <SideNavLink href="/chat">Chat</SideNavLink>
+				<ListItem>This link will</ListItem>
         <CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
 			</SideNav>
 			<Content>
