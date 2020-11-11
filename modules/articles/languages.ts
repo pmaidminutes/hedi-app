@@ -5,16 +5,14 @@ const GQL_PUBLIC = "/gql/public";
 export async function getAllLanguages(lang: string = "de") {
 	const query = gql`
 		{
-      {
-        languages {
-          isDefault
-          langcode
-          weight
-          isDefault
-          isRTL
-          translatedName(langcode:"de")
-        }
-      }
+			languages {
+				isDefault
+				langcode
+				weight
+				isDefault
+				isRTL
+				translatedName(langcode: ${`"${lang}"`})
+			}
 		}
 	`;
 

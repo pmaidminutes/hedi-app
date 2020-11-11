@@ -1,7 +1,10 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { GetStaticProps } from "next";
+// Modules
+import { ILanguage, getAllLanguages } from "../modules/articles/languages";
+// Components
 import { LanguageSwitch, CustomSideNavLink } from "../common/components";
-
 import {
 	Content,
 	SideNav,
@@ -9,9 +12,24 @@ import {
 	SideNavLink,
 } from "carbon-components-react";
 
-export default function Index() {
+export const getStaticProps: GetStaticProps<any> = async ({
+	locale,
+	locales,
+}) => {
+	const languages = await getAllLanguages(locale);
+
+	return { props: { locales, locale, languages } };
+};
+
+interface IIndexProps {
+	locales: string[];
+	locale: string;
+	languages: ILanguage[];
+}
+
+export default function Index({ locales, locale, languages }: IIndexProps) {
 	const router = useRouter();
-	const { locale, locales, defaultLocale, pathname } = router;
+	const { defaultLocale, pathname } = router;
 
 	return (
 		<div>
@@ -39,6 +57,16 @@ export default function Index() {
 				<p>Current locale: {locale}</p>
 				<p>Default locale: {defaultLocale}</p>
 				<p>Configured locales: {JSON.stringify(locales)}</p>
+				{languages.length > 0 ? (
+					<div>
+						<p>In drupal are the following languages available</p>
+						<ul>
+							{languages.map((language, index) => (
+								<li key={index}>{language.translatedName}</li>
+							))}
+						</ul>
+					</div>
+				) : null}
 			</Content>
 		</div>
 	);
