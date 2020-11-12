@@ -1,24 +1,43 @@
 import { request, gql } from "graphql-request";
 import { BASE_URL, GQL_PUBLIC } from "../../common/urls";
-import { slugifyTitle } from "../../common/utils";
 
-export async function getAllCategoryData(lang: string = "de") {
+export async function getAllSegments(lang: string = "de") {
 	const query = gql`
 		{
 			categories(langcode: ${`"${lang}"`}) {
 				id
 				name
-				articles {
-					id
-					title
-				}
+				path
+				parent
 				categories {
 					id
 					name
+					path
 					parent
 					articles {
 						id
 						title
+						path
+						category {
+							name
+						}
+						tags {
+							id
+							name
+						}
+					}
+				}
+				articles {
+					id
+					title
+					path
+					category {
+						id
+						name
+					}
+					tags {
+						id
+						name
 					}
 				}
 			}
@@ -28,37 +47,31 @@ export async function getAllCategoryData(lang: string = "de") {
 	const result = await request(BASE_URL + GQL_PUBLIC, query)
 		.then((data) => data)
 		.catch((e) => console.warn("error", e));
-	// const segments = addSlug(result.categories);
+	console.log({result})
 	return result.categories ?? [];
-	// return segments;
 }
-
-function addSlug(categories: ICategory[]) {
-	return categories.forEach((category) => {
-		traverse(category);
-	});
-}
-
-function traverse(category: ICategory) {
-	category["slug"] = slugifyTitle(category.name);
-
-	if (category.categories !== undefined) {
-		for (const child of category.categories) {
-			const sub = traverse(child);
-		}
-	}
-}
-
-export interface ICategory {
-	slug: string;
-	id: string;
+interface ICategoryBasic {
+	id: number;
 	name: string;
+}
+
+export interface ICategory extends ICategoryBasic {
+	id: number;
+	path: string;
 	parent?: string;
-	articles: IArticles[];
+	articles: IArticle[];
 	categories: ICategory[];
 }
 
-interface IArticles {
-	id: string;
+interface IArticle {
+	id: number;
 	title: string;
+	path: string;
+	category: ICategoryBasic;
+	tags: ITag;
+}
+
+interface ITag {
+	id: number;
+	name: string;
 }

@@ -1,10 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { LanguageSwitch } from "../common/components";
-import {
-	getAllCategoryData,
-	ICategory,
-} from "../modules/articles/categories";
+import { getAllSegments, ICategory } from "../modules/articles/categories";
 import { GetStaticProps } from "next";
 
 import { Content, SideNav, ListItem, Tabs, Tab } from "carbon-components-react";
@@ -13,7 +10,7 @@ export const getStaticProps: GetStaticProps<any> = async ({
 	locale,
 	locales,
 }) => {
-	const categories = await getAllCategoryData(locale);
+	const categories = await getAllSegments(locale);
 
 	return { props: { locales, locale, categories } };
 };
@@ -30,9 +27,7 @@ export default function Categories({
 	categories,
 }: ICategoriesProps) {
 	const router = useRouter();
-  const { pathname } = router;
-  categories.forEach(category=> console.log(category.categories))
-	console.log({ categories });
+	const { pathname } = router;
 	return (
 		<div>
 			<Head>
@@ -52,13 +47,13 @@ export default function Categories({
 				<Tabs>
 					{categories.length > 0
 						? categories.map((category) => (
-								<Tab label={category.name}>
+								<Tab key={category.id} label={category.name}>
 									{category.categories.length > 0 ? (
 										<>
 											<h2>Subcategories</h2>
 											<ul>
 												{category.categories.map((subcategory) => (
-													<li>{subcategory.name}</li>
+													<li key={subcategory.id}>{subcategory.name}</li>
 												))}
 											</ul>
 										</>
@@ -68,7 +63,7 @@ export default function Categories({
 											<h2>Articles</h2>
 											<ul>
 												{category.articles.map((article) => (
-													<li>{article.title}</li>
+													<li key={article.id}>{article.title}</li>
 												))}
 											</ul>
 										</>

@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useRouter } from "next/router";
 import {
 	ICategory,
-	getAllCategoryData,
+	getAllSegments,
 } from "../../modules/articles/categories";
 
 import { LanguageSwitch, CustomSideNavLink } from "../../common/components";
@@ -16,7 +16,7 @@ import {
 } from "carbon-components-react";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-	// const segments = await getAllCategoryData()
+	const segments = await getAllSegments()
 
 
 	const paths = [{ params: { segment: ["/start"] } }];
