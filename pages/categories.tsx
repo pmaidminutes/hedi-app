@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
 import { LanguageSwitch } from "../common/components";
-import { getAllSegments, ICategory } from "../modules/articles/categories";
+import { getAllCategories, ICategory } from "../modules/articles/categories";
 import { GetStaticProps } from "next";
 
 import { Content, SideNav, ListItem, Tabs, Tab } from "carbon-components-react";
@@ -10,7 +10,7 @@ export const getStaticProps: GetStaticProps<any> = async ({
 	locale,
 	locales,
 }) => {
-	const categories = await getAllSegments(locale);
+	const categories = await getAllCategories(locale);
 
 	return { props: { locales, locale, categories } };
 };

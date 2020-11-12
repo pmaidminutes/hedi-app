@@ -1,7 +1,7 @@
 import { request, gql } from "graphql-request";
 import { BASE_URL, GQL_PUBLIC } from "../../common/urls";
 
-export async function getAllSegments(lang: string = "de") {
+export async function getAllCategories(lang: string = "de") {
 	const query = gql`
 		{
 			categories(langcode: ${`"${lang}"`}) {

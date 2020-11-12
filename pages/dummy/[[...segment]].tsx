@@ -1,10 +1,7 @@
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useRouter } from "next/router";
-import {
-	ICategory,
-	getAllSegments,
-} from "../../modules/articles/categories";
+import { getAllSegments } from "../../modules/articles/segments";
 
 import { LanguageSwitch, CustomSideNavLink } from "../../common/components";
 
@@ -15,10 +12,13 @@ import {
 	SideNavLink,
 } from "carbon-components-react";
 
-export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-	const segments = await getAllSegments()
+export const getStaticPaths: GetStaticPaths<any> = async ({ locales }) => {
+	const segments: string[] = [];
+	locales?.forEach(async (locale) => {
+		segments.concat(await getAllSegments(locale));
+	});
 
-
+	console.log({ segments });
 	const paths = [{ params: { segment: ["/start"] } }];
 	return { paths, fallback: false };
 };
