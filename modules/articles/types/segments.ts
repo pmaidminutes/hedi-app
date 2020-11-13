@@ -2,8 +2,8 @@ import { ICategoryPath, IArticlePath } from "./index";
 export interface ISegmentParams {
 	params: {
 		segment: string[];
-		locale: string;
 	};
+	locale: string;
 }
 export interface ISegment {
 	articles: IPath[];

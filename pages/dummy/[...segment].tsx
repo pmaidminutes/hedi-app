@@ -21,17 +21,34 @@ import {
 import { LanguageSwitch, CustomSideNavLink } from "../../common/components";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-	const paths = await getAllSegments("de");
+	const poops = [];
+	for (let index in locales) {
+		poops.concat(await getAllSegments(locales[index]))
+	}
+
+	console.log({ poops });
+	// let paths = await getAllLocaledSegments(locales);
+	// locales?.forEach(async (locale) => {
+	// 	console.log(await getAllSegments(locale));
+	// });
+
 	// paths.forEach((path) => {
 	// 	path.params.segment.forEach((s) => console.log(s));
 	// 	console.log('locale: ',path.params.locale);
 	// });
+	const paths = [
+		{ params: { segment: ["schwangerschaft"] }, locale: "de" },
+		{ params: { segment: ["pregnancy"] }, locale: "en" },
+	];
+	// const paths = await getAllLocaledSegments(locales);
+	console.log({ paths });
 	return { paths, fallback: false };
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
 	console.log({ context });
-	const { params } = context;
+	const { params, locale, locales, defaultLocale } = context;
+	console.log({ locale }, { locales });
 	const { segment } = params ?? { segment: [] };
 
 	const slug =
@@ -39,10 +56,10 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	// TODO: check if this could be done in an other way
 	const content =
 		slug !== null
-			? await getCategoryBySlug(slug)
+			? await getCategoryBySlug(slug, locale)
 			: { name: "", categorie: [], articles: [] };
 	const { name, categories, articles } = content;
-
+	debugger;
 	return {
 		props: {
 			name: name ?? null,
@@ -54,8 +71,6 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export default function Segment(props: ISegmentProps) {
 	const { name, categories, articles } = props;
-	const router = useRouter();
-	const { locale, locales, defaultLocale, pathname } = router;
 	if (props !== null) {
 		return (
 			<div>
@@ -69,7 +84,7 @@ export default function Segment(props: ISegmentProps) {
 					aria-label="Side Navigation"
 				>
 					<ListItem>
-						<LanguageSwitch locale={locale} locales={locales} path={ pathname}/>
+						{/* <LanguageSwitch locale={locale} locales={locales} path={pathname} /> */}
 					</ListItem>
 					<SideNavLink href="/chat">Chat</SideNavLink>
 					<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>

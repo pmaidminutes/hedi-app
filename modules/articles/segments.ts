@@ -5,6 +5,7 @@ import { BASE_URL, GQL_PUBLIC } from "../../common/urls";
 import { ISegment, ISegmentParams } from "./types";
 
 export async function getAllSegments(lang = "de") {
+	console.log("getAllSegments");
 	const query = gql`
 		{
 			articles(langcode: ${`"${lang}"`}) {
@@ -33,12 +34,13 @@ export async function getAllSegments(lang = "de") {
 			);
 		}
 	});
+	console.log({segments})
 	return segments;
 }
 
 const segmentObject = (segment: string, lang: string): ISegmentParams => ({
 	params: {
-		segment: segment.split("/").filter((entry) => entry !== ""),
-		locale: lang,
+		segment: segment.split("/").filter((entry) => entry !== "")
 	},
+	locale: lang,
 });
