@@ -21,9 +21,11 @@ import {
 import { LanguageSwitch, CustomSideNavLink } from "../../common/components";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-	const poops = [];
+	let poops = [];
 	for (let index in locales) {
-		poops.concat(await getAllSegments(locales[index]))
+		let newSegments = await getAllSegments(locales[index]);
+		console.log({newSegments})
+		// poops[...segments];
 	}
 
 	console.log({ poops });
