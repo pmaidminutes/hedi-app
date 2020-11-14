@@ -7,7 +7,13 @@ interface LanguageSwitchProps {
   locale: string | undefined;
   path?: string;
 }
-
+/**
+ * Language Switch Component.
+ * 
+ * @param {array[]} locales - All the available language codes.
+ * @param {string} locale - The current language.
+ * @param {string} path - The path of the current site. If empty, the component will redirect to the start page.
+ */
 export const LanguageSwitch = ({ locales, locale, path = '/' }: LanguageSwitchProps) => {
 	const router = useRouter();
 
