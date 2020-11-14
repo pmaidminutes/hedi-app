@@ -1,4 +1,4 @@
-import { IArticle } from "./articles";
+import { IArticle, IArticlePath } from "./articles";
 
 export interface ICategoryBasic {
 	name: string;
@@ -14,4 +14,11 @@ export interface ICategory extends ICategoryBasic {
 	parent?: string;
 	articles: IArticle[];
 	categories: ICategory[];
+}
+
+export interface ICategoriesBySlug {
+	name: string;
+	categories: ICategoryPath[];
+	articles: IArticlePath[];
+
 }

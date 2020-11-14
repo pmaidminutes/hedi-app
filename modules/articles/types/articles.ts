@@ -11,6 +11,7 @@ export interface IArticle extends IArticlePath{
 	id: number;
 	category: ICategoryBasic;
 	tags: ITag;
+	parent: number;
 }
 
 interface ITag {

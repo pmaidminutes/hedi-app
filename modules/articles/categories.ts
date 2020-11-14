@@ -1,10 +1,10 @@
-import { request, gql } from "graphql-request";
-import { BASE_URL, GQL_PUBLIC } from "../../common/urls";
+import { getServiceClient, gql } from "@/common/graphql";
+import { ICategoriesBySlug, ICategory } from "../articles/types";
 
-export async function getCategoryBySlug(slug: string, lang: string = "de") {
+export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 	const query = gql`
-		{
-			categoryBySlug(slug:${`"${slug}"`}, srcLang:${`"${lang}"`}){
+		getCategoryBySlug($srcLang:String, $slug:String){
+			categoryBySlug(slug:$slug, srcLang:$srclang){
 				name
 				categories{
 					name
@@ -17,17 +17,19 @@ export async function getCategoryBySlug(slug: string, lang: string = "de") {
 			}
 		}
 	`;
+	const client = await getServiceClient();
+	if (!client) return [];
 
-	const result = await request(BASE_URL + GQL_PUBLIC, query)
-		.then((data) => data)
+	return client
+		.request<ICategoriesBySlug>(query, { srcLang: lang, slug: pageSlug })
+		.then((data) => data ?? [])
 		.catch((e) => console.warn("error", e));
-	return result.categoryBySlug;
 }
 
 export async function getAllCategories(lang: string = "de") {
 	const query = gql`
-		{
-			categories(langcode: ${`"${lang}"`}) {
+		getAllCategories($langcode:String){
+			categories(langcode:$langcode) {
 				id
 				name
 				path
@@ -66,10 +68,11 @@ export async function getAllCategories(lang: string = "de") {
 			}
 		}
 	`;
+	const client = await getServiceClient();
+	if (!client) return [];
 
-	const result = await request(BASE_URL + GQL_PUBLIC, query)
-		.then((data) => data)
+	return client
+		.request<ICategory>(query, { langcode: lang })
+		.then((data) => data ?? [])
 		.catch((e) => console.warn("error", e));
-	console.log({ result });
-	return result.categories ?? [];
 }
