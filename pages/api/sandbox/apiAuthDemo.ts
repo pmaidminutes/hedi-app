@@ -1,12 +1,12 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { getAuthHeader, getServiceAuth, IsIHTTPError } from '../../../modules/auth/server';
+import { getAuthHeader, getServiceAuth } from '../../../modules/auth/server';
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200;
   const pwd = req.query?.pwd;
   if (pwd && typeof pwd === 'string') {
-    const serviceResponse:any = await getServiceAuth('admin', pwd);
-    if (!IsIHTTPError(serviceResponse)) {
+    const serviceResponse = await getServiceAuth('admin', pwd);
+    if (serviceResponse) {
       const header = getAuthHeader(serviceResponse);
       // use this header to make authenticated api calls
     }
