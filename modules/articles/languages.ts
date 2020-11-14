@@ -1,9 +1,8 @@
-import { request, gql } from "graphql-request";
-const BASE_URL = "https://appstaging.projekt-hedi.de";
-const GQL_PUBLIC = "/gql/public";
+import { getServiceClient, gql } from "@/common/graphql";
 
-export async function getAllLanguages(lang: string = "de") {
+export async function getAllLanguages(lang = "de") {
 	const query = gql`
+	query getAllLanguages($langcode: String)
 		{
 			languages {
 				isDefault
@@ -11,15 +10,18 @@ export async function getAllLanguages(lang: string = "de") {
 				weight
 				isDefault
 				isRTL
-				translatedName(langcode: ${`"${lang}"`})
+				translatedName(langcode: $langcode)
 			}
 		}
 	`;
 
-	const result = await request(BASE_URL + GQL_PUBLIC, query)
-		.then((data) => data)
+	const client = await getServiceClient();
+	if (!client)
+		return [];
+	
+	return client.request<ILanguage>(query, { langcode: lang } )
+		.then((data) => data ?? [] )
 		.catch((e) => console.warn("error", e));
-	return result.languages ?? [];
 }
 
 export interface ILanguage {
