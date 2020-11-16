@@ -1,5 +1,4 @@
-import { request, gql } from "graphql-request";
-import { BASE_URL, GQL_PUBLIC } from "../../common/urls";
+import { getServiceClient, gql } from "@/common/graphql";
 
 // Types
 import { ISegment, ISegmentParams } from "./types";
@@ -7,11 +6,11 @@ import { ISegment, ISegmentParams } from "./types";
 export async function getAllSegments(lang = "de") {
 	console.log("getAllSegments");
 	const query = gql`
-		{
-			articles(langcode: ${`"${lang}"`}) {
+	query getAllLanguages($langcode: String){
+			articles(langcode: $langcode) {
 				path
 			}
-			categories(langcode: ${`"${lang}"`}) {
+			categories(langcode: $langcode) {
 				path
 				categories {
 					path
@@ -19,9 +18,15 @@ export async function getAllSegments(lang = "de") {
 			}
 		}
 	`;
-	const result: ISegment = await request(BASE_URL + GQL_PUBLIC, query)
-		.then((data) => data)
+
+	const client = await getServiceClient();
+	if (!client) return [];
+
+	const result = await client
+		.request(query, { langcode: lang })
+		.then((data) => data ?? [])
 		.catch((e) => console.warn("error", e));
+
 	const segments: ISegmentParams[] = [];
 	result.articles.forEach((article) =>
 		segments.push(segmentObject(article.path, lang))
@@ -34,13 +39,12 @@ export async function getAllSegments(lang = "de") {
 			);
 		}
 	});
-	console.log({segments})
 	return segments;
 }
 
 const segmentObject = (segment: string, lang: string): ISegmentParams => ({
 	params: {
-		segment: segment.split("/").filter((entry) => entry !== "")
+		segment: segment.split("/").filter((entry) => entry !== ""),
 	},
 	locale: lang,
 });

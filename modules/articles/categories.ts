@@ -3,8 +3,8 @@ import { ICategoriesBySlug, ICategory } from "../articles/types";
 
 export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 	const query = gql`
-		getCategoryBySlug($srcLang:String, $slug:String){
-			categoryBySlug(slug:$slug, srcLang:$srclang){
+		query getCategoryBySlug($slug:String!, $srcLang:String){
+			categoryBySlug(slug:$slug, srcLang:$srcLang){
 				name
 				categories{
 					name
@@ -22,13 +22,13 @@ export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 
 	return client
 		.request<ICategoriesBySlug>(query, { srcLang: lang, slug: pageSlug })
-		.then((data) => data ?? [])
+		.then((data) => data.categoryBySlug ?? null)
 		.catch((e) => console.warn("error", e));
 }
 
 export async function getAllCategories(lang: string = "de") {
 	const query = gql`
-		getAllCategories($langcode:String){
+		query getAllCategories($langcode:String){
 			categories(langcode:$langcode) {
 				id
 				name
