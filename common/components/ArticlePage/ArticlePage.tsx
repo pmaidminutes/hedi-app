@@ -1,15 +1,23 @@
-import React from "react";
+// Components
+import { Tag } from "carbon-components-react";
+// Types
+import { IArticle } from "@/modules/articles/types";
 
-export const ArticlePage = ({ title, body }) => {
+interface IArticleProps {
+	content: IArticle;
+}
+
+export const ArticlePage = ({ content }: IArticleProps) => {
+	const { title, body, tags, category } = content;
 	return (
 		<>
 			<h1>{title}</h1>
 			<div
 				dangerouslySetInnerHTML={{
-					// __html: article.attributes.body.value,
 					__html: body,
 				}}
 			/>
+			<Tag>{category.name}</Tag>
 		</>
 	);
 };

@@ -1,28 +1,47 @@
 import Link from "next/link";
+// Components
+import { Tile, UnorderedList, ListItem } from "carbon-components-react";
+// Types
+import { ICategory } from "@/modules/articles/types";
 
-export const CategoryPage = ({ name, categories, articles }) => {
+interface ICategoryProps {
+	content: ICategory;
+}
+
+export const CategoryPage = ({ content }: ICategoryProps) => {
+	const { categories, name, articles } = content;
+
 	return (
 		<>
 			<h1>{name}</h1>
 			{categories.length > 0 ? (
-				<>
+				<Tile>
 					<h2>Subcategories</h2>
-					<ul>
+					<UnorderedList>
 						{categories.map((category, index) => (
-              <li key={index}><Link href={`/dummy${category.path}`}>{category.name}</Link></li>
+							<ListItem key={index}>
+								<Link href={`/segments${category.path}`}>{category.name}</Link>
+							</ListItem>
 						))}
-					</ul>
-				</>
+					</UnorderedList>
+				</Tile>
 			) : null}
 			{articles.length > 0 ? (
-				<>
+				<Tile>
 					<h2>Articles</h2>
-					<ul>
+					<UnorderedList>
 						{articles.map((article, index) => (
-							<li key={index}><Link href={`/dummy${article.path}`}>{article.title}</Link></li>
+							<ListItem key={index}>
+								<Link href={`/segments${article.path}`}>{article.title}</Link>
+								<div
+									dangerouslySetInnerHTML={{
+										__html: article.summary,
+									}}
+								/>
+							</ListItem>
 						))}
-					</ul>
-				</>
+					</UnorderedList>
+				</Tile>
 			) : null}
 		</>
 	);

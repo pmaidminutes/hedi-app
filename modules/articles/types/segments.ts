@@ -1,4 +1,6 @@
-import { ICategoryPath, IArticlePath } from "./index";
+import { ParsedUrlQuery } from "querystring";
+import { IArticle } from "./articles";
+import { ICategory } from "./categories";
 export interface ISegmentParams {
 	params: {
 		segment: string[];
@@ -10,6 +12,7 @@ export interface ISegment {
 	categories: ICategorySegment[];
 }
 
+
 export interface ICategorySegment extends IPath {
 	categories: IPath[];
 }
@@ -18,19 +21,9 @@ export interface IPath {
 	path: string;
 }
 
-interface ISegmentProps {
+export interface ISegmentProps {
 	pagetype: "article" | "category";
 	locale: string;
 	locales: string[];
-}
-
-export interface ISegmentCategoryProps extends ISegmentProps {
-	name: string;
-	categories: ICategoryPath[];
-	articles: IArticlePath[];
-}
-
-export interface ISegmentArticleProps extends ISegmentProps {
-	title: string;
-	body: string;
+	content: ICategory | IArticle
 }

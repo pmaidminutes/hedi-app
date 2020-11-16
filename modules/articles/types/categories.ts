@@ -4,8 +4,8 @@ export interface ICategoryBasic {
 	name: string;
 }
 
-export interface ICategoryPath extends ICategoryBasic{
-  path: string;
+export interface ICategoryPath extends ICategoryBasic {
+	path: string;
 }
 
 export interface ICategory extends ICategoryBasic {
@@ -17,8 +17,9 @@ export interface ICategory extends ICategoryBasic {
 }
 
 export interface ICategoriesBySlug {
-	name: string;
-	categories: ICategoryPath[];
-	articles: IArticlePath[];
-
+	categoryBySlug: {
+		name: string;
+		categories: ICategoryPath[];
+		articles: IArticlePath[];
+	};
 }

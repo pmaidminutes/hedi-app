@@ -1,12 +1,10 @@
 import { getServiceClient, gql } from "@/common/graphql";
-
 // Types
 import { ISegment, ISegmentParams } from "./types";
 
 export async function getAllSegments(lang = "de") {
-	console.log("getAllSegments");
 	const query = gql`
-	query getAllLanguages($langcode: String){
+		query getAllLanguages($langcode: String) {
 			articles(langcode: $langcode) {
 				path
 			}
@@ -22,12 +20,13 @@ export async function getAllSegments(lang = "de") {
 	const client = await getServiceClient();
 	if (!client) return [];
 
-	const result = await client
+	const result:ISegment = await client
 		.request(query, { langcode: lang })
 		.then((data) => data ?? [])
 		.catch((e) => console.warn("error", e));
 
 	const segments: ISegmentParams[] = [];
+	// TODO: refactor maybe
 	result.articles.forEach((article) =>
 		segments.push(segmentObject(article.path, lang))
 	);

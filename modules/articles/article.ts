@@ -1,5 +1,5 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ICategoriesBySlug, ICategory } from "../articles/types";
+import { IArticleBySlug } from "@/modules/articles/types";
 
 export async function getArticleBySlug(pageSlug: string, lang = "de") {
 	const query = gql`
@@ -24,7 +24,7 @@ export async function getArticleBySlug(pageSlug: string, lang = "de") {
 	if (!client) return [];
 
 	return client
-		.request<ICategoriesBySlug>(query, { srcLang: lang, slug: pageSlug })
+		.request<IArticleBySlug>(query, { srcLang: lang, slug: pageSlug })
 		.then((data) => data.articleBySlug ?? null)
 		.catch((e) => console.warn("error", e));
 }

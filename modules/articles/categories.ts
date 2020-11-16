@@ -1,5 +1,5 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ICategoriesBySlug, ICategory } from "../articles/types";
+import { ICategoriesBySlug, ICategory } from "@/modules/articles/types";
 
 export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 	const query = gql`
@@ -13,6 +13,7 @@ export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 				articles {
 					title
 					path
+					summary
 				}
 			}
 		}

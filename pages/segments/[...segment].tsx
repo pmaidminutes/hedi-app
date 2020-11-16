@@ -1,12 +1,11 @@
 import Head from "next/head";
-import Link from "next/link";
-import { useRouter } from "next/router";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import {
+	IArticle,
+	ICategory,
+	ISegmentProps,
 	ISegmentParams,
-	ISegmentArticleProps,
-	ISegmentCategoryProps,
 } from "@/modules/articles/types";
 // Modules
 import { getAllSegments } from "@/modules/articles/segments";
@@ -20,8 +19,6 @@ import {
 	SideNav,
 	ListItem,
 	SideNavLink,
-	UnorderedList,
-	Tile,
 } from "carbon-components-react";
 import {
 	LanguageSwitch,
@@ -31,9 +28,9 @@ import {
 } from "@/common/components";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-	let paths = [];
+	let paths: ISegmentParams[] = [];
 	for (let index in locales) {
-		let segments = await getAllSegments(locales[index]);
+		let segments = await getAllSegments(locales[parseInt(index)]);
 		paths.push(...segments);
 	}
 	return { paths, fallback: false };
@@ -49,16 +46,14 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	let isCategory,
 		isArticle = false;
 	let content;
-	console.log({ slug });
 	if (slug !== null) {
 		content = await getCategoryBySlug(slug, locale);
-		console.log({ content });
 		isCategory = content !== null ? true : false;
-		console.log({ isCategory });
 		if (!isCategory) {
 			content = await getArticleBySlug(slug, locale);
 			isArticle = content !== null ? true : false;
 		} else if (!isCategory && !isArticle) {
+			// TODO: handle Exception
 			throw Error("Houston, we have got a problem");
 		}
 	} else {
@@ -67,51 +62,21 @@ export const getStaticProps: GetStaticProps = async (context) => {
 		content = { name: "", categorie: [], articles: [] };
 	}
 
-	console.log({ isArticle }, { isCategory });
+	const pagetype = isCategory ? "category" : "article";
 
-	if (isCategory) {
-		const { name, categories, articles } = content;
-		console.log({ name });
-		return {
-			props: {
-				pagetype: "category",
-				name: name ?? null,
-				categories: categories ?? [],
-				articles: articles ?? [],
-				locale,
-				locales,
-			},
-		};
-	} else {
-		const { title, body } = content;
-		console.log({ title });
-		return {
-			props: {
-				pagetype: "article",
-				title: title ?? null,
-				body: body ?? null,
-				locale,
-				locales,
-			},
-		};
-	}
+	return {
+		props: {
+			pagetype,
+			content,
+			locale,
+			locales,
+		},
+	};
 };
 
-export default function Segment(
-	props: ISegmentCategoryProps | ISegmentArticleProps
-) {
-	const router = useRouter();
-	const { pathname } = router;
-	const {
-		pagetype,
-		locale,
-		locales,
-		name,
-		categories,
-		articles,
-		title,
-		body,
-	} = props;
+export default function Segment(props: ISegmentProps) {
+	const { pagetype, locale, locales, content } = props;
+
 	if (props !== null) {
 		return (
 			<div>
@@ -132,14 +97,10 @@ export default function Segment(
 				</SideNav>
 				<Content>
 					{pagetype === "category" ? (
-						<CategoryPage
-							name={name}
-							articles={articles}
-							categories={categories}
-						/>
+						<CategoryPage content={content as ICategory} />
 					) : null}
 					{pagetype === "article" ? (
-						<ArticlePage title={title} body={body} />
+						<ArticlePage content={content as IArticle} />
 					) : null}
 				</Content>
 			</div>
