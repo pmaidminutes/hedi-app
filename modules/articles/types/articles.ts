@@ -9,6 +9,7 @@ export interface IArticlePath extends IArticleBasic {
 	slug: string;
 }
 export interface IArticle extends IArticlePath {
+	pagetype: string;
 	id: number;
 	category: ICategoryBasic;
 	tags: ITag;
@@ -24,6 +25,7 @@ interface ITag {
 
 export interface IArticleBySlug {
 	articleBySlug: {
+		pagetype: string;
 		id: number;
 		title: string;
 		body: string;

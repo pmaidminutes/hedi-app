@@ -5,12 +5,15 @@ export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 	const query = gql`
 		query getCategoryBySlug($slug:String!, $srcLang:String){
 			categoryBySlug(slug:$slug, srcLang:$srcLang){
+				pagetype:__typename
 				name
 				categories{
+					pagetype:__typename
 					name
 					path
 				}
 				articles {
+					pagetype:__typename
 					title
 					path
 					summary

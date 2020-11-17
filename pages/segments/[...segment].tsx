@@ -6,6 +6,8 @@ import {
 	ICategory,
 	ISegmentProps,
 	ISegmentParams,
+	ICategoriesBySlug,
+	IArticleBySlug,
 } from "@/modules/articles/types";
 // Modules
 import { getAllSegments } from "@/modules/articles/segments";
@@ -37,7 +39,7 @@ export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
 };
 
 export const getStaticProps: GetStaticProps = async (context) => {
-	const { params, locale, locales, defaultLocale } = context;
+	const { params, locale, locales } = context;
 	const { segment } = params ?? { segment: [] };
 
 	const slug =
@@ -59,10 +61,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	} else {
 		// TODO: fallback for undefined slug
 		isCategory = true;
-		content = { name: "", categorie: [], articles: [] };
+		content = { pagetype: "Category", name: "", categories: [], articles: [] };
 	}
 
-	const pagetype = isCategory ? "category" : "article";
+	console.log({ content });
+	// TODO: fix ts problem
+	const { pagetype } = content;
 
 	return {
 		props: {
@@ -76,6 +80,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 export default function Segment(props: ISegmentProps) {
 	const { pagetype, locale, locales, content } = props;
+	console.log({ pagetype });
 
 	if (props !== null) {
 		return (
@@ -96,10 +101,10 @@ export default function Segment(props: ISegmentProps) {
 					<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
 				</SideNav>
 				<Content>
-					{pagetype === "category" ? (
+					{pagetype === "Category" ? (
 						<CategoryPage content={content as ICategory} />
 					) : null}
-					{pagetype === "article" ? (
+					{pagetype === "Article" ? (
 						<ArticlePage content={content as IArticle} />
 					) : null}
 				</Content>

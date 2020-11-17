@@ -9,6 +9,7 @@ export interface ICategoryPath extends ICategoryBasic {
 }
 
 export interface ICategory extends ICategoryBasic {
+	pagetype: string;
 	id: number;
 	path: string;
 	parent?: string;
@@ -18,6 +19,7 @@ export interface ICategory extends ICategoryBasic {
 
 export interface ICategoriesBySlug {
 	categoryBySlug: {
+		pagetype: string;
 		name: string;
 		categories: ICategoryPath[];
 		articles: IArticlePath[];

@@ -22,7 +22,7 @@ export interface IPath {
 }
 
 export interface ISegmentProps {
-	pagetype: "article" | "category";
+	pagetype: "Article" | "Category";
 	locale: string;
 	locales: string[];
 	content: ICategory | IArticle

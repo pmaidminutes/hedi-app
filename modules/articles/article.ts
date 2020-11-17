@@ -5,6 +5,7 @@ export async function getArticleBySlug(pageSlug: string, lang = "de") {
 	const query = gql`
 		query getArticleBySlug($slug: String!, $srcLang: String) {
 			articleBySlug(slug: $slug, srcLang: $srcLang) {
+				pagetype:__typename
 				id
 				title
 				body
