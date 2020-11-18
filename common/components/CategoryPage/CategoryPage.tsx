@@ -10,11 +10,10 @@ interface ICategoryProps {
 
 export const CategoryPage = ({ content }: ICategoryProps) => {
 	const { categories, label, articles } = content;
-	console.log("shouldn't be here");
 	return (
 		<>
 			<h1>{label}</h1>
-			{categories.length > 0 ? (
+			{categories.length > 0 && (
 				<Tile>
 					<h2>Subcategories</h2>
 					<UnorderedList>
@@ -25,8 +24,8 @@ export const CategoryPage = ({ content }: ICategoryProps) => {
 						))}
 					</UnorderedList>
 				</Tile>
-			) : null}
-			{articles.length > 0 ? (
+			)}
+			{articles.length > 0 && (
 				<Tile>
 					<h2>Articles</h2>
 					<UnorderedList>
@@ -42,7 +41,7 @@ export const CategoryPage = ({ content }: ICategoryProps) => {
 						))}
 					</UnorderedList>
 				</Tile>
-			) : null}
+			)}
 		</>
 	);
 };

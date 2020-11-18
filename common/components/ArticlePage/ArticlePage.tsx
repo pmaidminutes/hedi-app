@@ -9,7 +9,6 @@ interface IArticleProps {
 
 export const ArticlePage = ({ content }: IArticleProps) => {
 	const { label, body, category } = content;
-	console.log({content});
 	return (
 		<>
 			<h1>{label}</h1>

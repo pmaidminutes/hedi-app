@@ -21,57 +21,6 @@ export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 }
 
 export async function getAllCategories(lang: string = "de") {
-	// const query = gql`
-	// 	query getAllCategories($langcode:String){
-	// 		categories(langcode:$langcode) {
-	// 			...FCategory
-	// 			categories {
-	// 				...FCategory
-	// 				articles {
-	// 					...FArticle
-	// 				}
-	// 			}
-	// 			articles {
-	// 				...FArticle
-	// 			}
-	// 			id
-	// 			name
-	// 			path
-	// 			parent
-	// 			categories {
-	// 				id
-	// 				name
-	// 				path
-	// 				parent
-	// 				articles {
-	// 					id
-	// 					title
-	// 					path
-	// 					category {
-	// 						name
-	// 					}
-	// 					tags {
-	// 						id
-	// 						name
-	// 					}
-	// 				}
-	// 			}
-	// 			articles {
-	// 				id
-	// 				title
-	// 				path
-	// 				category {
-	// 					id
-	// 					name
-	// 				}
-	// 				tags {
-	// 					id
-	// 					name
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-	// `;
 	const query = gql`
 	 	query getAllCategories($langcode:String) {
 	 		categories(langcode:$langcode) {

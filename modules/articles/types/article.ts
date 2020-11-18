@@ -24,7 +24,7 @@ export interface IArticle extends IArticleEntry, IEditorial {
 }
 
 export function isIArticle(obj: any) : obj is IArticle {
-	return (obj && obj.typeName === 'Article')
+	return (obj && (obj.typeName === 'Article'));
 }
 
 export const ArticleFields = `

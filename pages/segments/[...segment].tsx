@@ -43,12 +43,9 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const { params, locale, locales } = context;
 	const { segment } = params ?? { segment: [] };
 
-	const slug =
-		segment !== undefined ? stringToSlug(segment[segment.length - 1]) : null;
-	// TODO: check if this could be done in an other way
-
-	let content = undefined;
-	if (slug !== null) {
+	let content;
+	if (segment) {
+		const slug = stringToSlug(segment[segment.length - 1])
 		content = await getCategoryBySlug(slug, locale);
 		if (!content)
 			content = await getArticleBySlug(slug, locale);
@@ -67,9 +64,12 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	};
 };
 
-export default function Segment(props: ISegmentProps) {
-	const { locale, locales, content } = props;
+// HACK typeguards on Article and Category produce an undefined error
+// therefore the 'manual' if on typeName and a typecast of 'content' (and therefore the content is let not const)
 
+export default function Segment(props: ISegmentProps) {
+	const { locale, locales } = props;
+	let { content } = props;
 	return (
 		<div>
 			<Head>
@@ -88,9 +88,8 @@ export default function Segment(props: ISegmentProps) {
 				<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
 			</SideNav>
 			<Content>
-				{ isICategory(content) && <CategoryPage content={content} /> }
-				
-				{ isIArticle(content) &&  <ArticlePage content={content} />  }
+			{ ( content?.typeName === 'Category' ) &&   <CategoryPage content={content as ICategory} />  }
+			{ ( content?.typeName === 'Article' ) &&   <ArticlePage content={content as IArticle} />  }
 			</Content>
 		</div>
 	);
