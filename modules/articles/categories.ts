@@ -6,15 +6,15 @@ export async function getCategoryBySlug(pageSlug:string, lang = "de") {
 		query getCategoryBySlug($slug:String!, $srcLang:String){
 			categoryBySlug(slug:$slug, srcLang:$srcLang){
 				pagetype:__typename
-				name
+				label
 				categories{
 					pagetype:__typename
-					name
+					label
 					path
 				}
 				articles {
 					pagetype:__typename
-					title
+					label
 					path
 					summary
 				}
@@ -35,38 +35,38 @@ export async function getAllCategories(lang: string = "de") {
 		query getAllCategories($langcode:String){
 			categories(langcode:$langcode) {
 				id
-				name
+				label
 				path
 				parent
 				categories {
 					id
-					name
+					label
 					path
 					parent
 					articles {
 						id
-						title
+						label
 						path
 						category {
-							name
+							label
 						}
 						tags {
 							id
-							name
+							label
 						}
 					}
 				}
 				articles {
 					id
-					title
+					label
 					path
 					category {
 						id
-						name
+						label
 					}
 					tags {
 						id
-						name
+						label
 					}
 				}
 			}

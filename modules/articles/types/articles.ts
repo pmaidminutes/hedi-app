@@ -1,7 +1,7 @@
 import { ICategory, ICategoryBasic } from "./categories";
 
 interface IArticleBasic {
-	title: string;
+	label: string;
 }
 
 export interface IArticlePath extends IArticleBasic {
@@ -27,7 +27,7 @@ export interface IArticleBySlug {
 	articleBySlug: {
 		pagetype: string;
 		id: number;
-		title: string;
+		label: string;
 		body: string;
 		summary: string;
 		tags: ITag[];

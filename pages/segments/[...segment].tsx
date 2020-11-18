@@ -6,8 +6,6 @@ import {
 	ICategory,
 	ISegmentProps,
 	ISegmentParams,
-	ICategoriesBySlug,
-	IArticleBySlug,
 } from "@/modules/articles/types";
 // Modules
 import { getAllSegments } from "@/modules/articles/segments";
@@ -66,6 +64,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 
 	console.log({ content });
 	// TODO: fix ts problem
+
 	const { pagetype } = content;
 
 	return {

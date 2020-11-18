@@ -7,16 +7,16 @@ export async function getArticleBySlug(pageSlug: string, lang = "de") {
 			articleBySlug(slug: $slug, srcLang: $srcLang) {
 				pagetype:__typename
 				id
-				title
+				label
 				body
 				summary
 				tags {
 					id
-					name
+					label
 				}
 				category {
 					id
-					name
+					label
 				}
 			}
 		}

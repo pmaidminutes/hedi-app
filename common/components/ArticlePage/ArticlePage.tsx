@@ -8,16 +8,16 @@ interface IArticleProps {
 }
 
 export const ArticlePage = ({ content }: IArticleProps) => {
-	const { title, body, tags, category } = content;
+	const { label, body, tags, category } = content;
 	return (
 		<>
-			<h1>{title}</h1>
+			<h1>{label}</h1>
 			<div
 				dangerouslySetInnerHTML={{
 					__html: body,
 				}}
 			/>
-			<Tag>{category.name}</Tag>
+			<Tag>{category.label}</Tag>
 		</>
 	);
 };

@@ -1,7 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { LanguageSwitch } from "../common/components";
-import { getAllCategories, ICategory } from "../modules/articles/categories";
+import { LanguageSwitch } from "@/common/components";
+import { getAllCategories } from "@/modules/articles/categories";
+import { ICategory} from '@/modules/articles/types'
 import { GetStaticProps } from "next";
 
 import { Content, SideNav, ListItem, Tabs, Tab } from "carbon-components-react";
@@ -47,13 +48,13 @@ export default function Categories({
 				<Tabs>
 					{categories.length > 0
 						? categories.map((category) => (
-								<Tab key={category.id} label={category.name}>
+								<Tab key={category.id} label={category.label}>
 									{category.categories.length > 0 ? (
 										<>
 											<h2>Subcategories</h2>
 											<ul>
 												{category.categories.map((subcategory) => (
-													<li key={subcategory.id}>{subcategory.name}</li>
+													<li key={subcategory.id}>{subcategory.label}</li>
 												))}
 											</ul>
 										</>
@@ -63,7 +64,7 @@ export default function Categories({
 											<h2>Articles</h2>
 											<ul>
 												{category.articles.map((article) => (
-													<li key={article.id}>{article.title}</li>
+													<li key={article.id}>{article.label}</li>
 												))}
 											</ul>
 										</>
