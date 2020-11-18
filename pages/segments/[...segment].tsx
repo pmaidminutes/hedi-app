@@ -2,17 +2,18 @@ import Head from "next/head";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import {
-	IArticle,
-	ICategory,
 	ISegmentProps,
 	ISegmentParams,
-	ICategoriesBySlug,
-	IArticleBySlug,
+	ICategory,
+	isICategory,
+	IArticle,
+	isIArticle,
 } from "@/modules/articles/types";
 // Modules
 import { getAllSegments } from "@/modules/articles/segments";
 import { getCategoryBySlug } from "@/modules/articles/categories";
 import { getArticleBySlug } from "@/modules/articles/article";
+
 // Helper
 import { stringToSlug } from "@/modules/articles/helper";
 // Components
@@ -45,32 +46,20 @@ export const getStaticProps: GetStaticProps = async (context) => {
 	const slug =
 		segment !== undefined ? stringToSlug(segment[segment.length - 1]) : null;
 	// TODO: check if this could be done in an other way
-	let isCategory,
-		isArticle = false;
-	let content;
+
+	let content = undefined;
 	if (slug !== null) {
 		content = await getCategoryBySlug(slug, locale);
-		isCategory = content !== null ? true : false;
-		if (!isCategory) {
+		if (!content)
 			content = await getArticleBySlug(slug, locale);
-			isArticle = content !== null ? true : false;
-		} else if (!isCategory && !isArticle) {
-			// TODO: handle Exception
+		if (!content) {
+			console.log("couldn't render for ", segment)
 			throw Error("Houston, we have got a problem");
 		}
-	} else {
-		// TODO: fallback for undefined slug
-		isCategory = true;
-		content = { pagetype: "Category", name: "", categories: [], articles: [] };
 	}
-
-	console.log({ content });
-	// TODO: fix ts problem
-	const { pagetype } = content;
 
 	return {
 		props: {
-			pagetype,
 			content,
 			locale,
 			locales,
@@ -79,37 +68,30 @@ export const getStaticProps: GetStaticProps = async (context) => {
 };
 
 export default function Segment(props: ISegmentProps) {
-	const { pagetype, locale, locales, content } = props;
-	console.log({ pagetype });
+	const { locale, locales, content } = props;
 
-	if (props !== null) {
-		return (
-			<div>
-				<Head>
-					<title>HEDI App</title>
-				</Head>
-				<SideNav
-					isFixedNav
-					expanded={true}
-					isChildOfHeader={false}
-					aria-label="Side Navigation"
-				>
-					<ListItem>
-						<LanguageSwitch locale={locale} locales={locales} />
-					</ListItem>
-					<SideNavLink href="/chat">Chat</SideNavLink>
-					<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
-				</SideNav>
-				<Content>
-					{pagetype === "Category" ? (
-						<CategoryPage content={content as ICategory} />
-					) : null}
-					{pagetype === "Article" ? (
-						<ArticlePage content={content as IArticle} />
-					) : null}
-				</Content>
-			</div>
-		);
-	}
-	return null;
+	return (
+		<div>
+			<Head>
+				<title>HEDI App</title>
+			</Head>
+			<SideNav
+				isFixedNav
+				expanded={true}
+				isChildOfHeader={false}
+				aria-label="Side Navigation"
+			>
+				<ListItem>
+					<LanguageSwitch locale={locale} locales={locales} />
+				</ListItem>
+				<SideNavLink href="/chat">Chat</SideNavLink>
+				<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
+			</SideNav>
+			<Content>
+				{ isICategory(content) && <CategoryPage content={content} /> }
+				
+				{ isIArticle(content) &&  <ArticlePage content={content} />  }
+			</Content>
+		</div>
+	);
 }

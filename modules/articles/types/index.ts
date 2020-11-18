@@ -1,3 +1,5 @@
-export type { IArticle, IArticlePath, IArticleBySlug } from "./articles";
-export type { ICategory, ICategoryPath, ICategoriesBySlug } from "./categories";
+
+export * from './article';
+export * from './category';
+export * from './image';
 export type { ISegmentParams, ISegment, ISegmentProps } from "./segments";

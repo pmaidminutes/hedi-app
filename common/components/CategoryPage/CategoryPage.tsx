@@ -9,18 +9,18 @@ interface ICategoryProps {
 }
 
 export const CategoryPage = ({ content }: ICategoryProps) => {
-	const { categories, name, articles } = content;
-
+	const { categories, label, articles } = content;
+	console.log("shouldn't be here");
 	return (
 		<>
-			<h1>{name}</h1>
+			<h1>{label}</h1>
 			{categories.length > 0 ? (
 				<Tile>
 					<h2>Subcategories</h2>
 					<UnorderedList>
 						{categories.map((category, index) => (
 							<ListItem key={index}>
-								<Link href={`/segments${category.path}`}>{category.name}</Link>
+								<Link href={`/segments${category.path}`}>{category.label}</Link>
 							</ListItem>
 						))}
 					</UnorderedList>
@@ -32,7 +32,7 @@ export const CategoryPage = ({ content }: ICategoryProps) => {
 					<UnorderedList>
 						{articles.map((article, index) => (
 							<ListItem key={index}>
-								<Link href={`/segments${article.path}`}>{article.title}</Link>
+								<Link href={`/segments${article.path}`}>{article.label}</Link>
 								<div
 									dangerouslySetInnerHTML={{
 										__html: article.summary,
