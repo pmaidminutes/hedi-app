@@ -1,4 +1,3 @@
-import { ParsedUrlQuery } from "querystring";
 import { IArticle } from "./article";
 import { ICategory } from "./category";
 export interface ISegmentParams {

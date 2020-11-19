@@ -1,6 +1,6 @@
 import { getServiceClient, gql } from "@/common/graphql";
 // Types
-import { ISegment, ISegmentParams } from "./types";
+import { ISegment, ISegmentParams } from "@/modules/editorial/types";
 
 export async function getAllSegments(lang = "de") {
 	const query = gql`

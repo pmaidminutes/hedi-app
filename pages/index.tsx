@@ -2,7 +2,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { GetStaticProps } from "next";
 // Modules
-import { ILanguage, getAllLanguages } from "../modules/articles/languages";
+import { ILanguage, getAllLanguages } from "../modules/editorial/languages";
 // Components
 import { LanguageSwitch, CustomSideNavLink } from "../common/components";
 import {

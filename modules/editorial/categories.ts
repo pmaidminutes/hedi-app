@@ -1,5 +1,5 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { FCategory, FCategoryExpanded, ICategory, ICategoryExpanded } from "@/modules/articles/types";
+import { FCategory, FCategoryExpanded, ICategory, ICategoryExpanded } from "@/modules/editorial/types";
 
 
 export async function getCategoryBySlug(pageSlug:string, lang = "de") {

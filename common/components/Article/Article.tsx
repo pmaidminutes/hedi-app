@@ -1,7 +1,7 @@
 // Components
 import { Tag } from "carbon-components-react";
 // Types
-import { IArticle } from "@/modules/articles/types";
+import { IArticle } from "@/modules/editorial/types";
 
 interface IArticleProps {
 	content: IArticle;

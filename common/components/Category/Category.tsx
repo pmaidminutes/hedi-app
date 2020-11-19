@@ -2,7 +2,7 @@ import Link from "next/link";
 // Components
 import { Tile, UnorderedList, ListItem } from "carbon-components-react";
 // Types
-import { ICategory } from "@/modules/articles/types";
+import { ICategory } from "@/modules/editorial/types";
 
 interface ICategoryProps {
 	content: ICategory;

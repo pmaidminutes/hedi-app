@@ -6,14 +6,14 @@ import {
 	ISegmentParams,
 	ICategory,
 	IArticle,
-} from "@/modules/articles/types";
+} from "@/modules/editorial/types";
 // Modules
-import { getAllSegments } from "@/modules/articles/segments";
-import { getCategoryBySlug } from "@/modules/articles/categories";
-import { getArticleBySlug } from "@/modules/articles/article";
+import { getAllSegments } from "@/modules/editorial/segments";
+import { getCategoryBySlug } from "@/modules/editorial/categories";
+import { getArticleBySlug } from "@/modules/editorial/article";
 
 // Helper
-import { stringToSlug } from "@/modules/articles/helper";
+import { stringToSlug } from "@/modules/editorial/helper";
 // Components
 import {
 	Content,

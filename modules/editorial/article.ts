@@ -1,5 +1,5 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ArticleFrag, IArticle } from "@/modules/articles/types";
+import { ArticleFrag, IArticle } from "@/modules/editorial/types";
 
 export async function getArticleBySlug(pageSlug: string, lang = "de") {
 	const query = gql`
