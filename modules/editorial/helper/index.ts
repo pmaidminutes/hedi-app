@@ -1,1 +1,1 @@
-export { stringToSlug } from "./string-to-slug";
+export { stringToSlug } from "./stringToSlug";

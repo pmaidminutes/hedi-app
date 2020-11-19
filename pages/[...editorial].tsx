@@ -1,19 +1,14 @@
 import Head from "next/head";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { ICategory, IArticle } from "@/modules/editorial/types";
 import {
-	ISegmentProps,
-	ISegmentParams,
-	ICategory,
-	IArticle,
-} from "@/modules/editorial/types";
-// Modules
-import { getAllSegments } from "@/modules/editorial/segments";
-import { getCategoryBySlug } from "@/modules/editorial/categories";
-import { getArticleBySlug } from "@/modules/editorial/article";
-
-// Helper
-import { stringToSlug } from "@/modules/editorial/helper";
+	getStaticPaths as getEditorialParams,
+	getStaticProps as getEditorialProps,
+	IEditorialParam,
+	IEditorialParams,
+	IEditorialProps,
+} from "@/modules/editorial/generators/editorial";
 // Components
 import {
 	Content,
@@ -29,28 +24,25 @@ import {
 } from "@/common/components";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
-	let paths: ISegmentParams[] = [];
-	for (let index in locales) {
-		let segments = await getAllSegments(locales[parseInt(index)]);
-		paths.push(...segments);
-	}
+	let paths: IEditorialParams[] = await getEditorialParams(locales ?? []);
+
 	return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps<
+	IEditorialProps,
+	IEditorialParam
+> = async (context) => {
 	const { params, locale, locales } = context;
-	const { segment } = params ?? { segment: [] };
+	const { editorial } = params ?? { editorial: [] };
+
+	if (!(editorial && locale && locales)) throw Error("fatal error...");
 
 	let content;
-	if (segment) {
-		const slug = stringToSlug(segment[segment.length - 1])
-		content = await getCategoryBySlug(slug, locale);
-		if (!content)
-			content = await getArticleBySlug(slug, locale);
-		if (!content) {
-			console.log("couldn't render for ", segment)
-			throw Error("Houston, we have got a problem");
-		}
+	content = await getEditorialProps(editorial, locale);
+	if (!content) {
+		console.log("couldn't render for ", editorial);
+		throw Error("Houston, we have got a problem");
 	}
 
 	return {
@@ -65,7 +57,7 @@ export const getStaticProps: GetStaticProps = async (context) => {
 // HACK typeguards on Article and Category produce an undefined error
 // therefore the 'manual' if on typeName and a typecast of 'content' (and therefore the content is let not const)
 
-export default function Segment(props: ISegmentProps) {
+export default function Editorial(props: IEditorialProps) {
 	const { locale, locales } = props;
 	let { content } = props;
 	return (
@@ -86,8 +78,12 @@ export default function Segment(props: ISegmentProps) {
 				<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
 			</SideNav>
 			<Content>
-			{ ( content?.typeName === 'Category' ) &&   <Category content={content as ICategory} />  }
-			{ ( content?.typeName === 'Article' ) &&   <Article content={content as IArticle} />  }
+				{content?.typeName === "Category" && (
+					<Category content={content as ICategory} />
+				)}
+				{content?.typeName === "Article" && (
+					<Article content={content as IArticle} />
+				)}
 			</Content>
 		</div>
 	);

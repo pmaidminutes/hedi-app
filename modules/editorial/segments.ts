@@ -1,8 +1,8 @@
 import { getServiceClient, gql } from "@/common/graphql";
 // Types
-import { ISegment, ISegmentParams } from "@/modules/editorial/types";
+import { IEditorialParams } from "./generators/editorial";
 
-export async function getAllSegments(lang = "de") {
+export async function getAllEditorialSegments(lang = "de") {
 	const query = gql`
 		query getAllLanguages($langcode: String) {
 			articles(langcode: $langcode) {
@@ -20,30 +20,44 @@ export async function getAllSegments(lang = "de") {
 	const client = await getServiceClient();
 	if (!client) return [];
 
-	const result:ISegment = await client
+	const result:IEditorial = await client
 		.request(query, { langcode: lang })
-		.then((data) => data ?? [])
+		.then((data) => data)
 		.catch((e) => console.warn("error", e));
 
-	const segments: ISegmentParams[] = [];
-	// TODO: refactor maybe
-	result.articles.forEach((article) =>
-		segments.push(segmentObject(article.path, lang))
-	);
-	result.categories.forEach((category) => {
-		segments.push(segmentObject(category.path, lang));
-		if (category.categories.length > 0) {
-			category.categories.forEach((subcategory) =>
-				segments.push(segmentObject(subcategory.path, lang))
-			);
-		}
-	});
-	return segments;
+	return getParamObjects(result, lang);
 }
 
-const segmentObject = (segment: string, lang: string): ISegmentParams => ({
+function getParamObjects(obj: any, lang: string) {
+	const result: IEditorialParams[] = [];
+	for (let key in obj) {
+		if (typeof key === "string" && key === 'path') {
+			result.push(editorialSegmentObject(obj[key], lang));
+		} else {
+			result.push(...getParamObjects(obj[key], lang));
+		}
+	}
+	return result
+}
+
+const editorialSegmentObject = (segment: string, lang: string): IEditorialParams => ({
 	params: {
-		segment: segment.split("/").filter((entry) => entry !== ""),
+		editorial: segment.split("/").filter((entry) => entry !== ""),
 	},
 	locale: lang,
 });
+
+
+interface IEditorial {
+	articles: IPath[];
+	categories: ICategorySegment[];
+}
+
+
+interface ICategorySegment extends IPath {
+	categories: IPath[];
+}
+
+interface IPath {
+	path: string;
+}
