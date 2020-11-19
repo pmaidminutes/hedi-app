@@ -8,11 +8,7 @@ interface IArticleProps {
 }
 
 export const ArticlePage = ({ content }: IArticleProps) => {
-<<<<<<< HEAD
-	const { label, body, tags, category } = content;
-=======
 	const { label, body, category } = content;
->>>>>>> origin/segments-wip
 	return (
 		<>
 			<h1>{label}</h1>
@@ -20,12 +16,8 @@ export const ArticlePage = ({ content }: IArticleProps) => {
 				dangerouslySetInnerHTML={{
 					__html: body,
 				}}
-<<<<<<< HEAD
-			/>
-=======
 			>
 			</div>
->>>>>>> origin/segments-wip
 			<Tag>{category.label}</Tag>
 		</>
 	);

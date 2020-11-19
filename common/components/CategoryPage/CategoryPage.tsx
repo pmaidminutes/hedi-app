@@ -10,18 +10,10 @@ interface ICategoryProps {
 
 export const CategoryPage = ({ content }: ICategoryProps) => {
 	const { categories, label, articles } = content;
-<<<<<<< HEAD
-
-	return (
-		<>
-			<h1>{label}</h1>
-			{categories.length > 0 ? (
-=======
 	return (
 		<>
 			<h1>{label}</h1>
 			{categories.length > 0 && (
->>>>>>> origin/segments-wip
 				<Tile>
 					<h2>Subcategories</h2>
 					<UnorderedList>
