@@ -1,11 +1,12 @@
 import { gql } from "@/common/graphql";
-import { BodyFields, PathFields, IBody, IEditorial, IEntity,  IPath, EditorialFields, EntityFields } from "@/common/model/cms";
+import { BodyFields, URLPathFields, IBody, IEditorial, IEntity,  IURLPath, EditorialFields, EntityFields } from "@/common/model/cms";
 import { ImageFields, IImage } from './image'
 
-export interface IArticleEntry extends IPath, IBody {}
+export interface IArticleEntry extends IEntity, IURLPath, IBody {}
 
 export const ArticleEntryFields = `
-  ${PathFields}
+  ${EntityFields}
+  ${URLPathFields}
   ${BodyFields}
   image {
     ${ImageFields}
@@ -29,7 +30,7 @@ export function isIArticle(obj: any) : obj is IArticle {
 
 export const ArticleFields = `
   ${EditorialFields}
-  path
+  urlpath
   category {
     ${EntityFields}
   }

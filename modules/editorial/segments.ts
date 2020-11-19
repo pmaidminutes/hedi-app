@@ -6,12 +6,12 @@ export async function getAllEditorialSegments(lang = "de") {
 	const query = gql`
 		query getAllLanguages($langcode: String) {
 			articles(langcode: $langcode) {
-				path
+				urlpath
 			}
 			categories(langcode: $langcode) {
-				path
+				urlpath
 				categories {
-					path
+					urlpath
 				}
 			}
 		}
