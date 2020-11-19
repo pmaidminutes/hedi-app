@@ -1,6 +1,6 @@
 import { ParsedUrlQuery } from "querystring";
-import { IArticle } from "./articles";
-import { ICategory } from "./categories";
+import { IArticle } from "./article";
+import { ICategory } from "./category";
 export interface ISegmentParams {
 	params: {
 		segment: string[];
@@ -22,7 +22,6 @@ export interface IPath {
 }
 
 export interface ISegmentProps {
-	pagetype: "Article" | "Category";
 	locale: string;
 	locales: string[];
 	content: ICategory | IArticle

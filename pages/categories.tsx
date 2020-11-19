@@ -1,8 +1,8 @@
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { LanguageSwitch } from "@/common/components";
+import { LanguageSwitch } from "../common/components";
 import { getAllCategories } from "@/modules/articles/categories";
-import { ICategory} from '@/modules/articles/types'
+import { ICategory } from "@/modules/articles/types/category";
 import { GetStaticProps } from "next";
 
 import { Content, SideNav, ListItem, Tabs, Tab } from "carbon-components-react";
