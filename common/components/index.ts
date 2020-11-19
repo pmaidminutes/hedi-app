@@ -1,4 +1,4 @@
 export { LanguageSwitch } from "./LanguageSwitch";
 export { CustomSideNavLink } from "./CustomSideNavLink";
-export { CategoryPage } from "./CategoryPage";
-export { ArticlePage } from "./ArticlePage";
+export { Category } from "./Category";
+export { Article } from "./Article";

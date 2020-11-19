@@ -5,9 +5,7 @@ import {
 	ISegmentProps,
 	ISegmentParams,
 	ICategory,
-	isICategory,
 	IArticle,
-	isIArticle,
 } from "@/modules/articles/types";
 // Modules
 import { getAllSegments } from "@/modules/articles/segments";
@@ -26,8 +24,8 @@ import {
 import {
 	LanguageSwitch,
 	CustomSideNavLink,
-	CategoryPage,
-	ArticlePage,
+	Category,
+	Article,
 } from "@/common/components";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
@@ -88,8 +86,8 @@ export default function Segment(props: ISegmentProps) {
 				<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
 			</SideNav>
 			<Content>
-			{ ( content?.typeName === 'Category' ) &&   <CategoryPage content={content as ICategory} />  }
-			{ ( content?.typeName === 'Article' ) &&   <ArticlePage content={content as IArticle} />  }
+			{ ( content?.typeName === 'Category' ) &&   <Category content={content as ICategory} />  }
+			{ ( content?.typeName === 'Article' ) &&   <Article content={content as IArticle} />  }
 			</Content>
 		</div>
 	);
