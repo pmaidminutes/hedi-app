@@ -19,7 +19,7 @@ export const CategoryPage = ({ content }: ICategoryProps) => {
 					<UnorderedList>
 						{categories.map((category, index) => (
 							<ListItem key={index}>
-								<Link href={`/segments${category.path}`}>{category.label}</Link>
+								<Link href={category.path}>{category.label}</Link>
 							</ListItem>
 						))}
 					</UnorderedList>
@@ -31,7 +31,7 @@ export const CategoryPage = ({ content }: ICategoryProps) => {
 					<UnorderedList>
 						{articles.map((article, index) => (
 							<ListItem key={index}>
-								<Link href={`/segments${article.path}`}>{article.label}</Link>
+								<Link href={article.path}>{article.label}</Link>
 								<div
 									dangerouslySetInnerHTML={{
 										__html: article.summary,
