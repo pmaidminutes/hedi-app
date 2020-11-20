@@ -35,7 +35,7 @@ function getParamObjects(obj: any, lang: string) {
 	for (let key in obj) {
 		if (typeof key === "string" && key === 'urlpath') {
 			result.push(editorialSegmentObject(obj[key], lang));
-		} else {
+		} else if (typeof (obj[key]) === 'object') {
 			result.push(...getParamObjects(obj[key], lang));
 		}
 	}
