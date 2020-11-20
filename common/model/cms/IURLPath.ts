@@ -2,7 +2,7 @@ import { gql } from "@/common/graphql";
 import { isISlug, ISlug, SlugFields } from "./ISlug";
 
 export interface IURLPath extends ISlug {
-  path: string
+  urlpath: string
 }
 
 export function isIURLPath(obj: any) : obj is IURLPath {

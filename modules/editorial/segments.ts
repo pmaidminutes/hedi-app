@@ -1,20 +1,22 @@
 import { getServiceClient, gql } from "@/common/graphql";
 // Types
 import { IEditorialParams } from "./generators/editorial";
+import { IURLPath, URLPathFrag } from "@/common/model/cms";
 
 export async function getAllEditorialSegments(lang = "de") {
 	const query = gql`
 		query getAllLanguages($langcode: String) {
 			articles(langcode: $langcode) {
-				urlpath
+				...URLPathFrag
 			}
 			categories(langcode: $langcode) {
-				urlpath
+				...URLPathFrag
 				categories {
-					urlpath
+					...URLPathFrag
 				}
 			}
 		}
+	${URLPathFrag}
 	`;
 
 	const client = await getServiceClient();
@@ -31,7 +33,7 @@ export async function getAllEditorialSegments(lang = "de") {
 function getParamObjects(obj: any, lang: string) {
 	const result: IEditorialParams[] = [];
 	for (let key in obj) {
-		if (typeof key === "string" && key === 'path') {
+		if (typeof key === "string" && key === 'urlpath') {
 			result.push(editorialSegmentObject(obj[key], lang));
 		} else {
 			result.push(...getParamObjects(obj[key], lang));
@@ -49,15 +51,11 @@ const editorialSegmentObject = (segment: string, lang: string): IEditorialParams
 
 
 interface IEditorial {
-	articles: IPath[];
+	articles: IURLPath[];
 	categories: ICategorySegment[];
 }
 
 
-interface ICategorySegment extends IPath {
-	categories: IPath[];
-}
-
-interface IPath {
-	path: string;
+interface ICategorySegment extends IURLPath {
+	categories: IURLPath[];
 }
