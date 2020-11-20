@@ -1,24 +1,34 @@
 import { SelectItem, Select } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { ChangeEvent } from "react";
+// Types 
+import { ICategory, IArticle } from '@/modules/editorial/types'
+
+type LanguageSwitchContent = IArticle | ICategory
 
 interface LanguageSwitchProps {
-	locales: string[] | undefined;
-  locale: string | undefined;
-  path?: string;
+	translations?: LanguageSwitchContent[]
 }
+
 /**
  * Language Switch Component.
- * 
- * @param {array[]} locales - All the available language codes.
- * @param {string} locale - The current language.
- * @param {string} path - The path of the current site. If empty, the component will redirect to the start page.
+ *
+ * @param {array[]} translations - All translations of the current page.
  */
-export const LanguageSwitch = ({ locales, locale, path = '/' }: LanguageSwitchProps) => {
+export const LanguageSwitch = ({ translations }:LanguageSwitchProps) => {
 	const router = useRouter();
+	const { pathname, locale, locales } = router;;
 
-	const handleValueChange = (event: ChangeEvent<HTMLSelectElement>) => {
-		router.push(path, path, { locale: event.currentTarget.value });
+	const chooseLanguage = (event: ChangeEvent<HTMLSelectElement>) => {
+		const newLang = event.currentTarget.value;
+		let path;
+		if (translations) {
+			const { urlpath } = findLocaledUrlpath(translations, newLang);
+			path = urlpath;
+		} else {
+			path = pathname;
+		}
+		router.push(path, path, { locale: newLang });
 	};
 
 	return (
@@ -27,7 +37,7 @@ export const LanguageSwitch = ({ locales, locale, path = '/' }: LanguageSwitchPr
 			defaultValue={locale}
 			invalidText="A valid value is required"
 			labelText="Select Language"
-			onChange={(e: ChangeEvent<HTMLSelectElement>) => handleValueChange(e)}
+			onChange={(e: ChangeEvent<HTMLSelectElement>) => chooseLanguage(e)}
 		>
 			{locales !== undefined
 				? locales.map((lang, index) => (
@@ -37,3 +47,12 @@ export const LanguageSwitch = ({ locales, locale, path = '/' }: LanguageSwitchPr
 		</Select>
 	);
 };
+
+
+function findLocaledUrlpath(translations:LanguageSwitchContent[], locale: string) {
+	return (
+		translations.find((translation) => translation.langcode === locale) ?? {
+			urlpath: "/",
+		}
+	);
+}
