@@ -1,12 +1,13 @@
 import { gql } from "@/common/graphql";
-import { BodyFields, URLPathFields, IBody, IEditorial, IEntity,  IURLPath, EditorialFields, EntityFields } from "@/common/model/cms";
+import { BodyFields, URLPathFields, IBody, IEditorial, IEntity,  IURLPath, EditorialFields, EntityFields, isITranslatable, ITranslatable, TranslatableFields, ITranslations } from "@/common/model/cms";
 import { ImageFields, IImage } from './image'
 
-export interface IArticleEntry extends IEntity, IURLPath, IBody {}
+export interface IArticleEntry extends IEntity, IURLPath, ITranslatable, IBody {}
 
 export const ArticleEntryFields = `
   ${EntityFields}
   ${URLPathFields}
+  ${TranslatableFields}
   ${BodyFields}
   image {
     ${ImageFields}
@@ -19,10 +20,10 @@ fragment ArticleEntryFrag on Article {
 }
 `;
 
-export interface IArticle extends IArticleEntry, IEditorial {
+export interface IArticle extends IArticleEntry, IEditorial, ITranslations<IArticleEntry> {
   image: IImage
   category: IEntity
-  translations: IArticle[]
+  translations: IArticleEntry[]
 }
 
 export function isIArticle(obj: any) : obj is IArticle {
@@ -39,14 +40,7 @@ export const ArticleFields = `
     ${ImageFields}
   }
   translations(excludeSelf: $excludeSelf) {
-    ${EditorialFields}
-    urlpath
-    category {
-      ${EntityFields}
-    }
-    image {
-      ${ImageFields}
-    }
+    ${ArticleEntryFields}
   }
 `;
 

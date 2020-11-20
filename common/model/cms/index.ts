@@ -6,4 +6,5 @@ export * from './ISlug';
 export * from './ITags';
 export * from './ITaxonomy';
 export * from './ITranslatable';
+export * from './ITranslations';
 export * from './IURLPath';

@@ -1,15 +1,16 @@
 import { gql } from "@/common/graphql";
-import { EntityFields, IEntity, IURLPath, ITaxonomy, URLPathFields, TaxonomyFields, ITranslatable, TranslatableFields } from "@/common/model/cms";
+import { EntityFields, IEntity, IURLPath, ITaxonomy, ITranslations, URLPathFields, TaxonomyFields, ITranslatable, TranslatableFields } from "@/common/model/cms";
 import { ArticleEntryFields, IArticleEntry } from "./article";
 import { ImageFields, IImage } from "./image"
 
-export interface ICategoryEntry extends IEntity, IURLPath {
+export interface ICategoryEntry extends IEntity, IURLPath, ITranslatable {
   image?: IImage
 }
 
 export const CategoryEntryFields = `
   ${EntityFields}
   ${URLPathFields}
+  ${TranslatableFields}
   image {
     ${ImageFields}
   }
@@ -21,18 +22,17 @@ fragment CategoryEntryFrag on Category {
 }
 `;
 
-export interface ICategory extends ICategoryEntry, ITaxonomy, ITranslatable<ICategory> {
+export interface ICategory extends ICategoryEntry, ITaxonomy, ITranslations<ICategoryEntry> {
   parent: number
   categories: ICategoryEntry[]
   articles: IArticleEntry[]
-  translations: ICategory[]
+  translations: ICategoryEntry[]
 }
 
 export function isICategory(obj: any) : obj is ICategory {
 	return (obj && obj.typeName === 'Category')
 }
 
-// TODO this is very eager fetching, think of easier field selection while staying typed
 export const CategoryFields = `
   ${TaxonomyFields}
   urlpath
@@ -47,18 +47,7 @@ export const CategoryFields = `
     ${ArticleEntryFields}
   }
   translations(excludeSelf: $excludeSelf) {
-    ${TaxonomyFields}
-    urlpath
-    ${TranslatableFields}
-    image {
-      ${ImageFields}
-    }
-    categories {
-      ${CategoryEntryFields}
-    }
-    articles {
-      ${ArticleEntryFields}
-    }
+    ${CategoryEntryFields}
   }
 `;
 
