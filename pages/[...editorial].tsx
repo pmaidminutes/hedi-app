@@ -58,7 +58,6 @@ export const getStaticProps: GetStaticProps<
 // therefore the 'manual' if on typeName and a typecast of 'content' (and therefore the content is let not const)
 
 export default function Editorial(props: IEditorialProps) {
-	const { locale, locales } = props;
 	let { content } = props;
 	return (
 		<div>
@@ -72,7 +71,9 @@ export default function Editorial(props: IEditorialProps) {
 				aria-label="Side Navigation"
 			>
 				<ListItem>
-					<LanguageSwitch locale={locale} locales={locales} />
+					<LanguageSwitch
+						translations={content.translations}
+					/>
 				</ListItem>
 				<SideNavLink href="/chat">Chat</SideNavLink>
 				<CustomSideNavLink href="/chat">Chat</CustomSideNavLink>
