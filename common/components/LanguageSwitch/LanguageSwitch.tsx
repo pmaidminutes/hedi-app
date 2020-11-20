@@ -1,58 +1,42 @@
 import { SelectItem, Select } from "carbon-components-react";
 import { useRouter } from "next/router";
-import { ChangeEvent } from "react";
 // Types 
-import { ICategory, IArticle } from '@/modules/editorial/types'
+import { ITranslatable, IURLPath } from "@/common/model/cms";
 
-type LanguageSwitchContent = IArticle | ICategory
-
-interface LanguageSwitchProps {
-	translations?: LanguageSwitchContent[]
-}
+type LanguageSwitchOption = ITranslatable & IURLPath;
 
 /**
  * Language Switch Component.
  *
- * @param {array[]} translations - All translations of the current page.
+ * @param {array[]} translations - A List of locales and url paths of translations of the current page.
  */
-export const LanguageSwitch = ({ translations }:LanguageSwitchProps) => {
+export const LanguageSwitch = ({ translations }: {translations?: LanguageSwitchOption[]}) => {
 	const router = useRouter();
-	const { pathname, locale, locales } = router;;
-
-	const chooseLanguage = (event: ChangeEvent<HTMLSelectElement>) => {
-		const newLang = event.currentTarget.value;
-		let path;
-		if (translations) {
-			const { urlpath } = findLocaledUrlpath(translations, newLang);
-			path = urlpath;
-		} else {
-			path = pathname;
-		}
-		router.push(path, path, { locale: newLang });
-	};
-
+	const { locale, locales, asPath: currentPath } = router;
+	
+	// TODO this method will route to not existing pages (e.g. locale en, path = currentPath)
 	return (
 		<Select
 			id="language-switch"
 			defaultValue={locale}
 			invalidText="A valid value is required"
 			labelText="Select Language"
-			onChange={(e: ChangeEvent<HTMLSelectElement>) => chooseLanguage(e)}
+			onChange={ 
+				e => router.push(
+					e.currentTarget.value,
+					e.currentTarget.value, 
+					{locale: e.currentTarget.selectedOptions.item(0)?.text}
+				) 
+			}
 		>
-			{locales !== undefined
-				? locales.map((lang, index) => (
-						<SelectItem value={lang} text={lang} key={index} />
-				  ))
-				: null}
+			{
+				locales?.map(lang => ( {lang, path: findLocaledUrlpath(lang, translations)} ) )
+					.map(({lang, path}) => ( <SelectItem value={path ?? currentPath} text={lang} key={path ?? lang} selected={lang === locale} /> ) )
+			}
 		</Select>
 	);
 };
 
-
-function findLocaledUrlpath(translations:LanguageSwitchContent[], locale: string) {
-	return (
-		translations.find((translation) => translation.langcode === locale) ?? {
-			urlpath: "/",
-		}
-	);
+function findLocaledUrlpath(locale: string, translations?:LanguageSwitchOption[]) {
+	return translations?.find((translation) => translation.langcode === locale)?.urlpath;
 }
