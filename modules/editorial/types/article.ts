@@ -38,7 +38,7 @@ export const ArticleFields = `
   image {
     ${ImageFields}
   }
-  translations {
+  translations(excludeSelf: $excludeSelf) {
     ${EditorialFields}
     urlpath
     category {

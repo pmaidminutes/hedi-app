@@ -11,7 +11,7 @@ export function isITranslatable<T extends ITranslatable<T>>(obj: any) : obj is I
 
 export const TranslatableFields = `
   langcode
-  translations {
+  translations(excludeSelf: $excludeSelf) {
     langcode
   }
 `;

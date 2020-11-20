@@ -46,7 +46,7 @@ export const CategoryFields = `
   articles {
     ${ArticleEntryFields}
   }
-  translations {
+  translations(excludeSelf: $excludeSelf) {
     ${TaxonomyFields}
     urlpath
     ${TranslatableFields}
