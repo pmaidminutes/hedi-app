@@ -22,6 +22,7 @@ fragment ArticleEntryFrag on Article {
 export interface IArticle extends IArticleEntry, IEditorial {
   image: IImage
   category: IEntity
+  translations: IArticle[]
 }
 
 export function isIArticle(obj: any) : obj is IArticle {
@@ -36,6 +37,16 @@ export const ArticleFields = `
   }
   image {
     ${ImageFields}
+  }
+  translations {
+    ${EditorialFields}
+    urlpath
+    category {
+      ${EntityFields}
+    }
+    image {
+      ${ImageFields}
+    }
   }
 `;
 

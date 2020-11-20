@@ -1,15 +1,19 @@
 import { gql } from "@/common/graphql";
 
-export interface ITranslatable {
+export interface ITranslatable<T extends ITranslatable<T>> {
   langcode: string
-};
+  translations: T[]
+}
 
-export function isITranslatable(obj: any) : obj is ITranslatable {
-  return (obj && obj.langcode) ? true : false;
+export function isITranslatable<T extends ITranslatable<T>>(obj: any) : obj is ITranslatable<T> {
+  return (obj && obj.langcode && obj.translations) ? true : false;
 }
 
 export const TranslatableFields = `
   langcode
+  translations {
+    langcode
+  }
 `;
 
 export const TranslatableFrag = gql`

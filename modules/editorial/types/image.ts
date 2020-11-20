@@ -1,7 +1,7 @@
 import { gql } from "@/common/graphql";
 import { IEntity, ITranslatable, EntityFields, TranslatableFields } from '@/common/model/cms';
 
-export interface IImage extends ITranslatable, IEntity {
+export interface IImage extends ITranslatable<IImage>, IEntity {
   alt: string
   width: number
   height: number
