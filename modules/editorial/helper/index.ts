@@ -1,0 +1,1 @@
+export { stringToSlug } from "./stringToSlug";
