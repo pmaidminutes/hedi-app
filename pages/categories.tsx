@@ -41,7 +41,7 @@ export default function Categories({
 				isChildOfHeader={false}
 			>
 				<ListItem>
-					<LanguageSwitch locale={locale} locales={locales} path={pathname} />
+					<LanguageSwitch />
 				</ListItem>
 			</SideNav>
 			<Content>

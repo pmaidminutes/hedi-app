@@ -24,7 +24,7 @@ export default function ChatIndex() {
 				aria-label="Side Navigation"
 			>
 				<ListItem>
-					<LanguageSwitch locale={locale} locales={locales} path={pathname} />
+					<LanguageSwitch/>
 				</ListItem>
 			</SideNav>
 			<Content>

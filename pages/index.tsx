@@ -43,7 +43,7 @@ export default function Index({ locales, locale, languages }: IIndexProps) {
 				aria-label="Side Navigation"
 			>
 				<ListItem>
-					<LanguageSwitch locale={locale} locales={locales} />
+					<LanguageSwitch/>
 				</ListItem>
 				<ListItem>This link wont work with language transition</ListItem>
 				<SideNavLink href="/en/chat">Chat</SideNavLink>
