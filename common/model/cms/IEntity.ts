@@ -1,13 +1,13 @@
 import { gql } from "@/common/graphql";
 
 export interface IEntity {
-  typeName: string
-  id: number
-  label: string
-};
+  typeName: string;
+  id: number;
+  label: string;
+}
 
-export function isIEntity(obj: any) : obj is IEntity {
-  return (obj && obj.typeName && obj.id && obj.label) ? true : false;
+export function isIEntity(obj: any): obj is IEntity {
+  return obj && obj.typeName && obj.id && obj.label ? true : false;
 }
 
 export const EntityFields = `

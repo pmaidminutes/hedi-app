@@ -1,10 +1,20 @@
 import { gql } from "@/common/graphql";
-import { EntityFields, IEntity, IURLPath, ITaxonomy, ITranslations, URLPathFields, TaxonomyFields, ITranslatable, TranslatableFields } from "@/common/model/cms";
+import {
+  EntityFields,
+  IEntity,
+  IURLPath,
+  ITaxonomy,
+  ITranslations,
+  URLPathFields,
+  TaxonomyFields,
+  ITranslatable,
+  TranslatableFields,
+} from "@/common/model/cms";
 import { ArticleEntryFields, IArticleEntry } from "./article";
-import { ImageFields, IImage } from "./image"
+import { ImageFields, IImage } from "./image";
 
 export interface ICategoryEntry extends IEntity, IURLPath, ITranslatable {
-  image?: IImage
+  image?: IImage;
 }
 
 export const CategoryEntryFields = `
@@ -22,15 +32,18 @@ fragment CategoryEntryFrag on Category {
 }
 `;
 
-export interface ICategory extends ICategoryEntry, ITaxonomy, ITranslations<ICategoryEntry> {
-  parent: number
-  categories: ICategoryEntry[]
-  articles: IArticleEntry[]
-  translations: ICategoryEntry[]
+export interface ICategory
+  extends ICategoryEntry,
+    ITaxonomy,
+    ITranslations<ICategoryEntry> {
+  parent: number;
+  categories: ICategoryEntry[];
+  articles: IArticleEntry[];
+  translations: ICategoryEntry[];
 }
 
-export function isICategory(obj: any) : obj is ICategory {
-	return (obj && obj.typeName === 'Category')
+export function isICategory(obj: any): obj is ICategory {
+  return obj && obj.typeName === "Category";
 }
 
 export const CategoryFields = `
@@ -51,7 +64,6 @@ export const CategoryFields = `
   }
 `;
 
-
 export const CategoryFrag = gql`
 fragment CategoryFrag on Category {
   ${CategoryFields}
@@ -59,15 +71,15 @@ fragment CategoryFrag on Category {
 `;
 
 export interface ICategoryExpanded extends ICategory {
-  categories: ICategory[]
+  categories: ICategory[];
 }
 
 export const CategoryExpandedFrag = gql`
-fragment CategoryExpandedFrag on Category {
-  ...CategoryFrag
-  categories {
+  fragment CategoryExpandedFrag on Category {
     ...CategoryFrag
+    categories {
+      ...CategoryFrag
+    }
   }
-}
-${CategoryFrag}
+  ${CategoryFrag}
 `;

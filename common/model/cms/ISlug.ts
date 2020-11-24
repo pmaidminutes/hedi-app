@@ -1,11 +1,11 @@
 import { gql } from "@/common/graphql";
 
 export interface ISlug {
-  slug: string
+  slug: string;
 }
 
-export function isISlug(obj: any) : obj is ISlug {
-  return (obj && obj.slug) ? true : false;
+export function isISlug(obj: any): obj is ISlug {
+  return obj && obj.slug ? true : false;
 }
 
 export const SlugFields = `

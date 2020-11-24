@@ -1,3 +1,3 @@
-export function stringToSlug(string:string) {
-	return `/${string}`;
+export function stringToSlug(string: string) {
+  return `/${string}`;
 }

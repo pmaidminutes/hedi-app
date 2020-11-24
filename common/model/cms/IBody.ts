@@ -1,12 +1,12 @@
 import { gql } from "@/common/graphql";
 
 export interface IBody {
-  body: string
-  summary: string
+  body: string;
+  summary: string;
 }
 
-export function isIBody(obj: any) : obj is IBody {
-  return (obj && obj.body && obj.summary) ? true : false;
+export function isIBody(obj: any): obj is IBody {
+  return obj && obj.body && obj.summary ? true : false;
 }
 
 export const BodyFields = `

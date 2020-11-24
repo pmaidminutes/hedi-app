@@ -1,8 +1,25 @@
 import { gql } from "@/common/graphql";
-import { BodyFields, URLPathFields, IBody, IEditorial, IEntity,  IURLPath, EditorialFields, EntityFields, isITranslatable, ITranslatable, TranslatableFields, ITranslations } from "@/common/model/cms";
-import { ImageFields, IImage } from './image'
+import {
+  BodyFields,
+  URLPathFields,
+  IBody,
+  IEditorial,
+  IEntity,
+  IURLPath,
+  EditorialFields,
+  EntityFields,
+  isITranslatable,
+  ITranslatable,
+  TranslatableFields,
+  ITranslations,
+} from "@/common/model/cms";
+import { ImageFields, IImage } from "./image";
 
-export interface IArticleEntry extends IEntity, IURLPath, ITranslatable, IBody {}
+export interface IArticleEntry
+  extends IEntity,
+    IURLPath,
+    ITranslatable,
+    IBody {}
 
 export const ArticleEntryFields = `
   ${EntityFields}
@@ -20,14 +37,17 @@ fragment ArticleEntryFrag on Article {
 }
 `;
 
-export interface IArticle extends IArticleEntry, IEditorial, ITranslations<IArticleEntry> {
-  image: IImage
-  category: IEntity
-  translations: IArticleEntry[]
+export interface IArticle
+  extends IArticleEntry,
+    IEditorial,
+    ITranslations<IArticleEntry> {
+  image: IImage;
+  category: IEntity;
+  translations: IArticleEntry[];
 }
 
-export function isIArticle(obj: any) : obj is IArticle {
-	return (obj && (obj.typeName === 'Article'));
+export function isIArticle(obj: any): obj is IArticle {
+  return obj && obj.typeName === "Article";
 }
 
 export const ArticleFields = `
@@ -43,7 +63,6 @@ export const ArticleFields = `
     ${ArticleEntryFields}
   }
 `;
-
 
 export const ArticleFrag = gql`
 fragment ArticleFrag on Article {

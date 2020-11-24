@@ -1,12 +1,18 @@
 import { gql } from "@/common/graphql";
-import { isITranslatable, ITranslatable, TranslatableFields } from "./ITranslatable";
+import {
+  isITranslatable,
+  ITranslatable,
+  TranslatableFields,
+} from "./ITranslatable";
 
 export interface ITranslations<T extends ITranslatable> extends ITranslatable {
-  translations: T[]
+  translations: T[];
 }
 
-export function isITranslations<T extends ITranslatable>(obj: any) : obj is ITranslations<T> {
-  return (obj && obj.translations && isITranslatable(obj)) ? true : false;
+export function isITranslations<T extends ITranslatable>(
+  obj: any
+): obj is ITranslations<T> {
+  return obj && obj.translations && isITranslatable(obj) ? true : false;
 }
 
 export const TranslationsFields = `

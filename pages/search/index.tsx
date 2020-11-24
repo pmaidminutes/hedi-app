@@ -1,10 +1,10 @@
 /**
  * Search Root
- * 
+ *
  * for language switching see ../index.tsx
  */
 
-import Head from 'next/head'
+import Head from "next/head";
 
 export default function SearchIndex() {
   return (
@@ -13,11 +13,9 @@ export default function SearchIndex() {
         <title>HEDI App Search root</title>
       </Head>
       <main>
-        <h1>
-          HEDI App Search
-        </h1>
+        <h1>HEDI App Search</h1>
         <p>HEDI App search index, up and running</p>
-     </main>
+      </main>
     </div>
-  )
+  );
 }

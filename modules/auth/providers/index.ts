@@ -1,2 +1,2 @@
-export { credentialProvider } from './credentials';
-export { authCodeProvider } from './authCode';
+export { credentialProvider } from "./credentials";
+export { authCodeProvider } from "./authCode";

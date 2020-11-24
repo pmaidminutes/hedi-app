@@ -1,7 +1,7 @@
 import { ParsedUrlQuery } from "querystring";
 
 export interface ILanguageKey {
-  lang: string
+  lang: string;
 }
 
-export interface ILanguageParam extends ILanguageKey, ParsedUrlQuery { }
+export interface ILanguageParam extends ILanguageKey, ParsedUrlQuery {}

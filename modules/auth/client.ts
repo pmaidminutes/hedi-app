@@ -1,13 +1,9 @@
-import { User } from 'next-auth';
-import { useSession } from 'next-auth/client';
+import { User } from "next-auth";
+import { useSession } from "next-auth/client";
 
-export const getUser = ():[User|undefined, boolean] => {
-  const [ session, loading ] = useSession();
+export const getUser = (): [User | undefined, boolean] => {
+  const [session, loading] = useSession();
   let user = undefined;
-  if (!loading && session && session.user) 
-    user = { ...session.user };
-  return [
-    user,
-    loading 
-  ];
-}
+  if (!loading && session && session.user) user = { ...session.user };
+  return [user, loading];
+};
