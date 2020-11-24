@@ -31,7 +31,7 @@ export const LanguageSwitch = ({ translations }: {translations?: LanguageSwitchO
 		>
 			{
 				locales?.map(lang => ( {lang, path: findLocaledUrlpath(lang, translations)} ) )
-					.map(({lang, path}) => ( <SelectItem value={path ?? currentPath} text={lang} key={path ?? lang} selected={lang === locale} /> ) )
+					.map(({lang, path}) => ( <SelectItem value={path ?? currentPath} text={lang} key={path ?? lang} /> ) )
 			}
 		</Select>
 	);
