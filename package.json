@@ -7,7 +7,8 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--inspect' next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "pretty": "prettier --write './**/*.ts*'"
   },
   "dependencies": {
     "@carbon/icons-react": "^10.19.0",
@@ -28,6 +29,7 @@
     "@types/next-auth": "^3.1.13",
     "@types/node": "^14.14.5",
     "@types/react": "^16.9.54",
+    "prettier": "^2.2.0",
     "typescript": "^4.0.5"
   }
 }
