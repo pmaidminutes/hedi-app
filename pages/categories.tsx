@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 import { LanguageSwitch } from "../common/components";
 import { getAllCategories } from "@/modules/editorial/categories";
 import { ICategory } from "@/modules/editorial/types/category";
@@ -23,12 +22,8 @@ interface ICategoriesProps {
 }
 
 export default function Categories({
-	locales,
-	locale,
 	categories,
 }: ICategoriesProps) {
-	const router = useRouter();
-	const { pathname } = router;
 	return (
 		<div>
 			<Head>

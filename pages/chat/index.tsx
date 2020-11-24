@@ -11,7 +11,7 @@ import { LanguageSwitch } from "../../common/components";
 
 export default function ChatIndex() {
 	const router = useRouter();
-	const { locale, locales, pathname } = router;
+	const { pathname } = router;
 	return (
 		<div>
 			<Head>
