@@ -1,4 +1,4 @@
-import { IHTTPError } from "./types";
+import { IHTTPError } from "@/common/types";
 
 export async function requestCSRF() {
   const response = await fetch(

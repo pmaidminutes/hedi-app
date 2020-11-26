@@ -5,3 +5,8 @@ export interface ILanguageKey {
 }
 
 export interface ILanguageParam extends ILanguageKey, ParsedUrlQuery {}
+
+export interface IHTTPError {
+  code: number;
+  text: string;
+}

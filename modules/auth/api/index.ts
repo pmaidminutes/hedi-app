@@ -1,9 +1,9 @@
+import { IsIHTTPError } from "@/common/errorHandling";
 import { NextApiResponse, NextApiRequest } from "next";
 import NextAuth from "next-auth";
 import { getToken } from "next-auth/jwt";
 import { authorizeService, IAuth, IUserAuth } from "../flow";
 import { getOptions } from "../initOptions";
-import { IsIHTTPError } from "../requests";
 import { authHeader, IAuthHeader } from "../utils";
 
 export const withAuth = async (

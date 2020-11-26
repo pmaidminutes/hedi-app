@@ -1,5 +1,5 @@
+import { IsIHTTPError } from "@/common/errorHandling";
 import { requestCSRF } from "../requests";
-import { IsIHTTPError } from "../requests/types";
 import { getAccess } from "./getAccess";
 
 export async function authorizeService(username: string, password: string) {

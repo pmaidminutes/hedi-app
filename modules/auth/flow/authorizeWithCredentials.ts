@@ -1,7 +1,8 @@
 import { expiryObject } from "../utils";
-import { requestUserInfo, IsIHTTPError } from "../requests";
+import { requestUserInfo } from "../requests";
 import { IUserAuth } from "./types";
 import { getAccess } from "./getAccess";
+import { IsIHTTPError } from "@/common/errorHandling";
 
 export async function authorizeWithCredentials(
   username: string,

@@ -11,7 +11,9 @@
     "pretty": "prettier --write './**/*.ts*'"
   },
   "dependencies": {
-    "@carbon/icons-react": "^10.19.0",
+    "@carbon/icons": "^10.19.0",
+    "@carbon/icons-react": "^10.21.0",
+    "@types/carbon__icons-react": "^10.20.0",
     "carbon-components": "^10.22.0",
     "carbon-components-react": "^7.22.0",
     "carbon-icons": "^7.0.7",

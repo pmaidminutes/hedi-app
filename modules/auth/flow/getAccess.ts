@@ -1,6 +1,7 @@
 import { expiryObject } from "../utils";
-import { requestToken, IsIHTTPError } from "../requests";
+import { requestToken } from "../requests";
 import { IAuth } from "./types";
+import { IsIHTTPError } from "@/common/errorHandling";
 
 export async function getAccess(
   username: string,
