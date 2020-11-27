@@ -33,7 +33,7 @@ export async function getAllEditorialSegments(lang = "de") {
 function getParamObjects(obj: any, lang: string) {
   const result: IEditorialParams[] = [];
   for (let key in obj) {
-    if (typeof key === "string" && key === "urlpath") {
+    if (typeof key === "string" && key === "urlsegments") {
       result.push(editorialSegmentObject(obj[key], lang));
     } else if (typeof obj[key] === "object") {
       result.push(...getParamObjects(obj[key], lang));
@@ -43,11 +43,11 @@ function getParamObjects(obj: any, lang: string) {
 }
 
 const editorialSegmentObject = (
-  segment: string,
+  segments: string[],
   lang: string
 ): IEditorialParams => ({
   params: {
-    editorial: segment.split("/").filter(entry => entry !== ""),
+    editorial: segments,
   },
   locale: lang,
 });
