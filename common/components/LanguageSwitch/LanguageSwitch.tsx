@@ -16,13 +16,13 @@ export const LanguageSwitch = ({
   translations?: LanguageSwitchOption[];
 }) => {
   const router = useRouter();
-  const { locale, locales, asPath: currentPath } = router;
+  const { locales, asPath: currentPath } = router;
 
   // TODO this method will route to not existing pages (e.g. locale en, path = currentPath)
   return (
     <Select
       id="language-switch"
-      defaultValue={locale}
+      defaultValue={currentPath}
       invalidText="A valid value is required"
       labelText="Select Language"
       onChange={e =>
