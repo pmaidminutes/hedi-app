@@ -1,11 +1,12 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { GlossaryFields, IGlossary, IGlossaryEntry } from "./types";
+import { GlossaryFields, IGlossaryEntry, IGlossaryItem } from "./types";
 
 export async function getAllGlossaries(lang: string) {
   const query = gql`
-      query getAllGlossaries($langcode: String) {
+      query getAllGlossaries($langcode: String, $excludeSelf: Boolean) {
         glossary(langcode: $langcode) {
             ${GlossaryFields}
+           
         }
       }
     `;
@@ -13,10 +14,10 @@ export async function getAllGlossaries(lang: string) {
   const client = await getServiceClient();
 
   let glossaries = client
-    .request<{ glossary: IGlossaryEntry[] }>(query, {
+    .request<{ glossary: IGlossaryItem[] }>(query, {
       langcode: lang,
+      excludeSelf: true,
     })
     .then(data => data.glossary ?? []);
-
   return glossaries;
 }

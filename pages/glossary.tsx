@@ -13,9 +13,13 @@ import {
   Row,
   Column,
 } from "carbon-components-react";
-import { IGlossary, IGlossaryEntry } from "@/modules/editorial/types";
+import {
+  IGlossary,
+  IGlossaryEntry,
+  IGlossaryItem,
+} from "@/modules/editorial/types";
 import { getAllGlossaries } from "@/modules/editorial/glossaries";
-import { reorderGlossaryView } from "@/modules/editorial/helper/regroupGlossary";
+import { reorderGlossaryView } from "@/modules/editorial/helper";
 
 export const getStaticProps: GetStaticProps<any> = async ({
   locale,
@@ -47,18 +51,30 @@ export default function glossary({ groupedGlossaries }: IGlossaryProps) {
         </ListItem>
       </SideNav>
       <Content>
-        <h1>{"Glossary"}</h1>
+        <h1 style={{ fontStyle: "bold" }}>{"Glossary"}</h1>
         <Grid>
           <Row>
             {groupedGlossaries.map((glossaryGroup: IGlossary) => (
-              <Column lg={4}>
-                <AspectRatio ratio="1x1" background-color="red">
-                  {glossaryGroup.abbrev}
+              <Column lg={5}>
+                <AspectRatio ratio="1x1">
+                  <h2
+                    style={{ fontStyle: "bold", backgroundColor: "lightgray" }}>
+                    {glossaryGroup.abbrev}
+                  </h2>
                   <Accordion>
                     {glossaryGroup.glossaries.map(
-                      (glossaryEntry: IGlossaryEntry) => (
-                        <AccordionItem title={glossaryEntry.label}>
-                          <p>{glossaryEntry.body.substring(0, 300)}</p>
+                      (glossaryItem: IGlossaryItem) => (
+                        <AccordionItem title={glossaryItem.label}>
+                          <h4>
+                            {" "}
+                            {glossaryItem.translations.map(
+                              (translation: IGlossaryEntry) =>
+                                translation.langcode === "de"
+                                  ? "Auf Deutsch: " + translation.label
+                                  : ""
+                            )}
+                          </h4>
+                          <p>{glossaryItem.body.substring(0, 300)}</p>
                         </AccordionItem>
                       )
                     )}

@@ -6,24 +6,27 @@ import {
   EntityFields,
   TranslatableFields,
 } from "@/common/model/cms";
-
 export interface IGlossaryEntry extends IEntity, IURLPath, ITranslatable {
-  slug: string;
   body: string;
-  summary: string;
+  label: string;
 }
-
-export interface IGlossary
+export interface IGlossaryItem
   extends IGlossaryEntry,
-    ITranslations<IGlossaryEntry> {
+    ITranslations<IGlossaryEntry> {}
+
+export interface IGlossary {
   abbrev: string;
-  glossaries: IGlossaryEntry[];
-  translations: IGlossaryEntry[];
+  glossaries: IGlossaryItem[];
 }
+export const GlossaryEntryFields = `
+  body
+  `;
+
 export const GlossaryFields = `
 ${EntityFields}
-${TranslatableFields}
-slug
-body
-summary
+${GlossaryEntryFields}
+translations(excludeSelf: $excludeSelf) {
+  ${TranslatableFields}
+  ${EntityFields}
+${GlossaryEntryFields}}
 `;
