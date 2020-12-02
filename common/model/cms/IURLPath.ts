@@ -3,7 +3,7 @@ import { isISlug, ISlug, SlugFields } from "./ISlug";
 
 export interface IURLPath extends ISlug {
   urlpath: string;
-  urlsegments:string[]
+  urlsegments: string[];
 }
 
 export function isIURLPath(obj: any): obj is IURLPath {

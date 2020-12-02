@@ -7,30 +7,31 @@ import {
   SideNav,
   ListItem,
   AspectRatio,
-  Tab,
+  Accordion,
+  AccordionItem,
   Grid,
   Row,
   Column,
 } from "carbon-components-react";
-import { IGlossaryEntry } from "@/modules/editorial/types";
+import { IGlossary, IGlossaryEntry } from "@/modules/editorial/types";
 import { getAllGlossaries } from "@/modules/editorial/glossaries";
+import { reorderGlossaryView } from "@/modules/editorial/helper/regroupGlossary";
 
 export const getStaticProps: GetStaticProps<any> = async ({
   locale,
   locales,
 }) => {
-  const glossaries = await getAllGlossaries(`${locale}`);
-
-  return { props: { locales, locale, glossaries } };
+  const groupedGlossaries = reorderGlossaryView(
+    await getAllGlossaries(`${locale}`)
+  );
+  return { props: { locales, locale, groupedGlossaries } };
 };
-
 interface IGlossaryProps {
   locales: string[];
   locale: string;
-  glossaries: IGlossaryEntry[];
+  groupedGlossaries: IGlossary[];
 }
-
-export default function glossary({ glossaries }: IGlossaryProps) {
+export default function glossary({ groupedGlossaries }: IGlossaryProps) {
   return (
     <div>
       <Head>
@@ -46,20 +47,28 @@ export default function glossary({ glossaries }: IGlossaryProps) {
         </ListItem>
       </SideNav>
       <Content>
+        <h1>{"Glossary"}</h1>
         <Grid>
           <Row>
-            {glossaries.map(glossaryEntry => (
-              <Column lg={3} style={{}}>
+            {groupedGlossaries.map((glossaryGroup: IGlossary) => (
+              <Column lg={4}>
                 <AspectRatio ratio="1x1" background-color="red">
-                  {glossaryEntry.label}
-                  {glossaryEntry.body.substring(0, 300)}
+                  {glossaryGroup.abbrev}
+                  <Accordion>
+                    {glossaryGroup.glossaries.map(
+                      (glossaryEntry: IGlossaryEntry) => (
+                        <AccordionItem title={glossaryEntry.label}>
+                          <p>{glossaryEntry.body.substring(0, 300)}</p>
+                        </AccordionItem>
+                      )
+                    )}
+                  </Accordion>
                 </AspectRatio>
               </Column>
             ))}
           </Row>
         </Grid>
       </Content>
-      {JSON.stringify(glossaries)}
     </div>
   );
 }

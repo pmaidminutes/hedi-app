@@ -40,7 +40,7 @@ function getParamObjects(obj: any, lang: string) {
       if (obj.langcode === lang) {
         result.push(editorialSegmentObject(obj[key], lang));
       } else {
-        console.log(editorialSegmentObject(obj[key], lang))
+        console.log(editorialSegmentObject(obj[key], lang));
       }
     } else if (typeof obj[key] === "object") {
       result.push(...getParamObjects(obj[key], lang));

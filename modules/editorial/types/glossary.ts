@@ -1,16 +1,24 @@
-import { IEntity, IURLPath, ITranslatable, ITranslations, EntityFields, TranslatableFields } from "@/common/model/cms";
+import {
+  IEntity,
+  IURLPath,
+  ITranslatable,
+  ITranslations,
+  EntityFields,
+  TranslatableFields,
+} from "@/common/model/cms";
 
 export interface IGlossaryEntry extends IEntity, IURLPath, ITranslatable {
-    slug:string;
-    body:string;
-    summary:string;
-  }
+  slug: string;
+  body: string;
+  summary: string;
+}
 
 export interface IGlossary
-extends IGlossaryEntry,
-  ITranslations<IGlossaryEntry> {
-glossaries: IGlossaryEntry[];
-translations: IGlossaryEntry[];
+  extends IGlossaryEntry,
+    ITranslations<IGlossaryEntry> {
+  abbrev: string;
+  glossaries: IGlossaryEntry[];
+  translations: IGlossaryEntry[];
 }
 export const GlossaryFields = `
 ${EntityFields}

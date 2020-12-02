@@ -21,18 +21,16 @@ export async function getArticleBySlug(
   `;
   const client = await getServiceClient();
 
-  return (
-    client
-      .request<{ articleBySlug: IArticle }>(query, {
-        srcLang: lang,
-        dstLang: null,
-        slug: pageSlug,
-        excludeSelf,
-      })
-      .then(data => data.articleBySlug)
-      .catch(e => {
-        console.warn(e);
-        return null;
-      })
-  );
+  return client
+    .request<{ articleBySlug: IArticle }>(query, {
+      srcLang: lang,
+      dstLang: null,
+      slug: pageSlug,
+      excludeSelf,
+    })
+    .then(data => data.articleBySlug)
+    .catch(e => {
+      console.warn(e);
+      return null;
+    });
 }
