@@ -2,6 +2,7 @@ import { getServiceClient, gql } from "@/common/graphql";
 // Types
 import { IEditorialParams } from "./generators/editorial";
 import { ITranslatable, IURLPath, URLPathFrag } from "@/common/model/cms";
+import { IGlossaryPaths } from "./types";
 
 export async function getAllEditorialSegments(lang = "de") {
   const query = gql`
@@ -39,8 +40,6 @@ function getParamObjects(obj: any, lang: string) {
     if (typeof key === "string" && key === "urlsegments") {
       if (obj.langcode === lang) {
         result.push(editorialSegmentObject(obj[key], lang));
-      } else {
-        console.log(editorialSegmentObject(obj[key], lang));
       }
     } else if (typeof obj[key] === "object") {
       result.push(...getParamObjects(obj[key], lang));

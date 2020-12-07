@@ -5,28 +5,33 @@ import {
   ITranslations,
   EntityFields,
   TranslatableFields,
+  IContent,
+  ContentFields,
+  SlugFields,
 } from "@/common/model/cms";
-export interface IGlossaryEntry extends IEntity, IURLPath, ITranslatable {
-  body: string;
-  label: string;
+import { ParsedUrlQuery } from "querystring";
+export interface IGlossaryEntry extends IContent {
+  translations: IGlossaryEntry[];
 }
-export interface IGlossaryItem
-  extends IGlossaryEntry,
-    ITranslations<IGlossaryEntry> {}
 
-export interface IGlossary {
+export interface IGroupGlossary {
   abbrev: string;
-  glossaries: IGlossaryItem[];
+  glossaries: IGlossaryEntry[];
 }
-export const GlossaryEntryFields = `
-  body
-  `;
-
-export const GlossaryFields = `
-${EntityFields}
-${GlossaryEntryFields}
-translations(excludeSelf: $excludeSelf) {
-  ${TranslatableFields}
+export const GlossaryPathFields = `
   ${EntityFields}
-${GlossaryEntryFields}}
+  ${SlugFields}
 `;
+export const GlossaryFields = `
+${ContentFields}
+translations(excludeSelf: $excludeSelf) {
+  ${ContentFields}}
+`;
+export interface IGlossaryUrls extends ParsedUrlQuery {
+  glossaryLocalized: string;
+  glossaryTerm: string;
+}
+export interface IGlossaryPaths {
+  params: IGlossaryUrls;
+  locale: string;
+}

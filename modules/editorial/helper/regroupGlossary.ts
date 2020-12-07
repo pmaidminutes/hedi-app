@@ -1,9 +1,9 @@
-import { IGlossaryEntry, IGlossaryItem } from "../types";
+import { IGlossaryEntry } from "../types";
 
-export function reorderGlossaryView(entries: IGlossaryItem[]) {
+export function regroupGlossary(entries: IGlossaryEntry[]) {
   const groupedEntries = entries.reduce(function (
     glossaryArray: any,
-    entry: IGlossaryItem
+    entry: IGlossaryEntry
   ) {
     const firstChar = entry.label[0].toUpperCase();
     (glossaryArray[firstChar] = glossaryArray[firstChar] || []).push(entry);

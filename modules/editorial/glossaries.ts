@@ -1,7 +1,9 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { GlossaryFields, IGlossaryEntry, IGlossaryItem } from "./types";
+import { EntityFields, SlugFields } from "@/common/model/cms";
+import { reDesignStaticGlossaryPaths } from "./helper";
+import { GlossaryFields, IGlossaryEntry } from "./types";
 
-export async function getAllGlossaries(lang: string) {
+export async function getGlossaries(lang: string) {
   const query = gql`
       query getAllGlossaries($langcode: String, $excludeSelf: Boolean) {
         glossary(langcode: $langcode) {
@@ -13,11 +15,30 @@ export async function getAllGlossaries(lang: string) {
 
   const client = await getServiceClient();
 
-  let glossaries = client
-    .request<{ glossary: IGlossaryItem[] }>(query, {
+  return client
+    .request<{ glossary: IGlossaryEntry[] }>(query, {
       langcode: lang,
       excludeSelf: true,
     })
     .then(data => data.glossary ?? []);
-  return glossaries;
+}
+
+export async function getGlossaryPaths(langcode: string) {
+  const query = gql`
+      query getAllGlossaries($langcode: String) {
+        glossary(langcode: $langcode) {
+          ${EntityFields},
+          ${SlugFields}
+        }
+      }
+    `;
+
+  const client = await getServiceClient();
+
+  const glossaryEntries = client
+    .request<{ glossary: IGlossaryEntry[] }>(query, {
+      langcode: langcode,
+    })
+    .then(data => data.glossary ?? []);
+  return reDesignStaticGlossaryPaths(await glossaryEntries, langcode);
 }

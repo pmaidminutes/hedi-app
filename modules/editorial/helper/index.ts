@@ -1,2 +1,3 @@
 export { stringToSlug } from "./stringToSlug";
-export { reorderGlossaryView } from "./regroupGlossary";
+export { regroupGlossary } from "./regroupGlossary";
+export { reDesignStaticGlossaryPaths } from "./reDesignGlossaryUrl";
