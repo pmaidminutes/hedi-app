@@ -1,9 +1,5 @@
 import { User } from "next-auth";
-import { 
-  signIn, 
-  signOut, 
-  useSession, 
-} from "next-auth/client";
+import { signIn, signOut, useSession } from "next-auth/client";
 
 export const getUser = (): [User | undefined, boolean] => {
   const [session, loading] = useSession();
@@ -12,6 +8,7 @@ export const getUser = (): [User | undefined, boolean] => {
   return [user, loading];
 };
 
-export const login = (username: string, password: string) => signIn('credentials', {username, password});
+export const login = (username: string, password: string) =>
+  signIn("credentials", { username, password });
 
 export const logout = () => signOut();

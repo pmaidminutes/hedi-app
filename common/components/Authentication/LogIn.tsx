@@ -7,21 +7,34 @@ export const LogIn = () => {
   const [password, setPassword] = useTextInput();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login(username,password);
+    login(username, password);
   };
   return (
     <Form onSubmit={handleSubmit}>
-      <TextInput labelText="Username" id="username" value={username} onChange={setUsername} />
-      <TextInput type="password" labelText="Password" id="password" value={password} onChange={setPassword}/>
-      <Button type="submit" value="Submit">Login</Button>
+      <TextInput
+        labelText="Username"
+        id="username"
+        value={username}
+        onChange={setUsername}
+      />
+      <TextInput
+        type="password"
+        labelText="Password"
+        id="password"
+        value={password}
+        onChange={setPassword}
+      />
+      <Button type="submit" value="Submit">
+        Login
+      </Button>
     </Form>
   );
 };
 
-function useTextInput(defaultText = ''){
-  const [value,setValue] = useState(defaultText);
+function useTextInput(defaultText = "") {
+  const [value, setValue] = useState(defaultText);
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);    
-  };
-  return [value,handleChange] as const;
+    setValue(e.target.value);
+  }
+  return [value, handleChange] as const;
 }
