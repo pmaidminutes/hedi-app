@@ -44,9 +44,9 @@ export default function glossary({
         <h1 style={{ fontStyle: "bold" }}>{pageTitle}</h1>
         <Grid>
           <Row>
-            {groupedGlossaries.map((glossaryGroup: IGroupGlossary) => (
-              <Column lg={5}>
-                <GlossaryGroup
+            {groupedGlossaries.map((glossaryGroup: IGroupGlossary,index) => (
+              <Column lg={5}  key={index}>
+                <GlossaryGroup key={index}
                   glossaryGroup={glossaryGroup}
                   glossaryUrlTerm={`${glossaryUrlTerm}`}
                   defaultLocale={defaultLocale}
