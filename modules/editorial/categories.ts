@@ -41,6 +41,58 @@ export async function getCategoryBySlug(
     });
 }
 
+export async function getRootCategories(
+  lang = "de",
+  locales: string[] = [],
+  excludeSelf = true
+): Promise<ICategory | null> {
+  const query = gql`
+    query getRootCategories($lang: String, $excludeSelf: Boolean) {
+      categories(langcode: $lang) {
+        ...CategoryFrag
+      }
+    }
+    ${CategoryFrag}
+  `;
+
+  const client = await getServiceClient();
+
+  return client
+    .request<{ categories: ICategory[] }>(query, {
+      lang,
+      excludeSelf,
+    })
+    .then(
+      data =>
+        ({
+          // HACK recreating the type like this is too errorprone, find a better for the root category
+          typeName: "Category",
+          id: 0,
+          label: "root",
+          langcode: lang,
+          slug: "",
+          urlpath: "",
+          urlsegments: [],
+          // TODO investigate: next router push on site root 'app.com/' doesn't respect set locale but again uses the browser query
+          // it seems forcing the default language suddenly results in 'app.com/de'
+          translations: (locales
+            .filter(l => l !== lang)
+            .map(l => ({
+              langcode: l,
+              urlpath: "/" + l,
+              urlsegments: [],
+            })) as unknown) as ICategory[],
+          parent: 0,
+          categories: data.categories,
+          articles: [],
+        } as ICategory)
+    )
+    .catch(e => {
+      console.warn(e);
+      return null;
+    });
+}
+
 export async function getAllCategories(
   lang: string = "de",
   excludeSelf = true

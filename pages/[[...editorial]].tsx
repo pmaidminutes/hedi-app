@@ -34,12 +34,12 @@ export const getStaticProps: GetStaticProps<
   IEditorialParam
 > = async context => {
   const { params, locale, locales } = context;
-  const { editorial } = params ?? { editorial: [] };
+  const editorial = params?.editorial;
 
-  if (!(editorial && locale && locales)) throw Error("fatal error...");
+  if (!(locale && locales)) throw Error("fatal error...");
 
   let content;
-  content = await getEditorialProps(editorial, locale);
+  content = await getEditorialProps(editorial, locale, locales);
   if (!content) {
     console.log("couldn't render for ", editorial);
     throw Error("Houston, we have got a problem");

@@ -1,6 +1,9 @@
 // Modules
 import { getAllEditorialSegments } from "@/modules/editorial/segments";
-import { getCategoryBySlug } from "@/modules/editorial/categories";
+import {
+  getRootCategories,
+  getCategoryBySlug,
+} from "@/modules/editorial/categories";
 import { getArticleBySlug } from "@/modules/editorial/article";
 // Helper
 import { stringToSlug } from "@/modules/editorial/helper";
@@ -12,6 +15,10 @@ export const getStaticPaths = async (locales: string[]) => {
   const paths: IEditorialParams[] = [];
   if (locales) {
     for (let locale of locales) {
+      paths.push({
+        params: { editorial: undefined }, //no subsegment = root category
+        locale,
+      });
       const editorial_segments = await getAllEditorialSegments(locale);
       paths.push(...editorial_segments);
     }
@@ -19,18 +26,25 @@ export const getStaticPaths = async (locales: string[]) => {
   return paths;
 };
 
-export const getStaticProps = async (editorial: string[], locale = "de") => {
+export const getStaticProps = async (
+  editorial?: string[],
+  locale = "de",
+  locales: string[] = []
+) => {
   let content;
-
-  const slug = stringToSlug(editorial[editorial.length - 1]);
-  content = await getCategoryBySlug(slug, locale);
-  if (!content) content = await getArticleBySlug(slug, locale);
+  if (!editorial) {
+    content = await getRootCategories(locale, locales);
+  } else {
+    const slug = stringToSlug(editorial[editorial.length - 1]);
+    content = await getCategoryBySlug(slug, locale);
+    if (!content) content = await getArticleBySlug(slug, locale);
+  }
   return content;
 };
 
 // TODO param vs params naming
 export interface IEditorialParam extends ParsedUrlQuery {
-  editorial: string[];
+  editorial?: string[];
 }
 
 export interface IEditorialParams {
