@@ -1,8 +1,7 @@
 import { getServiceClient, gql } from "@/common/graphql";
+import { ITranslatable, IURLPath, URLPathFrag } from "@/common/model/cms";
 // Types
 import { IEditorialParams } from "./generators/editorial";
-import { ITranslatable, IURLPath, URLPathFrag } from "@/common/model/cms";
-import { IGlossaryPaths } from "./types";
 
 export async function getAllEditorialSegments(lang = "de") {
   const query = gql`

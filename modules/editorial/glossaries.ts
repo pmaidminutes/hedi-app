@@ -1,7 +1,7 @@
 import { getServiceClient, gql } from "@/common/graphql";
 import { EntityFields, SlugFields } from "@/common/model/cms";
-import { reDesignStaticGlossaryPaths } from "./helper";
-import { GlossaryFields, IGlossaryEntry } from "./types";
+import { reDesignStaticGlossaryPaths } from "@/modules/editorial/generators/glossary";
+import { GlossaryFields, IGlossaryEntry } from "@/modules/editorial/types";
 
 export async function getGlossaries(lang: string) {
   const query = gql`

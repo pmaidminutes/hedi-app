@@ -16,7 +16,8 @@ export const GlossaryGroup = (props: GlossaryGroupProps) => {
       </h2>
       <Accordion>
         {glossaryGroup.glossaries.map((glossaryItem: IGlossaryEntry, index) => (
-          <GlossaryEntry key={index}
+          <GlossaryEntry
+            key={index}
             glossaryItem={glossaryItem}
             glossaryUrlTerm={props.glossaryUrlTerm}
             defaultLocale={props.defaultLocale}

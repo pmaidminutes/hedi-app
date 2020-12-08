@@ -1,13 +1,15 @@
-import Head from "next/head";
-import { GetStaticPaths, GetStaticProps } from "next/types";
-
-import { Content, Grid, Row, Column } from "carbon-components-react";
-import { IGroupGlossary, IGlossaryPaths } from "@/modules/editorial/types";
-import { getGlossaries } from "@/modules/editorial/glossaries";
-import { regroupGlossary } from "@/modules/editorial/helper";
-import { getAllGlossaryPaths } from "@/modules/editorial/generators/glossary";
-import { useRouter } from "next/router";
 import { GlossaryGroup } from "@/common/components/Glossary";
+import {
+  getStaticPaths as getAllGlossaryPaths,
+  getStaticProps as regroupGlossary,
+  IGlossaryPaths,
+} from "@/modules/editorial/generators/glossary";
+import { getGlossaries } from "@/modules/editorial/glossaries";
+import { IGroupGlossary } from "@/modules/editorial/types";
+import { Column, Content, Grid, Row } from "carbon-components-react";
+import Head from "next/head";
+import { useRouter } from "next/router";
+import { GetStaticPaths, GetStaticProps } from "next/types";
 
 export const getStaticPaths: GetStaticPaths = async ({ locales }) => {
   let paths: IGlossaryPaths[] = await getAllGlossaryPaths(locales ?? []);
@@ -17,7 +19,9 @@ export const getStaticProps: GetStaticProps<any> = async ({
   locale,
   defaultLocale,
 }) => {
-  const groupedGlossaries = regroupGlossary(await getGlossaries(`${locale}`));
+  const groupedGlossaries = await regroupGlossary(
+    await getGlossaries(`${locale}`)
+  );
 
   return { props: { defaultLocale, groupedGlossaries } };
 };
@@ -44,9 +48,10 @@ export default function glossary({
         <h1 style={{ fontStyle: "bold" }}>{pageTitle}</h1>
         <Grid>
           <Row>
-            {groupedGlossaries.map((glossaryGroup: IGroupGlossary,index) => (
-              <Column lg={5}  key={index}>
-                <GlossaryGroup key={index}
+            {groupedGlossaries.map((glossaryGroup: IGroupGlossary, index) => (
+              <Column lg={5} key={index}>
+                <GlossaryGroup
+                  key={index}
                   glossaryGroup={glossaryGroup}
                   glossaryUrlTerm={`${glossaryUrlTerm}`}
                   defaultLocale={defaultLocale}

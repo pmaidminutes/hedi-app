@@ -1,15 +1,9 @@
 import {
-  IEntity,
-  IURLPath,
-  ITranslatable,
-  ITranslations,
-  EntityFields,
-  TranslatableFields,
-  IContent,
   ContentFields,
+  EntityFields,
+  IContent,
   SlugFields,
 } from "@/common/model/cms";
-import { ParsedUrlQuery } from "querystring";
 export interface IGlossaryEntry extends IContent {
   translations: IGlossaryEntry[];
 }
@@ -27,11 +21,3 @@ ${ContentFields}
 translations(excludeSelf: $excludeSelf) {
   ${ContentFields}}
 `;
-export interface IGlossaryUrls extends ParsedUrlQuery {
-  glossaryLocalized: string;
-  glossaryTerm: string;
-}
-export interface IGlossaryPaths {
-  params: IGlossaryUrls;
-  locale: string;
-}
