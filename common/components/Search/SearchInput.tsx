@@ -1,6 +1,5 @@
-import React, { useState } from "react";
 import { Search } from "carbon-components-react";
-import useSWR from "swr";
+import React, { useState } from "react";
 import { AutoSuggest } from "./AutoSuggest";
 interface SearchInputProps {
   inputText: (text: string) => void;
@@ -26,13 +25,14 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
   };
 
   return (
-    <div className="autocomplete">
+    <>
       <Search
+        data-search
         light
-        size="lg"
+        size="sm"
         id="search-text"
         placeHolderText="Search"
-        autoComplete="on"
+        autoComplete="off"
         value={searchValue}
         onChange={handleSearch}
         type="text"
@@ -47,6 +47,6 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
         textTyped={searchValue}
         textSelected={text => handleSuggest(text)}
       />
-    </div>
+    </>
   );
 };

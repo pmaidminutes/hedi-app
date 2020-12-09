@@ -1,12 +1,12 @@
 import { GlossaryGroup } from "@/common/components/Glossary";
+import { BreadCrumb, HediHeader } from "@/common/components/Shared";
 import {
   getStaticPaths as getAllGlossaryPaths,
   getStaticProps as getGlossaries,
-  IGlossaryPaths
+  IGlossaryPaths,
 } from "@/modules/editorial/generators/glossary";
 import { IGroupGlossary } from "@/modules/editorial/types";
 import { Column, Content, Grid, Row } from "carbon-components-react";
-import Head from "next/head";
 import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 
@@ -29,22 +29,24 @@ export default function glossary({
   defaultLocale,
   groupedGlossaries,
 }: IGlossaryProps) {
+  const router = useRouter();
   const {
-    query: { glossaryLocalized: pageTitle },
-  } = useRouter();
+    query: { glossaryLocalized },
+  } = router;
+  const pageTitle = `${glossaryLocalized}`;
   //TODO to include hash value to anchor on page load
   const glossaryUrlTerm = "xxxxx";
   //console.log(useRouter(),"---", pageTitle, "term and title")
   return (
     <div>
-      <Head>
-        <title>HEDI App index</title>
-      </Head>
+      <HediHeader pageTitle={pageTitle} />
+
       <Content>
+        <BreadCrumb pageTitle={pageTitle} path={router.asPath} />
         {
           //TODO need to discuss if there is a need for localized pageTitle
         }
-        <h1 style={{ fontStyle: "bold" }}>{pageTitle}</h1>
+
         <Grid>
           <Row>
             {groupedGlossaries.map((glossaryGroup: IGroupGlossary, index) => (

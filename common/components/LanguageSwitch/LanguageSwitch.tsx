@@ -1,7 +1,7 @@
-import { SelectItem, Select } from "carbon-components-react";
-import { useRouter } from "next/router";
 // Types
 import { ITranslatable, IURLPath } from "@/common/model/cms";
+import { Select, SelectItem } from "carbon-components-react";
+import { useRouter } from "next/router";
 
 type LanguageSwitchOption = ITranslatable & IURLPath;
 
@@ -25,6 +25,8 @@ export const LanguageSwitch = ({
       defaultValue={currentPath}
       invalidText="A valid value is required"
       labelText="Select Language"
+      size="sm"
+      noLabel
       onChange={e =>
         router.push(e.currentTarget.value, e.currentTarget.value, {
           locale: e.currentTarget.selectedOptions.item(0)?.text,
