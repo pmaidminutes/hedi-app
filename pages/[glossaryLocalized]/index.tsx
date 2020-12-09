@@ -2,7 +2,7 @@ import { GlossaryGroup } from "@/common/components/Glossary";
 import {
   getStaticPaths as getAllGlossaryPaths,
   getStaticProps as regroupGlossary,
-  IGlossaryPaths,
+  IGlossaryPaths
 } from "@/modules/editorial/generators/glossary";
 import { getGlossaries } from "@/modules/editorial/glossaries";
 import { IGroupGlossary } from "@/modules/editorial/types";
@@ -34,8 +34,11 @@ export default function glossary({
   groupedGlossaries,
 }: IGlossaryProps) {
   const {
-    query: { glossaryLocalized: pageTitle, glossaryTerm: glossaryUrlTerm },
+    query: { glossaryLocalized: pageTitle }
   } = useRouter();
+  //TODO to include hash value to anchor on page load
+  const glossaryUrlTerm="xxxxx";
+  //console.log(useRouter(),"---", pageTitle, "term and title")
   return (
     <div>
       <Head>

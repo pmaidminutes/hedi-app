@@ -3,7 +3,6 @@ import { IGlossaryEntry } from "@/modules/editorial/types";
 import { ParsedUrlQuery } from "querystring";
 interface IGlossaryUrls extends ParsedUrlQuery {
   glossaryLocalized: string;
-  glossaryTerm: string;
 }
 export interface IGlossaryPaths {
   params: IGlossaryUrls;
@@ -14,14 +13,15 @@ export const getStaticPaths = async (locales: string[]) => {
   const paths: IGlossaryPaths[] = [];
   if (locales) {
     for (let locale of locales) {
-      const glossaryPaths = await getGlossaryPaths(locale);
+      const glossaryEntries: IGlossaryEntry[] = await getGlossaryPaths(locale);
+      const glossaryPaths: IGlossaryPaths[] = reDesignStaticGlossaryPaths(glossaryEntries, locale);
       paths.push(...glossaryPaths);
     }
   }
   return paths;
 };
 
-export function reDesignStaticGlossaryPaths(
+function reDesignStaticGlossaryPaths(
   glossaryEntries: IGlossaryEntry[],
   locale: string
 ): IGlossaryPaths[] {
@@ -35,7 +35,7 @@ export function reDesignStaticGlossaryPaths(
 function composeGlossaryUrls(slug: string, locale: string) {
   const slugArray = slug.split("/");
   return {
-    params: { glossaryLocalized: slugArray[1], glossaryTerm: slugArray[2] },
+    params: { glossaryLocalized: slugArray[1]},
     locale: locale,
   };
 }

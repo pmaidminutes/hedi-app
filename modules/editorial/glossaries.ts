@@ -1,9 +1,8 @@
 import { getServiceClient, gql } from "@/common/graphql";
 import { EntityFields, SlugFields } from "@/common/model/cms";
-import { reDesignStaticGlossaryPaths } from "@/modules/editorial/generators/glossary";
 import { GlossaryFields, IGlossaryEntry } from "@/modules/editorial/types";
 
-export async function getGlossaries(lang: string) {
+export async function getGlossaries(lang: string): Promise <IGlossaryEntry[]>  {
   const query = gql`
       query getAllGlossaries($langcode: String, $excludeSelf: Boolean) {
         glossary(langcode: $langcode) {
@@ -23,7 +22,7 @@ export async function getGlossaries(lang: string) {
     .then(data => data.glossary ?? []);
 }
 
-export async function getGlossaryPaths(langcode: string) {
+export async function getGlossaryPaths(langcode: string): Promise <IGlossaryEntry[]> {
   const query = gql`
       query getAllGlossaries($langcode: String) {
         glossary(langcode: $langcode) {
@@ -35,10 +34,9 @@ export async function getGlossaryPaths(langcode: string) {
 
   const client = await getServiceClient();
 
-  const glossaryEntries = client
+  return client
     .request<{ glossary: IGlossaryEntry[] }>(query, {
       langcode: langcode,
     })
     .then(data => data.glossary ?? []);
-  return reDesignStaticGlossaryPaths(await glossaryEntries, langcode);
 }
