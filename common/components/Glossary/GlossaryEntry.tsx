@@ -23,7 +23,8 @@ export const GlossaryEntry = (props: GlossaryProps) => {
       {
         //TODO to remove substring when UI look and feel is made proper
       }
-      <div dangerouslySetInnerHTML={{
+      <div
+        dangerouslySetInnerHTML={{
           __html: glossaryItem.body,
         }}></div>
     </AccordionItem>

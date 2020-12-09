@@ -1,10 +1,9 @@
 import { GlossaryGroup } from "@/common/components/Glossary";
 import {
   getStaticPaths as getAllGlossaryPaths,
-  getStaticProps as regroupGlossary,
+  getStaticProps as getGlossaries,
   IGlossaryPaths
 } from "@/modules/editorial/generators/glossary";
-import { getGlossaries } from "@/modules/editorial/glossaries";
 import { IGroupGlossary } from "@/modules/editorial/types";
 import { Column, Content, Grid, Row } from "carbon-components-react";
 import Head from "next/head";
@@ -19,10 +18,7 @@ export const getStaticProps: GetStaticProps<any> = async ({
   locale,
   defaultLocale,
 }) => {
-  const groupedGlossaries = await regroupGlossary(
-    await getGlossaries(`${locale}`)
-  );
-
+  const groupedGlossaries = await getGlossaries(`${locale}`);
   return { props: { defaultLocale, groupedGlossaries } };
 };
 interface IGlossaryProps {
@@ -34,10 +30,10 @@ export default function glossary({
   groupedGlossaries,
 }: IGlossaryProps) {
   const {
-    query: { glossaryLocalized: pageTitle }
+    query: { glossaryLocalized: pageTitle },
   } = useRouter();
   //TODO to include hash value to anchor on page load
-  const glossaryUrlTerm="xxxxx";
+  const glossaryUrlTerm = "xxxxx";
   //console.log(useRouter(),"---", pageTitle, "term and title")
   return (
     <div>
