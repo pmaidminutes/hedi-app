@@ -3,10 +3,9 @@ import { BreadCrumb, HediHeader } from "@/common/components/Shared";
 import {
   getStaticPaths as getAllGlossaryPaths,
   getStaticProps as getGlossaries,
-  IGlossaryPaths,
+  IGlossaryPaths
 } from "@/modules/editorial/generators/glossary";
 import { IGroupGlossary } from "@/modules/editorial/types";
-import { Column, Content, Grid, Row } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 
@@ -38,30 +37,23 @@ export default function glossary({
   const glossaryUrlTerm = "xxxxx";
   //console.log(useRouter(),"---", pageTitle, "term and title")
   return (
-    <div>
+    <>
       <HediHeader pageTitle={pageTitle} />
 
-      <Content>
-        <BreadCrumb pageTitle={pageTitle} path={router.asPath} />
-        {
-          //TODO need to discuss if there is a need for localized pageTitle
-        }
-
-        <Grid>
-          <Row>
-            {groupedGlossaries.map((glossaryGroup: IGroupGlossary, index) => (
-              <Column lg={5} key={index}>
-                <GlossaryGroup
-                  key={index}
-                  glossaryGroup={glossaryGroup}
-                  glossaryUrlTerm={`${glossaryUrlTerm}`}
-                  defaultLocale={defaultLocale}
-                />
-              </Column>
-            ))}
-          </Row>
-        </Grid>
-      </Content>
-    </div>
+      <BreadCrumb  />
+      {
+        //TODO need to discuss if there is a need for localized pageTitle
+      }
+      <main className="bx--grid">
+        {groupedGlossaries.map((glossaryGroup: IGroupGlossary, index) => (
+          <GlossaryGroup
+            key={index}
+            glossaryGroup={glossaryGroup}
+            glossaryUrlTerm={`${glossaryUrlTerm}`}
+            defaultLocale={defaultLocale}
+          />
+        ))}
+      </main>
+    </>
   );
 }
