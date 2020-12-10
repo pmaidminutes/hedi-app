@@ -1,9 +1,15 @@
 // Types
 import { IArticle } from "@/modules/editorial/types";
+import { ITypename } from "@/common/model/cms";
 
 interface IArticleProps {
   content: IArticle;
 }
+
+export const TryArticle = (content: ITypename) =>
+  content.typeName === "Article" ? (
+    <Article content={content as IArticle} />
+  ) : null;
 
 export const Article = ({ content }: IArticleProps) => {
   const { label, body, category } = content;

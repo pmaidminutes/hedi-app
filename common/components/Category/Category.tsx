@@ -1,10 +1,16 @@
 import Link from "next/link";
 // Types
 import { ICategory } from "@/modules/editorial/types";
+import { ITypename } from "@/common/model/cms";
 
 interface ICategoryProps {
   content: ICategory;
 }
+
+export const TryCategory = (content: ITypename) =>
+  content.typeName === "Category" ? (
+    <Category content={content as ICategory} />
+  ) : null;
 
 export const Category = ({ content }: ICategoryProps) => {
   const { categories, label, articles } = content;
