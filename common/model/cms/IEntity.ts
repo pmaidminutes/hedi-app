@@ -1,7 +1,7 @@
 import { gql } from "@/common/graphql";
+import { ITypename } from "./ITypename";
 
-export interface IEntity {
-  typeName: string;
+export interface IEntity extends ITypename {
   id: number;
   label: string;
 }
