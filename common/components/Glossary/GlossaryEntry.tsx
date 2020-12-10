@@ -1,8 +1,8 @@
 import { IGlossaryEntry } from "@/modules/editorial/types";
 import {
   ExpandableTile,
-  TileAboveTheFoldContent,
-  TileBelowTheFoldContent,
+  Link, TileAboveTheFoldContent,
+  TileBelowTheFoldContent
 } from "carbon-components-react";
 
 interface GlossaryProps {
@@ -23,7 +23,9 @@ export const GlossaryEntry = (props: GlossaryProps) => {
             title={glossaryItem.label}
             expanded={glossaryUrlTerm === glossaryItem.label}>
             <TileAboveTheFoldContent>
-              <a href={"#" + glossaryItem.label}></a>{" "}
+              {//TODO should not use label because it has spaces, need to use slug
+}
+              <Link href={"#" + glossaryItem.label}></Link>{" "}
               <h2>{glossaryItem.label}</h2>
               {glossaryItem.translations.map(
                 (translation: IGlossaryEntry, index) =>
