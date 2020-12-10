@@ -1,10 +1,55 @@
 import { getServiceClient, gql } from "@/common/graphql";
+import { ITranslatable, IURLPath, URLPathFrag } from "@/common/model/cms";
+import { ISegmentPath } from "@/common/types";
 import {
   CategoryFrag,
   CategoryExpandedFrag,
   ICategory,
   ICategoryExpanded,
 } from "@/modules/editorial/types";
+
+export async function getCategoryPaths(lang = "de"): Promise<ISegmentPath[]> {
+  const query = gql`
+    query getCategoryPaths($langcode: String) {
+      categories(langcode: $langcode) {
+        ...URLPathFrag
+        langcode
+        categories {
+          ...URLPathFrag
+          langcode
+        }
+      }
+    }
+    ${URLPathFrag}
+  `;
+
+  const client = await getServiceClient();
+  if (!client) return [];
+
+  const categories = await client
+    .request(query, { langcode: lang })
+    .then<ICategoryPath[]>(data => data.categories)
+    .catch(e => {
+      console.warn("error", e);
+      return null;
+    });
+
+  return categories ? extractPaths(categories, lang) : [];
+}
+
+interface ICategoryPath extends IURLPath, ITranslatable {
+  categories?: ICategoryPath[];
+}
+
+function extractPaths(cats: ICategoryPath[], lang: string) {
+  const result: ISegmentPath[] = [];
+  for (const cat of cats) {
+    if (cat.langcode === lang)
+      result.push({ params: { segments: cat.urlsegments }, locale: lang });
+    if (cat.categories) result.push(...extractPaths(cat.categories, lang));
+  }
+  return result;
+}
 
 export async function getCategoryBySlug(
   pageSlug: string,

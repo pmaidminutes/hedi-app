@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { LanguageSwitch } from "../common/components";
-import { getAllCategories } from "@/modules/editorial/categories";
+import { getAllCategories } from "@/modules/editorial/category";
 import { ICategory } from "@/modules/editorial/types/category";
 import { GetStaticProps } from "next";
 
