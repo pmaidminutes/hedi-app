@@ -3,7 +3,7 @@ import { BreadCrumb, HediHeader } from "@/common/components/Shared";
 import {
   getStaticPaths as getAllGlossaryPaths,
   getStaticProps as getGlossaries,
-  IGlossaryPaths
+  IGlossaryPaths,
 } from "@/modules/editorial/generators/glossary";
 import { IGroupGlossary } from "@/modules/editorial/types";
 import { useRouter } from "next/router";
@@ -34,13 +34,13 @@ export default function glossary({
   } = router;
   const pageTitle = `${glossaryLocalized}`;
   //TODO to include hash value to anchor on page load
-  const glossaryUrlTerm = "xxxxx";
+  const glossaryUrlTerm = "Embryo";
   //console.log(useRouter(),"---", pageTitle, "term and title")
   return (
     <>
       <HediHeader pageTitle={pageTitle} />
 
-      <BreadCrumb  />
+      <BreadCrumb />
       {
         //TODO need to discuss if there is a need for localized pageTitle
       }
