@@ -1,5 +1,5 @@
 import { LanguageSwitch } from "@/common/components";
-import { Column, Header, HeaderName, Row } from "carbon-components-react";
+import { Search20 } from "@carbon/icons-react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { SearchInput } from "../Search";
@@ -17,22 +17,24 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = (
 ) => {
   const router = useRouter();
   return (
-    <Header className="hedi-header" aria-label="Hedi">
-      <Row>
-        <Column>
-          <HeaderName href="/" prefix="HEDI">
-            {props.pageTitle}
-          </HeaderName>
-        </Column>
-        <Column>
+    <header className="hedi-header">
+      <div className="bx--grid">
+      <div className="bx--row">
+        <div className="bx--col pb-s-sm">
+          <h1>{props.pageTitle}</h1>
+          <p>look up interesting words</p>
+        </div>
+        <div className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs" style={{alignSelf: "center"}}>
           <LanguageSwitch />
-        </Column>
-        <Column>
+        </div>
+        <div className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs" style={{alignSelf: "center"}}>
           <SearchInput inputText={() => console.log("search")} />
-          {/*         <Search20 id="se-id" onClick={()=> router.push({pathname: "/search", query:{searchTexts: "searchValue"}},"/search") }/>
-           */}{" "}
-        </Column>
-      </Row>
-    </Header>
+          </div>
+            <Search20 style={{position:"relative",alignSelf: "center"}} id="se-id" onClick={()=> router.push({pathname: "/search", query:{searchTexts: "searchValue"}},"/search") }/>
+           
+       
+      </div>
+      </div>
+    </header>
   );
 };

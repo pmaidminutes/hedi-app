@@ -1,5 +1,4 @@
 import { IGlossaryEntry, IGroupGlossary } from "@/modules/editorial/types";
-import { AspectRatio, Accordion } from "carbon-components-react";
 import { GlossaryEntry } from "./GlossaryEntry";
 interface GlossaryGroupProps {
   glossaryGroup: IGroupGlossary;
@@ -10,20 +9,23 @@ export const GlossaryGroup = (props: GlossaryGroupProps) => {
   const glossaryGroup = props.glossaryGroup;
 
   return (
-    <AspectRatio ratio="1x1">
-      <h2 style={{ fontStyle: "bold", backgroundColor: "lightgray" }}>
-        {glossaryGroup.abbrev}
-      </h2>
-      <Accordion>
-        {glossaryGroup.glossaries.map((glossaryItem: IGlossaryEntry, index) => (
-          <GlossaryEntry
-            key={index}
-            glossaryItem={glossaryItem}
-            glossaryUrlTerm={props.glossaryUrlTerm}
-            defaultLocale={props.defaultLocale}
-          />
-        ))}
-      </Accordion>
-    </AspectRatio>
+    <>
+      <div className="bx--row bx--row-padding px-s-md">
+        <div className="bx--col-md-4 hedi-glossary-letterhead">
+          <div className="bx--aspect-ratio">{glossaryGroup.abbrev}</div>
+        </div>
+      </div>
+
+      {glossaryGroup.glossaries.map((glossaryItem: IGlossaryEntry, index) => (
+        <GlossaryEntry
+          key={index}
+          entryIndex={index}
+          glossaryItem={glossaryItem}
+          glossaryUrlTerm={props.glossaryUrlTerm}
+          defaultLocale={props.defaultLocale}
+        />
+      ))}
+      <div className="hedi-separator"></div>
+    </>
   );
 };
