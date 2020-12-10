@@ -1,6 +1,4 @@
 import Link from "next/link";
-// Components
-import { Tile, UnorderedList, ListItem } from "carbon-components-react";
 // Types
 import { ICategory } from "@/modules/editorial/types";
 
@@ -11,37 +9,53 @@ interface ICategoryProps {
 export const Category = ({ content }: ICategoryProps) => {
   const { categories, label, articles } = content;
   return (
-    <>
-      <h1>{label}</h1>
-      {categories.length > 0 && (
-        <Tile>
-          <h2>Subcategories</h2>
-          <UnorderedList>
-            {categories.map((category, index) => (
-              <ListItem key={index}>
-                <Link href={category.urlpath}>{category.label}</Link>
-              </ListItem>
-            ))}
-          </UnorderedList>
-        </Tile>
-      )}
-      {articles.length > 0 && (
-        <Tile>
-          <h2>Articles</h2>
-          <UnorderedList>
-            {articles.map((article, index) => (
-              <ListItem key={index}>
-                <Link href={article.urlpath}>{article.label}</Link>
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: article.summary,
-                  }}
-                />
-              </ListItem>
-            ))}
-          </UnorderedList>
-        </Tile>
-      )}
-    </>
+    <div className="bx--col bx--no-gutter bx--grid">
+      <div className="bx--row">
+        <div className="bx--col bx--col-auto">
+          <div className="bx--snippet bx--skeleton bx--snippet--multi bx--aspect-ratio bx--aspect-ratio--2x1">
+            poster image
+          </div>
+        </div>
+        <div className="bx--col">
+          <h1>{label}</h1>
+        </div>
+      </div>
+
+      {categories.length > 0 &&
+        categories.map((category, index) => (
+          <div className="bx--row bx--row-padding" key={index}>
+            <div className="bx--col-md-2">
+              <div className="bx--snippet bx--skeleton bx--snippet--multi bx--aspect-ratio bx--aspect-ratio--2x1">
+                poster image
+              </div>
+            </div>
+            <div className="bx--col">
+              <Link href={category.urlpath} passHref>
+                <a className="bx--link">
+                  <h3>{category.label}</h3>
+                </a>
+              </Link>
+            </div>
+          </div>
+        ))}
+      {articles.length > 0 &&
+        articles.map((article, index) => (
+          <div className="bx--row bx--row-padding" key={index}>
+            <div className="bx--col">
+              <Link href={article.urlpath} passHref>
+                <a className="bx--link">
+                  <h3>{article.label}</h3>
+                </a>
+              </Link>
+              <div
+                className="bx--text"
+                dangerouslySetInnerHTML={{
+                  __html: article.summary,
+                }}
+              />
+            </div>
+          </div>
+        ))}
+    </div>
   );
 };
