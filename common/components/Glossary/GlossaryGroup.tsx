@@ -1,7 +1,7 @@
-import { IGlossaryEntry, IGroupGlossary } from "@/modules/editorial/types";
+import { IGlossaryEntry, IGlossaryGroup } from "@/modules/editorial/types";
 import { GlossaryEntry } from "./GlossaryEntry";
 interface GlossaryGroupProps {
-  glossaryGroup: IGroupGlossary;
+  glossaryGroup: IGlossaryGroup;
   glossaryUrlTerm: string;
   defaultLocale: string;
 }

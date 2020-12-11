@@ -1,6 +1,9 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { ISegmentParam, ISegmentProps } from "@/common/types";
+// generators
 import {
   getStaticPaths as getArticlePaths,
   getStaticProps as getArticleProps,
@@ -9,16 +12,26 @@ import {
   getStaticPaths as getCategoryPaths,
   getStaticProps as getCategoryProps,
 } from "@/modules/editorial/generators/category";
+import {
+  getStaticPaths as getGlossaryPaths,
+  getStaticProps as getGlossaryProps,
+} from "@/modules/editorial/generators/glossary";
 // Components
-import { Content, SideNav, ListItem } from "carbon-components-react";
-import { LanguageSwitch, TryArticle, TryCategory } from "@/common/components";
-import { ISegmentParam, ISegmentProps } from "@/common/types";
+import { Content } from "carbon-components-react";
+import {
+  BreadCrumb,
+  HediHeader,
+  TryArticle,
+  TryCategory,
+  TryGlossary,
+} from "@/common/components";
 
 export const getStaticPaths: GetStaticPaths = async context => {
   const locales = context?.locales ?? [];
   const paths = [];
   paths.push(...(await getArticlePaths(locales)));
   paths.push(...(await getCategoryPaths(locales)));
+  paths.push(...(await getGlossaryPaths(locales)));
   return { paths, fallback: false };
 };
 
@@ -31,6 +44,7 @@ export const getStaticProps: GetStaticProps<
   let content;
   content = await getCategoryProps(params?.segments, locale, locales);
   if (!content) content = await getArticleProps(params?.segments, locale);
+  if (!content) content = await getGlossaryProps(params?.segments, locale);
 
   if (!content) {
     console.log("couldn't find content for path ", segments.join("/"));
@@ -42,23 +56,24 @@ export const getStaticProps: GetStaticProps<
 
 export default function segments(props: ISegmentProps) {
   let { content } = props;
+  const router = useRouter();
+  const {
+    query: { segments },
+  } = router;
+  const pageTitle =
+    segments && segments.length > 0 ? segments[segments.length - 1] : "";
   return (
     <>
       <Head>
         <title>HEDI App</title>
       </Head>
-      <SideNav
-        isFixedNav
-        expanded={true}
-        isChildOfHeader={false}
-        aria-label="Side Navigation">
-        <ListItem>
-          <LanguageSwitch translations={content.translations} />
-        </ListItem>
-      </SideNav>
+      <HediHeader pageTitle={pageTitle} />
+      <BreadCrumb />
+
       <Content>
         <TryCategory {...content} />
         <TryArticle {...content} />
+        <TryGlossary {...content} />
       </Content>
     </>
   );

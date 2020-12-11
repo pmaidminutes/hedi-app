@@ -1,66 +1,104 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { EntityFields, SlugFields } from "@/common/model/cms";
-import { GlossaryFields, IGlossaryEntry } from "@/modules/editorial/types";
-import { IGlossaryPaths } from "./generators/glossary";
+import { ISegmentPath } from "@/common/types";
+import {
+  GlossaryFields,
+  IGlossary,
+  IGlossaryEntry,
+} from "@/modules/editorial/types";
 
-export async function getGlossaries(lang: string): Promise<IGlossaryEntry[]> {
+// TODO cms gql query to get complete glossary base w typename, translation etc
+const glossaryHack: { [key: string]: string } = {
+  de: "glossar",
+  en: "glossary",
+};
+
+export async function getGlossaryPaths(
+  langcode: string
+): Promise<ISegmentPath[]> {
+  // const query = gql`
+  //     query getAllGlossaries($langcode: String) {
+  //       glossary(langcode: $langcode) {
+  //         ${EntityFields},
+  //         ${SlugFields}
+  //       }
+  //     }
+  //   `;
+
+  // const client = await getServiceClient();
+
+  // const glossaryEntries: IGlossaryEntry[] = await client
+  //   .request<{ glossary: IGlossaryEntry[] }>(query, {
+  //     langcode: langcode,
+  //   })
+  //   .then(data => data.glossary ?? []);
+
+  return [{ params: { segments: [glossaryHack[langcode]] }, locale: langcode }];
+}
+
+export async function getGlossaryBySlug(
+  slug: string,
+  lang = "de",
+  excludeSelf = true
+) {
   const query = gql`
-      query getAllGlossaries($langcode: String, $excludeSelf: Boolean) {
-        glossary(langcode: $langcode) {
-            ${GlossaryFields}
-           
-        }
+    query getGlossary(
+      $langcode: String
+      $excludeSelf: Boolean
+    ) {
+      glossary(langcode: $langcode) {
+        ${GlossaryFields}
       }
-    `;
+    }
+  `;
 
   const client = await getServiceClient();
+
+  if (Object.values(glossaryHack).indexOf(slug) < 0) return null;
 
   return client
     .request<{ glossary: IGlossaryEntry[] }>(query, {
       langcode: lang,
-      excludeSelf: true,
+      excludeSelf,
     })
-    .then(data => data.glossary ?? []);
+    .then(data => transformToGlossary(data.glossary, lang))
+    .catch(e => {
+      console.warn(e);
+      return null;
+    });
 }
 
-export async function getGlossaryPaths(
-  langcode: string
-): Promise<IGlossaryPaths[]> {
-  const query = gql`
-      query getAllGlossaries($langcode: String) {
-        glossary(langcode: $langcode) {
-          ${EntityFields},
-          ${SlugFields}
-        }
-      }
-    `;
-
-  const client = await getServiceClient();
-
-  const glossaryEntries: IGlossaryEntry[] = await client
-    .request<{ glossary: IGlossaryEntry[] }>(query, {
-      langcode: langcode,
+function transformToGlossary(
+  entries: IGlossaryEntry[],
+  lang: string
+): IGlossary {
+  const groupedEntries = entries.reduce(function (
+    glossaryArray: { [key: string]: IGlossaryEntry[] },
+    entry: IGlossaryEntry
+  ) {
+    const firstChar = entry.label[0].toUpperCase();
+    (glossaryArray[firstChar] = glossaryArray[firstChar] || []).push(entry);
+    return glossaryArray;
+  },
+  {});
+  const groups = Object.entries(groupedEntries)
+    .map(([abbrev, glossaries]) => {
+      return { abbrev, glossaries };
     })
-    .then(data => data.glossary ?? []);
+    .sort((a, b) => a.abbrev.localeCompare(b.abbrev));
 
-  return reDesignStaticGlossaryPaths(glossaryEntries, langcode);
-}
+  const translations = Object.entries(glossaryHack)
+    .filter(([k, v]) => k !== lang)
+    .map(([langcode, slug]) => ({
+      langcode,
+      slug,
+      urlpath: slug,
+      urlsegments: [slug],
+    }));
 
-function reDesignStaticGlossaryPaths(
-  glossaryEntries: IGlossaryEntry[],
-  locale: string
-): IGlossaryPaths[] {
-  const glossaryPaths: IGlossaryPaths[] = [];
-  glossaryEntries.forEach(x => {
-    glossaryPaths.push(composeGlossaryUrls(x.slug, locale));
-  });
-  return glossaryPaths;
-}
-
-function composeGlossaryUrls(slug: string, locale: string) {
-  const slugArray = slug.split("/");
   return {
-    params: { glossaryLocalized: slugArray[1] },
-    locale: locale,
+    typeName: "Glossary",
+    langcode: lang,
+    translations,
+    groups,
   };
 }
