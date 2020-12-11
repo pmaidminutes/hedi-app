@@ -2,6 +2,7 @@
 import { IArticle } from "@/modules/editorial/types";
 import { ITypename } from "@/common/model/cms";
 
+import { TagView } from "@/hedi-components/TagView";
 interface IArticleProps {
   content: IArticle;
 }
@@ -14,36 +15,60 @@ export const TryArticle = (content: ITypename) =>
 export const Article = ({ content }: IArticleProps) => {
   const { label, body, category } = content;
 
-  return (
-    <div className="bx--col bx--no-gutter bx--grid">
-      <div className="bx--row">
-        <div className="bx--col bx--col-auto">
-          <div className="bx--snippet bx--skeleton bx--snippet--multi bx--aspect-ratio bx--aspect-ratio--2x1">
-            poster image
-          </div>
-        </div>
-        <div className="bx--col">
-          <h1>{label}</h1>
-          <div className="bx--text bx--heading">maybe subtitle</div>
-          <p>audio</p>
-          <div className="bx--icon--skeleton"></div>
-        </div>
-      </div>
-      <div className="bx--row bx--row-padding">
-        <div className="bx--col">
-          <div
-            className="bx--text"
-            dangerouslySetInnerHTML={{
-              __html: body,
-            }}></div>
-        </div>
-      </div>
+  const exampleTags = [
+    "Course of pregnancy",
+    "Example Tag",
+    "Schwangerschaftsverlauf",
+  ];
 
-      <div className="bx--row bx--row-padding">
-        <div className="bx--col">
-          <span className="bx--tag">{category.label}</span>
+  return (
+    <>
+      <a
+        href="#"
+        target="_blank"
+        className="bx--aspect-ratio bx--aspect-ratio--2x1">
+        <img
+          src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
+          alt="illustration of sleeping family"
+          className="hedi-header-image"
+        />
+      </a>
+      <div className="bx--grid">
+        <div className="bx--row">
+          <div className="bx--col-md-1 bx--col-lg-3"></div>
+          <div
+            className="bx--col-sm-4 bx--col-md-6 bx--col-lg-10 p-s-xl"
+            style={{ backgroundColor: "linen" }}>
+            <article>
+              <h1 className="pb-s-s" style={{ textAlign: "center" }}>
+                {label}
+              </h1>
+              <h4 className="pb-s-md" style={{ textAlign: "center" }}>
+                Subheadline Placeholder
+              </h4>
+
+              <div
+                style={{
+                  width: "70%",
+                  padding: "1rem 0",
+                  margin: "auto",
+                  backgroundColor: "grey",
+                }}>
+                Placeholder for Audio
+              </div>
+
+              <div
+                className="py-s-md"
+                dangerouslySetInnerHTML={{
+                  __html: body,
+                }}></div>
+            </article>
+          </div>
+          {/* <div className="bx--col-md-1 bx--col-lg-3"></div> */}
         </div>
       </div>
-    </div>
+      <div className="hedi-separator"></div>
+      <TagView tags={exampleTags} />
+    </>
   );
 };

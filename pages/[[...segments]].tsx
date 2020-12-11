@@ -71,11 +71,13 @@ export default function segments(props: ISegmentProps) {
       <HediHeader pageTitle={pageTitle} translations={content.translations} />
       <BreadCrumb />
 
-      <Content>
+      {/* <Content> */}
+      <main>
         <TryCategory {...content} />
         <TryArticle {...content} />
         <TryGlossary {...content} />
-      </Content>
+        {/* </Content> */}
+      </main>
     </>
   );
 }
