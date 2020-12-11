@@ -52,7 +52,7 @@ export async function getArticleBySlug(
     .request<{ articleBySlug: IArticle }>(query, {
       srcLang: lang,
       dstLang: lang,
-      slug: pageSlug,
+      slug: "/" + pageSlug,
       excludeSelf,
     })
     .then(data => data.articleBySlug)
