@@ -1,33 +1,29 @@
-import { LanguageSwitch } from "@/common/components";
+import { LanguageSwitch, ILanguageSwitchOption } from "@/common/components";
 import { Search20 } from "@carbon/icons-react";
-import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import { SearchInput } from "../Search";
-export const getStaticProps: GetStaticProps<any> = async ({
-  locale,
-  locales,
-}) => {
-  return { props: { locales, locale } };
-};
+
 export interface HeaderProps {
   pageTitle: string;
+  translations: ILanguageSwitchOption[];
 }
-export const HediHeader: React.FunctionComponent<HeaderProps> = (
-  props: HeaderProps
-) => {
+export const HediHeader: React.FunctionComponent<HeaderProps> = ({
+  pageTitle,
+  translations,
+}) => {
   const router = useRouter();
   return (
     <header className="hedi-header">
       <div className="bx--grid">
         <div className="bx--row">
           <div className="bx--col pb-s-sm">
-            <h1>{props.pageTitle}</h1>
+            <h1>{pageTitle}</h1>
             <p>look up interesting words</p>
           </div>
           <div
             className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs"
             style={{ alignSelf: "center" }}>
-            <LanguageSwitch />
+            <LanguageSwitch translations={translations} />
           </div>
           <div
             className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs"

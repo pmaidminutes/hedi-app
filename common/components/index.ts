@@ -1,4 +1,4 @@
-export { LanguageSwitch } from "./LanguageSwitch";
+export * from "./LanguageSwitch";
 export * from "./Article";
 export * from "./Category";
 export * from "./Glossary";

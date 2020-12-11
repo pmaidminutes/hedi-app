@@ -62,12 +62,13 @@ export default function segments(props: ISegmentProps) {
   } = router;
   const pageTitle =
     segments && segments.length > 0 ? segments[segments.length - 1] : "";
+  // TODO get proper page title, probably entity label
   return (
     <>
       <Head>
         <title>HEDI App</title>
       </Head>
-      <HediHeader pageTitle={pageTitle} />
+      <HediHeader pageTitle={pageTitle} translations={content.translations} />
       <BreadCrumb />
 
       <Content>

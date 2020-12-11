@@ -1,1 +1,1 @@
-export { LanguageSwitch } from "./LanguageSwitch";
+export * from "./LanguageSwitch";
