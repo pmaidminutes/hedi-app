@@ -76,7 +76,7 @@ export async function getCategoryBySlug(
     .request<{ categoryBySlug: ICategory }>(query, {
       srcLang: lang,
       dstLang: lang,
-      slug: pageSlug,
+      slug: "/" + pageSlug,
       excludeSelf,
     })
     .then(data => data.categoryBySlug)
