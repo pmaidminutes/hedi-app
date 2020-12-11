@@ -25,6 +25,8 @@ import {
   TryCategory,
   TryGlossary,
 } from "@/common/components";
+// HACK: temporary
+import { getCategoryColorClass } from "@/modules/editorial/categoryColor";
 
 export const getStaticPaths: GetStaticPaths = async context => {
   const locales = context?.locales ?? [];
@@ -41,6 +43,8 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale, locales }) => {
   const segments = params?.segments ?? [];
 
+  getCategoryColorClass(`/${segments[0]}`, locale ?? "de");
+
   let content;
   content = await getCategoryProps(params?.segments, locale, locales);
   if (!content) content = await getArticleProps(params?.segments, locale);
@@ -50,12 +54,12 @@ export const getStaticProps: GetStaticProps<
     console.log("couldn't find content for path ", segments.join("/"));
     throw Error("Houston, we have got a problem");
   }
-
   return { props: { content } };
 };
 
 export default function segments(props: ISegmentProps) {
   let { content } = props;
+
   const router = useRouter();
   const {
     query: { segments },
