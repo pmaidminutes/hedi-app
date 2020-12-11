@@ -2,7 +2,7 @@
 import { IArticle } from "@/modules/editorial/types";
 import { ITypename } from "@/common/model/cms";
 
-import { TagView } from "@/hedi-components/TagView";
+import { TagList } from "@/hedi-components/TagList";
 interface IArticleProps {
   content: IArticle;
 }
@@ -68,7 +68,7 @@ export const Article = ({ content }: IArticleProps) => {
         </div>
       </div>
       <div className="hedi-separator"></div>
-      <TagView tags={exampleTags} />
+      <TagList tags={exampleTags} />
     </>
   );
 };

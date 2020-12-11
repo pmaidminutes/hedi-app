@@ -1,5 +1,5 @@
 import { Tag } from "../Tag";
-export const TagView = ({ tags }: { tags: String[] }) => {
+export const TagList = ({ tags }: { tags: String[] }) => {
   return (
     <div className="bx--grid mb-l-sm">
       <h3 className="mt-s-md">Browse by tags</h3>
