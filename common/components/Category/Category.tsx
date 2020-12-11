@@ -15,53 +15,77 @@ export const TryCategory = (content: ITypename) =>
 export const Category = ({ content }: ICategoryProps) => {
   const { categories, label, articles } = content;
   return (
-    <div className="bx--col bx--no-gutter bx--grid">
+    /*-- ------------ main category row -------------- --*/
+    <div className="bx--grid">
       <div className="bx--row">
-        <div className="bx--col bx--col-auto">
-          <div className="bx--snippet bx--skeleton bx--snippet--multi bx--aspect-ratio bx--aspect-ratio--2x1">
-            poster image
-          </div>
-        </div>
-        <div className="bx--col">
-          <h1>{label}</h1>
+        <a
+          href="https://postimg.cc/gx98QBnR"
+          target="_blank"
+          className="bx--col-sm-4 bx--col-md-5 bx--col-lg-10 bx--aspect-ratio bx--aspect-ratio--2x1">
+          <img
+            src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
+            alt="illustration of sleeping family"
+            className="hedi-header-image"
+          />
+        </a>
+
+        <div
+          className="bx--col bx--col-sm-4 bx--col-lg-6"
+          style={{ alignSelf: "center" }}>
+          <h2>{label}</h2>
+          <h3>{}</h3>
         </div>
       </div>
 
-      {categories.length > 0 &&
-        categories.map((category, index) => (
-          <div className="bx--row bx--row-padding" key={index}>
-            <div className="bx--col-md-2">
-              <div className="bx--snippet bx--skeleton bx--snippet--multi bx--aspect-ratio bx--aspect-ratio--2x1">
-                poster image
-              </div>
-            </div>
-            <div className="bx--col">
+      <h3 className="mt-l-sm">Topic subcategories</h3>
+      <div className="bx--row">
+        {categories.length > 0 &&
+          categories.map(category => (
+            <div
+              className="bx--col bx--col-sm-4 bx--col-md-4 bx--col-lg-4 mt-s-md"
+              style={{ overflowWrap: "break-word" }}
+              key={category.urlpath}>
               <Link href={category.urlpath} passHref>
-                <a className="bx--link">
-                  <h3>{category.label}</h3>
+                <a className="hedi-unstyled-link">
+                  <div
+                    className="bx--aspect-ratio bx--aspect-ratio--2x1"
+                    style={{ backgroundColor: "darkcyan" }}>
+                    {" "}
+                    picture here{" "}
+                  </div>
+                  <h4>{category.label}</h4>
                 </a>
               </Link>
             </div>
+          ))}
+      </div>
+
+      <div className="hedi-separator"></div>
+
+      <div className="bx--grid">
+        <div className="bx--tile-container">
+          <div className="bx--row">
+            {articles.length > 0 &&
+              articles.map(article => (
+                <div
+                  className="bx--col-sm-4 bx--col-md-4 bx--col-lg-8"
+                  key={article.urlpath}>
+                  <Link href={article.urlpath} passHref>
+                    <a
+                      href="#"
+                      className="bx--tile bx--tile--clickable hedi-unstyled-link">
+                      <h4 className="pb-s-sm">{article.label}</h4>
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: article.summary,
+                        }}></p>
+                    </a>
+                  </Link>
+                </div>
+              ))}
           </div>
-        ))}
-      {articles.length > 0 &&
-        articles.map((article, index) => (
-          <div className="bx--row bx--row-padding" key={index}>
-            <div className="bx--col">
-              <Link href={article.urlpath} passHref>
-                <a className="bx--link">
-                  <h3>{article.label}</h3>
-                </a>
-              </Link>
-              <div
-                className="bx--text"
-                dangerouslySetInnerHTML={{
-                  __html: article.summary,
-                }}
-              />
-            </div>
-          </div>
-        ))}
+        </div>
+      </div>
     </div>
   );
 };
