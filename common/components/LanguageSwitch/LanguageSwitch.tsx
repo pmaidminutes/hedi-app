@@ -1,6 +1,6 @@
 // Types
 import { ITranslatable, IURLPath } from "@/common/model/cms";
-import { Select, SelectItem } from "carbon-components-react";
+import { Dropdown } from "carbon-components-react";
 import { useRouter } from "next/router";
 
 export interface ILanguageSwitchOption extends ITranslatable, IURLPath {}
@@ -13,42 +13,45 @@ export interface ILanguageSwitchOption extends ITranslatable, IURLPath {}
 export const LanguageSwitch = ({
   translations,
 }: {
-  translations?: ILanguageSwitchOption[];
+  translations: ILanguageSwitchOption[];
 }) => {
   const router = useRouter();
-  const { locales, asPath: currentPath } = router;
+  const { locales, asPath: currentPath, locale } = router;
 
   // TODO this method will route to not existing pages (e.g. locale en, path = currentPath)
+  const items =
+    locales?.map(lang => ({
+      lang,
+      path: findLocaledUrlpath(lang, translations),
+    })) ?? [];
   return (
-    <Select
+    <Dropdown
       id="language-switch"
-      defaultValue={currentPath}
+      label={locale ?? ""}
       invalidText="A valid value is required"
-      labelText="Select Language"
+      light
       size="sm"
-      noLabel
+      //@ts-ignore
+      items={items}
+      //@ts-ignore
+      itemToString={item => item.lang}
+      //@ts-ignore
+      initialSelectedItem={items.find(i => i.lang === locale)}
       onChange={e =>
-        router.push(e.currentTarget.value, e.currentTarget.value, {
-          locale: e.currentTarget.selectedOptions.item(0)?.text,
+        //@ts-ignore
+        router.push(e.selectedItem.path, e.selectedItem.value, {
+          //@ts-ignore
+          locale: e.selectedItem.lang,
         })
-      }>
-      {locales
-        ?.map(lang => ({ lang, path: findLocaledUrlpath(lang, translations) }))
-        .map(({ lang, path }) => (
-          <SelectItem
-            value={path ?? currentPath}
-            text={lang}
-            key={path ?? lang}
-          />
-        ))}
-    </Select>
+      }
+    />
   );
 };
 
 function findLocaledUrlpath(
   locale: string,
-  translations?: ILanguageSwitchOption[]
+  translations: ILanguageSwitchOption[]
 ) {
-  return translations?.find(translation => translation.langcode === locale)
+  return translations.find(translation => translation.langcode === locale)
     ?.urlpath;
 }

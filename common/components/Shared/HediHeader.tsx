@@ -23,7 +23,9 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
           <div
             className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs"
             style={{ alignSelf: "center" }}>
-            <LanguageSwitch translations={translations} />
+            <div className="bx--form-item" style={{ alignItems: "flex-end" }}>
+              <LanguageSwitch translations={translations} />
+            </div>
           </div>
           <div
             className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs"
