@@ -37,6 +37,7 @@ export const LanguageSwitch = ({
       itemToString={item => item.lang}
       //@ts-ignore
       initialSelectedItem={items.find(i => i.lang === locale)}
+      style={{ minWidth: "180px", maxWidth: "180px", alignSelf: "flex-end" }}
       onChange={e =>
         //@ts-ignore
         router.push(e.selectedItem.path, e.selectedItem.value, {

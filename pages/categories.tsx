@@ -3,6 +3,7 @@ import { getAllCategories } from "@/modules/editorial/category";
 import { ICategory } from "@/modules/editorial/types/category";
 import { GetStaticProps } from "next";
 import { LogInOut } from "@/hedi-components/Authentication/LogInOut";
+import { ModalStateManager as Modal } from "@components";
 
 import { Content } from "carbon-components-react";
 
@@ -29,6 +30,7 @@ export default function Categories({ categories }: ICategoriesProps) {
       </Head>
       <Content>
         <LogInOut />
+        <Modal />
       </Content>
     </div>
   );

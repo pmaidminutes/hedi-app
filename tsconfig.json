@@ -18,7 +18,8 @@
     "paths": {
       "@/modules/*": ["modules/*"],
       "@/common/*": ["common/*"],
-      "@/hedi-components/*": ["common/components/*"]
+      "@/hedi-components/*": ["common/components/*"],
+      "@components": ["common/components"]
     }
   },
 
