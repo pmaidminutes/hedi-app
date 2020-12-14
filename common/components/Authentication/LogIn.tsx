@@ -1,40 +1,27 @@
-import { login } from "@/modules/auth/client";
-import { Button, Form, TextInput } from "carbon-components-react";
-import { ChangeEvent, FormEvent, useState } from "react";
+import {  useState } from "react";
+import { LoginModal } from "./LoginModal";
+import ReactDOM from "react-dom";
+
 
 export const LogIn = () => {
-  const [username, setUsername] = useTextInput();
-  const [password, setPassword] = useTextInput();
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    login(username, password);
-  };
+  const [open, setOpen] = useState(false);
+
+  // useOnClickOutside(ref, () => setOpen(false));
   return (
-    <Form onSubmit={handleSubmit}>
-      <TextInput
-        labelText="Username"
-        id="username"
-        value={username}
-        onChange={setUsername}
-      />
-      <TextInput
-        type="password"
-        labelText="Password"
-        id="password"
-        value={password}
-        onChange={setPassword}
-      />
-      <Button type="submit" value="Submit">
+    <>
+      {typeof document === "undefined"
+        ? null
+        : ReactDOM.createPortal(
+            <LoginModal  open={open} onClose={() => setOpen(false)} />,
+            document.body
+          )}
+
+      <button
+        className="bx--btn bx--btn--primary hedi-login-button"
+        type="button"
+        onClick={() => setOpen(true)}>
         Login
-      </Button>
-    </Form>
+      </button>
+    </>
   );
 };
-
-function useTextInput(defaultText = "") {
-  const [value, setValue] = useState(defaultText);
-  function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    setValue(e.target.value);
-  }
-  return [value, handleChange] as const;
-}
