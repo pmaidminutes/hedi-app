@@ -1,10 +1,10 @@
 import Head from "next/head";
-import { LanguageSwitch } from "../common/components";
 import { getAllCategories } from "@/modules/editorial/category";
 import { ICategory } from "@/modules/editorial/types/category";
 import { GetStaticProps } from "next";
+import { LogInOut } from "@/hedi-components/Authentication/LogInOut";
 
-import { Content, SideNav, ListItem, Tabs, Tab } from "carbon-components-react";
+import { Content } from "carbon-components-react";
 
 export const getStaticProps: GetStaticProps<any> = async ({
   locale,
@@ -27,44 +27,8 @@ export default function Categories({ categories }: ICategoriesProps) {
       <Head>
         <title>HEDI App index</title>
       </Head>
-      <SideNav
-        aria-label="Side Navigation"
-        isFixedNav
-        expanded={true}
-        isChildOfHeader={false}>
-        <ListItem>
-          <LanguageSwitch />
-        </ListItem>
-      </SideNav>
       <Content>
-        <Tabs>
-          {categories.length > 0
-            ? categories.map(category => (
-                <Tab key={category.id} label={category.label}>
-                  {category.categories.length > 0 ? (
-                    <>
-                      <h2>Subcategories</h2>
-                      <ul>
-                        {category.categories.map(subcategory => (
-                          <li key={subcategory.id}>{subcategory.label}</li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : null}
-                  {category.articles.length > 0 ? (
-                    <>
-                      <h2>Articles</h2>
-                      <ul>
-                        {category.articles.map(article => (
-                          <li key={article.id}>{article.label}</li>
-                        ))}
-                      </ul>
-                    </>
-                  ) : null}
-                </Tab>
-              ))
-            : null}
-        </Tabs>
+        <LogInOut />
       </Content>
     </div>
   );
