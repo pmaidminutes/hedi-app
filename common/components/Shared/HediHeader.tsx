@@ -2,6 +2,7 @@ import { LanguageSwitch, ILanguageSwitchOption } from "@/common/components";
 import { Search20 } from "@carbon/icons-react";
 import { useRouter } from "next/router";
 import { SearchInput } from "../Search";
+import { LogInOut } from "@components";
 
 export interface HeaderProps {
   pageTitle: string;
@@ -40,12 +41,7 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
             }
           />
           <div className="bx--col hedi-align-header-items">
-            <button
-              className="bx--btn bx--btn--primary hedi-login-button"
-              type="button"
-              data-modal-target="#modal-pyu0ribosn">
-              Log in
-            </button>
+            <LogInOut />
           </div>
         </div>
       </div>
