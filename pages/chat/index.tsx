@@ -23,7 +23,7 @@ export default function ChatIndex() {
         isChildOfHeader={false}
         aria-label="Side Navigation">
         <ListItem>
-          <LanguageSwitch />
+
         </ListItem>
       </SideNav>
       <Content>
