@@ -17489,7 +17489,7 @@ a.bx--navigation-link:focus {
   margin: 1rem 0; }
 
 .bx--tile:focus {
-  outline: 2px solid #E35C8D;
+  outline: 2px solid #e35c8d;
   outline-offset: -2px; }
 
 .bx--tile--light {
@@ -17515,6 +17515,24 @@ a.bx--navigation-link:focus {
 .hedi-unstyled-link {
   text-decoration: none;
   color: inherit; }
+
+.hedi-category-color--pregnancy {
+  background-color: #2A84C6 !important; }
+
+.hedi-category-color--birth {
+  background-color: #E35C8D !important; }
+
+.hedi-category-color--after-birth {
+  background-color: #574E90 !important; }
+
+.hedi-category-color--finances {
+  background-color: #007362 !important; }
+
+.hedi-category-color--advice {
+  background-color: #C94E1B !important; }
+
+.hedi-category-color--root {
+  background-color: #2A84C6 !important; }
 
 .hedi-separator {
   display: block;

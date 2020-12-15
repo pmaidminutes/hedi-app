@@ -18,6 +18,8 @@ export interface ISegmentPath {
 
 export interface ISegmentProps {
   content: ITypename & { translations: (ITranslatable & IURLPath)[] };
+  // HACK: change when colors implemented in drupal
+  colorClass: string;
 }
 
 export interface IHTTPError {

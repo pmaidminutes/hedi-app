@@ -43,7 +43,10 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale, locales }) => {
   const segments = params?.segments ?? [];
 
-  getCategoryColorClass(`/${segments[0]}`, locale ?? "de");
+  const colorClass = await getCategoryColorClass(
+    `/${segments[0]}`,
+    locale ?? "de"
+  );
 
   let content;
   content = await getCategoryProps(params?.segments, locale, locales);
@@ -54,11 +57,12 @@ export const getStaticProps: GetStaticProps<
     console.log("couldn't find content for path ", segments.join("/"));
     throw Error("Houston, we have got a problem");
   }
-  return { props: { content } };
+  return { props: { content, colorClass } };
 };
 
 export default function segments(props: ISegmentProps) {
-  let { content } = props;
+  console.log({ props });
+  let { content, colorClass } = props;
 
   const router = useRouter();
   const {
@@ -72,7 +76,11 @@ export default function segments(props: ISegmentProps) {
       <Head>
         <title>HEDI App</title>
       </Head>
-      <HediHeader pageTitle={pageTitle} translations={content.translations} />
+      <HediHeader
+        pageTitle={pageTitle}
+        translations={content.translations}
+        colorClass={colorClass}
+      />
       <BreadCrumb />
 
       {/* <Content> */}

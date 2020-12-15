@@ -8,16 +8,20 @@ import { SearchInput } from "../Search";
 export interface HeaderProps {
   pageTitle: string;
   translations: ILanguageSwitchOption[];
+  // TODO: remove when integrated in drupal
+  colorClass: string;
 }
 export const HediHeader: React.FunctionComponent<HeaderProps> = ({
   pageTitle,
   translations,
+   // TODO: remove when integrated in drupal
+  colorClass
 }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
 
   return (
-    <header className="hedi-header">
+    <header className={`hedi-header ${colorClass}`}>
       <div className="bx--grid">
         <div className="bx--row">
           <div className="bx--col bx--col-sm-4 bx--col-md-8 bx--col-lg-6 pb-s-sm">

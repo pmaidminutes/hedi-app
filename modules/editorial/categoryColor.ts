@@ -7,22 +7,22 @@ export async function getCategoryColorClass(slug: string, locale: string) {
   let colorClass: string;
   switch (catId) {
     case 1:
-      colorClass = "pregnancy";
+      colorClass = "hedi-category-color--pregnancy";
       break;
     case 6:
-      colorClass = "birth";
+      colorClass = "hedi-category-color--birth";
       break;
     case 7:
-      colorClass = "after-birth";
+      colorClass = "hedi-category-color--after-birth";
       break;
     case 14:
-      colorClass = "finances";
+      colorClass = "hedi-category-color--finances";
       break;
     case 13:
-      colorClass = "advice";
+      colorClass = "hedi-category-color--advice";
       break;
     default:
-      colorClass = "root";
+      colorClass = "hedi-category-color--root";
   }
-  console.log({ colorClass });
+  return colorClass;
 }
