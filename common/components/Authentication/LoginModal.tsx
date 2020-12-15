@@ -25,7 +25,7 @@ export const LoginModal = ({
   };
 
   return (
-    <>
+    <form action={handleSubmit}>
       <div
         className={`bx--modal ${open ? "is-visible" : ""}`}
         role="dialog"
@@ -97,16 +97,13 @@ export const LoginModal = ({
               onClick={() => handleClose()}>
               close
             </button>
-            <button
-              className="bx--btn bx--btn--primary"
-              type="button"
-              onClick={handleSubmit}>
+            <button className="bx--btn bx--btn--primary" type="submit">
               log in
             </button>
           </div>
         </div>
         <span tabIndex={0}></span>
       </div>
-    </>
+    </form>
   );
 };
