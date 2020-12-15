@@ -3,7 +3,7 @@ import { ISegmentPath } from "@/common/types";
 import {
   GlossaryFields,
   IGlossary,
-  IGlossaryEntry,
+  IGlossaryEntry
 } from "@/modules/editorial/types";
 
 // TODO cms gql query to get complete glossary base w typename, translation etc
@@ -101,4 +101,34 @@ function transformToGlossary(
     translations,
     groups,
   };
+}
+
+export async function getGlossaryById(
+  id: number,
+  lang:string,
+) {
+  const query = gql`
+    query getGlossary(
+      $langcode: String
+      $id: number
+    ) {
+      glossary(langcode: $langcode, id: $id) {
+        ${GlossaryFields}
+      }
+    }
+  `;
+
+  const client = await getServiceClient();
+
+
+  return client
+    .request<{ glossary: IGlossaryEntry[] }>(query, {
+      langcode: lang,
+      id: id,
+    })
+    .then(data => data.glossary?? [])
+    .catch(e => {
+      console.warn(e);
+      return null;
+    });
 }

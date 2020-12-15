@@ -4,18 +4,13 @@
  * for language switching see ../index.tsx
  */
 
-import { HediHeader } from "@/common/components";
+import { BreadCrumb, GlossaryEntry, HediHeader } from "@/common/components";
 import { ResultContent, SearchInput } from "@/common/components/Search";
 import { IsIHTTPError } from "@/common/errorHandling";
 import { useSearch } from "@/modules/search/hooks";
 import { IContentEntry } from "@/modules/search/types";
 import {
-  Breadcrumb,
-  Button,
-  DatePicker,
-  DatePickerInput,
-  Dropdown,
-  Loading,
+  Loading
 } from "carbon-components-react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
@@ -79,31 +74,22 @@ export default function searchPage(props: SearchProps) {
     <div>
       <HediHeader pageTitle={"Search"} translations={[]} />
 
-      <Breadcrumb />
-      <SearchInput inputText={e => setSearchText(e)} textTyped={searchText} />
+      <BreadCrumb />
+      <main className="bx--grid">
+        <div>
+      <SearchInput className={"mb-l-xs"} size={"xl"} inputText={e => setSearchText(e)} textTyped={searchText} /></div>
 
-      <Button kind="tertiary" onClick={handleSearch}>
-        {"Search"}
-      </Button>
+      <h2>Filters</h2>
 
-      <Dropdown
-        ariaLabel="Dropdown"
-        id="entityId"
-        onChange={() => handleEntityChanges}
-        items={items}
-        label="Select your search"
-        titleText="Content/Midwife"
-      />
-      <DatePicker dateFormat="d/m/Y" datePickerType="single">
-        <DatePickerInput
-          id="date-picker-default-id"
-          placeholder="dd/mm/yyyy"
-          labelText="Due date"
-          type="text"
-        />
-      </DatePicker>
-
-      <div id="main-content">
+      <button className="bx--btn bx--btn--primary" onClick={handleSearch} type="button">articles</button>
+      <button className="bx--btn bx--btn--primary" type="button">profiles</button>
+      <button className="bx--btn bx--btn--primary" type="button">categories</button>
+      <div className="hedi-separator"></div>
+     
+      <div className="hedi-separator"></div>
+      <div className="bx--tile-container">
+         {/* iterate article component */}
+      </div>
         {
           //TODO should check for  empty array - even if there is no result will get loading overlay
           //data
@@ -116,29 +102,29 @@ export default function searchPage(props: SearchProps) {
           <div>
             {!IsIHTTPError(data) &&
               data?.map((entity: IContentEntry, index: any) =>
-                entity.contentId === "entity:user" ? (
-                  <div>
-                    {
-                      //TODO user display is not currently shown here
-                    }
+                entity.ss_type === "article" ? (
+                 
                     <ResultContent
                       key={index}
                       result={entity}
                       highlight={entity.highlightedContent}
                     />
-                  </div>
-                ) : (
-                  <div>
-                    <ResultContent
-                      result={entity}
-                      highlight={entity.highlightedContent}
+                 
+                ) : entity.ss_type === "glossary" ? (
+                  
+                    <GlossaryEntry
+                      glossaryItem={}
+                      glossaryUrlTerm={""}
                     />
-                  </div>
-                )
+                 
+                ): <ResultContent
+                result={entity}
+                highlight={entity.highlightedContent}
+              />
               )}
           </div>
         )}
-      </div>
+      </main>
     </div>
   );
 }

@@ -5,7 +5,7 @@ export function getSolrRequestParams(
   getHighlighted: boolean
 ) {
   const languageFilter = `) && ss_search_api_language:${lang}`;
-  const solarFields = "tm_X3b_*, ss_search_api_id, id, site, voll";
+  const solarFields = "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type,its_nid";
   const highlightParams = {
     wt: "json",
     fl: solarFields,

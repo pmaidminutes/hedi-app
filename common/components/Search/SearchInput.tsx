@@ -5,6 +5,8 @@ import { AutoSuggest } from "./AutoSuggest";
 interface SearchInputProps {
   inputText: (text: string) => void;
   textTyped: string;
+  size: "sm"|"xl";
+  className?:string;
 }
 export const SearchInput: React.FunctionComponent<SearchInputProps> = (
   props: SearchInputProps
@@ -34,8 +36,7 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
     <>
       <Search
         data-search
-        light
-        size="sm"
+        size={props.size}
         id="search-text"
         placeHolderText="Search"
         autoComplete="off"
@@ -43,7 +44,7 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
         onChange={handleSearch}
         type="text"
         labelText=""
-        style={{ position: "relative", alignItems: "center" }}
+        className={props.className}
       />
 
       {

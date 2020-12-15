@@ -25,10 +25,11 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
       }
       <ul
         style={{
-          border: "2px solid",
+          border: "2px",
           position: "absolute",
-          backgroundColor: "gray",
+          backgroundColor: "lightgray",
           zIndex: 9999,
+          marginTop: "-1.5rem"
         }}
         role="listbox"
         id="suggestion-list">
