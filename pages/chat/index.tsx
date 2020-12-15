@@ -3,11 +3,11 @@
  *
  * for language switching see ../index.tsx
  */
+import { Content, ListItem, SideNav } from "carbon-components-react";
 import Head from "next/head";
-
-import { Content, SideNav, ListItem } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { LanguageSwitch } from "../../common/components";
+
 
 export default function ChatIndex() {
   const router = useRouter();
@@ -23,7 +23,7 @@ export default function ChatIndex() {
         isChildOfHeader={false}
         aria-label="Side Navigation">
         <ListItem>
-          <LanguageSwitch />
+          <LanguageSwitch translations={[]}/>
         </ListItem>
       </SideNav>
       <Content>
