@@ -21,6 +21,21 @@ export const Glossary = ({ content }: IGlossaryProps) => {
     ? window.location.hash.substr(1)
     : "";
 
+    if (AssertClientSide()) {
+      // Use the hash to find the first element with that id
+      const element = document.querySelector(glossaryUrlTerm);
+
+      if (element) {
+        // Smooth scroll to that elment
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start',
+          inline: 'nearest',
+        });
+      }
+    }
+   
+
   //TODO to include hash value to anchor on page load, hash in URL doesnt work
 
   return (
