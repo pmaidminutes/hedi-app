@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { login } from "@/modules/auth/client";
 import { useOnClickOutside, useTextInput } from "@/common/hooks";
+import { Form } from "carbon-components-react";
 
 export const LoginModal = ({
   open,
@@ -25,7 +26,7 @@ export const LoginModal = ({
   };
 
   return (
-    <form action={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <div
         className={`bx--modal ${open ? "is-visible" : ""}`}
         role="dialog"
@@ -104,6 +105,6 @@ export const LoginModal = ({
         </div>
         <span tabIndex={0}></span>
       </div>
-    </form>
+    </Form>
   );
 };
