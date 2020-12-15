@@ -21,8 +21,7 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
   const router = useRouter();
 
   const breadCrumbPath =
-    props.staticCrumb ??
-    constructUrl(router.asPath, router.defaultLocale ?? "de");
+    props.staticCrumb ?? constructUrl(router.asPath, router.locale ?? "de");
   return (
     <div className="bx--grid">
       <nav
