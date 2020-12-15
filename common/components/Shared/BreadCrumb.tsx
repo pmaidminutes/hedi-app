@@ -33,18 +33,20 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
               Home
             </a>
           </div>
-          {breadCrumbPath.map((crumb, index) => (
-            <a
-              key={index}
-              href={crumb.url}
-              className={
-                crumb.currentPage
-                  ? "bx--breadcrumb-item bx--breadcrumb-item--current bx--link"
-                  : "bx--breadcrumb-item bx--breadcrumb-item bx--link"
-              }>
-              {crumb.name}
-            </a>
-          ))}
+          {breadCrumbPath.map((crumb, index) =>
+            crumb.currentPage ? (
+              <div className="bx--breadcrumb-item bx--breadcrumb-item--current">
+                {crumb.name}
+              </div>
+            ) : (
+              <div className="bx--breadcrumb-item">
+                {" "}
+                <a key={index} href={crumb.url} className="bx--link">
+                  {crumb.name}
+                </a>
+              </div>
+            )
+          )}
         </div>
       </nav>
     </div>
