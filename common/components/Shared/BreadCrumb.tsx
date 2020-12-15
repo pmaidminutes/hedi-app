@@ -21,7 +21,8 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
   const router = useRouter();
 
   const breadCrumbPath =
-    props.staticCrumb ?? constructUrl(router.asPath, router.locale ?? "de");
+    props.staticCrumb ??
+    constructUrl(router.asPath, router.defaultLocale ?? "de");
   return (
     <div className="bx--grid">
       <nav
@@ -35,13 +36,15 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
           </div>
           {breadCrumbPath.map((crumb, index) =>
             crumb.currentPage ? (
-              <div className="bx--breadcrumb-item bx--breadcrumb-item--current">
+              <div
+                className="bx--breadcrumb-item bx--breadcrumb-item--current"
+                key={index}>
                 {crumb.name}
               </div>
             ) : (
-              <div className="bx--breadcrumb-item">
+              <div className="bx--breadcrumb-item" key={index}>
                 {" "}
-                <a key={index} href={crumb.url} className="bx--link">
+                <a href={crumb.url} className="bx--link">
                   {crumb.name}
                 </a>
               </div>
@@ -60,7 +63,7 @@ function constructUrl(asPath: string, locale: string): CrumbPath[] {
     if (path.trim() != "") {
       basePath = basePath + "/" + path;
       composedPath.push({
-        name: path,
+        name: path.split("#")[0],
         url: basePath,
         currentPage: asPath.endsWith(path) ? true : false,
       });
