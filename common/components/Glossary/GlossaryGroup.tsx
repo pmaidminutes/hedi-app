@@ -15,16 +15,21 @@ export const GlossaryGroup = (props: GlossaryGroupProps) => {
           <div className="bx--aspect-ratio">{glossaryGroup.abbrev}</div>
         </div>
       </div>
-
-      {glossaryGroup.glossaries.map((glossaryItem: IGlossaryEntry, index) => (
-        <GlossaryEntry
-          key={index}
-          entryIndex={index}
-          glossaryItem={glossaryItem}
-          glossaryUrlTerm={props.glossaryUrlTerm}
-          defaultLocale={props.defaultLocale}
-        />
-      ))}
+      <div className="bx--tile-container">
+        <div className="bx--row">
+          {glossaryGroup.glossaries.map(
+            (glossaryItem: IGlossaryEntry, index) => (
+              <GlossaryEntry
+                key={index}
+                entryIndex={index}
+                glossaryItem={glossaryItem}
+                glossaryUrlTerm={props.glossaryUrlTerm}
+                defaultLocale={props.defaultLocale}
+              />
+            )
+          )}
+        </div>{" "}
+      </div>{" "}
       <div className="hedi-separator"></div>
     </>
   );

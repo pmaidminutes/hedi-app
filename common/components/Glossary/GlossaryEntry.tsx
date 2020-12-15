@@ -1,8 +1,8 @@
 import { IGlossaryEntry } from "@/modules/editorial/types";
 import {
   ExpandableTile,
-  Link, TileAboveTheFoldContent,
-  TileBelowTheFoldContent
+  TileAboveTheFoldContent,
+  TileBelowTheFoldContent,
 } from "carbon-components-react";
 
 interface GlossaryProps {
@@ -16,41 +16,34 @@ export const GlossaryEntry = (props: GlossaryProps) => {
   const glossaryItem = props.glossaryItem;
   const glossaryUrlTerm = props.glossaryUrlTerm;
   return (
-    <div className="bx--tile-container">
-      <div className="bx--row">
-        <div className="bx--col-md-4">
-          <ExpandableTile
-            title={glossaryItem.label}
-            expanded={glossaryUrlTerm === glossaryItem.label}>
-            <TileAboveTheFoldContent>
-              {//TODO should not use label because it has spaces, need to use slug
-}
-              <Link href={"#" + glossaryItem.label}></Link>{" "}
-              <h2>{glossaryItem.label}</h2>
-              {glossaryItem.translations.map(
-                (translation: IGlossaryEntry, index) =>
-                  translation.langcode === props.defaultLocale ? (
-                    <p key={index}>
-                      <mark> {translation.label}</mark>
-                    </p>
-                  ) : (
-                    ""
-                  )
-              )}
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: glossaryItem.body,
-                }}></div>
-            </TileAboveTheFoldContent>
-            <TileBelowTheFoldContent>
-              <div
-                dangerouslySetInnerHTML={{
-                  __html: glossaryItem.body,
-                }}></div>
-            </TileBelowTheFoldContent>
-          </ExpandableTile>
-        </div>{" "}
-      </div>{" "}
+    <div className="bx--col-md-4">
+      <ExpandableTile
+        title={glossaryItem.label}
+        id={glossaryItem.label}
+        tabIndex={0}>
+        <TileAboveTheFoldContent>
+          <div style={{ height: "100px" }}>
+            <h2>{glossaryItem.label}</h2>
+            {glossaryItem.translations.map(
+              (translation: IGlossaryEntry, index) =>
+                translation.langcode === props.defaultLocale ? (
+                  <p key={index}>
+                    <mark> {translation.label}</mark>
+                  </p>
+                ) : (
+                  ""
+                )
+            )}
+            <div
+              dangerouslySetInnerHTML={{
+                __html: glossaryItem.body,
+              }}></div>
+          </div>
+        </TileAboveTheFoldContent>
+        <TileBelowTheFoldContent>
+          <div style={{ height: "170px" }}></div>
+        </TileBelowTheFoldContent>
+      </ExpandableTile>
     </div>
   );
 };
