@@ -22,7 +22,7 @@ export const LanguageSwitch = ({
   const items =
     locales?.map(lang => ({
       lang,
-      path: findLocaledUrlpath(lang, translations),
+      path: findLocaledUrlpath(lang, translations) ?? currentPath,
     })) ?? [];
   return (
     <Dropdown

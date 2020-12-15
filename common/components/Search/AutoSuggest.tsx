@@ -15,25 +15,37 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
     //throw new Error(error);
     console.log("err");
   }
-
   const suggestionSelected = (value: string) => {
     props.textSelected(value);
   };
   return (
-    <ul>
-      {data && !IsIHTTPError(data)
-        ? data.map((suggestedResult: string) =>
-            typeof suggestedResult === "string" ? (
-              <li
-                key={suggestedResult}
-                onClick={e => suggestionSelected(suggestedResult)}>
-                {suggestedResult}
-              </li>
-            ) : (
-              ""
+    <>
+      {
+        //TODO to remove style after Kathi provides styles
+      }
+      <ul
+        style={{
+          border: "2px solid",
+          position: "absolute",
+          backgroundColor: "gray",
+          zIndex: 9999,
+        }}
+        role="listbox"
+        id="suggestion-list">
+        {data && !IsIHTTPError(data)
+          ? data.map((suggestedResult: string) =>
+              typeof suggestedResult === "string" ? (
+                <li
+                  key={suggestedResult}
+                  onClick={e => suggestionSelected(suggestedResult)}>
+                  {suggestedResult}
+                </li>
+              ) : (
+                ""
+              )
             )
-          )
-        : ""}
-    </ul>
+          : ""}
+      </ul>
+    </>
   );
 };
