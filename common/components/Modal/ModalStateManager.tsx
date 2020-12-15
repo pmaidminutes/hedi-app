@@ -1,26 +1,24 @@
-import {  useState } from "react";
-import { LoginModal } from "./LoginModal";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import { Modal } from "./Modal";
 
-
-export const LogIn = () => {
+export const ModalStateManager = () => {
   const [open, setOpen] = useState(false);
-
-  // useOnClickOutside(ref, () => setOpen(false));
   return (
     <>
       {typeof document === "undefined"
         ? null
         : ReactDOM.createPortal(
-            <LoginModal  open={open} onClose={() => setOpen(false)} />,
+            <Modal open={open} onClose={() => setOpen(false)} />,
             document.body
           )}
 
       <button
-        className="bx--btn bx--btn--primary hedi-login-button"
+        className="bx--btn bx--btn--primary"
         type="button"
+        data-modal-target="#modal-lokx1olb9q"
         onClick={() => setOpen(true)}>
-        Login
+        Show modal
       </button>
     </>
   );

@@ -3,6 +3,7 @@ import { Search20 } from "@carbon/icons-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SearchInput } from "../Search";
+import { LogInOut } from "@components";
 
 export interface HeaderProps {
   pageTitle: string;
@@ -19,19 +20,16 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
     <header className="hedi-header">
       <div className="bx--grid">
         <div className="bx--row">
-          <div className="bx--col pb-s-sm">
+          <div className="bx--col bx--col-sm-4 bx--col-md-8 bx--col-lg-6 pb-s-sm">
             <h1>{pageTitle}</h1>
           </div>
-          <div
-            className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs"
-            style={{ alignSelf: "center" }}>
-            <div className="bx--form-item" style={{ alignItems: "flex-end" }}>
+          <div className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs hedi-align-header-items">
+            <div className="bx--form-item">
               <LanguageSwitch translations={translations} />
             </div>
           </div>
-          <div
-            className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs"
-            style={{ alignSelf: "center" }}>
+
+          <div className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
             <SearchInput
               inputText={e => setSearchText(e)}
               textTyped={searchText}
@@ -44,6 +42,9 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
               router.push({ pathname: "/search", query: { searchText } })
             }
           />
+          <div className="bx--col hedi-align-header-items">
+            <LogInOut />
+          </div>
         </div>
       </div>
     </header>

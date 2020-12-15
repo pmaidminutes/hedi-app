@@ -8,7 +8,6 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import { LanguageSwitch } from "../../common/components";
 
-
 export default function ChatIndex() {
   const router = useRouter();
   const { pathname } = router;
@@ -23,7 +22,7 @@ export default function ChatIndex() {
         isChildOfHeader={false}
         aria-label="Side Navigation">
         <ListItem>
-          <LanguageSwitch translations={[]}/>
+          <LanguageSwitch translations={[]} />
         </ListItem>
       </SideNav>
       <Content>

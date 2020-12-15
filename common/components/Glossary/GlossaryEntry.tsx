@@ -2,7 +2,7 @@ import { IGlossaryEntry } from "@/modules/editorial/types";
 import {
   ExpandableTile,
   TileAboveTheFoldContent,
-  TileBelowTheFoldContent
+  TileBelowTheFoldContent,
 } from "carbon-components-react";
 
 interface GlossaryProps {
@@ -20,8 +20,8 @@ export const GlossaryEntry = (props: GlossaryProps) => {
       <ExpandableTile
         title={glossaryItem.label}
         id={glossaryItem.label}
-        tabIndex={0} >
-        <TileAboveTheFoldContent> 
+        tabIndex={0}>
+        <TileAboveTheFoldContent>
           <div style={{ height: "100px" }}>
             <h2>{glossaryItem.label}</h2>
             {glossaryItem.translations.map(
