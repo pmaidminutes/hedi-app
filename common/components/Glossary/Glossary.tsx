@@ -21,7 +21,7 @@ export const Glossary = ({ content }: IGlossaryProps) => {
     ? window.location.hash.substr(1)
     : "";
 
-    if (AssertClientSide()) {
+    if (AssertClientSide()&& glossaryUrlTerm) {
       // Use the hash to find the first element with that id
       const element = document.querySelector(glossaryUrlTerm);
 
