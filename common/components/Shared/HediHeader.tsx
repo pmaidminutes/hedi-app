@@ -9,13 +9,13 @@ export interface HeaderProps {
   pageTitle: string;
   translations: ILanguageSwitchOption[];
   // TODO: remove when integrated in drupal
-  colorClass: string;
+  colorClass?: string;
 }
 export const HediHeader: React.FunctionComponent<HeaderProps> = ({
   pageTitle,
   translations,
-   // TODO: remove when integrated in drupal
-  colorClass
+  // TODO: remove when integrated in drupal
+  colorClass,
 }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
