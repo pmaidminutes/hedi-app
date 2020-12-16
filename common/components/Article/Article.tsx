@@ -2,6 +2,7 @@
 import { ITypename } from "@/common/model/cms";
 import { TagList } from "@/hedi-components/TagList";
 import { IArticle } from "@/modules/editorial/types";
+import { AudioPlayer } from "@components";
 
 interface IArticleProps {
   content: IArticle;
@@ -14,7 +15,7 @@ export const TryArticle = (content: ITypename) =>
 
 export const Article = ({ content }: IArticleProps) => {
   const { label, body, category, audio } = content;
-
+  if (audio) console.log(audio?.url?.split("files/")[1]);
   const exampleTags = [
     "Course of pregnancy",
     "Example Tag",
@@ -45,31 +46,20 @@ export const Article = ({ content }: IArticleProps) => {
               <h4 className="pb-s-md" style={{ textAlign: "center" }}>
                 Subheadline Placeholder
               </h4>
-
-              <div
-                style={{
-                  width: "60%",
-                  padding: "1rem 0",
-                  margin: "auto",
-                  marginTop: "-85px",
-                }}>
-                {
-                  //TODO style needs to be updated in Audio
-                  //TODO url needs to be updated in Audio
-                  // TODO on switch of translation audio is not changing in refresh
-                  //TODO fix static url hard code and fix in safari for audio
-                }
-                <video controls>
-                  <source
-                    src={
-                      "http://appstaging.projekt-hedi.de/" +
-                      content.audio?.url?.split("files/")[1]
-                    }
-                    type="video/webm"
-                  />
-                </video>
-              </div>
-
+              {
+                //TODO style needs to be updated in Audio
+                //TODO url needs to be updated in Audio
+                // TODO on switch of translation audio is not changing in refresh
+                //TODO fix static url hard code and fix in safari for audio
+              }
+              {audio !== null ? (
+                <AudioPlayer
+                  src={
+                    "http://appstaging.projekt-hedi.de/" +
+                    audio?.url?.split("files/")[1]
+                  }
+                />
+              ) : null}
               <div
                 className="py-s-md"
                 dangerouslySetInnerHTML={{
