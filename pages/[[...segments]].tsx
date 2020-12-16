@@ -72,7 +72,7 @@ export default function segments(props: ISegmentProps) {
     segments && segments.length > 0 ? segments[segments.length - 1] : "";
   // TODO get proper page title, probably entity label
   return (
-    <>
+    <div className={colorClass}>
       <Head>
         <title>HEDI App</title>
       </Head>
@@ -90,6 +90,6 @@ export default function segments(props: ISegmentProps) {
         <TryGlossary {...content} />
         {/* </Content> */}
       </main>
-    </>
+    </div>
   );
 }
