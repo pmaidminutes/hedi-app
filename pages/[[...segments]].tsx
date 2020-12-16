@@ -42,10 +42,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale, locales }) => {
   const segments = params?.segments ?? [];
 
-  const colorClass = await getCategoryColorClass(
-    `/${segments[0]}`,
-    locale ?? "de"
-  );
+  const colorClass = await getCategoryColorClass(segments[0], locale ?? "de");
 
   let content;
   content = await getCategoryProps(params?.segments, locale, locales);
