@@ -17512,27 +17512,49 @@ a.bx--navigation-link:focus {
   height: 2rem;
   border-bottom: none; }
 
+.bx--fieldset legend {
+  color: #fff;
+  font-size: 0.8em; }
+
 .hedi-unstyled-link {
   text-decoration: none;
   color: inherit; }
 
-.hedi-category-color--pregnancy {
+.hedi-category-color--pregnancy header {
   background-color: #2A84C6 !important; }
 
-.hedi-category-color--birth {
+.hedi-category-color--pregnancy .hedi-article-container {
+  background-color: #ECF0FF; }
+
+.hedi-category-color--birth header {
   background-color: #E35C8D !important; }
 
-.hedi-category-color--after-birth {
+.hedi-category-color--birth .hedi-article-container {
+  background-color: #FFEAEC; }
+
+.hedi-category-color--after-birth header {
   background-color: #574E90 !important; }
 
-.hedi-category-color--finances {
+.hedi-category-color--after-birth .hedi-article-container {
+  background-color: #FBECFC; }
+
+.hedi-category-color--finances header {
   background-color: #007362 !important; }
 
-.hedi-category-color--advice {
+.hedi-category-color--finances .hedi-article-container {
+  background-color: #D9F6F6; }
+
+.hedi-category-color--advice header {
   background-color: #C94E1B !important; }
 
-.hedi-category-color--root {
+.hedi-category-color--advice .hedi-article-container {
+  background-color: #FFEDDF; }
+
+.hedi-category-color--root header {
   background-color: #2A84C6 !important; }
+
+.hedi-category-color--root .hedi-article-container {
+  background-color: #ECF0FF; }
 
 .hedi-separator {
   display: block;
@@ -17540,10 +17562,13 @@ a.bx--navigation-link:focus {
   border-bottom: 2px solid #dde1e6;
   margin: 1.5rem 0; }
 
-.hedi-glossary-letterhead {
-  color: white;
-  background-color: #8E6EC6;
-  font-size: 2rem; }
+.hedi-logo {
+  height: 2.2rem;
+  fill: white; }
+
+.hedi-logo-text {
+  font-size: 2.6rem;
+  color: white; }
 
 .hedi-header-image {
   display: block;
@@ -17551,11 +17576,15 @@ a.bx--navigation-link:focus {
   margin: auto; }
 
 .hedi-header {
-  display: block;
   width: 100%;
   color: white;
   background-color: #574E90;
   padding: 1rem 0; }
+
+.hedi-glossary-letterhead {
+  color: white;
+  background-color: #8E6EC6;
+  font-size: 2rem; }
 
 .hedi-article-entry-search {
   margin: 0.75rem 0; }
@@ -17567,6 +17596,30 @@ a.bx--navigation-link:focus {
 
 .hedi-align-header-items {
   align-self: center; }
+
+.hedi-marked-word {
+  color: #B7295B;
+  text-decoration: underline; }
+
+.hedi-search-results {
+  border: 1px solid #c1c7cd;
+  position: absolute;
+  color: #21272a;
+  background-color: #f2f4f8;
+  z-index: 8000;
+  width: 100%;
+  cursor: pointer; }
+
+.hedi-search-results li {
+  font-size: 1.1rem;
+  line-height: 2rem;
+  padding: 0 0.75rem; }
+
+.hedi-search-results li:nth-child(odd) {
+  background-color: white; }
+
+.hedi-search-results li:hover {
+  background-color: #FFC8D0; }
 
 .hedi-modal-footer {
   display: flex;
@@ -17583,6 +17636,9 @@ a.bx--navigation-link:focus {
   margin: 0.5rem;
   text-align: center;
   font-size: 1rem; }
+
+.hedi-btn {
+  display: inline; }
 
 mark {
   background-color: #FFC8D0;
