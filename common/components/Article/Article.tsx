@@ -1,8 +1,8 @@
 // Types
-import { IArticle } from "@/modules/editorial/types";
 import { ITypename } from "@/common/model/cms";
-
 import { TagList } from "@/hedi-components/TagList";
+import { IArticle } from "@/modules/editorial/types";
+
 interface IArticleProps {
   content: IArticle;
 }
@@ -13,7 +13,7 @@ export const TryArticle = (content: ITypename) =>
   ) : null;
 
 export const Article = ({ content }: IArticleProps) => {
-  const { label, body, category } = content;
+  const { label, body, category, audio } = content;
 
   const exampleTags = [
     "Course of pregnancy",
@@ -48,12 +48,26 @@ export const Article = ({ content }: IArticleProps) => {
 
               <div
                 style={{
-                  width: "70%",
+                  width: "60%",
                   padding: "1rem 0",
                   margin: "auto",
-                  backgroundColor: "grey",
+                  marginTop: "-85px",
                 }}>
-                Placeholder for Audio
+                {
+                  //TODO style needs to be updated in Audio
+                  //TODO url needs to be updated in Audio
+                  // TODO on switch of translation audio is not changing in refresh
+                  //TODO fix static url hard code and fix in safari for audio
+                }
+                <video controls>
+                  <source
+                    src={
+                      "http://appstaging.projekt-hedi.de/" +
+                      content.audio?.url?.split("files/")[1]
+                    }
+                    type="video/webm"
+                  />
+                </video>
               </div>
 
               <div

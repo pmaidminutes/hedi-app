@@ -1,20 +1,19 @@
 import { gql } from "@/common/graphql";
 import {
   BodyFields,
-  URLPathFields,
+  EditorialFields,
+  EntityFields,
   IBody,
   IEditorial,
   IEntity,
-  IURLPath,
-  EditorialFields,
-  EntityFields,
-  isITranslatable,
   ITranslatable,
-  TranslatableFields,
   ITranslations,
+  IURLPath,
+  TranslatableFields,
+  URLPathFields,
 } from "@/common/model/cms";
-import { ImageFields, IImage } from "./image";
-
+import { AudioFields, IAudio } from "./audio";
+import { IImage, ImageFields } from "./image";
 export interface IArticleEntry
   extends IEntity,
     IURLPath,
@@ -29,6 +28,10 @@ export const ArticleEntryFields = `
   image {
     ${ImageFields}
   }
+  audio
+  {
+    ${AudioFields}
+  }
 `;
 
 export const ArticleEntryFrag = gql`
@@ -42,6 +45,7 @@ export interface IArticle
     IEditorial,
     ITranslations<IArticleEntry> {
   image: IImage;
+  audio: IAudio;
   category: IEntity;
   translations: IArticleEntry[];
 }
@@ -58,6 +62,10 @@ export const ArticleFields = `
   }
   image {
     ${ImageFields}
+  }
+  audio
+  {
+    ${AudioFields}
   }
   translations(excludeSelf: $excludeSelf) {
     ${ArticleEntryFields}
