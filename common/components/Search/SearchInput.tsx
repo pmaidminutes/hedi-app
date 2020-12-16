@@ -19,10 +19,10 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
   const { locale } = router;
 
   const lang = locale;
-  console.log("lang=>", lang);
+  // console.log("lang=>", lang);
   // type ahead text or suggested text on typing in search box
   const handleSuggest = (textValue: string) => {
-    console.log(textValue + "-->text");
+    // console.log(textValue + "-->text");
     setSearchValue(textValue);
     props.inputText(textValue);
   };
