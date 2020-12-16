@@ -1,9 +1,9 @@
 import { ILanguageSwitchOption, LanguageSwitch } from "@/common/components";
 import { Search20 } from "@carbon/icons-react";
+import { LogInOut } from "@components";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { SearchInput } from "../Search";
-import { LogInOut } from "@components";
 
 export interface HeaderProps {
   pageTitle: string;
@@ -30,7 +30,7 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
           </div>
 
           <div className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
-            <SearchInput
+            <SearchInput size={"sm"}
               inputText={e => setSearchText(e)}
               textTyped={searchText}
             />

@@ -5,6 +5,7 @@ export interface IContentEntry {
   site: string;
   search_api_id: string;
   highlightedContent: IHighlightedContent;
+  ss_type:string;
 }
 
 export interface IHighlightedContent {
