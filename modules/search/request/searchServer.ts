@@ -1,7 +1,7 @@
-import { getSolrRequestParams, getSolrContentResult } from "../generator";
-import { IHTTPError } from "@/common/types";
-import { IContentEntry } from "../types";
 import { errorHandling } from "@/common/errorHandling";
+import { IHTTPError } from "@/common/types";
+import { getSolrContentResult, getSolrRequestParams } from "../generator";
+import { IContentEntry } from "../types";
 
 export async function searchServer(
   lang: string,
@@ -15,7 +15,7 @@ export async function searchServer(
     filter,
     getHighlighted
   );
-  //console.log("solrParams" + reqBody);
+  console.log("solrParams" + reqBody);
   const response = await fetch(process.env.SOLR_URL + "/select", {
     method: "post",
     body: reqBody,

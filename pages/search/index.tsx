@@ -14,17 +14,6 @@ import { Loading } from "carbon-components-react";
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-//TODO sample filter features, will be removed
-const items = [
-  {
-    id: "user",
-    label: "Midwife",
-  },
-  {
-    id: "node",
-    label: "Content",
-  },
-];
 
 export const getStaticProps: GetStaticProps<any> = async context => {
   return { props: { lang: context.locale ?? "de", searchText: "" } };
@@ -56,11 +45,7 @@ export default function searchPage(props: SearchProps) {
     setEntityId(e.selectedItem.id);
   };
   const hookCall = `/api/${props.lang}/search/${searchText}/${entityId}`;
-  /*   if(`${query?.searchText}`?.length>3)
-  {
-    setSearchText(`${query.searchText}`);
-    handleSearch;
-  } */
+
   const { data, error } = useSearch(searchText, hookCall);
   if (error) {
     console.log("for now error");

@@ -4,8 +4,9 @@ export function getSolrRequestParams(
   filter: string | string[],
   getHighlighted: boolean
 ) {
-  const languageFilter = `) && ss_search_api_language:${lang}`;
-  const solarFields = "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type,its_nid";
+  const languageFilter = `) `;
+  const solarFields =
+    "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type,its_nid";
   const highlightParams = {
     wt: "json",
     fl: solarFields,
@@ -13,8 +14,8 @@ export function getSolrRequestParams(
     "hl.fl": "tm_X3b_*, voll",
     "hl.snippets": "2",
     "hl.fragsize": "200",
-    "hl.simple.pre": "<em>",
-    "hl.simple.post": "</em>",
+    "hl.simple.pre": "<mark>",
+    "hl.simple.post": "</mark>",
   };
   const optionParams = { wt: "json", fl: solarFields };
   const requestBody = {
@@ -22,10 +23,7 @@ export function getSolrRequestParams(
       !searchText || searchText.length === 0
         ? "*:*" + languageFilter
         : `voll:(` + searchText + languageFilter,
-    filter:
-      typeof filter !== undefined
-        ? ``
-        : `ss_search_api_datasource:\"entity:${filter}\" `,
+    filter: `ss_search_api_language:${lang}`,
     params: getHighlighted ? highlightParams : optionParams,
   };
   return JSON.stringify(requestBody);

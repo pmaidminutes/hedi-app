@@ -13,14 +13,14 @@ export function ArticleBlock({ result, highlight }: IProps) {
   return (
     <div className="bx--col-sm-4 bx--col-md-6 bx--col-lg-10">
       <a
-        href={url}
+        href="#"
         className="bx--tile bx--tile--clickable hedi-unstyled-link hedi-article-entry-search">
-        <h4 className="pb-s-sm">
-          {highlight.highlightedTitle === undefined || ""
-            ? content.contentTitle
-            : highlight.highlightedTitle}
-        </h4>
-        <p> {highlight.highlightedBody} </p>
+        <h4 className="pb-s-sm">{content.contentTitle}</h4>
+        <p>
+          <div
+            dangerouslySetInnerHTML={{ __html: highlight.highlightedBody }}
+          />
+        </p>
       </a>
     </div>
   );
