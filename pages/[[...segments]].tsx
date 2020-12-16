@@ -17,7 +17,6 @@ import {
   getStaticProps as getGlossaryProps,
 } from "@/modules/editorial/generators/glossary";
 // Components
-import { Content } from "carbon-components-react";
 import {
   BreadCrumb,
   HediHeader,
@@ -26,7 +25,7 @@ import {
   TryGlossary,
 } from "@/common/components";
 // HACK: temporary
-import { getCategoryColorClass } from "@/modules/editorial/categoryColor";
+import { getCategoryColorClass } from "@/modules/editorial/category";
 
 export const getStaticPaths: GetStaticPaths = async context => {
   const locales = context?.locales ?? [];
@@ -61,7 +60,6 @@ export const getStaticProps: GetStaticProps<
 };
 
 export default function segments(props: ISegmentProps) {
-  console.log({ props });
   let { content, colorClass } = props;
 
   const router = useRouter();
