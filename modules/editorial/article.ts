@@ -22,10 +22,12 @@ export async function getArticlePaths(lang = "de"): Promise<ISegmentPath[]> {
     .then(data => data.articles)
     .catch(e => console.warn("error", e));
 
-  return articles.map(a => ({
-    params: { segments: a.urlsegments },
-    locale: a.langcode,
-  }));
+  return articles
+    .map(a => ({
+      params: { segments: a.urlsegments },
+      locale: a.langcode,
+    }))
+    .filter(a => a.locale === lang);
 }
 
 export async function getArticleBySlug(

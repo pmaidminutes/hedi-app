@@ -79,11 +79,18 @@ export async function getCategoryBySlug(
       slug: "/" + pageSlug,
       excludeSelf,
     })
-    .then(data => data.categoryBySlug)
+    .then(data => filterUntranslatedArticles(data.categoryBySlug))
     .catch(e => {
       console.warn(e);
       return null;
     });
+}
+
+function filterUntranslatedArticles(category: ICategory): ICategory {
+  category.articles = category.articles.filter(
+    a => a.langcode === category.langcode
+  );
+  return category;
 }
 
 export async function getRootCategories(
