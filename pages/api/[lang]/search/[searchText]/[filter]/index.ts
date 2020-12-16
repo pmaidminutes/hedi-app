@@ -1,5 +1,5 @@
-import { NextApiHandler } from "next";
 import { searchServer } from "@/modules/search/request/searchServer";
+import { NextApiHandler } from "next";
 
 const solrSearchHandler: NextApiHandler<any> = async (req, res) => {
   const {
