@@ -37,8 +37,7 @@ export const Article = ({ content }: IArticleProps) => {
         <div className="bx--row">
           <div className="bx--col-md-1 bx--col-lg-3"></div>
           <div
-            className="bx--col-sm-4 bx--col-md-6 bx--col-lg-10 p-s-xl"
-            style={{ backgroundColor: "linen" }}>
+            className="bx--col-sm-4 bx--col-md-6 bx--col-lg-10 p-s-xl hedi-article-container">
             <article>
               <h1 className="pb-s-s" style={{ textAlign: "center" }}>
                 {label}
