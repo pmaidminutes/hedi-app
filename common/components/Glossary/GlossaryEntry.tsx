@@ -12,21 +12,14 @@ interface GlossaryProps {
   entryIndex: number;
 }
 
-function replaceUmlauts(str: string) {
-  return str
-    .toLowerCase()
-    .replace(/ä/g, "ae")
-    .replace(/ö/g, "oe")
-    .replace(/ü/g, "ue");
-}
-
 export const GlossaryEntry = (props: GlossaryProps) => {
-  const { glossaryItem, glossaryUrlTerm, defaultLocale } = props;
+  console.log({ props });
+  const { glossaryItem, defaultLocale } = props;
   return (
     <div className="bx--col-md-4">
       <ExpandableTile
         title={glossaryItem.label}
-        id={replaceUmlauts(glossaryItem.label)}
+        id={glossaryItem.slug.substring(glossaryItem.slug.lastIndexOf("/") + 1)}
         tabIndex={0}>
         <TileAboveTheFoldContent>
           <div style={{ height: "100px" }}>
