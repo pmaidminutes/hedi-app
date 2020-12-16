@@ -1,18 +1,16 @@
-import {  useState } from "react";
-import { LoginModal } from "./LoginModal";
+import { useState } from "react";
+import { LogInModal } from "./LogInModal";
 import ReactDOM from "react-dom";
-
 
 export const LogIn = () => {
   const [open, setOpen] = useState(false);
 
-  // useOnClickOutside(ref, () => setOpen(false));
   return (
     <>
       {typeof document === "undefined"
         ? null
         : ReactDOM.createPortal(
-            <LoginModal  open={open} onClose={() => setOpen(false)} />,
+            <LogInModal open={open} onClose={() => setOpen(false)} />,
             document.body
           )}
 
