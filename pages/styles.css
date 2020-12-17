@@ -17520,6 +17520,10 @@ a.bx--navigation-link:focus {
   text-decoration: none;
   color: inherit; }
 
+.hedi-responsive-image {
+  max-width: 100%;
+  height: auto; }
+
 .hedi-category-color--pregnancy header {
   background-color: #2A84C6 !important; }
 
@@ -17575,11 +17579,13 @@ a.bx--navigation-link:focus {
   width: 100%;
   margin: auto; }
 
+.hedi-align-items {
+  align-items: center; }
+
 .hedi-header {
   width: 100%;
   color: white;
-  background-color: #574E90;
-  padding: 1rem 0; }
+  background-color: #574E90; }
 
 .hedi-glossary-letterhead {
   color: white;
@@ -17644,7 +17650,32 @@ mark {
   background-color: #FFC8D0;
   padding: 0 0.5rem; }
 
-article {
-  overflow-wrap: break-word; }
+article,
+article p {
+  overflow-wrap: break-word;
+  padding: 0.75rem;
+  color: #343a3f;
+  font-size: 1.1rem;
+  line-height: 1.75rem; }
+
+article h1 {
+  padding: 0.5rem 0;
+  letter-spacing: -0.25; }
+
+article p {
+  padding: 0.5rem 0; }
+
+.hedi-link-glossary {
+  text-decoration: none;
+  color: #00395D;
+  background-color: #CED8F7; }
+
+.hedi-link-article {
+  text-decoration: none;
+  color: #2A84C6;
+  background-color: #dde1e6; }
+
+.article-background-color {
+  background-color: #ECF0FF; }
 
 /*# sourceMappingURL=styles.css.map */

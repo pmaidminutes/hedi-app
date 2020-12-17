@@ -87,6 +87,7 @@ export async function getCategoryBySlug(
 }
 
 function filterUntranslatedArticles(category: ICategory): ICategory {
+  if (!category.articles) return category;
   category.articles = category.articles.filter(
     a => a.langcode === category.langcode
   );
@@ -167,7 +168,6 @@ export async function getAllCategories(
     })
     .then(data => data.categories ?? []);
 }
-
 
 // TODO: remove after added new drupal field
 export async function getCategoryColorClass(slug: string, locale: string) {

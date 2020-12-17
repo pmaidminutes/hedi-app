@@ -15,7 +15,7 @@ export const LogIn = () => {
           )}
 
       <button
-        className="bx--btn bx--btn--primary hedi-login-button"
+        className="bx--btn bx--btn--sm hedi-login-button"
         type="button"
         onClick={() => setOpen(true)}>
         Login

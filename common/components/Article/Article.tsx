@@ -3,6 +3,7 @@ import { ITypename } from "@/common/model/cms";
 import { TagList } from "@/hedi-components/TagList";
 import { IArticle } from "@/modules/editorial/types";
 import { AudioPlayer } from "@components";
+import { buildAssetUrl } from "../../utils";
 
 interface IArticleProps {
   content: IArticle;
@@ -15,7 +16,6 @@ export const TryArticle = (content: ITypename) =>
 
 export const Article = ({ content }: IArticleProps) => {
   const { label, body, category, audio } = content;
-  if (audio) console.log(audio?.url?.split("files/")[1]);
   const exampleTags = [
     "Course of pregnancy",
     "Example Tag",
@@ -36,9 +36,7 @@ export const Article = ({ content }: IArticleProps) => {
       </a>
       <div className="bx--grid">
         <div className="bx--row">
-          <div className="bx--col-md-1 bx--col-lg-3"></div>
-          <div
-            className="bx--col-sm-4 bx--col-md-6 bx--col-lg-10 p-s-xl hedi-article-container">
+          <div className="bx--col-sm-4 bx--col-md-6 bx--col-lg-8 bx--offset-md-1 bx--offset-lg-4 p-s-xl hedi-article-container">
             <article>
               <h1 className="pb-s-s" style={{ textAlign: "center" }}>
                 {label}
@@ -53,12 +51,7 @@ export const Article = ({ content }: IArticleProps) => {
                 //TODO fix static url hard code and fix in safari for audio
               }
               {audio !== null ? (
-                <AudioPlayer
-                  src={
-                    "http://appstaging.projekt-hedi.de/" +
-                    audio?.url?.split("files/")[1]
-                  }
-                />
+                <AudioPlayer src={buildAssetUrl(audio?.url)} />
               ) : null}
               <div
                 className="py-s-md"
