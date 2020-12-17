@@ -87,7 +87,7 @@ export async function getCategoryBySlug(
 }
 
 function filterUntranslatedArticles(category: ICategory): ICategory {
-  if (!category.articles) return category;
+  if (category.articles.length === 0) return category;
   category.articles = category.articles.filter(
     a => a.langcode === category.langcode
   );
