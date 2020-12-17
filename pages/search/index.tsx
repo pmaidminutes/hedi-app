@@ -32,7 +32,7 @@ export default function searchPage(props: SearchProps) {
   const router = useRouter();
   console.log(router.query, "query");
 
-  const [entityId, setEntityId] = useState();
+  const [entityType, setEntityType] = useState();
   const [searchText, setSearchText] = useState(`${searchTexts ?? ""}`);
   const [shouldFetch, setShouldFetch] = useState(false);
   //TODO temporary feature
@@ -42,11 +42,12 @@ export default function searchPage(props: SearchProps) {
     setShouldFetch(true);
   };
   const handleEntityChanges = (e: any) => {
-    setEntityId(e.selectedItem.id);
+    setEntityType(e.selectedItem.id);
   };
-  const hookCall = `/api/${props.lang}/search/${searchText}/${entityId}`;
+  console.log("lang in props", `${props.lang}`);
+  //const hookCall = `/api/${props.lang}/search/${searchText}/${entityType}`;
 
-  const { data, error } = useSearch(searchText, hookCall);
+  const { data, error } = useSearch(searchText, entityType);
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";

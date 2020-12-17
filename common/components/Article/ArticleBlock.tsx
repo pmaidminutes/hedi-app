@@ -16,11 +16,11 @@ export function ArticleBlock({ result, highlight }: IProps) {
         href="#"
         className="bx--tile bx--tile--clickable hedi-unstyled-link hedi-article-entry-search">
         <h4 className="pb-s-sm">{content.contentTitle}</h4>
-        <p>
-          <div
-            dangerouslySetInnerHTML={{ __html: highlight.highlightedBody }}
-          />
-        </p>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: "<p>" + highlight.highlightedBody + "</p>",
+          }}
+        />
       </a>
     </div>
   );
