@@ -13,17 +13,33 @@ interface GlossaryProps {
 }
 
 export const GlossaryEntry = (props: GlossaryProps) => {
-  console.log({ props });
-  const { glossaryItem, defaultLocale } = props;
+  const { glossaryItem, defaultLocale, glossaryUrlTerm } = props;
+  const entryId = glossaryItem.slug.substring(
+    glossaryItem.slug.lastIndexOf("/") + 1
+  );
+  const selected = entryId === glossaryUrlTerm ? true : false;
+  if (selected) {
+    console.log("%cSELECTED", "padding: 10px; background-color: green;");
+    console.log({ entryId }, { glossaryUrlTerm }, { selected });
+    console.log("%c--------------", "padding: 10px; background-color: green;");
+  } else {
+    console.log("%cNOT-SELECTED", "padding: 10px; background-color: red;");
+    console.log({ entryId }, { glossaryUrlTerm }, { selected });
+    console.log("%c--------------", "padding: 10px; background-color: red;");
+  }
+
   return (
     <div className="bx--col-md-4">
       <ExpandableTile
         title={glossaryItem.label}
-        id={glossaryItem.slug.substring(glossaryItem.slug.lastIndexOf("/") + 1)}
-        tabIndex={0}>
+        id={entryId}
+        tabIndex={0}
+        expanded={selected}>
         <TileAboveTheFoldContent>
           <div style={{ height: "100px" }}>
-            <h2>{glossaryItem.label}</h2>
+            <h2 className={selected ? "hedi-marked-word" : ""}>
+              {glossaryItem.label}
+            </h2>
             {glossaryItem.translations.map(
               (translation: IGlossaryEntry, index) =>
                 translation.langcode === defaultLocale ? (
