@@ -40,24 +40,36 @@ export const Category = ({ content }: ICategoryProps) => {
       <h3 className="mt-l-sm">Topic subcategories</h3>
       <div className="bx--row">
         {categories.length > 0 &&
-          categories.map(category => (
-            <div
-              className="bx--col bx--col-sm-4 bx--col-md-4 bx--col-lg-4 mt-s-md"
-              style={{ overflowWrap: "break-word" }}
-              key={category.urlpath}>
-              <Link href={category.urlpath} passHref>
-                <a className="hedi-unstyled-link">
-                  <div
-                    className="bx--aspect-ratio bx--aspect-ratio--2x1"
-                    style={{ backgroundColor: "darkcyan" }}>
-                    {" "}
-                    picture here{" "}
-                  </div>
-                  <h4>{category.label}</h4>
-                </a>
-              </Link>
-            </div>
-          ))}
+          categories.map(category => {
+            console.log({ category });
+            return (
+              <div
+                className="bx--col bx--col-sm-4 bx--col-md-4 bx--col-lg-4 mt-s-md"
+                style={{ overflowWrap: "break-word" }}
+                key={category.urlpath}>
+                <Link href={category.urlpath} passHref>
+                  <a className="hedi-unstyled-link">
+                    {category.image === null ? (
+                      <div
+                        className="bx--aspect-ratio bx--aspect-ratio--2x1"
+                        style={{ backgroundColor: "darkcyan" }}>
+                        {" "}
+                        picture here{" "}
+                      </div>
+                    ) : (
+                      <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
+                        <img
+                          src={category.image?.url}
+                          alt={category.image?.alt}
+                        />
+                      </div>
+                    )}
+                    <h4>{category.label}</h4>
+                  </a>
+                </Link>
+              </div>
+            );
+          })}
       </div>
 
       <div className="hedi-separator"></div>
