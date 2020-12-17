@@ -23,9 +23,9 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
   return (
     <header className={`hedi-header ${colorClass}`}>
       <div className="bx--grid">
-        <div className="bx--row">
-          <div className="bx--col bx--col-sm-4 bx--col-md-8 bx--col-lg-6 pb-s-sm">
-            <h1>{pageTitle}</h1>
+        <div className="bx--row py-s-sm">
+          <div className="bx--col bx--col-sm-4 bx--col-md-8 bx--col-lg-4 pb-s-sm">
+            <div className="hedi-logo-text">♥ Hedi</div>
           </div>
           <div className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs hedi-align-header-items">
             <div className="bx--form-item">
@@ -33,20 +33,21 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
             </div>
           </div>
 
-          <div className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
-            <SearchInput size={"sm"}
+          <div className="bx--col bx--col-sm-3 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
+            <SearchInput
+              size={"sm"}
               inputText={e => setSearchText(e)}
               textTyped={searchText}
             />
-          </div>
-          <Search20
+            {/* <Search20
             style={{ position: "relative", alignSelf: "center" }}
             id="se-id"
             onClick={() =>
               router.push({ pathname: "/search", query: { searchText } })
             }
-          />
-          <div className="bx--col hedi-align-header-items">
+          /> */}
+          </div>
+          <div className="bx--col bx--col-sm-3 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
             <LogInOut />
           </div>
         </div>

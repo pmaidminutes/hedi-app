@@ -24,10 +24,12 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
     props.staticCrumb ?? constructUrl(router.asPath, router.locale ?? "de");
   return (
     <div className="bx--grid">
-      <nav
-        className="by--row bx--row-padding bx--breadcrumb--no-trailing-slash pl-l-sm"
+      <div
+        className="by--row bx--row-padding bx--breadcrumb--no-trailing-slash my-s-sm pl-s-sm"
         aria-label="breadcrumb">
-        <div className="bx--col bx--breadcrumb">
+        <nav
+          className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
+          aria-label="breadcrumb">
           <div className="bx--breadcrumb-item">
             <a href="/" className="bx--link">
               Home
@@ -49,8 +51,8 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
               </div>
             )
           )}
-        </div>
-      </nav>
+        </nav>
+      </div>
     </div>
   );
 };

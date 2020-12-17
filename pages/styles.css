@@ -17670,10 +17670,16 @@ article p {
   color: #00395D;
   background-color: #CED8F7; }
 
+<<<<<<< HEAD
 .hedi-link-article {
   text-decoration: none;
   color: #2A84C6;
   background-color: #dde1e6; }
+=======
+.hedi-link-generic {
+  text-decoration: none;
+  color: #2A84C6; }
+>>>>>>> origin/main
 
 .article-background-color {
   background-color: #ECF0FF; }
