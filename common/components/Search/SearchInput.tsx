@@ -1,5 +1,4 @@
 import { Search } from "carbon-components-react";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AutoSuggest } from "./AutoSuggest";
 interface SearchInputProps {
@@ -15,10 +14,6 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
   const [searchValue, setSearchValue] = useState(
     typeof props.textTyped === undefined ? "" : props.textTyped
   );
-
-  const router = useRouter();
-  const [suggest, setSuggest] = useState(false);
-
   // console.log("lang=>", lang);
   // type ahead text or suggested text on typing in search box
   const handleSuggest = (textValue: string) => {
@@ -51,7 +46,6 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
         //TODO to change the lang value
       }
       <AutoSuggest
-        hookCall={props.textTyped}
         textTyped={searchValue}
         textSelected={text => handleSuggest(text)}
       />

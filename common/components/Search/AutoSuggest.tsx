@@ -3,7 +3,6 @@ import { useSuggest } from "@/modules/search/hooks";
 import { useState } from "react";
 
 interface SuggestProps {
-  hookCall: string;
   textTyped: string;
   textSelected: (text: string) => void;
 }
@@ -12,7 +11,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
 ) => {
   const [selectedText, setSelectedText] = useState("~");
   const { data, error } = useSuggest(
-    props.textTyped !== selectedText ? props.hookCall : undefined
+    props.textTyped !== selectedText ? props.textTyped : undefined
   );
   if (error) {
     //throw new Error(error);
