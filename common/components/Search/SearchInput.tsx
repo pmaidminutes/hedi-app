@@ -5,8 +5,9 @@ import { AutoSuggest } from "./AutoSuggest";
 interface SearchInputProps {
   inputText: (text: string) => void;
   textTyped: string;
-  size: "sm"|"xl";
-  className?:string;
+  size: "sm" | "xl";
+  className?: string;
+  id: string;
 }
 export const SearchInput: React.FunctionComponent<SearchInputProps> = (
   props: SearchInputProps
@@ -14,11 +15,10 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
   const [searchValue, setSearchValue] = useState(
     typeof props.textTyped === undefined ? "" : props.textTyped
   );
-  const hookSuggestCall = `/api/en/suggest/${searchValue.trim()}`;
-  const router = useRouter();
-  const { locale } = router;
 
-  const lang = locale;
+  const router = useRouter();
+  const [suggest, setSuggest] = useState(false);
+
   // console.log("lang=>", lang);
   // type ahead text or suggested text on typing in search box
   const handleSuggest = (textValue: string) => {
@@ -37,7 +37,7 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
       <Search
         data-search
         size={props.size}
-        id="search-text"
+        id={props.id}
         placeHolderText="Search"
         autoComplete="off"
         value={searchValue}
@@ -51,8 +51,7 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
         //TODO to change the lang value
       }
       <AutoSuggest
-        hookCall={hookSuggestCall}
-        lang={"en"}
+        hookCall={props.textTyped}
         textTyped={searchValue}
         textSelected={text => handleSuggest(text)}
       />

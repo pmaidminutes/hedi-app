@@ -34,8 +34,10 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
           </div>
 
           <div className="bx--col bx--col-sm-4 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
-            <SearchInput size={"sm"}
+            <SearchInput
+              size={"sm"}
               inputText={e => setSearchText(e)}
+              id={"search-header"}
               textTyped={searchText}
             />
           </div>

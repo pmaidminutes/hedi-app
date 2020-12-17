@@ -1,21 +1,26 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import { useSuggest } from "@/modules/search/hooks";
+import { useState } from "react";
 
 interface SuggestProps {
   hookCall: string;
-  lang: string;
   textTyped: string;
   textSelected: (text: string) => void;
 }
 export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
   props: SuggestProps
 ) => {
-  const { data, error } = useSuggest(`${props.textTyped}`, `${props.hookCall}`);
+  const [selectedText, setSelectedText] = useState("~");
+  const { data, error } = useSuggest(
+    props.textTyped !== selectedText ? props.hookCall : undefined
+  );
   if (error) {
     //throw new Error(error);
     console.log("err");
   }
+
   const suggestionSelected = (value: string) => {
+    setSelectedText(value);
     props.textSelected(value);
   };
   return (
@@ -29,7 +34,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
           position: "absolute",
           backgroundColor: "lightgray",
           zIndex: 9999,
-          marginTop: "-1.5rem"
+          marginTop: "-1.5rem",
         }}
         role="listbox"
         id="suggestion-list">

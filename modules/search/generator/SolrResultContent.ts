@@ -5,13 +5,11 @@ export function getSolrContentResult(
   lang: string,
   highlightingContent: any
 ): IContentEntry {
-  console.log(highlightingContent);
+  //console.log(highlightingContent);
   const prefix = "tm_X3b_" + lang;
   const title = prefix + "_title";
   const body = prefix + "_body";
-  if(entity.ss_type=="glossary")
-  {
-    
+  if (entity.ss_type == "glossary") {
   }
   return {
     contentTitle: entity[title],
