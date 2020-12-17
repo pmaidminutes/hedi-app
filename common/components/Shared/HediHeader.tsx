@@ -37,6 +37,7 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
             <SearchInput
               size={"sm"}
               inputText={e => setSearchText(e)}
+              id={"search-header"}
               textTyped={searchText}
             />
             {/* <Search20

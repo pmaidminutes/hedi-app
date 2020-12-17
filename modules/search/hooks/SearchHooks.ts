@@ -13,14 +13,19 @@ export function useSearch(searchText: string, hookCall: string) {
   return { ...swrResult };
 }
 
-export function useSuggest(typedText: string, hookCall: string) {
+export function useSuggest(suggestText?: string) {
   const fetcher = (url: any) => {
     return fetch(url)
       .then(response => response.json())
       .then(jsonResponse => jsonResponse.terms.voll);
   };
+  const splitWords = suggestText?.split(" ");
+  const modifiedText = splitWords
+    ? splitWords[splitWords.length - 1]
+    : suggestText;
+
   const swrResult = useSWR(
-    typedText?.length > 0 ? encodeURI(hookCall) : null,
+    suggestText ? "/api/en/suggest/" + encodeURI(suggestText) : null,
     fetcher
   );
   return { ...swrResult };

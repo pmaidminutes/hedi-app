@@ -63,6 +63,7 @@ export default function searchPage(props: SearchProps) {
         <div>
           <SearchInput
             className={"mb-l-xs"}
+            id={"search-results"}
             size={"xl"}
             inputText={e => setSearchText(e)}
             textTyped={searchText}
