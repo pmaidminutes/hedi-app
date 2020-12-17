@@ -13,9 +13,9 @@ export interface IImage extends ITranslatable, IEntity {
   url: string;
 }
 
+//HACK: not implemented on server yet ${TranslatableFields} f
 export const ImageFields = `
   ${EntityFields}
-  ${TranslatableFields}
   alt
   url
   width
