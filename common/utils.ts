@@ -11,3 +11,10 @@ export function AssertServerSide() {
 export function slugifyTitle(title: string): string {
   return title.replace(/\s+$/g, "").replace(/\s+/g, "-").toLowerCase();
 }
+
+// --- Build assets URL --- //
+export function buildAssetUrl(url: string | undefined): string {
+  if (url === undefined) return ""
+  const BASE_URL = "https://appstaging.projekt-hedi.de/";
+  return `${BASE_URL}${url.split("files/")[1]}`;
+}
