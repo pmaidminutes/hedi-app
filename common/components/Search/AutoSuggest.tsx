@@ -29,12 +29,12 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
         //TODO to remove style after Kathi provides styles
       }
       <ul
+        className="hedi-auto-suggest"
         style={{
           border: "2px",
           position: "absolute",
-          backgroundColor: "lightgray",
           zIndex: 9999,
-          marginTop: "-1.5rem",
+          width: "100%",
         }}
         role="listbox"
         id="suggestion-list">
@@ -42,6 +42,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
           ? data.map((suggestedResult: string) =>
               typeof suggestedResult === "string" ? (
                 <li
+                  style={{ padding: "5px" }}
                   key={suggestedResult}
                   onClick={e => suggestItemSelected(suggestedResult)}>
                   {suggestedResult}
