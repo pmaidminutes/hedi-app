@@ -1,3 +1,4 @@
+import { jsonFetcher } from "@/common/utils";
 import useSWR from "swr";
 
 export function useSearch(
@@ -6,26 +7,17 @@ export function useSearch(
   entityType?: string
 ) {
   const apiPath = "/api/" + lang + "/search/";
-  const fetcher = (url: any) => {
-    return fetch(url)
-      .then(response => response.json())
-      .then(jsonResponse => jsonResponse);
-  };
-  const swrResult = useSWR(
+
+  const swrResult = useSWR<any>(
     searchText?.length > 3
       ? apiPath + encodeURI(searchText + "/" + entityType)
       : null,
-    fetcher
+    jsonFetcher
   );
   return { ...swrResult };
 }
 
 export function useSuggest(suggestText?: string) {
-  const fetcher = (url: any) => {
-    return fetch(url)
-      .then(response => response.json())
-      .then(jsonResponse => jsonResponse.terms.voll);
-  };
   const splitWords = suggestText?.split(" ");
   const modifiedText = splitWords
     ? splitWords[splitWords.length - 1]
@@ -33,7 +25,7 @@ export function useSuggest(suggestText?: string) {
 
   const swrResult = useSWR(
     suggestText ? "/api/en/suggest/" + encodeURI(suggestText) : null,
-    fetcher
+    url => jsonFetcher<any>(url).then(response => response.terms.voll)
   );
   return { ...swrResult };
 }

@@ -14,7 +14,13 @@ export function slugifyTitle(title: string): string {
 
 // --- Build assets URL --- //
 export function buildAssetUrl(url: string | undefined): string {
-  if (url === undefined) return ""
+  if (url === undefined) return "";
   const BASE_URL = "https://appstaging.projekt-hedi.de/";
   return `${BASE_URL}${url.split("files/")[1]}`;
+}
+
+export function jsonFetcher<T>(url: RequestInfo) {
+  return fetch(url)
+    .then(response => response.json())
+    .then(jsonResponse => jsonResponse as T);
 }
