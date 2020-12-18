@@ -17530,11 +17530,17 @@ a.bx--navigation-link:focus {
 .hedi-category-color--pregnancy .hedi-article-container {
   background-color: #ECF0FF; }
 
+.hedi-category-color--pregnancy .hedi-auto-suggest {
+  background-color: #2A84C6; }
+
 .hedi-category-color--birth header {
   background-color: #E35C8D !important; }
 
 .hedi-category-color--birth .hedi-article-container {
   background-color: #FFEAEC; }
+
+.hedi-category-color--birth .hedi-auto-suggest {
+  background-color: #E35C8D; }
 
 .hedi-category-color--after-birth header {
   background-color: #574E90 !important; }
@@ -17542,11 +17548,17 @@ a.bx--navigation-link:focus {
 .hedi-category-color--after-birth .hedi-article-container {
   background-color: #FBECFC; }
 
+.hedi-category-color--after-birth .hedi-auto-suggest {
+  background-color: #574E90; }
+
 .hedi-category-color--finances header {
   background-color: #007362 !important; }
 
 .hedi-category-color--finances .hedi-article-container {
   background-color: #D9F6F6; }
+
+.hedi-category-color--finances .hedi-auto-suggest {
+  background-color: #007362; }
 
 .hedi-category-color--advice header {
   background-color: #C94E1B !important; }
@@ -17554,11 +17566,17 @@ a.bx--navigation-link:focus {
 .hedi-category-color--advice .hedi-article-container {
   background-color: #FFEDDF; }
 
+.hedi-category-color--advice .hedi-auto-suggest {
+  background-color: #C94E1B; }
+
 .hedi-category-color--root header {
   background-color: #2A84C6 !important; }
 
 .hedi-category-color--root .hedi-article-container {
   background-color: #ECF0FF; }
+
+.hedi-category-color--root .hedi-auto-suggest {
+  background-color: #2A84C6; }
 
 .hedi-separator {
   display: block;
