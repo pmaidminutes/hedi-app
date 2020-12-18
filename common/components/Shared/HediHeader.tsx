@@ -1,7 +1,7 @@
 import { ILanguageSwitchOption, LanguageSwitch } from "@/common/components";
+import { Logo } from "@components";
 import { Search20 } from "@carbon/icons-react";
 import { LogInOut } from "@components";
-import { useRouter } from "next/router";
 import { useState } from "react";
 import { SearchInput } from "../Search";
 
@@ -17,7 +17,6 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
   // TODO: remove when integrated in drupal
   colorClass,
 }) => {
-  const router = useRouter();
   const [searchText, setSearchText] = useState("");
 
   return (
@@ -25,7 +24,7 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
       <div className="bx--grid">
         <div className="bx--row py-s-sm">
           <div className="bx--col bx--col-sm-4 bx--col-md-8 bx--col-lg-4 pb-s-sm">
-            <div className="hedi-logo-text">♥ Hedi</div>
+            <Logo />
           </div>
           <div className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs hedi-align-header-items">
             <div className="bx--form-item">
