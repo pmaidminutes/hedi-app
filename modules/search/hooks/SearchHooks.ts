@@ -1,4 +1,6 @@
+import { IHTTPError } from "@/common/types";
 import { jsonFetcher } from "@/common/utils";
+import { IArticle, ICategory } from "@/modules/editorial/types";
 import useSWR from "swr";
 
 export function useSearch(
@@ -8,7 +10,7 @@ export function useSearch(
 ) {
   const apiPath = "/api/" + lang + "/search/";
 
-  const swrResult = useSWR<any>(
+  const swrResult = useSWR<IHTTPError | (IArticle | ICategory)[]>(
     searchText?.length > 3
       ? apiPath + encodeURI(searchText + "/" + entityType)
       : null,
@@ -23,7 +25,7 @@ export function useSuggest(suggestText?: string) {
     ? splitWords[splitWords.length - 1]
     : suggestText;
 
-  const swrResult = useSWR(
+  const swrResult = useSWR<IHTTPError | string[]>(
     suggestText ? "/api/en/suggest/" + encodeURI(suggestText) : null,
     url => jsonFetcher<any>(url).then(response => response.terms.voll)
   );

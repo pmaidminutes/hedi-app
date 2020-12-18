@@ -4,12 +4,15 @@
  * for language switching see ../index.tsx
  */
 
-import { BreadCrumb, HediHeader } from "@/common/components";
-import { ArticleBlock } from "@/common/components/Article/ArticleBlock";
+import {
+  ArticleEntry,
+  BreadCrumb,
+  CategoryEntry,
+  HediHeader,
+} from "@/common/components";
 import { SearchInput } from "@/common/components/Search";
 import { IsIHTTPError } from "@/common/errorHandling";
 import { useSearch } from "@/modules/search/hooks";
-import { IContentEntry } from "@/modules/search/types";
 import { Loading } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -35,9 +38,12 @@ export default function searchPage() {
   let errorMessage: string = "";
 
   const { data, error } = useSearch(queryText, locale, filter);
+  const results = IsIHTTPError(data) ? [] : data ?? [];
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";
+  } else if (IsIHTTPError(data)) {
+    errorMessage = data.text;
   } else {
     loading = false;
   }
@@ -80,22 +86,19 @@ export default function searchPage() {
         }
         {loading && !data ? (
           <Loading withOverlay={true} className={"some-class"} />
-        ) : error || IsIHTTPError(data) ? (
-          <div className="errorMessage">{data?.text || errorMessage}</div>
+        ) : errorMessage ? (
+          <div className="errorMessage">{errorMessage}</div>
         ) : (
           <div className="bx--tile-container">
-            {!IsIHTTPError(data) &&
-              data?.map((entity: IContentEntry, index: any) =>
-                entity.ss_type === "article" ? (
-                  <ArticleBlock
-                    key={index}
-                    result={entity}
-                    highlight={entity.highlightedContent}
-                  />
-                ) : (
-                  ""
-                )
-              )}
+            {results.map((entry: any) => {
+              if (!entry) return null;
+              switch (entry.typeName) {
+                case "Article":
+                  return <ArticleEntry article={entry} />;
+                case "Category":
+                  return <CategoryEntry category={entry} />;
+              }
+            })}
           </div>
         )}
       </main>
