@@ -6,10 +6,12 @@ interface SearchInputProps extends Partial<SearchProps> {
   onQueryChanged: (text: string) => void;
   query?: string;
 }
-export const SearchInput: React.FunctionComponent<SearchInputProps> = (
-  props: SearchInputProps
-) => {
-  const queryText = props.query ?? "";
+export const SearchInput: React.FunctionComponent<SearchInputProps> = ({
+  onQueryChanged,
+  query,
+  ...searchProps
+}) => {
+  const queryText = query ?? "";
   const [searchQuery, setSearchQuery] = useState(queryText);
   useEffect(() => {
     if (queryText) setSearchQuery(queryText);
@@ -21,19 +23,18 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
     const query = e.target.value;
     setSuggestQuery(query);
     setSearchQuery(query);
-    props.onQueryChanged(query);
+    onQueryChanged(query);
   };
 
   const handleSuggestSelected = (text: string) => {
     setSearchQuery(text);
     setSuggestQuery("");
-    props.onQueryChanged(text);
+    onQueryChanged(text);
   };
 
   return (
     <>
       <Search
-        {...props}
         data-search
         placeHolderText="Search"
         autoComplete="off"
@@ -41,6 +42,7 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
         onChange={handleSearch}
         type="search"
         labelText=""
+        {...searchProps}
       />
 
       {
