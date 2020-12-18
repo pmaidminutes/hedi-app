@@ -39,7 +39,7 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = (
         autoComplete="off"
         value={searchQuery}
         onChange={handleSearch}
-        type="text"
+        type="search"
         labelText=""
       />
 
