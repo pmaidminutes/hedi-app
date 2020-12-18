@@ -15,12 +15,7 @@ export const TryArticle = (content: ITypename) =>
   ) : null;
 
 export const Article = ({ content }: IArticleProps) => {
-  const { label, body, category, audio } = content;
-  const exampleTags = [
-    "Course of pregnancy",
-    "Example Tag",
-    "Schwangerschaftsverlauf",
-  ];
+  const { label, body, category, audio, tags } = content;
 
   return (
     <>
@@ -60,11 +55,16 @@ export const Article = ({ content }: IArticleProps) => {
                 }}></div>
             </article>
           </div>
-          {/* <div className="bx--col-md-1 bx--col-lg-3"></div> */}
         </div>
       </div>
-      <div className="hedi-separator"></div>
-      <TagList tags={exampleTags} />
+      {/* TODO: add semantic corretc html */}
+      {tags.length > 0 ? (
+        <>
+          {" "}
+          <div className="hedi-separator"></div>
+          <TagList tags={tags} />{" "}
+        </>
+      ) : null}
     </>
   );
 };
