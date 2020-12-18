@@ -28,6 +28,7 @@ export default function searchPage(props: SearchProps) {
   const {
     pathname,
     query: { searchTexts },
+    locale,
   } = useRouter();
   const router = useRouter();
   console.log(router.query, "query");
@@ -47,7 +48,7 @@ export default function searchPage(props: SearchProps) {
   console.log("lang in props", `${props.lang}`);
   //const hookCall = `/api/${props.lang}/search/${searchText}/${entityType}`;
 
-  const { data, error } = useSearch(searchText, entityType);
+  const { data, error } = useSearch(searchText, locale, entityType);
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";

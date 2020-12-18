@@ -1,8 +1,10 @@
-import { useRouter } from "next/router";
 import useSWR from "swr";
 
-export function useSearch(searchText: string, entityType?: string) {
-  const lang = useRouter().locale ?? "de";
+export function useSearch(
+  searchText: string,
+  lang: string = "de",
+  entityType?: string
+) {
   const apiPath = "/api/" + lang + "/search/";
   const fetcher = (url: any) => {
     return fetch(url)
