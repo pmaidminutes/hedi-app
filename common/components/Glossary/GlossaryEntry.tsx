@@ -18,15 +18,6 @@ export const GlossaryEntry = (props: GlossaryProps) => {
     glossaryItem.slug.lastIndexOf("/") + 1
   );
   const selected = entryId === glossaryUrlTerm ? true : false;
-  if (selected) {
-    console.log("%cSELECTED", "padding: 10px; background-color: green;");
-    console.log({ entryId }, { glossaryUrlTerm }, { selected });
-    console.log("%c--------------", "padding: 10px; background-color: green;");
-  } else {
-    console.log("%cNOT-SELECTED", "padding: 10px; background-color: red;");
-    console.log({ entryId }, { glossaryUrlTerm }, { selected });
-    console.log("%c--------------", "padding: 10px; background-color: red;");
-  }
 
   return (
     <div className="bx--col-md-4">
