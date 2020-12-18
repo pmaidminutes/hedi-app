@@ -2,7 +2,8 @@ import Link from "next/link";
 // Types
 import { ICategory } from "@/modules/editorial/types";
 import { ITypename } from "@/common/model/cms";
-import { buildAssetUrl } from "../../utils";
+import { ArticleEntry, CategoryEntry } from "@/common/components";
+
 interface ICategoryProps {
   content: ICategory;
 }
@@ -41,32 +42,7 @@ export const Category = ({ content }: ICategoryProps) => {
           <h3 className="mt-l-sm">Topic subcategories</h3>
           <div className="bx--row">
             {categories.map(category => (
-              <div
-                className="bx--col bx--col-sm-4 bx--col-md-4 bx--col-lg-4 mt-s-md"
-                style={{ overflowWrap: "break-word" }}
-                key={category.urlpath}>
-                <Link href={category.urlpath} passHref>
-                  <a className="hedi-unstyled-link">
-                    {category.image === null ? (
-                      <div
-                        className="bx--aspect-ratio bx--aspect-ratio--2x1"
-                        style={{ backgroundColor: "darkcyan" }}>
-                        {" "}
-                        picture here{" "}
-                      </div>
-                    ) : (
-                      <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
-                        <img
-                          className="hedi-responsive-image"
-                          src={buildAssetUrl(category.image?.url)}
-                          alt={category.image?.alt}
-                        />
-                      </div>
-                    )}
-                    <h4>{category.label}</h4>
-                  </a>
-                </Link>
-              </div>
+              <CategoryEntry category={category} />
             ))}
           </div>
         </>
@@ -77,24 +53,9 @@ export const Category = ({ content }: ICategoryProps) => {
       <div className="bx--grid">
         <div className="bx--tile-container">
           <div className="bx--row">
-            {articles.length > 0 &&
-              articles.map(article => (
-                <div
-                  className="bx--col-sm-4 bx--col-md-4 bx--col-lg-8"
-                  key={article.urlpath}>
-                  <Link href={article.urlpath} passHref>
-                    <a
-                      href="#"
-                      className="bx--tile bx--tile--clickable hedi-unstyled-link">
-                      <h4 className="pb-s-sm">{article.label}</h4>
-                      <p
-                        dangerouslySetInnerHTML={{
-                          __html: article.summary,
-                        }}></p>
-                    </a>
-                  </Link>
-                </div>
-              ))}
+            {articles.map(article => (
+              <ArticleEntry article={article} />
+            ))}
           </div>
         </div>
       </div>
