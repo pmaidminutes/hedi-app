@@ -1,7 +1,9 @@
 import { ILanguageSwitchOption, LanguageSwitch } from "@/common/components";
+
 import { Logo } from "@components";
-import { Search20 } from "@carbon/icons-react";
 import { LogInOut } from "@components";
+import { Form } from "carbon-components-react";
+import { useRouter } from "next/router";
 import { useState } from "react";
 import { SearchInput } from "../Search";
 
@@ -17,6 +19,7 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
   // TODO: remove when integrated in drupal
   colorClass,
 }) => {
+  const router = useRouter();
   const [searchText, setSearchText] = useState("");
 
   return (
@@ -33,19 +36,18 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
           </div>
 
           <div className="bx--col bx--col-sm-3 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
-            <SearchInput
-              size={"sm"}
-              inputText={e => setSearchText(e)}
-              id={"search-header"}
-              textTyped={searchText}
-            />
-            {/* <Search20
-            style={{ position: "relative", alignSelf: "center" }}
-            id="se-id"
-            onClick={() =>
-              router.push({ pathname: "/search", query: { searchText } })
-            }
-          /> */}
+            <Form
+              onSubmit={e => {
+                router.push("/search/" + searchText);
+                e.preventDefault();
+              }}>
+              <SearchInput
+                size={"sm"}
+                onQueryChanged={e => setSearchText(e)}
+                id={"search-header"}
+                query={searchText}
+              />
+            </Form>
           </div>
           <div className="bx--col bx--col-sm-3 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
             <LogInOut />

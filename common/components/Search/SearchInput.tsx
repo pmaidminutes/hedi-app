@@ -1,53 +1,54 @@
-import { Search } from "carbon-components-react";
-import React, { useState } from "react";
+import { Search, SearchProps } from "carbon-components-react";
+import { useEffect, useState } from "react";
 import { AutoSuggest } from "./AutoSuggest";
-interface SearchInputProps {
-  inputText: (text: string) => void;
-  textTyped: string;
-  size: "sm" | "xl";
-  className?: string;
-  id: string;
+
+interface SearchInputProps extends Partial<SearchProps> {
+  onQueryChanged: (text: string) => void;
+  query?: string;
 }
 export const SearchInput: React.FunctionComponent<SearchInputProps> = (
   props: SearchInputProps
 ) => {
-  const [searchValue, setSearchValue] = useState(
-    typeof props.textTyped === undefined ? "" : props.textTyped
-  );
-  // console.log("lang=>", lang);
-  // type ahead text or suggested text on typing in search box
-  const handleSuggest = (textValue: string) => {
-    // console.log(textValue + "-->text");
-    setSearchValue(textValue);
-    props.inputText(textValue);
+  const queryText = props.query ?? "";
+  const [searchQuery, setSearchQuery] = useState(queryText);
+  useEffect(() => {
+    if (queryText) setSearchQuery(queryText);
+  }, [queryText]);
+
+  const [suggestQuery, setSuggestQuery] = useState("");
+
+  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const query = e.target.value;
+    setSuggestQuery(query);
+    setSearchQuery(query);
+    props.onQueryChanged(query);
   };
 
-  const handleSearch = (text: any) => {
-    setSearchValue(text.target.value);
-    props.inputText(text.target.value);
+  const handleSuggestSelected = (text: string) => {
+    setSearchQuery(text);
+    setSuggestQuery("");
+    props.onQueryChanged(text);
   };
 
   return (
     <>
       <Search
+        {...props}
         data-search
-        size={props.size}
-        id={props.id}
         placeHolderText="Search"
         autoComplete="off"
-        value={searchValue}
+        value={searchQuery}
         onChange={handleSearch}
-        type="text"
+        type="search"
         labelText=""
-        className={props.className}
       />
 
       {
         //TODO to change the lang value
       }
       <AutoSuggest
-        textTyped={searchValue}
-        textSelected={text => handleSuggest(text)}
+        query={suggestQuery}
+        suggestionSelected={handleSuggestSelected}
       />
     </>
   );

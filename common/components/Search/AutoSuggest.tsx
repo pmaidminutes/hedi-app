@@ -3,24 +3,25 @@ import { useSuggest } from "@/modules/search/hooks";
 import { useState } from "react";
 
 interface SuggestProps {
-  textTyped: string;
-  textSelected: (text: string) => void;
+  query: string;
+  suggestionSelected: (text: string) => void;
 }
 export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
   props: SuggestProps
 ) => {
-  const [selectedText, setSelectedText] = useState("~");
+  const [selectedSuggestion, setSelectedSuggestion] = useState("");
+
   const { data, error } = useSuggest(
-    props.textTyped !== selectedText ? props.textTyped : undefined
+    props.query !== selectedSuggestion ? props.query : undefined
   );
   if (error) {
     //throw new Error(error);
     console.log("err");
   }
 
-  const suggestionSelected = (value: string) => {
-    setSelectedText(value);
-    props.textSelected(value);
+  const suggestItemSelected = (text: string) => {
+    setSelectedSuggestion(text);
+    props.suggestionSelected(text);
   };
   return (
     <>
@@ -42,7 +43,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
               typeof suggestedResult === "string" ? (
                 <li
                   key={suggestedResult}
-                  onClick={e => suggestionSelected(suggestedResult)}>
+                  onClick={e => suggestItemSelected(suggestedResult)}>
                   {suggestedResult}
                 </li>
               ) : (
