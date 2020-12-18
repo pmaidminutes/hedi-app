@@ -72,22 +72,30 @@ export async function getCategoryBySlug(
 
   const client = await getServiceClient();
 
-  return client
-    .request<{ categoryBySlug: ICategory }>(query, {
-      srcLang: lang,
-      dstLang: lang,
-      slug: "/" + pageSlug,
-      excludeSelf,
-    })
-    .then(data => filterUntranslatedArticles(data.categoryBySlug))
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return (
+    client
+      .request<{ categoryBySlug: ICategory }>(query, {
+        srcLang: lang,
+        dstLang: lang,
+        slug: "/" + pageSlug,
+        excludeSelf,
+      })
+      // .then(data => data.categoryBySlug)
+      .then(data => filterUntranslatedArticles(data.categoryBySlug))
+      .catch(e => {
+        console.warn(e);
+        return null;
+      })
+  );
 }
 
 function filterUntranslatedArticles(category: ICategory): ICategory {
-  if (category.articles.length === 0) return category;
+  if (
+    !category ||
+    category.articles === null ||
+    category.articles?.length === 0
+  )
+    return category;
   category.articles = category.articles.filter(
     a => a.langcode === category.langcode
   );
