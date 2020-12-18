@@ -17,7 +17,7 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
   pageTitle,
   translations,
   // TODO: remove when integrated in drupal
-  colorClass,
+  colorClass = "hedi-category-color--default",
 }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
@@ -37,6 +37,8 @@ export const HediHeader: React.FunctionComponent<HeaderProps> = ({
 
           <div className="bx--col bx--col-sm-3 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
             <Form
+              // TODO: remove inline Style
+              style={{ position: "relative" }}
               onSubmit={e => {
                 router.push("/search/" + searchText);
                 e.preventDefault();
