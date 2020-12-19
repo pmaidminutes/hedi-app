@@ -8,6 +8,7 @@ import {
   ArticleEntry,
   BreadCrumb,
   CategoryEntry,
+  GlossaryEntry,
   HediHeader,
 } from "@/common/components";
 import { SearchInput } from "@/common/components/Search";
@@ -30,7 +31,7 @@ export default function searchPage() {
   }, [initialQueryText]);
 
   const locale = router.locale ?? "de";
-
+  const defaultLocale = router.defaultLocale;
   // TODO implement filter options
   const [filter, setFilter] = useState();
 
@@ -97,6 +98,14 @@ export default function searchPage() {
                   return <ArticleEntry article={entry} />;
                 case "Category":
                   return <CategoryEntry category={entry} />;
+                case "GlossaryEntry":
+                  return (
+                    <GlossaryEntry
+                      glossaryEntry={entry}
+                      selected={true}
+                      translationLang={defaultLocale}
+                    />
+                  );
               }
             })}
           </div>

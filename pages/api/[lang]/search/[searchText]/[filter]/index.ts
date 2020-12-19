@@ -1,13 +1,14 @@
 import { IsIHTTPError } from "@/common/errorHandling";
-import { IArticle, ICategory } from "@/modules/editorial/types";
+import { IArticle, ICategory, IGlossaryEntry } from "@/modules/editorial/types";
 import { getArticleBySlug } from "@/modules/editorial/article";
 import { getCategoryBySlug } from "@/modules/editorial/category";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";
 import { IHTTPError } from "@/common/types";
+import { getGlossaryEntryBySlug } from "@/modules/editorial/glossaries";
 
 const solrSearchHandler: NextApiHandler<
-  IHTTPError | (IArticle | ICategory)[]
+  IHTTPError | (IArticle | ICategory | IGlossaryEntry)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter },
@@ -47,13 +48,27 @@ const solrSearchHandler: NextApiHandler<
             })
           );
           break;
-        // case 'glossary':
-        //   promises.push(getGlossaryBySlug(path, lang) as Promise<IEntity>);
-        //   break;
+        case "glossary":
+          promises.push(
+            getGlossaryEntryBySlug(path, lang).then(glossary => {
+              if (glossary) {
+                glossary.label = highlight.highlightedTitle ?? glossary.label;
+                glossary.body = highlight.highlightedBody;
+              }
+              return glossary;
+            })
+          );
+          break;
       }
     }
-    const entries = await Promise.all<IArticle | ICategory | null>(promises);
-    const nonNull = entries.filter(entry => entry) as (IArticle | ICategory)[];
+    const entries = await Promise.all<
+      IArticle | ICategory | IGlossaryEntry | null
+    >(promises);
+    const nonNull = entries.filter(entry => entry) as (
+      | IArticle
+      | ICategory
+      | IGlossaryEntry
+    )[];
     res.send(nonNull);
   }
 };
