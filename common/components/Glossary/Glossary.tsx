@@ -17,11 +17,11 @@ export const Glossary = ({ content }: IGlossaryProps) => {
   const { groups } = content;
   const { defaultLocale } = useRouter();
 
-  let glossaryUrlTerm = AssertClientSide()
+  const glossaryUrlTerm = AssertClientSide()
     ? window.location.hash.substr(1)
-    : "";
+    : undefined;
 
-  if (AssertClientSide() && glossaryUrlTerm) {
+  if (glossaryUrlTerm) {
     // Use the hash to find the first element with that id
     const element = document.querySelector(glossaryUrlTerm);
 
@@ -39,12 +39,12 @@ export const Glossary = ({ content }: IGlossaryProps) => {
 
   return (
     <div className="bx--grid">
-      {groups.map((glossaryGroup, index) => (
+      {groups.map(glossaryGroup => (
         <GlossaryGroup
-          key={index}
+          key={glossaryGroup.abbrev}
           glossaryGroup={glossaryGroup}
-          glossaryUrlTerm={`${glossaryUrlTerm}`}
-          defaultLocale={defaultLocale ?? "de"}
+          translationLang={defaultLocale}
+          selectedTerm={glossaryUrlTerm}
         />
       ))}
     </div>

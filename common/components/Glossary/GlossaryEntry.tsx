@@ -6,51 +6,43 @@ import {
 } from "carbon-components-react";
 
 interface GlossaryProps {
-  glossaryItem: IGlossaryEntry;
-  glossaryUrlTerm: string;
-  defaultLocale: string;
-  entryIndex: number;
+  glossaryEntry: IGlossaryEntry;
+  translationLang?: string;
+  selected?: boolean;
 }
 
 export const GlossaryEntry = (props: GlossaryProps) => {
-  const { glossaryItem, defaultLocale, glossaryUrlTerm } = props;
-  const entryId = glossaryItem.slug.substring(
-    glossaryItem.slug.lastIndexOf("/") + 1
+  const { glossaryEntry, translationLang, selected } = props;
+  const entryId = glossaryEntry.slug.substring(
+    glossaryEntry.slug.lastIndexOf("/") + 1
   );
-  const selected = entryId === glossaryUrlTerm ? true : false;
-
+  const translated = glossaryEntry.translations.find(
+    g => g.langcode === translationLang
+  )?.label;
   return (
-    <div className="bx--col-md-4">
-      <ExpandableTile
-        title={glossaryItem.label}
-        id={entryId}
-        tabIndex={0}
-        expanded={selected}>
-        <TileAboveTheFoldContent>
-          <div style={{ height: "100px" }}>
-            <h2 className={selected ? "hedi-marked-word" : ""}>
-              {glossaryItem.label}
-            </h2>
-            {glossaryItem.translations.map(
-              (translation: IGlossaryEntry, index) =>
-                translation.langcode === defaultLocale ? (
-                  <p key={index}>
-                    <mark> {translation.label}</mark>
-                  </p>
-                ) : (
-                  ""
-                )
-            )}
-            <div
-              dangerouslySetInnerHTML={{
-                __html: glossaryItem.body,
-              }}></div>
-          </div>
-        </TileAboveTheFoldContent>
-        <TileBelowTheFoldContent>
-          <div style={{ height: "170px" }}></div>
-        </TileBelowTheFoldContent>
-      </ExpandableTile>
-    </div>
+    <ExpandableTile
+      title={glossaryEntry.label}
+      id={entryId}
+      tabIndex={0}
+      expanded={selected}>
+      <TileAboveTheFoldContent>
+        <h2
+          className={selected ? "hedi-marked-word" : ""}
+          dangerouslySetInnerHTML={{
+            __html: glossaryEntry.label,
+          }}></h2>
+        {translated && (
+          <p>
+            <mark>{translated}</mark>
+          </p>
+        )}
+      </TileAboveTheFoldContent>
+      <TileBelowTheFoldContent>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: glossaryEntry.body,
+          }}></div>
+      </TileBelowTheFoldContent>
+    </ExpandableTile>
   );
 };
