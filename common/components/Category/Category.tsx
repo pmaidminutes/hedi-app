@@ -42,7 +42,12 @@ export const Category = ({ content }: ICategoryProps) => {
           <h3 className="mt-l-sm">Topic subcategories</h3>
           <div className="bx--row">
             {categories.map(category => (
-              <CategoryEntry category={category} />
+              <div
+                className="bx--col bx--col-sm-4 bx--col-md-4 bx--col-lg-4 mt-s-md"
+                style={{ overflowWrap: "break-word" }}
+                key={category.urlpath}>
+                <CategoryEntry category={category} />
+              </div>
             ))}
           </div>
         </>
@@ -54,7 +59,11 @@ export const Category = ({ content }: ICategoryProps) => {
         <div className="bx--tile-container">
           <div className="bx--row">
             {articles.map(article => (
-              <ArticleEntry article={article} />
+              <div
+                className="bx--col-sm-4 bx--col-md-4 bx--col-lg-8"
+                key={article.urlpath}>
+                <ArticleEntry article={article} />
+              </div>
             ))}
           </div>
         </div>
