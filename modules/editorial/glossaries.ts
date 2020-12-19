@@ -102,3 +102,37 @@ function transformToGlossary(
     groups,
   };
 }
+
+export async function getGlossaryEntryBySlug(
+  slug: string,
+  lang = "de",
+  excludeSelf = true
+) {
+  const query = gql`
+    query getGlossaryEntryBySlug(
+      $slug: String!
+      $srcLang: String
+      $dstLang: String
+      $excludeSelf: Boolean
+    ) {
+      glossaryEntryBySlug(slug: $slug, srcLang: $srcLang, dstLang: $dstLang) {
+        ${GlossaryFields}
+      }
+    }
+  `;
+
+  const client = await getServiceClient();
+
+  return client
+    .request<{ glossaryEntryBySlug: IGlossaryEntry }>(query, {
+      srcLang: lang,
+      dstLang: lang,
+      slug: "/" + slug,
+      excludeSelf,
+    })
+    .then(data => data.glossaryEntryBySlug)
+    .catch(e => {
+      console.warn(e);
+      return null;
+    });
+}
