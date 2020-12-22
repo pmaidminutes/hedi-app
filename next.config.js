@@ -7,4 +7,10 @@ module.exports = {
     // a non-locale prefixed path e.g. `/hello`
     defaultLocale: 'de',
   },
+  images: {
+    domains: [
+      'appstaging.projekt-hedi.de',
+      'localhost:3000'
+    ],
+  },
 }
