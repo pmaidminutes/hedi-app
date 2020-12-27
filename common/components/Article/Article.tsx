@@ -1,5 +1,6 @@
 // Types
 import { ITypename } from "@/common/model/cms";
+import { HTMLWithNextImage } from "@/common/html";
 import { TagList } from "@/hedi-components/TagList";
 import { IArticle } from "@/modules/editorial/types";
 import { AudioPlayer } from "@components";
@@ -48,11 +49,9 @@ export const Article = ({ content }: IArticleProps) => {
               {audio !== null ? (
                 <AudioPlayer src={buildAssetUrl(audio?.url)} />
               ) : null}
-              <div
-                className="py-s-md"
-                dangerouslySetInnerHTML={{
-                  __html: body,
-                }}></div>
+              <div className="py-s-md">
+                <HTMLWithNextImage data={body} />
+              </div>
             </article>
           </div>
         </div>
