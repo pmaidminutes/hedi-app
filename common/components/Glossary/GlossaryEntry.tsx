@@ -1,9 +1,10 @@
-import { IGlossaryEntry } from "@/modules/editorial/types";
 import {
   ExpandableTile,
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from "carbon-components-react";
+import { HTML } from "@/common/html";
+import { IGlossaryEntry } from "@/modules/editorial/types";
 
 interface GlossaryProps {
   glossaryEntry: IGlossaryEntry;
@@ -38,10 +39,7 @@ export const GlossaryEntry = (props: GlossaryProps) => {
         )}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: glossaryEntry.body,
-          }}></div>
+        <HTML data={glossaryEntry.body} />
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HTML } from "@/common/html";
 import { IArticleEntry } from "@/modules/editorial/types";
 
 export const ArticleEntry = ({ article }: { article: IArticleEntry }) => (
@@ -8,10 +9,7 @@ export const ArticleEntry = ({ article }: { article: IArticleEntry }) => (
         dangerouslySetInnerHTML={{
           __html: article.label,
         }}></h4>
-      <p
-        dangerouslySetInnerHTML={{
-          __html: article.summary,
-        }}></p>
+      <HTML data={article.summary} />
     </a>
   </Link>
 );
