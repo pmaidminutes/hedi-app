@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ICategoryEntry } from "@/modules/editorial/types";
 import { buildAssetUrl } from "../../utils";
@@ -14,9 +15,11 @@ export const CategoryEntry = ({ category }: { category: ICategoryEntry }) => (
         </div>
       ) : (
         <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
-          <img
+          <Image
             className="hedi-responsive-image"
             src={buildAssetUrl(category.image?.url)}
+            width={category.image?.width ?? 0}
+            height={category.image?.height ?? 0}
             alt={category.image?.alt}
           />
         </div>
