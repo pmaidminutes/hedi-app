@@ -1,16 +1,16 @@
 import { ITypename } from "@/common/model/cms";
 import { AssertClientSide } from "@/common/utils";
-import { IGlossary } from "@/modules/editorial/types";
+import { IGroupedGlossary } from "@/modules/editorial/types";
 import { useRouter } from "next/router";
 import { GlossaryGroup } from "./GlossaryGroup";
 
 interface IGlossaryProps {
-  content: IGlossary;
+  content: IGroupedGlossary;
 }
 
 export const TryGlossary = (content: ITypename) =>
   content.typeName === "Glossary" ? (
-    <Glossary content={content as IGlossary} />
+    <Glossary content={content as IGroupedGlossary} />
   ) : null;
 
 export const Glossary = ({ content }: IGlossaryProps) => {
@@ -41,7 +41,7 @@ export const Glossary = ({ content }: IGlossaryProps) => {
     <div className="bx--grid">
       {groups.map(glossaryGroup => (
         <GlossaryGroup
-          key={glossaryGroup.abbrev}
+          key={glossaryGroup.key}
           glossaryGroup={glossaryGroup}
           translationLang={defaultLocale}
           selectedTerm={glossaryUrlTerm}

@@ -1,3 +1,3 @@
 export * from "./Glossary";
-export { GlossaryEntry } from "./GlossaryEntry";
+export { GlossaryTerm } from "./GlossaryTerm";
 export { GlossaryGroup } from "./GlossaryGroup";

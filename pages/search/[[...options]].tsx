@@ -8,7 +8,7 @@ import {
   ArticleEntry,
   BreadCrumb,
   CategoryEntry,
-  GlossaryEntry,
+  GlossaryTerm,
   HediHeader,
 } from "@/common/components";
 import { SearchInput } from "@/common/components/Search";
@@ -100,8 +100,8 @@ export default function searchPage() {
                   return <CategoryEntry category={entry} />;
                 case "GlossaryEntry":
                   return (
-                    <GlossaryEntry
-                      glossaryEntry={entry}
+                    <GlossaryTerm
+                      glossaryTerm={entry}
                       selected={true}
                       translationLang={defaultLocale}
                     />

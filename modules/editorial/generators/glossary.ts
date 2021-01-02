@@ -1,13 +1,10 @@
-import {
-  getGlossaryBySlug,
-  getGlossaryPaths,
-} from "@/modules/editorial/glossaries";
+import { getGlossary, getGlossaryPath } from "@/modules/editorial/glossary";
 
 export const getStaticPaths = async (locales: string[]) => {
   const paths = [];
   if (locales) {
     for (let locale of locales) {
-      const glossaryPaths = await getGlossaryPaths(locale);
+      const glossaryPaths = await getGlossaryPath(locale);
       paths.push(...glossaryPaths);
     }
   }
@@ -18,6 +15,6 @@ export async function getStaticProps(segments?: string[], locale = "de") {
   if (!segments) {
     return null;
   } else {
-    return getGlossaryBySlug(segments[segments.length - 1], locale);
+    return getGlossary(locale);
   }
 }

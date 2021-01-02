@@ -1,14 +1,14 @@
 import { IsIHTTPError } from "@/common/errorHandling";
-import { IArticle, ICategory, IGlossaryEntry } from "@/modules/editorial/types";
+import { IArticle, ICategory, IGlossaryTerm } from "@/modules/editorial/types";
 import { getArticleBySlug } from "@/modules/editorial/article";
 import { getCategoryBySlug } from "@/modules/editorial/category";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";
 import { IHTTPError } from "@/common/types";
-import { getGlossaryEntryBySlug } from "@/modules/editorial/glossaries";
+import { getGlossaryTermBySlug } from "@/modules/editorial/glossary";
 
 const solrSearchHandler: NextApiHandler<
-  IHTTPError | (IArticle | ICategory | IGlossaryEntry)[]
+  IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter },
@@ -26,6 +26,9 @@ const solrSearchHandler: NextApiHandler<
     const promises = [];
     for (const entry of data) {
       const highlight = entry.highlightedContent;
+      const highlightedBody = Array.isArray(highlight.highlightedBody)
+        ? highlight.highlightedBody.join("...")
+        : highlight.highlightedBody;
       const [_, path, lang] = entry.search_api_id.split(":");
       switch (entry.ss_type) {
         case "article":
@@ -33,7 +36,7 @@ const solrSearchHandler: NextApiHandler<
             getArticleBySlug(path, lang).then(article => {
               if (article) {
                 article.label = highlight.highlightedTitle ?? article.label;
-                article.summary = highlight.highlightedBody;
+                article.summary = highlightedBody;
               }
               return article;
             })
@@ -48,12 +51,12 @@ const solrSearchHandler: NextApiHandler<
             })
           );
           break;
-        case "glossary":
+        case "glossaryterm":
           promises.push(
-            getGlossaryEntryBySlug(path, lang).then(glossary => {
+            getGlossaryTermBySlug(path, lang).then(glossary => {
               if (glossary) {
                 glossary.label = highlight.highlightedTitle ?? glossary.label;
-                glossary.body = highlight.highlightedBody;
+                glossary.description = highlightedBody ?? glossary.description;
               }
               return glossary;
             })
@@ -62,12 +65,12 @@ const solrSearchHandler: NextApiHandler<
       }
     }
     const entries = await Promise.all<
-      IArticle | ICategory | IGlossaryEntry | null
+      IArticle | ICategory | IGlossaryTerm | null
     >(promises);
     const nonNull = entries.filter(entry => entry) as (
       | IArticle
       | ICategory
-      | IGlossaryEntry
+      | IGlossaryTerm
     )[];
     res.send(nonNull);
   }

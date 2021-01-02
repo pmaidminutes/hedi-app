@@ -1,5 +1,5 @@
 import { IGlossaryGroup } from "@/modules/editorial/types";
-import { GlossaryEntry } from "./GlossaryEntry";
+import { GlossaryTerm } from "./GlossaryTerm";
 interface GlossaryGroupProps {
   glossaryGroup: IGlossaryGroup;
   translationLang?: string;
@@ -14,18 +14,17 @@ export const GlossaryGroup = ({
     <>
       <div className="bx--row bx--row-padding px-s-md">
         <div className="bx--col-md-4 hedi-glossary-letterhead">
-          {glossaryGroup.abbrev}
+          {glossaryGroup.key}
         </div>
       </div>
       <div className="bx--row">
-        {glossaryGroup.glossaries.map(glossaryEntry => (
-          <div className="bx--col-md-4" key={glossaryEntry.slug}>
-            <GlossaryEntry
-              glossaryEntry={glossaryEntry}
+        {glossaryGroup.terms.map(term => (
+          <div className="bx--col-md-4" key={term.slug}>
+            <GlossaryTerm
+              glossaryTerm={term}
               translationLang={translationLang}
               selected={
-                selectedTerm !== undefined &&
-                glossaryEntry.slug.endsWith(selectedTerm)
+                selectedTerm !== undefined && term.slug.endsWith(selectedTerm)
               }
             />
           </div>
