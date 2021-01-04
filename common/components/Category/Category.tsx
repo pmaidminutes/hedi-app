@@ -9,7 +9,7 @@ interface ICategoryProps {
 }
 
 export const TryCategory = (content: ITypename) =>
-  content.typeName === "Category" ? (
+  content.typeName === "Category" || content.typeName === "CategoryRoot" ? (
     <Category content={content as ICategory} />
   ) : null;
 
@@ -45,7 +45,7 @@ export const Category = ({ content }: ICategoryProps) => {
               <div
                 className="bx--col bx--col-sm-4 bx--col-md-4 bx--col-lg-4 mt-s-md"
                 style={{ overflowWrap: "break-word" }}
-                key={category.urlpath}>
+                key={category.route}>
                 <CategoryEntry category={category} />
               </div>
             ))}
@@ -58,10 +58,10 @@ export const Category = ({ content }: ICategoryProps) => {
       <div className="bx--grid">
         <div className="bx--tile-container">
           <div className="bx--row">
-            {articles.map(article => (
+            {articles?.map(article => (
               <div
                 className="bx--col-sm-4 bx--col-md-4 bx--col-lg-8"
-                key={article.urlpath}>
+                key={article.route}>
                 <ArticleEntry article={article} />
               </div>
             ))}

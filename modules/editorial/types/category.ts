@@ -2,29 +2,22 @@ import { gql } from "@/common/graphql";
 import {
   EntityFields,
   IEntity,
-  IURLPath,
-  ITaxonomy,
-  ITranslations,
-  URLPathFields,
-  TaxonomyFields,
   ITranslatable,
+  ILocalized,
+  LocalizedFields,
+  ILocalizedEntity,
+  LocalizedEntityFields,
   TranslatableFields,
 } from "@/common/model/cms";
 import { ArticleEntryFields, IArticleEntry } from "./article";
 import { ImageFields, IImage } from "./image";
 
-export interface ICategoryEntry extends IEntity, IURLPath, ITranslatable {
+export interface ICategoryEntry extends ILocalizedEntity {
   image?: IImage;
 }
 
-export const CategoryEntryFields = `
-  ${EntityFields}
-  ${URLPathFields}
-  ${TranslatableFields}
-  image {
-    ${ImageFields}
-  }
-`;
+export const CategoryEntryFields = `${LocalizedEntityFields}
+image { ${ImageFields} }`;
 
 export const CategoryEntryFrag = gql`
 fragment CategoryEntryFrag on Category {
@@ -32,14 +25,16 @@ fragment CategoryEntryFrag on Category {
 }
 `;
 
-export interface ICategory
-  extends ICategoryEntry,
-    ITaxonomy,
-    ITranslations<ICategoryEntry> {
-  parent: number;
+export interface ICategoryRoot extends ITranslatable<ILocalizedEntity> {
   categories: ICategoryEntry[];
+}
+
+export const CategoryRootFields = `${TranslatableFields}
+categories { ${CategoryEntryFields} }`;
+
+export interface ICategory extends ICategoryEntry, ICategoryRoot {
+  parent: number;
   articles: IArticleEntry[];
-  translations: ICategoryEntry[];
 }
 
 export function isICategory(obj: any): obj is ICategory {
@@ -47,39 +42,14 @@ export function isICategory(obj: any): obj is ICategory {
 }
 
 export const CategoryFields = `
-  ${TaxonomyFields}
-  urlpath
-  ${TranslatableFields}
-  image {
-    ${ImageFields}
-  }
-  categories {
-    ${CategoryEntryFields}
-  }
-  articles {
-    ${ArticleEntryFields}
-  }
-  translations(excludeSelf: $excludeSelf) {
-    ${CategoryEntryFields}
-  }
+  ${CategoryRootFields}
+  parent
+  articles { ${ArticleEntryFields} }
+  image { ${ImageFields} }
 `;
 
 export const CategoryFrag = gql`
 fragment CategoryFrag on Category {
   ${CategoryFields}
 }
-`;
-
-export interface ICategoryExpanded extends ICategory {
-  categories: ICategory[];
-}
-
-export const CategoryExpandedFrag = gql`
-  fragment CategoryExpandedFrag on Category {
-    ...CategoryFrag
-    categories {
-      ...CategoryFrag
-    }
-  }
-  ${CategoryFrag}
 `;

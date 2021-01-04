@@ -1,38 +1,20 @@
 import { gql } from "@/common/graphql";
 import {
-  BodyFields,
   EditorialFields,
   EntityFields,
-  IBody,
   IEditorial,
   IEntity,
-  ITranslatable,
-  ITranslations,
-  IURLPath,
-  TranslatableFields,
-  URLPathFields,
+  ILocalizedEntity,
+  ISummary,
+  LocalizedEntityFields,
+  SummaryFields,
 } from "@/common/model/cms";
 import { AudioFields, IAudio } from "./audio";
 import { IImage, ImageFields } from "./image";
-export interface IArticleEntry
-  extends IEntity,
-    IURLPath,
-    ITranslatable,
-    IBody {}
+export interface IArticleEntry extends ILocalizedEntity, ISummary {}
 
-export const ArticleEntryFields = `
-  ${EntityFields}
-  ${URLPathFields}
-  ${TranslatableFields}
-  ${BodyFields}
-  image {
-    ${ImageFields}
-  }
-  audio
-  {
-    ${AudioFields}
-  }
-`;
+export const ArticleEntryFields = `${LocalizedEntityFields}
+${SummaryFields}`;
 
 export const ArticleEntryFrag = gql`
 fragment ArticleEntryFrag on Article {
@@ -40,37 +22,20 @@ fragment ArticleEntryFrag on Article {
 }
 `;
 
-export interface IArticle
-  extends IArticleEntry,
-    IEditorial,
-    ITranslations<IArticleEntry> {
+export interface IArticle extends IArticleEntry, IEditorial<ILocalizedEntity> {
   image: IImage;
   audio: IAudio;
   category: IEntity;
-  translations: IArticleEntry[];
 }
 
 export function isIArticle(obj: any): obj is IArticle {
   return obj && obj.typeName === "Article";
 }
 
-export const ArticleFields = `
-  ${EditorialFields}
-  urlpath
-  category {
-    ${EntityFields}
-  }
-  image {
-    ${ImageFields}
-  }
-  audio
-  {
-    ${AudioFields}
-  }
-  translations(excludeSelf: $excludeSelf) {
-    ${ArticleEntryFields}
-  }
-`;
+export const ArticleFields = `${EditorialFields}
+category { ${EntityFields} }
+image { ${ImageFields} }
+audio { ${AudioFields} }`;
 
 export const ArticleFrag = gql`
 fragment ArticleFrag on Article {

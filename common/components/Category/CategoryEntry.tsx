@@ -4,7 +4,7 @@ import { ICategoryEntry } from "@/modules/editorial/types";
 import { buildAssetUrl } from "../../utils";
 
 export const CategoryEntry = ({ category }: { category: ICategoryEntry }) => (
-  <Link href={category.urlpath} passHref>
+  <Link href={category.route} passHref>
     <a className="hedi-unstyled-link">
       {category.image === null ? (
         <div

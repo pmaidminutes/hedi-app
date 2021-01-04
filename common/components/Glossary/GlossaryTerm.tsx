@@ -14,11 +14,11 @@ interface GlossaryProps {
 
 export const GlossaryTerm = (props: GlossaryProps) => {
   const { glossaryTerm, translationLang, selected } = props;
-  const entryId = glossaryTerm.slug.substring(
-    glossaryTerm.slug.lastIndexOf("/") + 1
+  const entryId = glossaryTerm.route.substring(
+    glossaryTerm.route.lastIndexOf("/") + 1
   );
   const translated = glossaryTerm.translations.find(
-    g => g.langcode === translationLang
+    g => g.lang === translationLang
   )?.label;
   return (
     <ExpandableTile
@@ -39,7 +39,7 @@ export const GlossaryTerm = (props: GlossaryProps) => {
         )}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
-        <HTML data={glossaryTerm.description} />
+        <HTML data={glossaryTerm.body} />
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );

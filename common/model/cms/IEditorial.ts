@@ -1,21 +1,34 @@
 import { gql } from "@/common/graphql";
 
-import { ContentFields, IContent, isIContent } from "./IContent";
-import { isITags, ITags, TagsFields } from "./ITags";
+import {
+  ContentFields,
+  IContent,
+  implementsIContent,
+  isIContent,
+} from "./IContent";
+import { ILocalizedEntity } from "./ILocalizedEntity";
+import { implementsISummary, ISummary, SummaryFields } from "./ISummary";
+import { implementsITagged, isITagged, ITagged, TaggedFields } from "./ITagged";
 
-export interface IEditorial extends IContent, ITags {}
+export interface IEditorial<T extends ILocalizedEntity>
+  extends IContent<T>,
+    ISummary,
+    ITagged {}
 
-export function isIEditorial(obj: any): obj is IContent {
-  return obj && isIContent(obj) && isITags(obj) ? true : false;
+export const implementsIEditorial = (obj: any) =>
+  implementsIContent(obj) && implementsISummary(obj) && implementsITagged(obj);
+
+export function isIEditorial<T extends ILocalizedEntity>(
+  obj: any
+): obj is IEditorial<T> {
+  return obj && isIContent(obj) && isITagged(obj) ? true : false;
 }
 
-export const EditorialFields = `
-  ${ContentFields}
-  ${TagsFields}
-`;
+export const EditorialFields = `${ContentFields}
+${SummaryFields}
+${TaggedFields}`;
 
 export const EditorialFrag = gql`
 fragment EditorialFrag on IEditorial {
   ${EditorialFields}
-}
-`;
+}`;

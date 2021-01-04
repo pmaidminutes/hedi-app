@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<
   const colorClass = await getCategoryColorClass(segments[0], locale ?? "de");
 
   let content;
-  content = await getCategoryProps(params?.segments, locale, locales);
+  content = await getCategoryProps(params?.segments, locale);
   if (!content) content = await getArticleProps(params?.segments, locale);
   if (!content) content = await getGlossaryProps(params?.segments, locale);
 

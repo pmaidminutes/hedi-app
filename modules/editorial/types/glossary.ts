@@ -1,48 +1,28 @@
 import {
-  ITaxonomy,
+  BodyFields,
+  IBody,
+  ILocalizedEntity,
   ITranslatable,
-  ITypename,
-  IURLPath,
-  SlugFields,
-  TaxonomyFields,
-  TranslationsFields,
+  TranslatableFields,
 } from "@/common/model/cms";
 
-export interface IGlossaryTerm extends ITaxonomy {
-  description: string;
-  translations: IGlossaryTerm[];
-}
+export interface IGlossaryTerm extends ITranslatable<ILocalizedEntity>, IBody {}
 
-export const GlossaryTermFields = `
-  ${TaxonomyFields}
-  description
-  translations(excludeSelf: $excludeSelf) {
-    ${TaxonomyFields}
-    description
-  }
-`;
+export const GlossaryTermFields = `${TranslatableFields}
+${BodyFields}`;
 
 export interface IGlossaryGroup {
   key: string;
   terms: IGlossaryTerm[];
 }
 
-export interface IGroupedGlossary extends ITypename, ITranslatable {
+export interface IGroupedGlossary extends ITranslatable<ILocalizedEntity> {
   groups: IGlossaryGroup[];
-  translations: (ITranslatable & IURLPath)[];
 }
 
-export interface IGlossary extends ITypename, ITranslatable {
-  translations: (ITranslatable & IURLPath)[];
+export interface IGlossary extends ITranslatable<ILocalizedEntity> {
   terms: IGlossaryTerm[];
 }
 
-export const GlossaryFields = `
-  ${TranslationsFields}
-  translations(excludeSelf: $excludeSelf) {
-    ${SlugFields}
-  }
-  terms {
-    ${GlossaryTermFields}
-  }
-`;
+export const GlossaryFields = `${TranslatableFields}
+terms { ${GlossaryTermFields} }`;

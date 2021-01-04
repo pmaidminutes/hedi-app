@@ -1,16 +1,9 @@
-import {
-  EntityFields,
-  IEntity,
-  ITranslatable,
-  TranslatableFields,
-} from "@/common/model/cms";
-
-export interface IAudio extends ITranslatable, IEntity {
+export interface IAudio {
+  label: string;
   url: string;
 }
 
 export const AudioFields = `
-  ${EntityFields}
-  ${TranslatableFields}
+  label
   url
 `;

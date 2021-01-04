@@ -1,3 +1,4 @@
+import { segmentsToRoute } from "@/common/types";
 import { getGlossary, getGlossaryPath } from "@/modules/editorial/glossary";
 
 export const getStaticPaths = async (locales: string[]) => {
@@ -15,6 +16,6 @@ export async function getStaticProps(segments?: string[], locale = "de") {
   if (!segments) {
     return null;
   } else {
-    return getGlossary(locale);
+    return getGlossary(segmentsToRoute(segments), locale);
   }
 }

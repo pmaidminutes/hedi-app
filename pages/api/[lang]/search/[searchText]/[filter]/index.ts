@@ -1,11 +1,11 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import { IArticle, ICategory, IGlossaryTerm } from "@/modules/editorial/types";
-import { getArticleBySlug } from "@/modules/editorial/article";
-import { getCategoryBySlug } from "@/modules/editorial/category";
+import { getArticle } from "@/modules/editorial/article";
+import { getCategory } from "@/modules/editorial/category";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";
 import { IHTTPError } from "@/common/types";
-import { getGlossaryTermBySlug } from "@/modules/editorial/glossary";
+import { getGlossaryTerm } from "@/modules/editorial/glossary";
 
 const solrSearchHandler: NextApiHandler<
   IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]
@@ -33,7 +33,7 @@ const solrSearchHandler: NextApiHandler<
       switch (entry.ss_type) {
         case "article":
           promises.push(
-            getArticleBySlug(path, lang).then(article => {
+            getArticle("/" + path, lang).then(article => {
               if (article) {
                 article.label = highlight.highlightedTitle ?? article.label;
                 article.summary = highlightedBody;
@@ -44,7 +44,7 @@ const solrSearchHandler: NextApiHandler<
           break;
         case "category":
           promises.push(
-            getCategoryBySlug(path, lang).then(category => {
+            getCategory("/" + path, lang).then(category => {
               if (category)
                 category.label = highlight.highlightedTitle ?? category.label;
               return category;
@@ -53,10 +53,10 @@ const solrSearchHandler: NextApiHandler<
           break;
         case "glossaryterm":
           promises.push(
-            getGlossaryTermBySlug(path, lang).then(glossary => {
+            getGlossaryTerm("/" + path, lang).then(glossary => {
               if (glossary) {
                 glossary.label = highlight.highlightedTitle ?? glossary.label;
-                glossary.description = highlightedBody ?? glossary.description;
+                glossary.body = highlightedBody ?? glossary.body;
               }
               return glossary;
             })

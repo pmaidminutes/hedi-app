@@ -1,39 +1,29 @@
 import { gql } from "@/common/graphql";
-import { BodyFields, IBody, isIBody } from "./IBody";
-import { EntityFields, IEntity, isIEntity } from "./IEntity";
-import { isISlug, ISlug, SlugFields } from "./ISlug";
-import { ITranslatable } from "./ITranslatable";
+import { BodyFields, IBody, implementsIBody } from "./IBody";
+import { ILocalizedEntity } from "./ILocalizedEntity";
 import {
-  isITranslations,
-  ITranslations,
-  TranslationsFields,
-} from "./ITranslations";
+  implementsITranslatable,
+  ITranslatable,
+  TranslatableFields,
+} from "./ITranslatable";
 
-export interface IContent
-  extends IEntity,
-    ISlug,
-    ITranslations<ITranslatable>,
+export interface IContent<T extends ILocalizedEntity>
+  extends ITranslatable<T>,
     IBody {}
 
-export function isIContent(obj: any): obj is IContent {
-  return obj &&
-    isIBody(obj) &&
-    isISlug(obj) &&
-    isITranslations(obj) &&
-    isIEntity(obj)
-    ? true
-    : false;
+export const implementsIContent = (obj: any) =>
+  implementsITranslatable(obj) && implementsIBody(obj);
+
+export function isIContent<T extends ILocalizedEntity>(
+  obj: any
+): obj is IContent<T> {
+  return implementsIContent(obj);
 }
 
-export const ContentFields = `
-  ${EntityFields}
-  ${SlugFields}
-  ${BodyFields}
-  ${TranslationsFields}
-`;
+export const ContentFields = `${TranslatableFields}
+${BodyFields}`;
 
 export const ContentFrag = gql`
 fragment ContentFrag on IContent {
   ${ContentFields}
-}
-`;
+}`;

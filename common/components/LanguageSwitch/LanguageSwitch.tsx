@@ -1,9 +1,7 @@
 // Types
-import { ITranslatable, IURLPath } from "@/common/model/cms";
+import { ILocalizedEntity } from "@/common/model/cms";
 import { Dropdown } from "carbon-components-react";
 import { useRouter } from "next/router";
-
-export interface ILanguageSwitchOption extends ITranslatable, IURLPath {}
 
 /**
  * Language Switch Component.
@@ -13,7 +11,7 @@ export interface ILanguageSwitchOption extends ITranslatable, IURLPath {}
 export const LanguageSwitch = ({
   translations,
 }: {
-  translations: ILanguageSwitchOption[];
+  translations: ILocalizedEntity[];
 }) => {
   const router = useRouter();
   const { locales, asPath: currentPath, locale } = router;
@@ -49,10 +47,6 @@ export const LanguageSwitch = ({
   );
 };
 
-function findLocaledUrlpath(
-  locale: string,
-  translations: ILanguageSwitchOption[]
-) {
-  return translations.find(translation => translation.langcode === locale)
-    ?.urlpath;
+function findLocaledUrlpath(locale: string, translations: ILocalizedEntity[]) {
+  return translations.find(translation => translation.lang === locale)?.route;
 }

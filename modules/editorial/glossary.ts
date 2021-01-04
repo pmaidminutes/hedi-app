@@ -1,5 +1,6 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ISegmentPath } from "@/common/types";
+import { ILocalizedEntity, LocalizedEntityFields } from "@/common/model/cms";
+import { ISegmentPath, routeToSegments } from "@/common/types";
 import {
   GlossaryTermFields,
   IGroupedGlossary,
@@ -8,37 +9,31 @@ import {
   GlossaryFields,
 } from "@/modules/editorial/types";
 
-export async function getGlossaryPath(
-  langcode: string
-): Promise<ISegmentPath[]> {
+export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {
   const query = gql`
-    query getGlossary($langcode: String) {
-      glossary(langcode: $langcode) {
-        slug
+    query getGlossary($lang: String) {
+      glossary(lang: $lang) {
+        ${LocalizedEntityFields}
       }
     }
   `;
 
   const client = await getServiceClient();
-  const segment = await client
-    .request<{ glossary: { slug?: string } }>(query, {
-      langcode: langcode,
-    })
-    .then(data => {
-      const slug = data.glossary.slug ?? "";
-      return slug.replace("/", "");
-    });
+  const segments = await client
+    .request<{ glossary?: ILocalizedEntity }>(query, { lang })
+    .then(data => routeToSegments(data.glossary?.route));
 
-  return [{ params: { segments: [segment] }, locale: langcode }];
+  return [{ params: { segments }, locale: lang }];
 }
 
-export async function getGlossary(lang = "de", excludeSelf = true) {
+export async function getGlossary(route: string, lang = "de") {
   const query = gql`
     query getGlossary(
-      $langcode: String
-      $excludeSelf: Boolean
+      $route: String
+      $lang: String
+      $includeSelf: Boolean
     ) {
-      glossary(langcode: $langcode) {
+      glossary(route: $route, lang: $lang) {
         ${GlossaryFields}
       }
     }
@@ -46,21 +41,15 @@ export async function getGlossary(lang = "de", excludeSelf = true) {
 
   const client = await getServiceClient();
   return client
-    .request<{ glossary: IGlossary }>(query, {
-      langcode: lang,
-      excludeSelf,
-    })
-    .then(data => transformToGlossary(data.glossary, lang))
+    .request<{ glossary: IGlossary }>(query, { route, lang })
+    .then(data => transformToGlossary(data.glossary))
     .catch(e => {
       console.warn(e);
       return null;
     });
 }
 
-function transformToGlossary(
-  glossary: IGlossary,
-  lang: string
-): IGroupedGlossary {
+function transformToGlossary(glossary: IGlossary): IGroupedGlossary {
   const groupedEntries = glossary.terms.reduce(function (
     glossaryArray: { [key: string]: IGlossaryTerm[] },
     term: IGlossaryTerm
@@ -76,37 +65,17 @@ function transformToGlossary(
     })
     .sort((a, b) => a.key.localeCompare(b.key));
 
-  const translations = glossary.translations.map(({ langcode, slug }) => {
-    const path = slug.replace("/", "");
-    return {
-      langcode,
-      slug: path,
-      urlpath: path,
-      urlsegments: [path],
-    };
-  });
-
-  return {
-    typeName: "Glossary",
-    langcode: lang,
-    translations,
-    groups,
-  };
+  return { ...glossary, groups };
 }
 
-export async function getGlossaryTermBySlug(
-  slug: string,
-  lang = "de",
-  excludeSelf = true
-) {
+export async function getGlossaryTerm(route: string, lang = "de") {
   const query = gql`
-    query getGlossaryTermBySlug(
-      $slug: String!
-      $srcLang: String
-      $dstLang: String
-      $excludeSelf: Boolean
+    query getGlossaryTerm(
+      $routes: [String]!
+      $lang: String
+      $includeSelf: Boolean
     ) {
-      glossaryTermBySlug(slug: $slug, srcLang: $srcLang, dstLang: $dstLang) {
+      glossaryterms(routes: $routes, lang: $lang) {
         ${GlossaryTermFields}
       }
     }
@@ -114,13 +83,11 @@ export async function getGlossaryTermBySlug(
 
   const client = await getServiceClient();
   return client
-    .request<{ glossaryTermBySlug: IGlossaryTerm }>(query, {
-      srcLang: lang,
-      dstLang: lang,
-      slug,
-      excludeSelf,
+    .request<{ glossaryterms: IGlossaryTerm[] }>(query, {
+      routes: [route],
+      lang,
     })
-    .then(data => data.glossaryTermBySlug)
+    .then(data => data.glossaryterms?.[0])
     .catch(e => {
       console.warn(e);
       return null;

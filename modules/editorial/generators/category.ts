@@ -1,8 +1,9 @@
 // Modules
+import { segmentsToRoute } from "@/common/types";
 import {
-  getCategoryBySlug,
+  getCategory,
   getCategoryPaths,
-  getRootCategories,
+  getCategoryRoot,
 } from "@/modules/editorial/category";
 
 export const getStaticPaths = async (locales: string[]) => {
@@ -13,20 +14,16 @@ export const getStaticPaths = async (locales: string[]) => {
       locale,
     });
     const segments = await getCategoryPaths(locale);
-    paths.push(...segments);
+    if (segments) paths.push(...segments);
   }
 
   return paths;
 };
 
-export const getStaticProps = async (
-  segments?: string[],
-  locale = "de",
-  locales: string[] = []
-) => {
+export const getStaticProps = async (segments?: string[], locale = "de") => {
   if (!segments) {
-    return getRootCategories(locale, locales);
+    return getCategoryRoot(locale);
   } else {
-    return getCategoryBySlug(segments[segments.length - 1], locale);
+    return getCategory(segmentsToRoute(segments), locale);
   }
 };

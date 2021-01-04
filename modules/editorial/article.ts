@@ -1,63 +1,55 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ITranslatable, IURLPath, URLPathFrag } from "@/common/model/cms";
-import { ISegmentPath } from "@/common/types";
-import { ArticleFrag, IArticle } from "@/modules/editorial/types";
+import { ILocalizedEntity, LocalizedEntityFields } from "@/common/model/cms";
+import { routeToSegments } from "@/common/types";
+import { ArticleFields, IArticle } from "@/modules/editorial/types";
 
-export async function getArticlePaths(lang = "de"): Promise<ISegmentPath[]> {
+export async function getArticlePaths(lang = "de") {
   const query = gql`
-    query getArticlePaths($langcode: String) {
-      articles(langcode: $langcode) {
-        ...URLPathFrag
-        langcode
+    query getArticlePaths($lang: String) {
+      articles(lang: $lang) { 
+        ${LocalizedEntityFields}
       }
     }
-    ${URLPathFrag}
   `;
 
   const client = await getServiceClient();
   if (!client) return [];
 
-  const articles: (IURLPath & ITranslatable)[] = await client
-    .request(query, { langcode: lang })
+  const articles = await client
+    .request<{ articles: ILocalizedEntity[] }>(query, { lang })
     .then(data => data.articles)
-    .catch(e => console.warn("error", e));
+    .catch(e => {
+      console.warn("error", e);
+      return null;
+    });
 
   return articles
-    .map(a => ({
-      params: { segments: a.urlsegments },
-      locale: a.langcode,
+    ?.map(a => ({
+      params: { segments: routeToSegments(a.route) },
+      locale: a.lang,
     }))
     .filter(a => a.locale === lang);
 }
 
-export async function getArticleBySlug(
-  pageSlug: string,
-  lang = "de",
-  excludeSelf = true
-) {
+export async function getArticle(route: string, lang = "de") {
   const query = gql`
-    query getArticleBySlug(
-      $slug: String!
-      $srcLang: String
-      $dstLang: String
-      $excludeSelf: Boolean
+    query getArticles(
+      $routes: [String!]!
+      $lang: String!
+      $includeSelf: Boolean
     ) {
-      articleBySlug(slug: $slug, srcLang: $srcLang, dstLang: $dstLang) {
-        ...ArticleFrag
+      articles(routes: $routes, lang: $lang) {
+        ${ArticleFields}
       }
     }
-    ${ArticleFrag}
   `;
   const client = await getServiceClient();
-  // TODO "under-18-years-and-pregnant" throws an error due to the number
   return client
-    .request<{ articleBySlug: IArticle }>(query, {
-      srcLang: lang,
-      dstLang: lang,
-      slug: "/" + pageSlug,
-      excludeSelf,
+    .request<{ articles: IArticle[] }>(query, {
+      routes: [route],
+      lang,
     })
-    .then(data => data.articleBySlug)
+    .then(data => data.articles?.[0])
     .catch(e => {
       console.warn(e);
       return null;
