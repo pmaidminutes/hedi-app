@@ -1,5 +1,5 @@
 // Types
-import { ILocalizedEntity } from "@/common/model/cms";
+import { IEntityLocalized } from "@/common/model/cms";
 import { Dropdown } from "carbon-components-react";
 import { useRouter } from "next/router";
 
@@ -11,7 +11,7 @@ import { useRouter } from "next/router";
 export const LanguageSwitch = ({
   translations,
 }: {
-  translations: ILocalizedEntity[];
+  translations: IEntityLocalized[];
 }) => {
   const router = useRouter();
   const { locales, asPath: currentPath, locale } = router;
@@ -47,6 +47,6 @@ export const LanguageSwitch = ({
   );
 };
 
-function findLocaledUrlpath(locale: string, translations: ILocalizedEntity[]) {
+function findLocaledUrlpath(locale: string, translations: IEntityLocalized[]) {
   return translations.find(translation => translation.lang === locale)?.route;
 }

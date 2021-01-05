@@ -1,5 +1,5 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ILocalizedEntity, LocalizedEntityFields } from "@/common/model/cms";
+import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { ISegmentPath, routeToSegments } from "@/common/types";
 import {
   GlossaryTermFields,
@@ -13,14 +13,14 @@ export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {
   const query = gql`
     query getGlossary($lang: String) {
       glossary(lang: $lang) {
-        ${LocalizedEntityFields}
+        ${EntityLocalizedFields}
       }
     }
   `;
 
   const client = await getServiceClient();
   const segments = await client
-    .request<{ glossary?: ILocalizedEntity }>(query, { lang })
+    .request<{ glossary?: IEntityLocalized }>(query, { lang })
     .then(data => routeToSegments(data.glossary?.route));
 
   return [{ params: { segments }, locale: lang }];

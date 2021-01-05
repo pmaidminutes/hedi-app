@@ -1,12 +1,12 @@
 import {
   BodyFields,
   IBody,
-  ILocalizedEntity,
+  IEntityLocalized,
   ITranslatable,
   TranslatableFields,
 } from "@/common/model/cms";
 
-export interface IGlossaryTerm extends ITranslatable<ILocalizedEntity>, IBody {}
+export interface IGlossaryTerm extends ITranslatable<IEntityLocalized>, IBody {}
 
 export const GlossaryTermFields = `${TranslatableFields}
 ${BodyFields}`;
@@ -16,11 +16,11 @@ export interface IGlossaryGroup {
   terms: IGlossaryTerm[];
 }
 
-export interface IGroupedGlossary extends ITranslatable<ILocalizedEntity> {
+export interface IGroupedGlossary extends ITranslatable<IEntityLocalized> {
   groups: IGlossaryGroup[];
 }
 
-export interface IGlossary extends ITranslatable<ILocalizedEntity> {
+export interface IGlossary extends ITranslatable<IEntityLocalized> {
   terms: IGlossaryTerm[];
 }
 

@@ -1,29 +1,29 @@
 import { gql } from "@/common/graphql";
 import { isILocalized, ILocalized, LocalizedFields } from "./ILocalized";
 import {
-  ILocalizedEntity,
-  implementsILocalizedEntity,
-  LocalizedEntityFields,
-} from "./ILocalizedEntity";
+  IEntityLocalized,
+  implementsIEntityLocalized,
+  EntityLocalizedFields,
+} from "./IEntityLocalized";
 
-export interface ITranslatable<T extends ILocalizedEntity>
-  extends ILocalizedEntity {
+export interface ITranslatable<T extends IEntityLocalized>
+  extends IEntityLocalized {
   translations: T[];
 }
 
 export const implementsITranslatable = (obj: any) =>
-  implementsILocalizedEntity(obj) && obj.translations;
+  implementsIEntityLocalized(obj) && obj.translations;
 
-export function isITranslatable<T extends ILocalizedEntity>(
+export function isITranslatable<T extends IEntityLocalized>(
   obj: any
 ): obj is ITranslatable<T> {
   return implementsITranslatable(obj);
 }
 
 export const TranslatableFields = `
-  ${LocalizedEntityFields}
+  ${EntityLocalizedFields}
   translations(includeSelf: $includeSelf) {
-    ${LocalizedEntityFields}
+    ${EntityLocalizedFields}
   }
 `;
 

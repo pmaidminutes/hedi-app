@@ -1,5 +1,5 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ILocalizedEntity, LocalizedEntityFields } from "@/common/model/cms";
+import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { routeToSegments } from "@/common/types";
 import { ArticleFields, IArticle } from "@/modules/editorial/types";
 
@@ -7,7 +7,7 @@ export async function getArticlePaths(lang = "de") {
   const query = gql`
     query getArticlePaths($lang: String) {
       articles(lang: $lang) { 
-        ${LocalizedEntityFields}
+        ${EntityLocalizedFields}
       }
     }
   `;
@@ -16,7 +16,7 @@ export async function getArticlePaths(lang = "de") {
   if (!client) return [];
 
   const articles = await client
-    .request<{ articles: ILocalizedEntity[] }>(query, { lang })
+    .request<{ articles: IEntityLocalized[] }>(query, { lang })
     .then(data => data.articles)
     .catch(e => {
       console.warn("error", e);
