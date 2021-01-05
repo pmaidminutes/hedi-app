@@ -1,11 +1,11 @@
 import { IsIHTTPError } from "@/common/errorHandling";
-import { IArticle, ICategory, IGlossaryTerm } from "@/modules/editorial/types";
+import { IHTTPError } from "@/common/types";
 import { getArticle } from "@/modules/editorial/article";
 import { getCategory } from "@/modules/editorial/category";
+import { getGlossaryTerm } from "@/modules/editorial/glossary";
+import { IArticle, ICategory, IGlossaryTerm } from "@/modules/editorial/types";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";
-import { IHTTPError } from "@/common/types";
-import { getGlossaryTerm } from "@/modules/editorial/glossary";
 
 const solrSearchHandler: NextApiHandler<
   IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]
@@ -42,7 +42,7 @@ const solrSearchHandler: NextApiHandler<
             })
           );
           break;
-        case "category":
+        case "categories":
           promises.push(
             getCategory("/" + path, lang).then(category => {
               if (category)

@@ -2,11 +2,11 @@ import { getServiceClient, gql } from "@/common/graphql";
 import { ILocalizedEntity, LocalizedEntityFields } from "@/common/model/cms";
 import { ISegmentPath, routeToSegments } from "@/common/types";
 import {
+  GlossaryFields,
   GlossaryTermFields,
-  IGroupedGlossary,
   IGlossary,
   IGlossaryTerm,
-  GlossaryFields,
+  IGroupedGlossary,
 } from "@/modules/editorial/types";
 
 export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {
@@ -71,7 +71,7 @@ function transformToGlossary(glossary: IGlossary): IGroupedGlossary {
 export async function getGlossaryTerm(route: string, lang = "de") {
   const query = gql`
     query getGlossaryTerm(
-      $routes: [String]!
+      $routes: [String!]!
       $lang: String
       $includeSelf: Boolean
     ) {

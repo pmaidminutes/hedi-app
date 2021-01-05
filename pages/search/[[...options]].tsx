@@ -98,7 +98,7 @@ export default function searchPage() {
                   return <ArticleEntry article={entry} />;
                 case "Category":
                   return <CategoryEntry category={entry} />;
-                case "GlossaryEntry":
+                case "GlossaryTerm":
                   return (
                     <GlossaryTerm
                       glossaryTerm={entry}
