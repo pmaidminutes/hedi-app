@@ -9,15 +9,13 @@ export function getSolrContentResult(
   const prefix = "tm_X3b_" + lang;
   const title = prefix + "_title";
   const body = prefix + "_body";
-  if (entity.ss_type == "glossary") {
-  }
   return {
     contentTitle: entity[title],
     contentId: entity.id,
     contentBody: entity[body],
     search_api_id: entity.ss_search_api_id,
     site: entity.site,
-    ss_type: entity.ss_type,
+    ss_type: entity.ss_type ? entity.ss_type : entity.ss_vid,
     highlightedContent: {
       contentId: entity.id,
       highlightedBody:
