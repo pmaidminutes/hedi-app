@@ -1,5 +1,5 @@
 import { ParsedUrlQuery } from "querystring";
-import { IEntityLocalized, ITranslatable } from "./model/cms";
+import { IEntityLocalized, IEntityTranslated } from "./model/cms";
 
 export interface ILanguageKey {
   lang: string;
@@ -22,7 +22,7 @@ export interface ISegmentPath {
 }
 
 export interface ISegmentProps {
-  content: ITranslatable<IEntityLocalized>;
+  content: IEntityTranslated<IEntityLocalized>;
   // HACK: change when colors implemented in drupal
   colorClass: string;
 }

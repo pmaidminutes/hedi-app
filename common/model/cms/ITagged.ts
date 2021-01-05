@@ -1,8 +1,8 @@
 import { gql } from "@/common/graphql";
-import { ITranslatable, TranslatableFields } from "./ITranslatable";
+import { IEntityTranslated, EntityTranslatedFields } from "./IEntityTranslated";
 
 // defined to be overwritten later
-export interface ITag extends ITranslatable<ITag> {}
+export interface ITag extends IEntityTranslated<ITag> {}
 
 export interface ITagged {
   tags: ITag[];
@@ -16,7 +16,7 @@ export function isITagged(obj: any): obj is ITagged {
 
 export const TaggedFields = `
   tags {
-    ${TranslatableFields}
+    ${EntityTranslatedFields}
   }
 `;
 

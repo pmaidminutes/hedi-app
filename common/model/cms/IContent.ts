@@ -2,17 +2,17 @@ import { gql } from "@/common/graphql";
 import { BodyFields, IBody, implementsIBody } from "./IBody";
 import { IEntityLocalized } from "./IEntityLocalized";
 import {
-  implementsITranslatable,
-  ITranslatable,
-  TranslatableFields,
-} from "./ITranslatable";
+  implementsIEntityTranslated,
+  IEntityTranslated,
+  EntityTranslatedFields,
+} from "./IEntityTranslated";
 
 export interface IContent<T extends IEntityLocalized>
-  extends ITranslatable<T>,
+  extends IEntityTranslated<T>,
     IBody {}
 
 export const implementsIContent = (obj: any) =>
-  implementsITranslatable(obj) && implementsIBody(obj);
+  implementsIEntityTranslated(obj) && implementsIBody(obj);
 
 export function isIContent<T extends IEntityLocalized>(
   obj: any
@@ -20,7 +20,7 @@ export function isIContent<T extends IEntityLocalized>(
   return implementsIContent(obj);
 }
 
-export const ContentFields = `${TranslatableFields}
+export const ContentFields = `${EntityTranslatedFields}
 ${BodyFields}`;
 
 export const ContentFrag = gql`
