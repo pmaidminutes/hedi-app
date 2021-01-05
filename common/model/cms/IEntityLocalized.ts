@@ -20,6 +20,6 @@ ${LocalizedFields}
 `;
 
 export const EntityLocalizedFrag = gql`
-fragment LocalizedEntityFrag on ILocalizedEntity {
+fragment EntityLocalizedFrag on IEntityLocalized {
   ${EntityLocalizedFields}
 }`;

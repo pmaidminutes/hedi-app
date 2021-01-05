@@ -26,7 +26,7 @@ export const EntityTranslatedFields = `
   }
 `;
 
-export const TranslatableFrag = gql`
-fragment TranslatableFrag on ITranslatable {
+export const EntityTranslatedFrag = gql`
+fragment EntityTranslatedFrag on IEntityTranslated {
   ${EntityTranslatedFields}
 }`;
