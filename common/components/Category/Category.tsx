@@ -1,15 +1,15 @@
 import Link from "next/link";
 // Types
 import { ICategory } from "@/modules/editorial/types";
-import { ITypename } from "@/common/model/cms";
+import { ITyped } from "@/common/model/cms";
 import { ArticleEntry, CategoryEntry } from "@/common/components";
 
 interface ICategoryProps {
   content: ICategory;
 }
 
-export const TryCategory = (content: ITypename) =>
-  content.typeName === "Category" || content.typeName === "CategoryRoot" ? (
+export const TryCategory = (content: ITyped) =>
+  content.type === "Category" || content.type === "CategoryRoot" ? (
     <Category content={content as ICategory} />
   ) : null;
 
