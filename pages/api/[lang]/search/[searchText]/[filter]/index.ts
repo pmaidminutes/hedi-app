@@ -1,12 +1,9 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import { IArticle } from "@/modules/editorial/article/types";
-// TODO change from
-import { IGlossaryTerm } from "../../../../../../modules/editorial/glossary/types";
-// TODO change from
-import { ICategory } from "../../../../../../modules/editorial/category/types";
+import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
+import { ICategory } from "@/modules/editorial/category/types";
 import { getArticle } from "@/modules/editorial/article/query";
-// TODO change from
-import { getCategory } from "../../../../../../modules/editorial/category/query";
+import { getCategory } from "@/modules/editorial/category/query";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";
 import { IHTTPError } from "@/common/types";

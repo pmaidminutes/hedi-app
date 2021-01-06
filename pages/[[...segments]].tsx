@@ -4,11 +4,10 @@ import { useRouter } from "next/router";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { ISegmentParam, ISegmentProps } from "@/common/types";
 // generators
-// TODO change from
 import {
   getStaticPaths as getCategoryPaths,
   getStaticProps as getCategoryProps,
-} from "../modules/editorial/category/server";
+} from "@/modules/editorial/category/server";
 import {
   getStaticPaths as getArticlePaths,
   getStaticProps as getArticleProps,
@@ -19,13 +18,12 @@ import {
 } from "@/modules/editorial/generators/glossary";
 // Components
 import { BreadCrumb, HediHeader } from "@/common/components";
-// TODO from
-import { TryGlossary } from "../modules/editorial/glossary/client/components";
-import { TryCategory } from "../modules/editorial/category/client/components";
+import { TryGlossary } from "@/modules/editorial/glossary/client/components";
+import { TryCategory } from "@/modules/editorial/category/client/components";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 // HACK: temporary
-// TODO change from
-import { getCategoryColorClass } from "../modules/editorial/category/query";
+
+import { getCategoryColorClass } from "@/modules/editorial/category/query";
 
 export const getStaticPaths: GetStaticPaths = async context => {
   const locales = context?.locales ?? [];

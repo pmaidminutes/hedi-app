@@ -1,6 +1,5 @@
 // Types
-// TODO change from
-import { ICategory } from "../../../types";
+import { ICategory } from "@/modules/editorial/category/types";
 import { ITyped } from "@/common/model/cms";
 import { CategoryEntry } from "../CategoryEntry";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
