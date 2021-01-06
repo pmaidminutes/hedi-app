@@ -1,5 +1,6 @@
 import { IGlossaryGroup } from "@/modules/editorial/types";
 import { GlossaryTerm } from "./GlossaryTerm";
+import { useState, useEffect } from "react";
 interface GlossaryGroupProps {
   glossaryGroup: IGlossaryGroup;
   translationLang?: string;
@@ -10,6 +11,13 @@ export const GlossaryGroup = ({
   translationLang,
   selectedTerm,
 }: GlossaryGroupProps) => {
+  const [updatedTerm, setUpdatedTerm] = useState("");
+  useEffect(() => {
+    setUpdatedTerm(
+      selectedTerm !== "" && selectedTerm !== undefined ? selectedTerm : ""
+    );
+  }, [selectedTerm]);
+
   return (
     <>
       <div className="bx--row bx--row-padding px-s-md">
@@ -23,9 +31,7 @@ export const GlossaryGroup = ({
             <GlossaryTerm
               glossaryTerm={term}
               translationLang={translationLang}
-              selected={
-                selectedTerm !== undefined && term.route.endsWith(selectedTerm)
-              }
+              selected={term.route.endsWith(updatedTerm, term.route.length)}
             />
           </div>
         ))}
