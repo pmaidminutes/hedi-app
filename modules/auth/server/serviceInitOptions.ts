@@ -1,5 +1,5 @@
 import { InitOptions, User } from "next-auth";
-import { IUserAuth } from "./flow";
+import { IUserAuth } from "../flow";
 import { credentialProvider } from "./providers";
 
 export function getOptions(debug?: boolean): InitOptions {

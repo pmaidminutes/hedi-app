@@ -1,6 +1,6 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import Providers from "next-auth/providers";
-import { authorizeWithCredentials } from "../flow";
+import { authorizeWithCredentials } from "../../flow";
 
 interface ICredentials {
   csrfToken: string;
@@ -8,8 +8,6 @@ interface ICredentials {
   password: string;
 }
 
-// TODO: [auth] login view component
-// TODO: [auth] login as modal/subcomponent
 // TODO: [auth] login language specific
 
 export const credentialProvider = Providers.Credentials({
