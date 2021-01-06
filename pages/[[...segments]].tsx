@@ -20,10 +20,10 @@ import {
 import {
   BreadCrumb,
   HediHeader,
-  TryArticle,
   TryCategory,
   TryGlossary,
 } from "@/common/components";
+import { TryArticle } from "../modules/editorial/article/index";
 // HACK: temporary
 import { getCategoryColorClass } from "@/modules/editorial/category";
 

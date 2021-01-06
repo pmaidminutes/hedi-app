@@ -1,5 +1,5 @@
 export * from "./LanguageSwitch";
-export * from "./Article";
+export * from "../../modules/editorial/article/client/components/Article";
 export * from "./Category";
 export * from "./Glossary";
 export { ResultContent, ResultUser, AutoSuggest, SearchInput } from "./Search";

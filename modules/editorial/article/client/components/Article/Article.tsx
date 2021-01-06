@@ -2,9 +2,9 @@
 import { ITyped } from "@/common/model/cms";
 import { HTMLWithNextImage } from "@/common/html";
 import { TagList } from "@/hedi-components/TagList";
-import { IArticle } from "@/modules/editorial/types";
+import { IArticle } from "@/modules/editorial/article/types";
 import { AudioPlayer } from "@components";
-import { buildAssetUrl } from "../../utils";
+import { buildAssetUrl } from "../../../../../../common/utils";
 
 interface IArticleProps {
   content: IArticle;

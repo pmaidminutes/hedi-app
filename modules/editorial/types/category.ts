@@ -5,7 +5,7 @@ import {
   EntityLocalizedFields,
   EntityTranslatedFields,
 } from "@/common/model/cms";
-import { ArticleEntryFields, IArticleEntry } from "./article";
+import { ArticleEntryFields, IArticleEntry } from "../article/types/article";
 import { ImageFields, IImage } from "./image";
 
 export interface ICategoryEntry extends IEntityLocalized {
