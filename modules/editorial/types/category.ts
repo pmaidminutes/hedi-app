@@ -1,22 +1,18 @@
 import { gql } from "@/common/graphql";
 import {
-  EntityFields,
-  IEntity,
-  ITranslatable,
-  ILocalized,
-  LocalizedFields,
-  ILocalizedEntity,
-  LocalizedEntityFields,
-  TranslatableFields,
+  IEntityTranslated,
+  IEntityLocalized,
+  EntityLocalizedFields,
+  EntityTranslatedFields,
 } from "@/common/model/cms";
 import { ArticleEntryFields, IArticleEntry } from "./article";
 import { ImageFields, IImage } from "./image";
 
-export interface ICategoryEntry extends ILocalizedEntity {
+export interface ICategoryEntry extends IEntityLocalized {
   image?: IImage;
 }
 
-export const CategoryEntryFields = `${LocalizedEntityFields}
+export const CategoryEntryFields = `${EntityLocalizedFields}
 image { ${ImageFields} }`;
 
 export const CategoryEntryFrag = gql`
@@ -25,11 +21,11 @@ fragment CategoryEntryFrag on Category {
 }
 `;
 
-export interface ICategoryRoot extends ITranslatable<ILocalizedEntity> {
+export interface ICategoryRoot extends IEntityTranslated<IEntityLocalized> {
   categories: ICategoryEntry[];
 }
 
-export const CategoryRootFields = `${TranslatableFields}
+export const CategoryRootFields = `${EntityTranslatedFields}
 categories { ${CategoryEntryFields} }`;
 
 export interface ICategory extends ICategoryEntry, ICategoryRoot {

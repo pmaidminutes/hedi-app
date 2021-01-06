@@ -1,5 +1,5 @@
 import { LanguageSwitch } from "@/common/components";
-import { ILocalizedEntity } from "@/common/model/cms";
+import { IEntityLocalized } from "@/common/model/cms";
 
 import { Logo } from "@components";
 import { LogInOut } from "@components";
@@ -10,7 +10,7 @@ import { SearchInput } from "../Search";
 
 export interface HeaderProps {
   pageTitle: string;
-  translations: ILocalizedEntity[];
+  translations: IEntityLocalized[];
   // TODO: remove when integrated in drupal
   colorClass?: string;
 }

@@ -1,5 +1,5 @@
 import { getServiceClient, gql } from "@/common/graphql";
-import { ILocalizedEntity, LocalizedEntityFields } from "@/common/model/cms";
+import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { routeToSegments } from "@/common/types";
 import {
   ICategory,
@@ -12,7 +12,7 @@ export async function getCategoryPaths(lang = "de") {
   const query = gql`
     query getCategoryPaths($lang: String) {
       categories(lang: $lang) {
-        ${LocalizedEntityFields}
+        ${EntityLocalizedFields}
       }
     }
   `;
@@ -21,7 +21,7 @@ export async function getCategoryPaths(lang = "de") {
   if (!client) return [];
 
   const categories = await client
-    .request<{ categories: ILocalizedEntity[] }>(query, { lang })
+    .request<{ categories: IEntityLocalized[] }>(query, { lang })
     .then(data => data.categories)
     .catch(e => {
       console.warn("error", e);

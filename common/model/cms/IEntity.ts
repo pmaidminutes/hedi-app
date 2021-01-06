@@ -1,19 +1,19 @@
 import { gql } from "@/common/graphql";
-import { implementsITypename, ITypename, TypenameFields } from "./ITypename";
+import { implementsITyped, ITyped, TypedFields } from "./ITyped";
 
-export interface IEntity extends ITypename {
+export interface IEntity extends ITyped {
   route: string;
   label: string;
 }
 
 export const implementsIEntity = (obj: any) =>
-  !!(implementsITypename(obj) && obj.id && obj.label);
+  !!(implementsITyped(obj) && obj.id && obj.label);
 
 export function isIEntity(obj: any): obj is IEntity {
   return implementsIEntity(obj);
 }
 
-export const EntityFields = `${TypenameFields}
+export const EntityFields = `${TypedFields}
 route
 label`;
 

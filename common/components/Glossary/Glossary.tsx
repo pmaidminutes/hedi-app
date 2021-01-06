@@ -1,4 +1,4 @@
-import { ITypename } from "@/common/model/cms";
+import { ITyped } from "@/common/model/cms";
 import { AssertClientSide } from "@/common/utils";
 import { IGroupedGlossary } from "@/modules/editorial/types";
 import { useRouter } from "next/router";
@@ -8,8 +8,8 @@ interface IGlossaryProps {
   content: IGroupedGlossary;
 }
 
-export const TryGlossary = (content: ITypename) =>
-  content.typeName === "Glossary" ? (
+export const TryGlossary = (content: ITyped) =>
+  content.type === "Glossary" ? (
     <Glossary content={content as IGroupedGlossary} />
   ) : null;
 

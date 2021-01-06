@@ -1,5 +1,5 @@
 // Types
-import { ITypename } from "@/common/model/cms";
+import { ITyped } from "@/common/model/cms";
 import { HTMLWithNextImage } from "@/common/html";
 import { TagList } from "@/hedi-components/TagList";
 import { IArticle } from "@/modules/editorial/types";
@@ -10,10 +10,8 @@ interface IArticleProps {
   content: IArticle;
 }
 
-export const TryArticle = (content: ITypename) =>
-  content.typeName === "Article" ? (
-    <Article content={content as IArticle} />
-  ) : null;
+export const TryArticle = (content: ITyped) =>
+  content.type === "Article" ? <Article content={content as IArticle} /> : null;
 
 export const Article = ({ content }: IArticleProps) => {
   const { label, body, category, audio, tags } = content;

@@ -4,16 +4,16 @@ import {
   EntityFields,
   IEditorial,
   IEntity,
-  ILocalizedEntity,
+  IEntityLocalized,
   ISummary,
-  LocalizedEntityFields,
+  EntityLocalizedFields,
   SummaryFields,
 } from "@/common/model/cms";
 import { AudioFields, IAudio } from "./audio";
 import { IImage, ImageFields } from "./image";
-export interface IArticleEntry extends ILocalizedEntity, ISummary {}
+export interface IArticleEntry extends IEntityLocalized, ISummary {}
 
-export const ArticleEntryFields = `${LocalizedEntityFields}
+export const ArticleEntryFields = `${EntityLocalizedFields}
 ${SummaryFields}`;
 
 export const ArticleEntryFrag = gql`
@@ -22,7 +22,7 @@ fragment ArticleEntryFrag on Article {
 }
 `;
 
-export interface IArticle extends IArticleEntry, IEditorial<ILocalizedEntity> {
+export interface IArticle extends IArticleEntry, IEditorial<IEntityLocalized> {
   image: IImage;
   audio: IAudio;
   category: IEntity;
