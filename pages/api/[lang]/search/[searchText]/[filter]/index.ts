@@ -1,6 +1,7 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import { IArticle } from "@/modules/editorial/article/types";
-import { IGlossaryTerm } from "@/modules/editorial/types";
+// TODO change from
+import { IGlossaryTerm } from "../../../../../../modules/editorial/glossary/types";
 // TODO change from
 import { ICategory } from "../../../../../../modules/editorial/category/types";
 import { getArticle } from "@/modules/editorial/article/query";
