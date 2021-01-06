@@ -5,13 +5,13 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { ISegmentParam, ISegmentProps } from "@/common/types";
 // generators
 import {
-  getStaticPaths as getArticlePaths,
-  getStaticProps as getArticleProps,
-} from "@/modules/editorial/generators/article";
-import {
   getStaticPaths as getCategoryPaths,
   getStaticProps as getCategoryProps,
 } from "@/modules/editorial/generators/category";
+import {
+  getStaticPaths as getArticlePaths,
+  getStaticProps as getArticleProps,
+} from "../modules/editorial/article/server/generators";
 import {
   getStaticPaths as getGlossaryPaths,
   getStaticProps as getGlossaryProps,
