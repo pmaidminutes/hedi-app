@@ -11,7 +11,7 @@ export async function suggestServer(
   };
 
   const reqBody = JSON.stringify({ params });
-  console.log(reqBody + " suggestions");
+  //console.log(reqBody + " suggestions");
   const response = await fetch(process.env.SOLR_URL + "/autocomplete", {
     method: "post",
     body: reqBody,
