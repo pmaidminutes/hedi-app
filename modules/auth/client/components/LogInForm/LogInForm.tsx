@@ -1,5 +1,5 @@
 import { FormEvent } from "react";
-import { login } from "@/modules/auth/client";
+import { login } from "../../functions";
 import { useTextInput } from "@/common/hooks";
 import { Form } from "carbon-components-react";
 

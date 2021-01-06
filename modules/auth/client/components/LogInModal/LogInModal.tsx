@@ -1,6 +1,6 @@
 import { useRef } from "react";
 import { useOnClickOutside } from "@/common/hooks";
-import { LogInForm } from ".";
+import { LogInForm } from "../LogInForm";
 
 export const LogInModal = ({
   open,

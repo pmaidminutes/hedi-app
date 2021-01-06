@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { LogInModal } from "./LogInModal";
+import { LogInModal } from "../LogInModal";
 import ReactDOM from "react-dom";
 
 export const LogIn = () => {

@@ -1,6 +1,6 @@
-import { getUser } from "@/modules/auth/client";
+import { getUser } from "../../functions";
 import { Loading } from "carbon-components-react";
-import { LogIn, LogOut } from "./";
+import { LogIn, LogOut } from "..";
 
 export const LogInOut = () => {
   const [user, loading] = getUser();

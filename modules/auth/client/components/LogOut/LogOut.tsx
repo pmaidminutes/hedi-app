@@ -1,4 +1,4 @@
-import { logout } from "@/modules/auth/client";
+import { logout } from "../../functions";
 import { FormGroup } from "carbon-components-react";
 
 export const LogOut = ({ label }: { label: string }) => (
