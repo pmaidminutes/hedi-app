@@ -7,7 +7,7 @@ import { getCategory } from "@/modules/editorial/category/query";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";
 import { IHTTPError } from "@/common/types";
-import { getGlossaryTerm } from "@/modules/editorial/glossary";
+import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 
 const solrSearchHandler: NextApiHandler<
   IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]

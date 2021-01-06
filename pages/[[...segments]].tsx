@@ -15,7 +15,7 @@ import {
 import {
   getStaticPaths as getGlossaryPaths,
   getStaticProps as getGlossaryProps,
-} from "@/modules/editorial/generators/glossary";
+} from "@/modules/editorial/glossary/server";
 // Components
 import { BreadCrumb, HediHeader } from "@/common/components";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
