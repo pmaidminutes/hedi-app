@@ -5,5 +5,4 @@ export {
   getUserAuthHeader,
   withAuth,
 } from "./api";
-export type { IAuth, IUserAuth } from "../flow";
-export type { IAuthHeader } from "../utils";
+export type { IAuthHeader, IUserAuth } from "../types";

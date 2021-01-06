@@ -1,6 +1,6 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import Providers from "next-auth/providers";
-import { authorizeWithCredentials } from "../../flow";
+import { authorizeWithCredentials } from "../../query";
 
 interface ICredentials {
   csrfToken: string;

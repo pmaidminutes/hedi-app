@@ -3,8 +3,9 @@ import { NextApiResponse, NextApiRequest } from "next";
 import NextAuth from "next-auth";
 import { getToken } from "next-auth/jwt";
 import { getOptions } from "./serviceInitOptions";
-import { authorizeService, IAuth, IUserAuth } from "../flow";
-import { authHeader, IAuthHeader } from "../utils";
+import { authorizeService } from "../query";
+import { toAuthHeader } from "./utils";
+import { IAuth, IAuthHeader, IUserAuth } from "../types";
 
 export const withAuth = async (
   req: NextApiRequest,
@@ -23,7 +24,7 @@ export const getUserAuthHeader = async (
   req: NextApiRequest
 ): Promise<IAuthHeader | {}> => {
   const auth = await getUserAuth(req);
-  return auth ? authHeader(auth) : {};
+  return auth ? toAuthHeader(auth) : {};
 };
 
 export const getServiceAuth = async (username: string, password: string) => {
@@ -32,5 +33,5 @@ export const getServiceAuth = async (username: string, password: string) => {
 };
 
 export const getAuthHeader = (auth: IAuth) => {
-  return authHeader(auth);
+  return toAuthHeader(auth);
 };

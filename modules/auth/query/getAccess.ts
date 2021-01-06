@@ -1,6 +1,6 @@
-import { expiryObject } from "../utils";
-import { requestToken } from "../requests";
-import { IAuth } from "./types";
+import { expiryObject } from "./utils";
+import { requestToken } from "./requests";
+import { IAuth } from "../types";
 import { IsIHTTPError } from "@/common/errorHandling";
 
 export async function getAccess(

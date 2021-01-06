@@ -1,5 +1,5 @@
 import { IUserInfoResponse } from "./types";
-import { authHeader } from "../utils";
+import { toAuthHeader } from "../../server/utils";
 import { IHTTPError } from "@/common/types";
 
 export async function requestUserInfo(accessToken: string, csrfToken: string) {
@@ -7,7 +7,7 @@ export async function requestUserInfo(accessToken: string, csrfToken: string) {
     process.env.NEXTAUTH_CMS_URL + "/oauth2/UserInfo",
     {
       method: "GET",
-      headers: authHeader({ accessToken, csrfToken }),
+      headers: toAuthHeader({ accessToken, csrfToken }),
     }
   );
   if (response.status === 200)

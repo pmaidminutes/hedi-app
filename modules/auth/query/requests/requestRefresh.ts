@@ -1,6 +1,6 @@
 import * as querystring from "querystring";
 import { ITokenResponse } from "./types";
-import { csrfObject } from "../utils";
+import { toCSRFObject } from "../../server/utils";
 
 export async function requestRefresh(refreshToken: string, csrfToken: string) {
   const body = {
@@ -14,7 +14,7 @@ export async function requestRefresh(refreshToken: string, csrfToken: string) {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      ...csrfObject(csrfToken),
+      ...toCSRFObject(csrfToken),
     },
     body: querystring.stringify(body),
   }).then(res => res.json() as Promise<ITokenResponse>);

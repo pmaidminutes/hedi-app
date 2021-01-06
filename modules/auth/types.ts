@@ -11,3 +11,8 @@ export interface IUserAuth extends IAuth {
   id: string;
   email: string;
 }
+
+export interface IAuthHeader extends Record<string, string> {
+  Authorization: string;
+  "X-CSRF-Token": string;
+}

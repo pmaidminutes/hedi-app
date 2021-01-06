@@ -1,6 +1,6 @@
 import * as querystring from "querystring";
 import { ITokenResponse } from "./types";
-import { csrfObject } from "../utils";
+import { toCSRFObject } from "../../server/utils";
 import { IHTTPError } from "@/common/types";
 
 export async function requestToken(
@@ -21,7 +21,7 @@ export async function requestToken(
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
-      ...csrfObject(csrfToken),
+      ...toCSRFObject(csrfToken),
     },
     body: querystring.stringify(body),
   });
