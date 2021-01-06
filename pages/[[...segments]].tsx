@@ -17,12 +17,9 @@ import {
   getStaticProps as getGlossaryProps,
 } from "@/modules/editorial/generators/glossary";
 // Components
-import {
-  BreadCrumb,
-  HediHeader,
-  TryCategory,
-  TryGlossary,
-} from "@/common/components";
+import { BreadCrumb, HediHeader, TryGlossary } from "@/common/components";
+// TODO from
+import { TryCategory } from "../modules/editorial/category/client/components";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 // HACK: temporary
 import { getCategoryColorClass } from "@/modules/editorial/category";

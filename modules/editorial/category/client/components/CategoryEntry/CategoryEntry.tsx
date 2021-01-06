@@ -1,8 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 // TODO change from
-import { ICategoryEntry } from "../../../modules/editorial/category/types";
-import { buildAssetUrl } from "../../utils";
+import { ICategoryEntry } from "../../../types";
+import { buildAssetUrl } from "@/common/utils";
 
 export const CategoryEntry = ({ category }: { category: ICategoryEntry }) => (
   <Link href={category.route} passHref>
