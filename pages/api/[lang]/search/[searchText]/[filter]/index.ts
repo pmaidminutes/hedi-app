@@ -4,7 +4,8 @@ import { IGlossaryTerm } from "@/modules/editorial/types";
 // TODO change from
 import { ICategory } from "../../../../../../modules/editorial/category/types";
 import { getArticle } from "@/modules/editorial/article/query";
-import { getCategory } from "@/modules/editorial/category";
+// TODO change from
+import { getCategory } from "../../../../../../modules/editorial/category/query";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";
 import { IHTTPError } from "@/common/types";

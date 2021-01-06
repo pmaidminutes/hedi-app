@@ -7,7 +7,7 @@ import {
   CategoryFields,
   ICategoryRoot,
   CategoryRootFields,
-} from "../editorial/category/types";
+} from "../types";
 
 export async function getCategoryPaths(lang = "de") {
   const query = gql`

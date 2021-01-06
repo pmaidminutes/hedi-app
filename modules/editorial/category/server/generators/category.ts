@@ -1,10 +1,6 @@
 // Modules
 import { segmentsToRoute } from "@/common/types";
-import {
-  getCategory,
-  getCategoryPaths,
-  getCategoryRoot,
-} from "@/modules/editorial/category";
+import { getCategory, getCategoryPaths, getCategoryRoot } from "../../query";
 
 export const getStaticPaths = async (locales: string[]) => {
   const paths = [];
