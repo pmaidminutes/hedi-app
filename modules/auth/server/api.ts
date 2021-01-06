@@ -5,7 +5,7 @@ import { getToken } from "next-auth/jwt";
 import { getOptions } from "./serviceInitOptions";
 import { authorizeService } from "../query";
 import { toAuthHeader } from "./utils";
-import { IAuth, IAuthHeader, IUserAuth } from "../types";
+import { IAuthHeader, IUserAuth } from "../types";
 
 export const withAuth = async (
   req: NextApiRequest,
@@ -30,8 +30,4 @@ export const getUserAuthHeader = async (
 export const getServiceAuth = async (username: string, password: string) => {
   const auth = await authorizeService(username, password);
   return IsIHTTPError(auth) ? null : auth;
-};
-
-export const getAuthHeader = (auth: IAuth) => {
-  return toAuthHeader(auth);
 };

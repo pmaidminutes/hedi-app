@@ -1,6 +1,6 @@
 import { GraphQLClient } from "graphql-request";
 import {
-  getAuthHeader,
+  toAuthHeader,
   getServiceAuth,
   IAuthHeader,
 } from "@/modules/auth/server";
@@ -26,7 +26,7 @@ export async function getServiceClient(endpoint = GQLEndpoint.Public) {
     process.env.SERVICE_USER,
     process.env.SERVICE_SECRET
   );
-  if (headers) return getClient(endpoint, getAuthHeader(headers));
+  if (headers) return getClient(endpoint, toAuthHeader(headers));
 
   throw new Error("[API SERVICE]: service could not log in");
 }
