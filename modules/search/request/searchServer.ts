@@ -15,7 +15,6 @@ export async function searchServer(
     filter,
     getHighlighted
   );
-  console.log("solrParams" + reqBody);
   const response = await fetch(process.env.SOLR_URL + "/select", {
     method: "post",
     body: reqBody,

@@ -31,10 +31,11 @@ const solrSearchHandler: NextApiHandler<
         ? highlight.highlightedBody.join("...")
         : highlight.highlightedBody;
       const [_, path, lang] = entry.search_api_id.split(":");
+      const route = "/" + path.replace("taxonomy_term", "taxonomy/term");
       switch (entry.ss_type) {
         case "article":
           promises.push(
-            getArticle("/" + path, lang).then(article => {
+            getArticle(route, lang).then(article => {
               if (article) {
                 article.label = highlight.highlightedTitle ?? article.label;
                 article.summary = highlightedBody;
@@ -45,26 +46,22 @@ const solrSearchHandler: NextApiHandler<
           break;
         case "categories":
           promises.push(
-            getCategory("/" + path.replace(underscore, "/"), lang).then(
-              category => {
-                if (category)
-                  category.label = highlight.highlightedTitle ?? category.label;
-                return category;
-              }
-            )
+            getCategory(route, lang).then(category => {
+              if (category)
+                category.label = highlight.highlightedTitle ?? category.label;
+              return category;
+            })
           );
           break;
         case "glossaryterm":
           promises.push(
-            getGlossaryTerm("/" + path.replace(underscore, "/"), lang).then(
-              glossary => {
-                if (glossary) {
-                  glossary.label = highlight.highlightedTitle ?? glossary.label;
-                  glossary.body = highlightedBody ?? glossary.body;
-                }
-                return glossary;
+            getGlossaryTerm(route, lang).then(glossary => {
+              if (glossary) {
+                glossary.label = highlight.highlightedTitle ?? glossary.label;
+                glossary.body = highlightedBody ?? glossary.body;
               }
-            )
+              return glossary;
+            })
           );
           break;
       }
