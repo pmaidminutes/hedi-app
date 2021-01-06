@@ -1,6 +1,7 @@
 import { IHTTPError } from "@/common/types";
 import { jsonFetcher } from "@/common/utils";
-import { IArticle, ICategory } from "@/modules/editorial/types";
+import { IArticle } from "@/modules/editorial/article/types";
+import { ICategory } from "@/modules/editorial/types";
 import useSWR from "swr";
 
 export function useSearch(
