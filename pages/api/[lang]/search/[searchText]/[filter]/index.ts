@@ -1,7 +1,7 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import { IArticle } from "@/modules/editorial/article/types";
 import { ICategory, IGlossaryTerm } from "@/modules/editorial/types";
-import { getArticle } from "@/modules/editorial/article";
+import { getArticle } from "@/modules/editorial/article/query";
 import { getCategory } from "@/modules/editorial/category";
 import { searchServer } from "@/modules/search/request/searchServer";
 import { NextApiHandler } from "next";

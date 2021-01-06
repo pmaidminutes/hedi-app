@@ -11,7 +11,7 @@ import {
 import {
   getStaticPaths as getArticlePaths,
   getStaticProps as getArticleProps,
-} from "../modules/editorial/article/server/generators/article";
+} from "@/modules/editorial/article/server";
 import {
   getStaticPaths as getGlossaryPaths,
   getStaticProps as getGlossaryProps,
@@ -23,7 +23,7 @@ import {
   TryCategory,
   TryGlossary,
 } from "@/common/components";
-import { TryArticle } from "../modules/editorial/article/client/components";
+import { TryArticle } from "@/modules/editorial/article/client/components";
 // HACK: temporary
 import { getCategoryColorClass } from "@/modules/editorial/category";
 
