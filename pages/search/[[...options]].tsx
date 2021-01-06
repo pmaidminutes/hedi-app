@@ -65,8 +65,6 @@ export default function searchPage() {
           />
         </div>
 
-        <h2>Filters</h2>
-
         <button className="bx--btn bx--btn--primary" type="button">
           articles
         </button>
@@ -77,7 +75,7 @@ export default function searchPage() {
           categories
         </button>
         <div className="hedi-separator"></div>
-
+        <h2>Search results</h2>
         <div className="bx--tile-container">
           {/* iterate article component */}
         </div>
