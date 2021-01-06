@@ -2,7 +2,8 @@ import Link from "next/link";
 // Types
 import { ICategory } from "@/modules/editorial/types";
 import { ITyped } from "@/common/model/cms";
-import { ArticleEntry, CategoryEntry } from "@/common/components";
+import { CategoryEntry } from "@/common/components";
+import { ArticleEntry } from "@/modules/editorial/article/client/components";
 
 interface ICategoryProps {
   content: ICategory;

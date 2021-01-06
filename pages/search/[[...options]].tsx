@@ -5,12 +5,12 @@
  */
 
 import {
-  ArticleEntry,
   BreadCrumb,
   CategoryEntry,
   GlossaryTerm,
   HediHeader,
 } from "@/common/components";
+import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { SearchInput } from "@/common/components/Search";
 import { IsIHTTPError } from "@/common/errorHandling";
 import { useSearch } from "@/modules/search/hooks";

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { HTML } from "@/common/html";
-import { IArticleEntry } from "@/modules/editorial/article/types";
+import { IArticleEntry } from "@/modules/editorial/article/types/article";
 
 export const ArticleEntry = ({ article }: { article: IArticleEntry }) => (
   <Link href={article.route} passHref>

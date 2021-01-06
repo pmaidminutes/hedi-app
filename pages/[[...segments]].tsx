@@ -11,7 +11,7 @@ import {
 import {
   getStaticPaths as getArticlePaths,
   getStaticProps as getArticleProps,
-} from "../modules/editorial/article/server/generators";
+} from "../modules/editorial/article/server/generators/article";
 import {
   getStaticPaths as getGlossaryPaths,
   getStaticProps as getGlossaryProps,
@@ -23,7 +23,7 @@ import {
   TryCategory,
   TryGlossary,
 } from "@/common/components";
-import { TryArticle } from "../modules/editorial/article/index";
+import { TryArticle } from "../modules/editorial/article/client/components";
 // HACK: temporary
 import { getCategoryColorClass } from "@/modules/editorial/category";
 
@@ -77,13 +77,10 @@ export default function segments(props: ISegmentProps) {
         colorClass={colorClass}
       />
       <BreadCrumb />
-
-      {/* <Content> */}
       <main>
         <TryCategory {...content} />
         <TryArticle {...content} />
         <TryGlossary {...content} />
-        {/* </Content> */}
       </main>
     </div>
   );
