@@ -1,5 +1,5 @@
-import { IUserInfoResponse } from "./types";
-import { toAuthHeader } from "../../server/utils";
+import { IUserInfoResponse } from "../../types";
+import { toAuthHeader } from "../utils";
 import { IHTTPError } from "@/common/types";
 
 export async function requestUserInfo(accessToken: string, csrfToken: string) {

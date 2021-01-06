@@ -1,4 +1,4 @@
-import { IUserInfoResponse } from "../../query";
+import { IUserInfoResponse } from "../../types";
 
 export const authCodeProvider = {
   id: "hediauthcode",

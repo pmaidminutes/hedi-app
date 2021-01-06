@@ -5,9 +5,3 @@ export interface ITokenResponse {
   refresh_token: string;
   scope?: string;
 }
-
-export interface IUserInfoResponse {
-  sub: number;
-  name: string;
-  email: string;
-}

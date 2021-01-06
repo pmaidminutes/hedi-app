@@ -1,6 +1,6 @@
-import { expiryObject, oauthNow } from "./utils";
-import { requestRefresh } from "./requests";
-import { IAuth } from "../types";
+import { expiryObject, oauthNow } from "../utils";
+import { requestRefresh } from "../requests";
+import { IAuth } from "../../types";
 
 export async function tryRefresh<T extends IAuth>(auth: T) {
   if (oauthNow() < auth.exp - 30) return auth;

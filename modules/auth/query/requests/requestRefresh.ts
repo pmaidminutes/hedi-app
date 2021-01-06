@@ -1,6 +1,6 @@
 import * as querystring from "querystring";
 import { ITokenResponse } from "./types";
-import { toCSRFObject } from "../../server/utils";
+import { toCSRFObject } from "../utils";
 
 export async function requestRefresh(refreshToken: string, csrfToken: string) {
   const body = {
