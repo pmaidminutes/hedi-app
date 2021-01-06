@@ -9,7 +9,7 @@ import {
   ArticleEntryFields,
   IArticleEntry,
 } from "@/modules/editorial/article/types";
-import { ImageFields, IImage } from "./image";
+import { ImageFields, IImage } from "@/modules/editorial/types";
 
 export interface ICategoryEntry extends IEntityLocalized {
   image?: IImage;

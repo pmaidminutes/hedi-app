@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ICategoryEntry } from "@/modules/editorial/types";
+// TODO change from
+import { ICategoryEntry } from "../../../modules/editorial/category/types";
 import { buildAssetUrl } from "../../utils";
 
 export const CategoryEntry = ({ category }: { category: ICategoryEntry }) => (

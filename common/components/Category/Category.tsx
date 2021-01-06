@@ -1,6 +1,7 @@
 import Link from "next/link";
 // Types
-import { ICategory } from "@/modules/editorial/types";
+// TODO change from
+import { ICategory } from "../../../modules/editorial/category/types";
 import { ITyped } from "@/common/model/cms";
 import { CategoryEntry } from "@/common/components";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";

@@ -1,12 +1,13 @@
 import { getServiceClient, gql } from "@/common/graphql";
 import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { routeToSegments } from "@/common/types";
+// TODO: change from
 import {
   ICategory,
   CategoryFields,
   ICategoryRoot,
   CategoryRootFields,
-} from "@/modules/editorial/types";
+} from "../editorial/category/types";
 
 export async function getCategoryPaths(lang = "de") {
   const query = gql`
