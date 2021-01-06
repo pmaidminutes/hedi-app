@@ -11,11 +11,9 @@ export const GlossaryGroup = ({
   translationLang,
   selectedTerm,
 }: GlossaryGroupProps) => {
-  const [updatedTerm, setUpdatedTerm] = useState("");
+  const [termUpdated, setTermUpdated] = useState("");
   useEffect(() => {
-    setUpdatedTerm(
-      selectedTerm !== "" && selectedTerm !== undefined ? selectedTerm : ""
-    );
+    setTermUpdated(selectedTerm ?? "");
   }, [selectedTerm]);
 
   return (
@@ -31,7 +29,7 @@ export const GlossaryGroup = ({
             <GlossaryTerm
               glossaryTerm={term}
               translationLang={translationLang}
-              selected={term.route.endsWith(updatedTerm, term.route.length)}
+              selected={term.route.endsWith(termUpdated, term.route.length)}
             />
           </div>
         ))}
