@@ -26,7 +26,7 @@ const solrSearchHandler: NextApiHandler<
     const promises = [];
     for (const entry of data) {
       const highlight = entry.highlightedContent;
-      let underscore = /\_/g;
+      let underscore = /\_/;
       const highlightedBody = Array.isArray(highlight.highlightedBody)
         ? highlight.highlightedBody.join("...")
         : highlight.highlightedBody;
@@ -47,7 +47,6 @@ const solrSearchHandler: NextApiHandler<
           promises.push(
             getCategory("/" + path.replace(underscore, "/"), lang).then(
               category => {
-                console.log("/" + path.replace(underscore, "/"), "path");
                 if (category)
                   category.label = highlight.highlightedTitle ?? category.label;
                 return category;
