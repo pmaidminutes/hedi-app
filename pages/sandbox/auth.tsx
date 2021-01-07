@@ -1,7 +1,7 @@
 import Head from "next/head";
 import useSWR from "swr";
 import { signIn, signOut } from "next-auth/client";
-import { getUser } from "../../modules/auth/client";
+import { getUser } from "@/modules/auth/client";
 import { Content, Tile, Button } from "carbon-components-react";
 
 export default function AuthSandbox() {
