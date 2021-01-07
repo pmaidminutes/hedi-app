@@ -42,14 +42,14 @@ export async function getGlossary(route: string, lang = "de") {
   const client = await getServiceClient();
   return client
     .request<{ glossary: IGlossary }>(query, { route, lang })
-    .then(data => transformToGlossary(data.glossary))
+    .then(data => glossaryToGroupedGlossary(data.glossary))
     .catch(e => {
       console.warn(e);
       return null;
     });
 }
 
-function transformToGlossary(glossary: IGlossary): IGroupedGlossary {
+function glossaryToGroupedGlossary(glossary: IGlossary): IGroupedGlossary {
   const groupedEntries = glossary.terms.reduce(function (
     glossaryArray: { [key: string]: IGlossaryTerm[] },
     term: IGlossaryTerm
