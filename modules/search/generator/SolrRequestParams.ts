@@ -6,7 +6,7 @@ export function getSolrRequestParams(
 ) {
   const languageFilter = `) `;
   const solarFields =
-    "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type,its_nid";
+    "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type, ss_vid,its_nid";
   const highlightParams = {
     wt: "json",
     fl: solarFields,

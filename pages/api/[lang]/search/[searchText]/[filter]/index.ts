@@ -28,14 +28,16 @@ const solrSearchHandler: NextApiHandler<
     const promises = [];
     for (const entry of data) {
       const highlight = entry.highlightedContent;
+      let underscore = /\_/;
       const highlightedBody = Array.isArray(highlight.highlightedBody)
         ? highlight.highlightedBody.join("...")
         : highlight.highlightedBody;
       const [_, path, lang] = entry.search_api_id.split(":");
+      const route = "/" + path.replace("taxonomy_term", "taxonomy/term");
       switch (entry.ss_type) {
         case "article":
           promises.push(
-            getArticle("/" + path, lang).then(article => {
+            getArticle(route, lang).then(article => {
               if (article) {
                 article.label = highlight.highlightedTitle ?? article.label;
                 article.summary = highlightedBody;
@@ -44,9 +46,9 @@ const solrSearchHandler: NextApiHandler<
             })
           );
           break;
-        case "category":
+        case "categories":
           promises.push(
-            getCategory("/" + path, lang).then(category => {
+            getCategory(route, lang).then(category => {
               if (category)
                 category.label = highlight.highlightedTitle ?? category.label;
               return category;
@@ -55,7 +57,7 @@ const solrSearchHandler: NextApiHandler<
           break;
         case "glossaryterm":
           promises.push(
-            getGlossaryTerm("/" + path, lang).then(glossary => {
+            getGlossaryTerm(route, lang).then(glossary => {
               if (glossary) {
                 glossary.label = highlight.highlightedTitle ?? glossary.label;
                 glossary.body = highlightedBody ?? glossary.body;
