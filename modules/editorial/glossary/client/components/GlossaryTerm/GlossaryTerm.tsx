@@ -3,7 +3,7 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from "carbon-components-react";
-import { HTML } from "@/common/html";
+import { HTMLWithNextImage } from "@/common/html";
 import { IGlossaryTerm } from "../../../types";
 
 interface GlossaryProps {
@@ -40,7 +40,7 @@ export const GlossaryTerm = (props: GlossaryProps): JSX.Element => {
         )}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
-        <HTML data={body} />
+        <HTMLWithNextImage data={body} />
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );

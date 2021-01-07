@@ -20,7 +20,6 @@ export const HTML = ({
         info.transform(html, info, attributesToProps(info.attributes))
       ),
   };
-
   const stack = [root];
   const parser = new Parser({
     onopentag(name, attributes) {

@@ -1,11 +1,18 @@
 import Image from "next/image";
-import { HTML, ITransformCallbackMap, ParseInfoTransformFn } from ".";
+import {
+  HTML,
+  ITransformCallbackMap,
+  ParseInfoTransformFn,
+  defaultTransform,
+} from ".";
 
 export const HTMLWithNextImage = ({
   data,
+  locale,
   callbacks,
 }: {
   data: string;
+  locale?: string | null;
   callbacks?: ITransformCallbackMap;
 }) => {
   const img: ParseInfoTransformFn = (_, __, props) => {
@@ -20,5 +27,13 @@ export const HTMLWithNextImage = ({
     return null;
   };
 
-  return <HTML data={data} callbacks={{ ...callbacks, img }} />;
+  const a: ParseInfoTransformFn = (htmlString, info, props: any) => {
+    console.log({ props }, { info });
+    if (locale && props?.className === "hedi-link-glossary") {
+      props.href = `/${locale}${props.href}`;
+    }
+    return defaultTransform(htmlString, info, props);
+  };
+
+  return <HTML data={data} callbacks={{ ...callbacks, img, a }} />;
 };

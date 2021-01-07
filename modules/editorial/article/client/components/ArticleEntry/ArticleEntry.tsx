@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HTML } from "@/common/html";
+import { HTMLWithNextImage } from "@/common/html";
 import { IArticleEntry } from "../../../types";
 
 export const ArticleEntry = ({
@@ -15,7 +15,7 @@ export const ArticleEntry = ({
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTML data={summary} />
+        <HTMLWithNextImage data={summary} />
       </a>
     </Link>
   );

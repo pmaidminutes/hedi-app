@@ -1,4 +1,4 @@
-// Types
+import { useRouter } from "next/router";
 import { ITyped } from "@/common/model/cms";
 import { HTMLWithNextImage } from "@/common/html";
 import { TagList } from "@/modules/common/components";
@@ -15,6 +15,8 @@ export const TryArticle = (content: ITyped): JSX.Element | null =>
 
 export const Article = ({ content }: IArticleProps): JSX.Element => {
   const { label, body, audio, tags } = content;
+  const router = useRouter();
+  const { locale, defaultLocale } = router;
 
   return (
     <>
@@ -48,7 +50,10 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
                 <AudioPlayer src={buildAssetUrl(audio?.url)} />
               ) : null}
               <div className="py-s-md">
-                <HTMLWithNextImage data={body} />
+                <HTMLWithNextImage
+                  data={body}
+                  locale={locale === defaultLocale ? null : locale}
+                />
               </div>
             </article>
           </div>
