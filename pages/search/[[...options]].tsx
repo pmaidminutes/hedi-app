@@ -90,20 +90,30 @@ export default function searchPage() {
           <div className="bx--tile-container">
             {IsIHTTPError(data)
               ? []
-              : data?.map((entry: any, index) => {
+              : data?.map((entry: any) => {
                   if (!entry) return null;
                   switch (entry.type) {
                     case "Article":
-                      return <ArticleEntry article={entry} key={index} />;
+                      return (
+                        <ArticleEntry
+                          article={entry}
+                          key={entry.route + locale}
+                        />
+                      );
                     case "Category":
-                      return <CategoryEntry category={entry} key={index} />;
+                      return (
+                        <CategoryEntry
+                          category={entry}
+                          key={entry.route + locale}
+                        />
+                      );
                     case "GlossaryTerm":
                       return (
                         <GlossaryTerm
                           glossaryTerm={entry}
                           selected={true}
                           translationLang={defaultLocale}
-                          key={index}
+                          key={entry.route + locale}
                         />
                       );
                   }
