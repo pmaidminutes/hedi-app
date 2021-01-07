@@ -1,10 +1,10 @@
 import { IsIHTTPError } from "@/common/errorHandling";
-import { useSuggest } from "@/modules/search/client/hooks";
 import { useState } from "react";
+import { useSuggest } from "../hooks";
 
 interface SuggestProps {
   query: string;
-  suggestionSelected: (text: string) => void;
+  onSuggestSelect: (text: string) => void;
 }
 export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
   props: SuggestProps
@@ -21,7 +21,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
 
   const suggestItemSelected = (text: string) => {
     setSelectedSuggestion(text);
-    props.suggestionSelected(text);
+    props.onSuggestSelect(text);
   };
   return (
     <>

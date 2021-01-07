@@ -1,11 +1,10 @@
-import { IContentEntry } from "../../types";
+import { IContentEntry } from "../../types/types";
 
 export function getSolrContentResult(
   entity: any,
   lang: string,
   highlightingContent: any
 ): IContentEntry {
-  //console.log(highlightingContent);
   const prefix = "tm_X3b_" + lang;
   const title = prefix + "_title";
   const body = prefix + "_body";

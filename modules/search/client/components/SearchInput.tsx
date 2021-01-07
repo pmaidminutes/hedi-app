@@ -50,7 +50,7 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = ({
       }
       <AutoSuggest
         query={suggestQuery}
-        suggestionSelected={handleSuggestSelected}
+        onSuggestSelect={handleSuggestSelected}
       />
     </>
   );

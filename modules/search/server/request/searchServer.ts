@@ -1,7 +1,10 @@
 import { errorHandling } from "@/common/errorHandling";
 import { IHTTPError } from "@/common/types";
-import { IContentEntry } from "../../types";
-import { getSolrContentResult, getSolrRequestParams } from "../generator";
+import {
+  getSolrContentResult,
+  getSolrRequestParams,
+} from "../../query/generator";
+import { IContentEntry } from "../../types/types";
 
 export async function searchServer(
   lang: string,
@@ -36,3 +39,4 @@ export async function searchServer(
     getSolrContentResult(entity, lang, highlightingContent[entity.id])
   ) as Promise<IContentEntry[]>;
 }
+``;
