@@ -1,9 +1,7 @@
 import { GraphQLClient } from "graphql-request";
-import {
-  getAuthHeader,
-  getServiceAuth,
-  IAuthHeader,
-} from "@/modules/auth/server";
+import { IAuthHeader } from "@/modules/auth/types";
+import { queryServiceAuthHeader } from "@/modules/auth/query";
+import { IsIHTTPError } from "@/common/errorHandling";
 
 export { gql } from "graphql-request";
 
@@ -22,11 +20,11 @@ export async function getServiceClient(endpoint = GQLEndpoint.Public) {
   if (!(process.env.SERVICE_USER && process.env.SERVICE_SECRET))
     throw new Error("[API SERVICE]: either service id or secret not specified");
 
-  const headers = await getServiceAuth(
+  const headers = await queryServiceAuthHeader(
     process.env.SERVICE_USER,
     process.env.SERVICE_SECRET
   );
-  if (headers) return getClient(endpoint, getAuthHeader(headers));
+  if (!IsIHTTPError(headers)) return getClient(endpoint, headers);
 
   throw new Error("[API SERVICE]: service could not log in");
 }

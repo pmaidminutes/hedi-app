@@ -2,7 +2,7 @@ import { LanguageSwitch } from "@/common/components";
 import { IEntityLocalized } from "@/common/model/cms";
 
 import { Logo } from "@components";
-import { LogInOut } from "@components";
+import { LogInOut } from "@/modules/auth/client";
 import { Form } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
