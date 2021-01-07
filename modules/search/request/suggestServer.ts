@@ -6,12 +6,11 @@ export async function suggestServer(
   typeText: string
 ): Promise<IHTTPError | []> {
   const params = {
-    "terms.fl": "voll",
-    "terms.prefix": !typeText ? "" : typeText,
+    "suggest.q": !typeText ? "" : typeText,
   };
 
   const reqBody = JSON.stringify({ params });
-  const response = await fetch(process.env.SOLR_URL + "/autocomplete", {
+  const response = await fetch(process.env.SOLR_URL + "/suggest", {
     method: "post",
     body: reqBody,
     headers: new Headers({

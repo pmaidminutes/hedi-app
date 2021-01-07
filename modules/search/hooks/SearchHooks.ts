@@ -22,14 +22,13 @@ export function useSearch(
 }
 
 export function useSuggest(suggestText?: string) {
-  const splitWords = suggestText?.split(" ");
-  const modifiedText = splitWords
-    ? splitWords[splitWords.length - 1]
-    : suggestText;
-
-  const swrResult = useSWR<IHTTPError | string[]>(
+  const swrResult = useSWR<IHTTPError | any[]>(
     suggestText ? "/api/en/suggest/" + encodeURI(suggestText) : null,
-    url => jsonFetcher<any>(url).then(response => response.terms.voll)
+    url =>
+      jsonFetcher<any>(url).then(
+        response =>
+          response.suggest.en[suggestText ? suggestText : "default"].suggestions
+      )
   );
   return { ...swrResult };
 }

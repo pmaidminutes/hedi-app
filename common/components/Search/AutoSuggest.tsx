@@ -1,4 +1,5 @@
 import { IsIHTTPError } from "@/common/errorHandling";
+import { HTMLWithNextImage } from "@/common/html";
 import { useSuggest } from "@/modules/search/hooks";
 import { useState } from "react";
 
@@ -39,18 +40,14 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
         role="listbox"
         id="suggestion-list">
         {data && !IsIHTTPError(data)
-          ? data.map((suggestedResult: string) =>
-              typeof suggestedResult === "string" ? (
-                <li
-                  style={{ padding: "5px" }}
-                  key={suggestedResult}
-                  onClick={e => suggestItemSelected(suggestedResult)}>
-                  {suggestedResult}
-                </li>
-              ) : (
-                ""
-              )
-            )
+          ? data.map(suggestedResult => (
+              <li
+                style={{ padding: "5px" }}
+                key={suggestedResult.term}
+                onClick={e => suggestItemSelected(suggestedResult.term)}>
+                <HTMLWithNextImage data={suggestedResult.term} />
+              </li>
+            ))
           : ""}
       </ul>
     </>
