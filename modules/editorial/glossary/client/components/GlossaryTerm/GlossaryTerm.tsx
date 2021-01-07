@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import {
   ExpandableTile,
   TileAboveTheFoldContent,
@@ -13,6 +14,8 @@ interface GlossaryProps {
 }
 
 export const GlossaryTerm = (props: GlossaryProps): JSX.Element => {
+  const router = useRouter();
+  const { locale, defaultLocale } = router;
   const { glossaryTerm, translationLang, isSelected } = props;
   const { label, body } = glossaryTerm;
   const entryId = glossaryTerm.route.substring(
@@ -40,7 +43,10 @@ export const GlossaryTerm = (props: GlossaryProps): JSX.Element => {
         )}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
-        <HTMLWithNextImage data={body} />
+        <HTMLWithNextImage
+          data={body}
+          locale={locale === defaultLocale ? null : locale}
+        />
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );

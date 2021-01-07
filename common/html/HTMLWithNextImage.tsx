@@ -28,7 +28,6 @@ export const HTMLWithNextImage = ({
   };
 
   const a: ParseInfoTransformFn = (htmlString, info, props: any) => {
-    console.log({ props }, { info });
     if (locale && props?.className === "hedi-link-glossary") {
       props.href = `/${locale}${props.href}`;
     }
