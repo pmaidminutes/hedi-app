@@ -1,1 +1,2 @@
-export * from "./category";
+export * from "./getStaticCategoryPaths";
+export * from "./getStaticCategoryProps";

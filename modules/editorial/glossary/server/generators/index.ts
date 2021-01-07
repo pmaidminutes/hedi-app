@@ -1,1 +1,2 @@
-export * from "./glossary";
+export * from "./getStaticGlossaryPaths";
+export * from "./getStaticGlossaryProps";

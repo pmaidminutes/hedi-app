@@ -1,1 +1,2 @@
-export * from "./article";
+export * from "./getStaticArticlePaths";
+export * from "./getStaticArticleProps";
