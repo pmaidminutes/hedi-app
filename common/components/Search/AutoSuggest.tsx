@@ -20,9 +20,15 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
     console.log("err");
   }
 
+  function stripHtml(text: string) {
+    let divNode = document.createElement("DIV");
+    divNode.innerHTML = text;
+    return divNode.textContent || divNode.innerText || "";
+  }
   const suggestItemSelected = (text: string) => {
-    setSelectedSuggestion(text);
-    props.suggestionSelected(text);
+    const plainText = stripHtml(text);
+    setSelectedSuggestion(plainText);
+    props.suggestionSelected(plainText);
   };
   return (
     <>
