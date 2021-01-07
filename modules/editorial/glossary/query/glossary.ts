@@ -6,8 +6,9 @@ import {
   IGlossary,
   IGlossaryTerm,
   GlossaryFields,
+  IGlossaryGrouped,
 } from "@/modules/editorial/glossary/types";
-import { glossaryToGroupedGlossary } from "../server";
+import { glossaryToGroupedGlossary } from "@/modules/editorial/glossary/server";
 
 export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {
   const query = gql`
@@ -26,7 +27,10 @@ export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {
   return [{ params: { segments }, locale: lang }];
 }
 
-export async function getGlossary(route: string, lang = "de") {
+export async function getGlossary(
+  route: string,
+  lang = "de"
+): Promise<IGlossaryGrouped | null> {
   const query = gql`
     query getGlossary(
       $route: String
@@ -49,7 +53,10 @@ export async function getGlossary(route: string, lang = "de") {
     });
 }
 
-export async function getGlossaryTerm(route: string, lang = "de") {
+export async function getGlossaryTerm(
+  route: string,
+  lang = "de"
+): Promise<IGlossaryTerm | null> {
   const query = gql`
     query getGlossaryTerm(
       $routes: [String]!

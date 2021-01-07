@@ -1,5 +1,5 @@
-import { IGlossaryGroup } from "../../../types";
-import { GlossaryTerm } from "../GlossaryTerm";
+import { IGlossaryGroup } from "@/modules/editorial/glossary/types";
+import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { useState, useEffect } from "react";
 interface GlossaryGroupProps {
   glossaryGroup: IGlossaryGroup;
@@ -10,7 +10,7 @@ export const GlossaryGroup = ({
   glossaryGroup,
   translationLang,
   selectedTerm,
-}: GlossaryGroupProps) => {
+}: GlossaryGroupProps): JSX.Element => {
   const [termUpdated, setTermUpdated] = useState("");
   useEffect(() => {
     setTermUpdated(selectedTerm ?? "");
@@ -29,7 +29,7 @@ export const GlossaryGroup = ({
             <GlossaryTerm
               glossaryTerm={term}
               translationLang={translationLang}
-              selected={term.route.endsWith(termUpdated, term.route.length)}
+              isSelected={term.route.endsWith(termUpdated, term.route.length)}
             />
           </div>
         ))}

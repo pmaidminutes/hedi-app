@@ -1,7 +1,12 @@
 // Modules
 import { segmentsToRoute } from "@/common/types";
-import { getCategory, getCategoryPaths, getCategoryRoot } from "../../query";
-
+import { ICategoryRoot } from "@/modules/editorial/category/types";
+import {
+  getCategory,
+  getCategoryPaths,
+  getCategoryRoot,
+} from "@/modules/editorial/category/query";
+// TODO return type
 export const getStaticPaths = async (locales: string[]) => {
   const paths = [];
   for (let locale of locales) {
@@ -16,7 +21,10 @@ export const getStaticPaths = async (locales: string[]) => {
   return paths;
 };
 
-export const getStaticProps = async (segments?: string[], locale = "de") => {
+export const getStaticProps = async (
+  segments?: string[],
+  locale = "de"
+): Promise<ICategoryRoot | null> => {
   if (!segments) {
     return getCategoryRoot(locale);
   } else {

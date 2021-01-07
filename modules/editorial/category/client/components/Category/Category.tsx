@@ -1,19 +1,19 @@
 // Types
 import { ICategory } from "@/modules/editorial/category/types";
 import { ITyped } from "@/common/model/cms";
-import { CategoryEntry } from "../CategoryEntry";
+import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 
 interface ICategoryProps {
   content: ICategory;
 }
 
-export const TryCategory = (content: ITyped) =>
+export const TryCategory = (content: ITyped): JSX.Element | null =>
   content.type === "Category" || content.type === "CategoryRoot" ? (
     <Category content={content as ICategory} />
   ) : null;
 
-export const Category = ({ content }: ICategoryProps) => {
+export const Category = ({ content }: ICategoryProps): JSX.Element => {
   const { categories, label, articles } = content;
   return (
     /*-- ------------ main category row -------------- --*/

@@ -1,14 +1,13 @@
 import { getServiceClient, gql } from "@/common/graphql";
 import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { routeToSegments } from "@/common/types";
-// TODO: change from
 import {
   ICategory,
   CategoryFields,
   ICategoryRoot,
   CategoryRootFields,
-} from "../types";
-
+} from "@/modules/editorial/category/types";
+// TODO: return type
 export async function getCategoryPaths(lang = "de") {
   const query = gql`
     query getCategoryPaths($lang: String) {
@@ -37,7 +36,10 @@ export async function getCategoryPaths(lang = "de") {
     .filter(a => a.locale === lang);
 }
 
-export async function getCategory(route: string, lang = "de") {
+export async function getCategory(
+  route: string,
+  lang = "de"
+): Promise<ICategory | null> {
   const query = gql`
     query getCategories(
       $routes: [String!]!
@@ -98,14 +100,19 @@ export async function getCategoryRoot(
     });
 }
 
-function hackRootTranslationRoutes(root: ICategoryRoot | null) {
+function hackRootTranslationRoutes(
+  root: ICategoryRoot | null
+): ICategoryRoot | null {
   if (!root) return root;
   root.translations = root.translations.map(t => ({ ...t, route: "/" }));
   return root;
 }
 
 // TODO: remove after added new drupal field
-export async function getCategoryColorClass(segment: string, lang: string) {
+export async function getCategoryColorClass(
+  segment: string,
+  lang: string
+): Promise<string> {
   let key = segment;
   if (lang !== "en") {
     const categoryData = await getCategory("/" + segment, lang);

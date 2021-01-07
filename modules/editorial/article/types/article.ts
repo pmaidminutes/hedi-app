@@ -9,8 +9,8 @@ import {
   EntityLocalizedFields,
   SummaryFields,
 } from "@/common/model/cms";
-import { AudioFields, IAudio } from "../../types/audio";
-import { IImage, ImageFields } from "../../types/image";
+import { AudioFields, IAudio } from "@/modules/editorial/types/audio";
+import { IImage, ImageFields } from "@/modules/editorial/types/image";
 export interface IArticleEntry extends IEntityLocalized, ISummary {}
 
 export const ArticleEntryFields = `${EntityLocalizedFields}

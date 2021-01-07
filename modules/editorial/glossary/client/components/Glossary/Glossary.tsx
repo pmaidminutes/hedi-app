@@ -1,19 +1,19 @@
 import { ITyped } from "@/common/model/cms";
 import { AssertClientSide } from "@/common/utils";
-import { IGroupedGlossary } from "../../../types";
+import { IGlossaryGrouped } from "@/modules/editorial/glossary/types";
 import { useRouter } from "next/router";
-import { GlossaryGroup } from "../GlossaryGroup";
+import { GlossaryGroup } from "@/modules/editorial/glossary/client/components";
 
 interface IGlossaryProps {
-  content: IGroupedGlossary;
+  content: IGlossaryGrouped;
 }
 
-export const TryGlossary = (content: ITyped) =>
+export const TryGlossary = (content: ITyped): JSX.Element | null =>
   content.type === "Glossary" ? (
-    <Glossary content={content as IGroupedGlossary} />
+    <Glossary content={content as IGlossaryGrouped} />
   ) : null;
 
-export const Glossary = ({ content }: IGlossaryProps) => {
+export const Glossary = ({ content }: IGlossaryProps): JSX.Element => {
   const { groups } = content;
   const { defaultLocale } = useRouter();
 

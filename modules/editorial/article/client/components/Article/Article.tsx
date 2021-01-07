@@ -10,11 +10,11 @@ interface IArticleProps {
   content: IArticle;
 }
 
-export const TryArticle = (content: ITyped) =>
+export const TryArticle = (content: ITyped): JSX.Element | null =>
   content.type === "Article" ? <Article content={content as IArticle} /> : null;
 
-export const Article = ({ content }: IArticleProps) => {
-  const { label, body, category, audio, tags } = content;
+export const Article = ({ content }: IArticleProps): JSX.Element => {
+  const { label, body, audio, tags } = content;
 
   return (
     <>

@@ -4,42 +4,43 @@ import {
   TileBelowTheFoldContent,
 } from "carbon-components-react";
 import { HTML } from "@/common/html";
-import { IGlossaryTerm } from "../../../types";
+import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
 
 interface GlossaryProps {
   glossaryTerm: IGlossaryTerm;
   translationLang?: string;
-  selected?: boolean;
+  isSelected?: boolean;
 }
 
-export const GlossaryTerm = (props: GlossaryProps) => {
-  const { glossaryTerm, translationLang, selected } = props;
+export const GlossaryTerm = (props: GlossaryProps): JSX.Element => {
+  const { glossaryTerm, translationLang, isSelected } = props;
+  const { label, body } = glossaryTerm;
   const entryId = glossaryTerm.route.substring(
     glossaryTerm.route.lastIndexOf("/") + 1
   );
-  const translated = glossaryTerm.translations.find(
+  const translation = glossaryTerm.translations.find(
     g => g.lang === translationLang
   )?.label;
   return (
     <ExpandableTile
-      title={glossaryTerm.label}
+      title={label}
       id={entryId}
       tabIndex={0}
-      expanded={selected}>
+      expanded={isSelected}>
       <TileAboveTheFoldContent>
         <h2
-          className={selected ? "hedi-marked-word" : ""}
+          className={isSelected ? "hedi-marked-word" : ""}
           dangerouslySetInnerHTML={{
-            __html: glossaryTerm.label,
+            __html: label,
           }}></h2>
-        {translated && (
+        {translation && (
           <p>
-            <mark>{translated}</mark>
+            <mark>{translation}</mark>
           </p>
         )}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
-        <HTML data={glossaryTerm.body} />
+        <HTML data={body} />
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );

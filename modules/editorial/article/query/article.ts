@@ -3,6 +3,7 @@ import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { routeToSegments } from "@/common/types";
 import { ArticleFields, IArticle } from "@/modules/editorial/article/types";
 
+// TODO how to write type here
 export async function getArticlePaths(lang = "de") {
   const query = gql`
     query getArticlePaths($lang: String) {
@@ -31,7 +32,10 @@ export async function getArticlePaths(lang = "de") {
     .filter(a => a.locale === lang);
 }
 
-export async function getArticle(route: string, lang = "de") {
+export async function getArticle(
+  route: string,
+  lang = "de"
+): Promise<IArticle | null> {
   const query = gql`
     query getArticles(
       $routes: [String!]!
