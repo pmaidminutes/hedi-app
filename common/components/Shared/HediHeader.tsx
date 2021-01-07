@@ -1,12 +1,11 @@
 import { LanguageSwitch } from "@/common/components";
 import { IEntityLocalized } from "@/common/model/cms";
-
-import { Logo } from "@components";
 import { LogInOut } from "@/modules/auth/client";
+import { Logo } from "@components";
 import { Form } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { SearchInput } from "../Search";
+import { SearchInput } from "../../../modules/search/client/components";
 
 export interface HeaderProps {
   pageTitle: string;

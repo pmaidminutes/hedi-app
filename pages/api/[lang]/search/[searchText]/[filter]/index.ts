@@ -4,7 +4,7 @@ import { getArticle } from "@/modules/editorial/article";
 import { getCategory } from "@/modules/editorial/category";
 import { getGlossaryTerm } from "@/modules/editorial/glossary";
 import { IArticle, ICategory, IGlossaryTerm } from "@/modules/editorial/types";
-import { searchServer } from "@/modules/search/request/searchServer";
+import { searchServer } from "@/modules/search/query/request/searchServer";
 import { NextApiHandler } from "next";
 
 const solrSearchHandler: NextApiHandler<

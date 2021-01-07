@@ -1,9 +1,8 @@
-export * from "./LanguageSwitch";
 export * from "./Article";
+export * from "./AudioPlayer";
 export * from "./Category";
 export * from "./Glossary";
-export { ResultContent, ResultUser, AutoSuggest, SearchInput } from "./Search";
-export * from "./Shared";
-export * from "./Modal";
-export * from "./AudioPlayer";
+export * from "./LanguageSwitch";
 export * from "./Logo";
+export * from "./Modal";
+export * from "./Shared";

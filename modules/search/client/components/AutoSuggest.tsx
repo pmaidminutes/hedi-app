@@ -1,5 +1,5 @@
 import { IsIHTTPError } from "@/common/errorHandling";
-import { useSuggest } from "@/modules/search/hooks";
+import { useSuggest } from "@/modules/search/client/hooks";
 import { useState } from "react";
 
 interface SuggestProps {

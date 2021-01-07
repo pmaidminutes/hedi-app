@@ -11,9 +11,9 @@ import {
   GlossaryTerm,
   HediHeader,
 } from "@/common/components";
-import { SearchInput } from "@/common/components/Search";
 import { IsIHTTPError } from "@/common/errorHandling";
-import { useSearch } from "@/modules/search/hooks";
+import { SearchInput } from "@/modules/search/client/components";
+import { useSearch } from "@/modules/search/client/hooks";
 import { Loading } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
