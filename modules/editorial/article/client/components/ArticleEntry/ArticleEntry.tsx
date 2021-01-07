@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { HTML } from "@/common/html";
-import { IArticleEntry } from "@/modules/editorial/article/types";
+import { IArticleEntry } from "../../../types";
 
 export const ArticleEntry = ({
   article,

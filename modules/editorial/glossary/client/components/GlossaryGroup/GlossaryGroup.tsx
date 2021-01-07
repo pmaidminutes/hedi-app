@@ -1,6 +1,6 @@
-import { IGlossaryGroup } from "@/modules/editorial/glossary/types";
-import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { useState, useEffect } from "react";
+import { IGlossaryGroup } from "../../../types";
+import { GlossaryTerm } from "../GlossaryTerm";
 interface GlossaryGroupProps {
   glossaryGroup: IGlossaryGroup;
   translationLang?: string;

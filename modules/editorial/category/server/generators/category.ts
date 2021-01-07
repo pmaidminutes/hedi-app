@@ -1,11 +1,7 @@
 // Modules
 import { segmentsToRoute } from "@/common/types";
-import { ICategoryRoot } from "@/modules/editorial/category/types";
-import {
-  getCategory,
-  getCategoryPaths,
-  getCategoryRoot,
-} from "@/modules/editorial/category/query";
+import { ICategoryRoot } from "../../types";
+import { getCategory, getCategoryPaths, getCategoryRoot } from "../../query";
 // TODO return type
 export const getStaticPaths = async (locales: string[]) => {
   const paths = [];

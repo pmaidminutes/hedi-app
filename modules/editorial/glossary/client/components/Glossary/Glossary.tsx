@@ -1,8 +1,8 @@
+import { useRouter } from "next/router";
 import { ITyped } from "@/common/model/cms";
 import { AssertClientSide } from "@/common/utils";
-import { IGlossaryGrouped } from "@/modules/editorial/glossary/types";
-import { useRouter } from "next/router";
-import { GlossaryGroup } from "@/modules/editorial/glossary/client/components";
+import { IGlossaryGrouped } from "../../../types";
+import { GlossaryGroup } from "../GlossaryGroup";
 
 interface IGlossaryProps {
   content: IGlossaryGrouped;

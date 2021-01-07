@@ -1,8 +1,4 @@
-import {
-  IGlossary,
-  IGlossaryGrouped,
-  IGlossaryTerm,
-} from "@/modules/editorial/glossary/types";
+import { IGlossary, IGlossaryGrouped, IGlossaryTerm } from "../types";
 
 export function glossaryToGroupedGlossary(
   glossary: IGlossary

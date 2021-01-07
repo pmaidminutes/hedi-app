@@ -1,7 +1,7 @@
 import { getServiceClient, gql } from "@/common/graphql";
 import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { routeToSegments } from "@/common/types";
-import { ArticleFields, IArticle } from "@/modules/editorial/article/types";
+import { ArticleFields, IArticle } from "../types";
 
 // TODO how to write type here
 export async function getArticlePaths(lang = "de") {

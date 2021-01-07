@@ -1,7 +1,7 @@
 // Modules
 import { segmentsToRoute } from "@/common/types";
-import { IArticle } from "@/modules/editorial/article/types";
-import { getArticlePaths, getArticle } from "@/modules/editorial/article/query";
+import { IArticle } from "../../types";
+import { getArticlePaths, getArticle } from "../../query";
 
 // TODO return type
 export const getStaticPaths = async (locales: string[]) => {

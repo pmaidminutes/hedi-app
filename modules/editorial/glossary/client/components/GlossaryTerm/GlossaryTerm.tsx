@@ -4,7 +4,7 @@ import {
   TileBelowTheFoldContent,
 } from "carbon-components-react";
 import { HTML } from "@/common/html";
-import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
+import { IGlossaryTerm } from "../../../types";
 
 interface GlossaryProps {
   glossaryTerm: IGlossaryTerm;

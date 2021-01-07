@@ -1,7 +1,7 @@
 // Types
-import { ICategory } from "@/modules/editorial/category/types";
+import { ICategory } from "../../../types";
 import { ITyped } from "@/common/model/cms";
-import { CategoryEntry } from "@/modules/editorial/category/client/components";
+import { CategoryEntry } from "../CategoryEntry";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 
 interface ICategoryProps {

@@ -7,8 +7,8 @@ import {
   IGlossary,
   IGlossaryTerm,
   IGlossaryGrouped,
-} from "@/modules/editorial/glossary/types";
-import { glossaryToGroupedGlossary } from "@/modules/editorial/glossary/server";
+} from "../types";
+import { glossaryToGroupedGlossary } from "../server";
 
 export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {
   const query = gql`

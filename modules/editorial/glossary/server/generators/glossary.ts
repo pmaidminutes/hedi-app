@@ -1,10 +1,7 @@
 import { segmentsToRoute } from "@/common/types";
-import {
-  getGlossary,
-  getGlossaryPath,
-} from "@/modules/editorial/glossary/query";
-import { IGlossaryGrouped } from "@/modules/editorial/glossary/types";
+import { getGlossary, getGlossaryPath } from "../../query";
 import { ISegmentPath } from "@/common/types";
+import { IGlossaryGrouped } from "../../types";
 
 export const getStaticPaths = async (
   locales: string[]
