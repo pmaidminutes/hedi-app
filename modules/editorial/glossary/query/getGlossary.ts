@@ -1,6 +1,6 @@
 import { getServiceClient, gql } from "@/common/graphql";
 import { GlossaryFields, IGlossary, IGlossaryGrouped } from "../types";
-import { glossaryToGroupedGlossary } from "../server";
+import { glossaryToGroupedGlossary } from "./functions";
 
 export async function getGlossary(
   route: string,

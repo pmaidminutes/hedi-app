@@ -1,5 +1,4 @@
 export * from "./LanguageSwitch";
-export * from "../../modules/editorial/article/client/components/Article";
 export { ResultContent, ResultUser, AutoSuggest, SearchInput } from "./Search";
 export * from "./Shared";
 export * from "./Modal";
