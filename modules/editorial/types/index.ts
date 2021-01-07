@@ -1,4 +1,2 @@
-export * from "./article";
-export * from "./category";
+export * from "./audio";
 export * from "./image";
-export * from "./glossary";

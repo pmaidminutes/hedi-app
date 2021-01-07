@@ -4,14 +4,11 @@
  * for language switching see ../index.tsx
  */
 
-import {
-  ArticleEntry,
-  BreadCrumb,
-  CategoryEntry,
-  GlossaryTerm,
-  HediHeader,
-} from "@/common/components";
+import { BreadCrumb, HediHeader } from "@/common/components";
 import { IsIHTTPError } from "@/common/errorHandling";
+import { ArticleEntry } from "@/modules/editorial/article/client/components";
+import { CategoryEntry } from "@/modules/editorial/category/client/components";
+import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { Loading } from "carbon-components-react";

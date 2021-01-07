@@ -1,10 +1,12 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import { IHTTPError } from "@/common/types";
-import { getArticle } from "@/modules/editorial/article";
-import { getCategory } from "@/modules/editorial/category";
-import { getGlossaryTerm } from "@/modules/editorial/glossary";
-import { IArticle, ICategory, IGlossaryTerm } from "@/modules/editorial/types";
-import { searchServer } from "@/modules/search/server/request/searchServer";
+import { getArticle } from "@/modules/editorial/article/query";
+import { IArticle } from "@/modules/editorial/article/types";
+import { getCategory } from "@/modules/editorial/category/query";
+import { ICategory } from "@/modules/editorial/category/types";
+import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
+import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
+import { searchServer } from "@/modules/search/server/request";
 import { NextApiHandler } from "next";
 
 const solrSearchHandler: NextApiHandler<
