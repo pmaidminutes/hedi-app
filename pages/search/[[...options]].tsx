@@ -4,13 +4,10 @@
  * for language switching see ../index.tsx
  */
 
-import {
-  ArticleEntry,
-  BreadCrumb,
-  CategoryEntry,
-  GlossaryTerm,
-  HediHeader,
-} from "@/common/components";
+import { BreadCrumb, HediHeader } from "@/common/components";
+import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
+import { CategoryEntry } from "@/modules/editorial/category/client/components";
+import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { SearchInput } from "@/common/components/Search";
 import { IsIHTTPError } from "@/common/errorHandling";
 import { useSearch } from "@/modules/search/hooks";

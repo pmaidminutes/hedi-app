@@ -5,27 +5,25 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { ISegmentParam, ISegmentProps } from "@/common/types";
 // generators
 import {
-  getStaticPaths as getArticlePaths,
-  getStaticProps as getArticleProps,
-} from "@/modules/editorial/generators/article";
-import {
   getStaticPaths as getCategoryPaths,
   getStaticProps as getCategoryProps,
-} from "@/modules/editorial/generators/category";
+} from "@/modules/editorial/category/server";
+import {
+  getStaticPaths as getArticlePaths,
+  getStaticProps as getArticleProps,
+} from "@/modules/editorial/article/server";
 import {
   getStaticPaths as getGlossaryPaths,
   getStaticProps as getGlossaryProps,
-} from "@/modules/editorial/generators/glossary";
+} from "@/modules/editorial/glossary/server";
 // Components
-import {
-  BreadCrumb,
-  HediHeader,
-  TryArticle,
-  TryCategory,
-  TryGlossary,
-} from "@/common/components";
+import { BreadCrumb, HediHeader } from "@/common/components";
+import { TryGlossary } from "@/modules/editorial/glossary/client/components";
+import { TryCategory } from "@/modules/editorial/category/client/components";
+import { TryArticle } from "@/modules/editorial/article/client/components";
 // HACK: temporary
-import { getCategoryColorClass } from "@/modules/editorial/category";
+
+import { getCategoryColorClass } from "@/modules/editorial/category/query";
 
 export const getStaticPaths: GetStaticPaths = async context => {
   const locales = context?.locales ?? [];
@@ -77,13 +75,10 @@ export default function segments(props: ISegmentProps) {
         colorClass={colorClass}
       />
       <BreadCrumb />
-
-      {/* <Content> */}
       <main>
         <TryCategory {...content} />
         <TryArticle {...content} />
         <TryGlossary {...content} />
-        {/* </Content> */}
       </main>
     </div>
   );
