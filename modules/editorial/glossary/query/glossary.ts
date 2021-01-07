@@ -3,11 +3,11 @@ import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { ISegmentPath, routeToSegments } from "@/common/types";
 import {
   GlossaryTermFields,
-  IGroupedGlossary,
   IGlossary,
   IGlossaryTerm,
   GlossaryFields,
 } from "@/modules/editorial/glossary/types";
+import { glossaryToGroupedGlossary } from "../server";
 
 export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {
   const query = gql`
@@ -47,25 +47,6 @@ export async function getGlossary(route: string, lang = "de") {
       console.warn(e);
       return null;
     });
-}
-
-function glossaryToGroupedGlossary(glossary: IGlossary): IGroupedGlossary {
-  const groupedEntries = glossary.terms.reduce(function (
-    glossaryArray: { [key: string]: IGlossaryTerm[] },
-    term: IGlossaryTerm
-  ) {
-    const firstChar = term.label[0].toUpperCase();
-    (glossaryArray[firstChar] = glossaryArray[firstChar] || []).push(term);
-    return glossaryArray;
-  },
-  {});
-  const groups = Object.entries(groupedEntries)
-    .map(([key, terms]) => {
-      return { key, terms };
-    })
-    .sort((a, b) => a.key.localeCompare(b.key));
-
-  return { ...glossary, groups };
 }
 
 export async function getGlossaryTerm(route: string, lang = "de") {

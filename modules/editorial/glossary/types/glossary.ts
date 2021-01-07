@@ -18,7 +18,7 @@ export interface IGlossaryGroup {
   terms: IGlossaryTerm[];
 }
 
-export interface IGroupedGlossary extends IEntityTranslated<IEntityLocalized> {
+export interface IGlossaryGrouped extends IEntityTranslated<IEntityLocalized> {
   groups: IGlossaryGroup[];
 }
 
