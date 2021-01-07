@@ -1,10 +1,7 @@
 import { errorHandling } from "@/common/errorHandling";
 import { IHTTPError } from "@/common/types";
-import {
-  getSolrContentResult,
-  getSolrRequestParams,
-} from "../../query/generator";
 import { IContentEntry } from "../../types/types";
+import { getSolrContentResult, getSolrRequestParams } from "../generator";
 
 export async function searchServer(
   lang: string,
