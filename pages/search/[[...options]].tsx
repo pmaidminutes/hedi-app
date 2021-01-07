@@ -39,7 +39,6 @@ export default function searchPage() {
   let errorMessage: string = "";
 
   const { data, error } = useSearch(queryText, locale, filter);
-  const results = IsIHTTPError(data) ? [] : data ?? [];
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";
@@ -89,23 +88,36 @@ export default function searchPage() {
           <div className="errorMessage">{errorMessage}</div>
         ) : (
           <div className="bx--tile-container">
-            {results.map((entry: any) => {
-              if (!entry) return null;
-              switch (entry.typeName) {
-                case "Article":
-                  return <ArticleEntry article={entry} />;
-                case "Category":
-                  return <CategoryEntry category={entry} />;
-                case "GlossaryTerm":
-                  return (
-                    <GlossaryTerm
-                      glossaryTerm={entry}
-                      selected={true}
-                      translationLang={defaultLocale}
-                    />
-                  );
-              }
-            })}
+            {IsIHTTPError(data)
+              ? []
+              : data?.map((entry: any) => {
+                  if (!entry) return null;
+                  switch (entry.type) {
+                    case "Article":
+                      return (
+                        <ArticleEntry
+                          article={entry}
+                          key={entry.route + locale}
+                        />
+                      );
+                    case "Category":
+                      return (
+                        <CategoryEntry
+                          category={entry}
+                          key={entry.route + locale}
+                        />
+                      );
+                    case "GlossaryTerm":
+                      return (
+                        <GlossaryTerm
+                          glossaryTerm={entry}
+                          selected={true}
+                          translationLang={defaultLocale}
+                          key={entry.route + locale}
+                        />
+                      );
+                  }
+                })}
           </div>
         )}
       </main>
