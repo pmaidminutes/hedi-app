@@ -15,7 +15,6 @@ export const GlossaryGroup = ({
   useEffect(() => {
     setTermUpdated(selectedTerm ?? "");
   }, [selectedTerm]);
-
   return (
     <>
       <div className="bx--row bx--row-padding px-s-md">
@@ -29,7 +28,10 @@ export const GlossaryGroup = ({
             <GlossaryTerm
               glossaryTerm={term}
               translationLang={translationLang}
-              isSelected={term.route.endsWith(termUpdated, term.route.length)}
+              isSelected={
+                termUpdated !== "" &&
+                term.route.endsWith(termUpdated, term.route.length)
+              }
             />
           </div>
         ))}
