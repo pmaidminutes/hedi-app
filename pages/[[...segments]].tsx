@@ -62,20 +62,14 @@ export const getStaticProps: GetStaticProps<
 export default function segments(props: ISegmentPageProps) {
   let { content } = props;
   const colorClass = content.appstyle ?? "";
-  const router = useRouter();
-  const {
-    query: { segments },
-  } = router;
-  const pageTitle =
-    segments && segments.length > 0 ? segments[segments.length - 1] : "";
-  // TODO get proper page title, probably entity label
+
   return (
     <div className={colorClass}>
       <Head>
         <title>HEDI App</title>
       </Head>
       <Header
-        pageTitle={pageTitle}
+        pageTitle={content.label}
         translations={content.translations}
         colorClass={colorClass}
       />
