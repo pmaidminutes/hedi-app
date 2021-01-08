@@ -4,7 +4,7 @@ import { IContentEntry } from "../../types/types";
 import {
   transformParamsToSolrRequestString,
   transformSolrResultToContentEntry,
-} from "../generator";
+} from "../functions";
 
 export async function searchServer(
   lang: string,
