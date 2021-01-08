@@ -2,6 +2,7 @@ import { Parser } from "htmlparser2";
 import { createElement, HTMLAttributes } from "react";
 import { IParserElementInfo, ITransformCallbackMap } from "./types";
 import { attributesToProps } from "./utils";
+import { AssertServerSide } from "@/common/utils";
 
 export const HTML = ({
   data,
@@ -38,7 +39,14 @@ export const HTML = ({
         start: parser.startIndex,
         end: parser.endIndex ? parser.endIndex + 1 : -1,
         children: [],
-        transform: () => text,
+        transform: () => {
+          if (AssertServerSide()) return text;
+          else {
+            const p = document.createElement("p");
+            p.innerHTML = text;
+            return p.textContent;
+          }
+        },
       });
     },
     onclosetag(name) {
