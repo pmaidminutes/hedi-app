@@ -1,8 +1,8 @@
 import { IsIHTTPError } from "@/common/errorHandling";
 import { HTMLWithNextImage } from "@/common/html";
 import { useSuggest } from "@/modules/search/hooks";
+import { ISuggestEntry } from "@/modules/search/types";
 import { useState } from "react";
-
 interface SuggestProps {
   query: string;
   suggestionSelected: (text: string) => void;
@@ -19,12 +19,11 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
     //throw new Error(error);
     console.log("err");
   }
-
-  function stripHtml(text: string) {
+  const stripHtml = (taggedText: string): string => {
     let divNode = document.createElement("DIV");
-    divNode.innerHTML = text;
+    divNode.innerHTML = taggedText;
     return divNode.textContent || divNode.innerText || "";
-  }
+  };
   const suggestItemSelected = (text: string) => {
     const plainText = stripHtml(text);
     setSelectedSuggestion(plainText);
@@ -46,12 +45,12 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
         role="listbox"
         id="suggestion-list">
         {data && !IsIHTTPError(data)
-          ? data.map(suggestedResult => (
+          ? data.map((suggestEntry: ISuggestEntry, index) => (
               <li
-                style={{ padding: "5px" }}
-                key={suggestedResult.term}
-                onClick={e => suggestItemSelected(suggestedResult.term)}>
-                <HTMLWithNextImage data={suggestedResult.term} />
+                style={{ padding: "3px" }}
+                key={index}
+                onClick={e => suggestItemSelected(suggestEntry.term)}>
+                <HTMLWithNextImage data={suggestEntry.term} />
               </li>
             ))
           : ""}
