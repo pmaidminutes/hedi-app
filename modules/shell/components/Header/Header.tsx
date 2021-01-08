@@ -1,12 +1,12 @@
-import { LanguageSwitch } from "@/common/components";
+import { LanguageSwitch } from "../LanguageSwitch";
+import { Logo } from "../Logo";
 import { IEntityLocalized } from "@/common/model/cms";
 
-import { Logo } from "@components";
 import { LogInOut } from "@/modules/auth/client";
 import { Form } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { useState } from "react";
-import { SearchInput } from "../Search";
+import { SearchInput } from "@/common/components";
 
 export interface HeaderProps {
   pageTitle: string;
@@ -14,7 +14,7 @@ export interface HeaderProps {
   // TODO: remove when integrated in drupal
   colorClass?: string;
 }
-export const HediHeader: React.FunctionComponent<HeaderProps> = ({
+export const Header: React.FunctionComponent<HeaderProps> = ({
   pageTitle,
   translations,
   // TODO: remove when integrated in drupal
