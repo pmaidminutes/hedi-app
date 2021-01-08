@@ -60,19 +60,14 @@ export const getStaticProps: GetStaticProps<
 };
 
 export default function segments(props: ISegmentPageProps) {
-  let { content } = props;
-  const colorClass = content.appstyle ?? "";
+  const { content } = props;
 
   return (
-    <div className={colorClass}>
+    <div className={content.appstyle ?? ""}>
       <Head>
         <title>HEDI App</title>
       </Head>
-      <Header
-        pageTitle={content.label}
-        translations={content.translations}
-        colorClass={colorClass}
-      />
+      <Header {...content} />
       <BreadCrumb />
       <main>
         <TryCategory {...content} />

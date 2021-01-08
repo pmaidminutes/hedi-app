@@ -1,29 +1,32 @@
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { Form } from "carbon-components-react";
-import { IEntityLocalized } from "@/common/model/cms";
+import {
+  IAppStyled,
+  IEntityLocalized,
+  IEntityTranslated,
+} from "@/common/model/cms";
 import { LogInOut } from "@/modules/auth/client";
 import { SearchInput } from "@/modules/search/client/components";
 import { LanguageSwitch } from "../LanguageSwitch";
 import { Logo } from "../Logo";
 
-export interface HeaderProps {
-  pageTitle: string;
-  translations: IEntityLocalized[];
-  // TODO: remove when integrated in drupal
-  colorClass?: string;
-}
+type HeaderProps = Pick<
+  IEntityTranslated<IEntityLocalized>,
+  "label" | "translations"
+> &
+  Partial<IAppStyled>;
+
 export const Header: React.FunctionComponent<HeaderProps> = ({
-  pageTitle,
+  label,
   translations,
-  // TODO: remove when integrated in drupal
-  colorClass = "hedi-category-color--default",
+  appstyle = "hedi-category-color--default",
 }) => {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
 
   return (
-    <header className={`hedi-header ${colorClass}`}>
+    <header className={`hedi-header ${appstyle}`}>
       <div className="bx--grid">
         <div className="bx--row py-s-sm">
           <div className="bx--col bx--col-sm-4 bx--col-md-8 bx--col-lg-4 pb-s-sm">
