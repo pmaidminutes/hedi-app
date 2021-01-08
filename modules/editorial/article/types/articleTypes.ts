@@ -8,6 +8,7 @@ import {
   ISummary,
   EntityLocalizedFields,
   SummaryFields,
+  IAppStyled,
 } from "@/common/model/cms";
 import { AudioFields, IAudio } from "@/modules/editorial/types/audio";
 import { IImage, ImageFields } from "@/modules/editorial/types/image";
@@ -22,10 +23,14 @@ fragment ArticleEntryFrag on Article {
 }
 `;
 
-export interface IArticle extends IArticleEntry, IEditorial<IEntityLocalized> {
+export interface IArticle
+  extends IArticleEntry,
+    IEditorial<IEntityLocalized>,
+    IAppStyled {
   image: IImage;
   audio: IAudio;
   category: IEntity;
+  appstyle: string;
 }
 
 export function isIArticle(obj: any): obj is IArticle {
@@ -35,7 +40,9 @@ export function isIArticle(obj: any): obj is IArticle {
 export const ArticleFields = `${EditorialFields}
 category { ${EntityFields} }
 image { ${ImageFields} }
-audio { ${AudioFields} }`;
+audio { ${AudioFields} }
+appstyle
+`;
 
 export const ArticleFrag = gql`
 fragment ArticleFrag on Article {

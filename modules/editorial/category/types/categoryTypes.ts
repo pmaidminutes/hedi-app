@@ -4,6 +4,7 @@ import {
   IEntityLocalized,
   EntityLocalizedFields,
   EntityTranslatedFields,
+  IAppStyled,
 } from "@/common/model/cms";
 import {
   ArticleEntryFields,
@@ -31,9 +32,10 @@ export interface ICategoryRoot extends IEntityTranslated<IEntityLocalized> {
 export const CategoryRootFields = `${EntityTranslatedFields}
 categories { ${CategoryEntryFields} }`;
 
-export interface ICategory extends ICategoryEntry, ICategoryRoot {
+export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled {
   parent: number;
   articles: IArticleEntry[];
+  appstyle: string;
 }
 
 export function isICategory(obj: any): obj is ICategory {
@@ -41,10 +43,11 @@ export function isICategory(obj: any): obj is ICategory {
 }
 
 export const CategoryFields = `
-  ${CategoryRootFields}
-  parent
-  articles { ${ArticleEntryFields} }
-  image { ${ImageFields} }
+${CategoryRootFields}
+parent
+articles { ${ArticleEntryFields} }
+appstyle
+image { ${ImageFields} }
 `;
 
 export const CategoryFrag = gql`
