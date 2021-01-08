@@ -2,7 +2,12 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { ISegmentParam, ISegmentProps } from "@/common/types";
+import { ISegmentParam } from "@/common/types";
+import {
+  IAppStyled,
+  IEntityLocalized,
+  IEntityTranslated,
+} from "@/common/model/cms";
 // generators
 import {
   getStaticPaths as getCategoryPaths,
@@ -17,16 +22,12 @@ import {
   getStaticProps as getGlossaryProps,
 } from "@/modules/editorial/glossary/server";
 // Components
-
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 import { TryArticle } from "@/modules/editorial/article/client/components";
-// HACK: temporary
 
-import { getCategoryColorClass } from "@/modules/editorial/category/query";
-
-export const getStaticPaths: GetStaticPaths = async context => {
+export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const locales = context?.locales ?? [];
   const paths = [];
   paths.push(...(await getArticlePaths(locales)));
@@ -35,13 +36,15 @@ export const getStaticPaths: GetStaticPaths = async context => {
   return { paths, fallback: false };
 };
 
-export const getStaticProps: GetStaticProps<
-  ISegmentProps,
-  ISegmentParam
-> = async ({ params, locale, locales }) => {
-  const segments = params?.segments ?? [];
+interface ISegmentPageProps {
+  content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
+}
 
-  const colorClass = await getCategoryColorClass(segments[0], locale ?? "de");
+export const getStaticProps: GetStaticProps<
+  ISegmentPageProps,
+  ISegmentParam
+> = async ({ params, locale }) => {
+  const segments = params?.segments ?? [];
 
   let content;
   content = await getCategoryProps(params?.segments, locale);
@@ -52,12 +55,13 @@ export const getStaticProps: GetStaticProps<
     console.log("couldn't find content for path ", segments.join("/"));
     throw Error("Houston, we have got a problem");
   }
-  return { props: { content, colorClass } };
+
+  return { props: { content } };
 };
 
-export default function segments(props: ISegmentProps) {
-  let { content, colorClass } = props;
-
+export default function segments(props: ISegmentPageProps) {
+  let { content } = props;
+  const colorClass = content.appstyle ?? "";
   const router = useRouter();
   const {
     query: { segments },
