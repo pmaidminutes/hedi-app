@@ -1,3 +1,4 @@
+export * from "./IAppStyled";
 export * from "./IBody";
 export * from "./IContent";
 export * from "./IEditorial";
