@@ -1,4 +1,4 @@
-export function getSolrRequestParams(
+export function transformParamsToSolrRequestString(
   lang: string,
   searchText: string,
   filter: string | string[],

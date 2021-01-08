@@ -1,6 +1,6 @@
 import { IContentEntry } from "../../types";
 
-export function getSolrContentResult(
+export function transformSolrResultToContentEntry(
   entity: any,
   lang: string,
   highlightingContent: any
