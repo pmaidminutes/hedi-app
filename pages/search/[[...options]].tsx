@@ -4,8 +4,8 @@
  * for language switching see ../index.tsx
  */
 
-import { BreadCrumb, HediHeader } from "@/common/components";
 import { IsIHTTPError } from "@/common/errorHandling";
+import { BreadCrumb, Header } from "@/modules/shell/components";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
@@ -47,7 +47,7 @@ export default function searchPage() {
 
   return (
     <div>
-      <HediHeader pageTitle={"Search"} translations={[]} />
+      <Header pageTitle={"Search"} translations={[]} />
 
       <BreadCrumb />
       <main className="bx--grid">

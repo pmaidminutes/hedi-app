@@ -1,7 +1,7 @@
 // Types
 import { ITyped } from "@/common/model/cms";
 import { HTMLWithNextImage } from "@/common/html";
-import { TagList } from "@/hedi-components/TagList";
+import { TagList } from "@/modules/common/components";
 import { IArticle } from "../../../types";
 import { AudioPlayer } from "@components";
 import { buildAssetUrl } from "@/common/utils";

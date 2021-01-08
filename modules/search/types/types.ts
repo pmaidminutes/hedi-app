@@ -13,3 +13,8 @@ export interface IHighlightedContent {
   highlightedTitle: string;
   highlightedBody: string | string[];
 }
+
+export interface ISuggestEntry {
+  term: string;
+  weight: number;
+}

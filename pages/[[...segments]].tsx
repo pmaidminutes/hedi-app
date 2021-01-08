@@ -17,7 +17,8 @@ import {
   getStaticProps as getGlossaryProps,
 } from "@/modules/editorial/glossary/server";
 // Components
-import { BreadCrumb, HediHeader } from "@/common/components";
+
+import { BreadCrumb, Header } from "@/modules/shell/components";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 import { TryArticle } from "@/modules/editorial/article/client/components";
@@ -69,7 +70,7 @@ export default function segments(props: ISegmentProps) {
       <Head>
         <title>HEDI App</title>
       </Head>
-      <HediHeader
+      <Header
         pageTitle={pageTitle}
         translations={content.translations}
         colorClass={colorClass}

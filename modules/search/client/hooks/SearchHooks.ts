@@ -1,8 +1,9 @@
+import useSWR from "swr";
 import { IHTTPError } from "@/common/types";
 import { jsonFetcher } from "@/common/utils";
 import { IArticle } from "@/modules/editorial/article/types";
 import { ICategory } from "@/modules/editorial/category/types";
-import useSWR from "swr";
+import { ISuggestEntry } from "../../types";
 
 export function useSearch(
   searchText: string,
@@ -21,14 +22,13 @@ export function useSearch(
 }
 
 export function useSuggest(suggestText?: string) {
-  const splitWords = suggestText?.split(" ");
-  const modifiedText = splitWords
-    ? splitWords[splitWords.length - 1]
-    : suggestText;
-
-  const swrResult = useSWR<IHTTPError | string[]>(
+  const swrResult = useSWR<IHTTPError | ISuggestEntry[]>(
     suggestText ? "/api/en/suggest/" + encodeURI(suggestText) : null,
-    url => jsonFetcher<any>(url).then(response => response.terms.voll)
+    url =>
+      jsonFetcher<any>(url).then(
+        response =>
+          response.suggest.en[suggestText ? suggestText : "default"].suggestions
+      )
   );
   return { ...swrResult };
 }

@@ -1,11 +1,11 @@
-import { LanguageSwitch } from "@/common/components";
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { Form } from "carbon-components-react";
 import { IEntityLocalized } from "@/common/model/cms";
 import { LogInOut } from "@/modules/auth/client";
-import { Logo } from "@components";
-import { Form } from "carbon-components-react";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { SearchInput } from "../../../modules/search/client/components";
+import { SearchInput } from "@/modules/search/client/components";
+import { LanguageSwitch } from "../LanguageSwitch";
+import { Logo } from "../Logo";
 
 export interface HeaderProps {
   pageTitle: string;
@@ -13,7 +13,7 @@ export interface HeaderProps {
   // TODO: remove when integrated in drupal
   colorClass?: string;
 }
-export const HediHeader: React.FunctionComponent<HeaderProps> = ({
+export const Header: React.FunctionComponent<HeaderProps> = ({
   pageTitle,
   translations,
   // TODO: remove when integrated in drupal

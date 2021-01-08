@@ -3,7 +3,7 @@ import { getCategoryPaths } from "../../query";
 
 export const getStaticPaths = async (
   locales: string[]
-): Promise<ISegmentPath[] | undefined> => {
+): Promise<ISegmentPath[]> => {
   const paths = [];
   for (let locale of locales) {
     paths.push({
