@@ -19,7 +19,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
     console.log("err");
   }
 
-  const suggestItemSelected = (text: string) => {
+  const handleSuggestSelected = (text: string) => {
     setSelectedSuggestion(text);
     props.onSuggestSelect(text);
   };
@@ -44,7 +44,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
                 <li
                   style={{ padding: "5px" }}
                   key={suggestedResult}
-                  onClick={e => suggestItemSelected(suggestedResult)}>
+                  onClick={e => handleSuggestSelected(suggestedResult)}>
                   {suggestedResult}
                 </li>
               ) : (

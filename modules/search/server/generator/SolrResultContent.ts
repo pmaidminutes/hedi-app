@@ -1,4 +1,4 @@
-import { IContentEntry } from "../../types/types";
+import { IContentEntry } from "../../types";
 
 export function getSolrContentResult(
   entity: any,
