@@ -1,9 +1,7 @@
-// TS
 import { ITagged } from "@/common/model/cms";
-// Components
 import { Tag } from "../Tag";
 
-export const TagList = ({ tags }: ITagged) => {
+export const TagList = ({ tags }: ITagged): JSX.Element => {
   return (
     <div className="bx--grid mb-l-sm">
       <h3 className="mt-s-md">Browse by tags</h3>

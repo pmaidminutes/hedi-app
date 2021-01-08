@@ -1,6 +1,6 @@
 import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
-
+// TODO refactor when changing BreadCrumb
 export const getStaticProps: GetStaticProps<any> = async ({
   locale,
   locales,

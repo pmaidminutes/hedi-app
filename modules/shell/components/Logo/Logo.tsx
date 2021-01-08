@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import Link from "next/link";
 
-export const Logo = () => {
+export const Logo = (): JSX.Element => {
   const router = useRouter();
   const { locale } = router;
 

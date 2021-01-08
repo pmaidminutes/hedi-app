@@ -12,7 +12,7 @@ export const LanguageSwitch = ({
   translations,
 }: {
   translations: IEntityLocalized[];
-}) => {
+}): JSX.Element => {
   const router = useRouter();
   const { locales, asPath: currentPath, locale } = router;
 
