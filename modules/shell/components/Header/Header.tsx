@@ -1,12 +1,11 @@
+import { useState } from "react";
+import { useRouter } from "next/router";
+import { Form } from "carbon-components-react";
+import { IEntityLocalized } from "@/common/model/cms";
+import { LogInOut } from "@/modules/auth/client";
+import { SearchInput } from "@/modules/search/client/components";
 import { LanguageSwitch } from "../LanguageSwitch";
 import { Logo } from "../Logo";
-import { IEntityLocalized } from "@/common/model/cms";
-
-import { LogInOut } from "@/modules/auth/client";
-import { Form } from "carbon-components-react";
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { SearchInput } from "@/common/components";
 
 export interface HeaderProps {
   pageTitle: string;

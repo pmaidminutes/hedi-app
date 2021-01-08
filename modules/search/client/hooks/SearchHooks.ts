@@ -1,10 +1,10 @@
+import useSWR from "swr";
 import { IHTTPError } from "@/common/types";
 import { jsonFetcher } from "@/common/utils";
 import { IArticle } from "@/modules/editorial/article/types";
-import useSWR from "swr";
-// TODO change from
-import { ICategory } from "../../editorial/category/types";
-import { ISuggestEntry } from "../types";
+import { ICategory } from "@/modules/editorial/category/types";
+import { IGlossaryTerm } from "@/modules/editorial/glossary/types/glossary";
+import { ISuggestEntry } from "../../types";
 
 export function useSearch(
   searchText: string,
@@ -13,7 +13,9 @@ export function useSearch(
 ) {
   const apiPath = "/api/" + lang + "/search/";
 
-  const swrResult = useSWR<IHTTPError | (IArticle | ICategory)[]>(
+  const swrResult = useSWR<
+    IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]
+  >(
     searchText?.length > 3
       ? apiPath + encodeURI(searchText + "/" + entityType)
       : null,

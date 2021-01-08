@@ -1,7 +1,10 @@
 import { errorHandling } from "@/common/errorHandling";
 import { IHTTPError } from "@/common/types";
-import { getSolrContentResult, getSolrRequestParams } from "../generator";
-import { IContentEntry } from "../types";
+import { IContentEntry } from "../../types/types";
+import {
+  transformParamsToSolrRequestString,
+  transformSolrResultToContentEntry,
+} from "../functions";
 
 export async function searchServer(
   lang: string,
@@ -9,7 +12,7 @@ export async function searchServer(
   filter: string | string[],
   getHighlighted: boolean
 ): Promise<IContentEntry[] | IHTTPError> {
-  const reqBody = getSolrRequestParams(
+  const reqBody = transformParamsToSolrRequestString(
     lang,
     searchText,
     filter,
@@ -33,6 +36,11 @@ export async function searchServer(
 
   const highlightingContent = jsonResponse.highlighting;
   return content.map((entity: any) =>
-    getSolrContentResult(entity, lang, highlightingContent[entity.id])
+    transformSolrResultToContentEntry(
+      entity,
+      lang,
+      highlightingContent[entity.id]
+    )
   ) as Promise<IContentEntry[]>;
 }
+``;

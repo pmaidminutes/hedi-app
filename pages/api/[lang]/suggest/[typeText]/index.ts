@@ -5,7 +5,7 @@
  * nest language specific calls into this folder
  */
 
-import { suggestServer } from "@/modules/search/request";
+import { suggestServer } from "@/modules/search/server/request";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 
 const suggestHandler: NextApiHandler<any> = async (

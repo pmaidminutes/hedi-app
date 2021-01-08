@@ -1,11 +1,11 @@
+import { useState } from "react";
 import { IsIHTTPError } from "@/common/errorHandling";
 import { HTMLWithNextImage } from "@/common/html";
-import { useSuggest } from "@/modules/search/hooks";
-import { ISuggestEntry } from "@/modules/search/types";
-import { useState } from "react";
+import { ISuggestEntry } from "../../types";
+import { useSuggest } from "../hooks";
 interface SuggestProps {
   query: string;
-  suggestionSelected: (text: string) => void;
+  onSuggestSelect: (text: string) => void;
 }
 export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
   props: SuggestProps
@@ -19,15 +19,16 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
     //throw new Error(error);
     console.log("err");
   }
+
   const stripHtml = (taggedText: string): string => {
     let divNode = document.createElement("DIV");
     divNode.innerHTML = taggedText;
     return divNode.textContent || divNode.innerText || "";
   };
-  const suggestItemSelected = (text: string) => {
+  const handleSuggestSelected = (text: string) => {
     const plainText = stripHtml(text);
     setSelectedSuggestion(plainText);
-    props.suggestionSelected(plainText);
+    props.onSuggestSelect(plainText);
   };
   return (
     <>
@@ -45,15 +46,15 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
         role="listbox"
         id="suggestion-list">
         {data && !IsIHTTPError(data)
-          ? data.map((suggestEntry: ISuggestEntry, index) => (
+          ? data.map((suggestedResult: ISuggestEntry, index) => (
               <li
-                style={{ padding: "3px" }}
+                style={{ padding: "5px" }}
                 key={index}
-                onClick={e => suggestItemSelected(suggestEntry.term)}>
-                <HTMLWithNextImage data={suggestEntry.term} />
+                onClick={e => handleSuggestSelected(suggestedResult.term)}>
+                <HTMLWithNextImage data={suggestedResult.term} />
               </li>
             ))
-          : ""}
+          : null}
       </ul>
     </>
   );

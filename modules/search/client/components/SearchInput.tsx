@@ -45,12 +45,9 @@ export const SearchInput: React.FunctionComponent<SearchInputProps> = ({
         {...searchProps}
       />
 
-      {
-        //TODO to change the lang value
-      }
       <AutoSuggest
         query={suggestQuery}
-        suggestionSelected={handleSuggestSelected}
+        onSuggestSelect={handleSuggestSelected}
       />
     </>
   );

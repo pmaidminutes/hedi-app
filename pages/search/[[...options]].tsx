@@ -4,13 +4,13 @@
  * for language switching see ../index.tsx
  */
 
-import { BreadCrumb, Header } from "@/modules/shell/components";
-import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
-import { CategoryEntry } from "@/modules/editorial/category/client/components";
-import { ArticleEntry } from "@/modules/editorial/article/client/components";
-import { SearchInput } from "@/common/components/Search";
 import { IsIHTTPError } from "@/common/errorHandling";
-import { useSearch } from "@/modules/search/hooks";
+import { BreadCrumb, Header } from "@/modules/shell/components";
+import { ArticleEntry } from "@/modules/editorial/article/client/components";
+import { CategoryEntry } from "@/modules/editorial/category/client/components";
+import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
+import { SearchInput } from "@/modules/search/client/components";
+import { useSearch } from "@/modules/search/client/hooks";
 import { Loading } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";

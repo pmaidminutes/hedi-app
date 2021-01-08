@@ -1,9 +1,9 @@
-export function getSolrRequestParams(
+export function transformParamsToSolrRequestString(
   lang: string,
   searchText: string,
   filter: string | string[],
   getHighlighted: boolean
-) {
+): string {
   const languageFilter = `) `;
   const solarFields =
     "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type, ss_vid,its_nid";
