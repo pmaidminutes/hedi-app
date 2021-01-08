@@ -108,7 +108,7 @@ export default function searchPage() {
                       return (
                         <GlossaryTerm
                           glossaryTerm={entry}
-                          selected={true}
+                          isSelected={true}
                           translationLang={defaultLocale}
                           key={entry.route + locale}
                         />
