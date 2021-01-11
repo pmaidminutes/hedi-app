@@ -47,7 +47,7 @@ export default function searchPage() {
 
   return (
     <div>
-      <Header pageTitle={"Search"} translations={[]} />
+      <Header label={"Search"} translations={[]} />
 
       <BreadCrumb />
       <main className="bx--grid">
