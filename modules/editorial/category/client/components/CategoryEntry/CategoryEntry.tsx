@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ICategoryEntry } from "../../../types";
-import { buildAssetUrl } from "@/common/utils";
+import { buildAssetUrl } from "@/modules/common/utils";
 
 export const CategoryEntry = ({
   category,

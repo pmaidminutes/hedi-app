@@ -1,6 +1,6 @@
 import { useRouter } from "next/router";
 import { ITyped } from "@/common/model/cms";
-import { AssertClientSide } from "@/common/utils";
+import { AssertClientSide } from "@/modules/common/utils";
 import { IGlossaryGrouped } from "../../../types";
 import { GlossaryGroup } from "../GlossaryGroup";
 

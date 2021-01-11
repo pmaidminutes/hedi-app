@@ -4,7 +4,7 @@ import { HTMLWithNextImage } from "@/modules/react/html";
 import { TagList } from "@/modules/common/components";
 import { IArticle } from "../../../types";
 import { AudioPlayer } from "@components";
-import { buildAssetUrl } from "@/common/utils";
+import { buildAssetUrl } from "@/modules/common/utils";
 
 interface IArticleProps {
   content: IArticle;

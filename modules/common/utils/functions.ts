@@ -7,6 +7,7 @@ export function AssertServerSide() {
   return typeof window === "undefined";
 }
 
+// HACK: should be solved on backend gql side
 // --- Build assets URL --- //
 export function buildAssetUrl(url: string | undefined): string {
   if (url === undefined) return "";
