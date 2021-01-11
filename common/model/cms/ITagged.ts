@@ -1,4 +1,3 @@
-import { gql } from "@/common/graphql";
 import { IEntityTranslated, EntityTranslatedFields } from "./IEntityTranslated";
 
 // defined to be overwritten later
@@ -18,10 +17,4 @@ export const TaggedFields = `
   tags {
     ${EntityTranslatedFields}
   }
-`;
-
-export const TaggedFrag = gql`
-fragment TaggedFrag on ITagged {
-  ${TaggedFields}
-}
 `;

@@ -1,4 +1,3 @@
-import { gql } from "@/common/graphql";
 import { implementsITyped, ITyped, TypedFields } from "./ITyped";
 
 export interface IEntity extends ITyped {
@@ -16,8 +15,3 @@ export function isIEntity(obj: any): obj is IEntity {
 export const EntityFields = `${TypedFields}
 route
 label`;
-
-export const EntityFrag = gql`
-fragment EntityFrag on IEntity {
-  ${EntityFields}
-}`;

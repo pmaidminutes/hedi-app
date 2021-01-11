@@ -1,5 +1,3 @@
-import { gql } from "@/common/graphql";
-
 export interface ILocalized {
   lang: string;
 }
@@ -11,8 +9,3 @@ export function isILocalized(obj: any): obj is ILocalized {
 }
 
 export const LocalizedFields = `lang`;
-
-export const LocalizedFrag = gql`
-fragment LocalizedFrag on ILocalized {
-  ${LocalizedFields}
-}`;

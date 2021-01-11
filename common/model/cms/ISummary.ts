@@ -1,5 +1,3 @@
-import { gql } from "@/common/graphql";
-
 export interface ISummary {
   summary: string;
 }
@@ -12,8 +10,3 @@ export function isISummary(obj: any): obj is ISummary {
 }
 
 export const SummaryFields = `summary`;
-
-export const SummaryFrag = gql`
-fragment SummaryFrag on ISummary {
-  ${SummaryFields}
-}`;

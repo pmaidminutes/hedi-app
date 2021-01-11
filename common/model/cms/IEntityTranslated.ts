@@ -1,4 +1,3 @@
-import { gql } from "@/common/graphql";
 import {
   IEntityLocalized,
   implementsIEntityLocalized,
@@ -25,8 +24,3 @@ export const EntityTranslatedFields = `
     ${EntityLocalizedFields}
   }
 `;
-
-export const EntityTranslatedFrag = gql`
-fragment EntityTranslatedFrag on IEntityTranslated {
-  ${EntityTranslatedFields}
-}`;

@@ -1,5 +1,3 @@
-import { gql } from "@/common/graphql";
-
 import {
   ContentFields,
   IContent,
@@ -24,11 +22,7 @@ export function isIEditorial<T extends IEntityLocalized>(
   return obj && isIContent(obj) && isITagged(obj) ? true : false;
 }
 
-export const EditorialFields = `${ContentFields}
+export const EditorialFields = `
+${ContentFields}
 ${SummaryFields}
 ${TaggedFields}`;
-
-export const EditorialFrag = gql`
-fragment EditorialFrag on IEditorial {
-  ${EditorialFields}
-}`;

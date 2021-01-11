@@ -1,5 +1,3 @@
-import { gql } from "@/common/graphql";
-
 export interface IBody {
   body: string;
 }
@@ -11,8 +9,3 @@ export function isIBody(obj: any): obj is IBody {
 }
 
 export const BodyFields = `body`;
-
-export const BodyFrag = gql`
-fragment BodyFrag on IBody {
-  ${BodyFields}
-}`;

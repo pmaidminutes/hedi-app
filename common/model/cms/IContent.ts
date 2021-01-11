@@ -1,4 +1,3 @@
-import { gql } from "@/common/graphql";
 import { BodyFields, IBody, implementsIBody } from "./IBody";
 import { IEntityLocalized } from "./IEntityLocalized";
 import {
@@ -22,8 +21,3 @@ export function isIContent<T extends IEntityLocalized>(
 
 export const ContentFields = `${EntityTranslatedFields}
 ${BodyFields}`;
-
-export const ContentFrag = gql`
-fragment ContentFrag on IContent {
-  ${ContentFields}
-}`;
