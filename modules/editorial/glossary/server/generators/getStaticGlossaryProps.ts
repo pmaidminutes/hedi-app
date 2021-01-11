@@ -1,4 +1,4 @@
-import { segmentsToRoute } from "@/common/types";
+import { segmentsToRoute } from "@/modules/common/utils";
 import { getGlossary } from "../../query";
 import { IGlossaryGrouped } from "../../types";
 

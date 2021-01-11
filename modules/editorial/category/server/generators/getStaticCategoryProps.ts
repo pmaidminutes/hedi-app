@@ -1,4 +1,4 @@
-import { segmentsToRoute } from "@/common/types";
+import { segmentsToRoute } from "@/modules/common/utils";
 import { ICategoryRoot } from "../../types";
 import { getCategory, getCategoryRoot } from "../../query";
 

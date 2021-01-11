@@ -15,6 +15,11 @@ export function buildAssetUrl(url: string | undefined): string {
   return `${BASE_URL}${url.split("files/")[1]}`;
 }
 
+export const routeToSegments = (route?: string) =>
+  route ? route.split("/").filter(s => s) : [];
+
+export const segmentsToRoute = (segments: string[]) => "/" + segments.join("/");
+
 export function jsonFetcher<T>(url: RequestInfo) {
   return fetch(url)
     .then(response => response.json())
