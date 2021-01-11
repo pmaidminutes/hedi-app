@@ -4,7 +4,7 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from "carbon-components-react";
-import { HTMLWithNextImage } from "@/common/html";
+import { HTMLWithNextImage } from "@/modules/react/html";
 import { IGlossaryTerm } from "../../../types";
 
 interface GlossaryProps {

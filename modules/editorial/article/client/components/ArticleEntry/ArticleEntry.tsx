@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { HTMLWithNextImage } from "@/common/html";
+import { HTMLWithNextImage } from "@/modules/react/html";
 import { IArticleEntry } from "../../../types";
 
 export const ArticleEntry = ({

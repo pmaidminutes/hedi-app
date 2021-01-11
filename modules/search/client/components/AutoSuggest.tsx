@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { IsIHTTPError } from "@/common/errorHandling";
-import { HTMLWithNextImage } from "@/common/html";
+import { HTMLWithNextImage } from "@/modules/react/html";
 import { ISuggestEntry } from "../../types";
 import { useSuggest } from "../hooks";
 interface SuggestProps {
