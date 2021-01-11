@@ -1,10 +1,9 @@
 import { useRouter } from "next/router";
 import { ITyped } from "@/common/model/cms";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import { TagList } from "@/modules/common/components";
-import { IArticle } from "../../../types";
-import { AudioPlayer } from "@components";
+import { AudioPlayer, TagList } from "@/modules/common/components";
 import { buildAssetUrl } from "@/modules/common/utils";
+import { IArticle } from "../../../types";
 
 interface IArticleProps {
   content: IArticle;
