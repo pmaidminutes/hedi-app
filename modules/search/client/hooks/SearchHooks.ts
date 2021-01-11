@@ -1,5 +1,5 @@
 import useSWR from "swr";
-import { IHTTPError } from "@/common/types";
+import { IHTTPError } from "@/modules/common/error";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IArticle } from "@/modules/editorial/article/types";
 import { ICategory } from "@/modules/editorial/category/types";

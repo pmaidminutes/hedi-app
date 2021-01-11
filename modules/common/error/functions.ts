@@ -1,4 +1,4 @@
-import { IHTTPError } from "@/common/types";
+import { IHTTPError } from "./types";
 
 export function errorHandling(response: Response) {
   return new Promise((resolve, reject) =>
@@ -6,8 +6,4 @@ export function errorHandling(response: Response) {
       ? resolve({ code: response.status, text: "Something went wrong !" })
       : resolve({ code: response.status, text: "No results yet!" })
   ) as Promise<IHTTPError>;
-}
-export function IsIHTTPError(arg: any): arg is IHTTPError {
-  if (!arg || typeof arg !== "object") return false;
-  return "code" in arg && "text" in arg;
 }

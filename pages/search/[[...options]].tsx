@@ -4,7 +4,7 @@
  * for language switching see ../index.tsx
  */
 
-import { IsIHTTPError } from "@/common/errorHandling";
+import { IsIHTTPError } from "@/modules/common/error";
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";

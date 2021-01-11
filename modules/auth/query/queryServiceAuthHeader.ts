@@ -1,4 +1,4 @@
-import { IsIHTTPError } from "@/common/errorHandling";
+import { IsIHTTPError } from "@/modules/common/error";
 import { toAuthHeader } from "./utils";
 import { authorizeService } from "./authorizeService";
 

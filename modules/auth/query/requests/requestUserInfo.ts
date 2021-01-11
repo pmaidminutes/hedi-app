@@ -1,6 +1,6 @@
 import { IUserInfoResponse } from "../../types";
 import { toAuthHeader } from "../utils";
-import { IHTTPError } from "@/common/types";
+import { IHTTPError } from "@/modules/common/error";
 
 export async function requestUserInfo(accessToken: string, csrfToken: string) {
   const response = await fetch(

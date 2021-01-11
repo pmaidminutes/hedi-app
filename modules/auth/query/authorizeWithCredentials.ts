@@ -1,7 +1,7 @@
 import { requestUserInfo } from "./requests";
 import { IUserAuth } from "../types";
 import { getAccess } from "./functions";
-import { IsIHTTPError } from "@/common/errorHandling";
+import { IsIHTTPError } from "@/modules/common/error";
 
 export async function authorizeWithCredentials(
   username: string,

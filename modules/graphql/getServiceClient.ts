@@ -1,4 +1,4 @@
-import { IsIHTTPError } from "@/common/errorHandling";
+import { IsIHTTPError } from "@/modules/common/error";
 import { queryServiceAuthHeader } from "@/modules/auth/query";
 import { GQLEndpoint } from "./config";
 import { getClient } from "./getClient";

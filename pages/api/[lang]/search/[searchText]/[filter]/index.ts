@@ -1,5 +1,4 @@
-import { IsIHTTPError } from "@/common/errorHandling";
-import { IHTTPError } from "@/common/types";
+import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
 import { getArticle } from "@/modules/editorial/article/query";
 import { IArticle } from "@/modules/editorial/article/types";
 import { getCategory } from "@/modules/editorial/category/query";

@@ -1,4 +1,4 @@
-import { IHTTPError } from "@/common/types";
+import { IHTTPError } from "@/modules/common/error";
 
 export async function requestCSRF() {
   const response = await fetch(

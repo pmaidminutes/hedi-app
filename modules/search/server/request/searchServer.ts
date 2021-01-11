@@ -1,5 +1,4 @@
-import { errorHandling } from "@/common/errorHandling";
-import { IHTTPError } from "@/common/types";
+import { errorHandling, IHTTPError } from "@/modules/common/error";
 import { IContentEntry } from "../../types/types";
 import {
   transformParamsToSolrRequestString,

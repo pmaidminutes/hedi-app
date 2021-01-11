@@ -1,4 +1,4 @@
-import { IsIHTTPError } from "@/common/errorHandling";
+import { IsIHTTPError } from "@/modules/common/error";
 import { requestCSRF } from "./requests";
 import { getAccess } from "./functions";
 

@@ -1,7 +1,7 @@
 import * as querystring from "querystring";
 import { ITokenResponse } from "./types";
 import { toCSRFObject } from "../utils";
-import { IHTTPError } from "@/common/types";
+import { IHTTPError } from "@/modules/common/error";
 
 export async function requestToken(
   username: string,

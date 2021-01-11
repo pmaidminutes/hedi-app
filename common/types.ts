@@ -13,8 +13,3 @@ export interface ISegmentPath {
   params: ISegmentParam;
   locale: string;
 }
-
-export interface IHTTPError {
-  code: number;
-  text: string;
-}

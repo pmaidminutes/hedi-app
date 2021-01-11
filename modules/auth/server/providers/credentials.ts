@@ -1,4 +1,4 @@
-import { IsIHTTPError } from "@/common/errorHandling";
+import { IsIHTTPError } from "@/modules/common/error";
 import Providers from "next-auth/providers";
 import { authorizeWithCredentials } from "../../query";
 
