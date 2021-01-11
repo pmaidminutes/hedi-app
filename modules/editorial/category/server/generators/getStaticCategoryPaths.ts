@@ -1,4 +1,4 @@
-import { ISegmentPath } from "@/common/types";
+import { ISegmentPath } from "../../../types";
 import { getCategoryPaths } from "../../query";
 
 export const getStaticPaths = async (

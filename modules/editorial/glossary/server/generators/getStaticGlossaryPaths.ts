@@ -1,5 +1,5 @@
+import { ISegmentPath } from "../../../types";
 import { getGlossaryPath } from "../../query";
-import { ISegmentPath } from "@/common/types";
 
 export const getStaticPaths = async (
   locales: string[]

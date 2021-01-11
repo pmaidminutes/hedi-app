@@ -1,8 +1,7 @@
 import Head from "next/head";
-import { useRouter } from "next/router";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { ISegmentParam } from "@/common/types";
+import { ISegmentParam } from "@/modules/editorial/types";
 import {
   IAppStyled,
   IEntityLocalized,
