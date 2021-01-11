@@ -1,4 +1,4 @@
-import { ITag } from "@/common/model/cms";
+import { ITag } from "@/modules/model";
 import Link from "next/link";
 
 export const Tag = ({ tag }: { tag: ITag }): JSX.Element => {

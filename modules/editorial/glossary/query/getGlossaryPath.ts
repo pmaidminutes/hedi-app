@@ -1,6 +1,6 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { routeToSegments } from "@/modules/common/utils";
-import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
+import { IEntityLocalized, EntityLocalizedFields } from "@/modules/model";
 import { ISegmentPath } from "../../types";
 
 export async function getGlossaryPath(lang: string): Promise<ISegmentPath[]> {

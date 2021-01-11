@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { ITyped } from "@/common/model/cms";
+import { ITyped } from "@/modules/model";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { AudioPlayer, TagList } from "@/modules/common/components";
 import { buildAssetUrl } from "@/modules/common/utils";

@@ -1,6 +1,6 @@
 // Types
 import { ICategory } from "../../../types";
-import { ITyped } from "@/common/model/cms";
+import { ITyped } from "@/modules/model";
 import { CategoryEntry } from "../CategoryEntry";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 

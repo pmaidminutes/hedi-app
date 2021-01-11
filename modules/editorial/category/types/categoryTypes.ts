@@ -5,7 +5,7 @@ import {
   EntityLocalizedFields,
   EntityTranslatedFields,
   IAppStyled,
-} from "@/common/model/cms";
+} from "@/modules/model";
 import {
   ArticleEntryFields,
   IArticleEntry,

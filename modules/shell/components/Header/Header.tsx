@@ -5,7 +5,7 @@ import {
   IAppStyled,
   IEntityLocalized,
   IEntityTranslated,
-} from "@/common/model/cms";
+} from "@/modules/model";
 import { LogInOut } from "@/modules/auth/client";
 import { SearchInput } from "@/modules/search/client/components";
 import { LanguageSwitch } from "../LanguageSwitch";

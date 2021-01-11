@@ -4,7 +4,7 @@ import {
   IEntityLocalized,
   IEntityTranslated,
   EntityTranslatedFields,
-} from "@/common/model/cms";
+} from "@/modules/model";
 
 export interface IGlossaryTerm
   extends IEntityTranslated<IEntityLocalized>,

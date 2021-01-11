@@ -6,7 +6,7 @@ import {
   IAppStyled,
   IEntityLocalized,
   IEntityTranslated,
-} from "@/common/model/cms";
+} from "@/modules/model";
 // generators
 import {
   getStaticPaths as getCategoryPaths,

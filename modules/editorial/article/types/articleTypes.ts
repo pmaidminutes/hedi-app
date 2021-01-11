@@ -9,7 +9,7 @@ import {
   EntityLocalizedFields,
   SummaryFields,
   IAppStyled,
-} from "@/common/model/cms";
+} from "@/modules/model";
 import { AudioFields, IAudio } from "@/modules/editorial/types/audio";
 import { IImage, ImageFields } from "@/modules/editorial/types/image";
 export interface IArticleEntry extends IEntityLocalized, ISummary {}

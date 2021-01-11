@@ -1,5 +1,5 @@
 // Types
-import { IEntityLocalized } from "@/common/model/cms";
+import { IEntityLocalized } from "@/modules/model";
 import { Dropdown } from "carbon-components-react";
 import { useRouter } from "next/router";
 

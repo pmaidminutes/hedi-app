@@ -1,4 +1,4 @@
-import { ITagged } from "@/common/model/cms";
+import { ITagged } from "@/modules/model";
 import { Tag } from "../Tag";
 
 export const TagList = ({ tags }: ITagged): JSX.Element => {
