@@ -1,4 +1,4 @@
-import { getServiceClient, gql } from "@/common/graphql";
+import { getServiceClient, gql } from "@/modules/graphql";
 
 export async function getAllLanguages(lang = "de") {
   const query = gql`

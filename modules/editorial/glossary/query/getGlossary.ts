@@ -1,4 +1,4 @@
-import { getServiceClient, gql } from "@/common/graphql";
+import { getServiceClient, gql } from "@/modules/graphql";
 import { GlossaryFields, IGlossary, IGlossaryGrouped } from "../types";
 import { glossaryToGroupedGlossary } from "./functions";
 

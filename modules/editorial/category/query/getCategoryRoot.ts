@@ -1,4 +1,4 @@
-import { getServiceClient, gql } from "@/common/graphql";
+import { getServiceClient, gql } from "@/modules/graphql";
 import { ICategoryRoot, CategoryRootFields } from "../types";
 
 export async function getCategoryRoot(

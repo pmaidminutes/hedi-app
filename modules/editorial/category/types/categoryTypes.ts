@@ -1,4 +1,4 @@
-import { gql } from "@/common/graphql";
+import { gql } from "@/modules/graphql";
 import {
   IEntityTranslated,
   IEntityLocalized,

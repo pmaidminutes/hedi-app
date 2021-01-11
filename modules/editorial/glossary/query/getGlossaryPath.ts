@@ -1,4 +1,4 @@
-import { getServiceClient, gql } from "@/common/graphql";
+import { getServiceClient, gql } from "@/modules/graphql";
 import { IEntityLocalized, EntityLocalizedFields } from "@/common/model/cms";
 import { ISegmentPath, routeToSegments } from "@/common/types";
 

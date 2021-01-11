@@ -1,5 +1,3 @@
-import { gql } from "@/common/graphql";
-
 export interface IImage {
   alt: string;
   width: number;
@@ -12,10 +10,4 @@ export const ImageFields = `
   url
   width
   height
-`;
-
-export const ImageFrag = gql`
-fragment FImage on Image {
-  ${ImageFields}
-}
 `;
