@@ -6,7 +6,7 @@
 import { Content, ListItem, SideNav } from "carbon-components-react";
 import Head from "next/head";
 import { useRouter } from "next/router";
-import { LanguageSwitch } from "../../common/components";
+import { LanguageSwitch } from "@/modules/shell/components";
 
 export default function ChatIndex() {
   const router = useRouter();
