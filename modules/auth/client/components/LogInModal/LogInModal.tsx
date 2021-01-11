@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { useOnClickOutside } from "@/common/hooks";
+import { useOnClickOutside } from "@/modules/common/hooks";
 import { LogInForm } from "../LogInForm";
 
 export const LogInModal = ({

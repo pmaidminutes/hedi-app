@@ -1,7 +1,4 @@
-import {
-  ChangeEvent,
-  useState,
-} from "react";
+import { ChangeEvent, useState } from "react";
 
 export function useTextInput(defaultText = "") {
   const [value, setValue] = useState(defaultText);

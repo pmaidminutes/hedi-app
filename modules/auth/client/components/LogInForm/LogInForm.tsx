@@ -1,6 +1,6 @@
 import { FormEvent } from "react";
 import { login } from "../../functions";
-import { useTextInput } from "@/common/hooks";
+import { useTextInput } from "@/modules/common/hooks";
 import { Form } from "carbon-components-react";
 
 export const LogInForm = ({ onClose }: { onClose?: () => void }) => {
