@@ -7,11 +7,6 @@ export function AssertServerSide() {
   return typeof window === "undefined";
 }
 
-// --- Slugify Title --- //
-export function slugifyTitle(title: string): string {
-  return title.replace(/\s+$/g, "").replace(/\s+/g, "-").toLowerCase();
-}
-
 // --- Build assets URL --- //
 export function buildAssetUrl(url: string | undefined): string {
   if (url === undefined) return "";
