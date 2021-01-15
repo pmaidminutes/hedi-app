@@ -1,9 +1,8 @@
-export interface IAudio {
-  label: string;
-  url: string;
-}
+import { IEntityLocalized } from "@/modules/model";
+
+export interface IAudio extends IEntityLocalized {}
 
 export const AudioFields = `
   label
-  url
+  route
 `;
