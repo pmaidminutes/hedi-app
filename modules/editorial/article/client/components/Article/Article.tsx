@@ -1,8 +1,8 @@
-import { useRouter } from "next/router";
-import { ITyped } from "@/modules/model";
-import { HTMLWithNextImage } from "@/modules/react/html";
 import { AudioPlayer, TagList } from "@/modules/common/components";
 import { buildAssetUrl } from "@/modules/common/utils";
+import { ITyped } from "@/modules/model";
+import { HTMLWithNextImage } from "@/modules/react/html";
+import { useRouter } from "next/router";
 import { IArticle } from "../../../types";
 
 interface IArticleProps {
@@ -46,7 +46,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
                 //TODO fix static url hard code and fix in safari for audio
               }
               {audio !== null ? (
-                <AudioPlayer src={buildAssetUrl(audio?.url)} />
+                <AudioPlayer src={buildAssetUrl(audio?.route)} />
               ) : null}
               <div className="py-s-md">
                 <HTMLWithNextImage

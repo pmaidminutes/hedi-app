@@ -1,13 +1,14 @@
-export interface IImage {
+import { IEntityLocalized } from "@/modules/model";
+
+export interface IImage extends IEntityLocalized {
   alt: string;
   width: number;
   height: number;
-  url: string;
 }
 
 export const ImageFields = `
   alt
-  url
+  route
   width
   height
 `;
