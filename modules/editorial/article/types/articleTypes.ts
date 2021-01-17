@@ -9,6 +9,7 @@ import {
   EntityLocalizedFields,
   SummaryFields,
   IAppStyled,
+  IRouteLabeled,
 } from "@/modules/model";
 import { AudioFields, IAudio } from "@/modules/editorial/types/audio";
 import { IImage, ImageFields } from "@/modules/editorial/types/image";
@@ -26,11 +27,13 @@ fragment ArticleEntryFrag on Article {
 export interface IArticle
   extends IArticleEntry,
     IEditorial<IEntityLocalized>,
-    IAppStyled {
+    IAppStyled,
+    IRouteLabeled {
   image: IImage;
   audio: IAudio;
   category: IEntity;
   appstyle: string;
+  routelabel: string;
 }
 
 export function isIArticle(obj: any): obj is IArticle {
@@ -42,6 +45,7 @@ category { ${EntityFields} }
 image { ${ImageFields} }
 audio { ${AudioFields} }
 appstyle
+routelabel
 `;
 
 export const ArticleFrag = gql`
