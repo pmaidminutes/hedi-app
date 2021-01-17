@@ -1,4 +1,5 @@
 import Head from "next/head";
+import { useState, useEffect } from "react";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { ISegmentParam } from "@/modules/editorial/types";
@@ -68,8 +69,15 @@ export default function segments(props: ISegmentPageProps) {
   console.log({ content });
   const pageType = type === "Glossary" ? "static" : "dynamic";
   const routelabel = type === "Glossary" ? type : content.routelabel;
+  const { appstyle } = content;
+  const [hediStyle, setHediStyle] = useState("");
+
+  useEffect(() => {
+    setHediStyle(appstyle ?? "");
+  }, [appstyle]);
+
   return (
-    <div className={content.appstyle ?? ""}>
+    <div className={hediStyle}>
       <Head>
         <title>HEDI App</title>
       </Head>
