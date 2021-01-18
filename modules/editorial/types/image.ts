@@ -1,16 +1,14 @@
-import { IEntityLocalized } from "@/modules/model";
+import { FileFields, IFile } from "@/modules/model/IFile";
 
-export interface IImage extends IEntityLocalized {
+export interface IImage extends IFile {
   alt: string;
   width: number;
   height: number;
-  mime: string;
 }
 
 export const ImageFields = `
-  mime
+  ${FileFields}
   alt
-  route
   width
   height
 `;
