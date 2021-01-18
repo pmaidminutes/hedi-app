@@ -1,7 +1,7 @@
+import { buildAssetUrl } from "@/modules/common/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { ICategoryEntry } from "../../../types";
-import { buildAssetUrl } from "@/modules/common/utils";
 
 export const CategoryEntry = ({
   category,
@@ -23,7 +23,7 @@ export const CategoryEntry = ({
           <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
             <Image
               className="hedi-responsive-image"
-              src={buildAssetUrl(image?.url)}
+              src={buildAssetUrl(image?.route)}
               width={image?.width ?? 0}
               height={image?.height ?? 0}
               alt={image?.alt}

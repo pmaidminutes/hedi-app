@@ -1,13 +1,14 @@
-export interface IImage {
+import { FileFields, IFile } from "@/modules/model/IFile";
+
+export interface IImage extends IFile {
   alt: string;
   width: number;
   height: number;
-  url: string;
 }
 
 export const ImageFields = `
+  ${FileFields}
   alt
-  url
   width
   height
 `;
