@@ -11,6 +11,8 @@ import {
   IRouteLabeled,
 } from "@/modules/model";
 
+import { routeToSegments } from "@/modules/common/utils";
+
 export function constructBreadCrumbPathData(
   content:
     | (IEntityTranslated<IEntityLocalized> &
@@ -27,26 +29,20 @@ export function constructBreadCrumbPathData(
     let basePath = locale === defaultLocale ? "" : "/" + locale;
 
     if (type === "Category" || type === "Article") {
-      const pathArray = filterEmptyElements(route.split("/"));
+      const pathArray = routeToSegments(route);
 
       const names =
-        routelabel !== undefined
-          ? filterEmptyElements(routelabel.split("/"))
-          : label;
+        routelabel !== undefined ? routeToSegments(routelabel) : label;
 
       pathArray.forEach((path: string, index: number) => {
         basePath = basePath + "/" + path;
         composedPath.push({
           name: names[index],
           url: basePath,
-          currentPage: route.endsWith(path) ? true : false,
+          currentPage: pathArray[pathArray.length - 1] === path ? true : false,
         });
       });
     }
   }
   return composedPath;
-}
-
-function filterEmptyElements(array: string[]): string[] {
-  return array.filter((el: string) => el.trim() !== "");
 }
