@@ -6,6 +6,7 @@ import {
   EntityTranslatedFields,
   IAppStyled,
   IRouteLabeled,
+  RouteLabelFields,
 } from "@/modules/model";
 import {
   ArticleEntryFields,
@@ -33,15 +34,11 @@ export interface ICategoryRoot extends IEntityTranslated<IEntityLocalized> {
 export const CategoryRootFields = `${EntityTranslatedFields}
 categories { ${CategoryEntryFields} }`;
 
-export interface ICategory
-  extends ICategoryEntry,
-    ICategoryRoot,
-    IAppStyled,
-    IRouteLabeled {
+export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled {
   parent: number;
   articles: IArticleEntry[];
   appstyle: string;
-  routelabel: string;
+  routelabel: IRouteLabeled;
 }
 
 export function isICategory(obj: any): obj is ICategory {
@@ -54,7 +51,7 @@ parent
 articles { ${ArticleEntryFields} }
 appstyle
 image { ${ImageFields} }
-routelabel
+${RouteLabelFields}
 `;
 
 export const CategoryFrag = gql`
