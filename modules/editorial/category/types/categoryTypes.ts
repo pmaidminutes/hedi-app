@@ -5,6 +5,8 @@ import {
   EntityLocalizedFields,
   EntityTranslatedFields,
   IAppStyled,
+  IRouteLabeled,
+  RouteLabelFields,
 } from "@/modules/model";
 import {
   ArticleEntryFields,
@@ -36,6 +38,7 @@ export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled {
   parent: number;
   articles: IArticleEntry[];
   appstyle: string;
+  routelabel: IRouteLabeled;
 }
 
 export function isICategory(obj: any): obj is ICategory {
@@ -48,6 +51,7 @@ parent
 articles { ${ArticleEntryFields} }
 appstyle
 image { ${ImageFields} }
+${RouteLabelFields}
 `;
 
 export const CategoryFrag = gql`

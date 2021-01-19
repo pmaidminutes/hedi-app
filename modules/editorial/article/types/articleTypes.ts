@@ -9,6 +9,8 @@ import {
   EntityLocalizedFields,
   SummaryFields,
   IAppStyled,
+  IRouteLabeled,
+  RouteLabelFields,
 } from "@/modules/model";
 import { AudioFields, IAudio } from "@/modules/editorial/types/audio";
 import { IImage, ImageFields } from "@/modules/editorial/types/image";
@@ -31,6 +33,7 @@ export interface IArticle
   audio: IAudio;
   category: IEntity;
   appstyle: string;
+  routelabel: IRouteLabeled;
 }
 
 export function isIArticle(obj: any): obj is IArticle {
@@ -42,6 +45,7 @@ category { ${EntityFields} }
 image { ${ImageFields} }
 audio { ${AudioFields} }
 appstyle
+${RouteLabelFields}
 `;
 
 export const ArticleFrag = gql`

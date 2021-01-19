@@ -1,27 +1,31 @@
-import { GetStaticProps } from "next";
 import { useRouter } from "next/router";
-// TODO refactor when changing BreadCrumb
-export const getStaticProps: GetStaticProps<any> = async ({
-  locale,
-  locales,
-}) => {
-  return { props: { locales, locale } };
-};
-interface CrumbPath {
-  name: string;
-  url: string;
-  currentPage: boolean;
-}
-export interface BreadCrumbProps {
-  staticCrumb?: CrumbPath[];
-}
-export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
-  props: BreadCrumbProps
-) => {
-  const router = useRouter();
+import { constructBreadCrumbPathData } from "../../server";
+import {
+  IAppStyled,
+  IEntityLocalized,
+  IEntityTranslated,
+  IRouteLabeled,
+} from "@/modules/model";
 
-  const breadCrumbPath =
-    props.staticCrumb ?? constructUrl(router.asPath, router.locale ?? "de");
+interface IBreadCrumbProps {
+  content?: IEntityTranslated<IEntityLocalized> &
+    Partial<IAppStyled> &
+    Partial<IRouteLabeled>;
+}
+
+export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
+  props: IBreadCrumbProps
+): JSX.Element => {
+  const router = useRouter();
+  const { locale, defaultLocale } = router;
+  const content = props.content ?? null;
+
+  const breadCrumbPath = constructBreadCrumbPathData(
+    content,
+    locale ?? "de",
+    defaultLocale
+  );
+
   return (
     <div className="bx--grid">
       <div
@@ -30,23 +34,36 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
         <nav
           className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
           aria-label="breadcrumb">
-          <div className="bx--breadcrumb-item">
-            <a href="/" className="bx--link">
+          {breadCrumbPath.length > 0 ? (
+            <div className="bx--breadcrumb-item">
+              <a
+                href={`/${locale === defaultLocale ? "" : locale}`}
+                className="bx--link">
+                Home
+              </a>
+            </div>
+          ) : (
+            <div
+              className={`bx--breadcrumb-item${
+                breadCrumbPath.length === 0
+                  ? " bx--breadcrumb-item--current"
+                  : ""
+              }`}>
               Home
-            </a>
-          </div>
+            </div>
+          )}
           {breadCrumbPath.map((crumb, index) =>
             crumb.currentPage ? (
               <div
                 className="bx--breadcrumb-item bx--breadcrumb-item--current"
-                key={index}>
-                {crumb.name}
+                key={crumb.label + index}>
+                {crumb.label}
               </div>
             ) : (
-              <div className="bx--breadcrumb-item" key={index}>
+              <div className="bx--breadcrumb-item" key={crumb.label + index}>
                 {" "}
-                <a href={crumb.url} className="bx--link">
-                  {crumb.name}
+                <a href={crumb.route} className="bx--link">
+                  {crumb.label}
                 </a>
               </div>
             )
@@ -56,20 +73,3 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
     </div>
   );
 };
-function constructUrl(asPath: string, locale: string): CrumbPath[] {
-  const pathArray = asPath.split("/");
-  const composedPath: CrumbPath[] = [];
-  let basePath = "/" + locale;
-  pathArray.map((path: string) => {
-    if (path.trim() != "") {
-      basePath = basePath + "/" + path;
-      composedPath.push({
-        name: path.split("#")[0],
-        url: basePath,
-        currentPage: asPath.endsWith(path) ? true : false,
-      });
-    }
-  });
-
-  return composedPath;
-}

@@ -36,7 +36,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   return { paths, fallback: false };
 };
 
-interface ISegmentPageProps {
+export interface ISegmentPageProps {
   content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
 }
 
@@ -74,7 +74,7 @@ export default function segments(props: ISegmentPageProps) {
         <title>HEDI App</title>
       </Head>
       <Header {...content} />
-      <BreadCrumb />
+      <BreadCrumb content={content} />
       <main>
         <TryCategory {...content} />
         <TryArticle {...content} />
