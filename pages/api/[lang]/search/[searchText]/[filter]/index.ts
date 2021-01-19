@@ -18,7 +18,7 @@ const solrSearchHandler: NextApiHandler<
   const data = await searchServer(
     `${lang}`,
     `${searchText}`.split(" ").join(" || "),
-    filter,
+    `${filter}`,
     true
   );
 
@@ -27,7 +27,6 @@ const solrSearchHandler: NextApiHandler<
     const promises = [];
     for (const entry of data) {
       const highlight = entry.highlightedContent;
-      let underscore = /\_/;
       const highlightedBody = Array.isArray(highlight.highlightedBody)
         ? highlight.highlightedBody.join("...")
         : highlight.highlightedBody;

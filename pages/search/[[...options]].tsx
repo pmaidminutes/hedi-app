@@ -5,12 +5,12 @@
  */
 
 import { IsIHTTPError } from "@/modules/common/error";
-import { BreadCrumb, Header } from "@/modules/shell/components";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
+import { BreadCrumb, Header } from "@/modules/shell/components";
 import { Loading } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -20,7 +20,7 @@ export default function searchPage() {
 
   const router = useRouter();
   const options = router.query?.options ?? "";
-  const initialQueryText = Array.isArray(options) ? options[0] : options;
+  const initialQueryText = `${options}`;
 
   const [queryText, setQueryText] = useState(initialQueryText);
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function searchPage() {
   const locale = router.locale ?? "de";
   const defaultLocale = router.defaultLocale;
   // TODO implement filter options
-  const [filter, setFilter] = useState();
+  const [filter, setFilter] = useState(String);
 
   //TODO temporary feature
   let errorMessage: string = "";
@@ -61,13 +61,22 @@ export default function searchPage() {
           />
         </div>
 
-        <button className="bx--btn bx--btn--primary" type="button">
+        <button
+          className="bx--btn bx--btn--primary"
+          type="button"
+          onClick={e => setFilter("ss_type:article")}>
           articles
         </button>
-        <button className="bx--btn bx--btn--primary" type="button">
+        <button
+          className="bx--btn bx--btn--primary"
+          type="button"
+          onClick={e => setFilter("ss_type:*_tmp")}>
           profiles
         </button>
-        <button className="bx--btn bx--btn--primary" type="button">
+        <button
+          className="bx--btn bx--btn--primary"
+          type="button"
+          onClick={e => setFilter("ss_vid:categories")}>
           categories
         </button>
         <div className="hedi-separator"></div>

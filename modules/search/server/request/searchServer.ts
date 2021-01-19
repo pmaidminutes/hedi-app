@@ -8,7 +8,7 @@ import {
 export async function searchServer(
   lang: string,
   searchText: string,
-  filter: string | string[],
+  filter: string,
   getHighlighted: boolean
 ): Promise<IContentEntry[] | IHTTPError> {
   const reqBody = transformParamsToSolrRequestString(

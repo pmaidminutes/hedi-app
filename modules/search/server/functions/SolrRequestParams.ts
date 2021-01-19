@@ -1,7 +1,7 @@
 export function transformParamsToSolrRequestString(
   lang: string,
   searchText: string,
-  filter: string | string[],
+  searchFilter: string,
   getHighlighted: boolean
 ): string {
   const languageFilter = `) `;
@@ -23,7 +23,10 @@ export function transformParamsToSolrRequestString(
       !searchText || searchText.length === 0
         ? "*:*" + languageFilter
         : `voll:(` + searchText + languageFilter,
-    filter: `ss_search_api_language:${lang}`,
+    filter: [
+      `ss_search_api_language:${lang}`,
+      `${searchFilter !== "undefined" ? searchFilter : ""}`,
+    ],
     params: getHighlighted ? highlightParams : optionParams,
   };
   return JSON.stringify(requestBody);
