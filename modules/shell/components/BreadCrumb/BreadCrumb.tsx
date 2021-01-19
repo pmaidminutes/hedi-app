@@ -7,14 +7,15 @@ import {
   IRouteLabeled,
 } from "@/modules/model";
 
-interface BreadCrumbProps {
+interface IBreadCrumbProps {
   content?: IEntityTranslated<IEntityLocalized> &
     Partial<IAppStyled> &
     Partial<IRouteLabeled>;
 }
-export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
-  props: BreadCrumbProps
-) => {
+
+export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
+  props: IBreadCrumbProps
+): JSX.Element => {
   const router = useRouter();
   const { locale, defaultLocale } = router;
   const content = props.content ?? null;
@@ -24,6 +25,7 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
     locale ?? "de",
     defaultLocale
   );
+
   return (
     <div className="bx--grid">
       <div
@@ -50,24 +52,22 @@ export const BreadCrumb: React.FunctionComponent<BreadCrumbProps> = (
               Home
             </div>
           )}
-          {breadCrumbPath.length > 0
-            ? breadCrumbPath.map((crumb, index) =>
-                crumb.currentPage ? (
-                  <div
-                    className="bx--breadcrumb-item bx--breadcrumb-item--current"
-                    key={crumb.name + index}>
-                    {crumb.name}
-                  </div>
-                ) : (
-                  <div className="bx--breadcrumb-item" key={crumb.name + index}>
-                    {" "}
-                    <a href={crumb.url} className="bx--link">
-                      {crumb.name}
-                    </a>
-                  </div>
-                )
-              )
-            : null}
+          {breadCrumbPath.map((crumb, index) =>
+            crumb.currentPage ? (
+              <div
+                className="bx--breadcrumb-item bx--breadcrumb-item--current"
+                key={crumb.name + index}>
+                {crumb.name}
+              </div>
+            ) : (
+              <div className="bx--breadcrumb-item" key={crumb.name + index}>
+                {" "}
+                <a href={crumb.url} className="bx--link">
+                  {crumb.name}
+                </a>
+              </div>
+            )
+          )}
         </nav>
       </div>
     </div>
