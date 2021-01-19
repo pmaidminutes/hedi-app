@@ -7,7 +7,6 @@ import {
   IAppStyled,
   IEntityLocalized,
   IEntityTranslated,
-  IRouteLabeled,
 } from "@/modules/model";
 // generators
 import {
@@ -38,9 +37,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
 };
 
 export interface ISegmentPageProps {
-  content: IEntityTranslated<IEntityLocalized> &
-    Partial<IAppStyled> &
-    Partial<IRouteLabeled>;
+  content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
 }
 
 export const getStaticProps: GetStaticProps<
@@ -64,11 +61,6 @@ export const getStaticProps: GetStaticProps<
 
 export default function segments(props: ISegmentPageProps) {
   const { content } = props;
-  console.log({ content });
-  const { type } = content;
-  console.log({ content });
-  const pageType = type === "Glossary" ? "static" : "dynamic";
-  const routelabel = type === "Glossary" ? type : content.routelabel;
   const { appstyle } = content;
   const [hediStyle, setHediStyle] = useState("");
 
