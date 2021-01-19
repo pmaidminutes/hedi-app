@@ -1,33 +1,52 @@
-interface BreadCrumbProps {
+interface IBreadCrumbPath {
   name: string;
   url: string;
   currentPage: boolean;
 }
 
-export function constructBreadCrumbData(
-  asPath: string,
+import {
+  IAppStyled,
+  IEntityLocalized,
+  IEntityTranslated,
+  IRouteLabeled,
+} from "@/modules/model";
+
+export function constructBreadCrumbPathData(
+  content:
+    | (IEntityTranslated<IEntityLocalized> &
+        Partial<IAppStyled> &
+        Partial<IRouteLabeled>)
+    | null,
   locale: string,
-  routelabel: string,
   defaultLocale: string | undefined
-): BreadCrumbProps[] {
-  const composedPath: BreadCrumbProps[] = [];
-  let basePath = locale === defaultLocale ? "" : "/" + locale;
+): IBreadCrumbPath[] {
+  const composedPath: IBreadCrumbPath[] = [];
 
-  const pathArray = filterEmptyElements(asPath.split("/"));
-  const names = filterEmptyElements(routelabel.split("/"));
+  if (content !== null) {
+    const { route, routelabel, type, label } = content;
+    let basePath = locale === defaultLocale ? "" : "/" + locale;
 
-  pathArray.forEach((path: string, index: number) => {
-    basePath = basePath + "/" + path;
-    composedPath.push({
-      name: names[index],
-      url: basePath,
-      currentPage: asPath.endsWith(path) ? true : false,
-    });
-  });
+    if (type === "Category" || type === "Article") {
+      const pathArray = filterEmptyElements(route.split("/"));
 
-  function filterEmptyElements(array: string[]): string[] {
-    return array.filter((el: string) => el.trim() !== "");
+      const names =
+        routelabel !== undefined
+          ? filterEmptyElements(routelabel.split("/"))
+          : label;
+
+      pathArray.forEach((path: string, index: number) => {
+        basePath = basePath + "/" + path;
+        composedPath.push({
+          name: names[index],
+          url: basePath,
+          currentPage: route.endsWith(path) ? true : false,
+        });
+      });
+    }
   }
-
   return composedPath;
+}
+
+function filterEmptyElements(array: string[]): string[] {
+  return array.filter((el: string) => el.trim() !== "");
 }
