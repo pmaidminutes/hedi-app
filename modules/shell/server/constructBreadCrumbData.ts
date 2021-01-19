@@ -1,6 +1,5 @@
-interface IBreadCrumbPath {
-  name: string;
-  url: string;
+import { IEntity } from "@/modules/model";
+interface IBreadCrumbPath extends Omit<IEntity, "type"> {
   currentPage: boolean;
 }
 
@@ -37,8 +36,8 @@ export function constructBreadCrumbPathData(
       pathArray.forEach((path: string, index: number) => {
         basePath = basePath + "/" + path;
         composedPath.push({
-          name: names[index],
-          url: basePath,
+          label: names[index],
+          route: basePath,
           currentPage: pathArray[pathArray.length - 1] === path ? true : false,
         });
       });

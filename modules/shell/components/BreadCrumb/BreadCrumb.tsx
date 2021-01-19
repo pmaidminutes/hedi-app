@@ -56,14 +56,14 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
             crumb.currentPage ? (
               <div
                 className="bx--breadcrumb-item bx--breadcrumb-item--current"
-                key={crumb.name + index}>
-                {crumb.name}
+                key={crumb.label + index}>
+                {crumb.label}
               </div>
             ) : (
-              <div className="bx--breadcrumb-item" key={crumb.name + index}>
+              <div className="bx--breadcrumb-item" key={crumb.label + index}>
                 {" "}
-                <a href={crumb.url} className="bx--link">
-                  {crumb.name}
+                <a href={crumb.route} className="bx--link">
+                  {crumb.label}
                 </a>
               </div>
             )
