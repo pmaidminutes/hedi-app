@@ -1,6 +1,6 @@
 import { IEntity } from "@/modules/model";
 interface IBreadCrumbPath extends Omit<IEntity, "type"> {
-  currentPage: boolean;
+  isCurrentPage: boolean;
 }
 
 import {
@@ -38,7 +38,8 @@ export function constructBreadCrumbPathData(
         composedPath.push({
           label: names[index],
           route: basePath,
-          currentPage: pathArray[pathArray.length - 1] === path ? true : false,
+          isCurrentPage:
+            pathArray[pathArray.length - 1] === path ? true : false,
         });
       });
     }
