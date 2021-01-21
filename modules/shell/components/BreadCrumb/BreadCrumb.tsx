@@ -53,7 +53,7 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
             </div>
           )}
           {breadCrumbPath.map((crumb, index) =>
-            crumb.currentPage ? (
+            crumb.isCurrentPage ? (
               <div
                 className="bx--breadcrumb-item bx--breadcrumb-item--current"
                 key={crumb.label + index}>
