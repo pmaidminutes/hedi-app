@@ -29,9 +29,19 @@ export default function searchPage() {
 
   const locale = router.locale ?? "de";
   const defaultLocale = router.defaultLocale;
-  // TODO implement filter options
+  // TODO implement other possible filter options
   const [filter, setFilter] = useState(String);
-
+  const handleFilter = function (selectedFilter: string) {
+    filter
+      ? setFilter(filter + " OR " + selectedFilter)
+      : setFilter(selectedFilter);
+  };
+  //TODO not used at the moment
+  const resetFilter = function () {
+    setFilter("");
+  };
+  //TODO not used at the moment
+  const removeFilter = function (removedFilter: string) {};
   //TODO temporary feature
   let errorMessage: string = "";
 
@@ -64,19 +74,19 @@ export default function searchPage() {
         <button
           className="bx--btn bx--btn--primary"
           type="button"
-          onClick={e => setFilter("ss_type:article")}>
+          onClick={e => handleFilter("articles")}>
           articles
         </button>
         <button
           className="bx--btn bx--btn--primary"
           type="button"
-          onClick={e => setFilter("ss_type:*_tmp")}>
+          onClick={e => handleFilter("profiles")}>
           profiles
         </button>
         <button
           className="bx--btn bx--btn--primary"
           type="button"
-          onClick={e => setFilter("ss_vid:categories")}>
+          onClick={e => handleFilter("categories")}>
           categories
         </button>
         <div className="hedi-separator"></div>

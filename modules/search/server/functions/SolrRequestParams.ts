@@ -17,12 +17,21 @@ export function transformParamsToSolrRequestString(
     "hl.simple.pre": "<mark>",
     "hl.simple.post": "</mark>",
   };
+  enum solrTypeFields {
+    articles = "ss_type:article",
+    profiles = "ss_type:*_tmp",
+    categories = "ss_vid:categories",
+  }
+  (<(keyof typeof solrTypeFields)[]>Object.keys(solrTypeFields)).map(
+    key => (searchFilter = searchFilter.replace(key, solrTypeFields[key]))
+  );
   const optionParams = { wt: "json", fl: solarFields };
   const requestBody = {
     query:
       !searchText || searchText.length === 0
         ? "*:*" + languageFilter
         : `voll:(` + searchText + languageFilter,
+    //TODO tempfix to overwrite the api path recognition
     filter: [
       `ss_search_api_language:${lang}`,
       `${searchFilter !== "undefined" ? searchFilter : ""}`,
