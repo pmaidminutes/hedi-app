@@ -17702,4 +17702,10 @@ article p {
 .hedi-text-center {
   text-align: center; }
 
+.hedi-self-center {
+  align-self: center; }
+
+.hedi-break-word {
+  overflow-wrap: break-word; }
+
 /*# sourceMappingURL=styles.css.map */
