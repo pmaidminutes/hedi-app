@@ -1,7 +1,7 @@
 import { HTMLWithNextImage } from "@/modules/react/html";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ICaregiver, IMidwife } from "../types/profileTypes";
+import { ICaregiver, IMidwife } from "../types";
 
 export const Profile = ({
   profile,

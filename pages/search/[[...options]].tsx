@@ -135,6 +135,7 @@ export default function searchPage() {
                         />
                       );
                     case "Caregiver":
+                    case "Midwife":
                       return (
                         <Profile profile={entry} key={entry.route + locale} />
                       );

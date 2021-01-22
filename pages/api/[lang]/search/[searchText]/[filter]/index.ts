@@ -5,8 +5,8 @@ import { getCategory } from "@/modules/editorial/category/query";
 import { ICategory } from "@/modules/editorial/category/types";
 import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
-import { getCaregiver, getMidwife } from "@/modules/profile/query/getProfiles";
-import { ICaregiver, IMidwife } from "@/modules/profile/types/profileTypes";
+import { getCaregiver, getMidwife } from "@/modules/profile/query";
+import { ICaregiver, IMidwife } from "@/modules/profile/types";
 import { searchServer } from "@/modules/search/server/request";
 import { NextApiHandler } from "next";
 
