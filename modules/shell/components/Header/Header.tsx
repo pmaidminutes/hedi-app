@@ -10,6 +10,7 @@ import { LogInOut } from "@/modules/auth/client";
 import { SearchInput } from "@/modules/search/client/components";
 import { LanguageSwitch } from "../LanguageSwitch";
 import { Logo } from "../Logo";
+import { Grid, Row, Column, FormItem } from "carbon-components-react";
 
 type HeaderProps = Pick<
   IEntityTranslated<IEntityLocalized>,
@@ -27,21 +28,29 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
 
   return (
     <header className={`hedi-header ${appstyle}`}>
-      <div className="bx--grid">
-        <div className="bx--row py-s-sm">
-          <div className="bx--col bx--col-sm-4 bx--col-md-8 bx--col-lg-4 pb-s-sm">
+      <Grid>
+        <Row className="py-s-sm">
+          <Column sm={4} md={8} lg={4} className="pb-s-sm">
             <Logo />
-          </div>
-          <div className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs hedi-align-header-items">
-            <div className="bx--form-item">
-              <LanguageSwitch translations={translations} />
-            </div>
-          </div>
+          </Column>
 
-          <div className="bx--col bx--col-sm-3 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
+          <Column
+            sm={4}
+            md={2}
+            lg={4}
+            className="py-s-xs hedi-align-header-items">
+            <FormItem>
+              <LanguageSwitch translations={translations} />
+            </FormItem>
+          </Column>
+
+          <Column
+            sm={3}
+            md={3}
+            lg={4}
+            className="py-s-xs hedi-align-header-items">
             <Form
-              // TODO: remove inline Style
-              style={{ position: "relative" }}
+              className="hedi-pos-rel"
               onSubmit={e => {
                 router.push("/search/" + searchText);
                 e.preventDefault();
@@ -53,12 +62,16 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
                 query={searchText}
               />
             </Form>
-          </div>
-          <div className="bx--col bx--col-sm-3 bx--col-md-3 bx--col-lg-4 py-s-xs hedi-align-header-items">
+          </Column>
+          <Column
+            sm={3}
+            md={3}
+            lg={4}
+            className="py-s-xs hedi-align-header-items">
             <LogInOut />
-          </div>
-        </div>
-      </div>
+          </Column>
+        </Row>
+      </Grid>
     </header>
   );
 };
