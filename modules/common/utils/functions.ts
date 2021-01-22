@@ -1,3 +1,5 @@
+import { IHTTPError } from "../error";
+
 /* --- dev helper functions --- */
 export function AssertClientSide() {
   return typeof window !== "undefined";
@@ -24,4 +26,12 @@ export function jsonFetcher<T>(url: RequestInfo) {
   return fetch(url)
     .then(response => response.json())
     .then(jsonResponse => jsonResponse as T);
+}
+export async function requestCoordinates(locationApi: string) {
+  const response = await fetch(locationApi, {
+    method: "GET",
+  });
+  if (response.status === 200) return response.json() as Promise<JSON>;
+  else
+    return { code: response.status, text: response.statusText } as IHTTPError;
 }

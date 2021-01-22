@@ -12,7 +12,7 @@ import { Profile } from "@/modules/profile/client/Profile";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
-import { Loading } from "carbon-components-react";
+import { Loading, Slider, TextInput } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -32,6 +32,8 @@ export default function searchPage() {
   const defaultLocale = router.defaultLocale;
   // TODO implement other possible filter options
   const [filter, setFilter] = useState(String);
+  const [distance, setDistance] = useState("2");
+  const [location, setLocation] = useState("Pinneberg 25421");
   const handleFilter = function (selectedFilter: string) {
     filter
       ? setFilter(filter + " OR " + selectedFilter)
@@ -45,8 +47,15 @@ export default function searchPage() {
   const removeFilter = function (removedFilter: string) {};
   //TODO temporary feature
   let errorMessage: string = "";
+  const encodedLocation = location.replace(/s/g, "+");
 
-  const { data, error } = useSearch(queryText, locale, filter);
+  const { data, error } = useSearch(
+    queryText,
+    locale,
+    encodedLocation,
+    distance,
+    filter
+  );
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";
@@ -71,7 +80,28 @@ export default function searchPage() {
             query={initialQueryText}
           />
         </div>
-
+        <div>
+          <TextInput
+            helperText=" "
+            id="location"
+            invalidText="A valid value is required"
+            labelText="Address line"
+            placeholder="Enter address"
+            value={location}
+          />
+          <Slider
+            ariaLabelInput="Slide for distance"
+            id="slider"
+            labelText="Control distance"
+            max={10}
+            min={0}
+            step={1}
+            stepMultiplier={2}
+            value={5}
+            hideTextInput={true}
+            onChange={({ value }) => setDistance(value.toString())}
+          />
+        </div>
         <button
           className="bx--btn bx--btn--primary"
           type="button"

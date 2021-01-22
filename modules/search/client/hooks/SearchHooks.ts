@@ -9,16 +9,22 @@ import { ISuggestEntry } from "../../types";
 export function useSearch(
   searchText: string,
   lang: string = "de",
+  location: string,
+  distance: string,
   searchFilter?: string
 ) {
   const apiPath = "/api/" + lang + "/search/";
+  console.log(distance, "distance in searchhooks");
   //TODO empty filter criterias doesnt recognize the api path yet, so given with temporary fix for now
   const pathFilter = searchFilter !== "" ? searchFilter : undefined;
   const swrResult = useSWR<
     IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]
   >(
     searchText?.length > 3
-      ? apiPath + encodeURI(searchText + "/" + pathFilter)
+      ? apiPath +
+          encodeURI(
+            searchText + "/" + pathFilter + "/" + location + "/" + distance
+          )
       : null,
     jsonFetcher
   );
