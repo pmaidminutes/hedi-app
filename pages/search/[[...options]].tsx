@@ -8,6 +8,7 @@ import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
+import { Profile } from "@/modules/profile/client/Profile";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
@@ -108,6 +109,7 @@ export default function searchPage() {
               ? []
               : data?.map((entry: any) => {
                   if (!entry) return null;
+                  console.log(entry.type, "in frontend");
                   switch (entry.type) {
                     case "Article":
                       return (
@@ -131,6 +133,10 @@ export default function searchPage() {
                           translationLang={defaultLocale}
                           key={entry.route + locale}
                         />
+                      );
+                    case "Caregiver":
+                      return (
+                        <Profile profile={entry} key={entry.route + locale} />
                       );
                   }
                 })}

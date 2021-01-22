@@ -5,11 +5,13 @@ import { getCategory } from "@/modules/editorial/category/query";
 import { ICategory } from "@/modules/editorial/category/types";
 import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
+import { getCaregiver, getMidwife } from "@/modules/profile/query/getProfiles";
+import { ICaregiver, IMidwife } from "@/modules/profile/types/profileTypes";
 import { searchServer } from "@/modules/search/server/request";
 import { NextApiHandler } from "next";
 
 const solrSearchHandler: NextApiHandler<
-  IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]
+  IHTTPError | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter },
@@ -32,6 +34,7 @@ const solrSearchHandler: NextApiHandler<
         : highlight.highlightedBody;
       const [_, path, lang] = entry.search_api_id.split(":");
       const route = "/" + path.replace("taxonomy_term", "taxonomy/term");
+      console.log(entry.ss_type);
       switch (entry.ss_type) {
         case "article":
           promises.push(
@@ -64,15 +67,37 @@ const solrSearchHandler: NextApiHandler<
             })
           );
           break;
+        case "caregiver_tmp":
+          promises.push(
+            getCaregiver(route).then(caregiver => {
+              if (caregiver) {
+                caregiver.label = highlight.highlightedTitle ?? caregiver.label;
+              }
+              return caregiver;
+            })
+          );
+          break;
+        case "midwife_tmp":
+          promises.push(
+            getMidwife(route).then(midwife => {
+              if (midwife) {
+                midwife.label = highlight.highlightedTitle ?? midwife.label;
+              }
+              return midwife;
+            })
+          );
+          break;
       }
     }
     const entries = await Promise.all<
-      IArticle | ICategory | IGlossaryTerm | null
+      IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | null
     >(promises);
     const nonNull = entries.filter(entry => entry) as (
       | IArticle
       | ICategory
       | IGlossaryTerm
+      | ICaregiver
+      | IMidwife
     )[];
     res.send(nonNull);
   }
