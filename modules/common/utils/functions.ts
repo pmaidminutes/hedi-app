@@ -1,4 +1,5 @@
-import { IHTTPError } from "../error";
+import { ICoordinatesJSON } from "@/modules/search/types";
+import { IHTTPError, IsIHTTPError } from "../error";
 
 /* --- dev helper functions --- */
 export function AssertClientSide() {
@@ -27,11 +28,12 @@ export function jsonFetcher<T>(url: RequestInfo) {
     .then(response => response.json())
     .then(jsonResponse => jsonResponse as T);
 }
-export async function requestCoordinates(locationApi: string) {
-  const response = await fetch(locationApi, {
-    method: "GET",
-  });
-  if (response.status === 200) return response.json() as Promise<JSON>;
-  else
-    return { code: response.status, text: response.statusText } as IHTTPError;
+export function parseJSONCoordinates(
+  json: ICoordinatesJSON[] | IHTTPError
+): string {
+  if (!IsIHTTPError(json) && json?.length === 1) {
+    const coordinates: string[] = json[0]?.geojson?.coordinates;
+    return coordinates[0] + "," + coordinates[1];
+  }
+  return "90,-180";
 }

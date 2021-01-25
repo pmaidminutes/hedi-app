@@ -1,5 +1,4 @@
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
-import { requestCoordinates } from "@/modules/common/utils";
 import { getArticle } from "@/modules/editorial/article/query";
 import { IArticle } from "@/modules/editorial/article/types";
 import { getCategory } from "@/modules/editorial/category/query";
@@ -17,11 +16,6 @@ const solrSearchHandler: NextApiHandler<
   const {
     query: { lang, searchText, filter, location, distance },
   } = req;
-  console.log(location, "distance api handler", distance);
-  const locationApi = `https://nominatim.openstreetmap.org/search?q=${location}&format=json&polygon_geojson=1&addressdetails=1`;
-
-  const json = await requestCoordinates(locationApi);
-  console.log(json);
   const data = await searchServer(
     `${lang}`,
     `${searchText}`.split(" ").join(" || "),

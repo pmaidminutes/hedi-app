@@ -14,7 +14,6 @@ export function useSearch(
   searchFilter?: string
 ) {
   const apiPath = "/api/" + lang + "/search/";
-  console.log(distance, "distance in searchhooks");
   //TODO empty filter criterias doesnt recognize the api path yet, so given with temporary fix for now
   const pathFilter = searchFilter !== "" ? searchFilter : undefined;
   const swrResult = useSWR<

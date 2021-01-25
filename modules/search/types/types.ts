@@ -18,3 +18,11 @@ export interface ISuggestEntry {
   term: string;
   weight: number;
 }
+
+export interface ICoordinatesJSON {
+  geojson: IGeoJSON;
+}
+export interface IGeoJSON {
+  coordinates: string[];
+  type: string;
+}

@@ -5,12 +5,14 @@
  */
 
 import { IsIHTTPError } from "@/modules/common/error";
+import { parseJSONCoordinates } from "@/modules/common/utils";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { Profile } from "@/modules/profile/client/Profile";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
+import { requestCoordinates } from "@/modules/search/server/request/requestCoordinates";
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { Loading, Slider, TextInput } from "carbon-components-react";
 import { useRouter } from "next/router";
@@ -32,12 +34,18 @@ export default function searchPage() {
   const defaultLocale = router.defaultLocale;
   // TODO implement other possible filter options
   const [filter, setFilter] = useState(String);
-  const [distance, setDistance] = useState("2");
-  const [location, setLocation] = useState("Pinneberg 25421");
+  //TODO pick it up from env file for now 5kms around
+  const [distance, setDistance] = useState("5");
+  const [location, setLocation] = useState("90,-180");
   const handleFilter = function (selectedFilter: string) {
     filter
       ? setFilter(filter + " OR " + selectedFilter)
       : setFilter(selectedFilter);
+  };
+  const handleLocation = async function (typedLocation: string) {
+    const typedAddress = typedLocation.replace(/\s/g, "+");
+    const locationJson = await requestCoordinates(typedAddress);
+    setLocation(parseJSONCoordinates(locationJson));
   };
   //TODO not used at the moment
   const resetFilter = function () {
@@ -47,12 +55,11 @@ export default function searchPage() {
   const removeFilter = function (removedFilter: string) {};
   //TODO temporary feature
   let errorMessage: string = "";
-  const encodedLocation = location.replace(/s/g, "+");
 
   const { data, error } = useSearch(
     queryText,
     locale,
-    encodedLocation,
+    location,
     distance,
     filter
   );
@@ -81,13 +88,18 @@ export default function searchPage() {
           />
         </div>
         <div>
+          {
+            //TODO cannot have onchange need to use button to fetch location
+            //or to find once the typing is finished
+          }
           <TextInput
             helperText=" "
             id="location"
             invalidText="A valid value is required"
             labelText="Address line"
             placeholder="Enter address"
-            value={location}
+            onChange={e => handleLocation(e.target.value)}
+            //value={location}
           />
           <Slider
             ariaLabelInput="Slide for distance"
