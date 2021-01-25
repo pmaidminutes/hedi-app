@@ -17603,7 +17603,11 @@ a.bx--navigation-link:focus {
 .hedi-header {
   width: 100%;
   color: white;
-  background-color: #574E90; }
+  background-color: #574E90;
+  position: relative;
+  height: auto;
+  display: block;
+  border-bottom: none; }
 
 .hedi-glossary-letterhead {
   color: white;
