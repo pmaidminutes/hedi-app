@@ -10,7 +10,13 @@ import { LogInOut } from "@/modules/auth/client";
 import { SearchInput } from "@/modules/search/client/components";
 import { LanguageSwitch } from "../LanguageSwitch";
 import { Logo } from "../Logo";
-import { Grid, Row, Column, FormItem } from "carbon-components-react";
+import {
+  Grid,
+  Row,
+  Column,
+  FormItem,
+  Header as CarbonHeader,
+} from "carbon-components-react";
 
 type HeaderProps = Pick<
   IEntityTranslated<IEntityLocalized>,
@@ -27,7 +33,7 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
   const [searchText, setSearchText] = useState("");
 
   return (
-    <header className={`hedi-header ${appstyle}`}>
+    <CarbonHeader className={`hedi-header ${appstyle}`}>
       <Grid>
         <Row className="py-s-sm">
           <Column sm={4} md={8} lg={4} className="pb-s-sm">
@@ -72,6 +78,6 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
           </Column>
         </Row>
       </Grid>
-    </header>
+    </CarbonHeader>
   );
 };
