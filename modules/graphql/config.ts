@@ -1,4 +1,4 @@
 export enum GQLEndpoint {
-  Public = "/public",
-  Secure = "/secure",
+  Public = "public",
+  Secure = "secure",
 }
