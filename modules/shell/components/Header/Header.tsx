@@ -34,7 +34,9 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
           </div>
           <div className="bx--col-sm-4 bx--col-md-2 bx--col-lg-4 py-s-xs hedi-align-header-items">
             <div className="bx--form-item">
-              <LanguageSwitch translations={translations} />
+              {translations !== undefined ? (
+                <LanguageSwitch translations={translations} />
+              ) : null}
             </div>
           </div>
 
