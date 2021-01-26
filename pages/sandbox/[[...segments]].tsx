@@ -7,7 +7,7 @@ import {
 } from "@/modules/profile/server";
 import { Header } from "@/modules/shell/components";
 import { ICaregiver } from "@/modules/profile/types";
-
+import { Profile } from "@/modules/profile/client/components";
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const paths = [];
   paths.push(...(await getCaregiverPaths()));
@@ -18,9 +18,11 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
 export interface IProfilePageProps {
   content: ICaregiver;
 }
-
-export const getStaticProps: GetStaticProps<// TODO: type
-any> = async ({ params, locale }) => {
+// TODO: type
+export const getStaticProps: GetStaticProps<any> = async ({
+  params,
+  locale,
+}) => {
   const segments = params?.segments ?? [];
 
   let content;
@@ -38,13 +40,16 @@ any> = async ({ params, locale }) => {
 export default function profilePage(props: IProfilePageProps) {
   console.log({ props });
   const { content } = props;
+  console.log({ content });
   return (
     <div>
       <Head>
         <title>HEDI App</title>
       </Head>
       <Header {...content} />
-      <main>test</main>
+      <main>
+        <Profile {...content} />
+      </main>
     </div>
   );
 }
