@@ -2,6 +2,7 @@ import { getServiceClient, gql } from "@/modules/graphql";
 import { IMidwife, MidwifeFields } from "../types";
 
 export async function getMidwife(route: string): Promise<IMidwife | null> {
+  console.log({ route });
   const query = gql`
       query getMidwife(
         $route: [String!]
