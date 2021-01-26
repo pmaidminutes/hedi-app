@@ -33,7 +33,7 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
   const [searchText, setSearchText] = useState("");
 
   return (
-    <CarbonHeader className={`hedi-header ${appstyle}`}>
+    <CarbonHeader className={`hedi-header ${appstyle}`} aria-label="header">
       <Grid>
         <Row className="py-s-sm">
           <Column sm={4} md={8} lg={4} className="pb-s-sm">
