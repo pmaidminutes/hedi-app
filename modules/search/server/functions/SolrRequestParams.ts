@@ -16,6 +16,7 @@ export function transformParamsToSolrRequestString(
     "hl.fragsize": "200",
     "hl.simple.pre": "<mark>",
     "hl.simple.post": "</mark>",
+    // "fq": "{!geofilt}", "sfield": "locs_lat_long", "pt": ${location}, "d":  ${distance},
   };
   enum solrTypeFields {
     articles = "ss_type:article",
