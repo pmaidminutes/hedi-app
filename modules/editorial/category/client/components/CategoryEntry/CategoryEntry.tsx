@@ -2,6 +2,7 @@ import { buildAssetUrl } from "@/modules/common/utils";
 import Image from "next/image";
 import Link from "next/link";
 import { ICategoryEntry } from "../../../types";
+import { AspectRatio, Link as CarbonLink } from "carbon-components-react";
 
 export const CategoryEntry = ({
   category,
@@ -11,16 +12,14 @@ export const CategoryEntry = ({
   const { image, label, route } = category;
   return (
     <Link href={route} passHref>
-      <a className="hedi-unstyled-link">
+      <a href={route} className="hedi-unstyled-link">
         {image === null ? (
-          <div
-            className="bx--aspect-ratio bx--aspect-ratio--2x1"
-            style={{ backgroundColor: "darkcyan" }}>
+          <AspectRatio ratio="2x1" style={{ backgroundColor: "darkcyan" }}>
             {" "}
             picture here{" "}
-          </div>
+          </AspectRatio>
         ) : (
-          <div className="bx--aspect-ratio bx--aspect-ratio--2x1">
+          <AspectRatio ratio="2x1">
             <Image
               className="hedi-responsive-image"
               src={buildAssetUrl(image?.route)}
@@ -28,7 +27,7 @@ export const CategoryEntry = ({
               height={image?.height ?? 0}
               alt={image?.alt}
             />
-          </div>
+          </AspectRatio>
         )}
         <h4
           dangerouslySetInnerHTML={{

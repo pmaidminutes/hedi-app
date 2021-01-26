@@ -2,3 +2,4 @@
 export * from "./AudioPlayer";
 export * from "./Tag";
 export * from "./TagList";
+export * from "./Seperator";

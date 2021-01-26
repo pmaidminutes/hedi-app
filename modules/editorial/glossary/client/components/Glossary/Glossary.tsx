@@ -3,7 +3,7 @@ import { ITyped } from "@/modules/model";
 import { AssertClientSide } from "@/modules/common/utils";
 import { IGlossaryGrouped } from "../../../types";
 import { GlossaryGroup } from "../GlossaryGroup";
-
+import { Grid } from "carbon-components-react";
 interface IGlossaryProps {
   content: IGlossaryGrouped;
 }
@@ -38,7 +38,7 @@ export const Glossary = ({ content }: IGlossaryProps): JSX.Element => {
   //TODO to include hash value to anchor on page load, hash in URL doesnt work
 
   return (
-    <div className="bx--grid">
+    <Grid>
       {groups.map(glossaryGroup => (
         <GlossaryGroup
           key={glossaryGroup.key}
@@ -47,6 +47,6 @@ export const Glossary = ({ content }: IGlossaryProps): JSX.Element => {
           selectedTerm={glossaryUrlTerm}
         />
       ))}
-    </div>
+    </Grid>
   );
 };

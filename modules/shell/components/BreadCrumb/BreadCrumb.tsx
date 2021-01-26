@@ -6,6 +6,7 @@ import {
   IEntityTranslated,
   IRouteLabeled,
 } from "@/modules/model";
+import { Grid, Row, Breadcrumb, BreadcrumbItem } from "carbon-components-react";
 
 interface IBreadCrumbProps {
   content?: IEntityTranslated<IEntityLocalized> &
@@ -27,49 +28,25 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   );
 
   return (
-    <div className="bx--grid">
-      <div
-        className="by--row bx--row-padding bx--breadcrumb--no-trailing-slash my-s-sm pl-s-sm"
-        aria-label="breadcrumb">
-        <nav
-          className="bx--breadcrumb bx--breadcrumb--no-trailing-slash"
-          aria-label="breadcrumb">
-          {breadCrumbPath.length > 0 ? (
-            <div className="bx--breadcrumb-item">
-              <a
-                href={`/${locale === defaultLocale ? "" : locale}`}
-                className="bx--link">
-                Home
-              </a>
-            </div>
-          ) : (
-            <div
-              className={`bx--breadcrumb-item${
-                breadCrumbPath.length === 0
-                  ? " bx--breadcrumb-item--current"
-                  : ""
-              }`}>
-              Home
-            </div>
-          )}
-          {breadCrumbPath.map((crumb, index) =>
-            crumb.isCurrentPage ? (
-              <div
-                className="bx--breadcrumb-item bx--breadcrumb-item--current"
-                key={crumb.label + index}>
-                {crumb.label}
-              </div>
-            ) : (
-              <div className="bx--breadcrumb-item" key={crumb.label + index}>
-                {" "}
-                <a href={crumb.route} className="bx--link">
-                  {crumb.label}
-                </a>
-              </div>
-            )
-          )}
-        </nav>
-      </div>
-    </div>
+    <Grid>
+      <Row className="my-s-sm pl-s-sm">
+        <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
+          <BreadcrumbItem
+            href={`/${locale === defaultLocale ? "" : locale}`}
+            isCurrentPage={breadCrumbPath.length === 0}>
+            Home
+          </BreadcrumbItem>
+
+          {breadCrumbPath.map((crumb, index) => (
+            <BreadcrumbItem
+              key={crumb.label + index}
+              isCurrentPage={crumb.isCurrentPage}
+              href={crumb.route}>
+              {crumb.label}
+            </BreadcrumbItem>
+          ))}
+        </Breadcrumb>
+      </Row>
+    </Grid>
   );
 };

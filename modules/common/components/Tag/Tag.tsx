@@ -1,12 +1,15 @@
 import { ITag } from "@/modules/model";
-import Link from "next/link";
+
+import { Tag as CarbonTag, Link } from "carbon-components-react";
 
 export const Tag = ({ tag }: { tag: ITag }): JSX.Element => {
   return (
-    <button className="bx--tag bx--tag--magenta">
-      <Link href={`/search/${tag.label}`} passHref>
-        <a className="bx--tag__label hedi-unstyled-link">{tag.label}</a>
+    <CarbonTag type={"magenta"}>
+      <Link
+        href={`/search/${tag.label}`}
+        className="bx--tag__label hedi-unstyled-link">
+        {tag.label}
       </Link>
-    </button>
+    </CarbonTag>
   );
 };

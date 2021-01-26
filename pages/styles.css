@@ -17603,7 +17603,11 @@ a.bx--navigation-link:focus {
 .hedi-header {
   width: 100%;
   color: white;
-  background-color: #574E90; }
+  background-color: #574E90;
+  position: relative;
+  height: auto;
+  display: block;
+  border-bottom: none; }
 
 .hedi-glossary-letterhead {
   color: white;
@@ -17695,5 +17699,17 @@ article p {
 
 .article-background-color {
   background-color: #ECF0FF; }
+
+.hedi-pos-rel {
+  position: relative; }
+
+.hedi-text-center {
+  text-align: center; }
+
+.hedi-self-center {
+  align-self: center; }
+
+.hedi-break-word {
+  overflow-wrap: break-word; }
 
 /*# sourceMappingURL=styles.css.map */
