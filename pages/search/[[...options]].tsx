@@ -8,7 +8,7 @@ import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
-import { Profile } from "@/modules/profile/client/Profile";
+import { ProfileEntry } from "@/modules/profile/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
@@ -137,7 +137,10 @@ export default function searchPage() {
                     case "Caregiver":
                     case "Midwife":
                       return (
-                        <Profile profile={entry} key={entry.route + locale} />
+                        <ProfileEntry
+                          profile={entry}
+                          key={entry.route + locale}
+                        />
                       );
                   }
                 })}
