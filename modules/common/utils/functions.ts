@@ -33,7 +33,7 @@ export function parseJSONCoordinates(
 ): string {
   if (!IsIHTTPError(json) && json?.length === 1) {
     const coordinates: string[] = json[0]?.geojson?.coordinates;
-    return coordinates[0] + "," + coordinates[1];
+    return coordinates[1] + "," + coordinates[0];
   }
-  return "90,-180";
+  return "";
 }

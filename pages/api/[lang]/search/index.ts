@@ -20,6 +20,8 @@ const solrSearchHandler: NextApiHandler<
     `${lang}`,
     `${searchText}`.split(" ").join(" || "),
     `${filter}`,
+    `${location}`,
+    `${distance}`,
     true
   );
 

@@ -33,10 +33,10 @@ export default function searchPage() {
   const locale = router.locale ?? "de";
   const defaultLocale = router.defaultLocale;
   // TODO implement other possible filter options
-  const [filter, setFilter] = useState(String);
+  const [filter, setFilter] = useState("");
   //TODO pick it up from env file for now 5kms around
   const [distance, setDistance] = useState("5");
-  const [location, setLocation] = useState("90,-180");
+  const [location, setLocation] = useState("");
   const handleFilter = function (selectedFilter: string) {
     filter
       ? setFilter(filter + " OR " + selectedFilter)

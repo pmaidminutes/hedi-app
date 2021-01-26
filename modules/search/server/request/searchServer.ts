@@ -9,12 +9,16 @@ export async function searchServer(
   lang: string,
   searchText: string,
   filter: string,
+  location: string,
+  distance: string,
   getHighlighted: boolean
 ): Promise<IContentEntry[] | IHTTPError> {
   const reqBody = transformParamsToSolrRequestString(
     lang,
     searchText,
     filter,
+    location,
+    distance,
     getHighlighted
   );
   const response = await fetch(process.env.SOLR_URL + "/select", {

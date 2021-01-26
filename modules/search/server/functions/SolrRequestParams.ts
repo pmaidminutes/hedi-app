@@ -2,11 +2,14 @@ export function transformParamsToSolrRequestString(
   lang: string,
   searchText: string,
   searchFilter: string,
+  location: string,
+  distance: string,
   getHighlighted: boolean
 ): string {
   const languageFilter = `) `;
   const solarFields =
-    "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type, ss_vid,its_nid";
+    "tm_X3b_*, ss_search_api_id, id, site, voll, ss_type, ss_vid, its_nid, locs_lat_long";
+  const isLocationPresent = `${location}` ? true : false;
   const highlightParams = {
     wt: "json",
     fl: solarFields,
@@ -16,7 +19,10 @@ export function transformParamsToSolrRequestString(
     "hl.fragsize": "200",
     "hl.simple.pre": "<mark>",
     "hl.simple.post": "</mark>",
-    // "fq": "{!geofilt}", "sfield": "locs_lat_long", "pt": ${location}, "d":  ${distance},
+    fq: isLocationPresent ? "{!geofilt}" : "",
+    sfield: isLocationPresent ? "locs_lat_long" : "",
+    pt: isLocationPresent ? `${location}` : "",
+    d: isLocationPresent ? `${distance}` : "",
   };
   enum solrTypeFields {
     articles = "ss_type:article",
@@ -26,18 +32,23 @@ export function transformParamsToSolrRequestString(
   (<(keyof typeof solrTypeFields)[]>Object.keys(solrTypeFields)).map(
     key => (searchFilter = searchFilter.replace(key, solrTypeFields[key]))
   );
-  const optionParams = { wt: "json", fl: solarFields };
+
+  const optionParams = {
+    wt: "json",
+    fl: solarFields,
+    fq: isLocationPresent ? "{!geofilt}" : "",
+    sfield: isLocationPresent ? "locs_lat_long" : "",
+    pt: isLocationPresent ? `${location}` : "",
+    d: isLocationPresent ? `${distance}` : "",
+  };
   const requestBody = {
     query:
       !searchText || searchText.length === 0
         ? "*:*" + languageFilter
         : `voll:(` + searchText + languageFilter,
-    //TODO tempfix to overwrite the api path recognition
-    filter: [
-      `ss_search_api_language:${lang}`,
-      `${searchFilter !== "undefined" ? searchFilter : ""}`,
-    ],
+    filter: [`ss_search_api_language:${lang}`, `${searchFilter}`],
     params: getHighlighted ? highlightParams : optionParams,
   };
+  console.log(requestBody);
   return JSON.stringify(requestBody);
 }
