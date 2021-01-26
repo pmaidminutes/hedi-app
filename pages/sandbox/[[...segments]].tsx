@@ -1,21 +1,25 @@
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { ISegmentParam } from "@/modules/editorial/types";
-import {
-  getStaticPaths as getCaregiverPaths,
-  getStaticProps as getCaregiverProps,
-} from "@/modules/profile/server";
+import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
+import { getStaticPaths as getCaregiverPaths } from "@/modules/profile/server/generators/getStaticCaregiverPaths";
+import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
+import { getStaticPaths as getMidwifePaths } from "@/modules/profile/server/generators/getStaticMidwifePaths";
 import { Header } from "@/modules/shell/components";
-import { ICaregiver } from "@/modules/profile/types";
+import { ICaregiver, IMidwife } from "@/modules/profile/types";
 import { Profile } from "@/modules/profile/client/components";
+
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
+  console.log({ context });
   const paths = [];
   paths.push(...(await getCaregiverPaths()));
+  paths.push(...(await getMidwifePaths()));
+  console.log({ paths });
   return { paths, fallback: false };
 };
 
 export interface IProfilePageProps {
-  content: ICaregiver;
+  content: ICaregiver | IMidwife;
 }
 export const getStaticProps: GetStaticProps<
   IProfilePageProps,
@@ -25,6 +29,7 @@ export const getStaticProps: GetStaticProps<
 
   let content;
   content = await getCaregiverProps(params?.segments);
+  if (!content) content = await getMidwifeProps(params?.segments);
   console.log({ content });
 
   if (!content) {
