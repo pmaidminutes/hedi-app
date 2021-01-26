@@ -11,18 +11,16 @@ import { Profile } from "@/modules/profile/client/components";
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const paths = [];
   paths.push(...(await getCaregiverPaths()));
-  console.log({ paths });
   return { paths, fallback: false };
 };
 
 export interface IProfilePageProps {
   content: ICaregiver;
 }
-// TODO: type
-export const getStaticProps: GetStaticProps<any> = async ({
-  params,
-  locale,
-}) => {
+export const getStaticProps: GetStaticProps<
+  IProfilePageProps,
+  ISegmentParam
+> = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
 
   let content;
@@ -38,9 +36,7 @@ export const getStaticProps: GetStaticProps<any> = async ({
 };
 
 export default function profilePage(props: IProfilePageProps) {
-  console.log({ props });
   const { content } = props;
-  console.log({ content });
   return (
     <div>
       <Head>
@@ -48,7 +44,7 @@ export default function profilePage(props: IProfilePageProps) {
       </Head>
       <Header {...content} />
       <main>
-        <Profile {...content} />
+        <Profile content={content} />
       </main>
     </div>
   );
