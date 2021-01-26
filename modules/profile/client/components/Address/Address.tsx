@@ -1,5 +1,5 @@
 interface IAddressProps {
-  addressdata: {
+  content: {
     city: string;
     postal_code: string;
     house_number: string;
@@ -12,8 +12,8 @@ interface IAddressProps {
   };
 }
 
-export const Address = ({ addressdata }: IAddressProps): JSX.Element => {
-  const { city, street, postal_code, house_number } = addressdata;
+export const Address = ({ content }: IAddressProps): JSX.Element => {
+  const { city, street, postal_code, house_number } = content;
   return (
     <section>
       <address>

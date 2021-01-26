@@ -1,5 +1,5 @@
 interface IContactProps {
-  contactdata: {
+  content: {
     phone: string;
     phone_private: string;
     mail: string;
@@ -8,14 +8,8 @@ interface IContactProps {
   };
 }
 
-export const Contact = ({ contactdata }: IContactProps): JSX.Element => {
-  const {
-    phone,
-    phone_private,
-    mail,
-    website,
-    consultation_hours,
-  } = contactdata;
+export const Contact = ({ content }: IContactProps): JSX.Element => {
+  const { phone, phone_private, mail, website, consultation_hours } = content;
   return (
     <section>
       {phone ? <p>{phone}</p> : null}

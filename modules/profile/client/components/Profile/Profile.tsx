@@ -2,62 +2,27 @@ import { ICaregiver } from "../../../types";
 import { Address } from "../Address";
 import { Contact } from "../Contact";
 import { DetailedName } from "../DetailedName";
+import { Grid, Row, Column } from "carbon-components-react";
 
 interface IProfileProps {
   content: ICaregiver;
 }
 
-export const Profile = (content: IProfileProps) => {
-  console.log({ content });
-  const {
-    street,
-    house_number,
-    postal_code,
-    city,
-    country,
-    county,
-    state,
-    district,
-    room,
-    phone,
-    phone_private,
-    mail,
-    website,
-    consultation_hours,
-    label,
-    display,
-    name,
-    surname,
-    suffix,
-    prefix,
-  } = content;
+export const Profile = ({ content }: IProfileProps) => {
   return (
-    <div>
-      <Address
-        addressdata={{
-          street,
-          house_number,
-          postal_code,
-          city,
-          country,
-          county,
-          state,
-          district,
-          room,
-        }}
-      />
-      <Contact
-        contactdata={{
-          phone,
-          phone_private,
-          mail,
-          website,
-          consultation_hours,
-        }}
-      />
-      <DetailedName
-        detailednamedata={{ label, display, name, surname, suffix, prefix }}
-      />
-    </div>
+    <Grid>
+      <Row>
+        <Column lg={16}>
+          <DetailedName content={content} />
+        </Column>
+        <Column sm={3} md={4} lg={8}>
+          <Address content={content} />
+        </Column>
+
+        <Column sm={3} md={4} lg={8}>
+          <Contact content={content} />
+        </Column>
+      </Row>
+    </Grid>
   );
 };

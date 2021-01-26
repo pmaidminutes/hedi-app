@@ -1,5 +1,5 @@
 interface IDetailedNameProps {
-  detailednamedata: {
+  content: {
     label: string;
     display: string;
     name: string;
@@ -9,10 +9,8 @@ interface IDetailedNameProps {
   };
 }
 
-export const DetailedName = ({
-  detailednamedata,
-}: IDetailedNameProps): JSX.Element => {
-  const { label, display, name, surname, suffix, prefix } = detailednamedata;
+export const DetailedName = ({ content }: IDetailedNameProps): JSX.Element => {
+  const { label, display, name, surname, suffix, prefix } = content;
   return (
     <section>
       <h3>{label}</h3>
