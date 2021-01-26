@@ -25,7 +25,6 @@ export async function getCaregiverPaths(): Promise<ISegmentPath[] | undefined> {
 
   return caregivers?.map(cargiver => ({
     params: { segments: routeToSegments(cargiver.route) },
-    // TODO: check
     locale: "de",
   }));
 }

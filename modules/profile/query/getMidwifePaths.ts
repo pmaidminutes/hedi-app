@@ -22,11 +22,9 @@ export async function getMidwifePaths(): Promise<ISegmentPath[] | undefined> {
       console.warn("error", e);
       return null;
     });
-  console.log({ midwives });
 
   return midwives?.map(midwife => ({
     params: { segments: routeToSegments(midwife.route) },
-    // TODO: check
     locale: "de",
   }));
 }
