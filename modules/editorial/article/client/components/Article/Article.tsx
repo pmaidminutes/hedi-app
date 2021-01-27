@@ -4,7 +4,7 @@ import { ITyped } from "@/modules/model";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { useRouter } from "next/router";
 import { IArticle } from "../../../types";
-
+import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
 interface IArticleProps {
   content: IArticle;
 }
@@ -19,24 +19,23 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
 
   return (
     <>
-      <a
-        href="#"
-        target="_blank"
-        className="bx--aspect-ratio bx--aspect-ratio--2x1">
+      <AspectRatio ratio="2x1">
         <img
           src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
           alt="illustration of sleeping family"
           className="hedi-header-image"
         />
-      </a>
-      <div className="bx--grid">
-        <div className="bx--row">
-          <div className="bx--col-sm-4 bx--col-md-6 bx--col-lg-8 bx--offset-md-1 bx--offset-lg-4 p-s-xl hedi-article-container">
+      </AspectRatio>
+      <Grid>
+        <Row>
+          <Column
+            sm={4}
+            md={{ span: 6, offset: 1 }}
+            lg={{ span: 8, offset: 4 }}
+            className="p-s-xl hedi-article-container">
             <article>
-              <h1 className="pb-s-s" style={{ textAlign: "center" }}>
-                {label}
-              </h1>
-              <h4 className="pb-s-md" style={{ textAlign: "center" }}>
+              <h1 className="pb-s-s hedi-text-center">{label}</h1>
+              <h4 className="pb-s-md hedi-text-center">
                 Subheadline Placeholder
               </h4>
               {
@@ -55,9 +54,9 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
                 />
               </div>
             </article>
-          </div>
-        </div>
-      </div>
+          </Column>
+        </Row>
+      </Grid>
       {/* TODO: add semantic corretc html */}
       {tags.length > 0 ? (
         <>

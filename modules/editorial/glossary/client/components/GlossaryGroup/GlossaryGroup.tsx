@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { IGlossaryGroup } from "../../../types";
 import { GlossaryTerm } from "../GlossaryTerm";
+import { Row, Column } from "carbon-components-react";
+import { Seperator } from "@/modules/common/components";
 interface GlossaryGroupProps {
   glossaryGroup: IGlossaryGroup;
   translationLang?: string;
@@ -17,14 +19,14 @@ export const GlossaryGroup = ({
   }, [selectedTerm]);
   return (
     <>
-      <div className="bx--row bx--row-padding px-s-md">
-        <div className="bx--col-md-4 hedi-glossary-letterhead">
+      <Row className="bx--row-padding px-s-md">
+        <Column className=" hedi-glossary-letterhead">
           {glossaryGroup.key}
-        </div>
-      </div>
-      <div className="bx--row">
+        </Column>
+      </Row>
+      <Row className="bx--row">
         {glossaryGroup.terms.map(term => (
-          <div className="bx--col-md-4" key={term.route}>
+          <Column md={4} key={term.route}>
             <GlossaryTerm
               glossaryTerm={term}
               translationLang={translationLang}
@@ -33,10 +35,10 @@ export const GlossaryGroup = ({
                 term.route.endsWith(termUpdated, term.route.length)
               }
             />
-          </div>
+          </Column>
         ))}
-      </div>
-      <div className="hedi-separator"></div>
+      </Row>
+      <Seperator />
     </>
   );
 };
