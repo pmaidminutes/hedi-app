@@ -9,6 +9,7 @@ export async function getMidwife(
       query getMidwife(
         $routes: [String!]
         $lang: String!
+        $includeSelf: Boolean
       ) {
         midwives(routes: $routes, lang: $lang) {
           ${MidwifeFields}
