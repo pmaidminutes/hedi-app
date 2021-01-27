@@ -9,6 +9,7 @@ export async function getCaregiver(
     query getCaregiver(
       $routes: [String!]
         $lang: String!
+        $includeSelf: Boolean
     ) {
       caregivers(routes: $routes, lang: $lang) {
         ${CaregiverFields}
