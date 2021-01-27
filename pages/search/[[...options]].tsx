@@ -5,14 +5,12 @@
  */
 
 import { IsIHTTPError } from "@/modules/common/error";
-import { parseJSONCoordinates } from "@/modules/common/utils";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { Profile } from "@/modules/profile/client/Profile";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
-import { requestCoordinates } from "@/modules/search/server/request/requestCoordinates";
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { Loading, Slider, TextInput } from "carbon-components-react";
 import { useRouter } from "next/router";
@@ -44,8 +42,7 @@ export default function searchPage() {
   };
   const handleLocation = async function (typedLocation: string) {
     const typedAddress = typedLocation.replace(/\s/g, "+");
-    const locationJson = await requestCoordinates(typedAddress);
-    setLocation(parseJSONCoordinates(locationJson));
+    setLocation(typedAddress);
   };
   //TODO not used at the moment
   const resetFilter = function () {
