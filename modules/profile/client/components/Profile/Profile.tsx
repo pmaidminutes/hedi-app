@@ -1,12 +1,24 @@
-import { ICaregiver } from "../../../types";
+import { ICaregiver, IMidwife } from "../../../types";
 import { Address } from "../Address";
 import { Contact } from "../Contact";
 import { DetailedName } from "../DetailedName";
-import { Grid, Row, Column } from "carbon-components-react";
+import { Grid, Row, Column, Content } from "carbon-components-react";
+import { ITyped } from "@/modules/model";
 
 interface IProfileProps {
-  content: ICaregiver;
+  content: ICaregiver | IMidwife;
 }
+
+export const TryProfile = (content: ITyped): JSX.Element | null => {
+  switch (content.type) {
+    case "Midwife":
+      return <Profile content={content as ICaregiver} />;
+    case "Caregiver":
+      return <Profile content={content as IMidwife} />;
+    default:
+      return null;
+  }
+};
 
 export const Profile = ({ content }: IProfileProps) => {
   return (

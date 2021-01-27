@@ -1,11 +1,13 @@
 import { ISegmentPath } from "@/modules/editorial/types";
 import { getCaregiverPaths } from "../../query";
 
-export const getStaticPaths = async (): Promise<ISegmentPath[]> => {
-  const paths: ISegmentPath[] = [];
-
-  const segments = await getCaregiverPaths();
-  if (segments) paths.push(...segments);
-
+export const getStaticPaths = async (
+  locales: string[]
+): Promise<ISegmentPath[]> => {
+  const paths = [];
+  for (let locale of locales) {
+    const segments = await getCaregiverPaths(locale);
+    if (segments) paths.push(...segments);
+  }
   return paths;
 };

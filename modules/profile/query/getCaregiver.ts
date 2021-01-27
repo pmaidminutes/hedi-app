@@ -1,12 +1,16 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { CaregiverFields, ICaregiver } from "../types";
 
-export async function getCaregiver(route: string): Promise<ICaregiver | null> {
+export async function getCaregiver(
+  route: string,
+  lang = "de"
+): Promise<ICaregiver | null> {
   const query = gql`
     query getCaregiver(
-      $routes: [String!]!
+      $routes: [String!]
+        $lang: String!
     ) {
-      caregivers(routes: $routes) {
+      caregivers(routes: $routes, lang: $lang) {
         ${CaregiverFields}
       }
     }
@@ -14,7 +18,7 @@ export async function getCaregiver(route: string): Promise<ICaregiver | null> {
 
   const client = await getServiceClient();
   return client
-    .request<{ caregivers: ICaregiver[] }>(query, { routes: [route] })
+    .request<{ caregivers: ICaregiver[] }>(query, { routes: [route], lang })
     .then(data => data.caregivers[0])
     .catch(e => {
       console.warn(e);

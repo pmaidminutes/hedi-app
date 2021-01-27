@@ -3,11 +3,12 @@ import { IMidwife } from "../../types";
 import { getMidwife } from "../../query";
 
 export const getStaticProps = async (
-  segments?: string[]
+  segments?: string[],
+  locale = "de"
 ): Promise<IMidwife | null> => {
   if (!segments) {
     return null;
   } else {
-    return getMidwife(segmentsToRoute(segments));
+    return getMidwife(segmentsToRoute(segments), locale);
   }
 };

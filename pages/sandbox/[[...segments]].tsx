@@ -6,30 +6,27 @@ import { getStaticPaths as getCaregiverPaths } from "@/modules/profile/server/ge
 import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
 import { getStaticPaths as getMidwifePaths } from "@/modules/profile/server/generators/getStaticMidwifePaths";
 import { Header } from "@/modules/shell/components";
-import { ICaregiver, IMidwife } from "@/modules/profile/types";
-import { Profile } from "@/modules/profile/client/components";
+import { TryProfile } from "@/modules/profile/client/components";
+import { ISegmentPageProps } from "../[[...segments]]";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
-  console.log({ context });
+  const locales = context?.locales ?? [];
   const paths = [];
-  paths.push(...(await getCaregiverPaths()));
-  paths.push(...(await getMidwifePaths()));
+  paths.push(...(await getCaregiverPaths(locales)));
+  paths.push(...(await getMidwifePaths(locales)));
   console.log({ paths });
   return { paths, fallback: false };
 };
 
-export interface IProfilePageProps {
-  content: ICaregiver | IMidwife;
-}
 export const getStaticProps: GetStaticProps<
-  IProfilePageProps,
+  ISegmentPageProps,
   ISegmentParam
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
 
   let content;
-  content = await getCaregiverProps(params?.segments);
-  if (!content) content = await getMidwifeProps(params?.segments);
+  content = await getCaregiverProps(params?.segments, locale);
+  if (!content) content = await getMidwifeProps(params?.segments, locale);
   console.log({ content });
 
   if (!content) {
@@ -40,7 +37,7 @@ export const getStaticProps: GetStaticProps<
   return { props: { content } };
 };
 
-export default function profilePage(props: IProfilePageProps) {
+export default function profilePage(props: ISegmentPageProps) {
   const { content } = props;
   return (
     <div>
@@ -49,7 +46,7 @@ export default function profilePage(props: IProfilePageProps) {
       </Head>
       <Header {...content} />
       <main>
-        <Profile content={content} />
+        <TryProfile {...content} />
       </main>
     </div>
   );

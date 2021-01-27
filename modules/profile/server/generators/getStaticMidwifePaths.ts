@@ -1,10 +1,13 @@
 import { ISegmentPath } from "@/modules/editorial/types";
 import { getMidwifePaths } from "../../query";
 
-export const getStaticPaths = async (): Promise<ISegmentPath[]> => {
+export const getStaticPaths = async (
+  locales: string[]
+): Promise<ISegmentPath[]> => {
   const paths: ISegmentPath[] = [];
-  const segments = await getMidwifePaths();
-  if (segments) paths.push(...segments);
-
+  for (let locale of locales) {
+    const segments = await getMidwifePaths(locale);
+    if (segments) paths.push(...segments);
+  }
   return paths;
 };

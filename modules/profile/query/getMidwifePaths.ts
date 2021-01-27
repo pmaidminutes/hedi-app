@@ -1,13 +1,15 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { routeToSegments } from "@/modules/common/utils";
-import { IMidwife, MidwifeFields } from "../types";
 import { ISegmentPath } from "@/modules/editorial/types";
+import { IEntityLocalized, EntityLocalizedFields } from "@/modules/model";
 
-export async function getMidwifePaths(): Promise<ISegmentPath[] | undefined> {
+export async function getMidwifePaths(
+  lang = "de"
+): Promise<ISegmentPath[] | undefined> {
   const query = gql`
-    query getCaregiverPaths {
-      midwives { 
-        ${MidwifeFields}
+    query getCaregiverPaths($lang: String) {
+      midwives(lang: $lang) { 
+        ${EntityLocalizedFields}
       }
     }
   `;
@@ -16,7 +18,7 @@ export async function getMidwifePaths(): Promise<ISegmentPath[] | undefined> {
   if (!client) return [];
 
   const midwives = await client
-    .request<{ midwives: IMidwife[] }>(query)
+    .request<{ midwives: IEntityLocalized[] }>(query, { lang })
     .then(data => data.midwives)
     .catch(e => {
       console.warn("error", e);
@@ -25,6 +27,6 @@ export async function getMidwifePaths(): Promise<ISegmentPath[] | undefined> {
 
   return midwives?.map(midwife => ({
     params: { segments: routeToSegments(midwife.route) },
-    locale: "de",
+    locale: midwife.lang,
   }));
 }
