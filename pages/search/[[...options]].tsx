@@ -12,7 +12,7 @@ import { ProfileEntry } from "@/modules/profile/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
-import { Loading } from "carbon-components-react";
+import { Loading, Slider, TextInput } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -31,11 +31,18 @@ export default function searchPage() {
   const locale = router.locale ?? "de";
   const defaultLocale = router.defaultLocale;
   // TODO implement other possible filter options
-  const [filter, setFilter] = useState(String);
+  const [filter, setFilter] = useState("");
+  //TODO pick it up from env file for now 5kms around
+  const [distance, setDistance] = useState("5");
+  const [location, setLocation] = useState("");
   const handleFilter = function (selectedFilter: string) {
     filter
       ? setFilter(filter + " OR " + selectedFilter)
       : setFilter(selectedFilter);
+  };
+  const handleLocation = async function (typedLocation: string) {
+    const typedAddress = typedLocation.replace(/\s/g, "+");
+    setLocation(typedAddress);
   };
   //TODO not used at the moment
   const resetFilter = function () {
@@ -46,7 +53,13 @@ export default function searchPage() {
   //TODO temporary feature
   let errorMessage: string = "";
 
-  const { data, error } = useSearch(queryText, locale, filter);
+  const { data, error } = useSearch(
+    queryText,
+    locale,
+    location,
+    distance,
+    filter
+  );
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";
@@ -71,7 +84,33 @@ export default function searchPage() {
             query={initialQueryText}
           />
         </div>
-
+        <div>
+          {
+            //TODO cannot have onchange need to use button to fetch location
+            //or to find once the typing is finished
+          }
+          <TextInput
+            helperText=" "
+            id="location"
+            invalidText="A valid value is required"
+            labelText="Address line"
+            placeholder="Enter address"
+            onChange={e => handleLocation(e.target.value)}
+            //value={location}
+          />
+          <Slider
+            ariaLabelInput="Slide for distance"
+            id="slider"
+            labelText="Control distance"
+            max={10}
+            min={0}
+            step={1}
+            stepMultiplier={2}
+            value={5}
+            hideTextInput={true}
+            onChange={({ value }) => setDistance(value.toString())}
+          />
+        </div>
         <button
           className="bx--btn bx--btn--primary"
           type="button"

@@ -1,3 +1,6 @@
+import { ICoordinatesJSON } from "@/modules/search/types";
+import { IHTTPError, IsIHTTPError } from "../error";
+
 /* --- dev helper functions --- */
 export function AssertClientSide() {
   return typeof window !== "undefined";
@@ -24,4 +27,13 @@ export function jsonFetcher<T>(url: RequestInfo) {
   return fetch(url)
     .then(response => response.json())
     .then(jsonResponse => jsonResponse as T);
+}
+export function parseJSONCoordinates(
+  json: ICoordinatesJSON[] | IHTTPError
+): string {
+  if (!IsIHTTPError(json) && json?.length === 1) {
+    const coordinates: string[] = json[0]?.geojson?.coordinates;
+    return coordinates[1] + "," + coordinates[0];
+  }
+  return "";
 }
