@@ -17713,3 +17713,8 @@ article p {
   overflow-wrap: break-word; }
 
 /*# sourceMappingURL=styles.css.map */
+@import 'leaflet/dist/leaflet.css';
+.leaflet-container {
+   height: 300px;
+    }
+ 

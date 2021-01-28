@@ -13,7 +13,6 @@ import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { Loading, Slider, TextInput } from "carbon-components-react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -23,12 +22,7 @@ export default function searchPage() {
   const router = useRouter();
   const options = router.query?.options ?? "";
   const initialQueryText = `${options}`;
-  const MapWithNoSSR = dynamic<any>(
-    () => import("@/modules/common/components/Map/MapClient"),
-    {
-      ssr: false,
-    }
-  );
+
   const [queryText, setQueryText] = useState(initialQueryText);
   useEffect(() => {
     setQueryText(initialQueryText);
@@ -137,9 +131,6 @@ export default function searchPage() {
         </button>
         <div className="hedi-separator"></div>
         <h2>Search results</h2>
-        <div id="map">
-          <MapWithNoSSR />
-        </div>
         <div className="bx--tile-container">
           {/* iterate article component */}
         </div>

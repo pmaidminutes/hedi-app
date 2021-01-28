@@ -1,8 +1,8 @@
+import { AssertServerSide } from "@/modules/common/utils";
 import { Parser } from "htmlparser2";
 import { createElement, HTMLAttributes } from "react";
 import { IParserElementInfo, ITransformCallbackMap } from "./types";
 import { attributesToProps } from "./utils";
-import { AssertServerSide } from "@/modules/common/utils";
 
 export const HTML = ({
   data,
