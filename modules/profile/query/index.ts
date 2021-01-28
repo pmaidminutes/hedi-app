@@ -1,2 +1,4 @@
 export * from "./getCaregiver";
 export * from "./getMidwife";
+export * from "./getCaregiverPaths";
+export * from "./getMidwifePaths";

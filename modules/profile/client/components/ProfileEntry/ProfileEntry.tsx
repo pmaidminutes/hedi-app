@@ -2,9 +2,9 @@ import { HTMLWithNextImage } from "@/modules/react/html";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ICaregiver, IMidwife } from "../types";
+import { ICaregiver, IMidwife } from "../../../types";
 
-export const Profile = ({
+export const ProfileEntry = ({
   profile,
 }: {
   profile: IMidwife | ICaregiver;

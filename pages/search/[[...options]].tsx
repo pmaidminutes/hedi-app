@@ -8,7 +8,7 @@ import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
-import { Profile } from "@/modules/profile/client/Profile";
+import { ProfileEntry } from "@/modules/profile/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
@@ -152,46 +152,47 @@ export default function searchPage() {
         ) : errorMessage ? (
           <div className="errorMessage">{errorMessage}</div>
         ) : (
-          <>
-            <div className="bx--tile-container">
-              {IsIHTTPError(data)
-                ? []
-                : data?.map((entry: any) => {
-                    if (!entry) return null;
-                    console.log(entry.type, "in frontend");
-                    switch (entry.type) {
-                      case "Article":
-                        return (
-                          <ArticleEntry
-                            article={entry}
-                            key={entry.route + locale}
-                          />
-                        );
-                      case "Category":
-                        return (
-                          <CategoryEntry
-                            category={entry}
-                            key={entry.route + locale}
-                          />
-                        );
-                      case "GlossaryTerm":
-                        return (
-                          <GlossaryTerm
-                            glossaryTerm={entry}
-                            isSelected={true}
-                            translationLang={defaultLocale}
-                            key={entry.route + locale}
-                          />
-                        );
-                      case "Caregiver":
-                      case "Midwife":
-                        return (
-                          <Profile profile={entry} key={entry.route + locale} />
-                        );
-                    }
-                  })}
-            </div>
-          </>
+          <div className="bx--tile-container">
+            {IsIHTTPError(data)
+              ? []
+              : data?.map((entry: any) => {
+                  if (!entry) return null;
+                  console.log(entry.type, "in frontend");
+                  switch (entry.type) {
+                    case "Article":
+                      return (
+                        <ArticleEntry
+                          article={entry}
+                          key={entry.route + locale}
+                        />
+                      );
+                    case "Category":
+                      return (
+                        <CategoryEntry
+                          category={entry}
+                          key={entry.route + locale}
+                        />
+                      );
+                    case "GlossaryTerm":
+                      return (
+                        <GlossaryTerm
+                          glossaryTerm={entry}
+                          isSelected={true}
+                          translationLang={defaultLocale}
+                          key={entry.route + locale}
+                        />
+                      );
+                    case "Caregiver":
+                    case "Midwife":
+                      return (
+                        <ProfileEntry
+                          profile={entry}
+                          key={entry.route + locale}
+                        />
+                      );
+                  }
+                })}
+          </div>
         )}
       </main>
     </div>
