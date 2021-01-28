@@ -21,11 +21,16 @@ import {
   getStaticPaths as getGlossaryPaths,
   getStaticProps as getGlossaryProps,
 } from "@/modules/editorial/glossary/server";
+import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
+import { getStaticPaths as getCaregiverPaths } from "@/modules/profile/server/generators/getStaticCaregiverPaths";
+import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
+import { getStaticPaths as getMidwifePaths } from "@/modules/profile/server/generators/getStaticMidwifePaths";
 // Components
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 import { TryArticle } from "@/modules/editorial/article/client/components";
+import { TryProfile } from "@/modules/profile/client/components";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const locales = context?.locales ?? [];
@@ -33,6 +38,8 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   paths.push(...(await getArticlePaths(locales)));
   paths.push(...(await getCategoryPaths(locales)));
   paths.push(...(await getGlossaryPaths(locales)));
+  paths.push(...(await getCaregiverPaths(locales)));
+  paths.push(...(await getMidwifePaths(locales)));
   return { paths, fallback: false };
 };
 
@@ -50,6 +57,8 @@ export const getStaticProps: GetStaticProps<
   content = await getCategoryProps(params?.segments, locale);
   if (!content) content = await getArticleProps(params?.segments, locale);
   if (!content) content = await getGlossaryProps(params?.segments, locale);
+  if (!content) content = await getCaregiverProps(params?.segments, locale);
+  if (!content) content = await getMidwifeProps(params?.segments, locale);
 
   if (!content) {
     console.log("couldn't find content for path ", segments.join("/"));
@@ -79,6 +88,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryCategory {...content} />
         <TryArticle {...content} />
         <TryGlossary {...content} />
+        <TryProfile {...content} />
       </main>
     </div>
   );
