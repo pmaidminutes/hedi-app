@@ -1,11 +1,7 @@
+import { IContact } from "@/modules/model";
+
 interface IContactProps {
-  content: {
-    phone: string;
-    phone_private: string;
-    mail: string;
-    website: string;
-    consultation_hours: string;
-  };
+  content: IContact;
 }
 
 export const Contact = ({ content }: IContactProps): JSX.Element => {

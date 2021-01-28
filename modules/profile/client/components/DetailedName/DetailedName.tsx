@@ -1,12 +1,7 @@
+import { IDetailedName } from "@/modules/model";
+
 interface IDetailedNameProps {
-  content: {
-    label: string;
-    display: string;
-    name: string;
-    surname: string;
-    suffix: string;
-    prefix: string;
-  };
+  content: IDetailedName;
 }
 
 export const DetailedName = ({ content }: IDetailedNameProps): JSX.Element => {

@@ -1,15 +1,6 @@
+import { IAddress } from "@/modules/model";
 interface IAddressProps {
-  content: {
-    city: string;
-    postal_code: string;
-    house_number: string;
-    street: string;
-    country: string;
-    county: string;
-    state: string;
-    district: string;
-    room: string;
-  };
+  content: IAddress;
 }
 
 export const Address = ({ content }: IAddressProps): JSX.Element => {
