@@ -9,10 +9,12 @@ import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { ProfileEntry } from "@/modules/profile/client/components";
+import { ILocation } from "@/modules/profile/types";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { Loading, Slider, TextInput } from "carbon-components-react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -22,7 +24,12 @@ export default function searchPage() {
   const router = useRouter();
   const options = router.query?.options ?? "";
   const initialQueryText = `${options}`;
-
+  const MapWithNoSSR = dynamic<any>(
+    () => import("@/modules/common/components/Map/MapClient"),
+    {
+      ssr: false,
+    }
+  );
   const [queryText, setQueryText] = useState(initialQueryText);
   useEffect(() => {
     setQueryText(initialQueryText);
@@ -40,6 +47,7 @@ export default function searchPage() {
       ? setFilter(filter + " OR " + selectedFilter)
       : setFilter(selectedFilter);
   };
+  const locations: ILocation[] = [];
   const handleLocation = async function (typedLocation: string) {
     const typedAddress = typedLocation.replace(/\s/g, "+");
     setLocation(typedAddress);
@@ -175,6 +183,16 @@ export default function searchPage() {
                       );
                     case "Caregiver":
                     case "Midwife":
+                    case "Institution":
+                    case "Organisation":
+                      {
+                        console.log(entry.lat);
+                        locations.push({
+                          lat: entry.lat,
+                          long: entry.long,
+                          name: entry.name,
+                        });
+                      }
                       return (
                         <ProfileEntry
                           profile={entry}
@@ -183,6 +201,14 @@ export default function searchPage() {
                       );
                   }
                 })}
+            {locations?.length > 0 ? (
+              <MapWithNoSSR
+                currentLocation={locations[0]}
+                locations={locations}
+              />
+            ) : (
+              ""
+            )}
           </div>
         )}
       </main>

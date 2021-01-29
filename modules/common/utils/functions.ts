@@ -31,9 +31,12 @@ export function jsonFetcher<T>(url: RequestInfo) {
 export function parseJSONCoordinates(
   json: ICoordinatesJSON[] | IHTTPError
 ): string {
-  if (!IsIHTTPError(json) && json?.length === 1) {
-    const coordinates: string[] = json[0]?.geojson?.coordinates;
-    return coordinates[1] + "," + coordinates[0];
+  if (!IsIHTTPError(json) && json?.length > 0) {
+    json.map(json => {
+      if (json?.geojson?.type === "Point") {
+        return json.geojson.coordinates;
+      }
+    });
   }
   return "";
 }
