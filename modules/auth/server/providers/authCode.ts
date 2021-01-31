@@ -7,10 +7,10 @@ export const authCodeProvider = {
   version: "2.0",
   scope: "default profile email openid offline_access",
   params: { grant_type: "authorization_code" },
-  accessTokenUrl: process.env.NEXTAUTH_CMS_URL + "/oauth2/token",
+  accessTokenUrl: process.env.CMS_URL + "/oauth2/token",
   authorizationUrl:
-    process.env.NEXTAUTH_CMS_URL + "/oauth2/authorize?response_type=code",
-  profileUrl: process.env.NEXTAUTH_CMS_URL + "/oauth2/UserInfo",
+    process.env.CMS_URL + "/oauth2/authorize?response_type=code",
+  profileUrl: process.env.CMS_URL + "/oauth2/UserInfo",
   profile: (profile: IUserInfoResponse) => {
     return {
       id: profile.name + "_" + profile.sub,

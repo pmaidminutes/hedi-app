@@ -17,7 +17,7 @@ export async function requestToken(
     client_secret: process.env.NEXTAUTH_CMS_SECRET,
   };
 
-  const response = await fetch(process.env.NEXTAUTH_CMS_URL + "/oauth2/token", {
+  const response = await fetch(process.env.CMS_URL + "/oauth2/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
