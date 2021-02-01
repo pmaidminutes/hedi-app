@@ -1,7 +1,7 @@
 import { ITyped } from "@/modules/model";
+import { ICaregiver, IMidwife } from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
 import dynamic from "next/dynamic";
-import { ICaregiver, IMidwife } from "../../../types";
 import { Address } from "../Address";
 import { Contact } from "../Contact";
 import { DetailedName } from "../DetailedName";
@@ -20,7 +20,7 @@ export const TryProfile = (content: ITyped): JSX.Element | null => {
   }
 };
 const MapWithNoSSR = dynamic<any>(
-  () => import("@/modules/common/components/Map/MapClient"),
+  () => import("@/modules/common/components/MapClient/MapClient"),
   {
     ssr: false,
   }

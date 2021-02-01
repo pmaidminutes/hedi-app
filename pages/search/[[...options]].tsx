@@ -25,7 +25,7 @@ export default function searchPage() {
   const options = router.query?.options ?? "";
   const initialQueryText = `${options}`;
   const MapWithNoSSR = dynamic<any>(
-    () => import("@/modules/common/components/Map/MapClient"),
+    () => import("@/modules/common/components/MapClient/MapClient"),
     {
       ssr: false,
     }
