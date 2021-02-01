@@ -10,7 +10,7 @@ export async function requestRefresh(refreshToken: string, csrfToken: string) {
     client_secret: process.env.NEXTAUTH_CMS_SECRET,
   };
 
-  return fetch(process.env.NEXTAUTH_CMS_URL + "/oauth2/token", {
+  return fetch(process.env.CMS_URL + "/oauth2/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
