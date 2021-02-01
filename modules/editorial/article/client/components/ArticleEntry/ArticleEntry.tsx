@@ -1,8 +1,8 @@
+import { HTMLWithNextImage } from "@/modules/react/html";
+import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { HTMLWithNextImage } from "@/modules/react/html";
 import { IArticleEntry } from "../../../types";
-import { ClickableTile } from "carbon-components-react";
 
 export const ArticleEntry = ({
   article,
