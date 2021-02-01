@@ -1,6 +1,4 @@
-import "leaflet/dist/leaflet.css";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { ICaregiver, IMidwife } from "../../../types";
 
 export const ProfileEntry = ({
@@ -8,8 +6,6 @@ export const ProfileEntry = ({
 }: {
   profile: IMidwife | ICaregiver;
 }): JSX.Element => {
-  const router = useRouter();
-  const { locale, defaultLocale } = router;
   const { label, route, display } = profile;
 
   return (

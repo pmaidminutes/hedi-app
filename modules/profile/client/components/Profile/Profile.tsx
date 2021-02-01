@@ -1,6 +1,6 @@
 import { MapClient } from "@/modules/common/components";
 import { ITyped } from "@/modules/model";
-import { ICaregiver, ILocation, IMidwife } from "@/modules/profile/types";
+import { ICaregiver, IMidwife, Location } from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
 import { Address } from "../Address";
 import { Contact } from "../Contact";
@@ -8,7 +8,7 @@ import { DetailedName } from "../DetailedName";
 interface IProfileProps {
   content: ICaregiver | IMidwife;
 }
-const locations: ILocation[] = [];
+const locations: Location[] = [];
 
 export const TryProfile = (content: ITyped): JSX.Element | null => {
   switch (content.type) {
@@ -37,11 +37,14 @@ export const Profile = ({ content }: IProfileProps) => {
             <Contact content={content} />
           </Column>
         </Row>
-        {locations.push({
-          lat: content.lat,
-          long: content.long,
-          name: content.name,
-        } as ILocation)}
+        {
+          //TODO to verify the state availablility of array
+          locations.push({
+            lat: content.lat,
+            long: content.long,
+            display: content.display,
+          } as Location)
+        }
         <MapClient currentLocation={locations[0]} locations={locations} />
       </Grid>
     </>

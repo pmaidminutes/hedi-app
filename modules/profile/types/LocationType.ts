@@ -1,9 +1,3 @@
-export interface ILocation {
-  lat: string;
-  long: string;
-  name: string;
-}
+import { IProfile } from "@/modules/model/IProfile";
 
-export function isILocation(obj: any): obj is ILocation {
-  return obj && obj.typeName === "Location";
-}
+export type Location = Pick<IProfile, "display" | "lat" | "long">;
