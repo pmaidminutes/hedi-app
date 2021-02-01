@@ -36,3 +36,5 @@ modular.txt
 
 #exporter
 /export/
+
+yarn.lock
