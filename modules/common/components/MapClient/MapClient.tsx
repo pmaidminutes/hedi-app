@@ -5,7 +5,7 @@ import L, { LatLngExpression } from "leaflet";
 import React from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 
-function convertCoordinates(
+function convertToCoordinates(
   latitude: string,
   longitude: string
 ): LatLngExpression {
@@ -26,7 +26,7 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
   return (
     <>
       <MapContainer
-        center={convertCoordinates(currentLocation.lat, currentLocation.long)}
+        center={convertToCoordinates(currentLocation.lat, currentLocation.long)}
         zoom={12}
         scrollWheelZoom={false}>
         <TileLayer
@@ -35,7 +35,7 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
         />
         {locations?.map((location: ILocation) => (
           <Marker
-            position={convertCoordinates(location.lat, location.long)}
+            position={convertToCoordinates(location.lat, location.long)}
             icon={iconPerson}>
             <Popup>{location.name}</Popup>
           </Marker>
