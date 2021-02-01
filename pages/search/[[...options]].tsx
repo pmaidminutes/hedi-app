@@ -156,7 +156,6 @@ export default function searchPage() {
               ? []
               : data?.map((entry: any) => {
                   if (!entry) return null;
-                  console.log(entry.type, "in frontend");
                   switch (entry.type) {
                     case "Article":
                       return (
@@ -186,7 +185,6 @@ export default function searchPage() {
                     case "Institution":
                     case "Organisation":
                       {
-                        console.log(entry.lat);
                         locations.push({
                           lat: entry.lat,
                           long: entry.long,
