@@ -70,12 +70,11 @@ export const getStaticProps: GetStaticProps<
 
 export default function segments(props: ISegmentPageProps) {
   const { content } = props;
-  const { appstyle } = content;
   const [hediStyle, setHediStyle] = useState("");
 
   useEffect(() => {
-    setHediStyle(appstyle ?? "");
-  }, [appstyle]);
+    setHediStyle(content?.appstyle ?? "");
+  }, [content]);
 
   return (
     <div className={hediStyle}>
