@@ -24,10 +24,10 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
   });
 
   return (
-    <div id="map">
+    <>
       <MapContainer
         center={convertCoordinates(currentLocation.lat, currentLocation.long)}
-        zoom={6}
+        zoom={12}
         scrollWheelZoom={false}>
         <TileLayer
           attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
@@ -41,6 +41,6 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
           </Marker>
         ))}
       </MapContainer>
-    </div>
+    </>
   );
 }

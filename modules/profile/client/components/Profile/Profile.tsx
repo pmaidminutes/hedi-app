@@ -1,13 +1,14 @@
+import { MapClient } from "@/modules/common/components";
 import { ITyped } from "@/modules/model";
-import { ICaregiver, IMidwife } from "@/modules/profile/types";
+import { ICaregiver, ILocation, IMidwife } from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
-import dynamic from "next/dynamic";
 import { Address } from "../Address";
 import { Contact } from "../Contact";
 import { DetailedName } from "../DetailedName";
 interface IProfileProps {
   content: ICaregiver | IMidwife;
 }
+const locations: ILocation[] = [];
 
 export const TryProfile = (content: ITyped): JSX.Element | null => {
   switch (content.type) {
@@ -19,12 +20,7 @@ export const TryProfile = (content: ITyped): JSX.Element | null => {
       return null;
   }
 };
-const MapWithNoSSR = dynamic<any>(
-  () => import("@/modules/common/components/MapClient/MapClient"),
-  {
-    ssr: false,
-  }
-);
+
 export const Profile = ({ content }: IProfileProps) => {
   return (
     <>
@@ -41,8 +37,13 @@ export const Profile = ({ content }: IProfileProps) => {
             <Contact content={content} />
           </Column>
         </Row>
+        {locations.push({
+          lat: content.lat,
+          long: content.long,
+          name: content.name,
+        } as ILocation)}
+        <MapClient currentLocation={locations[0]} locations={locations} />
       </Grid>
-      <MapWithNoSSR />
     </>
   );
 };

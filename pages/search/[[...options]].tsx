@@ -1,9 +1,4 @@
-/**
- * Search Root
- *
- * for language switching see ../index.tsx
- */
-
+import { MapClient } from "@/modules/common/components";
 import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
@@ -14,7 +9,6 @@ import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { Loading, Slider, TextInput } from "carbon-components-react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
@@ -24,12 +18,7 @@ export default function searchPage() {
   const router = useRouter();
   const options = router.query?.options ?? "";
   const initialQueryText = `${options}`;
-  const MapWithNoSSR = dynamic<any>(
-    () => import("@/modules/common/components/MapClient/MapClient"),
-    {
-      ssr: false,
-    }
-  );
+
   const [queryText, setQueryText] = useState(initialQueryText);
   useEffect(() => {
     setQueryText(initialQueryText);
@@ -200,10 +189,7 @@ export default function searchPage() {
                   }
                 })}
             {locations?.length > 0 ? (
-              <MapWithNoSSR
-                currentLocation={locations[0]}
-                locations={locations}
-              />
+              <MapClient currentLocation={locations[0]} locations={locations} />
             ) : (
               ""
             )}
