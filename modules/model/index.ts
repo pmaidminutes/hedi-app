@@ -13,3 +13,5 @@ export * from "./IRouteLabeled";
 export * from "./ISummary";
 export * from "./ITagged";
 export * from "./ITyped";
+export * from "./IUIText";
+export * from "./IWithUITexts";
