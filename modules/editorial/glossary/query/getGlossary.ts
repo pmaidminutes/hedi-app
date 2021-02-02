@@ -21,7 +21,9 @@ export async function getGlossary(
   const client = await getServiceClient();
   return client
     .request<{ glossary: IGlossary }>(query, { route, lang })
-    .then(data => glossaryToGroupedGlossary(data.glossary))
+    .then(data =>
+      data.glossary ? glossaryToGroupedGlossary(data.glossary) : null
+    )
     .catch(e => {
       console.warn(e);
       return null;

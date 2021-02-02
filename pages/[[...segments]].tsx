@@ -25,12 +25,17 @@ import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/ge
 import { getStaticPaths as getCaregiverPaths } from "@/modules/profile/server/generators/getStaticCaregiverPaths";
 import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
 import { getStaticPaths as getMidwifePaths } from "@/modules/profile/server/generators/getStaticMidwifePaths";
+import {
+  getStaticPaths as getSearchViewPaths,
+  getStaticProps as getSearchViewProps,
+} from "@/modules/search/server";
 // Components
 import { BreadCrumb, Header } from "@/modules/shell/components";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 import { TryProfile } from "@/modules/profile/client/components";
+import { TrySearch } from "@/modules/search/client/components";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const locales = context?.locales ?? [];
@@ -40,7 +45,8 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   paths.push(...(await getGlossaryPaths(locales)));
   paths.push(...(await getCaregiverPaths(locales)));
   paths.push(...(await getMidwifePaths(locales)));
-  return { paths, fallback: false };
+  paths.push(...(await getSearchViewPaths(locales)));
+  return { paths, fallback: "blocking" };
 };
 
 export interface ISegmentPageProps {
@@ -54,7 +60,9 @@ export const getStaticProps: GetStaticProps<
   const segments = params?.segments ?? [];
 
   let content;
-  content = await getCategoryProps(params?.segments, locale);
+  // query types with dynamic paths first
+  if (!content) content = await getSearchViewProps(params?.segments, locale);
+  if (!content) content = await getCategoryProps(params?.segments, locale);
   if (!content) content = await getArticleProps(params?.segments, locale);
   if (!content) content = await getGlossaryProps(params?.segments, locale);
   if (!content) content = await getCaregiverProps(params?.segments, locale);
@@ -65,17 +73,19 @@ export const getStaticProps: GetStaticProps<
     throw Error("Houston, we have got a problem");
   }
 
-  return { props: { content } };
+  return {
+    props: { content },
+    revalidate: content.type === "Search" ? 15 : false,
+  };
 };
 
 export default function segments(props: ISegmentPageProps) {
   const { content } = props;
-  const { appstyle } = content;
   const [hediStyle, setHediStyle] = useState("");
 
   useEffect(() => {
-    setHediStyle(appstyle ?? "");
-  }, [appstyle]);
+    setHediStyle(content?.appstyle ?? "");
+  }, [content]);
 
   return (
     <div className={hediStyle}>
@@ -89,6 +99,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryArticle {...content} />
         <TryGlossary {...content} />
         <TryProfile {...content} />
+        <TrySearch {...content} />
       </main>
     </div>
   );
