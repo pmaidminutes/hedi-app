@@ -1,8 +1,7 @@
-import { HTMLWithNextImage } from "@/modules/react/html";
+import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ICaregiver, IMidwife } from "../../../types";
-import { ClickableTile } from "carbon-components-react";
 
 export const ProfileEntry = ({
   profile,
@@ -11,20 +10,21 @@ export const ProfileEntry = ({
 }): JSX.Element => {
   const router = useRouter();
   const { locale, defaultLocale } = router;
-  const { label, route } = profile;
+  const { label, route, display } = profile;
+
   return (
-    <Link href={route} passHref>
-      <ClickableTile href={route}>
-        <h4
-          dangerouslySetInnerHTML={{
-            __html: label,
-          }}></h4>
-        <HTMLWithNextImage
-          data={label}
-          locale={locale === defaultLocale ? null : locale}
-        />
-      </ClickableTile>
-    </Link>
+    <>
+      <Link href={route} passHref>
+        <ClickableTile href={route}>
+          <h4
+            dangerouslySetInnerHTML={{
+              __html: label,
+            }}></h4>
+
+          {label}
+        </ClickableTile>
+      </Link>
+    </>
   );
 };
 [];

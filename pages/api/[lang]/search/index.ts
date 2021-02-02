@@ -39,7 +39,6 @@ const solrSearchHandler: NextApiHandler<
         : highlight.highlightedBody;
       const [_, path, lang] = entry.search_api_id.split(":");
       const route = "/" + path.replace("taxonomy_term", "taxonomy/term");
-      console.log(entry.ss_type);
       switch (entry.ss_type) {
         case "article":
           promises.push(

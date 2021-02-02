@@ -1,14 +1,10 @@
-/**
- * Search Root
- *
- * for language switching see ../index.tsx
- */
-
+import { MapClient } from "@/modules/common/components";
 import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { ProfileEntry } from "@/modules/profile/client/components";
+import { Location } from "@/modules/profile/types";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import { BreadCrumb, Header } from "@/modules/shell/components";
@@ -40,6 +36,7 @@ export default function searchPage() {
       ? setFilter(filter + " OR " + selectedFilter)
       : setFilter(selectedFilter);
   };
+  const locations: Location[] = [];
   const handleLocation = async function (typedLocation: string) {
     const typedAddress = typedLocation.replace(/\s/g, "+");
     setLocation(typedAddress);
@@ -148,7 +145,6 @@ export default function searchPage() {
               ? []
               : data?.map((entry: any) => {
                   if (!entry) return null;
-                  console.log(entry.type, "in frontend");
                   switch (entry.type) {
                     case "Article":
                       return (
@@ -175,6 +171,14 @@ export default function searchPage() {
                       );
                     case "Caregiver":
                     case "Midwife":
+                      {
+                        //TODO if there will be too many locations due to state changes..
+                        locations.push({
+                          lat: entry.lat,
+                          long: entry.long,
+                          display: entry.name,
+                        } as Location);
+                      }
                       return (
                         <ProfileEntry
                           profile={entry}
@@ -183,6 +187,11 @@ export default function searchPage() {
                       );
                   }
                 })}
+            {locations?.length > 0 ? (
+              <MapClient currentLocation={locations[0]} locations={locations} />
+            ) : (
+              ""
+            )}
           </div>
         )}
       </main>

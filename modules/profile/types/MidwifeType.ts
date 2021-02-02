@@ -1,8 +1,7 @@
 import {
-  EntityFields,
-  IEntityTranslated,
-  IEntityLocalized,
   EntityTranslatedFields,
+  IEntityLocalized,
+  IEntityTranslated,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -21,7 +20,7 @@ export interface IMidwife
 }
 
 export function isIMidwife(obj: any): obj is IMidwife {
-  return obj && obj.typeName === "Midwife";
+  return obj && obj.type === "Midwife";
 }
 
 export const MidwifeFields = `${EntityTranslatedFields}
