@@ -1,5 +1,4 @@
 import { ClickableTile } from "carbon-components-react";
-import "leaflet/dist/leaflet.css";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { ICaregiver, IMidwife } from "../../../types";
