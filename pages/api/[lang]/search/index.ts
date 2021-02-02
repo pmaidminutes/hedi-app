@@ -6,8 +6,18 @@ import { getCategory } from "@/modules/editorial/category/query";
 import { ICategory } from "@/modules/editorial/category/types";
 import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
-import { getCaregiver, getMidwife } from "@/modules/profile/query";
-import { ICaregiver, IMidwife } from "@/modules/profile/types";
+import {
+  getCaregiver,
+  getInstitution,
+  getMidwife,
+  getOrganisation,
+} from "@/modules/profile/query";
+import {
+  ICaregiver,
+  IInstitution,
+  IMidwife,
+  IOrganisation,
+} from "@/modules/profile/types";
 import { requestCoordinates } from "@/modules/search/server/functions";
 import { searchServer } from "@/modules/search/server/request";
 import { NextApiHandler } from "next";
@@ -91,10 +101,39 @@ const solrSearchHandler: NextApiHandler<
             })
           );
           break;
+        case "organisation_tmp":
+          promises.push(
+            getOrganisation(route).then(organisation => {
+              if (organisation) {
+                organisation.label =
+                  highlight.highlightedTitle ?? organisation.label;
+              }
+              return organisation;
+            })
+          );
+          break;
+        case "institution_tmp":
+          promises.push(
+            getInstitution(route).then(institution => {
+              if (institution) {
+                institution.label =
+                  highlight.highlightedTitle ?? institution.label;
+              }
+              return institution;
+            })
+          );
+          break;
       }
     }
     const entries = await Promise.all<
-      IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | null
+      | IArticle
+      | ICategory
+      | IGlossaryTerm
+      | ICaregiver
+      | IMidwife
+      | IOrganisation
+      | IInstitution
+      | null
     >(promises);
     const nonNull = entries.filter(entry => entry) as (
       | IArticle
@@ -102,6 +141,8 @@ const solrSearchHandler: NextApiHandler<
       | IGlossaryTerm
       | ICaregiver
       | IMidwife
+      | IOrganisation
+      | IInstitution
     )[];
     res.send(nonNull);
   }

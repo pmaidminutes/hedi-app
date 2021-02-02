@@ -1,12 +1,17 @@
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
-import { ICaregiver, IMidwife } from "../../../types";
+import {
+  ICaregiver,
+  IInstitution,
+  IMidwife,
+  IOrganisation,
+} from "../../../types";
 
 export const ProfileEntry = ({
   profile,
 }: {
-  profile: IMidwife | ICaregiver;
+  profile: IMidwife | ICaregiver | IOrganisation | IInstitution;
 }): JSX.Element => {
   const router = useRouter();
   const { locale, defaultLocale } = router;

@@ -189,6 +189,8 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                     );
                   case "Caregiver":
                   case "Midwife":
+                  case "Organisation":
+                  case "Institution":
                     {
                       //TODO if there will be too many locations due to state changes..
                       locations.push({
