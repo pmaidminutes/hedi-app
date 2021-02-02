@@ -10,7 +10,7 @@ export const ProfileEntry = ({
 }): JSX.Element => {
   const router = useRouter();
   const { locale, defaultLocale } = router;
-  const { label, route, display } = profile;
+  const { label, route, displayName } = profile;
 
   return (
     <>
@@ -21,7 +21,7 @@ export const ProfileEntry = ({
               __html: label,
             }}></h4>
 
-          {label}
+          {displayName}
         </ClickableTile>
       </Link>
     </>

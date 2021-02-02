@@ -1,7 +1,7 @@
 export interface IDetailedName {
-  display: string;
+  displayName: string;
   prefix: string;
-  name: string;
+  forename: string;
   surname: string;
   suffix: string;
 }
@@ -12,8 +12,8 @@ export function isIDetailedName(obj: any): obj is IDetailedName {
 }
 
 export const DetailedNameFields = `
-display
+displayName
 prefix
-name
+forename
 surname
 suffix`;

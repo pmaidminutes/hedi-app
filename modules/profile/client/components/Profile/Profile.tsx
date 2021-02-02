@@ -1,6 +1,12 @@
 import { MapClient } from "@/modules/common/components";
 import { ITyped } from "@/modules/model";
-import { ICaregiver, IMidwife, Location } from "@/modules/profile/types";
+import {
+  ICaregiver,
+  IInstitution,
+  IMidwife,
+  IOrganisation,
+  Location,
+} from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
 import { Address } from "../Address";
 import { Contact } from "../Contact";
@@ -16,6 +22,10 @@ export const TryProfile = (content: ITyped): JSX.Element | null => {
       return <Profile content={content as ICaregiver} />;
     case "Caregiver":
       return <Profile content={content as IMidwife} />;
+    case "Organisation":
+      return <Profile content={content as IOrganisation} />;
+    case "Institution":
+      return <Profile content={content as IInstitution} />;
     default:
       return null;
   }
@@ -42,7 +52,7 @@ export const Profile = ({ content }: IProfileProps) => {
           locations.push({
             lat: content.lat,
             long: content.long,
-            display: content.display,
+            displayName: content.displayName,
           } as Location)
         }
         <MapClient currentLocation={locations[0]} locations={locations} />

@@ -1,18 +1,18 @@
 import { MapClient } from "@/modules/common/components";
-import { ITyped, IUIText } from "@/modules/model";
 import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
+import { ITyped, IUIText } from "@/modules/model";
 import { ProfileEntry } from "@/modules/profile/client/components";
 import { Location } from "@/modules/profile/types";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import {
-  Grid,
-  Row,
   Column,
+  Grid,
   Loading,
+  Row,
   Slider,
   TextInput,
 } from "carbon-components-react";
@@ -194,7 +194,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                       locations.push({
                         lat: entry.lat,
                         long: entry.long,
-                        display: entry.name,
+                        displayName: entry.displayName,
                       } as Location);
                     }
                     return (

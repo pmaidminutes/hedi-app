@@ -1,5 +1,5 @@
 export interface IAddress {
-  display: string;
+  displayAddress: string;
   country: string;
   state: string;
   county: string;
@@ -21,7 +21,7 @@ export function isIAddress(obj: any): obj is IAddress {
 }
 
 export const AddressFields = `
-display
+displayAddress
 country
 state
 county
