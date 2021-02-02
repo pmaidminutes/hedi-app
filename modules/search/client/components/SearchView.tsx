@@ -1,15 +1,11 @@
-/**
- * Search Root
- *
- *
- */
-
+import { MapClient } from "@/modules/common/components";
 import { ITyped, IUIText } from "@/modules/model";
 import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { ProfileEntry } from "@/modules/profile/client/components";
+import { Location } from "@/modules/profile/types";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import {
@@ -60,6 +56,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
       ? setFilter(filter + " OR " + selectedFilter)
       : setFilter(selectedFilter);
   };
+  const locations: Location[] = [];
   const handleLocation = async function (typedLocation: string) {
     const typedAddress = typedLocation.replace(/\s/g, "+");
     setLocation(typedAddress);
@@ -166,7 +163,6 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
             ? []
             : data?.map((entry: any) => {
                 if (!entry) return null;
-                console.log(entry.type, "in frontend");
                 switch (entry.type) {
                   case "Article":
                     return (
@@ -193,6 +189,14 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                     );
                   case "Caregiver":
                   case "Midwife":
+                    {
+                      //TODO if there will be too many locations due to state changes..
+                      locations.push({
+                        lat: entry.lat,
+                        long: entry.long,
+                        display: entry.name,
+                      } as Location);
+                    }
                     return (
                       <ProfileEntry
                         profile={entry}
@@ -201,6 +205,11 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                     );
                 }
               })}
+          {locations?.length > 0 ? (
+            <MapClient currentLocation={locations[0]} locations={locations} />
+          ) : (
+            ""
+          )}
         </div>
       )}
     </Grid>

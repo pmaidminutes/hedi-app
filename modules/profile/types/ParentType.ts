@@ -12,7 +12,7 @@ export interface IParent extends IEntity, IDetailedName, IAddress, IContact {
 }
 
 export function isIParent(obj: any): obj is IParent {
-  return obj && obj.typeName === "Parent";
+  return obj && obj.type === "Parent";
 }
 export const ParentFields = `${EntityFields}
 ${DetailedNameFields}

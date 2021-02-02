@@ -17713,3 +17713,7 @@ article p {
   overflow-wrap: break-word; }
 
 /*# sourceMappingURL=styles.css.map */
+.leaflet-container {
+   height: 300px;
+    }
+ 
