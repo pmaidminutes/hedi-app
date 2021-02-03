@@ -7,8 +7,8 @@ const ssoPlaygroundHandler: NextApiHandler<any> = async (req, res) => {
   const authHeader = await getUserAuthHeader(req);
 
   if (authHeader) {
-    const gql = getClient(GQLEndpoint.Public, authHeader);
-    const usr = await gql.request(`query Session { session }`);
+    const gql = getClient(GQLEndpoint.User, authHeader);
+    const usr = await gql.request(`query MSGSession { msgSession }`);
     const session = usr.session;
 
     const tokenResponse = await querySSOLoginToken(session);
