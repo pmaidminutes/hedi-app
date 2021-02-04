@@ -37,7 +37,8 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
         {locations?.map((location: Location) => (
           <Marker
             position={convertToCoordinates(location.lat, location.long)}
-            icon={iconPerson}>
+            icon={iconPerson}
+            key={location.displayName}>
             <Popup>{location.displayName}</Popup>
           </Marker>
         ))}
