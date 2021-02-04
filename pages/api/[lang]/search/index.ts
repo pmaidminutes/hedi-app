@@ -1,5 +1,5 @@
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
-import { parseJSONCoordinates } from "@/modules/common/utils";
+import { parseJSONToLatLngCoordinates } from "@/modules/common/utils";
 import { getArticle } from "@/modules/editorial/article/query";
 import { IArticle } from "@/modules/editorial/article/types";
 import { getCategory } from "@/modules/editorial/category/query";
@@ -29,7 +29,7 @@ const solrSearchHandler: NextApiHandler<
     query: { lang, searchText, filter, location, distance },
   } = req;
   const locationJson = await requestCoordinates(`${location}`);
-  const locationCoordinates = parseJSONCoordinates(locationJson);
+  const locationCoordinates = parseJSONToLatLngCoordinates(locationJson);
   const data = await searchServer(
     `${lang}`,
     `${searchText}`.split(" ").join(" || "),

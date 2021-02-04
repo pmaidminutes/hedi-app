@@ -28,15 +28,16 @@ export function jsonFetcher<T>(url: RequestInfo) {
     .then(response => response.json())
     .then(jsonResponse => jsonResponse as T);
 }
-export function parseJSONCoordinates(
-  json: ICoordinatesJSON[] | IHTTPError
+export function parseJSONToLatLngCoordinates(
+  jsonAsString: string | IHTTPError
 ): string {
-  if (!IsIHTTPError(json) && json?.length > 0) {
-    json.map(json => {
-      if (json?.geojson?.type === "Point") {
-        return json.geojson.coordinates;
-      }
-    });
+  if (!IsIHTTPError(jsonAsString)) {
+    const parsedJSON: ICoordinatesJSON = JSON.parse(jsonAsString);
+    return parsedJSON?.items[0]?.position
+      ? parsedJSON.items[0].position.lat +
+          "," +
+          parsedJSON.items[0].position.lng
+      : "";
   }
   return "";
 }
