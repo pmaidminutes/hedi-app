@@ -1,11 +1,11 @@
-import { MapClient } from "@/modules/common/components";
 import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
+import { MapClient } from "@/modules/map/client/components";
+import { Location } from "@/modules/map/types";
 import { ITyped, IUIText } from "@/modules/model";
 import { ProfileEntry } from "@/modules/profile/client/components";
-import { Location } from "@/modules/profile/types";
 import { SearchInput } from "@/modules/search/client/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import {

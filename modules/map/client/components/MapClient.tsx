@@ -1,21 +1,13 @@
 //import 'leaflet-defaulticon-compatibility';
 
-import { Location } from "@/modules/profile/types";
-import L, { LatLngExpression } from "leaflet";
+import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import React from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import { coordinates, Location } from "../../types";
+import { convertToCoordinates } from "../functions";
 
-function convertToCoordinates(
-  latitude: string,
-  longitude: string
-): LatLngExpression {
-  return [parseFloat(latitude), parseFloat(longitude)];
-}
-interface coordinates {
-  locations: Location[];
-  currentLocation: Location;
-}
+("../types");
 export default function MapClient({ locations, currentLocation }: coordinates) {
   const iconPerson = new L.Icon({
     //TODO to move thhe image to durpal

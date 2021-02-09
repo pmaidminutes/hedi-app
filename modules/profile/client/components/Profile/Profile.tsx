@@ -1,11 +1,11 @@
-import { MapClient } from "@/modules/common/components";
+import { MapClient } from "@/modules/map/client/components";
+import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
 import {
   ICaregiver,
   IInstitution,
   IMidwife,
   IOrganisation,
-  Location,
 } from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
 import { Address } from "../Address";

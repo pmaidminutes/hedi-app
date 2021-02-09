@@ -1,11 +1,12 @@
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
-import { parseJSONToLatLngCoordinates } from "@/modules/common/utils";
 import { getArticle } from "@/modules/editorial/article/query";
 import { IArticle } from "@/modules/editorial/article/types";
 import { getCategory } from "@/modules/editorial/category/query";
 import { ICategory } from "@/modules/editorial/category/types";
 import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
+import { parseJSONToLatLngCoordinates } from "@/modules/map/server/functions";
+import { requestCoordinates } from "@/modules/map/server/request";
 import {
   getCaregiver,
   getInstitution,
@@ -18,7 +19,6 @@ import {
   IMidwife,
   IOrganisation,
 } from "@/modules/profile/types";
-import { requestCoordinates } from "@/modules/search/server/functions";
 import { searchServer } from "@/modules/search/server/request";
 import { NextApiHandler } from "next";
 
