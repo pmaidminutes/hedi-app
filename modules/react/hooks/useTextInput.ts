@@ -5,5 +5,5 @@ export function useTextInput(defaultText = "") {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     setValue(e.target.value);
   }
-  return [value, handleChange] as const;
+  return [value, handleChange, setValue] as const;
 }
