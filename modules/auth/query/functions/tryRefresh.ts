@@ -3,7 +3,8 @@ import { requestRefresh } from "../requests";
 import { IAuth } from "../../types";
 
 export async function tryRefresh<T extends IAuth>(auth: T) {
-  if (oauthNow() < auth.exp - 30) return auth;
+  const now = oauthNow();
+  if (now < auth.exp - 30) return auth;
 
   const { refreshToken, csrfToken } = auth;
   const tokenResp = await requestRefresh(refreshToken, csrfToken);
