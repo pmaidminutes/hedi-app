@@ -26,6 +26,7 @@ export function transformParamsToSolrRequestString(
   };
   enum solrTypeFields {
     articles = "ss_type:article",
+    pages = "ss_type:page",
     profiles = "ss_type:*_tmp",
     categories = "ss_vid:categories",
   }
