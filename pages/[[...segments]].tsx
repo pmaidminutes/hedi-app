@@ -40,6 +40,7 @@ import Head from "next/head";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
+import { Content } from "carbon-components-react";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const locales = context?.locales ?? [];
@@ -101,14 +102,16 @@ export default function segments(props: ISegmentPageProps) {
         <title>HEDI App</title>
       </Head>
       <Header {...content} />
-      <BreadCrumb content={content} />
-      <main>
-        <TryCategory {...content} />
-        <TryArticle {...content} />
-        <TryGlossary {...content} />
-        <TryProfile {...content} />
-        <TrySearch {...content} />
-      </main>
+      <Content>
+        <BreadCrumb content={content} />
+        <main>
+          <TryCategory {...content} />
+          <TryArticle {...content} />
+          <TryGlossary {...content} />
+          <TryProfile {...content} />
+          <TrySearch {...content} />
+        </main>
+      </Content>
     </div>
   );
 }

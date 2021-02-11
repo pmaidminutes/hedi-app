@@ -1,10 +1,11 @@
-import { AudioPlayer, TagList } from "@/modules/common/components";
+import { AudioPlayer, TagList, Seperator } from "@/modules/common/components";
 import { buildAssetUrl } from "@/modules/common/utils";
 import { ITyped } from "@/modules/model";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { useRouter } from "next/router";
 import { IArticle } from "../../../types";
 import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
+
 interface IArticleProps {
   content: IArticle;
 }
@@ -24,6 +25,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
           src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
           alt="illustration of sleeping family"
           className="hedi-header-image"
+          style={{maxWidth:"100%"}}
         />
       </AspectRatio>
       <Grid>
@@ -31,11 +33,10 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
           <Column
             sm={4}
             md={{ span: 6, offset: 1 }}
-            lg={{ span: 8, offset: 4 }}
-            className="p-s-xl hedi-article-container">
+            lg={{ span: 8, offset: 4 }}>
             <article>
-              <h1 className="pb-s-s hedi-text-center">{label}</h1>
-              <h4 className="pb-s-md hedi-text-center">
+              <h1>{label}</h1>
+              <h4>
                 Subheadline Placeholder
               </h4>
               {
@@ -47,7 +48,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
               {audio !== null ? (
                 <AudioPlayer src={buildAssetUrl(audio?.route)} />
               ) : null}
-              <div className="py-s-md">
+              <div>
                 <HTMLWithNextImage
                   data={body}
                   locale={locale === defaultLocale ? null : locale}
@@ -61,7 +62,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
       {tags.length > 0 ? (
         <>
           {" "}
-          <div className="hedi-separator"></div>
+          <Seperator />
           <TagList tags={tags} />{" "}
         </>
       ) : null}
