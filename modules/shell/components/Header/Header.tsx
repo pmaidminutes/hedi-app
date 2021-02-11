@@ -11,12 +11,23 @@ import { SearchInput } from "@/modules/search/client/components";
 import { LanguageSwitch } from "../LanguageSwitch";
 import { Logo } from "../Logo";
 import {
-  Grid,
-  Row,
-  Column,
   FormItem,
   Header as CarbonHeader,
+  HeaderName,
+  HeaderGlobalAction,
+  HeaderGlobalBar,
+  HeaderPanel,
+  Switcher,
+  SwitcherItem,
+  SwitcherDivider,
 } from "carbon-components-react";
+import {
+  Language32,
+  Search32,
+  Login32,
+  Logout32,
+  Menu32,
+} from "@carbon/icons-react";
 
 type HeaderProps = Pick<
   IEntityTranslated<IEntityLocalized>,
@@ -30,56 +41,44 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
   appstyle = "hedi-category-color--default",
 }) => {
   const router = useRouter();
+  const { locale } = router;
   const [searchText, setSearchText] = useState("");
+  const [isExpanded, setIsExpanded] = useState(false);
 
   return (
     <CarbonHeader className={`hedi-header ${appstyle}`} aria-label="header">
-      <Grid>
-        <Row className="py-s-sm">
-          <Column sm={4} md={8} lg={4} className="pb-s-sm">
-            <Logo />
-          </Column>
+      <HeaderName prefix="" href={`/${locale}`}>
+        ♥ Hedi
+      </HeaderName>
+      <HeaderGlobalBar>
+        {/* <HeaderGlobalAction aria-label="Search">
 
-          <Column
-            sm={4}
-            md={2}
-            lg={4}
-            className="py-s-xs hedi-align-header-items">
-            <FormItem>
-              {translations !== undefined ? (
-                <LanguageSwitch translations={translations} />
-              ) : null}
-            </FormItem>
-          </Column>
+        </HeaderGlobalAction> */}
+        <HeaderGlobalAction
+          aria-label="Slide In Menu"
+          onClick={() => setIsExpanded(prev => !prev)}>
+          <Menu32 />
+        </HeaderGlobalAction>
+      </HeaderGlobalBar>
+      <HeaderPanel aria-label="Header Panel Language" expanded={isExpanded}>
+        <LogInOut />
 
-          <Column
-            sm={3}
-            md={3}
-            lg={4}
-            className="py-s-xs hedi-align-header-items">
-            <Form
-              className="hedi-pos-rel"
-              onSubmit={e => {
-                router.push("/search/" + searchText);
-                e.preventDefault();
-              }}>
-              <SearchInput
-                size={"sm"}
-                onQueryChanged={e => setSearchText(e)}
-                id={"search-header"}
-                query={searchText}
-              />
-            </Form>
-          </Column>
-          <Column
-            sm={3}
-            md={3}
-            lg={4}
-            className="py-s-xs hedi-align-header-items">
-            <LogInOut />
-          </Column>
-        </Row>
-      </Grid>
+        {translations !== undefined ? (
+          <LanguageSwitch translations={translations} />
+        ) : null}
+        <Form
+          onSubmit={e => {
+            router.push("/search/" + searchText);
+            e.preventDefault();
+          }}>
+          <SearchInput
+            size={"sm"}
+            onQueryChanged={e => setSearchText(e)}
+            id={"search-header"}
+            query={searchText}
+          />
+        </Form>
+      </HeaderPanel>
     </CarbonHeader>
   );
 };
