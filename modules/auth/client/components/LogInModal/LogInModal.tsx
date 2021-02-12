@@ -1,6 +1,7 @@
-import { useRef } from "react";
-import { useOnClickOutside } from "@/modules/react/hooks";
-import { LogInForm } from "../LogInForm";
+import { FormEvent } from "react";
+import { Modal, TextInput, Form, Button } from "carbon-components-react";
+import { login } from "../../functions";
+import { useTextInput } from "@/modules/react/hooks";
 
 export const LogInModal = ({
   open,
@@ -9,24 +10,42 @@ export const LogInModal = ({
   open: boolean;
   onClose: VoidFunction;
 }) => {
-  const ref = useRef<HTMLDivElement>(null);
+  const [username, setUsername] = useTextInput();
+  const [password, setPassword] = useTextInput();
 
-  useOnClickOutside(ref, () => onClose());
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    login(username, password);
+  };
 
   return (
-    <div
-      className={`bx--modal ${open ? "is-visible" : ""}`}
-      role="dialog"
+    <Modal
+      open={open}
+      hasForm
       aria-modal="true"
-      // TODO: add label and description
-      // aria-labelledby="modal-pyu0ribosn-label"
-      // aria-describedby="modal-pyu0ribosn-heading"
-      tabIndex={-1}>
-      {/* TODO: typescript def */}
-      <div className="bx--modal-container" ref={ref}>
-        <LogInForm onClose={onClose} />
-      </div>
-      <span tabIndex={0}></span>
-    </div>
+      modalAriaLabel="Login Modal"
+      onRequestClose={onClose}
+      passiveModal={true}
+      modalHeading="Please log in">
+      <Form onSubmit={handleSubmit}>
+        <TextInput
+          labelText="username additional info"
+          placeholder="Username"
+          id="username"
+          value={username}
+          onChange={setUsername}
+          type="text"
+        />
+        <TextInput
+          labelText="password additional info"
+          placeholder="Password"
+          type="password"
+          id="password"
+          value={password}
+          onChange={setPassword}
+        />
+        <Button type="submit">login</Button>
+      </Form>
+    </Modal>
   );
 };
