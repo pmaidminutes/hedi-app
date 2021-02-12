@@ -7,6 +7,7 @@ import { Location } from "@/modules/map/types";
 import { ITyped, IUIText } from "@/modules/model";
 import { ProfileEntry } from "@/modules/profile/client/components";
 import { SearchInput } from "@/modules/search/client/components";
+import { Seperator } from "@/modules/common/components";
 import { useSearch } from "@/modules/search/client/hooks";
 import {
   Column,
@@ -15,6 +16,8 @@ import {
   Row,
   Slider,
   TextInput,
+  Button,
+  ToastNotification,
 } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
@@ -91,7 +94,6 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
       <Row>
         <Column>
           <SearchInput
-            className={"mb-l-xs"}
             id={"search-results"}
             size={"xl"}
             onQueryChanged={e => setQueryText(e.trim())}
@@ -126,29 +128,22 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
           onChange={({ value }) => setDistance(value.toString())}
         />
       </div>
-      <button
-        className="bx--btn bx--btn--primary"
-        type="button"
-        onClick={e => handleFilter("articles")}>
+      <Button kind="primary" onClick={e => handleFilter("articles")}>
         articles
-      </button>
-      <button
-        className="bx--btn bx--btn--primary"
-        type="button"
-        onClick={e => handleFilter("profiles")}>
+      </Button>
+      <Button kind="primary" onClick={e => handleFilter("profiles")}>
         profiles
-      </button>
-      <button
-        className="bx--btn bx--btn--primary"
-        type="button"
-        onClick={e => handleFilter("categories")}>
+      </Button>
+      <Button kind="primary" onClick={e => handleFilter("categories")}>
         categories
-      </button>
-      <div className="hedi-separator"></div>
+      </Button>
+      <Button kind="primary" onClick={e => handleFilter("articles")}>
+        articles
+      </Button>
+
+      <Seperator />
       <h2>{content.texts.results}</h2>
-      <div className="bx--tile-container">
-        {/* iterate article component */}
-      </div>
+      <div>{/* iterate article component */}</div>
       {
         //TODO should check for  empty array - even if there is no result will get loading overlay
         //data
@@ -156,9 +151,11 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
       {loading && !data ? (
         <Loading withOverlay={true} className={"some-class"} />
       ) : errorMessage ? (
-        <div className="errorMessage">{errorMessage}</div>
+        <ToastNotification title="Error" kind="error">
+          {errorMessage}
+        </ToastNotification>
       ) : (
-        <div className="bx--tile-container">
+        <div>
           {IsIHTTPError(data)
             ? []
             : data?.map((entry: any) => {
