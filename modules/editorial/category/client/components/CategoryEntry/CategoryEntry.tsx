@@ -14,7 +14,12 @@ export const CategoryEntry = ({
     <Link href={route} passHref>
       <a href={route}>
         {image === null ? (
-          <AspectRatio ratio="2x1"> picture here </AspectRatio>
+          <Image
+            src={"/dummy_img.png"}
+            layout="responsive"
+            width="auto"
+            height="auto"
+          />
         ) : (
           <AspectRatio ratio="2x1">
             <Image
