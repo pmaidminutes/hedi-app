@@ -1,10 +1,8 @@
 // Types
 import { IEntityLocalized } from "@/modules/model";
-import {
-  SwitcherItem,
-  Switcher,
-} from "carbon-components-react";
+import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
 import { useRouter } from "next/router";
+import { Language32 } from "@carbon/icons-react";
 
 /**
  * Language Switch Component.
@@ -26,21 +24,22 @@ export const LanguageSwitch = ({
       path: findLocaledUrlpath(lang, translations) ?? currentPath,
     })) ?? [];
   return (
-    <>
-      <Switcher aria-label="Switcher Container">
-        {items.map((item, index) => (
-          <SwitcherItem
-            key={index}
-            isSelected={item.lang === locale}
-            aria-label={item.lang}
-            href={`${item.lang === defaultLocale ? "" : "/" + item.lang}${
-              item.path
-            }`}>
-            {item.lang}
-          </SwitcherItem>
-        ))}
-      </Switcher>
-    </>
+    <OverflowMenu
+      renderIcon={Language32}
+      ariaLabel="Language Menu"
+      size="xl"
+      flipped={true}>
+      {items.map((item, index) => (
+        <OverflowMenuItem
+          key={index}
+          aria-label={item.lang}
+          href={`${item.lang === defaultLocale ? "" : "/" + item.lang}${
+            item.path
+          }`}
+          itemText={item.lang}
+          hasDivider={true}></OverflowMenuItem>
+      ))}
+    </OverflowMenu>
   );
 };
 
