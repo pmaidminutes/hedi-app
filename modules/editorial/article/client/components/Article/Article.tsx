@@ -5,19 +5,6 @@ import { HTMLWithNextImage } from "@/modules/react/html";
 import { useRouter } from "next/router";
 import { IArticle } from "../../../types";
 import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
-import {VideoPlayer} from '@/modules/common/components'
-
-const videodata = {
-  subtitles: [
-    { label: "Deutsch", langcode: "de", src: "/subtitle/de.vtt" },
-    { label: "English", langcode: "en", src: "/subtitle/en.vtt" },
-    { label: "Espagnol", langcode: "es", src: "/subtitle/es.vtt" },
-  ],
-  sources: [
-    { mimeType: "webm", src: "/210211_Audio_Multitrack_Tryout_1015.webm" },
-  ],
-}
-
 interface IArticleProps {
   content: IArticle;
 }
@@ -39,7 +26,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
           className="hedi-header-image"
         />
       </AspectRatio>
-     
+
       <Grid>
         <Row>
           <Column
@@ -61,7 +48,6 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
               {audio !== null ? (
                 <AudioPlayer src={buildAssetUrl(audio?.route)} />
               ) : null}
-               <VideoPlayer data={videodata} />
               <div className="py-s-md">
                 <HTMLWithNextImage
                   data={body}
