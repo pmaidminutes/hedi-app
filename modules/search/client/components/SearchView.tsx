@@ -1,5 +1,6 @@
 import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
+import { PageEntry } from "@/modules/editorial/page/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { MapClient } from "@/modules/map/client/components";
@@ -144,6 +145,12 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
         onClick={e => handleFilter("categories")}>
         categories
       </button>
+      <button
+        className="bx--btn bx--btn--primary"
+        type="button"
+        onClick={e => handleFilter("pages")}>
+        pages
+      </button>
       <div className="hedi-separator"></div>
       <h2>{content.texts.results}</h2>
       <div className="bx--tile-container">
@@ -168,6 +175,13 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                     return (
                       <ArticleEntry
                         article={entry}
+                        key={entry.route + locale}
+                      />
+                    );
+                  case "Page":
+                    return (
+                      <PageEntry
+                        page={entry}
                         key={entry.route + locale}
                       />
                     );

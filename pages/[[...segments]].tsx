@@ -3,6 +3,11 @@ import {
   getStaticPaths as getArticlePaths,
   getStaticProps as getArticleProps,
 } from "@/modules/editorial/article/server";
+import { TryPage } from "@/modules/editorial/page/client/components";
+import {
+  getStaticPaths as getPagePaths,
+  getStaticProps as getPageProps,
+} from "@/modules/editorial/page/server";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 // generators
 import {
@@ -52,6 +57,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   paths.push(...(await getOrganisationPaths(locales)));
   paths.push(...(await getInstitutionPaths(locales)));
   paths.push(...(await getSearchViewPaths(locales)));
+  paths.push(...(await getPagePaths(locales)));
   return { paths, fallback: "blocking" };
 };
 
@@ -75,6 +81,7 @@ export const getStaticProps: GetStaticProps<
   if (!content) content = await getMidwifeProps(params?.segments, locale);
   if (!content) content = await getOrganisationProps(params?.segments, locale);
   if (!content) content = await getInstitutionProps(params?.segments, locale);
+  if (!content) content = await getPageProps(params?.segments, locale);
 
   if (!content) {
     console.log("couldn't find content for path ", segments.join("/"));
@@ -108,6 +115,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryGlossary {...content} />
         <TryProfile {...content} />
         <TrySearch {...content} />
+        <TryPage {...content} />
       </main>
     </div>
   );

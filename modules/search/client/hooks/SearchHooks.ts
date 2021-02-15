@@ -1,6 +1,7 @@
 import { IHTTPError } from "@/modules/common/error";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IArticle } from "@/modules/editorial/article/types";
+import { IPage } from "@/modules/editorial/page/types";
 import { ICategory } from "@/modules/editorial/category/types";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types/glossary";
 import useSWR from "swr";
@@ -15,7 +16,7 @@ export function useSearch(
 ) {
   const apiPath = "/api/" + lang + "/search/";
   const swrResult = useSWR<
-    IHTTPError | (IArticle | ICategory | IGlossaryTerm)[]
+    IHTTPError | (IArticle | ICategory | IGlossaryTerm | IPage)[]
   >(
     searchText?.length > 3
       ? apiPath +
