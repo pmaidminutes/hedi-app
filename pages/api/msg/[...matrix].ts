@@ -1,0 +1,40 @@
+import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import * as https from "https";
+
+export const config = {
+  api: {
+    bodyParser: false,
+    externalResolver: true,
+  },
+};
+
+const msgHandler: NextApiHandler<any> = async (
+  req: NextApiRequest,
+  res: NextApiResponse
+) => {
+  // forward / proxy code
+  // https://gist.github.com/cmawhorter/a527a2350d5982559bb6
+
+  req.pause();
+  const command = req.url?.replace("/api/msg", "");
+  // prohibited actions can be filtered here (e.g. roomCreate, invite)
+
+  const { headers } = req;
+  headers.host = process.env.MSG_HOSTNAME;
+  const options = {
+    hostname: headers.host,
+    path: command?.replace("pushrules?access", "pushrules/?access"), //next seemingly doesn't pass in the url as is, thus breaks some commands
+    method: req.method,
+    headers,
+  };
+
+  const connector = https.request(options, function (serverResponse) {
+    serverResponse.pause();
+    res.writeHead(serverResponse.statusCode ?? 500, serverResponse.headers);
+    serverResponse.pipe(res, { end: true });
+    serverResponse.resume();
+  });
+  req.pipe(connector, { end: true });
+  req.resume();
+};
+export default msgHandler;

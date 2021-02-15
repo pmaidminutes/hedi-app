@@ -2,7 +2,7 @@ import { NextApiResponse, NextApiRequest } from "next";
 import NextAuth from "next-auth";
 import { getToken } from "next-auth/jwt";
 import { getOptions } from "./serviceInitOptions";
-import { toAuthHeader } from "../query";
+import { toAuthHeader, tryRefresh } from "../query";
 import { IAuthHeader, IUserAuth } from "../types";
 
 export const withAuth = async (
@@ -17,7 +17,10 @@ export const getUserAuth = async (
   req: NextApiRequest
 ): Promise<IUserAuth | null> => {
   const secret = process.env.NEXTAUTH_JWT_SECRET;
-  return secret ? (getToken({ req, secret }) as Promise<IUserAuth>) : null;
+  if (!secret) return null;
+  const auth = await (getToken({ req, secret }) as Promise<IUserAuth>);
+  // TODO either expiry time or refresh logic is not reliable
+  return tryRefresh(auth) as Promise<IUserAuth | null>;
 };
 
 export const getUserAuthHeader = async (
