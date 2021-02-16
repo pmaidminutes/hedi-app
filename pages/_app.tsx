@@ -1,11 +1,11 @@
 // HACK using precompiled default carbon css while not customizing styling to speed up build
 // switch '...carbon-components.min.css' with '..._app.scss' for applying styles
-import "./_app.scss";
-import "carbon-components/css/carbon-components.min.css";
+// import "./_app.scss";
+// import "carbon-components/css/carbon-components.min.css";
 import { Provider as AuthProvider } from "next-auth/client";
 import { AppProps } from "next/app";
 import "./styles.css";
-import "./style.css";
+import "./style.css"
 
 export default function HEDIApp({ Component, pageProps }: AppProps) {
   return (
