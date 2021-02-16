@@ -25,9 +25,10 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
           src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
           alt="illustration of sleeping family"
           className="hedi-header-image"
-          style={{maxWidth:"100%"}}
+          style={{ maxWidth: "100%" }}
         />
       </AspectRatio>
+
       <Grid>
         <Row>
           <Column
@@ -36,9 +37,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
             lg={{ span: 8, offset: 4 }}>
             <article>
               <h1>{label}</h1>
-              <h4>
-                Subheadline Placeholder
-              </h4>
+              <h4>Subheadline Placeholder</h4>
               {
                 //TODO style needs to be updated in Audio
                 //TODO url needs to be updated in Audio

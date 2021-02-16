@@ -1,6 +1,8 @@
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
 import { getArticle } from "@/modules/editorial/article/query";
 import { IArticle } from "@/modules/editorial/article/types";
+import { getPage } from "@/modules/editorial/page/query";
+import { IPage } from "@/modules/editorial/page/types";
 import { getCategory } from "@/modules/editorial/category/query";
 import { ICategory } from "@/modules/editorial/category/types";
 import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
@@ -23,7 +25,8 @@ import { searchServer } from "@/modules/search/server/request";
 import { NextApiHandler } from "next";
 
 const solrSearchHandler: NextApiHandler<
-  IHTTPError | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife)[]
+  | IHTTPError
+  | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | IPage)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter, location, distance },
@@ -58,6 +61,17 @@ const solrSearchHandler: NextApiHandler<
                 article.summary = highlightedBody;
               }
               return article;
+            })
+          );
+          break;
+        case "page":
+          promises.push(
+            getPage(route, lang).then(page => {
+              if (page) {
+                page.label = highlight.highlightedTitle ?? page.label;
+                page.summary = highlightedBody;
+              }
+              return page;
             })
           );
           break;
@@ -133,6 +147,7 @@ const solrSearchHandler: NextApiHandler<
       | IMidwife
       | IOrganisation
       | IInstitution
+      | IPage
       | null
     >(promises);
     const nonNull = entries.filter(entry => entry) as (
@@ -143,6 +158,7 @@ const solrSearchHandler: NextApiHandler<
       | IMidwife
       | IOrganisation
       | IInstitution
+      | IPage
     )[];
     res.send(nonNull);
   }

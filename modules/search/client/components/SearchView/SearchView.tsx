@@ -1,5 +1,6 @@
 import { IsIHTTPError } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
+import { PageEntry } from "@/modules/editorial/page/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { MapClient } from "@/modules/map/client/components";
@@ -167,6 +168,10 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                         article={entry}
                         key={entry.route + locale}
                       />
+                    );
+                  case "Page":
+                    return (
+                      <PageEntry page={entry} key={entry.route + locale} />
                     );
                   case "Category":
                     return (
