@@ -111,14 +111,12 @@ export default function segments(props: ISegmentPageProps) {
       <Header {...content} />
       <Content>
         <BreadCrumb content={content} />
-        <main>
-          <TryCategory {...content} />
-          <TryArticle {...content} />
-          <TryGlossary {...content} />
-          <TryProfile {...content} />
-          <TrySearch {...content} />
-          <TryPage {...content} />
-        </main>
+        <TryCategory {...content} />
+        <TryArticle {...content} />
+        <TryGlossary {...content} />
+        <TryProfile {...content} />
+        <TrySearch {...content} />
+        <TryPage {...content} />
       </Content>
     </div>
   );
