@@ -6,7 +6,13 @@ import {
   IEntityTranslated,
   IRouteLabeled,
 } from "@/modules/model";
-import { Grid, Row, Breadcrumb, BreadcrumbItem } from "carbon-components-react";
+import {
+  Grid,
+  Row,
+  Breadcrumb,
+  BreadcrumbItem,
+  Column,
+} from "carbon-components-react";
 
 interface IBreadCrumbProps {
   content?: IEntityTranslated<IEntityLocalized> &
@@ -29,23 +35,25 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
 
   return (
     <Grid>
-      <Row className="my-s-sm pl-s-sm">
-        <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
-          <BreadcrumbItem
-            href={`/${locale === defaultLocale ? "" : locale}`}
-            isCurrentPage={breadCrumbPath.length === 0}>
-            Home
-          </BreadcrumbItem>
-
-          {breadCrumbPath.map((crumb, index) => (
+      <Row>
+        <Column>
+          <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
             <BreadcrumbItem
-              key={crumb.label + index}
-              isCurrentPage={crumb.isCurrentPage}
-              href={crumb.route}>
-              {crumb.label}
+              href={`/${locale === defaultLocale ? "" : locale}`}
+              isCurrentPage={breadCrumbPath.length === 0}>
+              Home
             </BreadcrumbItem>
-          ))}
-        </Breadcrumb>
+
+            {breadCrumbPath.map((crumb, index) => (
+              <BreadcrumbItem
+                key={crumb.label + index}
+                isCurrentPage={crumb.isCurrentPage}
+                href={crumb.route}>
+                {crumb.label}
+              </BreadcrumbItem>
+            ))}
+          </Breadcrumb>
+        </Column>
       </Row>
     </Grid>
   );

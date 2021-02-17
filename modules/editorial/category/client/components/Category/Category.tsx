@@ -25,10 +25,11 @@ export const Category = ({ content }: ICategoryProps): JSX.Element => {
               src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
               alt="illustration of sleeping family"
               className="hedi-header-image"
+              style={{ maxWidth: "100%" }}
             />
           </AspectRatio>
         </Column>
-        <Column sm={4} lg={6} className="hedi-self-center">
+        <Column sm={4} lg={6}>
           <h2>{label}</h2>
         </Column>
       </Row>
@@ -37,7 +38,7 @@ export const Category = ({ content }: ICategoryProps): JSX.Element => {
           <h3 className="mt-l-sm">Topic subcategories</h3>
           <Row>
             {categories.map(category => (
-              <Column className="mt-s-md hedi-break-word" key={category.route}>
+              <Column key={category.route}>
                 <CategoryEntry category={category} />
               </Column>
             ))}

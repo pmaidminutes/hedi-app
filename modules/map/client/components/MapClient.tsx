@@ -1,5 +1,5 @@
 //import 'leaflet-defaulticon-compatibility';
-
+// TODO: add to seperate folder
 import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 import React from "react";

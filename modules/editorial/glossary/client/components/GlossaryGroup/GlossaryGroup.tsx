@@ -19,10 +19,8 @@ export const GlossaryGroup = ({
   }, [selectedTerm]);
   return (
     <>
-      <Row className="bx--row-padding px-s-md">
-        <Column className=" hedi-glossary-letterhead">
-          {glossaryGroup.key}
-        </Column>
+      <Row>
+        <Column>{glossaryGroup.key}</Column>
       </Row>
       <Row className="bx--row">
         {glossaryGroup.terms.map(term => (

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { LogInModal } from "../LogInModal";
 import ReactDOM from "react-dom";
-
+import { Button } from "carbon-components-react";
 export const LogIn = () => {
   const [open, setOpen] = useState(false);
 
@@ -14,12 +14,9 @@ export const LogIn = () => {
             document.body
           )}
 
-      <button
-        className="bx--btn bx--btn--sm hedi-login-button"
-        type="button"
-        onClick={() => setOpen(true)}>
+      <Button type="button" onClick={() => setOpen(true)}>
         Login
-      </button>
+      </Button>
     </>
   );
 };

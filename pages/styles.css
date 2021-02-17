@@ -2541,11 +2541,11 @@ body {
   max-width: 20rem;
   min-height: 3rem;
   margin: 0;
-  padding: 0.875rem 15px 0.875rem 15px;
+  padding: calc(0.875rem - 3px) 63px calc(0.875rem - 3px) 15px;
   text-align: left;
   text-decoration: none;
   vertical-align: top;
-  border-radius: 2rem;
+  border-radius: 0;
   outline: none;
   cursor: pointer;
   transition: background 70ms cubic-bezier(0, 0, 0.38, 0.9), box-shadow 70ms cubic-bezier(0, 0, 0.38, 0.9), border-color 70ms cubic-bezier(0, 0, 0.38, 0.9), outline 70ms cubic-bezier(0, 0, 0.38, 0.9); }
@@ -17480,50 +17480,6 @@ a.bx--navigation-link:focus {
 .b-rad-3xl::after {
   border-radius: 3rem; }
 
-.bx--tile {
-  overflow-wrap: break-word;
-  border-radius: 0.5rem;
-  background-color: #f2f4f8;
-  outline: 2px solid transparent;
-  outline-offset: -2px;
-  margin: 1rem 0; }
-
-.bx--tile:focus {
-  outline: 2px solid #e35c8d;
-  outline-offset: -2px; }
-
-.bx--tile--light {
-  background-color: #ffffff; }
-
-.bx--tile--clickable:hover,
-.bx--tile--selectable:hover,
-.bx--tile--expandable:hover {
-  background: #FFEAEC; }
-
-.bx--tile--clickable:focus,
-.bx--tile--expandable:focus {
-  outline: 2px solid #F9A5B7;
-  outline-offset: -2px; }
-
-.bx--tile-content__below-the-fold {
-  padding-bottom: 1rem; }
-
-.bx--dropdown {
-  height: 2rem;
-  border-bottom: none; }
-
-.bx--fieldset legend {
-  color: #fff;
-  font-size: 0.8em; }
-
-.hedi-unstyled-link {
-  text-decoration: none;
-  color: inherit; }
-
-.hedi-responsive-image {
-  max-width: 100%;
-  height: auto; }
-
 .hedi-category-color--pregnancy header {
   background-color: #2A84C6 !important; }
 
@@ -17584,136 +17540,4 @@ a.bx--navigation-link:focus {
   border-bottom: 2px solid #dde1e6;
   margin: 1.5rem 0; }
 
-.hedi-logo {
-  height: 2.2rem;
-  fill: white; }
-
-.hedi-logo-text {
-  font-size: 2.6rem;
-  color: white; }
-
-.hedi-header-image {
-  display: block;
-  width: 100%;
-  margin: auto; }
-
-.hedi-align-items {
-  align-items: center; }
-
-.hedi-header {
-  width: 100%;
-  color: white;
-  background-color: #574E90;
-  position: relative;
-  height: auto;
-  display: block;
-  border-bottom: none; }
-
-.hedi-glossary-letterhead {
-  color: white;
-  background-color: #8E6EC6;
-  font-size: 2rem; }
-
-.hedi-article-entry-search {
-  margin: 0.75rem 0; }
-
-.hedi-login-button {
-  color: #574E90;
-  background-color: white;
-  height: 1.5rem; }
-
-.hedi-align-header-items {
-  align-self: center; }
-
-.hedi-marked-word {
-  color: #B7295B;
-  text-decoration: underline; }
-
-.hedi-search-results {
-  border: 1px solid #c1c7cd;
-  position: absolute;
-  color: #21272a;
-  background-color: #f2f4f8;
-  z-index: 8000;
-  width: 100%;
-  cursor: pointer; }
-
-.hedi-search-results li {
-  font-size: 1.1rem;
-  line-height: 2rem;
-  padding: 0 0.75rem; }
-
-.hedi-search-results li:nth-child(odd) {
-  background-color: white; }
-
-.hedi-search-results li:hover {
-  background-color: #FFC8D0; }
-
-.hedi-modal-footer {
-  display: flex;
-  grid-row: -1/-1;
-  grid-column: 1/-1;
-  justify-content: space-evenly;
-  height: auto;
-  padding-bottom: 1rem;
-  margin-top: auto; }
-
-.hedi-modal-footer button.bx--btn {
-  flex-basis: auto;
-  width: 25%;
-  margin: 0.5rem;
-  text-align: center;
-  font-size: 1rem; }
-
-.hedi-btn {
-  display: inline; }
-
-mark {
-  background-color: #FFC8D0;
-  padding: 0 0.5rem; }
-
-article,
-article p {
-  overflow-wrap: break-word;
-  padding: 0.75rem;
-  color: #343a3f;
-  font-size: 1.1rem;
-  line-height: 1.75rem; }
-
-article h1 {
-  padding: 0.5rem 0;
-  letter-spacing: -0.25; }
-
-article p {
-  padding: 0.5rem 0; }
-
-.hedi-link-glossary {
-  text-decoration: none;
-  color: #00395D;
-  background-color: #CED8F7; }
-
-.hedi-link-article {
-  text-decoration: none;
-  color: #2A84C6;
-  background-color: #dde1e6; }
-
-.article-background-color {
-  background-color: #ECF0FF; }
-
-.hedi-pos-rel {
-  position: relative; }
-
-.hedi-text-center {
-  text-align: center; }
-
-.hedi-self-center {
-  align-self: center; }
-
-.hedi-break-word {
-  overflow-wrap: break-word; }
-
 /*# sourceMappingURL=styles.css.map */
-.leaflet-container {
-   height: 300px;
-    }
- 

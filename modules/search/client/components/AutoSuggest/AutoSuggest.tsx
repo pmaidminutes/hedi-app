@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { IsIHTTPError } from "@/modules/common/error";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import { ISuggestEntry } from "../../types";
-import { useSuggest } from "../hooks";
+import { ISuggestEntry } from "../../../types";
+import { useSuggest } from "../../hooks";
+import { UnorderedList, ListItem } from "carbon-components-react";
 interface SuggestProps {
   query: string;
   onSuggestSelect: (text: string) => void;
@@ -32,30 +33,17 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
   };
   return (
     <>
-      {
-        //TODO to remove style after Kathi provides styles
-      }
-      <ul
-        className="hedi-auto-suggest"
-        style={{
-          border: "2px",
-          position: "absolute",
-          zIndex: 9999,
-          width: "100%",
-        }}
-        role="listbox"
-        id="suggestion-list">
+      <UnorderedList role="listbox" id="suggestion-list">
         {data && !IsIHTTPError(data)
           ? data.map((suggestedResult: ISuggestEntry, index) => (
-              <li
-                style={{ padding: "5px" }}
+              <ListItem
                 key={index}
                 onClick={e => handleSuggestSelected(suggestedResult.term)}>
                 <HTMLWithNextImage data={suggestedResult.term} />
-              </li>
+              </ListItem>
             ))
           : null}
-      </ul>
+      </UnorderedList>
     </>
   );
 };

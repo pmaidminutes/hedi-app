@@ -4,11 +4,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { IPageEntry } from "../../../types";
 
-export const PageEntry = ({
-  page,
-}: {
-  page: IPageEntry;
-}): JSX.Element => {
+export const PageEntry = ({ page }: { page: IPageEntry }): JSX.Element => {
   const router = useRouter();
   const { locale, defaultLocale } = router;
   const { label, summary, route } = page;

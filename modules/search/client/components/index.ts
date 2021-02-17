@@ -1,3 +1,3 @@
-export { AutoSuggest } from "./AutoSuggest";
-export { SearchInput } from "./SearchInput";
+export * from "./AutoSuggest";
+export * from "./SearchInput";
 export * from "./SearchView";

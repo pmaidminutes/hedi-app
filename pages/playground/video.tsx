@@ -1,4 +1,4 @@
-import {VideoPlayer} from '@/modules/common/components'
+import { VideoPlayer } from "@/modules/common/components";
 
 const data = {
   subtitles: [
@@ -9,14 +9,12 @@ const data = {
   sources: [
     { mimeType: "webm", src: "/210211_Audio_Multitrack_Tryout_1015.webm" },
   ],
-}
-
+};
 
 export default function ChatIndex() {
-
   return (
     <div>
-      <VideoPlayer data={ data}/>
+      <VideoPlayer data={data} />
     </div>
   );
 }

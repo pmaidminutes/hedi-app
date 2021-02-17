@@ -1,7 +1,8 @@
 // Types
 import { IEntityLocalized } from "@/modules/model";
-import { Dropdown } from "carbon-components-react";
+import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
 import { useRouter } from "next/router";
+import { Language32 } from "@carbon/icons-react";
 
 /**
  * Language Switch Component.
@@ -14,7 +15,7 @@ export const LanguageSwitch = ({
   translations: IEntityLocalized[];
 }): JSX.Element => {
   const router = useRouter();
-  const { locales, asPath: currentPath, locale } = router;
+  const { locales, asPath: currentPath, locale, defaultLocale } = router;
 
   // TODO this method will route to not existing pages (e.g. locale en, path = currentPath)
   const items =
@@ -23,27 +24,22 @@ export const LanguageSwitch = ({
       path: findLocaledUrlpath(lang, translations) ?? currentPath,
     })) ?? [];
   return (
-    <Dropdown
-      id="language-switch"
-      label={locale ?? ""}
-      invalidText="A valid value is required"
-      light
-      size="sm"
-      //@ts-ignore
-      items={items}
-      //@ts-ignore
-      itemToString={item => item.lang}
-      //@ts-ignore
-      initialSelectedItem={items.find(i => i.lang === locale)}
-      style={{ minWidth: "180px", maxWidth: "180px", alignSelf: "flex-end" }}
-      onChange={e =>
-        //@ts-ignore
-        router.push(e.selectedItem.path, e.selectedItem.value, {
-          //@ts-ignore
-          locale: e.selectedItem.lang,
-        })
-      }
-    />
+    <OverflowMenu
+      renderIcon={Language32}
+      ariaLabel="Language Menu"
+      size="xl"
+      flipped={true}>
+      {items.map((item, index) => (
+        <OverflowMenuItem
+          key={index}
+          aria-label={item.lang}
+          href={`${item.lang === defaultLocale ? "" : "/" + item.lang}${
+            item.path
+          }`}
+          itemText={item.lang}
+          hasDivider={true}></OverflowMenuItem>
+      ))}
+    </OverflowMenu>
   );
 };
 

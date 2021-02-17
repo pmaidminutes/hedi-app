@@ -1,6 +1,6 @@
 import { Search, SearchProps } from "carbon-components-react";
 import { useEffect, useState } from "react";
-import { AutoSuggest } from "./AutoSuggest";
+import { AutoSuggest } from "../AutoSuggest";
 
 interface SearchInputProps extends Partial<SearchProps> {
   onQueryChanged: (text: string) => void;

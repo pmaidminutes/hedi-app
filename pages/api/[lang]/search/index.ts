@@ -25,7 +25,8 @@ import { searchServer } from "@/modules/search/server/request";
 import { NextApiHandler } from "next";
 
 const solrSearchHandler: NextApiHandler<
-  IHTTPError | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | IPage)[]
+  | IHTTPError
+  | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | IPage)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter, location, distance },

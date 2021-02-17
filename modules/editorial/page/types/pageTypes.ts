@@ -22,9 +22,7 @@ fragment PageEntryFrag on Page {
 }
 `;
 
-export interface IPage
-  extends IPageEntry,
-    IEditorial<IEntityLocalized> {
+export interface IPage extends IPageEntry, IEditorial<IEntityLocalized> {
   routelabel: IRouteLabeled;
 }
 
