@@ -46,6 +46,10 @@ import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { Content } from "carbon-components-react";
+let dynamicProps: any;
+if (process.env.HEDI_ENV) {
+  import("../imports").then(({ propsMap }) => (dynamicProps = propsMap));
+}
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const locales = context?.locales ?? [];
@@ -71,19 +75,29 @@ export const getStaticProps: GetStaticProps<
   ISegmentParam
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
+  console.log("test", segments.join("/"));
 
   let content;
   // query types with dynamic paths first
-  if (!content) content = await getSearchViewProps(params?.segments, locale);
-  if (!content) content = await getCategoryProps(params?.segments, locale);
-  if (!content) content = await getArticleProps(params?.segments, locale);
-  if (!content) content = await getGlossaryProps(params?.segments, locale);
-  if (!content) content = await getCaregiverProps(params?.segments, locale);
-  if (!content) content = await getMidwifeProps(params?.segments, locale);
-  if (!content) content = await getOrganisationProps(params?.segments, locale);
-  if (!content) content = await getInstitutionProps(params?.segments, locale);
-  if (!content) content = await getPageProps(params?.segments, locale);
-
+  console.log(process.env.HEDI_ENV);
+  // HACK for start page.
+  if (!process.env.HEDI_ENV || segments.join("/") === "") {
+    if (!content) content = await getSearchViewProps(params?.segments, locale);
+    if (!content) content = await getCategoryProps(params?.segments, locale);
+    if (!content) content = await getArticleProps(params?.segments, locale);
+    if (!content) content = await getGlossaryProps(params?.segments, locale);
+    if (!content) content = await getCaregiverProps(params?.segments, locale);
+    if (!content) content = await getMidwifeProps(params?.segments, locale);
+    if (!content)
+      content = await getOrganisationProps(params?.segments, locale);
+    if (!content) content = await getInstitutionProps(params?.segments, locale);
+    if (!content) content = await getPageProps(params?.segments, locale);
+  } else {
+    const data = dynamicProps.find(
+      (element: any) => element[0] === segments.join("/")
+    );
+    content = data[1].content;
+  }
   if (!content) {
     console.log("couldn't find content for path ", segments.join("/"));
     throw Error("Houston, we have got a problem");

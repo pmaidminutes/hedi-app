@@ -9,7 +9,8 @@
     "build": "next build",
     "start": "next start",
     "pretty": "prettier --write './**/*.ts*'",
-    "export": "node exporter.js"
+    "export": "node exporter.js",
+    "design": "node buildImports.js&& HEDI_ENV=DESIGN next dev"
   },
   "dependencies": {
     "@carbon/icons": "^10.19.0",
