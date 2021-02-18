@@ -18,6 +18,7 @@ export default class HEDIDocument extends Document {
       <Html>
         <Head>
           <meta name="application-name" content={APP_NAME} />
+          <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
         </Head>
         <body>
           <Main />
