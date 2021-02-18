@@ -47,6 +47,7 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { Content } from "carbon-components-react";
 let dynamicProps: any;
+
 if (process.env.HEDI_ENV) {
   import("../imports").then(({ propsMap }) => (dynamicProps = propsMap));
 }
@@ -75,13 +76,21 @@ export const getStaticProps: GetStaticProps<
   ISegmentParam
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
-  console.log("test", segments.join("/"));
-
   let content;
+  let data: any = [];
+  let hasStaticData = false;
+  if (process.env.HEDI_ENV) {
+    data = dynamicProps.find(
+      (element: any) => element[0] === segments.join("/")
+    );
+    hasStaticData = data ? true : false;
+    console.log({hasStaticData})
+  }
+
   // query types with dynamic paths first
-  console.log(process.env.HEDI_ENV);
-  // HACK for start page.
-  if (!process.env.HEDI_ENV || segments.join("/") === "") {
+  if (process.env.HEDI_ENV && hasStaticData) {
+    content = data[1].content;
+  } else {
     if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getCategoryProps(params?.segments, locale);
     if (!content) content = await getArticleProps(params?.segments, locale);
@@ -92,11 +101,6 @@ export const getStaticProps: GetStaticProps<
       content = await getOrganisationProps(params?.segments, locale);
     if (!content) content = await getInstitutionProps(params?.segments, locale);
     if (!content) content = await getPageProps(params?.segments, locale);
-  } else {
-    const data = dynamicProps.find(
-      (element: any) => element[0] === segments.join("/")
-    );
-    content = data[1].content;
   }
   if (!content) {
     console.log("couldn't find content for path ", segments.join("/"));

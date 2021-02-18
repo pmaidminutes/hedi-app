@@ -1,3 +1,3 @@
 prepare-design:
-	yarn build
+	yarn build 
 	cp -R .next/server/pages design-data
