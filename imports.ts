@@ -4,8 +4,8 @@ import deBeratungUndHilfeSchwangerschaftskonfliktberatung from 'design-data/de/b
 import deBeratungUndHilfeUnter18JahreUndSchwanger from 'design-data/de/beratung-und-hilfe/unter-18-jahre-und-schwanger.json';
 import deBeratungUndHilfe from 'design-data/de/beratung-und-hilfe.json';
 import deBetreuungDidiDada from 'design-data/de/betreuung/didi-dada.json';
-import deBetreuungHediCaregiverSurname from 'design-data/de/betreuung/hedi-caregiver-surname.json';
 import deBetreuungPriyaManoharan from 'design-data/de/betreuung/priya-manoharan.json';
+import deBetreuungUpsertMutation from 'design-data/de/betreuung/upsert-mutation.json';
 import deFinanzenUndDokumenteDokumenteGeburtsbescheinigungUndGeburtsurkunde from 'design-data/de/finanzen-und-dokumente/dokumente/geburtsbescheinigung-und-geburtsurkunde.json';
 import deFinanzenUndDokumenteDokumenteSorgerechtUndSorgeerklaerung0 from 'design-data/de/finanzen-und-dokumente/dokumente/sorgerecht-und-sorgeerklaerung-0.json';
 import deFinanzenUndDokumenteDokumenteSorgerechtUndSorgeerklaerung from 'design-data/de/finanzen-und-dokumente/dokumente/sorgerecht-und-sorgeerklaerung.json';
@@ -57,8 +57,8 @@ import enAfterBirth from 'design-data/en/after-birth.json';
 import enBabyHealthAndCare from 'design-data/en/baby-health-and-care.json';
 import enBirth from 'design-data/en/birth.json';
 import enCaregiverDidiDada from 'design-data/en/caregiver/didi-dada.json';
-import enCaregiverHediCaregiverSurname from 'design-data/en/caregiver/hedi-caregiver-surname.json';
 import enCaregiverPriyaManoharan from 'design-data/en/caregiver/priya-manoharan.json';
+import enCaregiverUpsertMutation from 'design-data/en/caregiver/upsert-mutation.json';
 import enFinancesAndDocumentsDocumentsCustodyAndCustodyDeclaration from 'design-data/en/finances-and-documents/documents/custody-and-custody-declaration.json';
 import enFinancesAndDocumentsDocumentsRecognitionPaternity from 'design-data/en/finances-and-documents/documents/recognition-paternity.json';
 import enFinancesAndDocumentsDocuments from 'design-data/en/finances-and-documents/documents.json';
@@ -90,8 +90,8 @@ import enSearch from 'design-data/en/search.json';
 ['beratung-und-hilfe/unter-18-jahre-und-schwanger', deBeratungUndHilfeUnter18JahreUndSchwanger.pageProps],
 ['beratung-und-hilfe', deBeratungUndHilfe.pageProps],
 ['betreuung/didi-dada', deBetreuungDidiDada.pageProps],
-['betreuung/hedi-caregiver-surname', deBetreuungHediCaregiverSurname.pageProps],
 ['betreuung/priya-manoharan', deBetreuungPriyaManoharan.pageProps],
+['betreuung/upsert-mutation', deBetreuungUpsertMutation.pageProps],
 ['finanzen-und-dokumente/dokumente/geburtsbescheinigung-und-geburtsurkunde', deFinanzenUndDokumenteDokumenteGeburtsbescheinigungUndGeburtsurkunde.pageProps],
 ['finanzen-und-dokumente/dokumente/sorgerecht-und-sorgeerklaerung-0', deFinanzenUndDokumenteDokumenteSorgerechtUndSorgeerklaerung0.pageProps],
 ['finanzen-und-dokumente/dokumente/sorgerecht-und-sorgeerklaerung', deFinanzenUndDokumenteDokumenteSorgerechtUndSorgeerklaerung.pageProps],
@@ -143,8 +143,8 @@ import enSearch from 'design-data/en/search.json';
 ['en/baby-health-and-care', enBabyHealthAndCare.pageProps],
 ['en/birth', enBirth.pageProps],
 ['en/caregiver/didi-dada', enCaregiverDidiDada.pageProps],
-['en/caregiver/hedi-caregiver-surname', enCaregiverHediCaregiverSurname.pageProps],
 ['en/caregiver/priya-manoharan', enCaregiverPriyaManoharan.pageProps],
+['en/caregiver/upsert-mutation', enCaregiverUpsertMutation.pageProps],
 ['en/finances-and-documents/documents/custody-and-custody-declaration', enFinancesAndDocumentsDocumentsCustodyAndCustodyDeclaration.pageProps],
 ['en/finances-and-documents/documents/recognition-paternity', enFinancesAndDocumentsDocumentsRecognitionPaternity.pageProps],
 ['en/finances-and-documents/documents', enFinancesAndDocumentsDocuments.pageProps],
