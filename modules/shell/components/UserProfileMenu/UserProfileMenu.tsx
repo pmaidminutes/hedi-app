@@ -1,27 +1,33 @@
 import { LogInModal } from "@/modules/auth/client/components";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import {
   OverflowMenu,
   OverflowMenuItem,
   Loading,
-  Button,
 } from "carbon-components-react";
 import { UserProfile32 } from "@carbon/icons-react";
 import { getUser, logout } from "@/modules/auth/client/";
 
-export const UserProfileMenu = (): JSX.Element => {
+export const UserProfileMenu = (): JSX.Element | null => {
+  const [hasMounted, setHasMounted] = useState(false);
   const [user, loading] = getUser();
   const [open, setOpen] = useState(false);
 
+  useEffect(() => {
+    setHasMounted(true);
+  }, []);
+
+  if (!hasMounted) {
+    return null;
+  }
+
   return (
     <>
-      {typeof document === "undefined"
-        ? null
-        : ReactDOM.createPortal(
-            <LogInModal open={open} onClose={() => setOpen(false)} />,
-            document.body
-          )}
+      {ReactDOM.createPortal(
+        <LogInModal open={open} onClose={() => setOpen(false)} />,
+        document.body
+      )}
       <OverflowMenu
         renderIcon={UserProfile32}
         ariaLabel="User Profile Menu"
