@@ -6,3 +6,8 @@
 * run `yarn design` or `npm design` to start the app in design mode
 
 The app will use data from the build json files, whenever possible. 
+
+# Adjusting Styles
+in the terminal:
+* got to folder `scss` 
+* follow the README

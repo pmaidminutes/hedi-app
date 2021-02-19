@@ -1,0 +1,150 @@
+//
+// This file is exported from
+// https://projekt-hedi.de/paletti/?007362=Green&C94E1B=Orange&574E90=Purple&2A84C6=Blue&E35C8D=Pink&A35844=Brown
+//   
+// Structure:
+// $[color-name]-map: ( [n*10]: #hex, ...)
+// ...
+// $[color-name]-primary: map value reference
+// $[color-name]-[n*10]: map value reference
+// ...
+//
+
+$green-map: (
+  10: #D9F6F6,
+  20: #B5DFDD,
+  30: #91C8C4,
+  40: #6DB2AA,
+  50: #489C90,
+  60: #1C8879,
+  70: #007362,
+  80: #005F4C,
+  90: #004B37,
+  100: #003824
+  );
+$orange-map: (
+  10: #FFEDDF,
+  20: #F7CEB2,
+  30: #EDAF88,
+  40: #E18F60,
+  50: #D36E3C,
+  60: #C94E1B,
+  70: #AA3E1D,
+  80: #8B301C,
+  90: #6C2418,
+  100: #4E1913
+  );
+$purple-map: (
+  10: #FBECFC,
+  20: #EAD0EF,
+  30: #D6B6E3,
+  40: #C09CD8,
+  50: #A784CE,
+  60: #8E6EC6,
+  70: #715EAB,
+  80: #574E90,
+  90: #3F3E75,
+  100: #292E5B
+  );
+$blue-map: (
+  10: #ECF0FF,
+  20: #CED8F7,
+  30: #AEC1EA,
+  40: #8BACDE,
+  50: #6397D1,
+  60: #2A84C6,
+  70: #0070AB,
+  80: #005D90,
+  90: #004B76,
+  100: #00395D
+  );
+$pink-map: (
+  10: #FFEAEC,
+  20: #FFC8D0,
+  30: #F9A5B7,
+  40: #EF82A0,
+  50: #E35C8D,
+  60: #DB2F73,
+  70: #B7295B,
+  80: #942345,
+  90: #731D32,
+  100: #521621
+  );
+$brown-map: (
+  10: #FFEDE0,
+  20: #F4D3C0,
+  30: #E6B9A1,
+  40: #D89F84,
+  50: #CA8569,
+  60: #BC6B51,
+  70: #A35844,
+  80: #8B4537,
+  90: #72332B,
+  100: #5B221F
+  );
+$green-primary: map-get($green-map,70);
+$green-10: map-get($green-map,10);
+$green-20: map-get($green-map,20);
+$green-30: map-get($green-map,30);
+$green-40: map-get($green-map,40);
+$green-50: map-get($green-map,50);
+$green-60: map-get($green-map,60);
+$green-70: map-get($green-map,70);
+$green-80: map-get($green-map,80);
+$green-90: map-get($green-map,90);
+$green-100: map-get($green-map,100);
+$orange-primary: map-get($orange-map,60);
+$orange-10: map-get($orange-map,10);
+$orange-20: map-get($orange-map,20);
+$orange-30: map-get($orange-map,30);
+$orange-40: map-get($orange-map,40);
+$orange-50: map-get($orange-map,50);
+$orange-60: map-get($orange-map,60);
+$orange-70: map-get($orange-map,70);
+$orange-80: map-get($orange-map,80);
+$orange-90: map-get($orange-map,90);
+$orange-100: map-get($orange-map,100);
+$purple-primary: map-get($purple-map,80);
+$purple-10: map-get($purple-map,10);
+$purple-20: map-get($purple-map,20);
+$purple-30: map-get($purple-map,30);
+$purple-40: map-get($purple-map,40);
+$purple-50: map-get($purple-map,50);
+$purple-60: map-get($purple-map,60);
+$purple-70: map-get($purple-map,70);
+$purple-80: map-get($purple-map,80);
+$purple-90: map-get($purple-map,90);
+$purple-100: map-get($purple-map,100);
+$blue-primary: map-get($blue-map,60);
+$blue-10: map-get($blue-map,10);
+$blue-20: map-get($blue-map,20);
+$blue-30: map-get($blue-map,30);
+$blue-40: map-get($blue-map,40);
+$blue-50: map-get($blue-map,50);
+$blue-60: map-get($blue-map,60);
+$blue-70: map-get($blue-map,70);
+$blue-80: map-get($blue-map,80);
+$blue-90: map-get($blue-map,90);
+$blue-100: map-get($blue-map,100);
+$pink-primary: map-get($pink-map,50);
+$pink-10: map-get($pink-map,10);
+$pink-20: map-get($pink-map,20);
+$pink-30: map-get($pink-map,30);
+$pink-40: map-get($pink-map,40);
+$pink-50: map-get($pink-map,50);
+$pink-60: map-get($pink-map,60);
+$pink-70: map-get($pink-map,70);
+$pink-80: map-get($pink-map,80);
+$pink-90: map-get($pink-map,90);
+$pink-100: map-get($pink-map,100);
+$brown-primary: map-get($brown-map,70);
+$brown-10: map-get($brown-map,10);
+$brown-20: map-get($brown-map,20);
+$brown-30: map-get($brown-map,30);
+$brown-40: map-get($brown-map,40);
+$brown-50: map-get($brown-map,50);
+$brown-60: map-get($brown-map,60);
+$brown-70: map-get($brown-map,70);
+$brown-80: map-get($brown-map,80);
+$brown-90: map-get($brown-map,90);
+$brown-100: map-get($brown-map,100);

@@ -1,0 +1,17 @@
+{
+	"main": "gulpfile.js",
+	"license": "MIT",
+	"scripts": {
+		"gulp": "gulp"
+	},
+	"dependencies": {
+		"carbon-components": "^10.28.0"
+	},
+	"devDependencies": {
+		"autoprefixer": "^9.7.0",
+		"gulp": "^4.0.2",
+		"gulp-postcss": "^8.0.0",
+		"gulp-sass": "^4.0.2",
+		"gulp-sourcemaps": "^2.6.5"
+	}
+}

@@ -5,7 +5,6 @@
 import { Provider as AuthProvider } from "next-auth/client";
 import { AppProps } from "next/app";
 import "./styles.css";
-import "./style.css"
 
 export default function HEDIApp({ Component, pageProps }: AppProps) {
   return (

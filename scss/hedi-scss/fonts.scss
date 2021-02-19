@@ -1,0 +1,23 @@
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600);
+$roboto-slab: 'Roboto Slab', serif;
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono);
+$roboto-mono: 'Roboto Mono', monospace;
+
+@import url(https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap);
+$merriweather: 'Merriweather', serif;
+
+@mixin theme-fonts {
+  $carbon--font-families: (
+    'mono': $roboto-mono,
+    'sans': $roboto-slab,
+    'sans-condensed':$roboto-slab,
+    'serif': $roboto-slab,
+  ) !global;
+}
+
+// Mal schaun ob's klappt :) - KK
+// @mixin hedi-fonts {
+// $merriweather--font: (
+//   'test': $merriweather,
+//   ) !global;
+// }
