@@ -1,17 +1,14 @@
 //
 // all options can be found here
 // https://www.carbondesignsystem.com/guidelines/themes/overview/#color
-//
+// https://www.carbondesignsystem.com/guidelines/color/usage
 
-@import './paletti';
-@import 'carbon-components/scss/globals/scss/vendor/@carbon/colors/scss/colors.scss';
 
 
 @mixin theme-colors {
- 
   // Beispiel einer selbst-definierten Variable
   //$blut: $red-60 !global;
- 
+
   $focus: $pink-primary !global;
   $interactive-01: $purple-primary !global;
 
@@ -22,14 +19,14 @@
 
   $interactive-03: $purple-primary !global;
   $hover-tertiary: $purple-primary !global;
-  
+
   $support-04: $blue-primary !global;
 
   // $interactive-01: #0f62fe !global;
   // $interactive-02: #393939 !global;
   // $interactive-03: #0f62fe !global;
   // $interactive-04: #0f62fe !global;
-  // $ui-background: #ffffff !global;
+  // $ui-background: yellow !global;
   // $ui-01: #f4f4f4 !global;
   // $ui-02: #ffffff !global;
   // $ui-03: #e0e0e0 !global;

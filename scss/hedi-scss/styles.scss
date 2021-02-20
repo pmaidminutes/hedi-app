@@ -1,70 +1,14 @@
-@import "./theme";
+@import "./config/config.scss";
+@import "./theme/hedi-theme.scss";
 @include hedi-theme;
-
 @import "carbon-components/scss/globals/scss/styles";
-
-@include utilities;
-@import "./paletti";
-@import "colors";
-
-
-@include theme-colors;
-
-
-
-$primary-color-map: (
-	pregnancy: $blue-primary,
-	birth: $pink-primary,
-	after-birth: $purple-primary,
-	finances: $green-primary,
-	advice: $orange-primary,
-	root: $blue-primary,
-	default: $purple-primary,
-);
-
-$light-color-map: (
-	pregnancy: $blue-10,
-	birth: $pink-10,
-	after-birth: $purple-10,
-	finances: $green-10,
-	advice: $orange-10,
-	root: $blue-10,
-	default: $purple-10,
-);
-
-@mixin colorClass($name) {
-	&--#{$name} {
-		header {
-			background-color: map-get($primary-color-map, $name) !important;
-		}
-		.hedi-article-container {
-			background-color: map-get($light-color-map, $name);
-		}
-		.hedi-auto-suggest {
-			background-color: map-get($primary-color-map, $name);
-		}
-	}
-}
-
-.hedi-category-color {
-	@include colorClass(pregnancy);
-	@include colorClass(birth);
-	@include colorClass(after-birth);
-	@include colorClass(finances);
-	@include colorClass(advice);
-	@include colorClass(root);
-}
-
-// --------- specific hedi classes -------- //
-// style-specifics for a single element
-
-.hedi-separator {
-	display: block;
-	width: 100%;
-	border-bottom: 2px solid $cool-gray-20;
-	margin: $layout-xs 0;
-}
-
-.hidden {
-  display: none;
-}
+// FROM GENERAL TO SPECIFIC
+// *************************
+// BASE -> all genreal html tags concerning
+@import "./base.scss";
+// page -> all things concerning the whole page (for example hedi category colors)
+@import "./page/page.scss";
+// components -> all components concerning
+@import "./components/components.scss";
+// helper -> helper classes like ".hidden"
+@import "./helper.scss"
