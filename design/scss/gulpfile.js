@@ -20,7 +20,7 @@ function scssTask(){
         .pipe(sass({includePaths: ['node_modules']})) // compile SCSS to CSS
         .pipe(postcss([ autoprefixer() ])) // PostCSS plugins
         .pipe(sourcemaps.write('.')) // write sourcemaps file in current directory
-        .pipe(dest('../pages')
+        .pipe(dest('../../pages')
     ); // put final CSS in root/pages folder
 }
 // Watch task: watch SCSS for changes
