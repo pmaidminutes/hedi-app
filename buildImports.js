@@ -1,7 +1,7 @@
 const read = require("fs-readdir-recursive");
 const fs = require("fs");
-const FOLDER_NAME = "data";
-const PATH_TO_IMPORTS = "imports.ts";
+const FOLDER_NAME = "./design/data";
+const PATH_TO_IMPORTS = "./design/imports.ts";
 
 const data = read(FOLDER_NAME);
 const filteredData = data.filter(element => element.endsWith(".json"));
@@ -30,7 +30,7 @@ function exporting() {
 
   filteredData.forEach(path => {
     const uniqueId = generateId(path);
-    imports.push(`import ${uniqueId} from '${FOLDER_NAME}/${path}';`);
+    imports.push(`import ${uniqueId} from '${'./data'}/${path}';`);
     propsMap.push(
       `['${
         path.startsWith("de/")
