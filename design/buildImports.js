@@ -1,7 +1,7 @@
 const read = require("fs-readdir-recursive");
 const fs = require("fs");
-const FOLDER_NAME = "design-data"
-
+const FOLDER_NAME = "data";
+const PATH_TO_IMPORTS = "imports.ts";
 
 const data = read(FOLDER_NAME);
 const filteredData = data.filter(element => element.endsWith(".json"));
@@ -48,6 +48,9 @@ function exporting() {
   ];
   `;
 
-  fs.writeFileSync("imports.ts", exportFileData);
+  fs.writeFileSync(PATH_TO_IMPORTS, "", function () {
+    console.log("cleaned");
+  });
+  fs.writeFileSync(PATH_TO_IMPORTS, exportFileData);
 }
 exporting();
