@@ -51,7 +51,7 @@ let dynamicProps: any;
 // @ts-ignore
 if (process.env.HEDI_ENV) {
   // @ts-ignore
-  import("../imports").then(({ propsMap }) => (dynamicProps = propsMap));
+  import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
 }
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
