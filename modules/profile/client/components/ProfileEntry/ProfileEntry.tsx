@@ -1,3 +1,4 @@
+import { IProfile } from "@/modules/model/IProfile";
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -11,7 +12,7 @@ import {
 export const ProfileEntry = ({
   profile,
 }: {
-  profile: IMidwife | ICaregiver | IOrganisation | IInstitution;
+  profile: IProfile | IMidwife | ICaregiver | IOrganisation | IInstitution;
 }): JSX.Element => {
   const router = useRouter();
   const { locale, defaultLocale } = router;

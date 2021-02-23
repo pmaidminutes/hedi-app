@@ -5,6 +5,8 @@ import {
   DetailedNameFields,
   IDetailedName,
 } from "@/modules/model/IDetailedName";
+import { ProfileFields } from "@/modules/model/IProfile";
+import { ChildrenFields } from "./ChildrenType";
 
 export interface IParent extends IEntity, IDetailedName, IAddress, IContact {
   birthdate: string;
@@ -20,4 +22,12 @@ ${AddressFields}
 ${ContactFields}
 birthdate
 first_pregnancy
+children
+{
+  ${ChildrenFields}
+}
+providers
+{
+  ${ProfileFields}
+}
 `;

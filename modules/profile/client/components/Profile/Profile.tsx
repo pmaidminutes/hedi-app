@@ -1,18 +1,23 @@
 import { MapClient } from "@/modules/map/client/components";
 import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
+import { IProfile } from "@/modules/model/IProfile";
 import {
   ICaregiver,
   IInstitution,
   IMidwife,
   IOrganisation,
+  isICaregiver,
+  isIMidwife,
 } from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
 import { Address } from "../Address";
 import { Contact } from "../Contact";
 import { DetailedName } from "../DetailedName";
+import { ProfileEntry } from "../ProfileEntry";
+
 interface IProfileProps {
-  content: ICaregiver | IMidwife;
+  content: ICaregiver | IMidwife | IOrganisation | IInstitution;
 }
 const locations: Location[] = [];
 
@@ -47,6 +52,13 @@ export const Profile = ({ content }: IProfileProps) => {
             <Contact content={content} />
           </Column>
         </Row>
+        {isICaregiver(content) || isIMidwife(content)
+          ? content.associations.map((entry: IProfile) => {
+              return <ProfileEntry profile={entry} key={entry.route} />;
+            })
+          : content.members.map((entry: IProfile) => {
+              return <ProfileEntry profile={entry} key={entry.route} />;
+            })}
         {
           //TODO to verify the state availablility of array
           locations.push({

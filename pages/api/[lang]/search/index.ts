@@ -1,12 +1,12 @@
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
 import { getArticle } from "@/modules/editorial/article/query";
 import { IArticle } from "@/modules/editorial/article/types";
-import { getPage } from "@/modules/editorial/page/query";
-import { IPage } from "@/modules/editorial/page/types";
 import { getCategory } from "@/modules/editorial/category/query";
 import { ICategory } from "@/modules/editorial/category/types";
 import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
+import { getPage } from "@/modules/editorial/page/query";
+import { IPage } from "@/modules/editorial/page/types";
 import { parseJSONToLatLngCoordinates } from "@/modules/map/server/functions";
 import { requestCoordinates } from "@/modules/map/server/request";
 import {
@@ -26,7 +26,16 @@ import { NextApiHandler } from "next";
 
 const solrSearchHandler: NextApiHandler<
   | IHTTPError
-  | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | IPage)[]
+  | (
+      | IArticle
+      | ICategory
+      | IGlossaryTerm
+      | ICaregiver
+      | IMidwife
+      | IOrganisation
+      | IInstitution
+      | IPage
+    )[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter, location, distance },

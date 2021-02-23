@@ -16926,4 +16926,7 @@ a.bx--navigation-link:focus {
 .hidden {
   display: none; }
 
+.leaflet-container {
+   height: 300px;
+    }
 /*# sourceMappingURL=styles.css.map */
