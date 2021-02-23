@@ -6,6 +6,7 @@ $roboto-mono: 'Roboto Mono', monospace;
 @import url(https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap);
 $merriweather: 'Merriweather', serif;
 
+
 @mixin theme-fonts {
   $carbon--font-families: (
     'mono': $roboto-mono,
@@ -15,9 +16,14 @@ $merriweather: 'Merriweather', serif;
   ) !global;
 }
 
-// Mal schaun ob's klappt :) - KK
-@mixin hedi-fonts {
-$merriweather--font: (
-  'serif': $merriweather,
-  ) !global;
+@function font-choice($font-type) {
+  @if($font-type == 'merryweather') {
+    @return $merriweather;
+  }
+  @if($font-type == 'roboto-mono') {
+    @return $roboto-mono;
+  }
+  @if($font-type == 'roboto-slab') {
+    @return $roboto-slab;
+  }
 }
