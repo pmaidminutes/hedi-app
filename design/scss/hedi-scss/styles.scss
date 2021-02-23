@@ -2,6 +2,7 @@
 @import "./theme/hedi-theme.scss";
 @include hedi-theme;
 @import "carbon-components/scss/globals/scss/styles";
+@import "./utilities.scss";
 // FROM GENERAL TO SPECIFIC
 // *************************
 // BASE -> all genreal html tags concerning

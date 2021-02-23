@@ -1,29 +1,20 @@
-@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;600);
+  
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+$roboto: 'Roboto', sans-serif;
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
 $roboto-slab: 'Roboto Slab', serif;
-@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
 $roboto-mono: 'Roboto Mono', monospace;
-
-@import url(https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap);
-$merriweather: 'Merriweather', serif;
-
 
 @mixin theme-fonts {
   $carbon--font-families: (
     'mono': $roboto-mono,
-    'sans': $roboto-slab,
-    'sans-condensed':$roboto-slab,
+    'sans': $roboto,
+    'sans-condensed':$roboto,
     'serif': $roboto-slab,
   ) !global;
 }
 
-@function font-choice($font-type) {
-  @if($font-type == 'merryweather') {
-    @return $merriweather;
-  }
-  @if($font-type == 'roboto-mono') {
-    @return $roboto-mono;
-  }
-  @if($font-type == 'roboto-slab') {
-    @return $roboto-slab;
-  }
+@function carbon--font-family($name) {
+  @return map-get($carbon--font-families, $name);
 }
