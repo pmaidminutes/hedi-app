@@ -1,7 +1,7 @@
 const read = require("fs-readdir-recursive");
 const fs = require("fs");
-const FOLDER_NAME = "./design/data";
-const PATH_TO_IMPORTS = "./design/imports.ts";
+const FOLDER_NAME = __dirname+"/data";
+const PATH_TO_IMPORTS = __dirname+"/imports.ts";
 
 const data = read(FOLDER_NAME);
 const filteredData = data.filter(element => element.endsWith(".json"));
