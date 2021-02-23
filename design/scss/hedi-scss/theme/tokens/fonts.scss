@@ -16,8 +16,8 @@ $merriweather: 'Merriweather', serif;
 }
 
 // Mal schaun ob's klappt :) - KK
-// @mixin hedi-fonts {
-// $merriweather--font: (
-//   'serif': $merriweather,
-//   ) !global;
-// }
+@mixin hedi-fonts {
+$merriweather--font: (
+  'serif': $merriweather,
+  ) !global;
+}

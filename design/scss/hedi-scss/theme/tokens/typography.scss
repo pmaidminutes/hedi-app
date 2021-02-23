@@ -1,5 +1,5 @@
-// @import './fonts';
-// @include hedi-fonts;
+@import './fonts';
+@include hedi-fonts;
 // @include theme-fonts;
 // all options can be found here
 // https://www.carbondesignsystem.com/guidelines/themes/overview/#typography
@@ -11,7 +11,7 @@
   //example for changing h1: they did the numbering in reverse h1 = heading-06,... h6 = heading-01
   //internally they don't hardcode sizes but use functions like font-size: carbon--type-scale(1),
   $productive-heading-06: (
-    // font-family: $merriweather--font('serif'),
+    // font-family: merriweather--font('serif'),
     font-size: 2.625rem,
     font-weight: 300,
     line-height: 1.199,
