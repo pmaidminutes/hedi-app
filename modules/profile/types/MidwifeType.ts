@@ -13,7 +13,6 @@ import {
   AssociationsFields,
   IWithAssociations,
 } from "@/modules/model/IWithAssociations";
-import { IParent, ParentFields } from "./ParentType";
 
 export interface IMidwife
   extends IEntityTranslated<IEntityLocalized>,
@@ -23,7 +22,6 @@ export interface IMidwife
     IWithAssociations {
   verified: boolean;
   service_area: string;
-  parents?: IParent[];
 }
 
 export function isIMidwife(obj: any): obj is IMidwife {
@@ -36,27 +34,5 @@ export const MidwifeFields = `${EntityTranslatedFields}
   ${ContactFields}
   verified
   service_area
-  associations
-  {
-    ... on Organisation
-    { 
-      ${AssociationsFields}
-    }
-    ... on Institution
-    { 
-      ${AssociationsFields}
-    }
-  }
-  `;
-
-export const MidwifeRelationsFields = `${EntityTranslatedFields}
-  ${DetailedNameFields}
-  ${AddressFields}
-  ${ContactFields}
-  verified
-  service_area
-  parents
-  {
-    ${ParentFields}
-  }
+  ${AssociationsFields}
   `;

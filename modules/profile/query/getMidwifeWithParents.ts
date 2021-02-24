@@ -1,10 +1,10 @@
 import { getServiceClient, gql } from "@/modules/graphql";
-import { IMidwife, MidwifeRelationsFields } from "../types";
+import { IMidwifeWithParents, MidwifeWithParentsFields } from "../types";
 
-export async function getMidwifeRelations(
+export async function getMidwifeWithParents(
   route: string,
   lang = "de"
-): Promise<IMidwife | null> {
+): Promise<IMidwifeWithParents | null> {
   const query = gql`
       query getMidwife(
         $routes: [String!]
@@ -12,14 +12,17 @@ export async function getMidwifeRelations(
         $includeSelf: Boolean
       ) {
         midwives(routes: $routes, lang: $lang) {
-          ${MidwifeRelationsFields}
+          ${MidwifeWithParentsFields}
         }
       }
     `;
 
   const client = await getServiceClient();
   return client
-    .request<{ midwives: IMidwife[] }>(query, { routes: [route], lang })
+    .request<{ midwives: IMidwifeWithParents[] }>(query, {
+      routes: [route],
+      lang,
+    })
     .then(data => data.midwives[0])
     .catch(e => {
       console.warn(e);

@@ -29,14 +29,5 @@ export const InstitutionFields = `${EntityTranslatedFields}
   ${AddressFields}
   ${ContactFields}
   service_area
-  members {
-    ... on Caregiver
-    {
-      ${MembersFields}
-    }
-    ... on Midwife
-    {
-      ${MembersFields}
-    }
-  }
+  ${MembersFields}
   `;
