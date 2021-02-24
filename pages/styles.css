@@ -16851,6 +16851,9 @@ a.bx--navigation-link:focus {
 .bx--side-nav.bx--side-nav--expanded ~ .bx--content {
   margin-left: 16rem; }
 
+.leaflet-container {
+  height: 300px; }
+
 .hedi-category-color--pregnancy header {
   background-color: #2A84C6 !important; }
 
