@@ -46,14 +46,11 @@ import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { Content } from "carbon-components-react";
-import * as fs from "fs";
 let dynamicProps: any;
-
-if (process.env.HEDI_ENV) {
-  // const importsPath = fs.existsSync("../design/data/imports.ts") ? "../design/data/imports" : "../design/imports";
+const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
+if (isDesignContext) {
   import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
 }
-
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const locales = context?.locales ?? [];
   const paths = [];
@@ -81,7 +78,7 @@ export const getStaticProps: GetStaticProps<
   let content;
   let data: any = [];
   let hasStaticData = false;
-  if (process.env.HEDI_ENV) {
+  if (isDesignContext) {
     data = dynamicProps.find(
       (element: any) => element[0] === segments.join("/")
     );
@@ -90,7 +87,7 @@ export const getStaticProps: GetStaticProps<
   }
 
   // query types with dynamic paths first
-  if (process.env.HEDI_ENV && hasStaticData) {
+  if (isDesignContext && hasStaticData) {
     content = data[1].content;
   } else {
     if (!content) content = await getSearchViewProps(params?.segments, locale);
