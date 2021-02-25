@@ -48,10 +48,11 @@ import { useEffect, useState } from "react";
 import { Content } from "carbon-components-react";
 let dynamicProps: any;
 
+console.log(process.env)
 // @ts-ignore
 if (process.env.HEDI_ENV) {
   // @ts-ignore
-  import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
+  // import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
 }
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
