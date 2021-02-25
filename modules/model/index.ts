@@ -15,3 +15,5 @@ export * from "./ITagged";
 export * from "./ITyped";
 export * from "./IUIText";
 export * from "./IWithUITexts";
+export * from "./IUpsertProfile";
+export * from "./IEditProfile";
