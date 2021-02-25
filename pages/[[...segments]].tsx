@@ -46,9 +46,11 @@ import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { Content } from "carbon-components-react";
+import * as fs from "fs";
 let dynamicProps: any;
 
 if (process.env.HEDI_ENV) {
+  // const importsPath = fs.existsSync("../design/data/imports.ts") ? "../design/data/imports" : "../design/imports";
   import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
 }
 
@@ -84,7 +86,7 @@ export const getStaticProps: GetStaticProps<
       (element: any) => element[0] === segments.join("/")
     );
     hasStaticData = data ? true : false;
-    console.log({hasStaticData})
+    console.log({ hasStaticData });
   }
 
   // query types with dynamic paths first
