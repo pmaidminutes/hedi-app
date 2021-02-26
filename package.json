@@ -5,12 +5,12 @@
   "author": "aidminutes GmBH",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
+    "dev": "node ./design/fileExists.js && NODE_OPTIONS='--inspect' next dev",
+    "build": "node ./design/fileExists.js &&  next build",
     "start": "next start",
     "pretty": "prettier --write './**/*.ts*'",
     "export": "node exporter.js",
-    "design": "node ./design/buildImports.js && HEDI_ENV=DESIGN next dev"
+    "design": "node ./design/fileExists.js && node ./design/buildImports.js && HEDI_ENV=DESIGN next dev"
   },
   "dependencies": {
     "@carbon/icons": "^10.19.0",
