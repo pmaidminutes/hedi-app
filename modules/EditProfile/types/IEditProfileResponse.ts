@@ -4,7 +4,7 @@ import { IProfile } from "./IEditProfileInfo";
 export interface IEditProfileResponse {
   success: boolean;
   errors?: IEditProfileError;
-  profile?: IProfile
+  profile?: IProfile;
 }
 
 export const EditProfileResponseFields = `success error { ${EditProfileErrorFields} }`;

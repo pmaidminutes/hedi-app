@@ -1,12 +1,12 @@
 import { IUIText, UITextFields } from "@/modules/model";
 import { getServiceClient, gql } from "@/modules/graphql";
 
-export async function GetProfileField(
+export async function getProfileField(
   keys: string[],
   lang = "de"
 ): Promise<IUIText[] | null> {
   const query = gql`
-    query GetProfileField(
+    query getProfileField(
       $keys: [String!]!
       $lang: String!
       $includeSelf: Boolean

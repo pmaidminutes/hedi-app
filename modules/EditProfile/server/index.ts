@@ -1,1 +1,1 @@
-export * from "./EditProfileAPI";
+export * from "./editProfileAPI";

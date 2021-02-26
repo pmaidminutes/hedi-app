@@ -1,24 +1,21 @@
-
 export interface IEditProfileLabels {
-  type: string,
-  key: string,
-  route: string,
-  label: string,
-  lang: string,
-  translations: ITranslations[],
-  texts: IAllLabels
+  type: string;
+  key: string;
+  route: string;
+  label: string;
+  lang: string;
+  translations: ITranslations[];
+  texts: IAllLabels;
 }
-
 
 export interface ITranslations {
-  type: string, 
-  route: string, 
-  label: string, 
-  lang: string 
+  type: string;
+  route: string;
+  label: string;
+  lang: string;
 }
 
-
-export interface IAllLabels{
+export interface IAllLabels {
   profile_type?: string;
   prefix?: string;
   forename?: string;
@@ -33,6 +30,6 @@ export interface IAllLabels{
   room?: string;
   website?: string;
   consultation_hours?: string;
-  first_pregnancy?:boolean;
+  first_pregnancy?: boolean;
   phone_private?: string;
 }
