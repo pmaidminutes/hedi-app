@@ -8,11 +8,9 @@ import {
 
 export const HTMLWithNextImage = ({
   data,
-  locale,
   callbacks,
 }: {
   data: string;
-  locale?: string | null;
   callbacks?: ITransformCallbackMap;
 }) => {
   const img: ParseInfoTransformFn = (_, __, props) => {
@@ -28,9 +26,9 @@ export const HTMLWithNextImage = ({
   };
 
   const a: ParseInfoTransformFn = (htmlString, info, props: any) => {
-    if (locale && props?.className.includes("hedi-link")) {
-      props.href = `/${locale}${props.href}`;
-    }
+    // if (locale && props?.className.includes("hedi-link")) {
+    //   props.href = `/${locale}${props.href}`;
+    // }
     return defaultTransform(htmlString, info, props);
   };
 
