@@ -1,6 +1,6 @@
 import { MatrixClient, MatrixEvent, Room, RoomState } from "matrix-js-sdk";
 import { useState } from "react";
-import { useListener } from "../../../hooks";
+import { useListener } from "../../hooks";
 
 // subscribes to MatrixClient events and tracks their state
 export const useRoomListSubscription = (client: MatrixClient) => {

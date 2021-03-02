@@ -1,5 +1,5 @@
 import { DependencyList, useEffect } from "react";
-import { MatrixClient } from "../types";
+import { MatrixClient } from "../../types";
 
 // MatrixClient doesn't handle lifecycle of listeners
 // we have to attach and cleanup ourself in order to not run into a memory leak
