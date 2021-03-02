@@ -32,6 +32,7 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
     locale ?? "de",
     defaultLocale
   );
+  console.log({ breadCrumbPath });
 
   return (
     <Grid>
@@ -39,7 +40,7 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
         <Column>
           <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
             <BreadcrumbItem
-              href={`/${locale === defaultLocale ? "" : locale}`}
+              href={`/${locale}`}
               isCurrentPage={breadCrumbPath.length === 0}>
               Home
             </BreadcrumbItem>

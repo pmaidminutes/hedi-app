@@ -10,8 +10,6 @@ import {
   IRouteLabeled,
 } from "@/modules/model";
 
-import { routeToSegments } from "@/modules/common/utils";
-
 export function constructBreadCrumbPathData(
   content:
     | (IEntityTranslated<IEntityLocalized> &
@@ -25,19 +23,24 @@ export function constructBreadCrumbPathData(
 
   if (content !== null) {
     const { route, routelabel, type, label } = content;
-    let basePath = locale === defaultLocale ? "" : "/" + locale;
+    console.log({ routelabel });
 
     if (type === "Category" || type === "Article") {
-      const pathArray = routeToSegments(route);
+      let pathArray = route.split("/").filter(e => e !== "");
+      pathArray.shift();
 
       const names =
-        routelabel !== undefined ? routeToSegments(routelabel) : label;
+        routelabel !== undefined
+          ? routelabel.split("/").filter(e => e !== "")
+          : label;
+
+      console.log({ names });
 
       pathArray.forEach((path: string, index: number) => {
-        basePath = basePath + "/" + path;
+        console.log({ path }, names[index]);
         composedPath.push({
           label: names[index],
-          route: basePath,
+          route: path,
           isCurrentPage:
             pathArray[pathArray.length - 1] === path ? true : false,
         });
