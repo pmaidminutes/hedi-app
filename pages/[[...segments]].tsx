@@ -48,7 +48,6 @@ import { useEffect, useState } from "react";
 import { Content } from "carbon-components-react";
 let dynamicProps: any;
 
-console.log(process.env)
 // @ts-ignore
 if (process.env.HEDI_ENV) {
   // @ts-ignore
