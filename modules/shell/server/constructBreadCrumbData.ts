@@ -17,13 +17,12 @@ export function constructBreadCrumbPathData(
         Partial<IRouteLabeled>)
     | null,
   locale: string,
-  defaultLocale: string | undefined
 ): IBreadCrumbPath[] {
   const composedPath: IBreadCrumbPath[] = [];
 
   if (content !== null) {
     const { route, routelabel, type, label } = content;
-    console.log({ routelabel });
+    let basePath =  "/" + locale;
 
     if (type === "Category" || type === "Article") {
       let pathArray = route.split("/").filter(e => e !== "");
@@ -34,13 +33,12 @@ export function constructBreadCrumbPathData(
           ? routelabel.split("/").filter(e => e !== "")
           : label;
 
-      console.log({ names });
 
       pathArray.forEach((path: string, index: number) => {
-        console.log({ path }, names[index]);
+        basePath = basePath + "/" + path;
         composedPath.push({
           label: names[index],
-          route: path,
+          route: basePath,
           isCurrentPage:
             pathArray[pathArray.length - 1] === path ? true : false,
         });

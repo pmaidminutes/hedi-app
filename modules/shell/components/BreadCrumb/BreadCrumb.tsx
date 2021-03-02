@@ -24,15 +24,13 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   props: IBreadCrumbProps
 ): JSX.Element => {
   const router = useRouter();
-  const { locale, defaultLocale } = router;
+  const { locale } = router;
   const content = props.content ?? null;
 
   const breadCrumbPath = constructBreadCrumbPathData(
     content,
     locale ?? "de",
-    defaultLocale
   );
-  console.log({ breadCrumbPath });
 
   return (
     <Grid>
