@@ -4,3 +4,6 @@ export * from "./MessageInput";
 
 export * from "./RoomInfo";
 export * from "./RoomList";
+
+export * from "./MessageEvent";
+export * from "./EventTile";
