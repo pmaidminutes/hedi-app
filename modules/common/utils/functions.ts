@@ -15,10 +15,14 @@ export function buildAssetUrl(url: string | undefined): string {
   return `${BASE_URL}${url}`;
 }
 
-export const routeToSegments = (route?: string) =>
-  route ? route.split("/").filter(s => s) : [];
+export const routeToSegments = (route?: string) => {
+  const test = route ? route.split("/").filter(s => s) : [];
+  test.shift();
+  return test;
+};
 
-export const segmentsToRoute = (segments: string[]) => "/" + segments.join("/");
+export const segmentsToRoute = (segments: string[], locale: string) =>
+  "/" + locale + "/" + segments.join("/");
 
 export function jsonFetcher<T>(url: RequestInfo) {
   return fetch(url)
