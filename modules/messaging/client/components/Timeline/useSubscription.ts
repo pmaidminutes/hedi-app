@@ -37,11 +37,12 @@ export const useTimelineWindowSubscription = (
   );
 
   // existing event state change, e.g. sending state of a message
+  // seems the listener is sometimes returning something else than an event...
   useListener(
     client,
     "event",
     (event: MatrixEvent) => {
-      if (events.find(ev => ev.getId() === event.getId())) {
+      if (event.getId && events.find(ev => ev.getId() === event.getId())) {
         setEvents(prev => [...prev]);
       }
     },
