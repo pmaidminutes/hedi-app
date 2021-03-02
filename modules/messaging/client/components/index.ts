@@ -8,3 +8,4 @@ export * from "./MessageEvent";
 export * from "./EventTile";
 export * from "./Timeline";
 export * from "./MessageComposer";
+export * from "./RoomView";
