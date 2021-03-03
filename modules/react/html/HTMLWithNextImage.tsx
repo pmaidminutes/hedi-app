@@ -25,12 +25,5 @@ export const HTMLWithNextImage = ({
     return null;
   };
 
-  const a: ParseInfoTransformFn = (htmlString, info, props: any) => {
-    // if (locale && props?.className.includes("hedi-link")) {
-    //   props.href = `/${locale}${props.href}`;
-    // }
-    return defaultTransform(htmlString, info, props);
-  };
-
-  return <HTML data={data} callbacks={{ ...callbacks, img, a }} />;
+  return <HTML data={data} callbacks={{ ...callbacks, img }} />;
 };
