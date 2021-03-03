@@ -23,14 +23,10 @@ interface IBreadCrumbProps {
 export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   props: IBreadCrumbProps
 ): JSX.Element => {
-  const router = useRouter();
-  const { locale } = router;
   const content = props.content ?? null;
+  const lang = content?.lang ?? "de";
 
-  const breadCrumbPath = constructBreadCrumbPathData(
-    content,
-    locale ?? "de",
-  );
+  const breadCrumbPath = constructBreadCrumbPathData(content, lang ?? "de");
 
   return (
     <Grid>
@@ -38,7 +34,7 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
         <Column>
           <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
             <BreadcrumbItem
-              href={`/${locale}`}
+              href={`/${lang}`}
               isCurrentPage={breadCrumbPath.length === 0}>
               Home
             </BreadcrumbItem>
