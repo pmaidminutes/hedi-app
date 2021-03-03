@@ -16,9 +16,9 @@ export function buildAssetUrl(url: string | undefined): string {
 }
 
 export const routeToSegments = (route?: string) => {
-  const test = route ? route.split("/").filter(s => s) : [];
-  test.shift();
-  return test;
+  const segments = route ? route.split("/").filter(s => s) : [];
+  segments.shift();
+  return segments;
 };
 
 export const segmentsToRoute = (segments: string[], locale: string) =>
