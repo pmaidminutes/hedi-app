@@ -9,6 +9,6 @@ export const getStaticProps = async (
   if (!segments) {
     return null;
   } else {
-    return getCaregiver(segmentsToRoute(segments, locale), locale);
+    return getCaregiver(segmentsToRoute(segments, locale));
   }
 };

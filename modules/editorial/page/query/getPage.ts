@@ -1,10 +1,10 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { PageFields, IPage } from "../types";
+import { getLangByRoute } from "@/modules/common/utils";
 
-export async function getPage(
-  route: string,
-  lang = "de"
-): Promise<IPage | null> {
+export async function getPage(route: string): Promise<IPage | null> {
+  const lang = getLangByRoute(route);
+
   const query = gql`
     query getPages(
       $routes: [String!]!

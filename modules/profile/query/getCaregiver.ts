@@ -1,10 +1,12 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { CaregiverFields, ICaregiver } from "../types";
+import { getLangByRoute } from "@/modules/common/utils";
 
 export async function getCaregiver(
-  route: string,
-  lang = "de"
+  route: string
 ): Promise<ICaregiver | null> {
+  const lang = getLangByRoute(route)
+  
   const query = gql`
     query getCaregiver(
       $routes: [String!]
