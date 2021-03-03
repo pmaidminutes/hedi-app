@@ -29,3 +29,10 @@ export function jsonFetcher<T>(url: RequestInfo) {
     .then(response => response.json())
     .then(jsonResponse => jsonResponse as T);
 }
+
+export function getLangByRoute(route: string) {
+  return route
+    .split("/")
+    .filter(s => s)
+    .shift();
+}
