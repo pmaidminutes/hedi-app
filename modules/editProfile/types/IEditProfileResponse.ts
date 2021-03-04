@@ -1,5 +1,5 @@
+import { IProfile } from "@/modules/model/IProfile";
 import { IEditProfileError, EditProfileErrorFields } from "./IEditProfileError";
-import { IProfile } from "./IEditProfileInfo";
 
 export interface IEditProfileResponse {
   success: boolean;

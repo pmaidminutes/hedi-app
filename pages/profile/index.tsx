@@ -3,45 +3,45 @@ import { Content } from "carbon-components-react";
 import { getUser, LogInOut } from "@/modules/auth/client";
 import { GetStaticProps } from "next";
 import { ISegmentParam } from "@/modules/editorial/types";
-import { EditProfileForm } from "@/modules/EditProfile/components";
+import { EditProfileForm } from "@/modules/editProfile/components";
 import { jsonFetcher } from "@/modules/common/utils";
-import { IEditProfileLabels } from "@/modules/EditProfile/types";
-import { getProfileField } from "@/modules/EditProfile/query";
+import { getProfileField } from "@/modules/editProfile/query";
+import { IEditProfileResponse } from "@/modules/editProfile/types";
 
 export const getStaticProps: GetStaticProps<any, ISegmentParam> = async ({
   params,
   locale,
 }) => {
-  let content;
-  content = await getProfileField(
-    ["profile", "profile_parent", "profile_caregiver", "profile_midwife"],
-    locale
-  );
+  let labels;
+  labels = await getProfileField(locale);
   return {
-    props: { content },
+    props: { labels },
   };
 };
 
 export default function EditProfilePage({
-  content,
+  labels,
 }: {
-  content: IEditProfileLabels[];
+  labels: { [key: string]: string };
 }) {
   const [user] = getUser();
   const { data, error } = useSWR(
     user ? "/api/account/editProfile" : null,
     url => jsonFetcher<any>(url)
   );
-
+  
   return (
     <div>
       <Content>
         <LogInOut />
-        {data && (
+        {error ? (
+          <div> An error occurred here. Please try again .... </div>
+        ) : !data || !(data as IEditProfileResponse)?.success ? (
+          <div> permission is required. </div>
+        ) : (
           <EditProfileForm
-            labels={content}
-            eagerValidate={false}
-            dataInput={data}></EditProfileForm>
+          infoLabels={labels}
+          data={data.profile}></EditProfileForm>
         )}
       </Content>
     </div>

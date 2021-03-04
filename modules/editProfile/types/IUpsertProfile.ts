@@ -1,9 +1,23 @@
 export interface IUpsertProfile {
-  profile: {
-      [key: string]: string;
-    };
-  }
-  
+  consultation_hours?: string;
+  first_pregnancy?: boolean;
+  city?: string;
+  forename?: string;
+  house_number?: string;
+  mail?: string;
+  phone?: string;
+  phone_private?: string;
+  postal_code?: string;
+  prefix?: string;
+  profile_type?: string;
+  room?: string;
+  street?: string;
+  suffix?: string;
+  surname?: string;
+  website?: string;
+}
+
+
   export const implementsIUpsertProfile = (obj: any) => !!(obj && obj.profile);
   
   export function isIUpsertProfile(obj: any): obj is IUpsertProfile {
