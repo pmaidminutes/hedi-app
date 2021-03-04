@@ -1,10 +1,12 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { IMidwifeWithParents, MidwifeWithParentsFields } from "../types";
+import { getLangByRoute } from "@/modules/common/utils";
 
 export async function getMidwifeWithParents(
-  route: string,
-  lang = "de"
+  route: string
 ): Promise<IMidwifeWithParents | null> {
+  const lang = getLangByRoute(route)
+  
   const query = gql`
       query getMidwife(
         $routes: [String!]

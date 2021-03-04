@@ -1,7 +1,6 @@
 import { IProfile } from "@/modules/model/IProfile";
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import {
   ICaregiver,
   IInstitution,
@@ -14,8 +13,6 @@ export const ProfileEntry = ({
 }: {
   profile: IProfile | IMidwife | ICaregiver | IOrganisation | IInstitution;
 }): JSX.Element => {
-  const router = useRouter();
-  const { locale, defaultLocale } = router;
   const { label, route, displayName } = profile;
 
   return (

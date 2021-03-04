@@ -64,7 +64,7 @@ const solrSearchHandler: NextApiHandler<
       switch (entry.ss_type) {
         case "article":
           promises.push(
-            getArticle(route, lang).then(article => {
+            getArticle(route).then(article => {
               if (article) {
                 article.label = highlight.highlightedTitle ?? article.label;
                 article.summary = highlightedBody;
@@ -75,7 +75,7 @@ const solrSearchHandler: NextApiHandler<
           break;
         case "page":
           promises.push(
-            getPage(route, lang).then(page => {
+            getPage(route).then(page => {
               if (page) {
                 page.label = highlight.highlightedTitle ?? page.label;
                 page.summary = highlightedBody;
@@ -86,7 +86,7 @@ const solrSearchHandler: NextApiHandler<
           break;
         case "categories":
           promises.push(
-            getCategory(route, lang).then(category => {
+            getCategory(route).then(category => {
               if (category)
                 category.label = highlight.highlightedTitle ?? category.label;
               return category;
@@ -95,7 +95,7 @@ const solrSearchHandler: NextApiHandler<
           break;
         case "glossaryterm":
           promises.push(
-            getGlossaryTerm(route, lang).then(glossary => {
+            getGlossaryTerm(route).then(glossary => {
               if (glossary) {
                 glossary.label = highlight.highlightedTitle ?? glossary.label;
                 glossary.body = highlightedBody ?? glossary.body;

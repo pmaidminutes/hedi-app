@@ -1,7 +1,6 @@
 import { TagList } from "@/modules/common/components";
 import { ITyped } from "@/modules/model";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import { useRouter } from "next/router";
 import { IPage } from "../../../types";
 import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
 interface IPageProps {
@@ -13,8 +12,6 @@ export const TryPage = (content: ITyped): JSX.Element | null =>
 
 export const Page = ({ content }: IPageProps): JSX.Element => {
   const { label, body, tags } = content;
-  const router = useRouter();
-  const { locale, defaultLocale } = router;
 
   return (
     <>
@@ -46,7 +43,6 @@ export const Page = ({ content }: IPageProps): JSX.Element => {
               <div className="py-s-md">
                 <HTMLWithNextImage
                   data={body}
-                  locale={locale === defaultLocale ? null : locale}
                 />
               </div>
             </article>

@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { constructBreadCrumbPathData } from "../../server";
 import {
   IAppStyled,
@@ -23,15 +22,10 @@ interface IBreadCrumbProps {
 export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   props: IBreadCrumbProps
 ): JSX.Element => {
-  const router = useRouter();
-  const { locale, defaultLocale } = router;
   const content = props.content ?? null;
+  const lang = content?.lang ?? "de";
 
-  const breadCrumbPath = constructBreadCrumbPathData(
-    content,
-    locale ?? "de",
-    defaultLocale
-  );
+  const breadCrumbPath = constructBreadCrumbPathData(content, lang ?? "de");
 
   return (
     <Grid>
@@ -39,7 +33,7 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
         <Column>
           <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
             <BreadcrumbItem
-              href={`/${locale === defaultLocale ? "" : locale}`}
+              href={`/${lang}`}
               isCurrentPage={breadCrumbPath.length === 0}>
               Home
             </BreadcrumbItem>

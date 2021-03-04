@@ -24,7 +24,6 @@ export async function getCategoryPaths(
       console.warn("error", e);
       return null;
     });
-
   return categories
     ?.map(c => ({
       params: { segments: routeToSegments(c.route) },

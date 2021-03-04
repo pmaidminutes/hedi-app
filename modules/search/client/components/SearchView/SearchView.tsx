@@ -49,7 +49,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
   }, [initialQueryText]);
 
   const locale = router.locale ?? "de";
-  const defaultLocale = router.defaultLocale;
+  const { defaultLocale } = router;
   // TODO implement other possible filter options
   const [filter, setFilter] = useState("");
   //TODO pick it up from env file for now 5kms around

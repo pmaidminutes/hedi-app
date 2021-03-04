@@ -1,4 +1,5 @@
 import { IEntity } from "@/modules/model";
+import { routeToSegments } from "@/modules/common/utils";
 interface IBreadCrumbPath extends Omit<IEntity, "type"> {
   isCurrentPage: boolean;
 }
@@ -10,28 +11,27 @@ import {
   IRouteLabeled,
 } from "@/modules/model";
 
-import { routeToSegments } from "@/modules/common/utils";
-
 export function constructBreadCrumbPathData(
   content:
     | (IEntityTranslated<IEntityLocalized> &
         Partial<IAppStyled> &
         Partial<IRouteLabeled>)
     | null,
-  locale: string,
-  defaultLocale: string | undefined
+  locale: string
 ): IBreadCrumbPath[] {
   const composedPath: IBreadCrumbPath[] = [];
 
   if (content !== null) {
     const { route, routelabel, type, label } = content;
-    let basePath = locale === defaultLocale ? "" : "/" + locale;
+    let basePath = "/" + locale;
 
     if (type === "Category" || type === "Article") {
-      const pathArray = routeToSegments(route);
+      let pathArray = routeToSegments(route);
 
       const names =
-        routelabel !== undefined ? routeToSegments(routelabel) : label;
+        routelabel !== undefined
+          ? routelabel.split("/").filter(e => e !== "")
+          : label;
 
       pathArray.forEach((path: string, index: number) => {
         basePath = basePath + "/" + path;

@@ -2,7 +2,6 @@ import { AudioPlayer, TagList, Seperator } from "@/modules/common/components";
 import { buildAssetUrl } from "@/modules/common/utils";
 import { ITyped } from "@/modules/model";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import { useRouter } from "next/router";
 import { IArticle } from "../../../types";
 import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
 
@@ -15,8 +14,6 @@ export const TryArticle = (content: ITyped): JSX.Element | null =>
 
 export const Article = ({ content }: IArticleProps): JSX.Element => {
   const { label, body, audio, tags } = content;
-  const router = useRouter();
-  const { locale, defaultLocale } = router;
 
   return (
     <>
@@ -50,7 +47,6 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
               <div>
                 <HTMLWithNextImage
                   data={body}
-                  locale={locale === defaultLocale ? null : locale}
                 />
               </div>
             </article>
