@@ -1,11 +1,11 @@
-import { Form, TextInput, Button } from "carbon-components-react";
+import { Form, TextArea, Button } from "carbon-components-react";
 import { useTextInput } from "@/modules/react/hooks";
-import { MatrixRoom } from "../../../types";
-import { useMsgClient } from "../../context";
+import { useMessagingService } from "../../context/MessagingService";
 
-export const MessageInput = ({ room }: { room: MatrixRoom }) => {
+//handle sending different things here
+export const MessageComposer = ({ roomId }: { roomId: string }) => {
+  const client = useMessagingService();
   const [text, handleText, setText] = useTextInput("");
-  const client = useMsgClient();
   return (
     <Form
       onSubmit={e => {
@@ -15,10 +15,10 @@ export const MessageInput = ({ room }: { room: MatrixRoom }) => {
         };
         if (target.message.value) {
           setText("");
-          client.sendTextMessage(room.roomId, target.message.value, "");
+          client.sendTextMessage(roomId, target.message.value, "");
         }
       }}>
-      <TextInput
+      <TextArea
         id="message"
         labelText="asdf"
         hideLabel
