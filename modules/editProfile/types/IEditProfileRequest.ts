@@ -1,5 +1,6 @@
-import { IProfile } from "@/modules/model/IProfile";
+import { IEditProfile } from "./IEditProfile";
 
-export interface IEditProfileRequest extends IProfile {
+
+export interface IEditProfileRequest extends IEditProfile {
   commit?: boolean;
 }

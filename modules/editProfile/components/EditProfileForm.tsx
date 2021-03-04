@@ -4,8 +4,8 @@ import useSWR from "swr";
 import { TextInput, Toggle,InlineNotification } from "carbon-components-react";
 import { IEditProfileError, IEditProfileRequest } from "../types";
 import { useTextInput, useToggleInput } from "@/modules/react/hooks";
-import { IProfile } from "@/modules/model/IProfile";
 import { Form, Button } from "carbon-components-react";
+import { IEditProfile } from "../types/IEditProfile";
 
 
 type EditProfileInputProps = {
@@ -13,7 +13,7 @@ type EditProfileInputProps = {
   infoLabels: { [key: string]: string };
   data: IEditProfileRequest | undefined;
 };
-function postProfile(url: string, profile: IProfile) {
+function postProfile(url: string, profile: IEditProfile) {
   return fetch(url, {
     method: "POST",
     body: JSON.stringify(profile),
@@ -54,7 +54,7 @@ export const EditProfileForm = ({
     profile_type = "",
     state = "";
 
-    const[hasChanged, setHasChanged] = useState<IProfile>()
+    const[hasChanged, setHasChanged] = useState<IEditProfile>()
     let error: any;
     useSWR([hasChanged ? "/api/account/editProfile" : null, hasChanged], (url, profile) =>
       postProfile(url, profile)

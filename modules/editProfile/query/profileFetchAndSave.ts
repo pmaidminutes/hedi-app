@@ -1,8 +1,8 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
 import { getClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { IProfile } from "@/modules/model/IProfile";
 import { NextApiRequest, NextApiResponse } from "next";
 import { IEditProfileResponse } from "../types";
+import { IEditProfile } from "../types/IEditProfile";
 import { IUpsertProfile, UpsertProfileFields } from "../types/IUpsertProfile";
 
 export async function saveProfile(
@@ -17,11 +17,11 @@ export async function fetchProfile(
   req: NextApiRequest,
   res: NextApiResponse<IEditProfileResponse>
 ): Promise<IEditProfileResponse> {
-  return mutateProfile({} as IProfile, req, res);
+  return mutateProfile({} as IEditProfile, req, res);
 }
 
-const mapIProfileToIUpsertProfile: (
-  data: IProfile
+const mapIEditProfileToIUpsertProfile: (
+  data: IEditProfile
 ) => IUpsertProfile = function (data): IUpsertProfile {
   return {
     consultation_hours: data.consultation_hours,
@@ -44,7 +44,7 @@ const mapIProfileToIUpsertProfile: (
 };
 
 async function mutateProfile(
-  data: IProfile,
+  data: IEditProfile,
   req: NextApiRequest,
   res: NextApiResponse<IEditProfileResponse>
 ): Promise<IEditProfileResponse> {
@@ -63,8 +63,8 @@ async function mutateProfile(
     if (authHeader) {
       const gql = await getClient(GQLEndpoint.User, authHeader);
       await gql
-        .rawRequest<{ upsertProfile: { profile: IProfile } }>(mutation, {
-          input: mapIProfileToIUpsertProfile(data),
+        .rawRequest<{ upsertProfile: { profile: IEditProfile } }>(mutation, {
+          input: mapIEditProfileToIUpsertProfile(data),
         })
         .then(data => {
           if (data?.errors) {

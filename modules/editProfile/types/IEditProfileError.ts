@@ -1,6 +1,7 @@
-import { IProfile } from "@/modules/model/IProfile";
+import { IEditProfile } from "./IEditProfile";
 
-export interface IEditProfileError extends IProfile {
+
+export interface IEditProfileError extends IEditProfile {
   generic?: string;
 }
 

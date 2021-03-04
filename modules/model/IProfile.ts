@@ -5,8 +5,6 @@ import { IDetailedName, implementsIDetailedName } from "./IDetailedName";
 
 
 export interface IProfile extends IDetailedName, IAddress, IContact  {
-  first_pregnancy: boolean;
-  profile_type : string;
 }
 export const implementsIProfile = (obj: any) =>
   implementsIDetailedName(obj) &&

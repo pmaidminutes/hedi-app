@@ -1,7 +1,8 @@
-import { IProfile } from "@/modules/model/IProfile";
+
 import { NextApiHandler } from "next";
 import { fetchProfile, saveProfile } from "../query";
 import { IEditProfileResponse } from "../types";
+import { IEditProfile } from "../types/IEditProfile";
 
 export const editProfileAPI: NextApiHandler<IEditProfileResponse> = async (
   req,
@@ -10,7 +11,7 @@ export const editProfileAPI: NextApiHandler<IEditProfileResponse> = async (
   if (req.body) {
     const query = JSON.parse(req.body);
     type typeInputData = Omit<
-      IProfile,
+      IEditProfile,
       | "county"
       | "displayAddress"
       | "displayName"
