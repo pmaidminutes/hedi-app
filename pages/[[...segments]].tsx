@@ -1,51 +1,50 @@
 import { TryArticle } from "@/modules/editorial/article/client/components";
-import {
-  getStaticPaths as getArticlePaths,
-  getStaticProps as getArticleProps,
-} from "@/modules/editorial/article/server";
+import { ArticlePathsGQL } from "@/modules/editorial/article/query";
+import { getStaticProps as getArticleProps } from "@/modules/editorial/article/server";
+
 import { TryPage } from "@/modules/editorial/page/client/components";
-import {
-  getStaticPaths as getPagePaths,
-  getStaticProps as getPageProps,
-} from "@/modules/editorial/page/server";
+import { PagePathsGQL } from "@/modules/editorial/page/query";
+import { getStaticProps as getPageProps } from "@/modules/editorial/page/server";
+
 import { TryCategory } from "@/modules/editorial/category/client/components";
-// generators
-import {
-  getStaticPaths as getCategoryPaths,
-  getStaticProps as getCategoryProps,
-} from "@/modules/editorial/category/server";
+import { CategoryPathsGQL } from "@/modules/editorial/category/query";
+import { getStaticProps as getCategoryProps } from "@/modules/editorial/category/server";
+
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
+import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
+import { getStaticProps as getGlossaryProps } from "@/modules/editorial/glossary/server";
+
+import { TryProfile } from "@/modules/profile/client/components";
 import {
-  getStaticPaths as getGlossaryPaths,
-  getStaticProps as getGlossaryProps,
-} from "@/modules/editorial/glossary/server";
+  CaregiverPathsGQL,
+  InstitutionPathsGQL,
+  MidwifePathsGQL,
+  OrganisationPathsGQL,
+} from "@/modules/profile/query";
+import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
+import { getStaticProps as getInstitutionProps } from "@/modules/profile/server/generators/getInstitutionStaticProps";
+import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
+import { getStaticProps as getOrganisationProps } from "@/modules/profile/server/generators/getOrganisationStaticProps";
+
+import { TrySearch } from "@/modules/search/client/components";
+import { SearchViewPathsGQL } from "@/modules/search/query";
+import { getStaticProps as getSearchViewProps } from "@/modules/search/server";
+
+// Components
+import { Content } from "carbon-components-react";
+import Head from "next/head";
+import { useEffect, useState } from "react";
+import { BreadCrumb, Header } from "@/modules/shell/components";
+// Types
 import { ISegmentParam } from "@/modules/common/types";
 import {
   IAppStyled,
   IEntityLocalized,
   IEntityTranslated,
 } from "@/modules/model";
-import { TryProfile } from "@/modules/profile/client/components";
-import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
-import { getStaticProps as getInstitutionProps } from "@/modules/profile/server/generators/getInstitutionStaticProps";
-import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
-import { getStaticProps as getOrganisationProps } from "@/modules/profile/server/generators/getOrganisationStaticProps";
-import { getStaticPaths as getCaregiverPaths } from "@/modules/profile/server/generators/getStaticCaregiverPaths";
-import { getStaticPaths as getInstitutionPaths } from "@/modules/profile/server/generators/getStaticInstitutionPaths";
-import { getStaticPaths as getMidwifePaths } from "@/modules/profile/server/generators/getStaticMidwifePaths";
-import { getStaticPaths as getOrganisationPaths } from "@/modules/profile/server/generators/getStaticOrganisationPaths";
-import { TrySearch } from "@/modules/search/client/components";
-import {
-  getStaticPaths as getSearchViewPaths,
-  getStaticProps as getSearchViewProps,
-} from "@/modules/search/server";
-// Components
-import { BreadCrumb, Header } from "@/modules/shell/components";
-import Head from "next/head";
-// Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { useEffect, useState } from "react";
-import { Content } from "carbon-components-react";
+import { getSegmentsPaths } from "@/modules/common/query";
+
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
 if (isDesignContext) {
@@ -53,21 +52,27 @@ if (isDesignContext) {
   import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
 }
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
+  const pathQueries = [
+    PagePathsGQL,
+    ArticlePathsGQL,
+    CategoryPathsGQL,
+    GlossaryPathsGQL,
+    CaregiverPathsGQL,
+    MidwifePathsGQL,
+    OrganisationPathsGQL,
+    InstitutionPathsGQL,
+    SearchViewPathsGQL,
+  ];
   const locales = context?.locales ?? [];
   const paths = [];
-  paths.push(...(await getArticlePaths(locales)));
-  paths.push(...(await getCategoryPaths(locales)));
-  paths.push(...(await getGlossaryPaths(locales)));
-  paths.push(...(await getCaregiverPaths(locales)));
-  paths.push(...(await getMidwifePaths(locales)));
-  paths.push(...(await getOrganisationPaths(locales)));
-  paths.push(...(await getInstitutionPaths(locales)));
-  paths.push(...(await getSearchViewPaths(locales)));
-  paths.push(...(await getPagePaths(locales)));
+  for (const lang of locales) {
+    paths.push(...(await getSegmentsPaths(pathQueries, lang)));
+  }
+
   return { paths, fallback: "blocking" };
 };
 
-export interface ISegmentPageProps {
+interface ISegmentPageProps {
   content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
 }
 
