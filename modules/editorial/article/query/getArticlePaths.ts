@@ -1,7 +1,7 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { routeToSegments } from "@/modules/common/utils";
 import { IEntityLocalized, EntityLocalizedFields } from "@/modules/model";
-import { ISegmentPath } from "../../types";
+import { ISegmentPath } from "@/modules/common/types";
 
 export async function getArticlePaths(
   lang = "de"

@@ -1,5 +1,5 @@
 import { routeToSegments } from "@/modules/common/utils";
-import { ISegmentPath } from "@/modules/editorial/types";
+import { ISegmentPath } from "@/modules/common/types";
 import { getServiceClient, gql } from "@/modules/graphql";
 import { EntityLocalizedFields, IEntityLocalized } from "@/modules/model";
 

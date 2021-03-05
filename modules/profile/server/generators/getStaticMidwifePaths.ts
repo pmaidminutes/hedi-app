@@ -1,4 +1,4 @@
-import { ISegmentPath } from "@/modules/editorial/types";
+import { ISegmentPath } from "@/modules/common/types";
 import { getMidwifePaths } from "../../query";
 
 export const getStaticPaths = async (

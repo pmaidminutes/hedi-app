@@ -1,6 +1,6 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { routeToSegments } from "@/modules/common/utils";
-import { ISegmentPath } from "@/modules/editorial/types";
+import { ISegmentPath } from "@/modules/common/types";
 import { IEntityLocalized, EntityLocalizedFields } from "@/modules/model";
 
 export async function getCaregiverPaths(

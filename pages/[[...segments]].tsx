@@ -19,7 +19,7 @@ import {
   getStaticPaths as getGlossaryPaths,
   getStaticProps as getGlossaryProps,
 } from "@/modules/editorial/glossary/server";
-import { ISegmentParam } from "@/modules/editorial/types";
+import { ISegmentParam } from "@/modules/common/types";
 import {
   IAppStyled,
   IEntityLocalized,
