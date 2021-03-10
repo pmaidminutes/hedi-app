@@ -1,12 +1,10 @@
-
 import { useState } from "react";
 import useSWR from "swr";
-import { TextInput, Toggle,InlineNotification } from "carbon-components-react";
+import { TextInput, Toggle, InlineNotification } from "carbon-components-react";
 import { IEditProfileError, IEditProfileRequest } from "../types";
 import { useTextInput, useToggleInput } from "@/modules/react/hooks";
-import { Form, Button } from "carbon-components-react";
+import { Form, Button, FormGroup, Column, Row } from "carbon-components-react";
 import { IEditProfile } from "../types/IEditProfile";
-
 
 type EditProfileInputProps = {
   errors?: IEditProfileError;
@@ -54,16 +52,15 @@ export const EditProfileForm = ({
     profile_type = "",
     state = "";
 
-    const[hasChanged, setHasChanged] = useState<IEditProfile>()
-    let error: any;
-    useSWR([hasChanged ? "/api/account/editProfile" : null, hasChanged], (url, profile) =>
-      postProfile(url, profile)
-    );
-  
+  const [hasChanged, setHasChanged] = useState<IEditProfile>();
+  let error: any;
+  useSWR(
+    [hasChanged ? "/api/account/editProfile" : null, hasChanged],
+    (url, profile) => postProfile(url, profile)
+  );
+
   return (
-    
     <Form
-    
       onSubmit={e => {
         e.preventDefault();
         if (
@@ -114,105 +111,124 @@ export const EditProfileForm = ({
           });
         }
       }}>
-
-     {error?.generic && (
+      {error?.generic && (
         <InlineNotification
           kind="error"
           title="Error"
           subtitle={error.generic}
         />
       )}
-      <TextInput
-        id={infoLabels?.street}
-        labelText={infoLabels?.street}
-        onChange={setStreet}
-        invalid={!!errors?.street}
-        invalidText={errors?.street}
-        value={street}
-      />
-      <TextInput
-        id={infoLabels?.forename}
-        labelText={infoLabels?.forename}
-        onChange={setForename}
-        invalid={!!errors?.forename}
-        invalidText={errors?.forename}
-        value={forename}
-      />
-      <TextInput
-        id={infoLabels?.surname}
-        labelText={infoLabels?.surname}
-        onChange={setSurname}
-        invalid={!!errors?.surname}
-        invalidText={errors?.surname}
-        value={surname}
-      />
+      <FormGroup legendText="Name">
+        <Row>
+          <Column>
+            <TextInput
+              id={infoLabels?.prefix}
+              labelText={infoLabels?.prefix}
+              onChange={setPrefix}
+              invalid={!!errors?.prefix}
+              invalidText={errors?.prefix}
+              value={prefix}
+            />
+          </Column>
+          <Column>
+            <TextInput
+              id={infoLabels?.forename}
+              labelText={infoLabels?.forename}
+              onChange={setForename}
+              invalid={!!errors?.forename}
+              invalidText={errors?.forename}
+              value={forename}
+            />
+          </Column>
+          <Column>
+            <TextInput
+              id={infoLabels?.surname}
+              labelText={infoLabels?.surname}
+              onChange={setSurname}
+              invalid={!!errors?.surname}
+              invalidText={errors?.surname}
+              value={surname}
+            />
+          </Column>
+          <Column>
+            <TextInput
+              id={infoLabels?.suffix}
+              labelText={infoLabels?.suffix}
+              onChange={setSuffix}
+              invalid={!!errors?.suffix}
+              invalidText={errors?.suffix}
+              value={suffix}
+            />
+          </Column>
+        </Row>
+      </FormGroup>
+      <FormGroup legendText="Address">
+        <Row>
+          <Column>
+            <TextInput
+              id={infoLabels?.street}
+              labelText={infoLabels?.street}
+              onChange={setStreet}
+              invalid={!!errors?.street}
+              invalidText={errors?.street}
+              value={street}
+            />
+          </Column>
+          <Column>
+            <TextInput
+              id={infoLabels?.house_number}
+              labelText={infoLabels?.house_number}
+              onChange={setHouseNumber}
+              invalid={!!errors?.house_number}
+              invalidText={errors?.house_number}
+              value={house_number}
+            />
+          </Column>
+        </Row>
+        <Row>
+          <Column>
+            <TextInput
+              id={infoLabels?.postal_code}
+              labelText={infoLabels?.postal_code}
+              onChange={setPostalCode}
+              invalid={!!errors?.postal_code}
+              invalidText={errors?.postal_code}
+              value={postal_code}
+            />
+          </Column>
+          <Column>
+            <TextInput
+              id={infoLabels?.city}
+              labelText={infoLabels?.city}
+              onChange={setCity}
+              invalid={!!errors?.city}
+              invalidText={errors?.city}
+              value={city}
+            />
+          </Column>
+        </Row>
 
-      <TextInput
-        id={infoLabels?.city}
-        labelText={infoLabels?.city}
-        onChange={setCity}
-        invalid={!!errors?.city}
-        invalidText={errors?.city}
-        value={city}
-      />
-
-      <TextInput
-        id={infoLabels?.house_number}
-        labelText={infoLabels?.house_number}
-        onChange={setHouseNumber}
-        invalid={!!errors?.house_number}
-        invalidText={errors?.house_number}
-        value={house_number}
-      />
-
-      <TextInput
-        id={infoLabels?.mail}
-        labelText={infoLabels?.mail}
-        onChange={setMail}
-        invalid={!!errors?.mail}
-        invalidText={errors?.mail}
-        value={mail}
-        required
-      />
-
-      <TextInput
-        id={infoLabels?.phone}
-        labelText={infoLabels?.phone}
-        onChange={setPhone}
-        invalid={!!errors?.phone}
-        invalidText={errors?.phone}
-        value={phone}
-      />
-
-      <TextInput
-        id={infoLabels?.postal_code}
-        labelText={infoLabels?.postal_code}
-        onChange={setPostalCode}
-        invalid={!!errors?.postal_code}
-        invalidText={errors?.postal_code}
-        value={postal_code}
-      />
-
-      <TextInput
-        id={infoLabels?.prefix}
-        labelText={infoLabels?.prefix}
-        onChange={setPrefix}
-        invalid={!!errors?.prefix}
-        invalidText={errors?.prefix}
-        value={prefix}
-      />
-
-      <TextInput
-        id={infoLabels?.suffix}
-        labelText={infoLabels?.suffix}
-        onChange={setSuffix}
-        invalid={!!errors?.suffix}
-        invalidText={errors?.suffix}
-        value={suffix}
-      />
+        <TextInput
+          id={infoLabels?.mail}
+          labelText={infoLabels?.mail}
+          onChange={setMail}
+          invalid={!!errors?.mail}
+          invalidText={errors?.mail}
+          value={mail}
+          required
+        />
+        <TextInput
+          id={infoLabels?.phone}
+          labelText={infoLabels?.phone}
+          onChange={setPhone}
+          invalid={!!errors?.phone}
+          invalidText={errors?.phone}
+          value={phone}
+        />
+      </FormGroup>
 
       {data?.profile_type?.toLowerCase() == "caregiver" ? (
-        <>
+        <FormGroup legendText="CareGiver">
           <TextInput
             id={infoLabels?.room}
             labelText={infoLabels?.room}
@@ -237,22 +253,22 @@ export const EditProfileForm = ({
             invalidText={errors?.consultation_hours}
             value={consultation_hours}
           />
-        </>
+        </FormGroup>
       ) : null}
 
       {data?.profile_type?.toLowerCase() == "parent" ? (
-        <>
+        <FormGroup legendText="Parent">
           <Toggle
             id={infoLabels?.first_pregnancy}
             labelText={infoLabels?.first_pregnancy}
             onChange={setFirstPregnancy}
             checked={first_pregnancy}
           />
-        </>
+        </FormGroup>
       ) : null}
 
       {data?.profile_type?.toLowerCase() == "midwife" ? (
-        <>
+        <FormGroup legendText="Midwife">
           <TextInput
             id={infoLabels?.phone_private}
             labelText={infoLabels?.phone_private}
@@ -277,7 +293,7 @@ export const EditProfileForm = ({
             invalidText={errors?.consultation_hours}
             value={consultation_hours}
           />
-        </>
+        </FormGroup>
       ) : null}
 
       <Button type="submit" size="field">
