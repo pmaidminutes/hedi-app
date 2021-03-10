@@ -1,9 +1,9 @@
 import { IHTTPError } from "@/modules/common/error";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IArticle } from "@/modules/editorial/article/types";
-import { IPage } from "@/modules/editorial/page/types";
 import { ICategory } from "@/modules/editorial/category/types";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types/glossary";
+import { IPage } from "@/modules/editorial/page/types";
 import useSWR from "swr";
 import { ISuggestEntry } from "../../types";
 
@@ -42,7 +42,8 @@ export function useSuggest(suggestText?: string) {
     url =>
       jsonFetcher<any>(url).then(
         response =>
-          response.suggest.en[suggestText ? suggestText : "default"].suggestions
+          response.suggest.title[suggestText ? suggestText : "default"]
+            .suggestions
       )
   );
   return { ...swrResult };

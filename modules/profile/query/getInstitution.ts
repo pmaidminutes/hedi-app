@@ -1,10 +1,12 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { IInstitution, InstitutionFields } from "../types";
+import { getLangByRoute } from "@/modules/common/utils";
 
 export async function getInstitution(
-  route: string,
-  lang = "de"
+  route: string
 ): Promise<IInstitution | null> {
+  const lang = getLangByRoute(route);
+
   const query = gql`
     query getInstitution(
       $routes: [String!]

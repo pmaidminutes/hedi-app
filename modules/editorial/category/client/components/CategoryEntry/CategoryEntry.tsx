@@ -11,30 +11,32 @@ export const CategoryEntry = ({
 }): JSX.Element => {
   const { image, label, route } = category;
   return (
-    <Link href={route} passHref>
-      <a href={route}>
-        {image === null ? (
-          <Image
-            src={"/dummy_img.png"}
-            layout="responsive"
-            width="auto"
-            height="auto"
-          />
-        ) : (
-          <AspectRatio ratio="2x1">
+    <div className="hedi__categoryentry">
+      <Link href={route} passHref>
+        <a href={route}>
+          {image === null ? (
             <Image
-              src={buildAssetUrl(image?.route)}
-              width={image?.width ?? 0}
-              height={image?.height ?? 0}
-              alt={image?.alt}
+              src={"/dummy_img.png"}
+              layout="responsive"
+              width="auto"
+              height="auto"
             />
-          </AspectRatio>
-        )}
-        <h4
-          dangerouslySetInnerHTML={{
-            __html: label,
-          }}></h4>
-      </a>
-    </Link>
+          ) : (
+            <AspectRatio ratio="2x1">
+              <Image
+                src={buildAssetUrl(image?.route)}
+                width={image?.width ?? 0}
+                height={image?.height ?? 0}
+                alt={image?.alt}
+              />
+            </AspectRatio>
+          )}
+          <h4
+            dangerouslySetInnerHTML={{
+              __html: label,
+            }}></h4>
+        </a>
+      </Link>
+    </div>
   );
 };

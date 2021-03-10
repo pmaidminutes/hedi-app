@@ -8,18 +8,18 @@ import {
   TileAboveTheFoldContent,
 } from "carbon-components-react";
 import { useTextInput } from "@/modules/react/hooks";
-import { useMsgClient } from "../../context";
+import { useMessagingService } from "../../context";
 
 export const Dev = () => {
   const [newRoom, handleNewRoom, setNewRoom] = useTextInput("");
   const [username, handleUsername, setUserName] = useTextInput("");
   const [inviteRoom, handleInviteRoom, setInviteRoom] = useTextInput("");
-  const client = useMsgClient();
+  const client = useMessagingService();
   return (
     <ExpandableTile>
       <TileAboveTheFoldContent>
         <h4>dev only</h4>
-        {client.credentials.userId}
+        {client.sessionState} {client.currentUserId}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
         <Form

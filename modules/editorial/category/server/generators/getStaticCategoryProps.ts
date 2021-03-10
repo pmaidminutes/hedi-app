@@ -9,6 +9,6 @@ export const getStaticProps = async (
   if (!segments) {
     return getCategoryRoot(locale);
   } else {
-    return getCategory(segmentsToRoute(segments), locale);
+    return getCategory(segmentsToRoute(segments, locale));
   }
 };

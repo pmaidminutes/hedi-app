@@ -1,10 +1,12 @@
 import { getServiceClient, gql } from "@/modules/graphql";
 import { GlossaryTermFields, IGlossaryTerm } from "../types";
+import { getLangByRoute } from "@/modules/common/utils";
 
 export async function getGlossaryTerm(
-  route: string,
-  lang = "de"
+  route: string
 ): Promise<IGlossaryTerm | null> {
+  const lang = getLangByRoute(route);
+
   const query = gql`
     query getGlossaryTerm(
       $routes: [String!]!

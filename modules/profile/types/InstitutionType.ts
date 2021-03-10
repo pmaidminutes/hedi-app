@@ -9,12 +9,14 @@ import {
   DetailedNameFields,
   IDetailedName,
 } from "@/modules/model/IDetailedName";
+import { IWithMembers, MembersFields } from "@/modules/model/IWithMembers";
 
 export interface IInstitution
   extends IEntityTranslated<IEntityLocalized>,
     IDetailedName,
     IAddress,
-    IContact {
+    IContact,
+    IWithMembers {
   service_area: string;
 }
 
@@ -27,4 +29,5 @@ export const InstitutionFields = `${EntityTranslatedFields}
   ${AddressFields}
   ${ContactFields}
   service_area
+  ${MembersFields}
   `;

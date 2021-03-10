@@ -1,7 +1,6 @@
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { IArticleEntry } from "../../../types";
 
 export const ArticleEntry = ({
@@ -9,8 +8,6 @@ export const ArticleEntry = ({
 }: {
   article: IArticleEntry;
 }): JSX.Element => {
-  const router = useRouter();
-  const { locale, defaultLocale } = router;
   const { label, summary, route } = article;
   return (
     <Link href={route} passHref>
@@ -20,10 +17,7 @@ export const ArticleEntry = ({
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTMLWithNextImage
-          data={summary}
-          locale={locale === defaultLocale ? null : locale}
-        />
+        <HTMLWithNextImage data={summary} />
       </ClickableTile>
     </Link>
   );

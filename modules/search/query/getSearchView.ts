@@ -1,10 +1,10 @@
 import { IUIText, UITextFields } from "@/modules/model";
 import { getServiceClient, gql } from "@/modules/graphql";
+import { getLangByRoute } from "@/modules/common/utils";
 
-export async function getSearchView(
-  route: string,
-  lang = "de"
-): Promise<IUIText | null> {
+export async function getSearchView(route: string): Promise<IUIText | null> {
+  const lang = getLangByRoute(route);
+
   const query = gql`
     query getSearchView(
       $routes: [String!]!

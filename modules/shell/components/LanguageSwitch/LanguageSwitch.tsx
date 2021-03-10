@@ -15,13 +15,14 @@ export const LanguageSwitch = ({
   translations: IEntityLocalized[];
 }): JSX.Element => {
   const router = useRouter();
-  const { locales, asPath: currentPath, locale, defaultLocale } = router;
+  const { locales, asPath: currentPath, locale } = router;
 
   // TODO this method will route to not existing pages (e.g. locale en, path = currentPath)
   const items =
     locales?.map(lang => ({
       lang,
-      path: findLocaledUrlpath(lang, translations) ?? currentPath,
+      path:
+        findLocaledUrlpath(lang, translations) ?? `/${locale}${currentPath}`,
     })) ?? [];
   return (
     <OverflowMenu
@@ -33,9 +34,7 @@ export const LanguageSwitch = ({
         <OverflowMenuItem
           key={index}
           aria-label={item.lang}
-          href={`${item.lang === defaultLocale ? "" : "/" + item.lang}${
-            item.path
-          }`}
+          href={item.path}
           itemText={item.lang}
           hasDivider={true}></OverflowMenuItem>
       ))}

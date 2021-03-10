@@ -5,11 +5,12 @@
   "author": "aidminutes GmBH",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_OPTIONS='--inspect' next dev",
-    "build": "next build",
+    "dev": "node ./design/fileExists.js && NODE_OPTIONS='--inspect' next dev",
+    "build": "node ./design/fileExists.js &&  next build",
     "start": "next start",
     "pretty": "prettier --write './**/*.ts*'",
-    "export": "node exporter.js"
+    "export": "node exporter.js",
+    "design": "node ./design/fileExists.js && node ./design/buildImports.js && HEDI_ENV=DESIGN next dev"
   },
   "dependencies": {
     "@carbon/icons": "^10.19.0",
@@ -37,10 +38,12 @@
   },
   "devDependencies": {
     "@types/carbon-components-react": "^7.21.0",
+    "@types/htmlparser2": "^3.10.2",
     "@types/next-auth": "^3.1.13",
     "@types/node": "^14.14.5",
     "@types/react": "^16.9.54",
     "@types/react-dom": "^17.0.0",
+    "fs-readdir-recursive": "^1.1.0",
     "git-format-staged": "^2.1.0",
     "husky": "^4.3.5",
     "prettier": "^2.2.0",

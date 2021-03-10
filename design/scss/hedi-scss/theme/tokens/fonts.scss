@@ -1,0 +1,20 @@
+  
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+$roboto: 'Roboto', sans-serif;
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
+$roboto-slab: 'Roboto Slab', serif;
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
+$roboto-mono: 'Roboto Mono', monospace;
+
+@mixin theme-fonts {
+  $carbon--font-families: (
+    'mono': $roboto-mono,
+    'sans': $roboto,
+    'sans-condensed':$roboto,
+    'serif': $roboto-slab,
+  ) !global;
+}
+
+@function carbon--font-family($name) {
+  @return map-get($carbon--font-families, $name);
+}

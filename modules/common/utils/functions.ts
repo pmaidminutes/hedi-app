@@ -15,13 +15,24 @@ export function buildAssetUrl(url: string | undefined): string {
   return `${BASE_URL}${url}`;
 }
 
-export const routeToSegments = (route?: string) =>
-  route ? route.split("/").filter(s => s) : [];
+export const routeToSegments = (route?: string) => {
+  const segments = route ? route.split("/").filter(s => s) : [];
+  segments.shift();
+  return segments;
+};
 
-export const segmentsToRoute = (segments: string[]) => "/" + segments.join("/");
+export const segmentsToRoute = (segments: string[], locale: string) =>
+  "/" + locale + "/" + segments.join("/");
 
 export function jsonFetcher<T>(url: RequestInfo) {
   return fetch(url)
     .then(response => response.json())
     .then(jsonResponse => jsonResponse as T);
+}
+
+export function getLangByRoute(route: string) {
+  return route
+    .split("/")
+    .filter(s => s)
+    .shift();
 }

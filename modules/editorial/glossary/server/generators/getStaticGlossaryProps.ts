@@ -9,6 +9,6 @@ export async function getStaticProps(
   if (!segments) {
     return null;
   } else {
-    return getGlossary(segmentsToRoute(segments), locale);
+    return getGlossary(segmentsToRoute(segments, locale));
   }
 }
