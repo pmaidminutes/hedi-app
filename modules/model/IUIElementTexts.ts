@@ -7,7 +7,12 @@ export interface IUIElementTexts {
 }
 
 export const implementsIUIElementTexts = (obj: any) =>
-  !!(obj && obj.identifier && obj.value && obj.description);
+  !!(
+    obj &&
+    obj.identifier != null &&
+    obj.value != null &&
+    obj.description != null
+  );
 
 export function isIUIElementTexts(obj: any): obj is IUIElementTexts {
   return implementsIUIElementTexts(obj);
