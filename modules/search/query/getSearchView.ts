@@ -1,8 +1,9 @@
-import { IUIText, UITextFields } from "@/modules/model";
-import { getServiceClient, gql } from "@/modules/graphql";
+import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import { getLangByRoute } from "@/modules/common/utils";
+import { AppPagesGQL } from "@/modules/common/query";
+import { IAppPage } from "@/modules/common/types";
 
-export async function getSearchView(route: string): Promise<IUIText | null> {
+export async function getSearchView(route: string): Promise<IAppPage | null> {
   const lang = getLangByRoute(route);
 
   const query = gql`
@@ -11,20 +12,18 @@ export async function getSearchView(route: string): Promise<IUIText | null> {
       $lang: String!
       $includeSelf: Boolean
     ) {
-      uitexts(routes: $routes, lang: $lang) {
-        ${UITextFields}
-      }
+      ${AppPagesGQL}
     }
   `;
-  const client = await getServiceClient();
+  const client = await getServiceClient(GQLEndpoint.Internal);
   return client
-    .request<{ uitexts: IUIText[] }>(query, {
+    .request<{ appPages: IAppPage[] }>(query, {
       routes: [route],
       lang,
     })
     .then(data => {
-      const view = data.uitexts?.[0];
-      if (view) view.type = "Search";
+      const view = data.appPages?.[0];
+      if (view && view.key === "search") view.type = "Search";
       return view;
     })
     .catch(e => {

@@ -22,12 +22,13 @@ import {
 } from "carbon-components-react";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
+import { IAppPage } from "@/modules/common/types";
 
 export const TrySearch = (content: ITyped): JSX.Element | null =>
-  content.type === "Search" ? <Search content={content as IUIText} /> : null;
+  content.type === "Search" ? <Search content={content as IAppPage} /> : null;
 
 interface ISearchProps {
-  content: IUIText;
+  content: IAppPage;
 }
 
 export const Search = ({ content }: ISearchProps): JSX.Element => {
@@ -143,7 +144,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
       </Button>
 
       <Seperator />
-      <h2>{content.texts.results}</h2>
+      <h2>{content.elements.find(e => e.identifier === "results")?.value}</h2>
       <div>{/* iterate article component */}</div>
       {
         //TODO should check for  empty array - even if there is no result will get loading overlay
