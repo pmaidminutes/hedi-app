@@ -4,6 +4,7 @@ import {
   IEntityTranslated,
   implementsIEntityTranslated,
 } from "./IEntityTranslated";
+import { IWithKey, WithKeyFields } from "./IWithKey";
 import {
   implementsIWithUITexts,
   IWithUITexts,
@@ -12,7 +13,8 @@ import {
 
 export interface IUIText
   extends IEntityTranslated<IEntityLocalized>,
-    IWithUITexts {}
+    IWithUITexts, 
+    IWithKey {}
 
 export const implementsIUIText = (obj: any) =>
   !!(implementsIEntityTranslated(obj) && implementsIWithUITexts(obj));
@@ -22,4 +24,6 @@ export function isIUIText(obj: any): obj is IUIText {
 }
 
 export const UITextFields = `${EntityTranslatedFields}
-${WithUITextsFields}`;
+${WithUITextsFields}
+${WithKeyFields}
+`;

@@ -19,10 +19,11 @@ export const LanguageSwitch = ({
 
   // TODO this method will route to not existing pages (e.g. locale en, path = currentPath)
   const items =
-  locales?.map(lang => ({
-    lang,
-    path: findLocaledUrlpath(lang, translations) ?? `/${locale}${currentPath}`,
-  })) ?? [];
+    locales?.map(lang => ({
+      lang,
+      path:
+        findLocaledUrlpath(lang, translations) ?? `/${locale}${currentPath}`,
+    })) ?? [];
   return (
     <OverflowMenu
       renderIcon={Language32}

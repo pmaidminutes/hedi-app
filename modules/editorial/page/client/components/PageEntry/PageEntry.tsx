@@ -13,9 +13,7 @@ export const PageEntry = ({ page }: { page: IPageEntry }): JSX.Element => {
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTMLWithNextImage
-          data={summary}
-        />
+        <HTMLWithNextImage data={summary} />
       </ClickableTile>
     </Link>
   );

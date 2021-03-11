@@ -5,8 +5,8 @@ import { getLangByRoute } from "@/modules/common/utils";
 export async function getMidwifeWithParents(
   route: string
 ): Promise<IMidwifeWithParents | null> {
-  const lang = getLangByRoute(route)
-  
+  const lang = getLangByRoute(route);
+
   const query = gql`
       query getMidwife(
         $routes: [String!]
