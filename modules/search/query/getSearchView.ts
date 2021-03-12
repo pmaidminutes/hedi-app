@@ -23,8 +23,11 @@ export async function getSearchView(route: string): Promise<IAppPage | null> {
     })
     .then(data => {
       const view = data.appPages?.[0];
-      if (view && view.key === "search") view.type = "Search";
-      return view;
+      if (view && view.key === "search") {
+        view.type = "Search";
+        return view;
+      }
+      return null;
     })
     .catch(e => {
       console.warn(e);
