@@ -17,9 +17,7 @@ export const ArticleEntry = ({
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTMLWithNextImage
-          data={summary}
-        />
+        <HTMLWithNextImage data={summary} />
       </ClickableTile>
     </Link>
   );

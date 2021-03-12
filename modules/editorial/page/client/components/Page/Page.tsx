@@ -41,9 +41,7 @@ export const Page = ({ content }: IPageProps): JSX.Element => {
                 //TODO fix static url hard code and fix in safari for audio
               }
               <div className="py-s-md">
-                <HTMLWithNextImage
-                  data={body}
-                />
+                <HTMLWithNextImage data={body} />
               </div>
             </article>
           </Column>

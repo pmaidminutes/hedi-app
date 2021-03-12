@@ -45,9 +45,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
                 <AudioPlayer src={buildAssetUrl(audio?.route)} />
               ) : null}
               <div>
-                <HTMLWithNextImage
-                  data={body}
-                />
+                <HTMLWithNextImage data={body} />
               </div>
             </article>
           </Column>

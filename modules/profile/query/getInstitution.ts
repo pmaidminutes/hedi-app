@@ -5,8 +5,8 @@ import { getLangByRoute } from "@/modules/common/utils";
 export async function getInstitution(
   route: string
 ): Promise<IInstitution | null> {
-  const lang = getLangByRoute(route)
-  
+  const lang = getLangByRoute(route);
+
   const query = gql`
     query getInstitution(
       $routes: [String!]

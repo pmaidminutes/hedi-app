@@ -40,9 +40,7 @@ export const GlossaryTerm = (props: GlossaryProps): JSX.Element => {
         )}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
-        <HTMLWithNextImage
-          data={body}
-        />
+        <HTMLWithNextImage data={body} />
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );
