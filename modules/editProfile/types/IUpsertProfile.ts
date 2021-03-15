@@ -17,32 +17,33 @@ export interface IUpsertProfile {
   website?: string;
 }
 
+export const implementsIUpsertProfile = (obj: any) => !!(obj && obj.profile);
 
-  export const implementsIUpsertProfile = (obj: any) => !!(obj && obj.profile);
-  
-  export function isIUpsertProfile(obj: any): obj is IUpsertProfile {
-    return implementsIUpsertProfile(obj);
-  }
-  
-  export const UpsertProfileFields = ` 
+export function isIUpsertProfile(obj: any): obj is IUpsertProfile {
+  return implementsIUpsertProfile(obj);
+}
+
+export const UpsertProfileFieldArray = [
+  "consultation_hours",
+  "first_pregnancy",
+  "city",
+  "forename",
+  "house_number",
+  "mail",
+  "phone",
+  "phone_private",
+  "postal_code",
+  "prefix",
+  "profile_type",
+  "room",
+  "street",
+  "suffix",
+  "surname",
+  "website",
+] as const;
+
+export const UpsertProfileFields = ` 
   profile {
-    consultation_hours
-    first_pregnancy
-    city
-    forename
-    house_number
-    mail
-    phone
-    phone_private
-    postal_code
-    prefix
-    profile_type
-    room
-    street
-    suffix
-    surname
-    website
+    ${UpsertProfileFieldArray.join(" ")}
   }
    `;
-
-  
