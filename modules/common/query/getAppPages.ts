@@ -3,7 +3,7 @@ import { EntityLocalizedFields } from "@/modules/model";
 import { AppPageFields } from "../types/appPage";
 
 export const generateAppPagePathsGQL = (keys: string[]): string =>
-  `appPagesByKey(keys: ${JSON.stringify(
+  `${keys.join("_")}: appPagesByKey(keys: ${JSON.stringify(
     keys
   )}, lang: $lang) { ${EntityLocalizedFields} }`;
 
