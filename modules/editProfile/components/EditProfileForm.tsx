@@ -1,116 +1,63 @@
 import { useState } from "react";
-import useSWR from "swr";
+
 import { TextInput, Toggle, InlineNotification } from "carbon-components-react";
 import { IEditProfileError, IEditProfileRequest } from "../types";
-import { useTextInput, useToggleInput } from "@/modules/react/hooks";
 import { Form, Button, FormGroup, Column, Row } from "carbon-components-react";
-import { IEditProfile } from "../types/IEditProfile";
+import { useEditProfileForm } from "./useEditProfileForm";
 
 type EditProfileInputProps = {
   errors?: IEditProfileError;
   infoLabels: { [key: string]: string };
   data: IEditProfileRequest | undefined;
 };
-function postProfile(url: string, profile: IEditProfile) {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(profile),
-  });
-}
+
+
 
 export const EditProfileForm = ({
   errors,
   infoLabels,
   data,
 }: EditProfileInputProps) => {
-  const [street, setStreet] = useTextInput(data?.street);
-  const [forename, setForename] = useTextInput(data?.forename);
-  const [surname, setSurname] = useTextInput(data?.surname);
-  const [city, setCity] = useTextInput(data?.city);
-  const [house_number, setHouseNumber] = useTextInput(data?.house_number);
-  const [mail, setMail] = useTextInput(data?.mail);
-  const [phone, setPhone] = useTextInput(data?.phone);
-  const [postal_code, setPostalCode] = useTextInput(data?.postal_code);
-  const [prefix, setPrefix] = useTextInput(data?.prefix);
-  const [suffix, setSuffix] = useTextInput(data?.suffix);
-  const [room, setRoom] = useTextInput(data?.room);
-  const [website, setWebsite] = useTextInput(data?.website);
-  const [phone_private, setPhonePrivate] = useTextInput(data?.phone_private);
-  const [first_pregnancy, setFirstPregnancy] = useToggleInput(false);
-  const [consultation_hours, setConsultationHours] = useTextInput(
-    data?.consultation_hours
-  );
-  const country = "",
-    county = "",
-    displayAddress = "",
-    displayName = "",
-    district = "",
-    lat = "",
-    lat_approx = "",
-    long = "",
-    long_approx = "",
-    profile_type = "",
-    state = "";
+  const [hasChanged, setHasChanged] = useState(false);
+  const [profileData, handleEditProfile, changes] = useEditProfileForm(data);
+  const {
+    prefix,
+    forename,
+    surname,
+    suffix,
+    city,
+    consultation_hours,
+    first_pregnancy,
+    house_number,
+    mail,
+    phone,
+    phone_private,
+    postal_code,
+    profile_type,
+    room,
+    street,
+    website,
+  } = profileData;
 
-  const [hasChanged, setHasChanged] = useState<IEditProfile>();
   let error: any;
-  useSWR(
-    [hasChanged ? "/api/account/editProfile" : null, hasChanged],
-    (url, profile) => postProfile(url, profile)
-  );
+
+  const handleSubmit = (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    if (!hasChanged) return;
+    handleEditProfile(e);
+  };
+
+  const handleChange = (
+    e:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    e.preventDefault();
+    setHasChanged(true);
+  };
 
   return (
-    <Form
-      onSubmit={e => {
-        e.preventDefault();
-        if (
-          setHasChanged &&
-          (street ||
-            forename ||
-            surname ||
-            city ||
-            house_number ||
-            mail ||
-            phone ||
-            postal_code ||
-            prefix ||
-            suffix ||
-            room ||
-            website ||
-            consultation_hours ||
-            first_pregnancy ||
-            phone_private)
-        ) {
-          setHasChanged({
-            street,
-            forename,
-            surname,
-            city,
-            house_number,
-            mail,
-            phone,
-            postal_code,
-            prefix,
-            suffix,
-            room,
-            website,
-            consultation_hours,
-            first_pregnancy,
-            phone_private,
-            country,
-            county,
-            displayAddress,
-            displayName,
-            district,
-            lat,
-            lat_approx,
-            long,
-            long_approx,
-            profile_type,
-            state,
-          });
-        }
-      }}>
+    <Form onSubmit={e => handleSubmit(e)}>
       {error?.generic && (
         <InlineNotification
           kind="error"
@@ -122,42 +69,42 @@ export const EditProfileForm = ({
         <Row>
           <Column>
             <TextInput
-              id={infoLabels?.prefix}
+              id="prefix"
               labelText={infoLabels?.prefix}
-              onChange={setPrefix}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.prefix}
               invalidText={errors?.prefix}
-              value={prefix}
+              defaultValue={prefix}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.forename}
+              id="forename"
               labelText={infoLabels?.forename}
-              onChange={setForename}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.forename}
               invalidText={errors?.forename}
-              value={forename}
+              defaultValue={forename}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.surname}
+              id="surname"
               labelText={infoLabels?.surname}
-              onChange={setSurname}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.surname}
               invalidText={errors?.surname}
-              value={surname}
+              defaultValue={surname}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.suffix}
+              id="suffix"
               labelText={infoLabels?.suffix}
-              onChange={setSuffix}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.suffix}
               invalidText={errors?.suffix}
-              value={suffix}
+              defaultValue={suffix}
             />
           </Column>
         </Row>
@@ -166,132 +113,132 @@ export const EditProfileForm = ({
         <Row>
           <Column>
             <TextInput
-              id={infoLabels?.street}
+              id="street"
               labelText={infoLabels?.street}
-              onChange={setStreet}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.street}
               invalidText={errors?.street}
-              value={street}
+              defaultValue={street}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.house_number}
+              id="house_number"
               labelText={infoLabels?.house_number}
-              onChange={setHouseNumber}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.house_number}
               invalidText={errors?.house_number}
-              value={house_number}
+              defaultValue={house_number}
             />
           </Column>
         </Row>
         <Row>
           <Column>
             <TextInput
-              id={infoLabels?.postal_code}
+              id="postal_code"
               labelText={infoLabels?.postal_code}
-              onChange={setPostalCode}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.postal_code}
               invalidText={errors?.postal_code}
-              value={postal_code}
+              defaultValue={postal_code}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.city}
+              id="city"
               labelText={infoLabels?.city}
-              onChange={setCity}
+              onChange={e => handleChange(e)}
               invalid={!!errors?.city}
               invalidText={errors?.city}
-              value={city}
+              defaultValue={city}
             />
           </Column>
         </Row>
 
         <TextInput
-          id={infoLabels?.mail}
+          id="mail"
           labelText={infoLabels?.mail}
-          onChange={setMail}
+          onChange={e => handleChange(e)}
           invalid={!!errors?.mail}
           invalidText={errors?.mail}
-          value={mail}
+          defaultValue={mail}
           required
         />
         <TextInput
-          id={infoLabels?.phone}
+          id="phone"
           labelText={infoLabels?.phone}
-          onChange={setPhone}
+          onChange={e => handleChange(e)}
           invalid={!!errors?.phone}
           invalidText={errors?.phone}
-          value={phone}
+          defaultValue={phone}
         />
       </FormGroup>
 
-      {data?.profile_type?.toLowerCase() == "caregiver" ? (
+      {profile_type?.toLowerCase() == "caregiver" ? (
         <FormGroup legendText="CareGiver">
           <TextInput
-            id={infoLabels?.room}
+            id="room"
             labelText={infoLabels?.room}
-            onChange={setRoom}
+            onChange={e => handleChange(e)}
             invalid={!!errors?.room}
             invalidText={errors?.room}
-            value={room}
+            defaultValue={room}
           />
           <TextInput
-            id={infoLabels?.website}
+            id="website"
             labelText={infoLabels?.website}
-            onChange={setWebsite}
+            onChange={e => handleChange(e)}
             invalid={!!errors?.website}
             invalidText={errors?.website}
-            value={website}
+            defaultValue={website}
           />
           <TextInput
-            id={infoLabels?.consultation_hours}
+            id="consultation_hours"
             labelText={infoLabels?.consultation_hours}
-            onChange={setConsultationHours}
+            onChange={e => handleChange(e)}
             invalid={!!errors?.consultation_hours}
             invalidText={errors?.consultation_hours}
-            value={consultation_hours}
+            defaultValue={consultation_hours}
           />
         </FormGroup>
       ) : null}
 
-      {data?.profile_type?.toLowerCase() == "parent" ? (
+      {profile_type?.toLowerCase() == "parent" ? (
         <FormGroup legendText="Parent">
           <Toggle
-            id={infoLabels?.first_pregnancy}
+            id="first_pregnancy"
             labelText={infoLabels?.first_pregnancy}
-            onChange={setFirstPregnancy}
-            checked={first_pregnancy}
+            onChange={e => handleChange(e)}
+            checked={first_pregnancy === undefined ? false : first_pregnancy}
           />
         </FormGroup>
       ) : null}
 
-      {data?.profile_type?.toLowerCase() == "midwife" ? (
+      {profile_type?.toLowerCase() == "midwife" ? (
         <FormGroup legendText="Midwife">
           <TextInput
-            id={infoLabels?.phone_private}
+            id="phone_private"
             labelText={infoLabels?.phone_private}
-            onChange={setPhonePrivate}
+            onChange={e => handleChange(e)}
             invalid={!!errors?.phone_private}
             invalidText={errors?.phone_private}
-            value={phone_private}
+            defaultValue={phone_private}
           />
           <TextInput
-            id={infoLabels?.website}
+            id="website"
             labelText={infoLabels?.website}
-            onChange={setWebsite}
+            onChange={e => handleChange(e)}
             invalid={!!errors?.website}
             invalidText={errors?.website}
-            value={website}
+            defaultValue={website}
           />
           <TextInput
-            id={infoLabels?.consultation_hours}
+            id="consultation_hours"
             labelText={infoLabels?.consultation_hours}
-            onChange={setConsultationHours}
+            onChange={e => handleChange(e)}
             invalid={!!errors?.consultation_hours}
             invalidText={errors?.consultation_hours}
-            value={consultation_hours}
+            defaultValue={consultation_hours}
           />
         </FormGroup>
       ) : null}
