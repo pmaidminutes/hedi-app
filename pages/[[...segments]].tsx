@@ -51,11 +51,18 @@ import { getSegmentsPaths } from "@/modules/common/query";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
-if (isDesignContext) {
-  // @ts-ignore
-  import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
-}
+
+const getDesignProps = async () => {
+  const { existsSync } = await import("fs");
+  const { join } = await import("path");
+  if (existsSync(join(__dirname, "../design/imports")))
+    return import("../design/imports").then(({ propsMap }) => propsMap);
+  else return null;
+};
+
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
+  if (isDesignContext) dynamicProps = await getDesignProps();
+
   const pathQueries = [
     PagePathsGQL,
     ArticlePathsGQL,
@@ -87,19 +94,17 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
   let content;
-  let data: any = [];
-  let hasStaticData = false;
+
   if (isDesignContext) {
-    data = dynamicProps.find(
+    const data = dynamicProps?.find(
       (element: any) => element[0] === segments.join("/")
     );
-    hasStaticData = data ? true : false;
-    console.log({ hasStaticData });
+    content = data?.[1]?.content;
   }
 
   // query types with dynamic paths first
-  if (isDesignContext && hasStaticData) {
-    content = data[1].content;
+  if (isDesignContext && content) {
+    //we have a exported content for designing, skip backend fetches
   } else {
     if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
