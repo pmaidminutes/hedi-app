@@ -1,9 +1,10 @@
-// TODO: under development
 import { IAppPage } from "@/modules/common/types";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { WithUIElementsFields } from "@/modules/model";
+import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
 
-export async function getUserFeedbackLabels(lang = "de"): Promise<any> {
+export async function getUserFeedbackLabels(
+  lang = "de"
+): Promise<IUIElementTexts[] | null> {
   const query = gql`
     query getUserFeedbackLabels(
       $keys: [String!]!

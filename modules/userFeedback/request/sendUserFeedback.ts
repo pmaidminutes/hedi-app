@@ -1,9 +1,8 @@
-// TODO: under development
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { IUserFeedbackInfo } from "../types/IUserFeedbackInfo";
+import { IUserFeedback } from "../types";
 
 export async function sendUserFeedback(
-  userfeedback: IUserFeedbackInfo
+  userfeedback: Partial<IUserFeedback>
 ): Promise<IMutationResponse | null> {
   return new Promise<IMutationResponse | null>((resolve, reject) => {
     fetch("/api/userfeedback/sendUserFeedback", {
@@ -11,15 +10,9 @@ export async function sendUserFeedback(
       body: JSON.stringify(userfeedback),
     })
       .then(resp => resp.json())
-      .then(resp => {
-        resolve(resp);
-      })
+      .then(resp => resolve(resp))
       .catch(err => {
-        // TODO: comment below line
-        console.log(err);
-        reject(err);
-        // TODO: uncomment below line
-        // err.text().then((errText: string) => reject(errText));
+        err.text().then((errText: string) => reject(errText));
       });
   });
 }
