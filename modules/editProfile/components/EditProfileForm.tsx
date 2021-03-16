@@ -1,17 +1,22 @@
-import { useState } from "react";
-
-import { TextInput, Toggle, InlineNotification } from "carbon-components-react";
-import { IEditProfileError, IEditProfileRequest } from "../types";
-import { Form, Button, FormGroup, Column, Row } from "carbon-components-react";
+import { FormEvent, FormEventHandler, useState } from "react";
+import {
+  Form,
+  Button,
+  FormGroup,
+  Column,
+  Row,
+  TextInput,
+  Toggle,
+  InlineNotification,
+} from "carbon-components-react";
+import { IEditProfile } from "../types";
 import { useEditProfileForm } from "./useEditProfileForm";
 
 type EditProfileInputProps = {
-  errors?: IEditProfileError;
+  errors?: { [key: string]: string };
   infoLabels: { [key: string]: string };
-  data: IEditProfileRequest | undefined;
+  data: IEditProfile | undefined;
 };
-
-
 
 export const EditProfileForm = ({
   errors,
@@ -41,10 +46,12 @@ export const EditProfileForm = ({
 
   let error: any;
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
+  const handleSubmit: FormEventHandler = (e: FormEvent) => {
     e.preventDefault();
     if (!hasChanged) return;
-    handleEditProfile(e);
+    const form = e.target as HTMLFormElement;
+    handleEditProfile(new FormData(form));
+    setHasChanged(false);
   };
 
   const handleChange = (
@@ -70,6 +77,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="prefix"
+              name="prefix"
               labelText={infoLabels?.prefix}
               onChange={e => handleChange(e)}
               invalid={!!errors?.prefix}
@@ -80,6 +88,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="forename"
+              name="forename"
               labelText={infoLabels?.forename}
               onChange={e => handleChange(e)}
               invalid={!!errors?.forename}
@@ -90,6 +99,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="surname"
+              name="surname"
               labelText={infoLabels?.surname}
               onChange={e => handleChange(e)}
               invalid={!!errors?.surname}
@@ -100,6 +110,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="suffix"
+              name="suffix"
               labelText={infoLabels?.suffix}
               onChange={e => handleChange(e)}
               invalid={!!errors?.suffix}
@@ -114,6 +125,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="street"
+              name="street"
               labelText={infoLabels?.street}
               onChange={e => handleChange(e)}
               invalid={!!errors?.street}
@@ -124,6 +136,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="house_number"
+              name="house_number"
               labelText={infoLabels?.house_number}
               onChange={e => handleChange(e)}
               invalid={!!errors?.house_number}
@@ -136,6 +149,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="postal_code"
+              name="postal_code"
               labelText={infoLabels?.postal_code}
               onChange={e => handleChange(e)}
               invalid={!!errors?.postal_code}
@@ -146,6 +160,7 @@ export const EditProfileForm = ({
           <Column>
             <TextInput
               id="city"
+              name="city"
               labelText={infoLabels?.city}
               onChange={e => handleChange(e)}
               invalid={!!errors?.city}
@@ -157,6 +172,7 @@ export const EditProfileForm = ({
 
         <TextInput
           id="mail"
+          name="mail"
           labelText={infoLabels?.mail}
           onChange={e => handleChange(e)}
           invalid={!!errors?.mail}
@@ -166,6 +182,7 @@ export const EditProfileForm = ({
         />
         <TextInput
           id="phone"
+          name="phone"
           labelText={infoLabels?.phone}
           onChange={e => handleChange(e)}
           invalid={!!errors?.phone}
@@ -178,6 +195,7 @@ export const EditProfileForm = ({
         <FormGroup legendText="CareGiver">
           <TextInput
             id="room"
+            name="room"
             labelText={infoLabels?.room}
             onChange={e => handleChange(e)}
             invalid={!!errors?.room}
@@ -186,6 +204,7 @@ export const EditProfileForm = ({
           />
           <TextInput
             id="website"
+            name="website"
             labelText={infoLabels?.website}
             onChange={e => handleChange(e)}
             invalid={!!errors?.website}
@@ -194,6 +213,7 @@ export const EditProfileForm = ({
           />
           <TextInput
             id="consultation_hours"
+            name="consultation_hours"
             labelText={infoLabels?.consultation_hours}
             onChange={e => handleChange(e)}
             invalid={!!errors?.consultation_hours}
@@ -207,6 +227,7 @@ export const EditProfileForm = ({
         <FormGroup legendText="Parent">
           <Toggle
             id="first_pregnancy"
+            name="first_pregnancy"
             labelText={infoLabels?.first_pregnancy}
             onChange={e => handleChange(e)}
             checked={first_pregnancy === undefined ? false : first_pregnancy}
@@ -218,6 +239,7 @@ export const EditProfileForm = ({
         <FormGroup legendText="Midwife">
           <TextInput
             id="phone_private"
+            name="phone_private"
             labelText={infoLabels?.phone_private}
             onChange={e => handleChange(e)}
             invalid={!!errors?.phone_private}
@@ -226,6 +248,7 @@ export const EditProfileForm = ({
           />
           <TextInput
             id="website"
+            name="website"
             labelText={infoLabels?.website}
             onChange={e => handleChange(e)}
             invalid={!!errors?.website}
@@ -234,6 +257,7 @@ export const EditProfileForm = ({
           />
           <TextInput
             id="consultation_hours"
+            name="consultation_hours"
             labelText={infoLabels?.consultation_hours}
             onChange={e => handleChange(e)}
             invalid={!!errors?.consultation_hours}
