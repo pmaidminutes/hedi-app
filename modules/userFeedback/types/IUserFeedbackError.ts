@@ -1,7 +1,6 @@
-import { UserFeedbackFields } from "@/modules/model/IUserFeedback";
-import { IUserFeedbackInfo } from "./IUserFeedbackInfo";
+import { UserFeedbackFields, UserFeedbackInput } from ".";
 
-export interface IUserFeedbackError extends IUserFeedbackInfo {
+export interface IUserFeedbackError extends UserFeedbackInput {
   generic?: string;
 }
 
