@@ -1,17 +1,20 @@
 import { useState } from "react";
-
-import { TextInput, Toggle, InlineNotification } from "carbon-components-react";
+import { ChevronUp16, ChevronDown16 } from "@carbon/icons-react";
+import {
+  TextInput,
+  Toggle,
+  InlineNotification,
+  TextArea,
+} from "carbon-components-react";
 import { IEditProfileError, IEditProfileRequest } from "../types";
 import { Form, Button, FormGroup, Column, Row } from "carbon-components-react";
 import { useEditProfileForm } from "./useEditProfileForm";
-
+import { Seperator } from "@/modules/common/components";
 type EditProfileInputProps = {
   errors?: IEditProfileError;
   infoLabels: { [key: string]: string };
   data: IEditProfileRequest | undefined;
 };
-
-
 
 export const EditProfileForm = ({
   errors,
@@ -20,6 +23,7 @@ export const EditProfileForm = ({
 }: EditProfileInputProps) => {
   const [hasChanged, setHasChanged] = useState(false);
   const [profileData, handleEditProfile, changes] = useEditProfileForm(data);
+  const [showAdvancedName, setShowAdvancedName] = useState(false);
   const {
     prefix,
     forename,
@@ -51,6 +55,7 @@ export const EditProfileForm = ({
     e:
       | React.ChangeEvent<HTMLInputElement>
       | React.KeyboardEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLTextAreaElement>
   ) => {
     e.preventDefault();
     setHasChanged(true);
@@ -67,51 +72,111 @@ export const EditProfileForm = ({
       )}
       <FormGroup legendText="Name">
         <Row>
-          <Column>
-            <TextInput
-              id="prefix"
-              labelText={infoLabels?.prefix}
-              onChange={e => handleChange(e)}
-              invalid={!!errors?.prefix}
-              invalidText={errors?.prefix}
-              defaultValue={prefix}
-            />
+          <Column sm={15} lg={8}>
+            {!showAdvancedName ? (
+              <Row>
+                <Column>
+                  <TextInput
+                    id="name"
+                    labelText={"Name"}
+                    onChange={e => console.log(e)}
+                    // invalid={!!errors?.prefix}
+                    // invalidText={errors?.prefix}
+                    defaultValue={`${prefix ? prefix : ""} ${
+                      forename ? forename : ""
+                    } ${surname ? surname : ""} ${suffix ? suffix : ""}`}
+                  />
+                </Column>
+              </Row>
+            ) : (
+              <>
+                <Row>
+                  <Column>
+                    <TextInput
+                      id="prefix"
+                      labelText={infoLabels?.prefix}
+                      onChange={e => handleChange(e)}
+                      invalid={!!errors?.prefix}
+                      invalidText={errors?.prefix}
+                      defaultValue={prefix}
+                    />
+                  </Column>
+                </Row>
+                <Row>
+                  <Column>
+                    <TextInput
+                      id="forename"
+                      labelText={infoLabels?.forename}
+                      onChange={e => handleChange(e)}
+                      invalid={!!errors?.forename}
+                      invalidText={errors?.forename}
+                      defaultValue={forename}
+                    />
+                  </Column>
+                </Row>
+                <Row>
+                  <Column>
+                    <TextInput
+                      id="surname"
+                      labelText={infoLabels?.surname}
+                      onChange={e => handleChange(e)}
+                      invalid={!!errors?.surname}
+                      invalidText={errors?.surname}
+                      defaultValue={surname}
+                    />
+                  </Column>
+                </Row>
+                <Row>
+                  <Column>
+                    <TextInput
+                      id="suffix"
+                      labelText={infoLabels?.suffix}
+                      onChange={e => handleChange(e)}
+                      invalid={!!errors?.suffix}
+                      invalidText={errors?.suffix}
+                      defaultValue={suffix}
+                    />
+                  </Column>
+                </Row>
+              </>
+            )}
           </Column>
-          <Column>
-            <TextInput
-              id="forename"
-              labelText={infoLabels?.forename}
-              onChange={e => handleChange(e)}
-              invalid={!!errors?.forename}
-              invalidText={errors?.forename}
-              defaultValue={forename}
-            />
-          </Column>
-          <Column>
-            <TextInput
-              id="surname"
-              labelText={infoLabels?.surname}
-              onChange={e => handleChange(e)}
-              invalid={!!errors?.surname}
-              invalidText={errors?.surname}
-              defaultValue={surname}
-            />
-          </Column>
-          <Column>
-            <TextInput
-              id="suffix"
-              labelText={infoLabels?.suffix}
-              onChange={e => handleChange(e)}
-              invalid={!!errors?.suffix}
-              invalidText={errors?.suffix}
-              defaultValue={suffix}
+          <Column sm={1}>
+            <Button
+              renderIcon={showAdvancedName ? ChevronUp16 : ChevronDown16}
+              iconDescription="Icon Description"
+              hasIconOnly
+              onClick={() => setShowAdvancedName(prev => !prev)}
             />
           </Column>
         </Row>
       </FormGroup>
+      <Seperator />
       <FormGroup legendText="Address">
         <Row>
-          <Column>
+          <Column lg={6}>
+            <TextInput
+              id="city"
+              labelText={infoLabels?.city}
+              onChange={e => handleChange(e)}
+              invalid={!!errors?.city}
+              invalidText={errors?.city}
+              defaultValue={city}
+            />
+          </Column>
+          <Column lg={2}>
+            <TextInput
+              id="postal_code"
+              labelText={infoLabels?.postal_code}
+              onChange={e => handleChange(e)}
+              invalid={!!errors?.postal_code}
+              invalidText={errors?.postal_code}
+              defaultValue={postal_code}
+            />
+          </Column>
+        </Row>
+        <Row>
+          <Column lg={6}>
             <TextInput
               id="street"
               labelText={infoLabels?.street}
@@ -121,7 +186,7 @@ export const EditProfileForm = ({
               defaultValue={street}
             />
           </Column>
-          <Column>
+          <Column lg={2}>
             <TextInput
               id="house_number"
               labelText={infoLabels?.house_number}
@@ -133,75 +198,81 @@ export const EditProfileForm = ({
           </Column>
         </Row>
         <Row>
-          <Column>
+          <Column lg={2}>
             <TextInput
-              id="postal_code"
-              labelText={infoLabels?.postal_code}
+              id="room"
+              labelText={infoLabels?.room}
               onChange={e => handleChange(e)}
-              invalid={!!errors?.postal_code}
-              invalidText={errors?.postal_code}
-              defaultValue={postal_code}
-            />
-          </Column>
-          <Column>
-            <TextInput
-              id="city"
-              labelText={infoLabels?.city}
-              onChange={e => handleChange(e)}
-              invalid={!!errors?.city}
-              invalidText={errors?.city}
-              defaultValue={city}
+              invalid={!!errors?.room}
+              invalidText={errors?.room}
+              defaultValue={room}
             />
           </Column>
         </Row>
-
-        <TextInput
-          id="mail"
-          labelText={infoLabels?.mail}
-          onChange={e => handleChange(e)}
-          invalid={!!errors?.mail}
-          invalidText={errors?.mail}
-          defaultValue={mail}
-          required
-        />
-        <TextInput
-          id="phone"
-          labelText={infoLabels?.phone}
-          onChange={e => handleChange(e)}
-          invalid={!!errors?.phone}
-          invalidText={errors?.phone}
-          defaultValue={phone}
-        />
+      </FormGroup>
+      <Seperator />
+      <FormGroup legendText="Kontakt">
+        <Row>
+          <Column lg={6}>
+            <TextInput
+              id="phone"
+              labelText={infoLabels?.phone}
+              onChange={e => handleChange(e)}
+              invalid={!!errors?.phone}
+              invalidText={errors?.phone}
+              defaultValue={phone}
+            />
+          </Column>
+          <Column lg={6}>
+            <TextInput
+              id="phone_private"
+              labelText={infoLabels?.phone_private}
+              onChange={e => handleChange(e)}
+              invalid={!!errors?.phone_private}
+              invalidText={errors?.phone_private}
+              defaultValue={phone_private}
+            />
+          </Column>
+        </Row>
+        <Row>
+          <Column lg={6}>
+            <TextInput
+              id="mail"
+              labelText={infoLabels?.mail}
+              onChange={e => handleChange(e)}
+              invalid={!!errors?.mail}
+              invalidText={errors?.mail}
+              defaultValue={mail}
+              required
+            />
+          </Column>
+          <Column lg={6}>
+            <TextInput
+              id="website"
+              labelText={infoLabels?.website}
+              onChange={e => handleChange(e)}
+              invalid={!!errors?.website}
+              invalidText={errors?.website}
+              defaultValue={website}
+            />
+          </Column>
+        </Row>
+        <Row>
+          <Column lg={6}>
+            <TextArea
+              id="consultation_hours"
+              labelText={infoLabels?.consultation_hours}
+              onChange={e => handleChange(e)}
+              invalid={!!errors?.consultation_hours}
+              invalidText={errors?.consultation_hours}
+              defaultValue={consultation_hours}
+              placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
+            />
+          </Column>
+        </Row>
       </FormGroup>
 
-      {profile_type?.toLowerCase() == "caregiver" ? (
-        <FormGroup legendText="CareGiver">
-          <TextInput
-            id="room"
-            labelText={infoLabels?.room}
-            onChange={e => handleChange(e)}
-            invalid={!!errors?.room}
-            invalidText={errors?.room}
-            defaultValue={room}
-          />
-          <TextInput
-            id="website"
-            labelText={infoLabels?.website}
-            onChange={e => handleChange(e)}
-            invalid={!!errors?.website}
-            invalidText={errors?.website}
-            defaultValue={website}
-          />
-          <TextInput
-            id="consultation_hours"
-            labelText={infoLabels?.consultation_hours}
-            onChange={e => handleChange(e)}
-            invalid={!!errors?.consultation_hours}
-            invalidText={errors?.consultation_hours}
-            defaultValue={consultation_hours}
-          />
-        </FormGroup>
-      ) : null}
+      {profile_type?.toLowerCase() == "caregiver" ? <></> : null}
 
       {profile_type?.toLowerCase() == "parent" ? (
         <FormGroup legendText="Parent">
@@ -214,34 +285,7 @@ export const EditProfileForm = ({
         </FormGroup>
       ) : null}
 
-      {profile_type?.toLowerCase() == "midwife" ? (
-        <FormGroup legendText="Midwife">
-          <TextInput
-            id="phone_private"
-            labelText={infoLabels?.phone_private}
-            onChange={e => handleChange(e)}
-            invalid={!!errors?.phone_private}
-            invalidText={errors?.phone_private}
-            defaultValue={phone_private}
-          />
-          <TextInput
-            id="website"
-            labelText={infoLabels?.website}
-            onChange={e => handleChange(e)}
-            invalid={!!errors?.website}
-            invalidText={errors?.website}
-            defaultValue={website}
-          />
-          <TextInput
-            id="consultation_hours"
-            labelText={infoLabels?.consultation_hours}
-            onChange={e => handleChange(e)}
-            invalid={!!errors?.consultation_hours}
-            invalidText={errors?.consultation_hours}
-            defaultValue={consultation_hours}
-          />
-        </FormGroup>
-      ) : null}
+      {profile_type?.toLowerCase() == "midwife" ? <></> : null}
 
       <Button type="submit" size="field">
         Submit
