@@ -1,2 +1,2 @@
-export * from "./profileFetchAndSave";
+export * from "./upsertProfileQuery";
 export * from "./getProfileField";
