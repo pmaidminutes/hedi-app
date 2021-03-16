@@ -1,6 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
-import { getSearchView } from "../../query";
+import { getLoginView } from "../../query";
 
 export const getStaticProps = async (
   segments?: string[],
@@ -9,6 +9,6 @@ export const getStaticProps = async (
   if (!segments) {
     return null;
   } else {
-    return getSearchView(segmentsToRoute([segments[0]], locale));
+    return getLoginView(segmentsToRoute([segments[0]], locale));
   }
 };

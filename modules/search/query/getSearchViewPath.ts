@@ -1,4 +1,3 @@
-import { gql } from "@/modules/graphql";
-import { EntityLocalizedFields } from "@/modules/model";
+import { generateAppPagePathsGQL } from "@/modules/common/query";
 
-export const SearchViewPathsGQL = gql` uitextsByKey(keys: ["search"], lang: $lang) { ${EntityLocalizedFields} }`;
+export const SearchViewPathsGQL = generateAppPagePathsGQL(["search"]);
