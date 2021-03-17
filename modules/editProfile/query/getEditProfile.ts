@@ -3,7 +3,7 @@ import { getLangByRoute } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { IEditProfileView } from "../types";
-import { EntityFields, IEntity } from "@/modules/model";
+import { EntityFields, LanguageFields } from "@/modules/model";
 
 export async function getEditProfile(
   route: string
@@ -40,22 +40,22 @@ export async function getEditProfile(
       $lang: String!
       $includeSelf: Boolean
     ) {
-      appPagesByKey(keys: ["editprofile_Parent","editprofile_Caregiver","editprofile_Midwife"], lang: $lang) {
+      children: appPagesByKey(keys: ["editprofile_Parent","editprofile_Caregiver","editprofile_Midwife"], lang: $lang) {
         ${AppPageFields}
       }
-      domains(lang: $lang) {
+      domainOptions: domains(lang: $lang) {
         ${EntityFields}
+      }
+      languageOptions: allLanguages(lang: $lang) {
+        ${LanguageFields}
       }
     }
   `;
-  const sub = await client.request<{
-    appPagesByKey: IAppPage[];
-    domains: IEntity[];
-  }>(subquery, {
+  const subResults = await client.request<
+    Pick<IEditProfileView, "children" | "domainOptions" | "languageOptions">
+  >(subquery, {
     lang,
   });
 
-  const { appPagesByKey: children, domains: domainOptions } = sub;
-
-  return { ...appPage, children, domainOptions };
+  return { ...appPage, ...subResults };
 }

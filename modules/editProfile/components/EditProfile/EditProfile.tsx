@@ -18,6 +18,7 @@ export const EditProfile = ({ content }: { content: IEditProfileView }) => {
     [];
 
   // TODO content.domainOptions
+  // TODO content.languageOptions for languageSkills
   return (
     <EditProfileForm
       uiElementMap={{ main, Parent, Caregiver, Midwife }}
