@@ -17,6 +17,7 @@ export const EditProfile = ({ content }: { content: IEditProfileView }) => {
     content.children.find(ap => ap.key === "editprofile_Midwife")?.elements ??
     [];
 
+  // TODO content.domainOptions
   return (
     <EditProfileForm
       uiElementMap={{ main, Parent, Caregiver, Midwife }}

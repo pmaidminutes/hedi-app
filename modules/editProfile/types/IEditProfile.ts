@@ -20,8 +20,9 @@ export interface IEditProfile
     | "county"
     | "country"
   > {
-  first_pregnancy: boolean;
   type: string;
+  first_pregnancy: boolean;
+  domains: string[];
 }
 
 export const EditProfileFieldArray: (keyof IEditProfile)[] = [
@@ -41,6 +42,7 @@ export const EditProfileFieldArray: (keyof IEditProfile)[] = [
   "suffix",
   "surname",
   "website",
+  "domains",
 ];
 
 export const EditProfileFields = `${EditProfileFieldArray.join(" ")}`;

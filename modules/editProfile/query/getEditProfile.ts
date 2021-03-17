@@ -3,6 +3,7 @@ import { getLangByRoute } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { IEditProfileView } from "../types";
+import { EntityFields, IEntity } from "@/modules/model";
 
 export async function getEditProfile(
   route: string
@@ -42,13 +43,19 @@ export async function getEditProfile(
       appPagesByKey(keys: ["editprofile_Parent","editprofile_Caregiver","editprofile_Midwife"], lang: $lang) {
         ${AppPageFields}
       }
+      domains(lang: $lang) {
+        ${EntityFields}
+      }
     }
   `;
-  const sub = await client.request<{ appPagesByKey: IAppPage[] }>(subquery, {
+  const sub = await client.request<{
+    appPagesByKey: IAppPage[];
+    domains: IEntity[];
+  }>(subquery, {
     lang,
   });
 
-  const { appPagesByKey: children } = sub;
+  const { appPagesByKey: children, domains: domainOptions } = sub;
 
-  return { ...appPage, children };
+  return { ...appPage, children, domainOptions };
 }
