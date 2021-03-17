@@ -9,6 +9,7 @@ export * from "./IEntity";
 export * from "./IEntityLocalized";
 export * from "./IEntityTranslated";
 export * from "./ILocalized";
+export * from "./ILanguage";
 export * from "./IRouteLabeled";
 export * from "./ISummary";
 export * from "./ITagged";
