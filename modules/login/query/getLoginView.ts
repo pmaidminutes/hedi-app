@@ -3,11 +3,11 @@ import { getLangByRoute } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
 
-export async function getSearchView(route: string): Promise<IAppPage | null> {
+export async function getLoginView(route: string): Promise<IAppPage | null> {
   const lang = getLangByRoute(route);
 
   const query = gql`
-    query getSearchView(
+    query getLoginView(
       $routes: [String!]!
       $lang: String!
       $includeSelf: Boolean
@@ -23,8 +23,8 @@ export async function getSearchView(route: string): Promise<IAppPage | null> {
     })
     .then(data => {
       const view = data.appPages?.[0];
-      if (view && view.key === "search") {
-        view.type = "Search";
+      if (view && view.key === "login") {
+        view.type = "Login";
         return view;
       }
       return null;
