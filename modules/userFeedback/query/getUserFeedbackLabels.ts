@@ -23,8 +23,7 @@ export async function getUserFeedbackLabels(
       lang,
     })
     .then(data => {
-      const result: { [key: string]: string } = {};
-      return data.appPagesByKey[0]?.elements || [];
+      return data.appPagesByKey[0]?.elements;
     })
     .catch(e => {
       console.warn(e);

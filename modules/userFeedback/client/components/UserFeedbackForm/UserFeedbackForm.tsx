@@ -13,7 +13,11 @@ import { clientInformationCollector } from "../../helper/ClientInformationCollec
 import { IUIElementTexts } from "@/modules/model";
 import { getTextInputProps } from "@/modules/common/utils";
 
-export const UserFeedbackForm = ({ labels }: { labels: IUIElementTexts[] }) => {
+export const UserFeedbackForm = ({
+  elements,
+}: {
+  elements: IUIElementTexts[];
+}) => {
   const [label, setLabel] = useTextInput();
   const [body, setBody] = useTextInput();
   const [isSucceed, setIsSucceed] = useState(false);
@@ -29,7 +33,9 @@ export const UserFeedbackForm = ({ labels }: { labels: IUIElementTexts[] }) => {
       .then(resp => {
         if (resp?.success) {
           setIsSucceed(true);
+          setError({});
         } else {
+          setIsSucceed(false);
           setError({
             generic: resp?.errors?.generic,
             label: resp?.errors?.label || "",
@@ -42,37 +48,36 @@ export const UserFeedbackForm = ({ labels }: { labels: IUIElementTexts[] }) => {
       });
   };
 
-  const getUIElement = (key: string) => {
-    return getTextInputProps(key, labels);
+  const getUIElement = (identifier: string) => {
+    return elements.find(item => item.identifier === identifier);
   };
+  const titleInput = getTextInputProps("title", elements);
 
   return (
     <Form onSubmit={handleSubmit}>
       {error?.generic && (
         <InlineNotification
           kind="error"
-          title={getUIElement("error")?.labelText || "Error"}
+          title={getUIElement("error")?.value || "Error"}
           subtitle={error.generic}
         />
       )}
       {isSucceed && (
         <InlineNotification
           kind="success"
-          title={getUIElement("success")?.labelText || "Success"}
-          subtitle={getUIElement("success")?.["aria-label"]}
+          title={getUIElement("success")?.value || "Success"}
+          subtitle={getUIElement("success")?.description}
         />
       )}
       <TextInput
-        id="label"
-        labelText={getUIElement("title")?.labelText || "Title"}
-        placeholder={getUIElement("title")?.placeholder}
         onChange={setLabel}
         invalid={!!error?.label}
         invalidText={error?.label}
+        {...titleInput}
       />
       <TextArea
         id="body"
-        labelText={getUIElement("body")?.labelText || "Body"}
+        labelText={getUIElement("body")?.value || "Body"}
         placeholder={getUIElement("body")?.placeholder}
         required
         onChange={setBody}
@@ -81,7 +86,7 @@ export const UserFeedbackForm = ({ labels }: { labels: IUIElementTexts[] }) => {
       />
 
       <Button type="submit" size="field">
-        {getUIElement("submit")?.labelText || "Submit"}
+        {getUIElement("submit")?.value || "Submit"}
       </Button>
     </Form>
   );
