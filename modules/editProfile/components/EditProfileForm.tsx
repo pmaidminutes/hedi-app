@@ -10,6 +10,7 @@ import { IEditProfileError, IEditProfileRequest } from "../types";
 import { Form, Button, FormGroup, Column, Row } from "carbon-components-react";
 import { useEditProfileForm } from "./useEditProfileForm";
 import { Seperator } from "@/modules/common/components";
+import { ServiceSelections } from "./ServiceSelection";
 type EditProfileInputProps = {
   errors?: IEditProfileError;
   infoLabels: { [key: string]: string };
@@ -271,6 +272,7 @@ export const EditProfileForm = ({
           </Column>
         </Row>
       </FormGroup>
+      <ServiceSelections />
 
       {profile_type?.toLowerCase() == "caregiver" ? <></> : null}
 

@@ -2,13 +2,13 @@ import useSWR from "swr";
 import { Content } from "carbon-components-react";
 import { getUser, LogInOut } from "@/modules/auth/client";
 import { GetStaticProps } from "next";
-import { ISegmentParam } from "@/modules/editorial/types";
+
 import { EditProfileForm } from "@/modules/editProfile/components";
 import { jsonFetcher } from "@/modules/common/utils";
 import { getProfileField } from "@/modules/editProfile/query";
 import { IEditProfileResponse } from "@/modules/editProfile/types";
 
-export const getStaticProps: GetStaticProps<any, ISegmentParam> = async ({
+export const getStaticProps: GetStaticProps<any> = async ({
   params,
   locale,
 }) => {
@@ -29,7 +29,7 @@ export default function EditProfilePage({
     user ? "/api/account/editProfile" : null,
     url => jsonFetcher<any>(url)
   );
-  
+
   return (
     <div>
       <Content>
@@ -40,8 +40,8 @@ export default function EditProfilePage({
           <div> permission is required. </div>
         ) : (
           <EditProfileForm
-          infoLabels={labels}
-          data={data.profile}></EditProfileForm>
+            infoLabels={labels}
+            data={data.profile}></EditProfileForm>
         )}
       </Content>
     </div>
