@@ -17089,6 +17089,35 @@ a.bx--navigation-link:focus {
   border-bottom: 2px solid #dde1e6;
   margin: 1.5rem 0; }
 
+.hedi-service_selection {
+  background-color: #f4f4f4; }
+  .hedi-service_selection:hover {
+    background-color: #e5e5e5; }
+  .hedi-service_selection__head {
+    cursor: pointer;
+    margin-bottom: 1rem; }
+    .hedi-service_selection__head .bx--tile__checkmark {
+      opacity: 1; }
+  .hedi-service_selection__content {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9), visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    height: 0; }
+  .hedi-service_selection.is-expanded .hedi-service_selection__content {
+    visibility: inherit;
+    opacity: 1;
+    transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9), visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    height: 100%; }
+  .hedi-service_selection .bx--accordion__content {
+    padding-right: 0; }
+  .hedi-service_selection .bx--accordion__title {
+    font-family: "Roboto Slab", serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: 0; }
+
 .hidden {
   display: none; }
 

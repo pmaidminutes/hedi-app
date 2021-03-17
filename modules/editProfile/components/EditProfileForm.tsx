@@ -9,10 +9,13 @@ import {
   InlineNotification,
   FormProps,
   InlineLoading,
+  TextArea,
 } from "carbon-components-react";
 import { IUIElementTexts } from "@/modules/model";
 import { getTextInputProps } from "@/modules/common/utils";
 import { IUpsertProfile } from "../types";
+import { Seperator } from "@/modules/common/components";
+import { ServiceSelection } from "./ServiceSelection";
 
 type ProfileTypes = "Parent" | "Caregiver" | "Midwife";
 
@@ -44,7 +47,7 @@ export const EditProfileForm = ({
 
       <FormGroup legendText="Name">
         <Row>
-          <Column>
+          <Column lg={2}>
             <TextInput
               {...getTextInputProps("prefix", uiElementMap.main)}
               name="prefix"
@@ -53,7 +56,7 @@ export const EditProfileForm = ({
               defaultValue={profile?.prefix}
             />
           </Column>
-          <Column>
+          <Column lg={6}>
             <TextInput
               {...getTextInputProps("forename", uiElementMap.main)}
               name="forename"
@@ -63,9 +66,6 @@ export const EditProfileForm = ({
             />
           </Column>
         </Row>
-      </FormGroup>
-      <Seperator />
-      <FormGroup legendText="Address">
         <Row>
           <Column lg={6}>
             <TextInput
@@ -83,6 +83,29 @@ export const EditProfileForm = ({
               invalid={!!errors?.suffix}
               invalidText={errors?.suffix}
               defaultValue={profile?.suffix}
+            />
+          </Column>
+        </Row>
+      </FormGroup>
+      <Seperator />
+      <FormGroup legendText="Address">
+        <Row>
+          <Column lg={6}>
+            <TextInput
+              {...getTextInputProps("city", uiElementMap.main)}
+              name="city"
+              invalid={!!errors?.city}
+              invalidText={errors?.city}
+              defaultValue={profile?.city}
+            />
+          </Column>
+          <Column lg={2}>
+            <TextInput
+              {...getTextInputProps("postal_code", uiElementMap.main)}
+              name="postal_code"
+              invalid={!!errors?.postal_code}
+              invalidText={errors?.postal_code}
+              defaultValue={profile?.postal_code}
             />
           </Column>
         </Row>
@@ -109,11 +132,11 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("postal_code", uiElementMap.main)}
-              name="postal_code"
-              invalid={!!errors?.postal_code}
-              invalidText={errors?.postal_code}
-              defaultValue={profile?.postal_code}
+              {...getTextInputProps("room", uiElementMap.main)}
+              name="room"
+              invalid={!!errors?.room}
+              invalidText={errors?.room}
+              defaultValue={profile?.room}
             />
           </Column>
         </Row>
@@ -123,32 +146,61 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("city", uiElementMap.main)}
-              name="city"
-              invalid={!!errors?.city}
-              invalidText={errors?.city}
-              defaultValue={profile?.city}
+              {...getTextInputProps("phone", uiElementMap.main)}
+              name="phone"
+              invalid={!!errors?.phone}
+              invalidText={errors?.phone}
+              defaultValue={profile?.phone}
+            />
+          </Column>
+          <Column lg={6}>
+          <TextInput
+            {...getTextInputProps("phone_private", uiElementMap.Midwife)}
+            name="phone_private"
+            invalid={!!errors?.phone_private}
+            invalidText={errors?.phone_private}
+            defaultValue={profile?.phone_private}
+          />
+          </Column>
+        </Row>
+        <Row>
+          <Column lg={6}>
+            <TextInput
+              {...getTextInputProps("mail", uiElementMap.main)}
+              name="mail"
+              invalid={!!errors?.mail}
+              invalidText={errors?.mail}
+              defaultValue={profile?.mail}
+              required
+            />
+          </Column>
+          <Column lg={6}>
+            <TextInput
+              {...getTextInputProps("website", uiElementMap.Caregiver)}
+              name="website"
+              invalid={!!errors?.website}
+              invalidText={errors?.website}
+              defaultValue={profile?.website}
             />
           </Column>
         </Row>
-
-        <TextInput
-          {...getTextInputProps("mail", uiElementMap.main)}
-          name="mail"
-          invalid={!!errors?.mail}
-          invalidText={errors?.mail}
-          defaultValue={profile?.mail}
-          required
-        />
-        <TextInput
-          {...getTextInputProps("phone", uiElementMap.main)}
-          name="phone"
-          invalid={!!errors?.phone}
-          invalidText={errors?.phone}
-          defaultValue={profile?.phone}
-        />
+        <Row>
+          <Column lg={6}>
+            <TextArea
+              {...getTextInputProps(
+                "consultation_hours",
+                uiElementMap.Caregiver
+              )}
+              name="consultation_hours"
+              invalid={!!errors?.consultation_hours}
+              invalidText={errors?.consultation_hours}
+              defaultValue={profile?.consultation_hours}
+              placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
+            />
+          </Column>
+        </Row>
       </FormGroup>
-      <ServiceSelections />
+      <ServiceSelection />
 
       {profile?.profile_type === "Caregiver" ? (
         <FormGroup legendText="Caregiver">

@@ -1,1 +1,1 @@
-export * from "./ServiceSelections";
+export * from "./ServiceSelection";
