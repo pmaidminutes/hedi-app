@@ -4,8 +4,6 @@ export interface IEditProfile
   extends Omit<
     IProfile,
     | "county"
-    | "displayAddress"
-    | "displayName"
     | "district"
     | "lat"
     | "lat_approx"
@@ -26,22 +24,28 @@ export interface IEditProfile
 }
 
 export const EditProfileFieldArray: (keyof IEditProfile)[] = [
-  "consultation_hours",
-  "first_pregnancy",
-  "city",
+  "type",
+
+  "displayName",
+  "prefix",
   "forename",
+  "surname",
+  "suffix",
+
+  "displayAddress",
+  "city",
+  "postal_code",
+  "street",
   "house_number",
-  "mail",
+  "room",
+
   "phone",
   "phone_private",
-  "postal_code",
-  "prefix",
-  "type",
-  "room",
-  "street",
-  "suffix",
-  "surname",
+  "mail",
   "website",
+  "consultation_hours",
+
+  "first_pregnancy",
   "domains",
 ];
 
