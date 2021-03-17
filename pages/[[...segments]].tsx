@@ -34,6 +34,10 @@ import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 
+import { TryEditProfile } from "@/modules/editProfile/components";
+import { EditProfilePathsGQL } from "@/modules/editProfile/query";
+import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
+
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
@@ -74,6 +78,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     InstitutionPathsGQL,
     SearchViewPathsGQL,
     LoginViewPathsGQL,
+    EditProfilePathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -106,8 +111,10 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
+    console.log(params?.segments);
     if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
+    if (!content) content = await getEditProfileProps(params?.segments, locale);
     if (!content) content = await getCategoryProps(params?.segments, locale);
     if (!content) content = await getArticleProps(params?.segments, locale);
     if (!content) content = await getGlossaryProps(params?.segments, locale);
@@ -151,6 +158,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryProfile {...content} />
         <TrySearch {...content} />
         <TryLogin {...content} />
+        <TryEditProfile {...content} />
         <TryPage {...content} />
       </Content>
     </div>
