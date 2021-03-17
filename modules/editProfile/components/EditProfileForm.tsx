@@ -1,163 +1,83 @@
-import { useState } from "react";
-import useSWR from "swr";
-import { TextInput, Toggle, InlineNotification } from "carbon-components-react";
-import { IEditProfileError, IEditProfileRequest } from "../types";
-import { useTextInput, useToggleInput } from "@/modules/react/hooks";
-import { Form, Button, FormGroup, Column, Row } from "carbon-components-react";
-import { IEditProfile } from "../types/IEditProfile";
+import {
+  Form,
+  Button,
+  FormGroup,
+  Column,
+  Row,
+  TextInput,
+  Toggle,
+  InlineNotification,
+  FormProps,
+  InlineLoading,
+} from "carbon-components-react";
+import { IUIElementTexts } from "@/modules/model";
+import { getTextInputProps } from "@/modules/common/utils";
+import { IUpsertProfile } from "../types";
 
-type EditProfileInputProps = {
-  errors?: IEditProfileError;
-  infoLabels: { [key: string]: string };
-  data: IEditProfileRequest | undefined;
+type ProfileTypes = "Parent" | "Caregiver" | "Midwife";
+
+type UIElementMap = {
+  main: IUIElementTexts[];
+} & Record<ProfileTypes, IUIElementTexts[]>;
+
+type EditProfileInputProps = FormProps & {
+  uiElementMap: UIElementMap;
+  data: IUpsertProfile;
+  isValidating?: boolean;
 };
-function postProfile(url: string, profile: IEditProfile) {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(profile),
-  });
-}
 
 export const EditProfileForm = ({
-  errors,
-  infoLabels,
-  data,
+  uiElementMap,
+  data: { success, errors, profile },
+  isValidating,
+  ...formProps
 }: EditProfileInputProps) => {
-  const [street, setStreet] = useTextInput(data?.street);
-  const [forename, setForename] = useTextInput(data?.forename);
-  const [surname, setSurname] = useTextInput(data?.surname);
-  const [city, setCity] = useTextInput(data?.city);
-  const [house_number, setHouseNumber] = useTextInput(data?.house_number);
-  const [mail, setMail] = useTextInput(data?.mail);
-  const [phone, setPhone] = useTextInput(data?.phone);
-  const [postal_code, setPostalCode] = useTextInput(data?.postal_code);
-  const [prefix, setPrefix] = useTextInput(data?.prefix);
-  const [suffix, setSuffix] = useTextInput(data?.suffix);
-  const [room, setRoom] = useTextInput(data?.room);
-  const [website, setWebsite] = useTextInput(data?.website);
-  const [phone_private, setPhonePrivate] = useTextInput(data?.phone_private);
-  const [first_pregnancy, setFirstPregnancy] = useToggleInput(false);
-  const [consultation_hours, setConsultationHours] = useTextInput(
-    data?.consultation_hours
-  );
-  const country = "",
-    county = "",
-    displayAddress = "",
-    displayName = "",
-    district = "",
-    lat = "",
-    lat_approx = "",
-    long = "",
-    long_approx = "",
-    profile_type = "",
-    state = "";
-
-  const [hasChanged, setHasChanged] = useState<IEditProfile>();
-  let error: any;
-  useSWR(
-    [hasChanged ? "/api/account/editProfile" : null, hasChanged],
-    (url, profile) => postProfile(url, profile)
-  );
-
   return (
-    <Form
-      onSubmit={e => {
-        e.preventDefault();
-        if (
-          setHasChanged &&
-          (street ||
-            forename ||
-            surname ||
-            city ||
-            house_number ||
-            mail ||
-            phone ||
-            postal_code ||
-            prefix ||
-            suffix ||
-            room ||
-            website ||
-            consultation_hours ||
-            first_pregnancy ||
-            phone_private)
-        ) {
-          setHasChanged({
-            street,
-            forename,
-            surname,
-            city,
-            house_number,
-            mail,
-            phone,
-            postal_code,
-            prefix,
-            suffix,
-            room,
-            website,
-            consultation_hours,
-            first_pregnancy,
-            phone_private,
-            country,
-            county,
-            displayAddress,
-            displayName,
-            district,
-            lat,
-            lat_approx,
-            long,
-            long_approx,
-            profile_type,
-            state,
-          });
-        }
-      }}>
-      {error?.generic && (
+    <Form {...formProps}>
+      {errors?.generic && (
         <InlineNotification
           kind="error"
           title="Error"
-          subtitle={error.generic}
+          subtitle={errors.generic}
         />
       )}
+
       <FormGroup legendText="Name">
         <Row>
           <Column>
             <TextInput
-              id={infoLabels?.prefix}
-              labelText={infoLabels?.prefix}
-              onChange={setPrefix}
+              {...getTextInputProps("prefix", uiElementMap.main)}
+              name="prefix"
               invalid={!!errors?.prefix}
               invalidText={errors?.prefix}
-              value={prefix}
+              defaultValue={profile?.prefix}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.forename}
-              labelText={infoLabels?.forename}
-              onChange={setForename}
+              {...getTextInputProps("forename", uiElementMap.main)}
+              name="forename"
               invalid={!!errors?.forename}
               invalidText={errors?.forename}
-              value={forename}
+              defaultValue={profile?.forename}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.surname}
-              labelText={infoLabels?.surname}
-              onChange={setSurname}
+              {...getTextInputProps("surname", uiElementMap.main)}
+              name="surname"
               invalid={!!errors?.surname}
               invalidText={errors?.surname}
-              value={surname}
+              defaultValue={profile?.surname}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.suffix}
-              labelText={infoLabels?.suffix}
-              onChange={setSuffix}
+              {...getTextInputProps("suffix", uiElementMap.main)}
+              name="suffix"
               invalid={!!errors?.suffix}
               invalidText={errors?.suffix}
-              value={suffix}
+              defaultValue={profile?.suffix}
             />
           </Column>
         </Row>
@@ -166,139 +86,134 @@ export const EditProfileForm = ({
         <Row>
           <Column>
             <TextInput
-              id={infoLabels?.street}
-              labelText={infoLabels?.street}
-              onChange={setStreet}
+              {...getTextInputProps("street", uiElementMap.main)}
+              name="street"
               invalid={!!errors?.street}
               invalidText={errors?.street}
-              value={street}
+              defaultValue={profile?.street}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.house_number}
-              labelText={infoLabels?.house_number}
-              onChange={setHouseNumber}
+              {...getTextInputProps("house_number", uiElementMap.main)}
+              name="house_number"
               invalid={!!errors?.house_number}
               invalidText={errors?.house_number}
-              value={house_number}
+              defaultValue={profile?.house_number}
             />
           </Column>
         </Row>
         <Row>
           <Column>
             <TextInput
-              id={infoLabels?.postal_code}
-              labelText={infoLabels?.postal_code}
-              onChange={setPostalCode}
+              {...getTextInputProps("postal_code", uiElementMap.main)}
+              name="postal_code"
               invalid={!!errors?.postal_code}
               invalidText={errors?.postal_code}
-              value={postal_code}
+              defaultValue={profile?.postal_code}
             />
           </Column>
           <Column>
             <TextInput
-              id={infoLabels?.city}
-              labelText={infoLabels?.city}
-              onChange={setCity}
+              {...getTextInputProps("city", uiElementMap.main)}
+              name="city"
               invalid={!!errors?.city}
               invalidText={errors?.city}
-              value={city}
+              defaultValue={profile?.city}
             />
           </Column>
         </Row>
 
         <TextInput
-          id={infoLabels?.mail}
-          labelText={infoLabels?.mail}
-          onChange={setMail}
+          {...getTextInputProps("mail", uiElementMap.main)}
+          name="mail"
           invalid={!!errors?.mail}
           invalidText={errors?.mail}
-          value={mail}
+          defaultValue={profile?.mail}
           required
         />
         <TextInput
-          id={infoLabels?.phone}
-          labelText={infoLabels?.phone}
-          onChange={setPhone}
+          {...getTextInputProps("phone", uiElementMap.main)}
+          name="phone"
           invalid={!!errors?.phone}
           invalidText={errors?.phone}
-          value={phone}
+          defaultValue={profile?.phone}
         />
       </FormGroup>
 
-      {data?.profile_type?.toLowerCase() == "caregiver" ? (
-        <FormGroup legendText="CareGiver">
+      {profile?.profile_type === "Caregiver" ? (
+        <FormGroup legendText="Caregiver">
           <TextInput
-            id={infoLabels?.room}
-            labelText={infoLabels?.room}
-            onChange={setRoom}
+            {...getTextInputProps("room", uiElementMap.Caregiver)}
+            name="room"
             invalid={!!errors?.room}
             invalidText={errors?.room}
-            value={room}
+            defaultValue={profile?.room}
           />
           <TextInput
-            id={infoLabels?.website}
-            labelText={infoLabels?.website}
-            onChange={setWebsite}
+            {...getTextInputProps("website", uiElementMap.Caregiver)}
+            name="website"
             invalid={!!errors?.website}
             invalidText={errors?.website}
-            value={website}
+            defaultValue={profile?.website}
           />
           <TextInput
-            id={infoLabels?.consultation_hours}
-            labelText={infoLabels?.consultation_hours}
-            onChange={setConsultationHours}
+            {...getTextInputProps("consultation_hours", uiElementMap.Caregiver)}
+            name="consultation_hours"
             invalid={!!errors?.consultation_hours}
             invalidText={errors?.consultation_hours}
-            value={consultation_hours}
+            defaultValue={profile?.consultation_hours}
           />
         </FormGroup>
       ) : null}
 
-      {data?.profile_type?.toLowerCase() == "parent" ? (
+      {profile?.profile_type === "Parent" ? (
         <FormGroup legendText="Parent">
           <Toggle
-            id={infoLabels?.first_pregnancy}
-            labelText={infoLabels?.first_pregnancy}
-            onChange={setFirstPregnancy}
-            checked={first_pregnancy}
+            id="first_pregnancy"
+            name="first_pregnancy"
+            labelText={
+              getTextInputProps(
+                "first_pregnancy",
+                uiElementMap.Parent
+              )?.labelText.toString() ?? ""
+            }
+            defaultToggled={profile?.first_pregnancy ?? false}
           />
         </FormGroup>
       ) : null}
 
-      {data?.profile_type?.toLowerCase() == "midwife" ? (
+      {profile?.profile_type === "Midwife" ? (
         <FormGroup legendText="Midwife">
           <TextInput
-            id={infoLabels?.phone_private}
-            labelText={infoLabels?.phone_private}
-            onChange={setPhonePrivate}
+            {...getTextInputProps("phone_private", uiElementMap.Midwife)}
+            name="phone_private"
             invalid={!!errors?.phone_private}
             invalidText={errors?.phone_private}
-            value={phone_private}
+            defaultValue={profile?.phone_private}
           />
           <TextInput
-            id={infoLabels?.website}
-            labelText={infoLabels?.website}
-            onChange={setWebsite}
+            {...getTextInputProps("website", uiElementMap.Midwife)}
+            name="website"
             invalid={!!errors?.website}
             invalidText={errors?.website}
-            value={website}
+            defaultValue={profile?.website}
           />
           <TextInput
-            id={infoLabels?.consultation_hours}
-            labelText={infoLabels?.consultation_hours}
-            onChange={setConsultationHours}
+            {...getTextInputProps("website", uiElementMap.Midwife)}
+            name="consultation_hours"
             invalid={!!errors?.consultation_hours}
             invalidText={errors?.consultation_hours}
-            value={consultation_hours}
+            defaultValue={profile?.consultation_hours}
           />
         </FormGroup>
       ) : null}
 
-      <Button type="submit" size="field">
-        Submit
-      </Button>
+      {isValidating ? (
+        <InlineLoading status="active" />
+      ) : (
+        <Button type="submit">Submit</Button>
+      )}
     </Form>
   );
 };
