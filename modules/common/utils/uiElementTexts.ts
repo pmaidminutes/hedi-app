@@ -10,7 +10,10 @@ export const tryGetValue = (
 export const getTextInputProps = (
   identifier: string,
   elements: IUIElementTexts[]
-): TextInputProps => {
+): Pick<
+  TextInputProps,
+  "id" | "labelText" | "placeholder" | "helperText" | "aria-label"
+> => {
   const element = elements.find(item => item.identifier === identifier);
   return {
     id: identifier,

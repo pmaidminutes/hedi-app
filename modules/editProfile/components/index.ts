@@ -1,1 +1,2 @@
-export * from "./EditProfileForm";
+export * from "./EditProfile";
+export * from "./TryEditProfile";

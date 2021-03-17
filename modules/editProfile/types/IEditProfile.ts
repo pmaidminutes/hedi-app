@@ -23,3 +23,26 @@ export interface IEditProfile
   first_pregnancy: boolean;
   profile_type: string;
 }
+
+export const EditProfileFieldArray: (keyof IEditProfile)[] = [
+  "consultation_hours",
+  "first_pregnancy",
+  "city",
+  "forename",
+  "house_number",
+  "mail",
+  "phone",
+  "phone_private",
+  "postal_code",
+  "prefix",
+  "profile_type",
+  "room",
+  "street",
+  "suffix",
+  "surname",
+  "website",
+];
+
+export const EditProfileFields = `${EditProfileFieldArray.join(" ")}`;
+
+export type EditProfileInput = Partial<IEditProfile>;
