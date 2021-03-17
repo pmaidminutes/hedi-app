@@ -1,9 +1,7 @@
 import { gql } from "@/modules/graphql";
 import {
   EditorialFields,
-  EntityFields,
   IEditorial,
-  IEntity,
   IEntityLocalized,
   ISummary,
   EntityLocalizedFields,
@@ -11,6 +9,8 @@ import {
   IRouteLabeled,
   RouteLabelFields,
 } from "@/modules/model";
+import { IImage, ImageFields } from "../../types";
+
 export interface IPageEntry extends IEntityLocalized, ISummary {}
 
 export const PageEntryFields = `${EntityLocalizedFields}
@@ -24,6 +24,7 @@ fragment PageEntryFrag on Page {
 
 export interface IPage extends IPageEntry, IEditorial<IEntityLocalized> {
   routelabel: IRouteLabeled;
+  posterImage?: IImage;
 }
 
 export function isIPage(obj: any): obj is IPage {
@@ -32,6 +33,7 @@ export function isIPage(obj: any): obj is IPage {
 
 export const PageFields = `${EditorialFields}
 ${RouteLabelFields}
+posterImage {${ImageFields}}
 `;
 
 export const PageFrag = gql`
