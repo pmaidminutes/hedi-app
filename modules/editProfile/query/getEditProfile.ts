@@ -28,7 +28,7 @@ export async function getEditProfile(
       console.warn(e);
       return { appPages: [] };
     });
-  console.log({ appPages });
+
   if (!(appPages?.[0] && appPages[0].key === "editprofile")) return null;
 
   const appPage = appPages[0];
@@ -47,7 +47,7 @@ export async function getEditProfile(
   const sub = await client.request<{ appPagesByKey: IAppPage[] }>(subquery, {
     lang,
   });
-  console.log({ sub });
+
   const { appPagesByKey: children } = sub;
 
   return { ...appPage, children };
