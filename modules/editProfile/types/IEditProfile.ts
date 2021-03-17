@@ -1,4 +1,5 @@
 import { IProfile } from "@/modules/model/IProfile";
+import { ILanguageSkillEntry } from "./ILanguageSkillEntry";
 
 export interface IEditProfile
   extends Omit<
@@ -19,6 +20,7 @@ export interface IEditProfile
     | "country"
   > {
   type: string;
+  languageSkills: ILanguageSkillEntry[];
   first_pregnancy: boolean;
   domains: string[];
 }
@@ -45,10 +47,15 @@ export const EditProfileFieldArray: (keyof IEditProfile)[] = [
   "website",
   "consultation_hours",
 
+  "languageSkills",
+
   "first_pregnancy",
   "domains",
 ];
 
-export const EditProfileFields = `${EditProfileFieldArray.join(" ")}`;
+export const EditProfileFields = `${EditProfileFieldArray.join(" ").replace(
+  "languageSkills",
+  "languageSkills { langcode level }"
+)}`;
 
 export type EditProfileInput = Partial<IEditProfile>;
