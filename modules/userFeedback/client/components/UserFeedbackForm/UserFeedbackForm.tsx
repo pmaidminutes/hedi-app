@@ -79,7 +79,7 @@ export const UserFeedbackForm = ({
         id="body"
         labelText={getUIElement("body")?.value || "Body"}
         placeholder={getUIElement("body")?.placeholder}
-        required
+        helperText={getUIElement("body")?.help}
         onChange={setBody}
         invalid={!!error?.body}
         invalidText={error?.body}
