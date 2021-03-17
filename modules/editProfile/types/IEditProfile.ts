@@ -21,7 +21,7 @@ export interface IEditProfile
     | "country"
   > {
   first_pregnancy: boolean;
-  profile_type: string;
+  type: string;
 }
 
 export const EditProfileFieldArray: (keyof IEditProfile)[] = [
@@ -35,7 +35,7 @@ export const EditProfileFieldArray: (keyof IEditProfile)[] = [
   "phone_private",
   "postal_code",
   "prefix",
-  "profile_type",
+  "type",
   "room",
   "street",
   "suffix",

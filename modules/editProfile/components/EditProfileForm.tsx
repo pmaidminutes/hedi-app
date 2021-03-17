@@ -161,13 +161,13 @@ export const EditProfileForm = ({
             />
           </Column>
           <Column lg={6}>
-          <TextInput
-            {...getTextInputProps("phone_private", uiElementMap.Midwife)}
-            name="phone_private"
-            invalid={!!errors?.phone_private}
-            invalidText={errors?.phone_private}
-            defaultValue={profile?.phone_private}
-          />
+            <TextInput
+              {...getTextInputProps("phone_private", uiElementMap.Midwife)}
+              name="phone_private"
+              invalid={!!errors?.phone_private}
+              invalidText={errors?.phone_private}
+              defaultValue={profile?.phone_private}
+            />
           </Column>
         </Row>
         <Row>
@@ -209,7 +209,7 @@ export const EditProfileForm = ({
       </FormGroup>
       <ServiceSelection services={services} />
 
-      {profile?.profile_type === "Caregiver" ? (
+      {profile?.type === "Caregiver" ? (
         <FormGroup legendText="Caregiver">
           <TextInput
             {...getTextInputProps("room", uiElementMap.Caregiver)}
@@ -235,7 +235,7 @@ export const EditProfileForm = ({
         </FormGroup>
       ) : null}
 
-      {profile?.profile_type === "Parent" ? (
+      {profile?.type === "Parent" ? (
         <FormGroup legendText="Parent">
           <Toggle
             id="first_pregnancy"
@@ -251,7 +251,7 @@ export const EditProfileForm = ({
         </FormGroup>
       ) : null}
 
-      {profile?.profile_type === "Midwife" ? (
+      {profile?.type === "Midwife" ? (
         <FormGroup legendText="Midwife">
           <TextInput
             {...getTextInputProps("phone_private", uiElementMap.Midwife)}
