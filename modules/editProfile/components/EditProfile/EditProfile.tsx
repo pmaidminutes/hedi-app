@@ -1,7 +1,6 @@
 import { getUser } from "@/modules/auth/client";
-import { IEditProfileView } from "../types";
-import { EditProfileForm } from "./EditProfileForm";
-import { useEditProfileForm } from "./useEditProfileForm";
+import { IEditProfileView } from "../../types";
+import { EditProfileForm, useEditProfileForm } from "../EditProfileForm";
 
 export const EditProfile = ({ content }: { content: IEditProfileView }) => {
   const [user] = getUser();

@@ -13,9 +13,9 @@ import {
 } from "carbon-components-react";
 import { IUIElementTexts } from "@/modules/model";
 import { getTextInputProps } from "@/modules/common/utils";
-import { IUpsertProfile } from "../types";
 import { Seperator } from "@/modules/common/components";
-import { ServiceSelection } from "./ServiceSelection";
+import { IUpsertProfile } from "../../types";
+import { ServiceSelection } from "../ServiceSelection";
 
 type ProfileTypes = "Parent" | "Caregiver" | "Midwife";
 
