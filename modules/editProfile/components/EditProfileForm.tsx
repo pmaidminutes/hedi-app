@@ -29,6 +29,13 @@ type EditProfileInputProps = FormProps & {
   isValidating?: boolean;
 };
 
+const services = [
+  "Sexualberatung",
+  "Verhütungsberatung",
+  "Schwangerenberatung",
+  "Beratung bei Trennung und Scheidung",
+];
+
 export const EditProfileForm = ({
   uiElementMap,
   data: { success, errors, profile },
@@ -200,7 +207,7 @@ export const EditProfileForm = ({
           </Column>
         </Row>
       </FormGroup>
-      <ServiceSelection />
+      <ServiceSelection services={services} />
 
       {profile?.profile_type === "Caregiver" ? (
         <FormGroup legendText="Caregiver">
