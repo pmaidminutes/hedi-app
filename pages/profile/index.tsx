@@ -1,12 +1,9 @@
-import useSWR from "swr";
 import { Content } from "carbon-components-react";
 import { getUser, LogInOut } from "@/modules/auth/client";
 import { GetStaticProps } from "next";
 import { ISegmentParam } from "@/modules/common/types";
-import { EditProfileForm } from "@/modules/editProfile/components";
-import { jsonFetcher } from "@/modules/common/utils";
+import { EditProfile } from "@/modules/editProfile/components";
 import { getProfileField } from "@/modules/editProfile/query";
-import { IUpsertProfile } from "@/modules/editProfile/types";
 
 export const getStaticProps: GetStaticProps<any, ISegmentParam> = async ({
   params,
@@ -25,23 +22,15 @@ export default function EditProfilePage({
   labels: { [key: string]: string };
 }) {
   const [user] = getUser();
-  const { data, error } = useSWR(
-    user ? "/api/account/editProfile" : null,
-    url => jsonFetcher<any>(url)
-  );
 
   return (
     <div>
       <Content>
         <LogInOut />
-        {error ? (
-          <div> An error occurred here. Please try again .... </div>
-        ) : !data || !(data as IUpsertProfile)?.success ? (
+        {!user ? (
           <div> permission is required. </div>
         ) : (
-          <EditProfileForm
-            infoLabels={labels}
-            data={data.profile}></EditProfileForm>
+          <EditProfile infoLabels={labels} lang="de" />
         )}
       </Content>
     </div>
