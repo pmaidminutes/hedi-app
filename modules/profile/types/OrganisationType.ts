@@ -2,6 +2,8 @@ import {
   EntityTranslatedFields,
   IEntityLocalized,
   IEntityTranslated,
+  IWithLanguageSkills,
+  WithLanguageSkillsFields,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -16,6 +18,7 @@ export interface IOrganisation
     IDetailedName,
     IAddress,
     IContact,
+    IWithLanguageSkills,
     IWithMembers {
   service_area: string;
 }
@@ -28,6 +31,7 @@ export const OrganisationFields = `${EntityTranslatedFields}
   ${DetailedNameFields}
   ${AddressFields}
   ${ContactFields}
+  ${WithLanguageSkillsFields}
   service_area
   ${MembersFields}
   `;

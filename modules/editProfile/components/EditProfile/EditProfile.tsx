@@ -1,7 +1,6 @@
 import { getUser } from "@/modules/auth/client";
-import { IEditProfileView } from "../types";
-import { EditProfileForm } from "./EditProfileForm";
-import { useEditProfileForm } from "./useEditProfileForm";
+import { IEditProfileView } from "../../types";
+import { EditProfileForm, useEditProfileForm } from "../EditProfileForm";
 
 export const EditProfile = ({ content }: { content: IEditProfileView }) => {
   const [user] = getUser();
@@ -18,6 +17,8 @@ export const EditProfile = ({ content }: { content: IEditProfileView }) => {
     content.children.find(ap => ap.key === "editprofile_Midwife")?.elements ??
     [];
 
+  // TODO content.domainOptions
+  // TODO content.languageOptions for languageSkills
   return (
     <EditProfileForm
       uiElementMap={{ main, Parent, Caregiver, Midwife }}

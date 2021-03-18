@@ -13,9 +13,9 @@ import {
 } from "carbon-components-react";
 import { IUIElementTexts } from "@/modules/model";
 import { getTextInputProps } from "@/modules/common/utils";
-import { IUpsertProfile } from "../types";
 import { Seperator } from "@/modules/common/components";
-import { ServiceSelection } from "./ServiceSelection";
+import { IUpsertProfile } from "../../types";
+import { ServiceSelection } from "../ServiceSelection";
 
 type ProfileTypes = "Parent" | "Caregiver" | "Midwife";
 
@@ -209,7 +209,7 @@ export const EditProfileForm = ({
       </FormGroup>
       <ServiceSelection services={services} />
 
-      {profile?.profile_type === "Caregiver" ? (
+      {profile?.type === "Caregiver" ? (
         <FormGroup legendText="Caregiver">
           <TextInput
             {...getTextInputProps("room", uiElementMap.Caregiver)}
@@ -235,7 +235,7 @@ export const EditProfileForm = ({
         </FormGroup>
       ) : null}
 
-      {profile?.profile_type === "Parent" ? (
+      {profile?.type === "Parent" ? (
         <FormGroup legendText="Parent">
           <Toggle
             id="first_pregnancy"
@@ -251,7 +251,7 @@ export const EditProfileForm = ({
         </FormGroup>
       ) : null}
 
-      {profile?.profile_type === "Midwife" ? (
+      {profile?.type === "Midwife" ? (
         <FormGroup legendText="Midwife">
           <TextInput
             {...getTextInputProps("phone_private", uiElementMap.Midwife)}

@@ -6,7 +6,7 @@ import {
   EditProfileFieldArray,
   EditProfileInput,
   IUpsertProfile,
-} from "../types";
+} from "../../types";
 
 function postProfile(
   url: string,
