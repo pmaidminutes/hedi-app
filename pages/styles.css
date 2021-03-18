@@ -17118,6 +17118,20 @@ a.bx--navigation-link:focus {
     line-height: 1.29;
     letter-spacing: 0; }
 
+.hedi__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem; }
+  .hedi__footer a {
+    font-family: "Roboto Slab", serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.375;
+    letter-spacing: 0;
+    text-decoration: none; }
+    .hedi__footer a:not(:last-child) {
+      margin-right: 1rem; }
+
 .hidden {
   display: none; }
 

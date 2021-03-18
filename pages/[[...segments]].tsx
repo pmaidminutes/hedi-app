@@ -42,7 +42,7 @@ import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/ser
 import { Content } from "carbon-components-react";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import { BreadCrumb, Header } from "@/modules/shell/components";
+import { BreadCrumb, Header, Footer } from "@/modules/shell/components";
 // Types
 import { ISegmentParam } from "@/modules/common/types";
 import {
@@ -161,6 +161,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryEditProfile {...content} />
         <TryPage {...content} />
       </Content>
+      <Footer />
     </div>
   );
 }
