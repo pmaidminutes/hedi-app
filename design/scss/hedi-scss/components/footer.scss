@@ -1,0 +1,13 @@
+.hedi__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: $carbon--spacing-05 ;
+  a {
+    @include carbon--type-style("productive-heading-02");
+    text-decoration: none;
+
+    &:not(:last-child){
+      margin-right: 1rem;
+    }
+  }
+}
