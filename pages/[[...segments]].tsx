@@ -34,6 +34,10 @@ import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 
+import { TryEditProfile } from "@/modules/editProfile/components";
+import { EditProfilePathsGQL } from "@/modules/editProfile/query";
+import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
+
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
@@ -51,11 +55,18 @@ import { getSegmentsPaths } from "@/modules/common/query";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
-if (isDesignContext) {
-  // @ts-ignore
-  import("../design/imports").then(({ propsMap }) => (dynamicProps = propsMap));
-}
+
+const getDesignProps = async () => {
+  const { existsSync } = await import("fs");
+  const { join } = await import("path");
+  if (existsSync(join(__dirname, "../design/imports")))
+    return import("../design/imports").then(({ propsMap }) => propsMap);
+  else return null;
+};
+
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
+  if (isDesignContext) dynamicProps = await getDesignProps();
+
   const pathQueries = [
     PagePathsGQL,
     ArticlePathsGQL,
@@ -67,6 +78,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     InstitutionPathsGQL,
     SearchViewPathsGQL,
     LoginViewPathsGQL,
+    EditProfilePathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -87,22 +99,22 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
   let content;
-  let data: any = [];
-  let hasStaticData = false;
+
   if (isDesignContext) {
-    data = dynamicProps.find(
+    const data = dynamicProps?.find(
       (element: any) => element[0] === segments.join("/")
     );
-    hasStaticData = data ? true : false;
-    console.log({ hasStaticData });
+    content = data?.[1]?.content;
   }
 
   // query types with dynamic paths first
-  if (isDesignContext && hasStaticData) {
-    content = data[1].content;
+  if (isDesignContext && content) {
+    //we have a exported content for designing, skip backend fetches
   } else {
+    console.log(params?.segments);
     if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
+    if (!content) content = await getEditProfileProps(params?.segments, locale);
     if (!content) content = await getCategoryProps(params?.segments, locale);
     if (!content) content = await getArticleProps(params?.segments, locale);
     if (!content) content = await getGlossaryProps(params?.segments, locale);
@@ -146,6 +158,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryProfile {...content} />
         <TrySearch {...content} />
         <TryLogin {...content} />
+        <TryEditProfile {...content} />
         <TryPage {...content} />
       </Content>
     </div>

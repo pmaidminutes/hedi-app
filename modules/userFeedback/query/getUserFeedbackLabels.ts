@@ -23,7 +23,7 @@ export async function getUserFeedbackLabels(
       lang,
     })
     .then(data => {
-      return data.appPagesByKey[0]?.elements;
+      return data.appPagesByKey[0]?.elements || null;
     })
     .catch(e => {
       console.warn(e);

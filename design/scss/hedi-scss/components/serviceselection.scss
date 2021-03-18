@@ -1,0 +1,40 @@
+.hedi-service_selection {
+  background-color: $ui-01;
+  &:hover {
+    background-color: $hover-ui;
+  }
+  &__head {
+    cursor: pointer;
+    margin-bottom: 1rem;
+    .bx--tile__checkmark {
+      opacity: 1;
+    }
+
+  }
+
+  &__content {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9),
+      visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    height: 0;
+  }
+
+  &.is-expanded {
+    .hedi-service_selection__content {
+      visibility: inherit;
+      opacity: 1;
+      transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9),
+        visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
+      height: 100%;
+    }
+  }
+
+  .bx--accordion__content {
+    padding-right: 0;
+  }
+  .bx--accordion__title {
+    @include carbon--type-style("productive-heading-04");
+  }
+}
