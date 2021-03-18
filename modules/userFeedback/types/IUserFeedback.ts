@@ -17,9 +17,9 @@ body
 metadata
 created`;
 
-export const insertUserFeedbackMutation = gql`
-mutation sendUserFeedback($input: UserFeedbackInput!, $lang: String) {
-  insertUserFeedback(input: $input, lang: $lang) {
+export const insertUserFeedbacksMutation = gql`
+mutation sendUserFeedbacks($input: [UserFeedbackInput!]!, $lang: String) {
+  insertUserFeedbacks(input: $input, lang: $lang) {
     ${MutationResponseFields}
   }
 }
