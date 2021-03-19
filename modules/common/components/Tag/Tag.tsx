@@ -1,10 +1,14 @@
-import { ITag } from "@/modules/model";
+import { ITag, TagType } from "@/modules/model";
 
 import { Tag as CarbonTag, Link } from "carbon-components-react";
 
-export const Tag = ({ tag }: { tag: ITag }): JSX.Element => {
+interface ITagProps {
+  tag: ITag;
+  type?: TagType | null;
+}
+export const Tag = ({ tag, type }: ITagProps): JSX.Element => {
   return (
-    <CarbonTag type={"magenta"}>
+    <CarbonTag type={type ? type : "magenta"}>
       <Link
         href={`/search/${tag.label}`}
         className="bx--tag__label hedi-unstyled-link">
