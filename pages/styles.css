@@ -17020,6 +17020,10 @@ a.bx--navigation-link:focus {
 .leaflet-container {
   height: 300px; }
 
+address {
+  display: flex;
+  flex-direction: column; }
+
 .hedi-category-color--pregnancy header {
   background-color: #2A84C6 !important; }
 
@@ -17083,11 +17087,36 @@ a.bx--navigation-link:focus {
   .hedi__categoryentry a h4 {
     color: red; }
 
-.hedi-separator {
-  display: block;
+.hedi__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem; }
+  .hedi__footer a {
+    font-family: "Roboto Slab", serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.375;
+    letter-spacing: 0;
+    text-decoration: none; }
+    .hedi__footer a:not(:last-child) {
+      margin-right: 1rem; }
+
+.hedi__profile-entry img {
   width: 100%;
-  border-bottom: 2px solid #dde1e6;
-  margin: 1.5rem 0; }
+  max-width: 300px;
+  height: auto;
+  background-color: #AEC1EA; }
+
+.hedi__profile-entry > div > div:not(:first-child) {
+  background-color: #fff; }
+
+.hedi__profile--tile .bx--tile {
+  width: 100%; }
+
+.hedi__profile--tile img, .hedi__profile--tile svg {
+  max-width: 130px;
+  max-height: 140px;
+  height: auto; }
 
 .hedi__row-with-bg {
   padding: 2rem 0;
@@ -17106,25 +17135,12 @@ a.bx--navigation-link:focus {
     position: relative;
     width: 100%; }
 
-.hedi__profile-entry img {
+.hedi-separator {
+  display: block;
   width: 100%;
-  max-width: 300px;
-  height: auto;
-  background-color: #AEC1EA; }
+  border-bottom: 2px solid #dde1e6;
+  margin: 1.5rem 0; }
 
-.hedi__profile-entry address {
-  display: flex;
-  flex-direction: column; }
-
-.hedi__profile-entry > div > div:not(:first-child) {
-  background-color: #fff; }
-
-.hedi__profile-services .bx--tile {
-  width: 100%; }
-
-.hedi__profile-services img, .hedi__profile-services svg {
-  max-width: 130px;
-  height: auto; }
 .hedi-service_selection {
   background-color: #f4f4f4; }
   .hedi-service_selection:hover {
@@ -17153,20 +17169,6 @@ a.bx--navigation-link:focus {
     font-weight: 400;
     line-height: 1.29;
     letter-spacing: 0; }
-
-.hedi__footer {
-  display: flex;
-  justify-content: flex-end;
-  padding: 1rem; }
-  .hedi__footer a {
-    font-family: "Roboto Slab", serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.375;
-    letter-spacing: 0;
-    text-decoration: none; }
-    .hedi__footer a:not(:last-child) {
-      margin-right: 1rem; }
 
 .hidden {
   display: none; }
