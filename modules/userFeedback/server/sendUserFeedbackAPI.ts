@@ -4,6 +4,11 @@ import { NextApiHandler } from "next";
 import { insertUserFeedbacks } from "../query";
 import { UserFeedbackInput } from "../types";
 
+interface UserFeedbacksFetch {
+  lang: string;
+  userfeedbacks: UserFeedbackInput[];
+}
+
 export const sendUserFeedbacksAPI: NextApiHandler<
   IMutationResponse[] | IMutationResponse
 > = async (req, res) => {
@@ -14,7 +19,7 @@ export const sendUserFeedbacksAPI: NextApiHandler<
     return;
   }
 
-  const userfeedbacks = JSON.parse(req.body) as UserFeedbackInput[];
+  const { lang, userfeedbacks } = JSON.parse(req.body) as UserFeedbacksFetch;
 
   const authHeader = await getUserAuthHeader(req);
   if (!authHeader) {
@@ -24,9 +29,11 @@ export const sendUserFeedbacksAPI: NextApiHandler<
     return;
   }
 
-  // TODO get user locale. useRouter() causes hook error. req.headers["accept-language"] gives unprocessed languages
-
-  const mutationResult = await insertUserFeedbacks(authHeader, userfeedbacks);
+  const mutationResult = await insertUserFeedbacks(
+    authHeader,
+    userfeedbacks,
+    lang
+  );
   if (mutationResult) res.status(200).json(mutationResult);
   else res.status(500).json({ success: false, errors: {} });
 };

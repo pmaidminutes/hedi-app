@@ -5,7 +5,10 @@ import { FormEvent } from "react";
 import { clientInformationCollector } from "../../helper/ClientInformationCollector";
 
 // TODO under development
-export const MultipleUserFeedback: React.FC = ({ children }) => {
+export const MultipleUserFeedback: React.FC<{ lang: string }> = ({
+  lang,
+  children,
+}) => {
   const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -26,7 +29,7 @@ export const MultipleUserFeedback: React.FC = ({ children }) => {
         entriesToSend.push({ metadata, ...entryGroups[key] });
       }
     }
-    sendUserFeedbacks(entriesToSend)
+    sendUserFeedbacks(entriesToSend, lang)
       .then(resp => {
         console.log(resp);
         if (resp && resp.length == entriesToSend.length) {
