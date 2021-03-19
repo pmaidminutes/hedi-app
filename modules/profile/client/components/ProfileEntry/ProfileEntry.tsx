@@ -15,13 +15,7 @@ export const ProfileEntry = ({
 }): JSX.Element => {
   console.log({ profile });
   const {
-    label,
-    route,
     displayName,
-    forename,
-    prefix,
-    surname,
-    suffix,
     postal_code,
     city,
     mail,
@@ -39,17 +33,14 @@ export const ProfileEntry = ({
               src="/images/profile_dummy.png"
               alt="Profil Bild"
               style={{
-                width: "100%",
-                maxWidth: "300px",
-                height: "auto",
-                backgroundColor: "blue",
+
               }}
             />
           </Column>
-          <Column lg={10} style={{backgroundColor:"#fff"}}>
+          <Column lg={10}>
             <h2>{displayName}</h2>
             <h3>psychosoziale Beratung</h3>
-            <address style={{display: "flex", flexDirection:"column"}}>
+            <address style={{}}>
               <p>
                 {postal_code} {city}
               </p>

@@ -17106,6 +17106,19 @@ a.bx--navigation-link:focus {
     position: relative;
     width: 100%; }
 
+.hedi__profile-entry img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  background-color: #AEC1EA; }
+
+.hedi__profile-entry address {
+  display: flex;
+  flex-direction: column; }
+
+.hedi__profile-entry > div > div:not(:first-child) {
+  background-color: #fff; }
+
 .hidden {
   display: none; }
 
