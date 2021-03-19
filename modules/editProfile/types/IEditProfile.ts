@@ -23,6 +23,7 @@ export interface IEditProfile
   languageSkills: ILanguageSkillEntry[];
   first_pregnancy: boolean;
   domains: string[];
+  services: string[];
 }
 
 export const EditProfileFieldArray: (keyof IEditProfile)[] = [
@@ -51,6 +52,7 @@ export const EditProfileFieldArray: (keyof IEditProfile)[] = [
 
   "first_pregnancy",
   "domains",
+  "services",
 ];
 
 export const EditProfileFields = `${EditProfileFieldArray.join(" ").replace(
