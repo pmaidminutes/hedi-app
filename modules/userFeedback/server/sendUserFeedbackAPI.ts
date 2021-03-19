@@ -1,14 +1,17 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { GetServerSideProps, NextApiHandler } from "next";
-import { useRouter } from "next/router";
-import { insertUserFeedback } from "../query";
+import { NextApiHandler } from "next";
+import { insertUserFeedbacks } from "../query";
 import { UserFeedbackInput } from "../types";
 
-export const sendUserFeedbackAPI: NextApiHandler<IMutationResponse> = async (
-  req,
-  res
-) => {
+interface UserFeedbacksFetch {
+  lang: string;
+  userfeedbacks: UserFeedbackInput[];
+}
+
+export const sendUserFeedbacksAPI: NextApiHandler<
+  IMutationResponse[] | IMutationResponse
+> = async (req, res) => {
   if (!req.body) {
     res
       .status(400)
@@ -16,7 +19,7 @@ export const sendUserFeedbackAPI: NextApiHandler<IMutationResponse> = async (
     return;
   }
 
-  const userfeedback = JSON.parse(req.body) as UserFeedbackInput;
+  const { lang, userfeedbacks } = JSON.parse(req.body) as UserFeedbacksFetch;
 
   const authHeader = await getUserAuthHeader(req);
   if (!authHeader) {
@@ -26,9 +29,11 @@ export const sendUserFeedbackAPI: NextApiHandler<IMutationResponse> = async (
     return;
   }
 
-  // TODO get user locale. useRouter() causes hook error. req.headers["accept-language"] gives unprocessed languages
-
-  const mutationResult = await insertUserFeedback(authHeader, userfeedback);
+  const mutationResult = await insertUserFeedbacks(
+    authHeader,
+    userfeedbacks,
+    lang
+  );
   if (mutationResult) res.status(200).json(mutationResult);
   else res.status(500).json({ success: false, errors: {} });
 };

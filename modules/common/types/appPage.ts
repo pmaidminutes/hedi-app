@@ -17,6 +17,7 @@ export interface IAppPage
     IBody {
   routelabel: IRouteLabeled;
   key: string;
+  longTitle?: string;
   posterImage?: IImage;
 }
 
@@ -27,6 +28,7 @@ export function isIAppPage(obj: any): obj is IAppPage {
 export const AppPageFields = `${EntityTranslatedFields}
 ${RouteLabelFields}
 key
+longTitle
 ${WithUIElementsFields}
 ${BodyFields}
 posterImage {${ImageFields}}
