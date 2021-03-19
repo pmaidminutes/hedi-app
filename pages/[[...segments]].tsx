@@ -72,15 +72,15 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
   const pathQueries = [
-    PagePathsGQL,
-    ArticlePathsGQL,
-    CategoryPathsGQL,
-    GlossaryPathsGQL,
+    //PagePathsGQL,
+    //ArticlePathsGQL,
+    //CategoryPathsGQL,
+    //GlossaryPathsGQL,
     CaregiverPathsGQL,
     MidwifePathsGQL,
-    OrganisationPathsGQL,
-    InstitutionPathsGQL,
-    SearchViewPathsGQL,
+    //OrganisationPathsGQL,
+    //InstitutionPathsGQL,
+    //SearchViewPathsGQL,
     LoginViewPathsGQL,
     EditProfilePathsGQL,
     UserFeedbackThanksViewPathsGQL,
@@ -94,8 +94,15 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   return { paths, fallback: "blocking" };
 };
 
+interface IShellProps {
+  // TODO: to be implemented
+  // header?: IHeaderProps
+  // footer?: IFooter
+}
+
 interface ISegmentPageProps {
   content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
+  shell: IShellProps;
 }
 
 export const getStaticProps: GetStaticProps<
@@ -117,18 +124,18 @@ export const getStaticProps: GetStaticProps<
     //we have a exported content for designing, skip backend fetches
   } else {
     console.log(params?.segments);
-    if (!content) content = await getSearchViewProps(params?.segments, locale);
+    // if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content) content = await getEditProfileProps(params?.segments, locale);
-    if (!content) content = await getCategoryProps(params?.segments, locale);
-    if (!content) content = await getArticleProps(params?.segments, locale);
-    if (!content) content = await getGlossaryProps(params?.segments, locale);
+    // if (!content) content = await getCategoryProps(params?.segments, locale);
+    // if (!content) content = await getArticleProps(params?.segments, locale);
+    // if (!content) content = await getGlossaryProps(params?.segments, locale);
     if (!content) content = await getCaregiverProps(params?.segments, locale);
     if (!content) content = await getMidwifeProps(params?.segments, locale);
-    if (!content)
-      content = await getOrganisationProps(params?.segments, locale);
-    if (!content) content = await getInstitutionProps(params?.segments, locale);
-    if (!content) content = await getPageProps(params?.segments, locale);
+    // if (!content)
+    //   content = await getOrganisationProps(params?.segments, locale);
+    // if (!content) content = await getInstitutionProps(params?.segments, locale);
+    // if (!content) content = await getPageProps(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
   }
@@ -138,7 +145,7 @@ export const getStaticProps: GetStaticProps<
   }
 
   return {
-    props: { content },
+    props: { content, shell: {} },
     revalidate: content.type === "Search" ? 15 : false,
   };
 };
@@ -158,15 +165,15 @@ export default function segments(props: ISegmentPageProps) {
       </Head>
       <Header {...content} />
       <Content>
-        <BreadCrumb content={content} />
+        {/* <BreadCrumb content={content} />
         <TryCategory {...content} />
         <TryArticle {...content} />
         <TryGlossary {...content} />
-        <TryProfile {...content} />
         <TrySearch {...content} />
+        <TryPage {...content} /> */}
+        <TryProfile {...content} />
         <TryLogin {...content} />
         <TryEditProfile {...content} />
-        <TryPage {...content} />
         <TryUserFeedbackThanks {...content} />
       </Content>
       <Footer />
