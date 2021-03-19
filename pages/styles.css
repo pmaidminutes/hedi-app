@@ -17125,6 +17125,48 @@ a.bx--navigation-link:focus {
 .hedi__profile-services img, .hedi__profile-services svg {
   max-width: 130px;
   height: auto; }
+.hedi-service_selection {
+  background-color: #f4f4f4; }
+  .hedi-service_selection:hover {
+    background-color: #e5e5e5; }
+  .hedi-service_selection__head {
+    cursor: pointer;
+    margin-bottom: 1rem; }
+    .hedi-service_selection__head .bx--tile__checkmark {
+      opacity: 1; }
+  .hedi-service_selection__content {
+    display: block;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9), visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    height: 0; }
+  .hedi-service_selection.is-expanded .hedi-service_selection__content {
+    visibility: inherit;
+    opacity: 1;
+    transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9), visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
+    height: 100%; }
+  .hedi-service_selection .bx--accordion__content {
+    padding-right: 0; }
+  .hedi-service_selection .bx--accordion__title {
+    font-family: "Roboto Slab", serif;
+    font-size: 1.75rem;
+    font-weight: 400;
+    line-height: 1.29;
+    letter-spacing: 0; }
+
+.hedi__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem; }
+  .hedi__footer a {
+    font-family: "Roboto Slab", serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.375;
+    letter-spacing: 0;
+    text-decoration: none; }
+    .hedi__footer a:not(:last-child) {
+      margin-right: 1rem; }
 
 .hidden {
   display: none; }

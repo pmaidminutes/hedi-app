@@ -2,6 +2,8 @@ import {
   EntityTranslatedFields,
   IEntityLocalized,
   IEntityTranslated,
+  IWithLanguageSkills,
+  WithLanguageSkillsFields,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -19,6 +21,7 @@ export interface ICaregiver
     IDetailedName,
     IAddress,
     IContact,
+    IWithLanguageSkills,
     IWithAssociations {}
 
 export function isICaregiver(obj: any): obj is ICaregiver {
@@ -29,5 +32,6 @@ export const CaregiverFields = `${EntityTranslatedFields}
 ${DetailedNameFields}
 ${AddressFields}
 ${ContactFields}
+${WithLanguageSkillsFields}
 ${AssociationsFields}
 `;

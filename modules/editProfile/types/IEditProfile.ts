@@ -1,11 +1,10 @@
 import { IProfile } from "@/modules/model/IProfile";
+import { ILanguageSkillEntry } from "./ILanguageSkillEntry";
 
 export interface IEditProfile
   extends Omit<
     IProfile,
     | "county"
-    | "displayAddress"
-    | "displayName"
     | "district"
     | "lat"
     | "lat_approx"
@@ -20,29 +19,43 @@ export interface IEditProfile
     | "county"
     | "country"
   > {
+  type: string;
+  languageSkills: ILanguageSkillEntry[];
   first_pregnancy: boolean;
-  profile_type: string;
+  domains: string[];
 }
 
 export const EditProfileFieldArray: (keyof IEditProfile)[] = [
-  "consultation_hours",
-  "first_pregnancy",
-  "city",
+  "type",
+
+  "displayName",
+  "prefix",
   "forename",
+  "surname",
+  "suffix",
+
+  "displayAddress",
+  "city",
+  "postal_code",
+  "street",
   "house_number",
-  "mail",
+  "room",
+
   "phone",
   "phone_private",
-  "postal_code",
-  "prefix",
-  "profile_type",
-  "room",
-  "street",
-  "suffix",
-  "surname",
+  "mail",
   "website",
+  "consultation_hours",
+
+  "languageSkills",
+
+  "first_pregnancy",
+  "domains",
 ];
 
-export const EditProfileFields = `${EditProfileFieldArray.join(" ")}`;
+export const EditProfileFields = `${EditProfileFieldArray.join(" ").replace(
+  "languageSkills",
+  "languageSkills { langcode level }"
+)}`;
 
 export type EditProfileInput = Partial<IEditProfile>;

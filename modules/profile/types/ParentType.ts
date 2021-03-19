@@ -1,4 +1,9 @@
-import { EntityFields, IEntity } from "@/modules/model";
+import {
+  EntityFields,
+  IEntity,
+  IWithLanguageSkills,
+  WithLanguageSkillsFields,
+} from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
 import {
@@ -8,7 +13,12 @@ import {
 import { ProfileFields } from "@/modules/model/IProfile";
 import { ChildrenFields } from "./ChildrenType";
 
-export interface IParent extends IEntity, IDetailedName, IAddress, IContact {
+export interface IParent
+  extends IEntity,
+    IDetailedName,
+    IAddress,
+    IContact,
+    IWithLanguageSkills {
   birthdate: string;
   first_pregnancy: boolean;
 }
@@ -20,6 +30,7 @@ export const ParentFields = `${EntityFields}
 ${DetailedNameFields}
 ${AddressFields}
 ${ContactFields}
+${WithLanguageSkillsFields}
 birthdate
 first_pregnancy
 children

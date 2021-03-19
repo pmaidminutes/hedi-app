@@ -1,3 +1,4 @@
+import { IImage, ImageFields } from "@/modules/editorial/types";
 import {
   IEntityLocalized,
   IEntityTranslated,
@@ -6,13 +7,18 @@ import {
   RouteLabelFields,
   IWithUIElements,
   WithUIElementsFields,
+  IBody,
+  BodyFields,
 } from "@/modules/model";
 
 export interface IAppPage
   extends IEntityTranslated<IEntityLocalized>,
-    IWithUIElements {
+    IWithUIElements,
+    IBody {
   routelabel: IRouteLabeled;
   key: string;
+  longTitle?: string;
+  posterImage?: IImage;
 }
 
 export function isIAppPage(obj: any): obj is IAppPage {
@@ -22,5 +28,8 @@ export function isIAppPage(obj: any): obj is IAppPage {
 export const AppPageFields = `${EntityTranslatedFields}
 ${RouteLabelFields}
 key
+longTitle
 ${WithUIElementsFields}
+${BodyFields}
+posterImage {${ImageFields}}
 `;

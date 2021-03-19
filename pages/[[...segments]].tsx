@@ -38,12 +38,14 @@ import { getStaticProps as getOrganisationProps } from "@/modules/profile/server
 import { TrySearch } from "@/modules/search/client/components";
 import { SearchViewPathsGQL } from "@/modules/search/query";
 import { getStaticProps as getSearchViewProps } from "@/modules/search/server";
-import { BreadCrumb, Header } from "@/modules/shell/components";
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
-import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
+import { BreadCrumb, Header, Footer } from "@/modules/shell/components";
+// Types
+import { GetStaticPaths, GetStaticProps } from "next/types";
+
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -153,6 +155,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryEditProfile {...content} />
         <TryPage {...content} />
       </Content>
+      <Footer />
     </div>
   );
 }
