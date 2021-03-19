@@ -34,6 +34,10 @@ import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 
+import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
+import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
+import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
+
 import { TryEditProfile } from "@/modules/editProfile/components";
 import { EditProfilePathsGQL } from "@/modules/editProfile/query";
 import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
@@ -79,6 +83,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     SearchViewPathsGQL,
     LoginViewPathsGQL,
     EditProfilePathsGQL,
+    UserFeedbackThanksViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -124,6 +129,8 @@ export const getStaticProps: GetStaticProps<
       content = await getOrganisationProps(params?.segments, locale);
     if (!content) content = await getInstitutionProps(params?.segments, locale);
     if (!content) content = await getPageProps(params?.segments, locale);
+    if (!content)
+      content = await getUserFeedbackThanksViewProps(params?.segments, locale);
   }
   if (!content) {
     console.log("couldn't find content for path ", segments.join("/"));
@@ -160,6 +167,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryLogin {...content} />
         <TryEditProfile {...content} />
         <TryPage {...content} />
+        <TryUserFeedbackThanks {...content} />
       </Content>
       <Footer />
     </div>
