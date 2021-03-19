@@ -41,10 +41,11 @@ import { getStaticProps as getRegistrationViewProps } from "@/modules/registrati
 import { TrySearch } from "@/modules/search/client/components";
 import { SearchViewPathsGQL } from "@/modules/search/query";
 import { getStaticProps as getSearchViewProps } from "@/modules/search/server";
-import { BreadCrumb, Header } from "@/modules/shell/components";
+import { BreadCrumb, Footer, Header } from "@/modules/shell/components";
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
+// Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 
@@ -160,6 +161,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryEditProfile {...content} />
         <TryPage {...content} />
       </Content>
+      <Footer />
     </div>
   );
 }
