@@ -1,5 +1,5 @@
 import { IProfile } from "@/modules/model/IProfile";
-import { ClickableTile } from "carbon-components-react";
+import { ClickableTile, Row, Column } from "carbon-components-react";
 import Link from "next/link";
 import {
   ICaregiver,
@@ -13,20 +13,60 @@ export const ProfileEntry = ({
 }: {
   profile: IProfile | IMidwife | ICaregiver | IOrganisation | IInstitution;
 }): JSX.Element => {
-  const { label, route, displayName } = profile;
+  console.log({ profile });
+  const {
+    label,
+    route,
+    displayName,
+    forename,
+    prefix,
+    surname,
+    suffix,
+    postal_code,
+    city,
+    mail,
+    website,
+    phone,
+  } = profile;
 
   return (
     <>
-      <Link href={route} passHref>
-        <ClickableTile href={route}>
-          <h4
-            dangerouslySetInnerHTML={{
-              __html: label,
-            }}></h4>
 
-          {displayName}
-        </ClickableTile>
-      </Link>
+      <section className="hedi__profile-entry">
+        <Row>
+          <Column lg={{ span: 4, offset: 1 }}>
+            <img
+              src="/images/profile_dummy.png"
+              alt="Profil Bild"
+              style={{
+                width: "100%",
+                maxWidth: "300px",
+                height: "auto",
+                backgroundColor: "blue",
+              }}
+            />
+          </Column>
+          <Column lg={10} style={{backgroundColor:"#fff"}}>
+            <h2>{displayName}</h2>
+            <h3>psychosoziale Beratung</h3>
+            <address style={{display: "flex", flexDirection:"column"}}>
+              <p>
+                {postal_code} {city}
+              </p>
+              {/* TODO right number for phone linking */}
+              <a href={`tel:${phone}`}  target="_blank" title="Telefonnummer">
+                {phone}
+              </a>
+              <a href={`mailto:${mail}`} target="_blank" title="E-Mail Address">
+                {mail}
+              </a>
+              <a href={website} target="_blank" title="Webseite">
+                {website}
+              </a>
+            </address>
+          </Column>
+        </Row>
+      </section>
     </>
   );
 };
