@@ -18,5 +18,11 @@ export function useServiceSelection(props: IServiceSelection) {
   const handleComponentClick = () => {
     setIsExpanded(prev => !prev);
   };
-  return { services, selectedServices, isExpanded, handleServiceClick, handleComponentClick };
+  return {
+    services,
+    selectedServices,
+    isExpanded,
+    handleServiceClick,
+    handleComponentClick,
+  };
 }

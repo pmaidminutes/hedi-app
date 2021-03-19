@@ -1,23 +1,23 @@
 import { IAuthHeader } from "@/modules/auth/types";
 import { getClient, GQLEndpoint } from "@/modules/graphql";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { insertUserFeedbackMutation, UserFeedbackInput } from "../types";
+import { insertUserFeedbacksMutation, UserFeedbackInput } from "../types";
 
-export async function insertUserFeedback(
+export async function insertUserFeedbacks(
   authHeader: IAuthHeader,
-  userfeedback: UserFeedbackInput,
+  userfeedbacks: UserFeedbackInput[],
   lang?: string
-): Promise<IMutationResponse | null> {
+): Promise<IMutationResponse[] | null> {
   const client = await getClient(GQLEndpoint.User, authHeader);
   return client
-    .request<{ insertUserFeedback: IMutationResponse }>(
-      insertUserFeedbackMutation,
+    .request<{ insertUserFeedbacks: IMutationResponse[] }>(
+      insertUserFeedbacksMutation,
       {
-        input: userfeedback,
+        input: userfeedbacks,
         lang,
       }
     )
-    .then(data => data.insertUserFeedback)
+    .then(data => data.insertUserFeedbacks)
     .catch((err: any) => {
       console.warn(err);
       return null;
