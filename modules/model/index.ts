@@ -10,6 +10,7 @@ export * from "./IEntityLocalized";
 export * from "./IEntityTranslated";
 export * from "./ILocalized";
 export * from "./ILanguage";
+export * from "./IProfile";
 export * from "./IRouteLabeled";
 export * from "./ISummary";
 export * from "./ITagged";
