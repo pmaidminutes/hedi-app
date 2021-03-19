@@ -29,20 +29,24 @@ export const ProfileEntry = ({
             {/* TODO subtitle? */}
             <h3>psychosoziale Beratung</h3>
             <address style={{}}>
-              <p>
-                {postal_code} {city}
-              </p>
+              {postal_code} {city}
               {/* TODO right number for phone linking */}
+            </address>
+            <p>
               <a href={`tel:${phone}`} target="_blank" title="Telefonnummer">
                 {phone}
               </a>
+            </p>
+            <p>
               <a href={`mailto:${mail}`} target="_blank" title="E-Mail Address">
                 {mail}
               </a>
+            </p>
+            <p>
               <a href={website} target="_blank" title="Webseite">
                 {website}
               </a>
-            </address>
+            </p>
           </Column>
         </Row>
       </section>
