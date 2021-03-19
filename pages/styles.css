@@ -17119,6 +17119,13 @@ a.bx--navigation-link:focus {
 .hedi__profile-entry > div > div:not(:first-child) {
   background-color: #fff; }
 
+.hedi__profile-services .bx--tile {
+  width: 100%; }
+
+.hedi__profile-services img, .hedi__profile-services svg {
+  max-width: 130px;
+  height: auto; }
+
 .hidden {
   display: none; }
 
