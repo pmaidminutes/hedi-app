@@ -4,3 +4,4 @@ export * from "./Seperator";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./VideoPlayer";
+export * from "./RowWithBg";
