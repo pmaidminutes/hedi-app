@@ -1,19 +1,29 @@
+import { getSegmentsPaths } from "@/modules/common/query";
+// Types
+import { ISegmentParam } from "@/modules/common/types";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 import { ArticlePathsGQL } from "@/modules/editorial/article/query";
 import { getStaticProps as getArticleProps } from "@/modules/editorial/article/server";
-
-import { TryPage } from "@/modules/editorial/page/client/components";
-import { PagePathsGQL } from "@/modules/editorial/page/query";
-import { getStaticProps as getPageProps } from "@/modules/editorial/page/server";
-
 import { TryCategory } from "@/modules/editorial/category/client/components";
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
 import { getStaticProps as getCategoryProps } from "@/modules/editorial/category/server";
-
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
 import { getStaticProps as getGlossaryProps } from "@/modules/editorial/glossary/server";
-
+import { TryPage } from "@/modules/editorial/page/client/components";
+import { PagePathsGQL } from "@/modules/editorial/page/query";
+import { getStaticProps as getPageProps } from "@/modules/editorial/page/server";
+import { TryEditProfile } from "@/modules/editProfile/components";
+import { EditProfilePathsGQL } from "@/modules/editProfile/query";
+import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
+import { TryLogin } from "@/modules/login/client/components";
+import { LoginViewPathsGQL } from "@/modules/login/query";
+import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
+import {
+  IAppStyled,
+  IEntityLocalized,
+  IEntityTranslated,
+} from "@/modules/model";
 import { TryProfile } from "@/modules/profile/client/components";
 import {
   CaregiverPathsGQL,
@@ -25,33 +35,18 @@ import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/ge
 import { getStaticProps as getInstitutionProps } from "@/modules/profile/server/generators/getInstitutionStaticProps";
 import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
 import { getStaticProps as getOrganisationProps } from "@/modules/profile/server/generators/getOrganisationStaticProps";
-
+import { TryRegistration } from "@/modules/registration/components/TryRegistration";
+import { RegistrationViewPathsGQL } from "@/modules/registration/query";
+import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { TrySearch } from "@/modules/search/client/components";
 import { SearchViewPathsGQL } from "@/modules/search/query";
 import { getStaticProps as getSearchViewProps } from "@/modules/search/server";
-
-import { TryLogin } from "@/modules/login/client/components";
-import { LoginViewPathsGQL } from "@/modules/login/query";
-import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
-
-import { TryEditProfile } from "@/modules/editProfile/components";
-import { EditProfilePathsGQL } from "@/modules/editProfile/query";
-import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
-
+import { BreadCrumb, Header } from "@/modules/shell/components";
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import { BreadCrumb, Header } from "@/modules/shell/components";
-// Types
-import { ISegmentParam } from "@/modules/common/types";
-import {
-  IAppStyled,
-  IEntityLocalized,
-  IEntityTranslated,
-} from "@/modules/model";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { getSegmentsPaths } from "@/modules/common/query";
+import { useEffect, useState } from "react";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -79,6 +74,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     SearchViewPathsGQL,
     LoginViewPathsGQL,
     EditProfilePathsGQL,
+    RegistrationViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -114,6 +110,8 @@ export const getStaticProps: GetStaticProps<
     console.log(params?.segments);
     if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
+    if (!content)
+      content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getEditProfileProps(params?.segments, locale);
     if (!content) content = await getCategoryProps(params?.segments, locale);
     if (!content) content = await getArticleProps(params?.segments, locale);
@@ -157,6 +155,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryGlossary {...content} />
         <TryProfile {...content} />
         <TrySearch {...content} />
+        <TryRegistration {...content} />
         <TryLogin {...content} />
         <TryEditProfile {...content} />
         <TryPage {...content} />

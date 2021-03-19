@@ -1,15 +1,18 @@
-import { FormEvent, useEffect, useState } from "react";
-import { Form, Button, InlineNotification } from "carbon-components-react";
-import { RegisterInputs } from "../RegisterInputs";
-import { IRegisterInfo } from "../../types";
-import { useRegister } from "../../request";
 import { IsIHTTPError } from "@/modules/common/error";
+import { Button, Form, InlineNotification } from "carbon-components-react";
+import { FormEvent, useState } from "react";
+import { useRegister } from "../../request";
+import { IRegisterInfo, IRegistrationView } from "../../types";
+import { RegisterInputs } from "../RegisterInputs";
 
-export const RegisterForm = ({
-  eagerValidate,
-}: {
-  eagerValidate?: boolean;
-}) => {
+export const RegisterForm = (
+  {
+    eagerValidate,
+  }: {
+    eagerValidate?: boolean;
+  },
+  content: IRegistrationView
+) => {
   const [info, setInfo] = useState<IRegisterInfo>();
   const [commit, setCommit] = useState(false);
   const { data, error } = useRegister(
@@ -31,7 +34,11 @@ export const RegisterForm = ({
           subtitle={response.error.generic}
         />
       )}
-      <RegisterInputs onChange={setInfo} errors={response?.error} />
+      <RegisterInputs
+        onChange={setInfo}
+        errors={response?.error}
+        content={content}
+      />
 
       <Button type="submit" size="field">
         Submit

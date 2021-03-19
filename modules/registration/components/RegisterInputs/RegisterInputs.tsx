@@ -1,14 +1,19 @@
 import { useTextInput } from "@/modules/react/hooks";
-import { Form, TextInput } from "carbon-components-react";
+import { TextInput } from "carbon-components-react";
 import { useEffect } from "react";
-import { IRegisterError, IRegisterInfo } from "../../types";
+import { IRegisterError, IRegisterInfo, IRegistrationView } from "../../types";
 
 type RegisterInputProps = {
   errors?: IRegisterError;
   onChange?: (info: IRegisterInfo) => void;
+  content: IRegistrationView;
 };
 
-export const RegisterInputs = ({ errors, onChange }: RegisterInputProps) => {
+export const RegisterInputs = ({
+  errors,
+  onChange,
+  content,
+}: RegisterInputProps) => {
   const [name, setName] = useTextInput();
   const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
@@ -20,6 +25,7 @@ export const RegisterInputs = ({ errors, onChange }: RegisterInputProps) => {
   return (
     <>
       <TextInput
+        //{...getTextInputProps("name", content?.elements)}
         id="name"
         labelText="Username"
         required
@@ -27,15 +33,9 @@ export const RegisterInputs = ({ errors, onChange }: RegisterInputProps) => {
         invalid={!!errors?.name}
         invalidText={errors?.name}
       />
+
       <TextInput
-        id="mail"
-        labelText="E-Mail"
-        required
-        onChange={setMail}
-        invalid={!!errors?.mail}
-        invalidText={errors?.mail}
-      />
-      <TextInput
+        // {...getTextInputProps("pass", content?.elements)}
         id="pass"
         labelText="Password"
         type="password"
