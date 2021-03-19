@@ -1,0 +1,22 @@
+.hedi__language-skills {
+
+  tr {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    background-color: #fff;
+    &:not(:last-child) {
+      margin-bottom: .5rem;
+    }
+    td:first-child {
+      min-width: 100px;
+    }
+  }
+  .bx--tile {
+    width: 100%;
+  }
+
+  svg {
+    color: $pink-80;
+  }
+}

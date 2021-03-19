@@ -17170,6 +17170,22 @@ address {
     line-height: 1.29;
     letter-spacing: 0; }
 
+.hedi__language-skills tr {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff; }
+  .hedi__language-skills tr:not(:last-child) {
+    margin-bottom: .5rem; }
+  .hedi__language-skills tr td:first-child {
+    min-width: 100px; }
+
+.hedi__language-skills .bx--tile {
+  width: 100%; }
+
+.hedi__language-skills svg {
+  color: #942345; }
+
 .hidden {
   display: none; }
 
