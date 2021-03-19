@@ -15,7 +15,9 @@ import { Address } from "../Address";
 import { Contact } from "../Contact";
 import { DetailedName } from "../DetailedName";
 import { ProfileEntry } from "../ProfileEntry";
-
+import { RowWithBg } from "@/modules/common/components";
+import { Services } from "../Services";
+import { LanguageSkills } from "../LanguageSkills";
 interface IProfileProps {
   content: ICaregiver | IMidwife | IOrganisation | IInstitution;
 }
@@ -40,16 +42,25 @@ export const Profile = ({ content }: IProfileProps) => {
   return (
     <>
       <Grid>
+        <RowWithBg>
+          <ProfileEntry profile={content} />
+        </RowWithBg>
         <Row>
-          <Column lg={16}>
-            <DetailedName content={content} />
+          <Column lg={8}>
+            <Services />
           </Column>
+          <Column lg={8}>
+            <Contact content={content} />
+          </Column>
+          <Column lg={8}>
+            <LanguageSkills languageSkills={content.languageSkills} />
+          </Column>
+        </Row>
+
+        <Row>
+          <Column lg={16}>{/* <DetailedName content={content} /> */}</Column>
           <Column sm={3} md={4} lg={8}>
             <Address content={content} />
-          </Column>
-
-          <Column sm={3} md={4} lg={8}>
-            <Contact content={content} />
           </Column>
         </Row>
         {isICaregiver(content) || isIMidwife(content)
