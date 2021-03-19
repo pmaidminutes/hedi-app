@@ -1,18 +1,20 @@
+import { getTextInputProps } from "@/modules/common/utils";
+import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import { TextInput } from "carbon-components-react";
 import { useEffect } from "react";
-import { IRegisterError, IRegisterInfo, IRegistrationView } from "../../types";
+import { IRegisterError, IRegisterInfo } from "../../types";
 
 type RegisterInputProps = {
   errors?: IRegisterError;
   onChange?: (info: IRegisterInfo) => void;
-  content: IRegistrationView;
+  elements: IUIElementTexts[];
 };
 
 export const RegisterInputs = ({
   errors,
   onChange,
-  content,
+  elements,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
   const [mail, setMail] = useTextInput();
@@ -25,19 +27,22 @@ export const RegisterInputs = ({
   return (
     <>
       <TextInput
-        //{...getTextInputProps("name", content?.elements)}
-        id="name"
-        labelText="Username"
+        {...getTextInputProps("name", elements)}
         required
         onChange={setName}
         invalid={!!errors?.name}
         invalidText={errors?.name}
       />
-
       <TextInput
-        // {...getTextInputProps("pass", content?.elements)}
-        id="pass"
-        labelText="Password"
+        id={"mail"}
+        labelText={"Email"}
+        required
+        onChange={setMail}
+        invalid={!!errors?.mail}
+        invalidText={errors?.mail}
+      />
+      <TextInput
+        {...getTextInputProps("pass", elements)}
         type="password"
         required
         onChange={setPass}

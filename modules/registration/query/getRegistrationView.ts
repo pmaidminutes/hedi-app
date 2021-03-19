@@ -25,7 +25,6 @@ export async function getRegistrationView(
     })
     .then(data => {
       const view = data.appPages?.[0];
-      console.log(view, "view");
       if (view && view.key === "registration") {
         view.type = "Registration";
         return view;

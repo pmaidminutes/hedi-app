@@ -2,13 +2,7 @@ import { IsIHTTPError } from "@/modules/common/error";
 import { getTextInputProps } from "@/modules/common/utils";
 import { useTextInput } from "@/modules/react/hooks";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import {
-  AspectRatio,
-  Button,
-  Grid,
-  Row,
-  TextInput,
-} from "carbon-components-react";
+import { AspectRatio, Grid, Row, TextInput } from "carbon-components-react";
 import { useEffect } from "react";
 import { useValidate } from "../request/useValidate";
 import { IRegisterError, IRegisterInfo } from "../types";
@@ -53,11 +47,7 @@ export const Registration = ({
       </AspectRatio>
       <Grid>
         <Row>
-          <HTMLWithNextImage
-            data={
-              content.elements.find(e => e.identifier === "header")?.value ?? ""
-            }
-          />
+          <HTMLWithNextImage data={content.longTitle ?? ""} />
         </Row>
         <Row>
           <TextInput
@@ -67,13 +57,10 @@ export const Registration = ({
             invalid={!!errors?.passcode}
             invalidText={errors?.passcode}
           />
-          <Button type="button" onClick={(valid = true)}>
-            {content.elements.find(e => e.identifier === "check")?.value}
-          </Button>
         </Row>
         {!IsIHTTPError(data) && data?.success ? (
           <>
-            <RegisterForm {...content} />
+            <RegisterForm elements={content.elements} eagerValidate={true} />
           </>
         ) : (
           ""

@@ -1,4 +1,4 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import {
   IRegisterRequest,
   IRegisterResponse,
@@ -11,15 +11,16 @@ export async function registerQuery(
   const mutation = gql`
     mutation register(
       $name: String
-      $mail: String
       $pass: String
+      $mail: String
+      $commit: Boolean
     ) {
-      register(name: $name, mail: $mail, pass: $pass) {
+      register(input:{name: $name, mail: $mail, pass: $pass}, commit: $commit) {
         ${RegisterResponseFields}
       }
     }
   `;
-  const client = await getServiceClient();
+  const client = await getServiceClient(GQLEndpoint.Internal);
   client.request;
   return client
     .request<{ register: IRegisterResponse; error?: any }>(mutation, data)
