@@ -10,13 +10,14 @@ import {
   FormProps,
   InlineLoading,
   TextArea,
+  ContentSwitcher,
+  Switch,
 } from "carbon-components-react";
-import { getTextInputProps } from "@/modules/common/utils";
+import { getTextInputProps, hasElement } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
 import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
-
-type ProfileTypes = "Parent" | "Caregiver" | "Midwife";
+import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -43,6 +44,9 @@ export const EditProfileForm = ({
   isValidating,
   ...formProps
 }: EditProfileInputProps) => {
+  const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
+    profile?.type
+  );
   return (
     <Form {...formProps}>
       {errors?.generic && (
@@ -52,6 +56,15 @@ export const EditProfileForm = ({
           subtitle={errors.generic}
         />
       )}
+
+      <TextInput
+        id="type"
+        name="type"
+        value={profileType}
+        hidden={true}
+        labelText="profiletype"
+        hideLabel
+      />
 
       <FormGroup legendText="Name">
         <Row>
@@ -137,17 +150,19 @@ export const EditProfileForm = ({
             />
           </Column>
         </Row>
-        <Row>
-          <Column lg={2}>
-            <TextInput
-              {...getTextInputProps("room", elements)}
-              name="room"
-              invalid={!!errors?.room}
-              invalidText={errors?.room}
-              defaultValue={profile?.room}
-            />
-          </Column>
-        </Row>
+        {hasElement("room", conditionalElements[profileType]) && (
+          <Row>
+            <Column lg={2}>
+              <TextInput
+                {...getTextInputProps("room", elements)}
+                name="room"
+                invalid={!!errors?.room}
+                invalidText={errors?.room}
+                defaultValue={profile?.room}
+              />
+            </Column>
+          </Row>
+        )}
       </FormGroup>
       <Seperator />
       <FormGroup legendText="Kontakt">
@@ -161,18 +176,20 @@ export const EditProfileForm = ({
               defaultValue={profile?.phone}
             />
           </Column>
-          <Column lg={6}>
-            <TextInput
-              {...getTextInputProps(
-                "phone_private",
-                conditionalElements.Midwife
-              )}
-              name="phone_private"
-              invalid={!!errors?.phone_private}
-              invalidText={errors?.phone_private}
-              defaultValue={profile?.phone_private}
-            />
-          </Column>
+          {hasElement("phone_private", conditionalElements[profileType]) && (
+            <Column lg={6}>
+              <TextInput
+                {...getTextInputProps(
+                  "phone_private",
+                  conditionalElements.Midwife
+                )}
+                name="phone_private"
+                invalid={!!errors?.phone_private}
+                invalidText={errors?.phone_private}
+                defaultValue={profile?.phone_private}
+              />
+            </Column>
+          )}
         </Row>
         <Row>
           <Column lg={6}>
@@ -185,64 +202,69 @@ export const EditProfileForm = ({
               required
             />
           </Column>
-          <Column lg={6}>
-            <TextInput
-              {...getTextInputProps("website", conditionalElements.Caregiver)}
-              name="website"
-              invalid={!!errors?.website}
-              invalidText={errors?.website}
-              defaultValue={profile?.website}
-            />
-          </Column>
+          {hasElement("website", conditionalElements[profileType]) && (
+            <Column lg={6}>
+              <TextInput
+                {...getTextInputProps("website", conditionalElements.Caregiver)}
+                name="website"
+                invalid={!!errors?.website}
+                invalidText={errors?.website}
+                defaultValue={profile?.website}
+              />
+            </Column>
+          )}
         </Row>
+        {hasElement("consultation_hours", conditionalElements[profileType]) && (
+          <Row>
+            <Column lg={6}>
+              <TextArea
+                {...getTextInputProps(
+                  "consultation_hours",
+                  conditionalElements.Caregiver
+                )}
+                name="consultation_hours"
+                invalid={!!errors?.consultation_hours}
+                invalidText={errors?.consultation_hours}
+                defaultValue={profile?.consultation_hours}
+                placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
+              />
+            </Column>
+          </Row>
+        )}
+      </FormGroup>
+
+      <FormGroup legendText="Tätigkeiten">
         <Row>
-          <Column lg={6}>
-            <TextArea
-              {...getTextInputProps(
-                "consultation_hours",
-                conditionalElements.Caregiver
-              )}
-              name="consultation_hours"
-              invalid={!!errors?.consultation_hours}
-              invalidText={errors?.consultation_hours}
-              defaultValue={profile?.consultation_hours}
-              placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
-            />
+          <Column>
+            <ContentSwitcher onChange={handleContentSwitcherChange}>
+              <Switch
+                name="Parent"
+                text="Eltern"
+                onClick={() => {}}
+                onKeyDown={() => {}}
+                defaultChecked={profileType === "Parent"}
+              />
+              <Switch
+                name="Midwife"
+                text="Hebamme"
+                onClick={() => {}}
+                onKeyDown={() => {}}
+                defaultChecked={profileType === "Midwife"}
+              />
+              <Switch
+                name="Caregiver"
+                text="andere"
+                onClick={() => {}}
+                onKeyDown={() => {}}
+                defaultChecked={profileType === "Caregiver"}
+              />
+            </ContentSwitcher>
           </Column>
         </Row>
       </FormGroup>
       <ServiceSelection services={services} />
 
-      {profile?.type === "Caregiver" ? (
-        <FormGroup legendText="Caregiver">
-          <TextInput
-            {...getTextInputProps("room", conditionalElements.Caregiver)}
-            name="room"
-            invalid={!!errors?.room}
-            invalidText={errors?.room}
-            defaultValue={profile?.room}
-          />
-          <TextInput
-            {...getTextInputProps("website", conditionalElements.Caregiver)}
-            name="website"
-            invalid={!!errors?.website}
-            invalidText={errors?.website}
-            defaultValue={profile?.website}
-          />
-          <TextInput
-            {...getTextInputProps(
-              "consultation_hours",
-              conditionalElements.Caregiver
-            )}
-            name="consultation_hours"
-            invalid={!!errors?.consultation_hours}
-            invalidText={errors?.consultation_hours}
-            defaultValue={profile?.consultation_hours}
-          />
-        </FormGroup>
-      ) : null}
-
-      {profile?.type === "Parent" ? (
+      {hasElement("first_pregnancy", conditionalElements[profileType]) && (
         <FormGroup legendText="Parent">
           <Toggle
             id="first_pregnancy"
@@ -256,33 +278,7 @@ export const EditProfileForm = ({
             defaultToggled={profile?.first_pregnancy ?? false}
           />
         </FormGroup>
-      ) : null}
-
-      {profile?.type === "Midwife" ? (
-        <FormGroup legendText="Midwife">
-          <TextInput
-            {...getTextInputProps("phone_private", conditionalElements.Midwife)}
-            name="phone_private"
-            invalid={!!errors?.phone_private}
-            invalidText={errors?.phone_private}
-            defaultValue={profile?.phone_private}
-          />
-          <TextInput
-            {...getTextInputProps("website", conditionalElements.Midwife)}
-            name="website"
-            invalid={!!errors?.website}
-            invalidText={errors?.website}
-            defaultValue={profile?.website}
-          />
-          <TextInput
-            {...getTextInputProps("website", conditionalElements.Midwife)}
-            name="consultation_hours"
-            invalid={!!errors?.consultation_hours}
-            invalidText={errors?.consultation_hours}
-            defaultValue={profile?.consultation_hours}
-          />
-        </FormGroup>
-      ) : null}
+      )}
 
       {isValidating ? (
         <InlineLoading status="active" />
