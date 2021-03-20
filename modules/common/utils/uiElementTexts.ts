@@ -3,18 +3,18 @@ import { TextInputProps } from "carbon-components-react";
 
 export const tryGetValue = (
   identifier: string,
-  elements: IUIElementTexts[]
+  elements?: IUIElementTexts[]
 ): string =>
-  elements.find(item => item.identifier === identifier)?.value ?? identifier;
+  elements?.find(item => item.identifier === identifier)?.value ?? identifier;
 
 export const getTextInputProps = (
   identifier: string,
-  elements: IUIElementTexts[]
+  elements?: IUIElementTexts[]
 ): Pick<
   TextInputProps,
   "id" | "labelText" | "placeholder" | "helperText" | "aria-label"
 > => {
-  const element = elements.find(item => item.identifier === identifier);
+  const element = elements?.find(item => item.identifier === identifier);
   return {
     id: identifier,
     labelText: element?.value ?? identifier,
