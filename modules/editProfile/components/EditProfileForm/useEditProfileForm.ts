@@ -36,9 +36,11 @@ export function useEditProfileForm() {
     EditProfileFieldArray.forEach(key => {
       let value = form.get(key)?.valueOf();
       if (value === "on") value = true;
+      if (key === "domains" || key === "services" || key === "languageSkills")
+        value = form.getAll(key)?.valueOf();
       if (value && value !== profileData?.[key]) {
-        setProperty(delta, key, value as string | boolean);
-        setProperty(profileData, key, value as string | boolean);
+        setProperty(delta, key, value as any);
+        setProperty(profileData, key, value as any);
       }
     });
     if (Object.keys(delta).length > 0) {

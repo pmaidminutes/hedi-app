@@ -12,6 +12,7 @@ import {
   TextArea,
   ContentSwitcher,
   Switch,
+  SelectableTile,
 } from "carbon-components-react";
 import { getTextInputProps, hasElement } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
@@ -262,6 +263,28 @@ export const EditProfileForm = ({
           </Column>
         </Row>
       </FormGroup>
+
+      {profileType !== "Parent" && profileType !== "Midwife" && (
+        <FormGroup legendText="domains">
+          <Row>
+            <Column role="group">
+              {domainOptions.map((option, index) => (
+                <SelectableTile
+                  key={option.route}
+                  id={option.type + index}
+                  //@ts-ignore
+                  name="domains"
+                  value={option.route}
+                  selected={profile?.domains.includes(option.route)}
+                  onChange={() => {}}>
+                  {option.label}
+                </SelectableTile>
+              ))}
+            </Column>
+          </Row>
+        </FormGroup>
+      )}
+
       <ServiceSelection services={services} />
 
       {hasElement("first_pregnancy", conditionalElements[profileType]) && (
