@@ -1,6 +1,9 @@
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
 
+export const hasElement = (identifier: string, elements?: IUIElementTexts[]) =>
+  !!elements?.find(item => item.identifier === identifier);
+
 export const tryGetValue = (
   identifier: string,
   elements?: IUIElementTexts[]
