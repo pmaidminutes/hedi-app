@@ -5,14 +5,15 @@ import {
   IServiceGroup,
   IUIElementTexts,
 } from "@/modules/model";
+import { ProfileType } from "@/modules/profile/types";
 
 export interface IEditProfileFormConfig {
   lang: string;
   elements: IUIElementTexts[];
-  conditionalElements: Record<string, IUIElementTexts[]>;
+  conditionalElements: Partial<Record<ProfileType, IUIElementTexts[]>>;
   languageOptions: ILanguage[];
   domainOptions: IEntity[];
-  conditionalServiceGroups: Record<string, IServiceGroup[]>;
+  conditionalServiceGroups: Partial<Record<ProfileType, IServiceGroup[]>>;
 }
 
 export interface IEditProfileView extends IAppPage, IEditProfileFormConfig {}

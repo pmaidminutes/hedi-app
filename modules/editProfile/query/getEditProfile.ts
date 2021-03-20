@@ -12,6 +12,7 @@ import {
   LanguageFields,
   ServiceGroupFields,
 } from "@/modules/model";
+import { ProfileType } from "@/modules/profile/types";
 
 export async function getEditProfile(
   route: string
@@ -77,9 +78,10 @@ export async function getEditProfile(
   });
 
   const conditionalElements = subPages.reduce((acc, page) => {
-    const key = page.key.replace("editprofile_", "");
-    return { ...acc, [key]: page.elements };
-  }, {} as Record<string, IUIElementTexts[]>);
+    const key = page.key.replace("editprofile_", "") as ProfileType;
+    acc[key] = page.elements;
+    return acc;
+  }, {} as Record<ProfileType, IUIElementTexts[]>);
 
   // TODO filter out services which are groups at the same time
   const Midwife = serviceGroups.filter(sg => sg.midwife);
