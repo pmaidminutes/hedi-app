@@ -11,20 +11,15 @@ import {
   InlineLoading,
   TextArea,
 } from "carbon-components-react";
-import { IUIElementTexts } from "@/modules/model";
 import { getTextInputProps } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
-import { IUpsertProfile } from "../../types";
+import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
 
 type ProfileTypes = "Parent" | "Caregiver" | "Midwife";
 
-type UIElementMap = {
-  main: IUIElementTexts[];
-} & Record<ProfileTypes, IUIElementTexts[]>;
-
 type EditProfileInputProps = FormProps & {
-  uiElementMap: UIElementMap;
+  config: IEditProfileFormConfig;
   data: IUpsertProfile;
   isValidating?: boolean;
 };
@@ -37,7 +32,13 @@ const services = [
 ];
 
 export const EditProfileForm = ({
-  uiElementMap,
+  config: {
+    elements,
+    conditionalElements,
+    domainOptions,
+    languageOptions,
+    conditionalServiceGroups,
+  },
   data: { success, errors, profile },
   isValidating,
   ...formProps
@@ -56,7 +57,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("prefix", uiElementMap.main)}
+              {...getTextInputProps("prefix", elements)}
               name="prefix"
               invalid={!!errors?.prefix}
               invalidText={errors?.prefix}
@@ -65,7 +66,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("forename", uiElementMap.main)}
+              {...getTextInputProps("forename", elements)}
               name="forename"
               invalid={!!errors?.forename}
               invalidText={errors?.forename}
@@ -76,7 +77,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("surname", uiElementMap.main)}
+              {...getTextInputProps("surname", elements)}
               name="surname"
               invalid={!!errors?.surname}
               invalidText={errors?.surname}
@@ -85,7 +86,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("suffix", uiElementMap.main)}
+              {...getTextInputProps("suffix", elements)}
               name="suffix"
               invalid={!!errors?.suffix}
               invalidText={errors?.suffix}
@@ -99,7 +100,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("city", uiElementMap.main)}
+              {...getTextInputProps("city", elements)}
               name="city"
               invalid={!!errors?.city}
               invalidText={errors?.city}
@@ -108,7 +109,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("postal_code", uiElementMap.main)}
+              {...getTextInputProps("postal_code", elements)}
               name="postal_code"
               invalid={!!errors?.postal_code}
               invalidText={errors?.postal_code}
@@ -119,7 +120,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("street", uiElementMap.main)}
+              {...getTextInputProps("street", elements)}
               name="street"
               invalid={!!errors?.street}
               invalidText={errors?.street}
@@ -128,7 +129,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("house_number", uiElementMap.main)}
+              {...getTextInputProps("house_number", elements)}
               name="house_number"
               invalid={!!errors?.house_number}
               invalidText={errors?.house_number}
@@ -139,7 +140,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("room", uiElementMap.main)}
+              {...getTextInputProps("room", elements)}
               name="room"
               invalid={!!errors?.room}
               invalidText={errors?.room}
@@ -153,7 +154,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("phone", uiElementMap.main)}
+              {...getTextInputProps("phone", elements)}
               name="phone"
               invalid={!!errors?.phone}
               invalidText={errors?.phone}
@@ -162,7 +163,10 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("phone_private", uiElementMap.Midwife)}
+              {...getTextInputProps(
+                "phone_private",
+                conditionalElements.Midwife
+              )}
               name="phone_private"
               invalid={!!errors?.phone_private}
               invalidText={errors?.phone_private}
@@ -173,7 +177,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("mail", uiElementMap.main)}
+              {...getTextInputProps("mail", elements)}
               name="mail"
               invalid={!!errors?.mail}
               invalidText={errors?.mail}
@@ -183,7 +187,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("website", uiElementMap.Caregiver)}
+              {...getTextInputProps("website", conditionalElements.Caregiver)}
               name="website"
               invalid={!!errors?.website}
               invalidText={errors?.website}
@@ -196,7 +200,7 @@ export const EditProfileForm = ({
             <TextArea
               {...getTextInputProps(
                 "consultation_hours",
-                uiElementMap.Caregiver
+                conditionalElements.Caregiver
               )}
               name="consultation_hours"
               invalid={!!errors?.consultation_hours}
@@ -212,21 +216,24 @@ export const EditProfileForm = ({
       {profile?.type === "Caregiver" ? (
         <FormGroup legendText="Caregiver">
           <TextInput
-            {...getTextInputProps("room", uiElementMap.Caregiver)}
+            {...getTextInputProps("room", conditionalElements.Caregiver)}
             name="room"
             invalid={!!errors?.room}
             invalidText={errors?.room}
             defaultValue={profile?.room}
           />
           <TextInput
-            {...getTextInputProps("website", uiElementMap.Caregiver)}
+            {...getTextInputProps("website", conditionalElements.Caregiver)}
             name="website"
             invalid={!!errors?.website}
             invalidText={errors?.website}
             defaultValue={profile?.website}
           />
           <TextInput
-            {...getTextInputProps("consultation_hours", uiElementMap.Caregiver)}
+            {...getTextInputProps(
+              "consultation_hours",
+              conditionalElements.Caregiver
+            )}
             name="consultation_hours"
             invalid={!!errors?.consultation_hours}
             invalidText={errors?.consultation_hours}
@@ -243,7 +250,7 @@ export const EditProfileForm = ({
             labelText={
               getTextInputProps(
                 "first_pregnancy",
-                uiElementMap.Parent
+                conditionalElements.Parent
               )?.labelText.toString() ?? ""
             }
             defaultToggled={profile?.first_pregnancy ?? false}
@@ -254,21 +261,21 @@ export const EditProfileForm = ({
       {profile?.type === "Midwife" ? (
         <FormGroup legendText="Midwife">
           <TextInput
-            {...getTextInputProps("phone_private", uiElementMap.Midwife)}
+            {...getTextInputProps("phone_private", conditionalElements.Midwife)}
             name="phone_private"
             invalid={!!errors?.phone_private}
             invalidText={errors?.phone_private}
             defaultValue={profile?.phone_private}
           />
           <TextInput
-            {...getTextInputProps("website", uiElementMap.Midwife)}
+            {...getTextInputProps("website", conditionalElements.Midwife)}
             name="website"
             invalid={!!errors?.website}
             invalidText={errors?.website}
             defaultValue={profile?.website}
           />
           <TextInput
-            {...getTextInputProps("website", uiElementMap.Midwife)}
+            {...getTextInputProps("website", conditionalElements.Midwife)}
             name="consultation_hours"
             invalid={!!errors?.consultation_hours}
             invalidText={errors?.consultation_hours}
