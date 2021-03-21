@@ -1,6 +1,6 @@
-import { getUserAuthHeader } from "@/modules/auth/server";
+import { IAuthHeader } from "@/modules/auth/types";
+import { IHTTPError } from "@/modules/common/error";
 import { getClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { NextApiRequest, NextApiResponse } from "next";
 import {
   EditProfileInput,
   IUpsertProfile,
@@ -8,33 +8,29 @@ import {
 } from "../types";
 
 export async function upsertProfileQuery(
-  input: EditProfileInput | null,
-  req: NextApiRequest,
-  res: NextApiResponse<IUpsertProfile>
-): Promise<IUpsertProfile> {
-  return new Promise<IUpsertProfile>(async (ok, err) => {
-    const mutation = gql`
-    mutation editProfile($input: UpsertProfileInput)
-     {
-       upsertProfile(input: $input)
-       {
-          ${UpsertProfileFields}
-       }
-    }
-     `;
+  input: {
+    profile?: EditProfileInput;
+    lang: string;
+  },
+  authHeader: IAuthHeader
+): Promise<IUpsertProfile | IHTTPError> {
+  const mutation = gql`
+    mutation editProfile(
+      $profile: UpsertProfileInput 
+      $lang: String
+      ) {
+      upsertProfile(input: $profile, lang: $lang) {
+        ${UpsertProfileFields}
+      }
+    }`;
 
-    const authHeader = await getUserAuthHeader(req);
-    if (authHeader) {
-      const gql = await getClient(GQLEndpoint.User, authHeader);
-      await gql
-        .request<{ upsertProfile: IUpsertProfile }>(mutation, { input })
-        .then(data => {
-          ok(data.upsertProfile);
-        })
-        .catch(e => {
-          console.warn(e);
-          return null;
-        });
-    }
-  });
+  const client = await getClient(GQLEndpoint.User, authHeader);
+  const result = await client
+    .request<{ upsertProfile: IUpsertProfile }>(mutation, input)
+    .then(data => data.upsertProfile)
+    .catch(e => {
+      console.warn(e);
+      return { code: 500, text: "Internal Server Error" };
+    });
+  return result;
 }

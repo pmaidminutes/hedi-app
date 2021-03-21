@@ -9,7 +9,7 @@ export const EditProfile = ({ content }: { content: IEditProfileView }) => {
   return (
     <EditProfileForm
       config={extractConfig(content)}
-      {...useEditProfileForm()}
+      {...useEditProfileForm(content.lang)}
     />
   );
 };
