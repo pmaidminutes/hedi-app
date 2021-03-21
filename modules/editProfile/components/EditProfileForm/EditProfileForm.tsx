@@ -19,6 +19,7 @@ import { Seperator } from "@/modules/common/components";
 import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
+import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -232,6 +233,13 @@ export const EditProfileForm = ({
             </Column>
           </Row>
         )}
+      </FormGroup>
+      <Seperator />
+      <FormGroup legendText="Sprachen">
+        <LanguageSkillsSelection
+          config={{ elements, languageOptions }}
+          data={profile?.languageSkills}
+        />
       </FormGroup>
 
       <FormGroup legendText="Tätigkeiten">

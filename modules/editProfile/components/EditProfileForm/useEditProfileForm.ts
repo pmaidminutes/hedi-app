@@ -36,8 +36,12 @@ export function useEditProfileForm() {
     EditProfileFieldArray.forEach(key => {
       let value = form.get(key)?.valueOf();
       if (value === "on") value = true;
-      if (key === "domains" || key === "services" || key === "languageSkills")
+      if (key === "domains" || key === "services")
         value = form.getAll(key)?.valueOf();
+      if (key === "languageSkills")
+        value = (form.getAll(key)?.valueOf() as string[]).map(v =>
+          JSON.parse(v)
+        );
       if (value && value !== profileData?.[key]) {
         setProperty(delta, key, value as any);
         setProperty(profileData, key, value as any);
