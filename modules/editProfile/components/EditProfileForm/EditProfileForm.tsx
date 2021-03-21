@@ -285,7 +285,20 @@ export const EditProfileForm = ({
         </FormGroup>
       )}
 
-      <ServiceSelection services={services} />
+      {!!conditionalServiceGroups[profileType] && (
+        <FormGroup legendText="Tätigkeiten">
+          <Row>
+            {conditionalServiceGroups[profileType]?.map(group => (
+              <Column lg={8} key={group.route}>
+                <ServiceSelection
+                  group={group}
+                  initialServices={profile?.services}
+                />
+              </Column>
+            ))}
+          </Row>
+        </FormGroup>
+      )}
 
       {hasElement("first_pregnancy", conditionalElements[profileType]) && (
         <FormGroup legendText="Parent">

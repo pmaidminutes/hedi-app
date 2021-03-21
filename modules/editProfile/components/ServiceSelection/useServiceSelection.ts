@@ -1,13 +1,22 @@
-import { useState } from "react";
-export interface IServiceSelection {
-  services: string[];
-}
-export function useServiceSelection(props: IServiceSelection) {
-  const { services } = props;
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+import { IService, IServiceGroup } from "@/modules/model";
+import { useEffect, useState } from "react";
 
-  const handleServiceClick = (service: string) => {
+export function useServiceSelection(
+  group: IServiceGroup,
+  initialServices?: string[]
+) {
+  const { services } = group;
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [selectedServices, setSelectedServices] = useState<IService[]>([]);
+
+  useEffect(() => {
+    const initial = group.services.filter(s =>
+      initialServices?.includes(s.route)
+    );
+    setSelectedServices(initial);
+  }, [initialServices]);
+
+  const handleServiceClick = (service: IService) => {
     if (selectedServices.length > 0 && selectedServices.includes(service)) {
       setSelectedServices(prev => prev.filter(p => p !== service));
     } else {

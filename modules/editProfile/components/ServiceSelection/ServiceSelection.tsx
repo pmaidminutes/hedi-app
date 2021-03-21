@@ -1,16 +1,23 @@
 import React from "react";
-import { useServiceSelection, IServiceSelection } from "./useServiceSelection";
+import { useServiceSelection } from "./useServiceSelection";
 import { SelectableTile, Tile, Tag } from "carbon-components-react";
 import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
+import { IServiceGroup } from "@/modules/model";
 
-export const ServiceSelection = (props: IServiceSelection) => {
+export const ServiceSelection = ({
+  group,
+  initialServices,
+}: {
+  group: IServiceGroup;
+  initialServices?: string[];
+}) => {
   const {
     isExpanded,
     services,
     selectedServices,
     handleComponentClick,
     handleServiceClick,
-  } = useServiceSelection(props);
+  } = useServiceSelection(group, initialServices);
   return (
     <Tile
       aria-expanded={isExpanded}
@@ -18,21 +25,29 @@ export const ServiceSelection = (props: IServiceSelection) => {
       <div
         className="hedi-service_selection__head"
         onClick={() => handleComponentClick()}>
-        <h2>Psychosoziale Beratung</h2>
+        <h2>{group.label}</h2>
         <span className="bx--tile__checkmark">
           {isExpanded ? <ChevronUp16 /> : <ChevronDown16 />}
         </span>
         {selectedServices.length > 0
-          ? selectedServices.map(service => <Tag type={"blue"}>{service}</Tag>)
+          ? selectedServices.map(service => (
+              <Tag type={"blue"} key={service.route}>
+                {service.label}
+              </Tag>
+            ))
           : null}
       </div>
 
       <div className="hedi-service_selection__content">
         {services.map(service => (
           <SelectableTile
-            value={service}
+            key={service.route}
+            //@ts-ignore
+            name="services"
+            value={service.route}
+            defaultChecked={!!selectedServices?.find(s => s === service)}
             onChange={e => handleServiceClick(service)}>
-            {service}
+            {service.label}
           </SelectableTile>
         ))}
       </div>
