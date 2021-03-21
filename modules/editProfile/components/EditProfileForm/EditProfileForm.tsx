@@ -245,14 +245,9 @@ export const EditProfileForm = ({
       <FormGroup legendText="Tätigkeiten">
         <Row>
           <Column>
-            <ContentSwitcher onChange={handleContentSwitcherChange}>
-              <Switch
-                name="Parent"
-                text="Eltern"
-                onClick={() => {}}
-                onKeyDown={() => {}}
-                defaultChecked={profileType === "Parent"}
-              />
+            <ContentSwitcher
+              onChange={handleContentSwitcherChange}
+              selectedIndex={profileType === "Midwife" ? 0 : 1}>
               <Switch
                 name="Midwife"
                 text="Hebamme"
