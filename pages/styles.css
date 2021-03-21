@@ -17118,6 +17118,18 @@ address {
   max-height: 140px;
   height: auto; }
 
+.hedi__related-profiles {
+  background-color: #005D90;
+  color: #fff;
+  padding: 2rem;
+  width: 100%; }
+  .hedi__related-profiles--profile {
+    height: 100%; }
+    .hedi__related-profiles--profile svg {
+      position: absolute;
+      bottom: 0;
+      right: 0; }
+
 .hedi__row-with-bg {
   padding: 2rem 0;
   position: relative; }

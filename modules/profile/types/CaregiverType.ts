@@ -4,6 +4,7 @@ import {
   IEntityTranslated,
   IWithLanguageSkills,
   WithLanguageSkillsFields,
+  IUIElementTexts
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -23,6 +24,10 @@ export interface ICaregiver
     IContact,
     IWithLanguageSkills,
     IWithAssociations {}
+
+export interface ICaregiverView extends ICaregiver{
+  uiTexts: IUIElementTexts[]
+}
 
 export function isICaregiver(obj: any): obj is ICaregiver {
   return obj && obj.type === "Caregiver";

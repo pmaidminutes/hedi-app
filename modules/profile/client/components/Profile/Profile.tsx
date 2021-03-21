@@ -18,6 +18,7 @@ import { ProfileEntry } from "../ProfileEntry";
 import { RowWithBg } from "@/modules/common/components";
 import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
+import { RelatedProfiles } from "../RelatedProfiles";
 interface IProfileProps {
   content: ICaregiver | IMidwife | IOrganisation | IInstitution;
 }
@@ -41,7 +42,7 @@ export const TryProfile = (content: ITyped): JSX.Element | null => {
 export const Profile = ({ content }: IProfileProps) => {
   return (
     <>
-      <Grid>
+      <Grid fullWidth={true}>
         <RowWithBg>
           <ProfileEntry profile={content} />
         </RowWithBg>
@@ -56,6 +57,10 @@ export const Profile = ({ content }: IProfileProps) => {
             <LanguageSkills languageSkills={content.languageSkills} />
           </Column>
         </Row>
+        <Row>
+          <RelatedProfiles />
+        </Row>
+
 
         <Row>
           <Column lg={16}>{/* <DetailedName content={content} /> */}</Column>

@@ -1,0 +1,16 @@
+.hedi__related-profiles {
+  background-color: $blue-80;
+  // background-image:url(/images/related_profiles_bg_rotated.svg) ;
+  color: #fff;
+  padding: 2rem;
+  width: 100%;
+
+  &--profile {
+    height: 100%;
+    svg {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}
