@@ -4,11 +4,20 @@ import { TextInputProps } from "carbon-components-react";
 export const hasElement = (identifier: string, elements?: IUIElementTexts[]) =>
   !!elements?.find(item => item.identifier === identifier);
 
-export const tryGetValue = (
+export const tryGet = (
   identifier: string,
   elements?: IUIElementTexts[]
+): IUIElementTexts | undefined =>
+  elements?.find(item => item.identifier === identifier);
+
+export const tryGetValue = (
+  identifier: string,
+  elements?: IUIElementTexts[],
+  fallback?: string
 ): string =>
-  elements?.find(item => item.identifier === identifier)?.value ?? identifier;
+  elements?.find(item => item.identifier === identifier)?.value ??
+  fallback ??
+  identifier;
 
 export const getTextInputProps = (
   identifier: string,
