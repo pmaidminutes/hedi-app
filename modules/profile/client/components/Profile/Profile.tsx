@@ -46,6 +46,7 @@ export const Profile = ({ content }: IProfileProps) => {
         <RowWithBg>
           <ProfileEntry profile={content} />
         </RowWithBg>
+
         <Row>
           <Column lg={8}>
             <Services />
@@ -59,14 +60,6 @@ export const Profile = ({ content }: IProfileProps) => {
         </Row>
         <Row>
           <RelatedProfiles />
-        </Row>
-
-
-        <Row>
-          <Column lg={16}>{/* <DetailedName content={content} /> */}</Column>
-          <Column sm={3} md={4} lg={8}>
-            <Address content={content} />
-          </Column>
         </Row>
         {isICaregiver(content) || isIMidwife(content)
           ? content.associations.map((entry: IProfile) => {

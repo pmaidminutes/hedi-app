@@ -1,10 +1,11 @@
+import { IAppPage } from "@/modules/common/types";
 import {
   EntityTranslatedFields,
   IEntityLocalized,
   IEntityTranslated,
   IWithLanguageSkills,
   WithLanguageSkillsFields,
-  IUIElementTexts
+  IUIElementTexts,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -25,8 +26,8 @@ export interface ICaregiver
     IWithLanguageSkills,
     IWithAssociations {}
 
-export interface ICaregiverView extends ICaregiver{
-  uiTexts: IUIElementTexts[]
+export interface ICaregiverView extends ICaregiver {
+  uiTexts: IAppPage[];
 }
 
 export function isICaregiver(obj: any): obj is ICaregiver {

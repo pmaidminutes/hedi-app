@@ -2,7 +2,7 @@ import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import { CaregiverFields, ICaregiver, ICaregiverView } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { WithUIElementsFields } from "@/modules/model";
-import {AppPageFields} from '@/modules/common/types'
+import { AppPageFields } from "@/modules/common/types";
 
 export async function getCaregiver(
   route: string
@@ -24,7 +24,6 @@ export async function getCaregiver(
   const client = await getServiceClient(GQLEndpoint.Internal);
   const { caregivers } = await client
     .request<{ caregivers: ICaregiver[] }>(query, { routes: [route], lang })
-    // .then(data => data.caregivers[0])
     .catch(e => {
       console.warn(e);
       return { caregivers: [] };
@@ -46,7 +45,6 @@ export async function getCaregiver(
     { lang }
   );
 
-  console.log({uiTexts})
-
+  const elements = uiTexts[0];
   return { ...caregiver, ...uiTexts };
 }
