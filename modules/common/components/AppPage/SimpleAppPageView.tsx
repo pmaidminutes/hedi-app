@@ -1,10 +1,9 @@
 import { IAppPage } from "@/modules/common/types";
 import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
-import Link from "next/link";
 import Image from "next/image";
 import { HTMLWithNextImage } from "@/modules/react/html";
 
-export const AppPageView: React.FC<{
+export const SimpleAppPageView: React.FC<{
   content: IAppPage;
   rootCssClass?: string;
 }> = ({ content, rootCssClass, children }) => {
@@ -26,18 +25,6 @@ export const AppPageView: React.FC<{
           <Column>
             <h1>{content.longTitle ?? content.label}</h1>
             <HTMLWithNextImage data={content.body} />
-            <div className="hedi-app-page-link-buttons">
-              {content.elements.map(element => (
-                <Link
-                  key={element.identifier + content.lang}
-                  href={"#"}
-                  passHref>
-                  <a href={"#" /* TODO redirect to correct location */}>
-                    {element.value}
-                  </a>
-                </Link>
-              ))}
-            </div>
           </Column>
         </Row>
         {children && (
