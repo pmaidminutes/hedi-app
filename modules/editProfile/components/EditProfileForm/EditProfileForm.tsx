@@ -31,13 +31,6 @@ type EditProfileInputProps = FormProps & {
   isValidating?: boolean;
 };
 
-const services = [
-  "Sexualberatung",
-  "Verhütungsberatung",
-  "Schwangerenberatung",
-  "Beratung bei Trennung und Scheidung",
-];
-
 export const EditProfileForm = ({
   config: {
     elements,
@@ -66,7 +59,8 @@ export const EditProfileForm = ({
       <input id="type" name="type" value={profileType} hidden={true} readOnly />
 
       <FormGroup
-        legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}>
+        legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}
+        className="hedi-group-name">
         <Row>
           <Column lg={2}>
             <TextInput
@@ -103,7 +97,8 @@ export const EditProfileForm = ({
       <FormGroup
         legendText={
           <h2>{tryGetValue("group-address", elements, "Adresse")}</h2>
-        }>
+        }
+        className="hedi-group-address">
         <Row>
           <Column lg={6}>
             <TextInput
@@ -162,7 +157,8 @@ export const EditProfileForm = ({
       <FormGroup
         legendText={
           <h2>{tryGetValue("group-contact", elements, "Kontakt")}</h2>
-        }>
+        }
+        className="hedi-group-contact">
         <Row>
           <Column lg={6}>
             <TextInput
@@ -246,7 +242,8 @@ export const EditProfileForm = ({
       <FormGroup
         legendText={
           <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
-        }>
+        }
+        className="hedi-group-type">
         <Row>
           <Column>
             <ContentSwitcher
@@ -278,7 +275,8 @@ export const EditProfileForm = ({
             <h4>
               {tryGetValue("group-domains", elements, "Arbeitsschwerpunkt")}
             </h4>
-          }>
+          }
+          className="hedi-group-domains">
           <Row>
             <Column role="group">
               {domainOptions.map((option, index) => (
@@ -302,7 +300,8 @@ export const EditProfileForm = ({
         <FormGroup
           legendText={
             <h2>{tryGetValue("group-services", elements, "Angebote")}</h2>
-          }>
+          }
+          className="hedi-group-services">
           <Row>
             {conditionalServiceGroups[profileType]?.map(serviceGroup => (
               <Column lg={8} key={serviceGroup.route}>
