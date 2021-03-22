@@ -17,7 +17,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
       <Tile>
-        <img src="/images/profile_pregnancy.svg" alt="" />
+        <img src="/images/Pregnancy_blue.svg" alt="" />
         <address>
           <p>{displayAddress}</p>
           <p>
