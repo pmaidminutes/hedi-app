@@ -1,11 +1,5 @@
 import { getTextInputProps } from "@/modules/common/utils";
 import { ProfileView } from "@/modules/profile/query";
-import {
-  ICaregiver,
-  IInstitution,
-  IMidwife,
-  IOrganisation,
-} from "@/modules/profile/types";
 export interface IProfileViewProps {
   content: ProfileView;
 }
@@ -22,12 +16,13 @@ export function useProfile(props: IProfileViewProps) {
     website,
     phone,
   } = content;
-  const headline = getTextInputProps("fluency", elements);
+  const languagesHeadline = getTextInputProps("fluency", elements);
+  const servicesHeadline = getTextInputProps("services", elements);
 
   return {
     languagesData: {
       languageSkills,
-      headline,
+      headline: languagesHeadline,
     },
     profileEntryData: {
       displayName,
@@ -36,6 +31,9 @@ export function useProfile(props: IProfileViewProps) {
       mail,
       website,
       phone,
+    },
+    servicesData: {
+      headline: servicesHeadline,
     },
   };
 }

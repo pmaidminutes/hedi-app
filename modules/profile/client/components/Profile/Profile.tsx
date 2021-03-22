@@ -42,7 +42,7 @@ export const TryProfile = (content: ITyped): JSX.Element | null => {
 };
 
 export const Profile = (props: IProfileViewProps) => {
-  const { languagesData, profileEntryData } = useProfile(props);
+  const { languagesData, profileEntryData, servicesData } = useProfile(props);
   const { content } = props;
   return (
     <>
@@ -53,7 +53,7 @@ export const Profile = (props: IProfileViewProps) => {
 
         <Row>
           <Column lg={8}>
-            <Services />
+            <Services {...servicesData} />
           </Column>
           <Column lg={8}>
             <Contact content={content} />
