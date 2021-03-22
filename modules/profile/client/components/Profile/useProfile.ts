@@ -15,9 +15,14 @@ export function useProfile(props: IProfileViewProps) {
     mail,
     website,
     phone,
+    consultation_hours,
+    street,
+    house_number,
+    displayAddress,
   } = content;
   const languagesHeadline = getTextInputProps("fluency", elements);
   const servicesHeadline = getTextInputProps("services", elements);
+  const contactHeadline = getTextInputProps("office_hrs", elements);
 
   return {
     languagesData: {
@@ -34,6 +39,18 @@ export function useProfile(props: IProfileViewProps) {
     },
     servicesData: {
       headline: servicesHeadline,
+    },
+    contactData: {
+      headline: contactHeadline,
+      phone,
+      mail,
+      website,
+      consultation_hours,
+      street,
+      house_number,
+      city,
+      displayAddress,
+      postal_code,
     },
   };
 }

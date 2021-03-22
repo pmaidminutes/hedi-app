@@ -11,15 +11,12 @@ import {
   isIMidwife,
 } from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
-import { Address } from "../Address";
 import { Contact } from "../Contact";
-import { DetailedName } from "../DetailedName";
 import { ProfileEntry } from "../ProfileEntry";
 import { RowWithBg } from "@/modules/common/components";
 import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
-import { getTextInputProps } from "@/modules/common/utils";
 import { IProfileViewProps, useProfile } from "./useProfile";
 import { ProfileView } from "@/modules/profile/query/getProfile";
 
@@ -42,8 +39,12 @@ export const TryProfile = (content: ITyped): JSX.Element | null => {
 };
 
 export const Profile = (props: IProfileViewProps) => {
-  const { languagesData, profileEntryData, servicesData } = useProfile(props);
-  const { content } = props;
+  const {
+    languagesData,
+    profileEntryData,
+    servicesData,
+    contactData,
+  } = useProfile(props);
   return (
     <>
       <Grid fullWidth={true}>
@@ -56,7 +57,7 @@ export const Profile = (props: IProfileViewProps) => {
             <Services {...servicesData} />
           </Column>
           <Column lg={8}>
-            <Contact content={content} />
+            <Contact {...contactData} />
           </Column>
           <Column lg={8}>
             <LanguageSkills {...languagesData} />

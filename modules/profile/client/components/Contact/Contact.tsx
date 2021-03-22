@@ -1,10 +1,7 @@
-import { IContact, IProfile } from "@/modules/model";
+import { IContactProps, useContact } from "./useContact";
 import { Tile } from "carbon-components-react";
-interface IContactProps {
-  content: IProfile;
-}
 
-export const Contact = ({ content }: IContactProps): JSX.Element => {
+export const Contact = (props: IContactProps): JSX.Element => {
   const {
     phone,
     mail,
@@ -15,7 +12,8 @@ export const Contact = ({ content }: IContactProps): JSX.Element => {
     city,
     displayAddress,
     postal_code,
-  } = content;
+    headline,
+  } = useContact(props);
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
       <Tile>
@@ -45,9 +43,12 @@ export const Contact = ({ content }: IContactProps): JSX.Element => {
             {website}
           </a>
         </p>
-        {/* TODO headline aus Appages */}
-        <h3>Sprechzeiten</h3>
-        {consultation_hours ? <p>{consultation_hours}</p> : null}
+        {consultation_hours ? (
+          <>
+            <h3>{headline}</h3>
+            <p>{consultation_hours}</p>
+          </>
+        ) : null}
       </Tile>
     </section>
   );
