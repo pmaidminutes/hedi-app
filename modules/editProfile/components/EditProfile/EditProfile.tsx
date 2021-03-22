@@ -20,7 +20,7 @@ export const EditProfile = ({ content }: { content: IEditProfileView }) => {
           alt={poster.alt}
         />
       )}
-      <h1>{content.label}</h1>
+      <h1>{content.longTitle ?? content.label}</h1>
       <HTMLWithNextImage data={content.body} />
       <EditProfileForm
         config={extractConfig(content)}
