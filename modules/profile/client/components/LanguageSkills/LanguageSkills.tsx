@@ -9,10 +9,15 @@ export const LanguageSkills = ({ languageSkills }: IWithLanguageSkills) => {
         {/* TODO von appages holen */}
         <h3>Sprachen</h3>
         <table>
-          {languageSkills.map((skill, index) => (
-            // TODO other key
-            <LanguageSkill key={index} languageSkill={skill} />
-          ))}
+          <tbody>
+            {languageSkills.map((skill, index) => (
+              // TODO other key
+              <LanguageSkill
+                key={index + skill.language.label}
+                languageSkill={skill}
+              />
+            ))}
+          </tbody>
         </table>
       </Tile>
     </section>
