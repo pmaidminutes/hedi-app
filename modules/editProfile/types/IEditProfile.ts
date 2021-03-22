@@ -1,4 +1,5 @@
 import { IProfile } from "@/modules/model/IProfile";
+import { ProfileType } from "@/modules/profile/types";
 import { ILanguageSkillEntry } from "./ILanguageSkillEntry";
 
 export interface IEditProfile
@@ -19,10 +20,11 @@ export interface IEditProfile
     | "county"
     | "country"
   > {
-  type: string;
+  type: ProfileType;
   languageSkills: ILanguageSkillEntry[];
   first_pregnancy: boolean;
   domains: string[];
+  services: string[];
 }
 
 export const EditProfileFieldArray: (keyof IEditProfile)[] = [
@@ -51,6 +53,7 @@ export const EditProfileFieldArray: (keyof IEditProfile)[] = [
 
   "first_pregnancy",
   "domains",
+  "services",
 ];
 
 export const EditProfileFields = `${EditProfileFieldArray.join(" ").replace(

@@ -10,38 +10,42 @@ import {
   FormProps,
   InlineLoading,
   TextArea,
+  ContentSwitcher,
+  Switch,
+  SelectableTile,
 } from "carbon-components-react";
-import { IUIElementTexts } from "@/modules/model";
-import { getTextInputProps } from "@/modules/common/utils";
+import {
+  getTextInputProps,
+  hasElement,
+  tryGetValue,
+} from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
-import { IUpsertProfile } from "../../types";
+import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
-
-type ProfileTypes = "Parent" | "Caregiver" | "Midwife";
-
-type UIElementMap = {
-  main: IUIElementTexts[];
-} & Record<ProfileTypes, IUIElementTexts[]>;
+import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
+import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 
 type EditProfileInputProps = FormProps & {
-  uiElementMap: UIElementMap;
+  config: IEditProfileFormConfig;
   data: IUpsertProfile;
   isValidating?: boolean;
 };
 
-const services = [
-  "Sexualberatung",
-  "Verhütungsberatung",
-  "Schwangerenberatung",
-  "Beratung bei Trennung und Scheidung",
-];
-
 export const EditProfileForm = ({
-  uiElementMap,
+  config: {
+    elements,
+    conditionalElements,
+    domainOptions,
+    languageOptions,
+    conditionalServiceGroups,
+  },
   data: { success, errors, profile },
   isValidating,
   ...formProps
 }: EditProfileInputProps) => {
+  const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
+    profile?.type
+  );
   return (
     <Form {...formProps}>
       {errors?.generic && (
@@ -52,11 +56,15 @@ export const EditProfileForm = ({
         />
       )}
 
-      <FormGroup legendText="Name">
+      <input id="type" name="type" value={profileType} hidden={true} readOnly />
+
+      <FormGroup
+        legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}
+        className="hedi--group hedi--group--name">
         <Row>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("prefix", uiElementMap.main)}
+              {...getTextInputProps("prefix", elements)}
               name="prefix"
               invalid={!!errors?.prefix}
               invalidText={errors?.prefix}
@@ -65,7 +73,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("forename", uiElementMap.main)}
+              {...getTextInputProps("forename", elements)}
               name="forename"
               invalid={!!errors?.forename}
               invalidText={errors?.forename}
@@ -76,30 +84,25 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("surname", uiElementMap.main)}
+              {...getTextInputProps("surname", elements)}
               name="surname"
               invalid={!!errors?.surname}
               invalidText={errors?.surname}
               defaultValue={profile?.surname}
             />
           </Column>
-          <Column lg={2}>
-            <TextInput
-              {...getTextInputProps("suffix", uiElementMap.main)}
-              name="suffix"
-              invalid={!!errors?.suffix}
-              invalidText={errors?.suffix}
-              defaultValue={profile?.suffix}
-            />
-          </Column>
         </Row>
       </FormGroup>
       <Seperator />
-      <FormGroup legendText="Address">
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-address", elements, "Adresse")}</h2>
+        }
+        className="hedi--group hedi--group--address">
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("city", uiElementMap.main)}
+              {...getTextInputProps("city", elements)}
               name="city"
               invalid={!!errors?.city}
               invalidText={errors?.city}
@@ -108,7 +111,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("postal_code", uiElementMap.main)}
+              {...getTextInputProps("postal_code", elements)}
               name="postal_code"
               invalid={!!errors?.postal_code}
               invalidText={errors?.postal_code}
@@ -119,7 +122,7 @@ export const EditProfileForm = ({
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("street", uiElementMap.main)}
+              {...getTextInputProps("street", elements)}
               name="street"
               invalid={!!errors?.street}
               invalidText={errors?.street}
@@ -128,7 +131,7 @@ export const EditProfileForm = ({
           </Column>
           <Column lg={2}>
             <TextInput
-              {...getTextInputProps("house_number", uiElementMap.main)}
+              {...getTextInputProps("house_number", elements)}
               name="house_number"
               invalid={!!errors?.house_number}
               invalidText={errors?.house_number}
@@ -136,44 +139,55 @@ export const EditProfileForm = ({
             />
           </Column>
         </Row>
-        <Row>
-          <Column lg={2}>
-            <TextInput
-              {...getTextInputProps("room", uiElementMap.main)}
-              name="room"
-              invalid={!!errors?.room}
-              invalidText={errors?.room}
-              defaultValue={profile?.room}
-            />
-          </Column>
-        </Row>
+        {hasElement("room", conditionalElements[profileType]) && (
+          <Row>
+            <Column lg={8}>
+              <TextInput
+                {...getTextInputProps("room", conditionalElements[profileType])}
+                name="room"
+                invalid={!!errors?.room}
+                invalidText={errors?.room}
+                defaultValue={profile?.room}
+              />
+            </Column>
+          </Row>
+        )}
       </FormGroup>
       <Seperator />
-      <FormGroup legendText="Kontakt">
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-contact", elements, "Kontakt")}</h2>
+        }
+        className="hedi--group hedi--group--contact">
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("phone", uiElementMap.main)}
+              {...getTextInputProps("phone", elements)}
               name="phone"
               invalid={!!errors?.phone}
               invalidText={errors?.phone}
               defaultValue={profile?.phone}
             />
           </Column>
-          <Column lg={6}>
-            <TextInput
-              {...getTextInputProps("phone_private", uiElementMap.Midwife)}
-              name="phone_private"
-              invalid={!!errors?.phone_private}
-              invalidText={errors?.phone_private}
-              defaultValue={profile?.phone_private}
-            />
-          </Column>
+          {hasElement("phone_private", conditionalElements[profileType]) && (
+            <Column lg={6}>
+              <TextInput
+                {...getTextInputProps(
+                  "phone_private",
+                  conditionalElements[profileType]
+                )}
+                name="phone_private"
+                invalid={!!errors?.phone_private}
+                invalidText={errors?.phone_private}
+                defaultValue={profile?.phone_private}
+              />
+            </Column>
+          )}
         </Row>
         <Row>
           <Column lg={6}>
             <TextInput
-              {...getTextInputProps("mail", uiElementMap.main)}
+              {...getTextInputProps("mail", elements)}
               name="mail"
               invalid={!!errors?.mail}
               invalidText={errors?.mail}
@@ -181,61 +195,128 @@ export const EditProfileForm = ({
               required
             />
           </Column>
-          <Column lg={6}>
-            <TextInput
-              {...getTextInputProps("website", uiElementMap.Caregiver)}
-              name="website"
-              invalid={!!errors?.website}
-              invalidText={errors?.website}
-              defaultValue={profile?.website}
-            />
-          </Column>
+          {hasElement("website", conditionalElements[profileType]) && (
+            <Column lg={6}>
+              <TextInput
+                {...getTextInputProps(
+                  "website",
+                  conditionalElements[profileType]
+                )}
+                name="website"
+                invalid={!!errors?.website}
+                invalidText={errors?.website}
+                defaultValue={profile?.website}
+              />
+            </Column>
+          )}
         </Row>
+        {hasElement("consultation_hours", conditionalElements[profileType]) && (
+          <Row>
+            <Column lg={6}>
+              <TextArea
+                {...getTextInputProps(
+                  "consultation_hours",
+                  conditionalElements[profileType]
+                )}
+                name="consultation_hours"
+                invalid={!!errors?.consultation_hours}
+                invalidText={errors?.consultation_hours}
+                defaultValue={profile?.consultation_hours}
+                placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
+              />
+            </Column>
+          </Row>
+        )}
+      </FormGroup>
+      <Seperator />
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-languageSkills", elements, "Sprachen")}</h2>
+        }
+        className="hedi--group hedi--group--language-skills">
+        <LanguageSkillsSelection
+          config={{ elements, languageOptions }}
+          data={profile?.languageSkills}
+        />
+      </FormGroup>
+
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
+        }
+        className="hedi--group hedi--group--profile-type">
         <Row>
-          <Column lg={6}>
-            <TextArea
-              {...getTextInputProps(
-                "consultation_hours",
-                uiElementMap.Caregiver
-              )}
-              name="consultation_hours"
-              invalid={!!errors?.consultation_hours}
-              invalidText={errors?.consultation_hours}
-              defaultValue={profile?.consultation_hours}
-              placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
-            />
+          <Column>
+            <ContentSwitcher
+              onChange={handleContentSwitcherChange}
+              size="xl"
+              selectedIndex={profileType === "Midwife" ? 0 : 1}>
+              <Switch
+                name="Midwife"
+                text={tryGetValue("type-midwife", elements, "Hebamme")}
+                onClick={() => {}}
+                onKeyDown={() => {}}
+                defaultChecked={profileType === "Midwife"}
+              />
+              <Switch
+                name="Caregiver"
+                text={tryGetValue("type-caregiver", elements, "Betreuende")}
+                onClick={() => {}}
+                onKeyDown={() => {}}
+                defaultChecked={profileType === "Caregiver"}
+              />
+            </ContentSwitcher>
           </Column>
         </Row>
       </FormGroup>
-      <ServiceSelection services={services} />
 
-      {profile?.type === "Caregiver" ? (
-        <FormGroup legendText="Caregiver">
-          <TextInput
-            {...getTextInputProps("room", uiElementMap.Caregiver)}
-            name="room"
-            invalid={!!errors?.room}
-            invalidText={errors?.room}
-            defaultValue={profile?.room}
-          />
-          <TextInput
-            {...getTextInputProps("website", uiElementMap.Caregiver)}
-            name="website"
-            invalid={!!errors?.website}
-            invalidText={errors?.website}
-            defaultValue={profile?.website}
-          />
-          <TextInput
-            {...getTextInputProps("consultation_hours", uiElementMap.Caregiver)}
-            name="consultation_hours"
-            invalid={!!errors?.consultation_hours}
-            invalidText={errors?.consultation_hours}
-            defaultValue={profile?.consultation_hours}
-          />
+      {profileType !== "Parent" && profileType !== "Midwife" && (
+        <FormGroup
+          legendText={
+            <h4>
+              {tryGetValue("group-domains", elements, "Arbeitsschwerpunkt")}
+            </h4>
+          }
+          className="hedi--group hedi--group--domains">
+          <Row>
+            <Column role="group">
+              {domainOptions.map((option, index) => (
+                <SelectableTile
+                  key={option.route}
+                  id={option.type + index}
+                  //@ts-ignore
+                  name="domains"
+                  value={option.route}
+                  selected={profile?.domains.includes(option.route)}
+                  onChange={() => {}}>
+                  {option.label}
+                </SelectableTile>
+              ))}
+            </Column>
+          </Row>
         </FormGroup>
-      ) : null}
+      )}
 
-      {profile?.type === "Parent" ? (
+      {!!conditionalServiceGroups[profileType] && (
+        <FormGroup
+          legendText={
+            <h2>{tryGetValue("group-services", elements, "Angebote")}</h2>
+          }
+          className="hedi--group hedi--group--services">
+          <Row>
+            {conditionalServiceGroups[profileType]?.map(serviceGroup => (
+              <Column lg={8} key={serviceGroup.route}>
+                <ServiceSelection
+                  config={{ elements, serviceGroup }}
+                  data={profile?.services}
+                />
+              </Column>
+            ))}
+          </Row>
+        </FormGroup>
+      )}
+
+      {hasElement("first_pregnancy", conditionalElements[profileType]) && (
         <FormGroup legendText="Parent">
           <Toggle
             id="first_pregnancy"
@@ -243,44 +324,20 @@ export const EditProfileForm = ({
             labelText={
               getTextInputProps(
                 "first_pregnancy",
-                uiElementMap.Parent
+                conditionalElements.Parent
               )?.labelText.toString() ?? ""
             }
             defaultToggled={profile?.first_pregnancy ?? false}
           />
         </FormGroup>
-      ) : null}
-
-      {profile?.type === "Midwife" ? (
-        <FormGroup legendText="Midwife">
-          <TextInput
-            {...getTextInputProps("phone_private", uiElementMap.Midwife)}
-            name="phone_private"
-            invalid={!!errors?.phone_private}
-            invalidText={errors?.phone_private}
-            defaultValue={profile?.phone_private}
-          />
-          <TextInput
-            {...getTextInputProps("website", uiElementMap.Midwife)}
-            name="website"
-            invalid={!!errors?.website}
-            invalidText={errors?.website}
-            defaultValue={profile?.website}
-          />
-          <TextInput
-            {...getTextInputProps("website", uiElementMap.Midwife)}
-            name="consultation_hours"
-            invalid={!!errors?.consultation_hours}
-            invalidText={errors?.consultation_hours}
-            defaultValue={profile?.consultation_hours}
-          />
-        </FormGroup>
-      ) : null}
+      )}
 
       {isValidating ? (
         <InlineLoading status="active" />
       ) : (
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {tryGetValue("submit", elements, "Profil speichern")}
+        </Button>
       )}
     </Form>
   );

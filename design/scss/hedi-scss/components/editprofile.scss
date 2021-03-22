@@ -1,0 +1,10 @@
+.hedi--edit-profile {
+
+  // required to make the dropdowns visible tables
+  // cannot be set directly on the table, since the overflow is defined on a wrapping node
+  .hedi--group--language-skills {
+    .bx--data-table-content {
+      overflow-x: visible !important; 
+    }
+  }
+}
