@@ -6,5 +6,5 @@ export const getStaticProps = async (
   segments?: string[],
   locale = "de"
 ): Promise<IAppPage | null> => {
-  return getLandingPageView(segmentsToRoute(segments || [], locale));
+  return getLandingPageView(segmentsToRoute(segments || [], locale), locale);
 };

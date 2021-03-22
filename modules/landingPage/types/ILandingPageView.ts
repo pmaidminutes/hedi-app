@@ -1,5 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
+import { IEntity } from "@/modules/model";
 
 export interface ILandingPageView extends IAppPage {
-  buttons: IAppPage[];
+  links: (IEntity & { key: string })[];
 }

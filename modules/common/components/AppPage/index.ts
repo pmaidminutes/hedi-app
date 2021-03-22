@@ -1,1 +1,1 @@
-export * from "./AppPageView";
+export * from "./SimpleAppPageView";
