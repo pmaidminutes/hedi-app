@@ -1,6 +1,6 @@
 import { generateAppPagePathsGQL } from "@/modules/common/query";
-import { simpleAppPages } from "../types/SimpleAppPages";
+import { simpleAppPageKeys } from "../types/SimpleAppPageKeys";
 
 export const SimpleAppPagesViewPathsGQL = generateAppPagePathsGQL(
-  simpleAppPages
+  simpleAppPageKeys
 );
