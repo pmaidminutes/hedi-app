@@ -12,10 +12,9 @@ export async function registerQuery(
     mutation register(
       $name: String
       $pass: String
-      $mail: String
       $commit: Boolean
     ) {
-      register(input:{name: $name, mail: $mail, pass: $pass}, commit: $commit) {
+      register(input:{name: $name,pass: $pass}, commit: $commit) {
         ${RegisterResponseFields}
       }
     }

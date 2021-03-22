@@ -5,7 +5,9 @@ import { IRegisterRequest, IRegisterResponse } from "../types";
 
 export function useValidate(info: IRegisterRequest) {
   const validateResult = useSWR<IHTTPError | IRegisterResponse>(
-    info.passcode ? "/api/register/validate/?" + encodeInfo(info) : null,
+    info.passcode && info.passcode.length > 5
+      ? "/api/register/validate/?" + encodeInfo(info)
+      : null,
     url => jsonFetcher<IRegisterResponse>(url)
   );
   return { ...validateResult };

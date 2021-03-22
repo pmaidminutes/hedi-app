@@ -1,4 +1,4 @@
 export * from "./RegisterForm";
 export * from "./RegisterInputs";
-export * from "./Registration";
+export * from "./RegistrationView";
 export * from "./TryRegistration";

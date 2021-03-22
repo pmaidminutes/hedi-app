@@ -1,7 +1,7 @@
 import { getTextInputProps } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
-import { TextInput } from "carbon-components-react";
+import { Button, TextInput } from "carbon-components-react";
 import { useEffect } from "react";
 import { IRegisterError, IRegisterInfo } from "../../types";
 
@@ -9,12 +9,14 @@ type RegisterInputProps = {
   errors?: IRegisterError;
   onChange?: (info: IRegisterInfo) => void;
   elements: IUIElementTexts[];
+  isPasscodeTyped: boolean;
 };
 
 export const RegisterInputs = ({
   errors,
   onChange,
   elements,
+  isPasscodeTyped,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
   const [mail, setMail] = useTextInput();
@@ -24,33 +26,34 @@ export const RegisterInputs = ({
       onChange({ name, mail, pass });
     }
   }, [name, mail, pass]);
+
   return (
     <>
-      <TextInput
-        {...getTextInputProps("name", elements)}
-        required
-        onChange={setName}
-        autoComplete="off"
-        invalid={!!errors?.name}
-        invalidText={errors?.name}
-      />
-      <TextInput
-        id={"mail"}
-        labelText={"Email"}
-        required
-        autoComplete="off"
-        onChange={setMail}
-        invalid={!!errors?.mail}
-        invalidText={errors?.mail}
-      />
-      <TextInput
-        {...getTextInputProps("pass", elements)}
-        type="password"
-        required
-        onChange={setPass}
-        invalid={!!errors?.pass}
-        invalidText={errors?.pass}
-      />
+      {isPasscodeTyped ? (
+        <>
+          <TextInput
+            {...getTextInputProps("name", elements)}
+            required
+            onChange={setName}
+            autoComplete="off"
+            invalid={!!errors?.name}
+            invalidText={errors?.name}
+          />
+          <TextInput
+            {...getTextInputProps("pass", elements)}
+            type="password"
+            required
+            onChange={setPass}
+            invalid={!!errors?.pass}
+            invalidText={errors?.pass}
+          />
+          <Button type="submit" size="field">
+            {elements.find(e => e.identifier === "submit")?.value}
+          </Button>
+        </>
+      ) : (
+        ""
+      )}
     </>
   );
 };

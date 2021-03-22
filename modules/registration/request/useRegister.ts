@@ -1,11 +1,11 @@
-import useSWR from "swr";
 import { IHTTPError } from "@/modules/common/error";
 import { jsonFetcher } from "@/modules/common/utils";
+import useSWR from "swr";
 import { IRegisterRequest, IRegisterResponse } from "../types";
 
 export function useRegister(info: IRegisterRequest) {
   const registerResult = useSWR<IHTTPError | IRegisterResponse>(
-    info.name || info.mail || info.pass
+    info.passcode || info.name || info.mail || info.pass
       ? "/api/register/?" + encodeInfo(info)
       : null,
     url => jsonFetcher<IRegisterResponse>(url)

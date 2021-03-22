@@ -1,8 +1,8 @@
 import { ITyped } from "@/modules/model";
 import { IRegistrationView } from "../types";
-import { Registration } from "./Registration";
+import { RegistrationView } from "./RegistrationView/RegistrationView";
 
 export const TryRegistration = (content: ITyped): JSX.Element | null =>
   content.type === "Registration" ? (
-    <Registration content={content as IRegistrationView} />
+    <RegistrationView content={content as IRegistrationView} />
   ) : null;
