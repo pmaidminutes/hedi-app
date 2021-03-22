@@ -46,7 +46,6 @@ import { BreadCrumb, Header, Footer } from "@/modules/shell/components";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 
-
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
 
@@ -145,7 +144,7 @@ export default function segments(props: ISegmentPageProps) {
       </Head>
       <Header {...content} />
       <Content>
-        <BreadCrumb content={content} />
+        {/* <BreadCrumb content={content} /> */}
         <TryCategory {...content} />
         <TryArticle {...content} />
         <TryGlossary {...content} />
