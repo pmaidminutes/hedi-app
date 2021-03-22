@@ -176,7 +176,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
       </Content>
-      <Footer />
+      <Footer {...content} />
     </div>
   );
 }
