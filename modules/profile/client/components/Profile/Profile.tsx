@@ -65,7 +65,7 @@ export const Profile = (props: IProfileViewProps) => {
         <Row>
           <RelatedProfiles />
         </Row>
-        {isICaregiver(content) || isIMidwife(content)
+        {/* {isICaregiver(content) || isIMidwife(content)
           ? content.associations.map((entry: IProfile) => {
               return <ProfileEntry profile={entry} key={entry.route} />;
             })
@@ -80,7 +80,7 @@ export const Profile = (props: IProfileViewProps) => {
             displayName: content.displayName,
           } as Location)
         }
-        <MapClient currentLocation={locations[0]} locations={locations} />
+        <MapClient currentLocation={locations[0]} locations={locations} /> */}
       </Grid>
     </>
   );
