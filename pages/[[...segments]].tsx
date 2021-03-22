@@ -31,10 +31,6 @@ import {
   MidwifePathsGQL,
   OrganisationPathsGQL,
 } from "@/modules/profile/query";
-import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
-import { getStaticProps as getInstitutionProps } from "@/modules/profile/server/generators/getInstitutionStaticProps";
-import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
-import { getStaticProps as getOrganisationProps } from "@/modules/profile/server/generators/getOrganisationStaticProps";
 import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
 import { TrySearch } from "@/modules/search/client/components";
 import { SearchViewPathsGQL } from "@/modules/search/query";
