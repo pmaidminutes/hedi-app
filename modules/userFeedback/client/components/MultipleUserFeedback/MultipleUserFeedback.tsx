@@ -31,7 +31,6 @@ export const MultipleUserFeedback: React.FC<{ lang: string }> = ({
     }
     sendUserFeedbacks(entriesToSend, lang)
       .then(resp => {
-        console.log(resp);
         if (resp && resp.length == entriesToSend.length) {
           for (let index = 0; index < resp.length; index++) {
             const itemResult = resp[index];
