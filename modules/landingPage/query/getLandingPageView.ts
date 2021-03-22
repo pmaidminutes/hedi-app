@@ -1,6 +1,5 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { AppPagesGQL } from "@/modules/common/query";
-import { IAppPage } from "@/modules/common/types";
+import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { ILandingPageView } from "../types/ILandingPageView";
 import { EntityFields } from "@/modules/model";
 
@@ -9,21 +8,18 @@ export async function getLandingPageView(
   lang: string = "de"
 ): Promise<ILandingPageView | null> {
   // TODO log the route to know possible paths with no content
-  route = `/${lang}/landing-page`;
-
   const query = gql`
     query getLandingPageView(
-      $routes: [String!]!
-      $lang: String!
+      $lang: String!     
       $includeSelf: Boolean
-    ) {
-      ${AppPagesGQL}
-    }
-  `;
+    ) { 
+      appPages: appPagesByKey(keys: ["landingPage"], lang: $lang) {
+        ${AppPageFields} 
+      }
+    }`;
   const client = await getServiceClient(GQLEndpoint.Internal);
   const appPage = await client
     .request<{ appPages: IAppPage[] }>(query, {
-      routes: [route],
       lang,
     })
     .then(data => {
@@ -47,6 +43,7 @@ export async function getLandingPageView(
       $lang: String!
     ) {
       links: appPagesByKey(keys: ["registration","login"], lang: $lang) {
+        key
         ${EntityFields}
       }
     }
