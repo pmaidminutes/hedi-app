@@ -9,14 +9,12 @@ type RegisterInputProps = {
   errors?: IRegisterError;
   onChange?: (info: IRegisterInfo) => void;
   elements: IUIElementTexts[];
-  isPasscodeTyped: boolean;
 };
 
 export const RegisterInputs = ({
   errors,
   onChange,
   elements,
-  isPasscodeTyped,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
   //const [mail, setMail] = useTextInput();
@@ -29,31 +27,25 @@ export const RegisterInputs = ({
 
   return (
     <>
-      {isPasscodeTyped ? (
-        <>
-          <TextInput
-            {...getTextInputProps("name", elements)}
-            required
-            onChange={setName}
-            autoComplete="off"
-            invalid={!!errors?.name}
-            invalidText={errors?.name}
-          />
-          <TextInput
-            {...getTextInputProps("pass", elements)}
-            type="password"
-            required
-            onChange={setPass}
-            invalid={!!errors?.pass}
-            invalidText={errors?.pass}
-          />
-          <Button type="submit" size="field">
-            {elements.find(e => e.identifier === "submit")?.value}
-          </Button>
-        </>
-      ) : (
-        ""
-      )}
+      <TextInput
+        {...getTextInputProps("name", elements)}
+        required
+        onChange={setName}
+        autoComplete="off"
+        invalid={!!errors?.name}
+        invalidText={errors?.name}
+      />
+      <TextInput
+        {...getTextInputProps("pass", elements)}
+        type="password"
+        required
+        onChange={setPass}
+        invalid={!!errors?.pass}
+        invalidText={errors?.pass}
+      />
+      <Button type="submit" size="field">
+        {elements.find(e => e.identifier === "submit")?.value}
+      </Button>
     </>
   );
 };

@@ -73,12 +73,13 @@ export const RegisterForm = ({
         invalid={!!passcodeData?.errors?.passcode}
         invalidText={passcodeData?.errors?.passcode}
       />
-      <RegisterInputs
-        onChange={setInfo}
-        errors={response?.errors}
-        elements={elements}
-        isPasscodeTyped={passcode ? true : false}
-      />
+      {!!passcode && (
+        <RegisterInputs
+          onChange={setInfo}
+          errors={response?.errors}
+          elements={elements}
+        />
+      )}
     </Form>
   );
 };
