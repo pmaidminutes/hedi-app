@@ -3,4 +3,5 @@ export interface IRegisterInfo {
   mail?: string;
   pass?: string;
   passcode?: string;
+  lang?: string;
 }

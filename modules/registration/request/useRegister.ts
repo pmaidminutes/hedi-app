@@ -1,11 +1,13 @@
 import { IHTTPError } from "@/modules/common/error";
 import { jsonFetcher } from "@/modules/common/utils";
+import { useRouter } from "next/router";
 import useSWR from "swr";
 import { IRegisterRequest, IRegisterResponse } from "../types";
 
 export function useRegister(info: IRegisterRequest) {
+  info.lang = useRouter().locale;
   const registerResult = useSWR<IHTTPError | IRegisterResponse>(
-    info.passcode || info.name || info.mail || info.pass
+    info.passcode || info.name || info.pass
       ? "/api/register/?" + encodeInfo(info)
       : null,
     url => jsonFetcher<IRegisterResponse>(url)

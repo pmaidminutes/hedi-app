@@ -40,7 +40,7 @@ export const RegisterForm = ({
     e.preventDefault();
     setCommit(passcodeData?.success ? true : false);
   };
-  if (data && passcodeData?.success) {
+  if (response?.success && passcodeData?.success) {
     eagerValidate = false;
     router.push("/" + router.locale);
   }
