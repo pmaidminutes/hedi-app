@@ -1,6 +1,6 @@
-import { NextAuthOptions, User } from "next-auth";
-import { IUserAuth } from "../types";
+import { NextAuthOptions } from "next-auth";
 import { credentialProvider } from "./providers";
+import { jwt } from "../query/jwtCallback";
 
 export function getOptions(debug?: boolean): NextAuthOptions {
   return {
@@ -9,28 +9,7 @@ export function getOptions(debug?: boolean): NextAuthOptions {
     session: { jwt: true },
     jwt: { secret: process.env.NEXTAUTH_JWT_SECRET },
     callbacks: {
-      jwt: async (
-        token,
-        user: User | IUserAuth,
-        account,
-        profile,
-        isNewUser
-      ) => {
-        if (account?.type) {
-          // account empty if call was not preceded by a login
-          if (account.type === "credentials") {
-            const auth = user as IUserAuth;
-            token = { ...token, ...user };
-          } else {
-            token.accessToken = account.accessToken;
-            token.refreshToken = account.refreshToken;
-
-            token.accessTokenExpires = account.accessTokenExpires; //accessTokenExpires is not parsed correctly
-          }
-        }
-
-        return token;
-      },
+      jwt,
     },
   };
 }
