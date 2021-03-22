@@ -25,7 +25,7 @@ export async function getUserFeedbackThanksView(
     })
     .then(data => {
       const view = data.appPages?.[0];
-      if (view && view.key === "userfeedback-thanks") {
+      if (view && view.key === "userfeedbackThanks") {
         view.type = "UserFeedbackThanks";
         return view;
       }
