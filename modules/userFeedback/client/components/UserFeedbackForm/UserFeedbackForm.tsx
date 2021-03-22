@@ -13,17 +13,19 @@ export const getStaticProps: GetStaticProps<any, ParsedUrlQuery> = async ({
 }) => {
   let elements = await getUserFeedbackLabels(locale);
   return {
-    props: { elements },
+    props: { elements, locale },
   };
 };
 
 export default function UserFeedbackForm({
   elements,
+  locale,
 }: {
   elements: IUIElementTexts[];
+  locale: string;
 }) {
   return (
-    <MultipleUserFeedback>
+    <MultipleUserFeedback lang={locale}>
       <UserFeedbackEntry
         elements={elements}
         label="feedback"
