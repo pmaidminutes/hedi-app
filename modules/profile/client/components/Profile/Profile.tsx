@@ -42,13 +42,13 @@ export const TryProfile = (content: ITyped): JSX.Element | null => {
 };
 
 export const Profile = (props: IProfileViewProps) => {
-  const { languagesData } = useProfile(props);
+  const { languagesData, profileEntryData } = useProfile(props);
   const { content } = props;
   return (
     <>
       <Grid fullWidth={true}>
         <RowWithBg>
-          <ProfileEntry profile={content} />
+          <ProfileEntry {...profileEntryData} />
         </RowWithBg>
 
         <Row>

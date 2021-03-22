@@ -17101,13 +17101,13 @@ address {
     .hedi__footer a:not(:last-child) {
       margin-right: 1rem; }
 
-.hedi__profile-entry img {
+.hedi--profile-entry img {
   width: 100%;
   max-width: 300px;
   height: auto;
   background-color: #AEC1EA; }
 
-.hedi__profile-entry > div > div:not(:first-child) {
+.hedi--profile-entry > div > div:not(:first-child) {
   background-color: #fff; }
 
 .hedi--profile--tile .bx--tile {
