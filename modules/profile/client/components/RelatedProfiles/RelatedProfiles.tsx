@@ -1,8 +1,5 @@
 import React from "react";
-import {
-  AspectRatio,
-  Row,
-} from "carbon-components-react";
+import { AspectRatio, Row } from "carbon-components-react";
 import { RelatedProfile } from "./RelatedProfile";
 const data = [
   {
@@ -38,8 +35,8 @@ export const RelatedProfiles = () => {
         {/* TODO apppage text */}
         <h2>Verknüpfte Profile</h2>
         <Row>
-          {data.map(profile => (
-            <RelatedProfile {...profile} />
+          {data.map((profile, index) => (
+            <RelatedProfile key={index} {...profile} />
           ))}
         </Row>
       </AspectRatio>
