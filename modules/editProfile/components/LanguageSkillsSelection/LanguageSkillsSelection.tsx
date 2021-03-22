@@ -11,6 +11,7 @@ import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../types";
 import { LanguageSkillRow } from "./LanguageSkillRow";
 import { useLanguageSkillsSelection } from "./useLanguageSkillsSelection";
+import { tryGetValue } from "@/modules/common/utils";
 
 export type LanguageSkillsSelectionProps = {
   config: {
@@ -33,15 +34,23 @@ export const LanguageSkillsSelection = ({
     <Table>
       <TableHead>
         <TableRow>
-          <TableHeader>Sprache</TableHeader>
-          <TableHeader>Fähigkeit</TableHeader>
+          <TableHeader>
+            {tryGetValue("language", config.elements, "Sprache")}
+          </TableHeader>
+          <TableHeader>
+            {tryGetValue("level", config.elements, "Verständnis")}
+          </TableHeader>
           <TableHeader>
             <Button
               kind="tertiary"
               renderIcon={Add32}
-              iconDescription="weitere Hinzufügen"
+              iconDescription={tryGetValue(
+                "add-languageSkill",
+                config.elements,
+                "weitere Hinzufügen"
+              )}
               onClick={handleAddClick}>
-              weitere
+              {tryGetValue("add-languageSkill", config.elements, "Hinzufügen")}
             </Button>
           </TableHeader>
         </TableRow>

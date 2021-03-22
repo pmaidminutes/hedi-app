@@ -14,7 +14,11 @@ import {
   Switch,
   SelectableTile,
 } from "carbon-components-react";
-import { getTextInputProps, hasElement } from "@/modules/common/utils";
+import {
+  getTextInputProps,
+  hasElement,
+  tryGetValue,
+} from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
 import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
@@ -59,16 +63,10 @@ export const EditProfileForm = ({
         />
       )}
 
-      <TextInput
-        id="type"
-        name="type"
-        value={profileType}
-        hidden={true}
-        labelText="profiletype"
-        hideLabel
-      />
+      <input id="type" name="type" value={profileType} hidden={true} readOnly />
 
-      <FormGroup legendText="Name">
+      <FormGroup
+        legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}>
         <Row>
           <Column lg={2}>
             <TextInput
@@ -99,19 +97,13 @@ export const EditProfileForm = ({
               defaultValue={profile?.surname}
             />
           </Column>
-          <Column lg={2}>
-            <TextInput
-              {...getTextInputProps("suffix", elements)}
-              name="suffix"
-              invalid={!!errors?.suffix}
-              invalidText={errors?.suffix}
-              defaultValue={profile?.suffix}
-            />
-          </Column>
         </Row>
       </FormGroup>
       <Seperator />
-      <FormGroup legendText="Address">
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-address", elements, "Adresse")}</h2>
+        }>
         <Row>
           <Column lg={6}>
             <TextInput
@@ -154,9 +146,9 @@ export const EditProfileForm = ({
         </Row>
         {hasElement("room", conditionalElements[profileType]) && (
           <Row>
-            <Column lg={2}>
+            <Column lg={8}>
               <TextInput
-                {...getTextInputProps("room", elements)}
+                {...getTextInputProps("room", conditionalElements[profileType])}
                 name="room"
                 invalid={!!errors?.room}
                 invalidText={errors?.room}
@@ -167,7 +159,10 @@ export const EditProfileForm = ({
         )}
       </FormGroup>
       <Seperator />
-      <FormGroup legendText="Kontakt">
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-contact", elements, "Kontakt")}</h2>
+        }>
         <Row>
           <Column lg={6}>
             <TextInput
@@ -183,7 +178,7 @@ export const EditProfileForm = ({
               <TextInput
                 {...getTextInputProps(
                   "phone_private",
-                  conditionalElements.Midwife
+                  conditionalElements[profileType]
                 )}
                 name="phone_private"
                 invalid={!!errors?.phone_private}
@@ -207,7 +202,10 @@ export const EditProfileForm = ({
           {hasElement("website", conditionalElements[profileType]) && (
             <Column lg={6}>
               <TextInput
-                {...getTextInputProps("website", conditionalElements.Caregiver)}
+                {...getTextInputProps(
+                  "website",
+                  conditionalElements[profileType]
+                )}
                 name="website"
                 invalid={!!errors?.website}
                 invalidText={errors?.website}
@@ -222,7 +220,7 @@ export const EditProfileForm = ({
               <TextArea
                 {...getTextInputProps(
                   "consultation_hours",
-                  conditionalElements.Caregiver
+                  conditionalElements[profileType]
                 )}
                 name="consultation_hours"
                 invalid={!!errors?.consultation_hours}
@@ -235,29 +233,36 @@ export const EditProfileForm = ({
         )}
       </FormGroup>
       <Seperator />
-      <FormGroup legendText="Sprachen">
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-languageSkills", elements, "Sprachen")}</h2>
+        }>
         <LanguageSkillsSelection
           config={{ elements, languageOptions }}
           data={profile?.languageSkills}
         />
       </FormGroup>
 
-      <FormGroup legendText="Tätigkeiten">
+      <FormGroup
+        legendText={
+          <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
+        }>
         <Row>
           <Column>
             <ContentSwitcher
               onChange={handleContentSwitcherChange}
+              size="xl"
               selectedIndex={profileType === "Midwife" ? 0 : 1}>
               <Switch
                 name="Midwife"
-                text="Hebamme"
+                text={tryGetValue("type-midwife", elements, "Hebamme")}
                 onClick={() => {}}
                 onKeyDown={() => {}}
                 defaultChecked={profileType === "Midwife"}
               />
               <Switch
                 name="Caregiver"
-                text="andere"
+                text={tryGetValue("type-caregiver", elements, "Betreuende")}
                 onClick={() => {}}
                 onKeyDown={() => {}}
                 defaultChecked={profileType === "Caregiver"}
@@ -268,7 +273,12 @@ export const EditProfileForm = ({
       </FormGroup>
 
       {profileType !== "Parent" && profileType !== "Midwife" && (
-        <FormGroup legendText="domains">
+        <FormGroup
+          legendText={
+            <h4>
+              {tryGetValue("group-domains", elements, "Arbeitsschwerpunkt")}
+            </h4>
+          }>
           <Row>
             <Column role="group">
               {domainOptions.map((option, index) => (
@@ -289,13 +299,16 @@ export const EditProfileForm = ({
       )}
 
       {!!conditionalServiceGroups[profileType] && (
-        <FormGroup legendText="Tätigkeiten">
+        <FormGroup
+          legendText={
+            <h2>{tryGetValue("group-services", elements, "Angebote")}</h2>
+          }>
           <Row>
-            {conditionalServiceGroups[profileType]?.map(group => (
-              <Column lg={8} key={group.route}>
+            {conditionalServiceGroups[profileType]?.map(serviceGroup => (
+              <Column lg={8} key={serviceGroup.route}>
                 <ServiceSelection
-                  group={group}
-                  initialServices={profile?.services}
+                  config={{ elements, serviceGroup }}
+                  data={profile?.services}
                 />
               </Column>
             ))}
@@ -322,7 +335,9 @@ export const EditProfileForm = ({
       {isValidating ? (
         <InlineLoading status="active" />
       ) : (
-        <Button type="submit">Submit</Button>
+        <Button type="submit">
+          {tryGetValue("submit", elements, "Profil speichern")}
+        </Button>
       )}
     </Form>
   );

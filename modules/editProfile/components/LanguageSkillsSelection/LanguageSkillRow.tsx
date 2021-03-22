@@ -3,6 +3,7 @@ import { Delete32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../types";
 import { useLanguageSkillRow } from "./useLanguageSkillRow";
+import { tryGetValue } from "@/modules/common/utils";
 
 export type LanguageSkillRowProps = {
   config: {
@@ -30,7 +31,7 @@ export const LanguageSkillRow = ({
         <Dropdown
           id="langcode"
           titleText=""
-          label="Sprache wählen"
+          label={tryGetValue("language", elements, "Sprache")}
           light
           selectedItem={languageOptions.find(
             l => l.code === languageSkill.langcode
@@ -43,7 +44,7 @@ export const LanguageSkillRow = ({
       <TableCell>
         <Dropdown
           id="level"
-          label="Verständnis wählen"
+          label={tryGetValue("level", elements, "Verständnis")}
           titleText=""
           light
           selectedItem={languageSkill.level}
@@ -56,7 +57,11 @@ export const LanguageSkillRow = ({
         <Button
           kind="ghost"
           renderIcon={Delete32}
-          iconDescription="Delete"
+          iconDescription={tryGetValue(
+            "remove-languageSkill",
+            elements,
+            "Sprache"
+          )}
           hasIconOnly
           onClick={handleDeleteClick}
         />
