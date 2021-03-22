@@ -1,12 +1,8 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { CaregiverFields, ICaregiver, ICaregiverView } from "../types";
+import { CaregiverFields, ICaregiver } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
-import { WithUIElementsFields } from "@/modules/model";
-import { AppPageFields } from "@/modules/common/types";
 
-export async function getCaregiver(
-  route: string
-): Promise<ICaregiverView | null> {
+export async function getCaregiver(route: string): Promise<ICaregiver | null> {
   const lang = getLangByRoute(route);
 
   const query = gql`
@@ -32,19 +28,5 @@ export async function getCaregiver(
 
   const caregiver = caregivers[0];
 
-  const subquery = gql`
-    query getCaregiverElements($lang: String!){
-      uiTexts: appPagesByKey(keys:["viewprofile"], lang:$lang){
-        ${WithUIElementsFields}
-      }
-    }
-  `;
-
-  const uiTexts = await client.request<Pick<ICaregiverView, "uiTexts">>(
-    subquery,
-    { lang }
-  );
-
-  const elements = uiTexts[0];
-  return { ...caregiver, ...uiTexts };
+  return { ...caregiver };
 }
