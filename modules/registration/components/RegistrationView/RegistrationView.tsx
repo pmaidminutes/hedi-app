@@ -20,34 +20,27 @@ export const RegistrationView = ({
   content,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
-  const [mail, setMail] = useTextInput();
+  //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
   const router = useRouter();
   const backLink = () => router.back();
   useEffect(() => {
-    if (onChange && (name || mail || pass)) {
-      onChange({ name, mail, pass });
+    if (onChange && (name || pass)) {
+      onChange({ name, pass });
     }
-  }, [name, mail, pass]);
+  }, [name, pass]);
   return (
     <>
       <Image
         {...content.posterImage}
-        src={
-          "http://cms.projekt-hedi.de/sites/default/files" +
-          content.posterImage?.route
-        }
+        src={"http://appstaging.projekt-hedi.de" + content.posterImage?.route}
       />
       <Grid>
         <Row>
-          <h2>
-            <HTMLWithNextImage data={content.longTitle ?? ""} />
-          </h2>
+          <h2>{content.longTitle ?? content.label}</h2>
         </Row>
         <Row>
-          <h2>
-            {content.elements.find(e => e.identifier === "subtitle")?.value}
-          </h2>
+          <HTMLWithNextImage data={content.body} />
         </Row>
         <Column>
           <Row></Row>

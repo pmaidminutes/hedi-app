@@ -10,7 +10,6 @@ module.exports = {
   images: {
     domains: [
       'appstaging.projekt-hedi.de',
-      'cms.projekt-hedi.de',
       'localhost:3000'
     ],
   },

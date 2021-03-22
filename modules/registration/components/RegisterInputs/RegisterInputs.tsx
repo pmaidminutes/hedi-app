@@ -19,13 +19,13 @@ export const RegisterInputs = ({
   isPasscodeTyped,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
-  const [mail, setMail] = useTextInput();
+  //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
   useEffect(() => {
-    if (onChange && (name || mail || pass)) {
-      onChange({ name, mail, pass });
+    if (onChange && (name || pass)) {
+      onChange({ name, pass });
     }
-  }, [name, mail, pass]);
+  }, [name, pass]);
 
   return (
     <>

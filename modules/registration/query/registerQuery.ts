@@ -6,7 +6,7 @@ import {
 } from "../types";
 
 export async function registerQuery(
-  data: IRegisterRequest
+  registerData: IRegisterRequest
 ): Promise<IRegisterResponse | null> {
   const mutation = gql`
     mutation register(
@@ -23,7 +23,10 @@ export async function registerQuery(
   const client = await getServiceClient(GQLEndpoint.Internal);
   client.request;
   return client
-    .request<{ register: IRegisterResponse; error?: any }>(mutation, data)
+    .request<{ register: IRegisterResponse; error?: any }>(
+      mutation,
+      registerData
+    )
     .then(data => {
       return data.register;
     })
