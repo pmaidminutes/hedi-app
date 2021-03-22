@@ -1,3 +1,4 @@
+export * from "./ProfileType";
 export * from "./CaregiverType";
 export * from "./CaregiverWithParentsType";
 export * from "./ChildrenType";

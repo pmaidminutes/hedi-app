@@ -11,6 +11,8 @@ export * from "./IEntityTranslated";
 export * from "./ILocalized";
 export * from "./ILanguage";
 export * from "./IRouteLabeled";
+export * from "./IService";
+export * from "./IServiceGroup";
 export * from "./ISummary";
 export * from "./ITagged";
 export * from "./ITyped";

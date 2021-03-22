@@ -1,18 +1,43 @@
-import { useState } from "react";
-export interface IServiceSelection {
-  services: string[];
-}
-export function useServiceSelection(props: IServiceSelection) {
-  const { services } = props;
-  const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+import { IService, IServiceGroup } from "@/modules/model";
+import { useEffect, useState } from "react";
 
-  const handleServiceClick = (service: string) => {
-    if (selectedServices.length > 0 && selectedServices.includes(service)) {
-      setSelectedServices(prev => prev.filter(p => p !== service));
-    } else {
-      setSelectedServices(prev => [...prev, service]);
-    }
+export type ISelectableService = Pick<IService, "label" | "route"> & {
+  selected?: boolean;
+};
+
+export function useServiceSelection(
+  group: IServiceGroup,
+  initialServices?: string[]
+) {
+  const [services, setServices] = useState(
+    group.services as ISelectableService[]
+  );
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  useEffect(() => {
+    const initial = group.services.map(service => {
+      const { label, route, ..._ } = service;
+      return { label, route, selected: initialServices?.includes(route) };
+    });
+    setServices([...initial]);
+  }, [group.label, initialServices]);
+
+  const handleServiceClick = (service: ISelectableService) => {
+    setServices(p =>
+      [...p].map(s => {
+        if (s.route === service.route) s.selected = !s.selected;
+        return s;
+      })
+    );
+  };
+
+  const handleTagClose = (service: ISelectableService) => {
+    setServices(p =>
+      [...p].map(s => {
+        if (s.route === service.route && s.selected) s.selected = false;
+        return s;
+      })
+    );
   };
 
   const handleComponentClick = () => {
@@ -20,9 +45,9 @@ export function useServiceSelection(props: IServiceSelection) {
   };
   return {
     services,
-    selectedServices,
     isExpanded,
     handleServiceClick,
     handleComponentClick,
+    handleTagClose,
   };
 }

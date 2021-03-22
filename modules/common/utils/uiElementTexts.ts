@@ -1,20 +1,32 @@
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
 
+export const hasElement = (identifier: string, elements?: IUIElementTexts[]) =>
+  !!elements?.find(item => item.identifier === identifier);
+
+export const tryGet = (
+  identifier: string,
+  elements?: IUIElementTexts[]
+): IUIElementTexts | undefined =>
+  elements?.find(item => item.identifier === identifier);
+
 export const tryGetValue = (
   identifier: string,
-  elements: IUIElementTexts[]
+  elements?: IUIElementTexts[],
+  fallback?: string
 ): string =>
-  elements.find(item => item.identifier === identifier)?.value ?? identifier;
+  elements?.find(item => item.identifier === identifier)?.value ??
+  fallback ??
+  identifier;
 
 export const getTextInputProps = (
   identifier: string,
-  elements: IUIElementTexts[]
+  elements?: IUIElementTexts[]
 ): Pick<
   TextInputProps,
   "id" | "labelText" | "placeholder" | "helperText" | "aria-label"
 > => {
-  const element = elements.find(item => item.identifier === identifier);
+  const element = elements?.find(item => item.identifier === identifier);
   return {
     id: identifier,
     labelText: element?.value ?? identifier,
