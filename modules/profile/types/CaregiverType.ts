@@ -26,10 +26,6 @@ export interface ICaregiver
     IWithLanguageSkills,
     IWithAssociations {}
 
-export interface ICaregiverView extends ICaregiver {
-  uiTexts: IAppPage[];
-}
-
 export function isICaregiver(obj: any): obj is ICaregiver {
   return obj && obj.type === "Caregiver";
 }
