@@ -1,27 +1,43 @@
 import { IService, IServiceGroup } from "@/modules/model";
 import { useEffect, useState } from "react";
 
+export type ISelectableService = Pick<IService, "label" | "route"> & {
+  selected?: boolean;
+};
+
 export function useServiceSelection(
   group: IServiceGroup,
   initialServices?: string[]
 ) {
-  const { services } = group;
+  const [services, setServices] = useState(
+    group.services as ISelectableService[]
+  );
   const [isExpanded, setIsExpanded] = useState(false);
-  const [selectedServices, setSelectedServices] = useState<IService[]>([]);
 
   useEffect(() => {
-    const initial = group.services.filter(s =>
-      initialServices?.includes(s.route)
-    );
-    setSelectedServices(initial);
-  }, [initialServices]);
+    const initial = group.services.map(service => {
+      const { label, route, ..._ } = service;
+      return { label, route, selected: initialServices?.includes(route) };
+    });
+    setServices([...initial]);
+  }, [group.label, initialServices]);
 
-  const handleServiceClick = (service: IService) => {
-    if (selectedServices.length > 0 && selectedServices.includes(service)) {
-      setSelectedServices(prev => prev.filter(p => p !== service));
-    } else {
-      setSelectedServices(prev => [...prev, service]);
-    }
+  const handleServiceClick = (service: ISelectableService) => {
+    setServices(p =>
+      [...p].map(s => {
+        if (s.route === service.route) s.selected = !s.selected;
+        return s;
+      })
+    );
+  };
+
+  const handleTagClose = (service: ISelectableService) => {
+    setServices(p =>
+      [...p].map(s => {
+        if (s.route === service.route && s.selected) s.selected = false;
+        return s;
+      })
+    );
   };
 
   const handleComponentClick = () => {
@@ -29,9 +45,9 @@ export function useServiceSelection(
   };
   return {
     services,
-    selectedServices,
     isExpanded,
     handleServiceClick,
     handleComponentClick,
+    handleTagClose,
   };
 }

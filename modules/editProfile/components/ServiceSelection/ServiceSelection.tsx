@@ -2,22 +2,28 @@ import React from "react";
 import { useServiceSelection } from "./useServiceSelection";
 import { SelectableTile, Tile, Tag } from "carbon-components-react";
 import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
-import { IServiceGroup } from "@/modules/model";
+import { IServiceGroup, IUIElementTexts } from "@/modules/model";
+import { tryGetValue } from "@/modules/common/utils";
+
+export type ServiceSelectionProps = {
+  config: {
+    elements?: IUIElementTexts[];
+    serviceGroup: IServiceGroup;
+  };
+  data?: string[];
+};
 
 export const ServiceSelection = ({
-  group,
-  initialServices,
-}: {
-  group: IServiceGroup;
-  initialServices?: string[];
-}) => {
+  config: { elements, serviceGroup },
+  data,
+}: ServiceSelectionProps) => {
   const {
     isExpanded,
     services,
-    selectedServices,
     handleComponentClick,
     handleServiceClick,
-  } = useServiceSelection(group, initialServices);
+    handleTagClose,
+  } = useServiceSelection(serviceGroup, data);
   return (
     <Tile
       aria-expanded={isExpanded}
@@ -25,29 +31,40 @@ export const ServiceSelection = ({
       <div
         className="hedi-service_selection__head"
         onClick={() => handleComponentClick()}>
-        <h2>{group.label}</h2>
+        <h2>{serviceGroup.label}</h2>
         <span className="bx--tile__checkmark">
           {isExpanded ? <ChevronUp16 /> : <ChevronDown16 />}
         </span>
-        {selectedServices.length > 0
-          ? selectedServices.map(service => (
-              <Tag type={"blue"} key={service.route}>
-                {service.label}
-              </Tag>
-            ))
-          : null}
+        {services.findIndex(s => s.selected) >= 0 ? (
+          services.map(
+            s =>
+              !!s.selected && (
+                <Tag
+                  type={"blue"}
+                  key={s.route}
+                  filter
+                  onClose={() => handleTagClose(s)}>
+                  {s.label}
+                </Tag>
+              )
+          )
+        ) : (
+          <Tag type={"warm-gray"}>
+            {tryGetValue("add-service", elements, "Hinzufügen")}
+          </Tag>
+        )}
       </div>
 
       <div className="hedi-service_selection__content">
-        {services.map(service => (
+        {services.map(s => (
           <SelectableTile
-            key={service.route}
+            key={s.route}
             //@ts-ignore
             name="services"
-            value={service.route}
-            defaultChecked={!!selectedServices?.find(s => s === service)}
-            onChange={e => handleServiceClick(service)}>
-            {service.label}
+            value={s.route}
+            selected={s.selected}
+            onChange={() => handleServiceClick(s)}>
+            {s.label}
           </SelectableTile>
         ))}
       </div>
