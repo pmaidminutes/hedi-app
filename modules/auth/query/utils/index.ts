@@ -1,2 +1,2 @@
 export * from "./authHeader";
-export * from "./expiryObject";
+export * from "./tokenResponse";

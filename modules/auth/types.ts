@@ -2,7 +2,6 @@ import { JWT } from "next-auth/jwt";
 import { WithAdditionalParams } from "next-auth/_utils";
 
 export interface IAuth {
-  name: string;
   accessToken: string;
   accessTokenExpires: number;
   expires: number;
@@ -12,10 +11,9 @@ export interface IAuth {
   csrfToken: string;
 }
 
-export interface IUserAuth
-  extends IAuth,
-    Omit<WithAdditionalParams<JWT>, "name"> {
+export interface IUserAuth extends IAuth, WithAdditionalParams<JWT> {
   id: string;
+  name: string;
   email: string;
 }
 

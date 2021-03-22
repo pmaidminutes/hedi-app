@@ -1,4 +1,4 @@
-import { getExpires } from "../utils";
+import { tokenResponseToAuth } from "../utils";
 import { requestRefresh } from "../requests";
 import { IAuth } from "../../types";
 import { IsIHTTPError } from "@/modules/common/error";
@@ -7,13 +7,11 @@ export async function tryRefresh<T extends IAuth>(auth: T) {
   if (Date.now() < auth.accessTokenExpires - 500) return auth;
 
   const { refreshToken, csrfToken } = auth;
-  const tokenResp = await requestRefresh(refreshToken, csrfToken);
-  if (IsIHTTPError(tokenResp)) return null;
+  const response = await requestRefresh(refreshToken, csrfToken);
+  if (IsIHTTPError(response)) return null;
 
   return {
     ...auth,
-    accessToken: tokenResp.access_token,
-    ...getExpires(tokenResp.expires_in),
-    refreshToken: tokenResp.refresh_token,
-  } as IAuth;
+    ...tokenResponseToAuth(response, csrfToken),
+  } as T;
 }
