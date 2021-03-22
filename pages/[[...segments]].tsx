@@ -38,6 +38,9 @@ import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components"
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
 
+import { TryLandingPage } from "@/modules/landingPage/client/components";
+import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
+
 import { TryEditProfile } from "@/modules/editProfile/components";
 import { EditProfilePathsGQL } from "@/modules/editProfile/query";
 import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
@@ -140,8 +143,9 @@ export const getStaticProps: GetStaticProps<
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
   }
   if (!content) {
-    console.log("couldn't find content for path ", segments.join("/"));
-    throw Error("Houston, we have got a problem");
+    content = await getLandingPageViewProps(params?.segments, locale);
+    // console.log("couldn't find content for path ", segments.join("/"));
+    // throw Error("Houston, we have got a problem");
   }
 
   return {
@@ -175,6 +179,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryLogin {...content} />
         <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
+        <TryLandingPage {...content} />
       </Content>
       <Footer />
     </div>
