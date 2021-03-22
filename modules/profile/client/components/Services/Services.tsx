@@ -14,7 +14,7 @@ export const Services = ({
   tagType = "blue",
 }: IService) => {
   return (
-    <section className="hedi__profile-services hedi__profile--tile">
+    <section className="hedi--profile-services hedi--profile--tile">
       <Tile>
         {/* TODO import as svg, alt*/}
         <img src="/images/baby_on_hand.svg" alt="" />
