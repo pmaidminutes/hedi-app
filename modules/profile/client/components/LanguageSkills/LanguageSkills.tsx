@@ -1,13 +1,14 @@
 import React from "react";
-import { IWithLanguageSkills } from "@/modules/model";
+import { ILanguageSkillsProps, useLanguageSkills } from "./useLanguageSkills";
 import { Tile } from "carbon-components-react";
 import { LanguageSkill } from "./LanguageSkill";
-export const LanguageSkills = ({ languageSkills }: IWithLanguageSkills) => {
+
+export const LanguageSkills = (props: ILanguageSkillsProps) => {
+  const { languageSkills, headline } = useLanguageSkills(props);
   return (
-    <section className="hedi__language-skills">
+    <section className="hedi--language-skills">
       <Tile>
-        {/* TODO von appages holen */}
-        <h3>Sprachen</h3>
+        <h3>{headline}</h3>
         <table>
           <tbody>
             {languageSkills.map((skill, index) => (
