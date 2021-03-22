@@ -1,6 +1,11 @@
 import { IsIHTTPError } from "@/modules/common/error";
 import { IUIElementTexts } from "@/modules/model";
-import { Button, Form, InlineNotification } from "carbon-components-react";
+import {
+  Button,
+  Form,
+  InlineNotification,
+  ToastNotification,
+} from "carbon-components-react";
 import { FormEvent, useState } from "react";
 import { useRegister } from "../../request";
 import { IRegisterInfo } from "../../types";
@@ -19,13 +24,12 @@ export const RegisterForm = ({
     eagerValidate && info ? { ...info, commit } : {}
   );
   const response = data && !IsIHTTPError(data) ? data : undefined;
-  if (response) {
+  if (data) {
     eagerValidate = false;
   }
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(eagerValidate, "eagervalidate");
     eagerValidate = true;
     setCommit(true);
   };
@@ -39,6 +43,17 @@ export const RegisterForm = ({
           subtitle={response.errors.generic}
         />
       )}
+      {response?.success && (
+        <ToastNotification
+          kind="success"
+          lowContrast={true}
+          title="Success"
+          caption="Login created"
+          hideCloseButton={true}
+          style={{ minWidth: "50rem", marginBottom: ".5rem" }}
+        />
+      )}
+
       <RegisterInputs
         onChange={setInfo}
         errors={response?.errors}

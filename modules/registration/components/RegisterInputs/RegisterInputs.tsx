@@ -30,6 +30,7 @@ export const RegisterInputs = ({
         {...getTextInputProps("name", elements)}
         required
         onChange={setName}
+        autoComplete="off"
         invalid={!!errors?.name}
         invalidText={errors?.name}
       />
@@ -37,6 +38,7 @@ export const RegisterInputs = ({
         id={"mail"}
         labelText={"Email"}
         required
+        autoComplete="off"
         onChange={setMail}
         invalid={!!errors?.mail}
         invalidText={errors?.mail}

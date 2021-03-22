@@ -24,7 +24,6 @@ export const Registration = ({
   const [name, setName] = useTextInput();
   const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
-  let valid = false;
   useEffect(() => {
     if (onChange && (name || mail || pass)) {
       onChange({ name, mail, pass });
@@ -35,19 +34,21 @@ export const Registration = ({
 
   return (
     <>
-      <AspectRatio ratio="3x4">
+      <AspectRatio ratio="2x1">
         <img
           {...content.posterImage}
           src={
             "http://cms.projekt-hedi.de/sites/default/files" +
             content.posterImage?.route
           }
-          style={{ maxWidth: "100%" }}
         />
       </AspectRatio>
       <Grid>
+        <Row></Row>
         <Row>
-          <HTMLWithNextImage data={content.longTitle ?? ""} />
+          <h2>
+            <HTMLWithNextImage data={content.longTitle ?? ""} />
+          </h2>
         </Row>
         <Row>
           <TextInput
@@ -58,13 +59,16 @@ export const Registration = ({
             invalidText={errors?.passcode}
           />
         </Row>
-        {!IsIHTTPError(data) && data?.success ? (
-          <>
-            <RegisterForm elements={content.elements} eagerValidate={true} />
-          </>
-        ) : (
-          ""
-        )}
+
+        <Row>
+          {!IsIHTTPError(data) && data?.success ? (
+            <>
+              <RegisterForm elements={content.elements} eagerValidate={true} />
+            </>
+          ) : (
+            ""
+          )}
+        </Row>
       </Grid>
     </>
   );
