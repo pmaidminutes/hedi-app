@@ -23,7 +23,7 @@ export const EditProfile = ({ content }: { content: IEditProfileView }) => {
       <h1>{content.longTitle ?? content.label}</h1>
       <HTMLWithNextImage data={content.body} />
       <EditProfileForm
-        className="hedi-edit-profile"
+        className="hedi--edit-profile"
         config={extractConfig(content)}
         {...useEditProfileForm(content.lang)}
       />

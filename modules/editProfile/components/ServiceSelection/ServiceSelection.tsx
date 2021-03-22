@@ -27,9 +27,9 @@ export const ServiceSelection = ({
   return (
     <Tile
       aria-expanded={isExpanded}
-      className={`hedi-service_selection${isExpanded ? " is-expanded" : ""}`}>
+      className={`hedi--service-selection${isExpanded ? " is-expanded" : ""}`}>
       <div
-        className="hedi-service_selection__head"
+        className="hedi--service-selection__head"
         onClick={() => handleComponentClick()}>
         <h2>{serviceGroup.label}</h2>
         <span className="bx--tile__checkmark">
@@ -55,7 +55,7 @@ export const ServiceSelection = ({
         )}
       </div>
 
-      <div className="hedi-service_selection__content">
+      <div className="hedi--service-selection__content">
         {services.map(s => (
           <SelectableTile
             key={s.route}

@@ -60,7 +60,7 @@ export const EditProfileForm = ({
 
       <FormGroup
         legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}
-        className="hedi-group-name">
+        className="hedi--group hedi--group--name">
         <Row>
           <Column lg={2}>
             <TextInput
@@ -98,7 +98,7 @@ export const EditProfileForm = ({
         legendText={
           <h2>{tryGetValue("group-address", elements, "Adresse")}</h2>
         }
-        className="hedi-group-address">
+        className="hedi--group hedi--group--address">
         <Row>
           <Column lg={6}>
             <TextInput
@@ -158,7 +158,7 @@ export const EditProfileForm = ({
         legendText={
           <h2>{tryGetValue("group-contact", elements, "Kontakt")}</h2>
         }
-        className="hedi-group-contact">
+        className="hedi--group hedi--group--contact">
         <Row>
           <Column lg={6}>
             <TextInput
@@ -232,7 +232,8 @@ export const EditProfileForm = ({
       <FormGroup
         legendText={
           <h2>{tryGetValue("group-languageSkills", elements, "Sprachen")}</h2>
-        }>
+        }
+        className="hedi--group hedi--group--language-skills">
         <LanguageSkillsSelection
           config={{ elements, languageOptions }}
           data={profile?.languageSkills}
@@ -243,7 +244,7 @@ export const EditProfileForm = ({
         legendText={
           <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
         }
-        className="hedi-group-type">
+        className="hedi--group hedi--group--profile-type">
         <Row>
           <Column>
             <ContentSwitcher
@@ -276,7 +277,7 @@ export const EditProfileForm = ({
               {tryGetValue("group-domains", elements, "Arbeitsschwerpunkt")}
             </h4>
           }
-          className="hedi-group-domains">
+          className="hedi--group hedi--group--domains">
           <Row>
             <Column role="group">
               {domainOptions.map((option, index) => (
@@ -301,7 +302,7 @@ export const EditProfileForm = ({
           legendText={
             <h2>{tryGetValue("group-services", elements, "Angebote")}</h2>
           }
-          className="hedi-group-services">
+          className="hedi--group hedi--group--services">
           <Row>
             {conditionalServiceGroups[profileType]?.map(serviceGroup => (
               <Column lg={8} key={serviceGroup.route}>
