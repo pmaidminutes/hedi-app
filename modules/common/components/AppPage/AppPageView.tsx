@@ -4,13 +4,10 @@ import Link from "next/link";
 import Image from "next/image";
 import { HTMLWithNextImage } from "@/modules/react/html";
 
-export const AppPageView = ({
-  content,
-  rootCssClass,
-}: {
+export const AppPageView: React.FC<{
   content: IAppPage;
   rootCssClass?: string;
-}) => {
+}> = ({ content, rootCssClass, children }) => {
   return (
     <div className={rootCssClass}>
       {content.posterImage && (
@@ -43,6 +40,11 @@ export const AppPageView = ({
             </div>
           </Column>
         </Row>
+        {children && (
+          <Row>
+            <Column>{children}</Column>
+          </Row>
+        )}
       </Grid>
     </div>
   );
