@@ -19,27 +19,31 @@ import { RowWithBg } from "@/modules/common/components";
 import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
-interface IProfileProps {
-  content: ICaregiver | IMidwife | IOrganisation | IInstitution;
-}
+import { getTextInputProps } from "@/modules/common/utils";
+import { IProfileViewProps, useProfile } from "./useProfile";
+import { ProfileView } from "@/modules/profile/query/getProfile";
+
 const locations: Location[] = [];
 
 export const TryProfile = (content: ITyped): JSX.Element | null => {
+  console.log({ content });
   switch (content.type) {
     case "Midwife":
-      return <Profile content={content as ICaregiver} />;
+      return <Profile content={content as ProfileView} />;
     case "Caregiver":
-      return <Profile content={content as IMidwife} />;
+      return <Profile content={content as ProfileView} />;
     case "Organisation":
-      return <Profile content={content as IOrganisation} />;
+      return <Profile content={content as ProfileView} />;
     case "Institution":
-      return <Profile content={content as IInstitution} />;
+      return <Profile content={content as ProfileView} />;
     default:
       return null;
   }
 };
 
-export const Profile = ({ content }: IProfileProps) => {
+export const Profile = (props: IProfileViewProps) => {
+  const { languagesData } = useProfile(props);
+  const { content } = props;
   return (
     <>
       <Grid fullWidth={true}>
@@ -55,7 +59,7 @@ export const Profile = ({ content }: IProfileProps) => {
             <Contact content={content} />
           </Column>
           <Column lg={8}>
-            <LanguageSkills languageSkills={content.languageSkills} />
+            <LanguageSkills {...languagesData} />
           </Column>
         </Row>
         <Row>

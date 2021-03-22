@@ -35,6 +35,7 @@ import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/ge
 import { getStaticProps as getInstitutionProps } from "@/modules/profile/server/generators/getInstitutionStaticProps";
 import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
 import { getStaticProps as getOrganisationProps } from "@/modules/profile/server/generators/getOrganisationStaticProps";
+import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
 import { TrySearch } from "@/modules/search/client/components";
 import { SearchViewPathsGQL } from "@/modules/search/query";
 import { getStaticProps as getSearchViewProps } from "@/modules/search/server";
@@ -111,11 +112,10 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getCategoryProps(params?.segments, locale);
     if (!content) content = await getArticleProps(params?.segments, locale);
     if (!content) content = await getGlossaryProps(params?.segments, locale);
-    if (!content) content = await getCaregiverProps(params?.segments, locale);
-    if (!content) content = await getMidwifeProps(params?.segments, locale);
-    if (!content)
-      content = await getOrganisationProps(params?.segments, locale);
-    if (!content) content = await getInstitutionProps(params?.segments, locale);
+    if (!content) content = await getProfileProps(params?.segments, locale);
+    if (!content) content = await getProfileProps(params?.segments, locale);
+    if (!content) content = await getProfileProps(params?.segments, locale);
+    if (!content) content = await getProfileProps(params?.segments, locale);
     if (!content) content = await getPageProps(params?.segments, locale);
   }
   if (!content) {
