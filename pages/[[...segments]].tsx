@@ -16,7 +16,7 @@ import { TryProfile } from "@/modules/profile/client/components";
 import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
 import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
 import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
-import { TryRegistration } from "@/modules/registration/components/TryRegistration";
+import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { Footer, Header } from "@/modules/shell/components";
