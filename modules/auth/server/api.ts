@@ -1,7 +1,7 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import NextAuth from "next-auth";
 import { getToken } from "next-auth/jwt";
-import { getOptions } from "./serviceInitOptions";
+import { getOptions } from "./serviceOptions";
 import { toAuthHeader, tryRefresh } from "../query";
 import { IAuthHeader, IUserAuth } from "../types";
 
@@ -19,6 +19,7 @@ export const getUserAuth = async (
   const secret = process.env.NEXTAUTH_JWT_SECRET;
   if (!secret) return null;
   const auth = await (getToken({ req, secret }) as Promise<IUserAuth>);
+  if (!auth) return null;
   // TODO either expiry time or refresh logic is not reliable
   return tryRefresh(auth) as Promise<IUserAuth | null>;
 };

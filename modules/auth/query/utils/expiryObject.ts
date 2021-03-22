@@ -1,7 +1,16 @@
-export const oauthNow = () => Math.floor(Date.now() / 1000);
+export const getIAT = (now: number) => Math.floor(now / 1000);
 
-export const expiryObject = (expiresIn: number) => {
-  const iat = oauthNow();
-  const exp = iat + expiresIn;
-  return { iat, exp };
+export const getAccessTokenExpires = (now: number, expiresIn: number) =>
+  now + expiresIn * 1000;
+
+export const getExpires = (expiresIn: number) => {
+  const now = Date.now();
+  const iat = getIAT(now);
+  const accessTokenExpires = getAccessTokenExpires(now, expiresIn);
+  return {
+    accessTokenExpires,
+    expires: expiresIn,
+    iat,
+    exp: 0,
+  };
 };

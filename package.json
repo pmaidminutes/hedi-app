@@ -30,7 +30,7 @@
     "leaflet-defaulticon-compatibility": "^0.1.1",
     "matrix-js-sdk": "^9.6.0",
     "next": "latest",
-    "next-auth": "^3.3.0",
+    "next-auth": "^3.13.0",
     "react": "17.0.1",
     "react-dom": "^17.0.1",
     "react-leaflet": "^3.0.5",
@@ -40,7 +40,7 @@
   "devDependencies": {
     "@types/carbon-components-react": "^7.21.0",
     "@types/htmlparser2": "^3.10.2",
-    "@types/next-auth": "^3.1.13",
+    "@types/next-auth": "^3.7.2",
     "@types/node": "^14.14.5",
     "@types/react": "^16.9.54",
     "@types/react-dom": "^17.0.0",

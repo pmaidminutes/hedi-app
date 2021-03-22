@@ -1,8 +1,8 @@
-import { InitOptions, User } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import { IUserAuth } from "../types";
 import { credentialProvider } from "./providers";
 
-export function getOptions(debug?: boolean): InitOptions {
+export function getOptions(debug?: boolean): NextAuthOptions {
   return {
     debug,
     providers: [credentialProvider],
@@ -24,6 +24,7 @@ export function getOptions(debug?: boolean): InitOptions {
           } else {
             token.accessToken = account.accessToken;
             token.refreshToken = account.refreshToken;
+
             token.accessTokenExpires = account.accessTokenExpires; //accessTokenExpires is not parsed correctly
           }
         }
