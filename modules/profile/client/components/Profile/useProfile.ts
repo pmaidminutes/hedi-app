@@ -1,5 +1,6 @@
 import { getTextInputProps } from "@/modules/common/utils";
 import { ProfileView } from "@/modules/profile/query";
+import { isICaregiver, isIMidwife } from "../../../types";
 export interface IProfileViewProps {
   content: ProfileView;
 }
@@ -24,6 +25,9 @@ export function useProfile(props: IProfileViewProps) {
   const servicesHeadline = getTextInputProps("services", elements);
   const contactHeadline = getTextInputProps("office_hrs", elements);
 
+  const services =
+    isICaregiver(content) || isIMidwife(content) ? content.services : null;
+
   return {
     languagesData: {
       languageSkills,
@@ -39,6 +43,7 @@ export function useProfile(props: IProfileViewProps) {
     },
     servicesData: {
       headline: servicesHeadline,
+      services,
     },
     contactData: {
       headline: contactHeadline,

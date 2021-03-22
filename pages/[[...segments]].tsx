@@ -140,7 +140,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: { content, shell: {} },
-    revalidate: content.type === "Search" ? 15 : false,
+    // revalidate: content.type === "Search" ? 15 : false,
   };
 };
 
