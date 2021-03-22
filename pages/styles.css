@@ -17024,9 +17024,6 @@ address {
   display: flex;
   flex-direction: column; }
 
-.hedi-header + .bx--content {
-  padding: 0; }
-
 .hedi-category-color--pregnancy header {
   background-color: #2A84C6 !important; }
 
@@ -17113,10 +17110,10 @@ address {
 .hedi__profile-entry > div > div:not(:first-child) {
   background-color: #fff; }
 
-.hedi__profile--tile .bx--tile {
+.hedi--profile--tile .bx--tile {
   width: 100%; }
 
-.hedi__profile--tile img, .hedi__profile--tile svg {
+.hedi--profile--tile img, .hedi--profile--tile svg {
   max-width: 130px;
   max-height: 140px;
   height: auto; }
@@ -17185,20 +17182,20 @@ address {
     line-height: 1.29;
     letter-spacing: 0; }
 
-.hedi__language-skills tr {
+.hedi--language-skills tr {
   display: flex;
   align-items: center;
   padding: 1rem;
   background-color: #fff; }
-  .hedi__language-skills tr:not(:last-child) {
+  .hedi--language-skills tr:not(:last-child) {
     margin-bottom: .5rem; }
-  .hedi__language-skills tr td:first-child {
+  .hedi--language-skills tr td:first-child {
     min-width: 100px; }
 
-.hedi__language-skills .bx--tile {
+.hedi--language-skills .bx--tile {
   width: 100%; }
 
-.hedi__language-skills svg {
+.hedi--language-skills svg {
   color: #942345; }
 
 .hidden {
