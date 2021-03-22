@@ -17118,14 +17118,18 @@ address {
   max-height: 140px;
   height: auto; }
 
-.hedi__related-profiles {
-  background-color: #005D90;
+.hedi--related-profiles {
+  background-color: #AEC1EA;
+  background-image: url(/images/Baby_Hand_gedreht.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
   color: #fff;
   padding: 2rem;
   width: 100%; }
-  .hedi__related-profiles--profile {
+  .hedi--related-profiles--profile {
     height: 100%; }
-    .hedi__related-profiles--profile svg {
+    .hedi--related-profiles--profile svg {
       position: absolute;
       bottom: 0;
       right: 0; }

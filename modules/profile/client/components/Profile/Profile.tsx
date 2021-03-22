@@ -1,15 +1,6 @@
 import { MapClient } from "@/modules/map/client/components";
 import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
-import { IProfile } from "@/modules/model/IProfile";
-import {
-  ICaregiver,
-  IInstitution,
-  IMidwife,
-  IOrganisation,
-  isICaregiver,
-  isIMidwife,
-} from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
 import { Contact } from "../Contact";
 import { ProfileEntry } from "../ProfileEntry";
@@ -23,7 +14,6 @@ import { ProfileView } from "@/modules/profile/query/getProfile";
 const locations: Location[] = [];
 
 export const TryProfile = (content: ITyped): JSX.Element | null => {
-  console.log({ content });
   switch (content.type) {
     case "Midwife":
       return <Profile content={content as ProfileView} />;
@@ -44,6 +34,8 @@ export const Profile = (props: IProfileViewProps) => {
     profileEntryData,
     servicesData,
     contactData,
+    relatedProfilesData,
+    mapData,
   } = useProfile(props);
   return (
     <>
@@ -64,9 +56,9 @@ export const Profile = (props: IProfileViewProps) => {
           </Column>
         </Row>
         <Row>
-          <RelatedProfiles />
+          <RelatedProfiles {...relatedProfilesData} />
         </Row>
-        {/* {isICaregiver(content) || isIMidwife(content)
+        {/* {hasMap)
           ? content.associations.map((entry: IProfile) => {
               return <ProfileEntry profile={entry} key={entry.route} />;
             })
@@ -80,8 +72,8 @@ export const Profile = (props: IProfileViewProps) => {
             long: content.long,
             displayName: content.displayName,
           } as Location)
-        }
-        <MapClient currentLocation={locations[0]} locations={locations} /> */}
+        } */}
+        <MapClient {...mapData} />
       </Grid>
     </>
   );

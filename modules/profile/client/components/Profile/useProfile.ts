@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { getTextInputProps } from "@/modules/common/utils";
 import { ProfileView } from "@/modules/profile/query";
 import { isICaregiver, isIMidwife } from "../../../types";
@@ -7,6 +8,7 @@ export interface IProfileViewProps {
 
 export function useProfile(props: IProfileViewProps) {
   const { content } = props;
+  console.log({ content });
   const {
     languageSkills,
     elements,
@@ -20,10 +22,13 @@ export function useProfile(props: IProfileViewProps) {
     street,
     house_number,
     displayAddress,
+    lat,
+    long,
   } = content;
   const languagesHeadline = getTextInputProps("fluency", elements);
   const servicesHeadline = getTextInputProps("services", elements);
   const contactHeadline = getTextInputProps("office_hrs", elements);
+  const relatedHeadline = getTextInputProps("linked_profile", elements);
 
   const services =
     isICaregiver(content) || isIMidwife(content) ? content.services : null;
@@ -56,6 +61,18 @@ export function useProfile(props: IProfileViewProps) {
       city,
       displayAddress,
       postal_code,
+    },
+    relatedProfilesData: {
+      headline: relatedHeadline,
+    },
+    mapData: {
+      currentLocation: {
+        lat,
+        long,
+        displayName,
+      },
+      // TODO: handling associates
+      locations: [{ lat, long, displayName }],
     },
   };
 }
