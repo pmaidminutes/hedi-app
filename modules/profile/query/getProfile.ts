@@ -1,19 +1,15 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import {
   CaregiverFields,
-  ICaregiver,
   MidwifeFields,
-  IMidwife,
-  IOrganisation,
-  IInstitution,
   InstitutionFields,
   OrganisationFields,
+  Profile,
 } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 
-export type Profile = ICaregiver | IMidwife | IOrganisation | IInstitution;
 export type ProfileView = Profile & {
   elements: IUIElementTexts[];
 };
