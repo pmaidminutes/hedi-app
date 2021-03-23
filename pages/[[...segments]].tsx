@@ -18,13 +18,20 @@ import { TryProfile } from "@/modules/profile/client/components";
 import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
 import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
 import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
+import { TryRegistration } from "@/modules/registration/components";
+import { RegistrationViewPathsGQL } from "@/modules/registration/query";
+import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { Footer, Header } from "@/modules/shell/components";
+import { TrySimpleAppPage } from "@/modules/simpleAppPage/client/components";
+import { SimpleAppPagesViewPathsGQL } from "@/modules/simpleAppPage/query";
+import { getStaticProps as getStaticSimpleAppPageViewProps } from "@/modules/simpleAppPage/server/generators";
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
+// Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 
@@ -54,7 +61,9 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     //SearchViewPathsGQL,
     LoginViewPathsGQL,
     EditProfilePathsGQL,
+    RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
+    SimpleAppPagesViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -97,6 +106,8 @@ export const getStaticProps: GetStaticProps<
     console.log(params?.segments);
     // if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
+    if (!content)
+      content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getEditProfileProps(params?.segments, locale);
     // if (!content) content = await getCategoryProps(params?.segments, locale);
     // if (!content) content = await getArticleProps(params?.segments, locale);
@@ -109,6 +120,8 @@ export const getStaticProps: GetStaticProps<
     // if (!content) content = await getPageProps(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
+    if (!content)
+      content = await getStaticSimpleAppPageViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
@@ -143,10 +156,12 @@ export default function segments(props: ISegmentPageProps) {
         <TryGlossary {...content} />
         <TrySearch {...content} />
         <TryPage {...content} /> */}
+        <TryRegistration {...content} />
         <TryProfile {...content} />
         <TryLogin {...content} />
         <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
+        <TrySimpleAppPage {...content} />
         <TryLandingPage {...content} />
       </Content>
       <Footer />

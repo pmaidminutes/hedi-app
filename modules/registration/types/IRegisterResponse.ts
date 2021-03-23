@@ -1,8 +1,8 @@
-import { IRegisterError, RegisterErrorFields } from "./IRegisterError";
+import { IRegisterError } from "./IRegisterError";
 
 export interface IRegisterResponse {
   success: boolean;
-  error?: IRegisterError;
+  errors?: IRegisterError;
 }
 
-export const RegisterResponseFields = `success error { ${RegisterErrorFields} }`;
+export const RegisterResponseFields = `success errors`;
