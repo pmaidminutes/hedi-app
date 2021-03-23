@@ -1,18 +1,55 @@
-import { IContact } from "@/modules/model";
+import { IContactProps, useContact } from "./useContact";
+import { Tile } from "carbon-components-react";
 
-interface IContactProps {
-  content: IContact;
-}
-
-export const Contact = ({ content }: IContactProps): JSX.Element => {
-  const { phone, phone_private, mail, website, consultation_hours } = content;
+export const Contact = (props: IContactProps): JSX.Element => {
+  const {
+    phone,
+    mail,
+    website,
+    consultation_hours,
+    street,
+    house_number,
+    city,
+    displayAddress,
+    postal_code,
+    headline,
+  } = useContact(props);
   return (
-    <section>
-      {phone ? <p>{phone}</p> : null}
-      {phone_private ? <p>{phone_private}</p> : null}
-      {mail ? <p>{mail}</p> : null}
-      {website ? <p>{website}</p> : null}
-      {consultation_hours ? <p>{consultation_hours}</p> : null}
+    <section className="hedi--profile-contact hedi--profile--tile">
+      <Tile>
+        <img src="/images/Pregnancy_blue.svg" alt="" />
+        <address>
+          <p>{displayAddress}</p>
+          <p>
+            {street} {house_number}
+          </p>
+          <p>
+            {postal_code} {city}
+          </p>
+        </address>
+        {/* TODO right number for phone linking */}
+        <p>
+          <a href={`tel:${phone}`} target="_blank" title="Telefonnummer">
+            {phone}
+          </a>
+        </p>
+        <p>
+          <a href={`mailto:${mail}`} target="_blank" title="E-Mail Address">
+            {mail}
+          </a>
+        </p>
+        <p>
+          <a href={website} target="_blank" title="Webseite">
+            {website}
+          </a>
+        </p>
+        {consultation_hours ? (
+          <>
+            <h3>{headline}</h3>
+            <p>{consultation_hours}</p>
+          </>
+        ) : null}
+      </Tile>
     </section>
   );
 };

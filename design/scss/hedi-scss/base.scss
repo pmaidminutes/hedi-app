@@ -2,3 +2,7 @@
 .leaflet-container {
   height: 300px;
 }
+address {
+  display: flex;
+  flex-direction: column;
+}
