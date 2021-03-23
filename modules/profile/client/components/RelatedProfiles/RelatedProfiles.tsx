@@ -6,6 +6,7 @@ import {
 import { AspectRatio, Row } from "carbon-components-react";
 import { RelatedProfile } from "./RelatedProfile";
 
+// TODO remove testdata
 const data = [
   {
     longtitle: "Geburtshaus Sonnenschein",
