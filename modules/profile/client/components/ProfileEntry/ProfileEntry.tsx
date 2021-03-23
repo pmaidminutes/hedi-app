@@ -20,6 +20,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
             <img src="/images/profile_dummy.png" alt="Profil Bild" style={{}} />
           </Column>
           <Column lg={10}>
+            {/* TODO reuse contact */}
             <h2>{displayName}</h2>
             {/* TODO subtitle? */}
             <h3>psychosoziale Beratung</h3>

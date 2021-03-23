@@ -47,7 +47,7 @@ export async function getProfile(route: string): Promise<ProfileView | null> {
   const profile = profiles[0];
 
   const subquery = gql`
-    query getCaregiverElements($lang: String!){
+    query getProfileElements($lang: String!){
       uiTexts: appPagesByKey(keys:["viewprofile"], lang:$lang){
         ${WithUIElementsFields}
       }

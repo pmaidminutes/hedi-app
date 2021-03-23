@@ -14,18 +14,13 @@ import { ProfileView } from "@/modules/profile/query/getProfile";
 const locations: Location[] = [];
 
 export const TryProfile = (content: ITyped): JSX.Element | null => {
-  switch (content.type) {
-    case "Midwife":
-      return <Profile content={content as ProfileView} />;
-    case "Caregiver":
-      return <Profile content={content as ProfileView} />;
-    case "Organisation":
-      return <Profile content={content as ProfileView} />;
-    case "Institution":
-      return <Profile content={content as ProfileView} />;
-    default:
-      return null;
-  }
+  if (
+    ["Midwife", "Caregiver", "Organisation", "Institution"].includes(
+      content.type
+    )
+  )
+    return <Profile content={content as ProfileView} />;
+  else return null;
 };
 
 export const Profile = (props: IProfileViewProps) => {
