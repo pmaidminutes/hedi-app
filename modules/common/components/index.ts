@@ -6,3 +6,4 @@ export * from "./Stars";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./VideoPlayer";
+export * from "./ButtonContainer";

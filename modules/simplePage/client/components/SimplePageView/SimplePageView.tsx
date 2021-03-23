@@ -32,19 +32,19 @@ export const SimplePageView: React.FC<{
             </Column>
           ) : null}
           <Column>
-            <Grid>
-              <Row>
+            {/* <Grid> */}
+              {/* <Row> */}
                 <Column className="hedi--titlegroup">
                   <h1>{content.longTitle ?? content.label}</h1>
                   <HTMLWithNextImage data={content.body} />
                 </Column>
-              </Row>
+              {/* </Row> */}
               {children && (
                 <div className={`hedi--group hedi--group--${content.key}`}>
                   {children}
                 </div>
               )}
-            </Grid>
+            {/* </Grid> */}
           </Column>
         </Row>
       </Grid>
