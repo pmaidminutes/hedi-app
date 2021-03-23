@@ -295,7 +295,7 @@ export const EditProfileForm = ({
               </h4>
             }>
             <Row>
-              <Column role="group">
+              <Column sm={4} md={6} lg={8} role="group">
                 {domainOptions.map((option, index) => (
                   <SelectableTile
                     key={option.route}

@@ -22,22 +22,29 @@ export const SimplePageView: React.FC<{
         </AspectRatio>
       )}
 
-      <Grid>
+      <Grid condensed fullWidth>
         <Row>
-          <Column sm={0} md={2} lg={{ span: 4, offset: 2 }}>
-            hier kommt vom CMS das IMG- SVG Schwangere oder Baby
-            <img src="././public/Pregnancy_pink80.svg" alt=""></img>
+          <Column sm={0} md={3} lg={6}>
+            <div aspect-ratio>
+              <img src="/Pregnancy_pink80.svg" alt=""></img>
+            </div>
           </Column>
-          <Column sm={4} md={6} lg={8} className="hedi--titlegroup">
-            <h1>{content.longTitle ?? content.label}</h1>
-            <HTMLWithNextImage data={content.body} />
+          <Column>
+            <Grid>
+              <Row>
+                <Column className="hedi--titlegroup">
+                  <h1>{content.longTitle ?? content.label}</h1>
+                  <HTMLWithNextImage data={content.body} />
+                </Column>
+              </Row>
+              {children && (
+                <div className={`hedi--group hedi--group--${content.key}`}>
+                  {children}
+                </div>
+              )}
+            </Grid>
           </Column>
         </Row>
-        {children && (
-          <div className={`hedi--group hedi--group--${content.key}`}>
-            {children}
-          </div>
-        )}
       </Grid>
     </div>
   );

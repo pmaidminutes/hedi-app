@@ -1,0 +1,16 @@
+@import "./theme/hedi-theme.scss";
+
+.hedi--simple-app-page {
+   //font-size: xx-large; 
+  }
+
+  .hedi--titlegroup {
+   margin-bottom: $layout-lg; 
+  }
+
+  h1 {
+margin-bottom: $spacing-lg;
+  }
+
+  img {
+    max-height: 250px;}

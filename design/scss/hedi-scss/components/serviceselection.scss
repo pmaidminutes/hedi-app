@@ -21,6 +21,11 @@
     height: 0;
   }
 
+  .bx--tile--selectable {
+    min-height: $spacing-md;
+
+  }
+
   &.is-expanded {
     .hedi--service-selection__content {
       visibility: inherit;
