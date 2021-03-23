@@ -1,32 +1,51 @@
-import { IProfile } from "@/modules/model/IProfile";
-import { ClickableTile } from "carbon-components-react";
-import Link from "next/link";
-import {
-  ICaregiver,
-  IInstitution,
-  IMidwife,
-  IOrganisation,
-} from "../../../types";
+import { Row, Column } from "carbon-components-react";
+import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
 
-export const ProfileEntry = ({
-  profile,
-}: {
-  profile: IProfile | IMidwife | ICaregiver | IOrganisation | IInstitution;
-}): JSX.Element => {
-  const { label, route, displayName } = profile;
+export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
+  const {
+    displayName,
+    postal_code,
+    city,
+    mail,
+    website,
+    phone,
+  } = useProfileEntry(props);
 
   return (
     <>
-      <Link href={route} passHref>
-        <ClickableTile href={route}>
-          <h4
-            dangerouslySetInnerHTML={{
-              __html: label,
-            }}></h4>
-
-          {displayName}
-        </ClickableTile>
-      </Link>
+      <section className="hedi--profile-entry">
+        <Row>
+          <Column lg={{ span: 4, offset: 1 }}>
+            {/* TODO image dynamisch */}
+            <img src="/images/profile_dummy.png" alt="Profil Bild" style={{}} />
+          </Column>
+          <Column lg={10}>
+            {/* TODO reuse contact */}
+            <h2>{displayName}</h2>
+            {/* TODO subtitle? */}
+            <h3>psychosoziale Beratung</h3>
+            <address>
+              {postal_code} {city}
+              {/* TODO right number for phone linking */}
+            </address>
+            <p>
+              <a href={`tel:${phone}`} target="_blank">
+                {phone}
+              </a>
+            </p>
+            <p>
+              <a href={`mailto:${mail}`} target="_blank">
+                {mail}
+              </a>
+            </p>
+            <p>
+              <a href={website} target="_blank">
+                {website}
+              </a>
+            </p>
+          </Column>
+        </Row>
+      </section>
     </>
   );
 };

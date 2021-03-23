@@ -1,27 +1,27 @@
-import { SimpleAppPageView } from "@/modules/common/components/AppPage";
+import { tryGet } from "@/modules/common/utils";
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
-import { Button } from "carbon-components-react";
-import Link from "next/link";
+import { SimplePageView } from "@/modules/simplePage/client/components";
+import {
+  Button,
+  ButtonSet,
+  Column,
+  FormLabel,
+  Row,
+} from "carbon-components-react";
 
 export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   return (
-    <SimpleAppPageView content={content} rootCssClass="landing-page">
-      {content.links.map(appPage => (
-        <span className="landing-page-button-group" key={appPage.route}>
-          <span className="help-text">
-            {
-              content.elements?.find(
-                element => element.identifier == appPage.key
-              )?.help
-            }
-          </span>
-          <Link key={appPage.key} href={appPage.route} passHref>
-            <a href={appPage.route}>
-              <Button>{appPage.label}</Button>
-            </a>
-          </Link>
-        </span>
-      ))}
-    </SimpleAppPageView>
+    <SimplePageView content={content}>
+      <Row>
+        {content.links.map(link => (
+          <Column>
+            <ButtonSet stacked>
+              <FormLabel>{tryGet(link.key, content.elements)?.help}</FormLabel>
+              <Button href={link.route}>{link.label}</Button>
+            </ButtonSet>
+          </Column>
+        ))}
+      </Row>
+    </SimplePageView>
   );
 };

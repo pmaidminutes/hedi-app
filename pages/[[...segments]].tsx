@@ -1,9 +1,6 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
 import { ISegmentParam } from "@/modules/common/types";
-import { TryEditProfile } from "@/modules/editProfile/components";
-import { EditProfilePathsGQL } from "@/modules/editProfile/query";
-import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
@@ -16,22 +13,28 @@ import {
 } from "@/modules/model";
 import { TryProfile } from "@/modules/profile/client/components";
 import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
-import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
-import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
+import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { Footer, Header } from "@/modules/shell/components";
-import { TrySimpleAppPage } from "@/modules/simpleAppPage/client/components";
-import { SimpleAppPagesViewPathsGQL } from "@/modules/simpleAppPage/query";
-import { getStaticProps as getStaticSimpleAppPageViewProps } from "@/modules/simpleAppPage/server/generators";
+import { useShell } from "@/modules/shell/hooks";
+// Types
+import {
+  getShell,
+  getShellLinksGQL,
+  LanguagesGQL,
+} from "@/modules/shell/query";
+import { IShellProps } from "@/modules/shell/types";
+import { TrySimplePage } from "@/modules/simplePage/client/components";
+import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
+import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
-// Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 
@@ -50,20 +53,12 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
   const pathQueries = [
-    //PagePathsGQL,
-    //ArticlePathsGQL,
-    //CategoryPathsGQL,
-    //GlossaryPathsGQL,
     CaregiverPathsGQL,
     MidwifePathsGQL,
-    //OrganisationPathsGQL,
-    //InstitutionPathsGQL,
-    //SearchViewPathsGQL,
     LoginViewPathsGQL,
-    EditProfilePathsGQL,
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
-    SimpleAppPagesViewPathsGQL,
+    SimplePageViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -73,12 +68,6 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
 
   return { paths, fallback: "blocking" };
 };
-
-interface IShellProps {
-  // TODO: to be implemented
-  // header?: IHeaderProps
-  // footer?: IFooter
-}
 
 interface ISegmentPageProps {
   content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
@@ -103,42 +92,34 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
-    console.log(params?.segments);
-    // if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
-    if (!content) content = await getEditProfileProps(params?.segments, locale);
-    // if (!content) content = await getCategoryProps(params?.segments, locale);
-    // if (!content) content = await getArticleProps(params?.segments, locale);
-    // if (!content) content = await getGlossaryProps(params?.segments, locale);
-    if (!content) content = await getCaregiverProps(params?.segments, locale);
-    if (!content) content = await getMidwifeProps(params?.segments, locale);
-    // if (!content)
-    //   content = await getOrganisationProps(params?.segments, locale);
-    // if (!content) content = await getInstitutionProps(params?.segments, locale);
-    // if (!content) content = await getPageProps(params?.segments, locale);
+    if (!content) content = await getProfileProps(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
     if (!content)
-      content = await getStaticSimpleAppPageViewProps(params?.segments, locale);
+      content = await getStaticSimplePageViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
-    // console.log("couldn't find content for path ", segments.join("/"));
-    // throw Error("Houston, we have got a problem");
   }
+  // ShellStuff
+  const shellQueries = [
+    getShellLinksGQL("links", ["viewprofile"]),
+    LanguagesGQL,
+  ];
+  const { links, languages } = await getShell(locale, shellQueries);
+  const shell = useShell(languages, content, links);
 
   return {
-    props: { content, shell: {} },
-    revalidate: content?.type === "Search" ? 15 : false,
+    props: { content, shell },
   };
 };
 
 export default function segments(props: ISegmentPageProps) {
-  const { content } = props;
+  const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
-
   useEffect(() => {
     setHediStyle(content?.appstyle ?? "");
   }, [content]);
@@ -148,23 +129,16 @@ export default function segments(props: ISegmentPageProps) {
       <Head>
         <title>HEDI App</title>
       </Head>
-      <Header {...content} />
+      <Header {...shell} />
       <Content>
-        {/* <BreadCrumb content={content} />
-        <TryCategory {...content} />
-        <TryArticle {...content} />
-        <TryGlossary {...content} />
-        <TrySearch {...content} />
-        <TryPage {...content} /> */}
         <TryRegistration {...content} />
         <TryProfile {...content} />
         <TryLogin {...content} />
-        <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
-        <TrySimpleAppPage {...content} />
+        <TrySimplePage content={content} />
         <TryLandingPage {...content} />
       </Content>
-      <Footer />
+      <Footer {...shell} />
     </div>
   );
 }
