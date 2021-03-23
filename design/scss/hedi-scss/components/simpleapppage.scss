@@ -1,16 +1,21 @@
 @import "./theme/hedi-theme.scss";
 
-.hedi--simple-app-page {
-   //font-size: xx-large; 
+.hedi--simple-page {
+  .hedi--app-page-image {
+    float: right;
+    width: auto;
+    img {
+    height: 100%;
+    width: auto;
+    max-height: 250px;
+    }
   }
 
   .hedi--titlegroup {
-   margin-bottom: $layout-lg; 
+    margin-bottom: $layout-lg;
   }
 
   h1 {
-margin-bottom: $spacing-lg;
+    margin-bottom: $spacing-lg;
   }
-
-  img {
-    max-height: 250px;}
+}
