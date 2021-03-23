@@ -16949,10 +16949,6 @@ a.bx--navigation-link:focus {
 .hedi--edit-profile .hedi--service-selection__head {
   margin-bottom: 0; }
 
-FormLabel {
-  color: red;
-  height: 2rem; }
-
 .hedi-separator {
   display: block;
   width: 100%;
