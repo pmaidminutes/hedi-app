@@ -28,7 +28,7 @@ export const SimplePageView: React.FC<{
         <Row>
           {url ? (
             <Column sm={0} md={3} lg={6}>
-              <div aspect-ratio>
+              <div className="hedi--app-page-image">
                 <img src={url} alt={alt ?? ""}></img>
               </div>
             </Column>
