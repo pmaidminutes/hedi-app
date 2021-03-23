@@ -1,12 +1,28 @@
-import { IHTTPError } from "@/modules/common/error";
-import { jsonFetcher } from "@/modules/common/utils";
-import { useRouter } from "next/router";
+import { useState } from "react";
 import useSWR from "swr";
+import { jsonFetcher } from "@/modules/common/utils";
 import { IRegisterRequest, IRegisterResponse } from "../types";
 
-export function useRegister(info: IRegisterRequest) {
-  info.lang = useRouter().locale;
-  const registerResult = useSWR<IHTTPError | IRegisterResponse>(
+export const useRegister = () => {
+  const [response, setResponse] = useState<IRegisterResponse>({
+    success: false,
+  });
+  const [loading, setLoading] = useState(false);
+
+  const register = async (info: IRegisterRequest) => {
+    setLoading(true);
+    const resp = await jsonFetcher<IRegisterResponse>(
+      "/api/register/?" + encodeInfo(info)
+    );
+    setResponse(resp);
+    setLoading(false);
+  };
+
+  return { response, loading, register };
+};
+
+export function useRegisterEager(info: IRegisterRequest) {
+  const registerResult = useSWR<IRegisterResponse>(
     info.passcode || info.name || info.pass
       ? "/api/register/?" + encodeInfo(info)
       : null,

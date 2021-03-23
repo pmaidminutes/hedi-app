@@ -24,24 +24,19 @@ export const RegisterForm = ({
   const [passcode, setPasscode] = useTextInput();
 
   const [info, setInfo] = useState<IRegisterInfo>();
-  const [commit, setCommit] = useState(false);
-  const { data, error } = useRegister(
-    eagerValidate && info ? { ...info, commit } : {}
-  );
-  const response = data && !IsIHTTPError(data) ? data : undefined;
-  const router = useRouter();
+  const { response, loading, register } = useRegister();
 
-  const validCode = useValidate({ passcode: passcode });
+  const { data: codeResponse } = useValidate({ passcode });
   const passcodeData =
-    validCode.data && !IsIHTTPError(validCode.data)
-      ? validCode.data
-      : undefined;
+    codeResponse && !IsIHTTPError(codeResponse) ? codeResponse : undefined;
+  const router = useRouter();
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setCommit(passcodeData?.success ? true : false);
+    if (passcodeData?.success && info && !loading)
+      register({ ...info, lang: router.locale, commit: true });
   };
+
   if (response?.success && passcodeData?.success) {
-    eagerValidate = false;
     router.push("/" + router.locale);
   }
 
