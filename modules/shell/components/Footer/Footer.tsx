@@ -3,7 +3,8 @@ import { Link } from "carbon-components-react";
 import { IEntity, IEntityTranslated, IEntityLocalized } from "@/modules/model";
 import { LanguageSwitch } from "../LanguageSwitch";
 interface IFooter {
-  data?: IEntity[];
+  translations?: IEntityLocalized[];
+  links?: IEntity[];
 }
 
 type FooterProps = Pick<
@@ -11,22 +12,26 @@ type FooterProps = Pick<
   "label" | "translations"
 >;
 
-export const Footer: React.FunctionComponent<FooterProps> = ({
-  label,
+export const Footer: React.FunctionComponent<IFooter> = ({
+  links,
   translations,
 }) => {
-  // const { data } = props;
-  // if (data?.length === 0 || data === undefined) return null;
+  console.log({links}, {translations})
   return (
-    <footer aria-label="footer" className="hedi__footer">
-      {/* {data.map((link, index) => {
-        return (
-          <Link key={link.label + index} href={link.route} title={link.label}>
-            {link.label}
-          </Link>
-        );
-      })} */}
-      <LanguageSwitch translations={translations} />
+    <footer aria-label="footer" className="hedi--footer">
+      {links
+        ? links.map((link, index) => {
+            return (
+              <Link
+                key={link.label + index}
+                href={link.route}
+                title={link.label}>
+                {link.label}
+              </Link>
+            );
+          })
+        : null}
+      {translations ? <LanguageSwitch translations={translations} type="text"/> : null}
     </footer>
   );
 };
