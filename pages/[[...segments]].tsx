@@ -61,8 +61,13 @@ import {
 } from "@/modules/model";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { getSegmentsPaths } from "@/modules/common/query";
-import { getShell } from "@/modules/shell/query";
-import { useShell, IShellProps } from "@/modules/shell/hooks";
+import {
+  getShell,
+  getShellLinksGQL,
+  LanguagesGQL,
+} from "@/modules/shell/query";
+import { useShell } from "@/modules/shell/hooks";
+import { IShellProps } from "@/modules/shell/types";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -144,8 +149,12 @@ export const getStaticProps: GetStaticProps<
     // console.log("couldn't find content for path ", segments.join("/"));
     // throw Error("Houston, we have got a problem");
   }
-  // const results = Promise.all(gql, gql...)
-  const { links, languages } = await getShell(locale);
+  // ShellStuff
+  const shellQueries = [
+    getShellLinksGQL("links", ["viewprofile"]),
+    LanguagesGQL,
+  ];
+  const { links, languages } = await getShell(locale, shellQueries);
   const shell = useShell(languages, content, links);
 
   return {

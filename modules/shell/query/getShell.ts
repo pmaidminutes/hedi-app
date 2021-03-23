@@ -10,27 +10,22 @@ export interface IShell {
   links: IEntity[];
   languages: ILanguage[];
 }
-// getNavLink(keys: string[], lang) {
-//   // via apppages
-//   return IEntity[];
-// }
 
-// getShell
-// # TODO: add right keys
-// keys: string[],
-export async function getShell(lang: string = "de"): Promise<IShell> {
+export const getShellLinksGQL = (name: string, keys: string[]) => {
+  return `${name}:appPagesByKey(keys:[${keys
+    .map(key => `"${key}"`)
+    .join(",")}],lang: $lang) {
+    ${EntityFields}
+  }`;
+};
+
+export async function getShell(lang: string = "de", gqlQueries: string[]): Promise<IShell> {
   const query = gql`
     query getShell(
         $lang: String!
         $includeSelf: Boolean
     ) {
-      links: appPagesByKey (keys:["viewprofile"],lang: $lang) {
-        ${EntityFields}
-      }
-      languages{
-      ${LanguageFields}
-
-      }
+      ${gqlQueries.join("\n")}
     }
   `;
 

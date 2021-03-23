@@ -1,4 +1,4 @@
-import { IShellProps } from "@/modules/shell/hooks/useShell";
+import { IShellProps } from "@/modules/shell/types";
 export interface IFooter extends Partial<IShellProps> {}
 
 export function useFooter(props: IFooter) {

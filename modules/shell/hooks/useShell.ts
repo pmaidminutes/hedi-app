@@ -5,18 +5,7 @@ import {
   IEntityTranslated,
   ILanguage,
 } from "@/modules/model";
-
-interface IFooter extends Partial<INav> {
-  languageSwitch?: string;
-}
-interface INav {
-  links: IEntity[];
-}
-
-export interface IShellProps {
-  languageSwitchLinks: IEntity[];
-  links: IEntity[];
-}
+import { IShellProps } from "../types";
 
 export function useShell(
   languages: ILanguage[],
