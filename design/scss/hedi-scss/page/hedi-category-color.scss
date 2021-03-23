@@ -1,43 +1,41 @@
 // HEDI CATEGORY COLOR
 $primary-color-map: (
-	pregnancy: $blue-primary,
-	birth: $pink-primary,
-	after-birth: $purple-primary,
-	finances: $green-primary,
-	advice: $orange-primary,
-	root: $blue-primary,
-	default: $purple-primary,
+  pregnancy: $blue-primary,
+  birth: $pink-primary,
+  after-birth: $purple-primary,
+  finances: $green-primary,
+  advice: $orange-primary,
+  root: $blue-primary,
+  default: $purple-primary,
 );
 
 $light-color-map: (
-	pregnancy: $blue-10,
-	birth: $pink-10,
-	after-birth: $purple-10,
-	finances: $green-10,
-	advice: $orange-10,
-	root: $blue-10,
-	default: $purple-10,
+  pregnancy: $blue-10,
+  birth: $pink-10,
+  after-birth: $purple-10,
+  finances: $green-10,
+  advice: $orange-10,
+  root: $blue-10,
+  default: $purple-10,
 );
 
 @mixin colorClass($name) {
-	&--#{$name} {
-		header {
-			background-color: map-get($primary-color-map, $name) !important;
-		}
-		.hedi-article-container {
-			background-color: map-get($light-color-map, $name);
-		}
-		.hedi-auto-suggest {
-			background-color: map-get($primary-color-map, $name);
-		}
-	}
+  &--#{$name} {
+    background-color: map-get($primary-color-map, $name) !important;
+    .hedi-article-container {
+      background-color: map-get($light-color-map, $name);
+    }
+    .hedi-auto-suggest {
+      background-color: map-get($primary-color-map, $name);
+    }
+  }
 }
 
 .hedi-category-color {
-	@include colorClass(pregnancy);
-	@include colorClass(birth);
-	@include colorClass(after-birth);
-	@include colorClass(finances);
-	@include colorClass(advice);
-	@include colorClass(root);
+  @include colorClass(pregnancy);
+  @include colorClass(birth);
+  @include colorClass(after-birth);
+  @include colorClass(finances);
+  @include colorClass(advice);
+  @include colorClass(root);
 }
