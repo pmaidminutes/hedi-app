@@ -131,12 +131,12 @@ export default function segments(props: ISegmentPageProps) {
       </Head>
       <Header {...shell} />
       <Content>
-        <TryRegistration {...content} />
-        <TryProfile {...content} />
-        <TryLogin {...content} />
-        <TryUserFeedbackThanks {...content} />
-        <TrySimplePage content={content} />
-        <TryLandingPage {...content} />
+        <TryRegistration {...content} key="registration" />
+        <TryProfile {...content} key="profile" />
+        <TryLogin {...content} key="login" />
+        <TryUserFeedbackThanks {...content} key="userfeedback" />
+        <TrySimplePage content={content} key="simplepage" />
+        <TryLandingPage {...content} key="landingpage" />
       </Content>
       <Footer {...shell} />
     </div>

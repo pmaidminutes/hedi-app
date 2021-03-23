@@ -1,9 +1,11 @@
-import { FormEventHandler, useState, useEffect } from "react";
 import { login } from "@/modules/auth/client";
 import { getTextInputProps, tryGetValue } from "@/modules/common/utils";
+import {
+  ILoginFormLayoutProps,
+  LoginFormProps,
+} from "@/modules/login/client/components";
 import { IUIElementTexts } from "@/modules/model";
-import { LoginFormProps } from "./LoginForm";
-import { ILoginFormLayoutProps } from "./LoginFormLayout";
+import { FormEventHandler, useEffect, useState } from "react";
 
 const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
   event.preventDefault();

@@ -7,8 +7,7 @@ export const useLoginView = (redirect: string) => {
   const router = useRouter();
   useEffect(() => {
     if (!loading && user) {
-      // TODO redirect to a better location
-      console.log("redirectsssss");
+      // redirects to landing pages
       router.push(redirect);
     }
   }, [user, loading]);
