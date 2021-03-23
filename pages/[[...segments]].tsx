@@ -1,7 +1,8 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
 import { ISegmentParam } from "@/modules/common/types";
-
+import { TryLandingPage } from "@/modules/landingPage/client/components";
+import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
@@ -12,37 +13,30 @@ import {
 } from "@/modules/model";
 import { TryProfile } from "@/modules/profile/client/components";
 import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
+import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { Footer, Header } from "@/modules/shell/components";
-import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
-import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
-import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
-
-import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
-import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
-
-import { TrySimplePage } from "@/modules/simplePage/client/components";
-import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
-
-
-// Components
-import { Content } from "carbon-components-react";
-import Head from "next/head";
+import { useShell } from "@/modules/shell/hooks";
 // Types
-
 import {
   getShell,
   getShellLinksGQL,
   LanguagesGQL,
 } from "@/modules/shell/query";
-import { useShell } from "@/modules/shell/hooks";
 import { IShellProps } from "@/modules/shell/types";
+import { TrySimplePage } from "@/modules/simplePage/client/components";
+import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
+import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
+import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
+import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
+import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
+// Components
+import { Content } from "carbon-components-react";
+import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
-import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -137,12 +131,12 @@ export default function segments(props: ISegmentPageProps) {
       </Head>
       <Header {...shell} />
       <Content>
-        <TryRegistration {...content} />
-        <TryProfile {...content} />
-        <TryLogin {...content} />
-        <TryUserFeedbackThanks {...content} />
-        <TrySimplePage content={content} />
-        <TryLandingPage {...content} />
+        <TryRegistration {...content} key="registration" />
+        <TryProfile {...content} key="profile" />
+        <TryLogin {...content} key="login" />
+        <TryUserFeedbackThanks {...content} key="userfeedback" />
+        <TrySimplePage content={content} key="simplepage" />
+        <TryLandingPage {...content} key="landingpage" />
       </Content>
       <Footer {...shell} />
     </div>

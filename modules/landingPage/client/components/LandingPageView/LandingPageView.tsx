@@ -1,6 +1,6 @@
-import { SimplePageView } from "@/modules/simplePage/client/components";
 import { tryGet } from "@/modules/common/utils";
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 import {
   Button,
   ButtonSet,

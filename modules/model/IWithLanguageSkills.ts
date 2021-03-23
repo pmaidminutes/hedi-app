@@ -1,6 +1,6 @@
 import { ILanguage, LanguageFields } from "./ILanguage";
 
-export interface ILanguageSkill{
+export interface ILanguageSkill {
   language: ILanguage;
   level: number;
 }

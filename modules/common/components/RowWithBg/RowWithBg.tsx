@@ -12,4 +12,3 @@ export const RowWithBg = (props: IRowWithBg) => {
     </Row>
   );
 };
-
