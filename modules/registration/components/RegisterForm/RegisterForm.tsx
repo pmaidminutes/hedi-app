@@ -1,4 +1,3 @@
-import { IsIHTTPError } from "@/modules/common/error";
 import { getTextInputProps } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
@@ -63,7 +62,6 @@ export const RegisterForm = ({
         {...getTextInputProps("registrationcode", elements)}
         required
         onChange={setPasscode}
-        type="password"
         invalid={!!codeResponse?.errors?.passcode}
         //invalidText={passcodeData?.errors?.passcode} TODO use with translations only
       />

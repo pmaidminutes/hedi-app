@@ -9,7 +9,8 @@ export const LoginForm = (definition: IAppPage) => (
   <>
     <SimpleAppPageView
       content={definition}
-      rootCssClass="login-form"></SimpleAppPageView>
+      rootCssClass="login-form"
+      key={definition.route}></SimpleAppPageView>
     <LoginFormLayout {...useLoginForm(definition)}></LoginFormLayout>
   </>
 );

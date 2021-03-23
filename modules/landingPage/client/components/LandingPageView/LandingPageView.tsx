@@ -7,7 +7,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   return (
     <SimpleAppPageView content={content} rootCssClass="landing-page">
       {content.links.map(appPage => (
-        <span className="landing-page-button-group">
+        <span className="landing-page-button-group" key={appPage.route}>
           <span className="help-text">
             {
               content.elements?.find(
