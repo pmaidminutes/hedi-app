@@ -3,9 +3,8 @@ import { useFooter, IFooter } from "./useFooter";
 import { Link } from "carbon-components-react";
 import { LanguageSwitch } from "../LanguageSwitch";
 
-export const Footer: React.FunctionComponent<IFooter> = props => {
-  const { links, translations, languages } = useFooter(props);
-  console.log({ links }, { translations }, {languages});
+export const Footer = (props: IFooter) => {
+  const { links, languageSwitchLinks } = useFooter(props);
   return (
     <footer aria-label="footer" className="hedi--footer">
       {links
@@ -20,8 +19,11 @@ export const Footer: React.FunctionComponent<IFooter> = props => {
             );
           })
         : null}
-      {translations ? (
-        <LanguageSwitch languages={ languages} translations={translations} direction="top"/>
+      {languageSwitchLinks ? (
+        <LanguageSwitch
+          links={languageSwitchLinks}
+          direction="top"
+        />
       ) : null}
     </footer>
   );

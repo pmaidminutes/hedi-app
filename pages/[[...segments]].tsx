@@ -61,7 +61,8 @@ import {
 } from "@/modules/model";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { getSegmentsPaths } from "@/modules/common/query";
-import {  getShell, IShell } from "@/modules/shell/query";
+import { getShell } from "@/modules/shell/query";
+import { useShell, IShellProps } from "@/modules/shell/hooks";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -100,19 +101,6 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   return { paths, fallback: "blocking" };
 };
 
-interface IShellProps {
-  // TODO: to be implemented
-  // header?: IHeaderProps
-  // footer?: IFooter
-}
-
-interface IFooter extends Partial<INav> {
-  languageSwitch?: string;
-}
-interface INav {
-  links: IEntity[];
-}
-
 interface ISegmentPageProps {
   content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
   shell: IShellProps;
@@ -136,7 +124,6 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
-    console.log(params?.segments);
     // if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content) content = await getEditProfileProps(params?.segments, locale);
@@ -158,30 +145,9 @@ export const getStaticProps: GetStaticProps<
     // throw Error("Houston, we have got a problem");
   }
   // const results = Promise.all(gql, gql...)
-  const { links, languages } = await getShell(locale)
-  console.log({ links }, { languages })
+  const { links, languages } = await getShell(locale);
+  const shell = useShell(languages, content, links);
 
-
-  const { translations } = content;
-  const languageSwitchLinks: IEntity[] = translations.map((translation: IEntityLocalized) => {
-    return {
-      route: translation.route,
-      label: languages.find((language: ILanguage) => language.code === translation.lang)?.label ?? '',
-      type: "Link",
-    };
-  });
-
-  console.log({ languageSwitchLinks })
-
-  interface IShellProps {
-    links: IEntity[]
-    translations: IEntity[]
-    languages: ILanguage[]
-  }
-
-  const shell: IShellProps = {links, translations:languageSwitchLinks, languages}
-
-  console.log({shell})
   return {
     props: { content, shell },
     revalidate: content.type === "Search" ? 15 : false,
@@ -191,7 +157,6 @@ export const getStaticProps: GetStaticProps<
 export default function segments(props: ISegmentPageProps) {
   const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
-
   useEffect(() => {
     setHediStyle(content?.appstyle ?? "");
   }, [content]);
@@ -201,7 +166,7 @@ export default function segments(props: ISegmentPageProps) {
       <Head>
         <title>HEDI App</title>
       </Head>
-      <Header {...content} />
+      <Header {...shell} />
       <Content>
         {/* <BreadCrumb content={content} />
         <TryCategory {...content} />

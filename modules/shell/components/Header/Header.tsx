@@ -1,9 +1,5 @@
 import { useRouter } from "next/router";
-import {
-  IAppStyled,
-  IEntityLocalized,
-  IEntityTranslated,
-} from "@/modules/model";
+import { useHeader, IHeader } from "./useHeader";
 import { LanguageSwitch } from "../LanguageSwitch";
 import {
   Header as CarbonHeader,
@@ -14,30 +10,21 @@ import {
 import { GlobalSearchMenu } from "../GlobalSearchMenu";
 import { UserProfileMenu } from "../UserProfileMenu";
 
-type HeaderProps = Pick<
-  IEntityTranslated<IEntityLocalized>,
-  "label" | "translations"
-> &
-  Partial<IAppStyled>;
-
-export const Header: React.FunctionComponent<HeaderProps> = ({
-  label,
-  translations,
-  appstyle = "hedi-category-color--default",
-}) => {
+export const Header = (props: IHeader) => {
+  const { appstyle, languageSwitchLinks } = useHeader(props);
   const router = useRouter();
   const { locale } = router;
 
   return (
-    <CarbonHeader className={`hedi-header ${appstyle}`} aria-label="header">
+    <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
       <HeaderName prefix="" href={`/${locale}`}>
-        ♥ Hedi
+        <img src="/images/hedi_logos/hedi_logo_color_dark.svg" alt="HEDI Logo" />
       </HeaderName>
       <HeaderGlobalBar>
         <GlobalSearchMenu />
-        {/* {translations !== undefined ? (
-          <LanguageSwitch translations={translations} />
-        ) : null} */}
+        {languageSwitchLinks !== undefined ? (
+          <LanguageSwitch links={languageSwitchLinks} />
+        ) : null}
         <UserProfileMenu />
       </HeaderGlobalBar>
     </CarbonHeader>

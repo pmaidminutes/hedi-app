@@ -1,12 +1,8 @@
-import { IEntity, IEntityLocalized, ILanguage } from "@/modules/model";
-export interface IFooter {
-  translations?: IEntityLocalized[];
-  links?: IEntity[];
-  languages: ILanguage[]
-}
+import { IShellProps } from "@/modules/shell/hooks/useShell";
+export interface IFooter extends Partial<IShellProps> {}
 
 export function useFooter(props: IFooter) {
-  const {translations, links, languages} = props
+  const { languageSwitchLinks, links } = props;
 
-  return {translations, links, languages}
+  return { languageSwitchLinks, links };
 }
