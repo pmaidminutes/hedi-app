@@ -159,22 +159,31 @@ export const getStaticProps: GetStaticProps<
   }
   // const results = Promise.all(gql, gql...)
   const { links, languages } = await getShell(locale)
-  console.log({links}, {languages})
+  console.log({ links }, { languages })
 
 
   const { translations } = content;
-  const languageSwitchLinks: IEntity[] =translations.map((translation: IEntityLocalized) => {
+  const languageSwitchLinks: IEntity[] = translations.map((translation: IEntityLocalized) => {
     return {
       route: translation.route,
-      label: languages.find((language:ILanguage) => language.code === translation.lang).label,
+      label: languages.find((language: ILanguage) => language.code === translation.lang)?.label ?? '',
       type: "Link",
     };
-  }) ;
+  });
 
-  console.log({languageSwitchLinks})
+  console.log({ languageSwitchLinks })
 
+  interface IShellProps {
+    links: IEntity[]
+    translations: IEntity[]
+    languages: ILanguage[]
+  }
+
+  const shell: IShellProps = {links, translations:languageSwitchLinks, languages}
+
+  console.log({shell})
   return {
-    props: { content, shell: {links, translations:languageSwitchLinks} },
+    props: { content, shell },
     revalidate: content.type === "Search" ? 15 : false,
   };
 };

@@ -11,7 +11,7 @@ import { Language32 } from "@carbon/icons-react";
 export const LanguageSwitch = (
   props: ILanguageSwitchProps
 ): JSX.Element | null => {
-  const { translations, items, direction } = useLanguageSwitch(props);
+  const { items, direction } = useLanguageSwitch(props);
 
   return (
     <OverflowMenu
@@ -25,8 +25,9 @@ export const LanguageSwitch = (
           key={index}
           aria-label={item.lang}
           href={item.path}
-          itemText={item.lang}
-          hasDivider={true}></OverflowMenuItem>
+          itemText={item.label}
+          hasDivider={true}
+        />
       ))}
     </OverflowMenu>
   );

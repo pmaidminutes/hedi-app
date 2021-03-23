@@ -1,5 +1,4 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-
 import {
   EntityFields,
   IEntity,
@@ -19,7 +18,7 @@ export interface IShell {
 // getShell
 // # TODO: add right keys
 // keys: string[],
-export async function getShell(lang: string | undefined): Promise<IShell | null> {
+export async function getShell(lang: string = "de"): Promise<IShell> {
   const query = gql`
     query getShell(
         $lang: String!
@@ -45,9 +44,9 @@ export async function getShell(lang: string | undefined): Promise<IShell | null>
       console.warn(e);
       return { links: [], languages: [] };
     });
-  if (!links?.[0] || !languages?.[0]) return null;
+  if (!links?.[0] || !languages?.[0]) return { links: [], languages: [] };
 
-  return { links:typeAsLink(links), languages };
+  return { links: typeAsLink(links), languages };
 }
 
 const typeAsLink = (array: IEntity[]) => {

@@ -1,11 +1,12 @@
-import { IEntity, IEntityLocalized } from "@/modules/model";
+import { IEntity, IEntityLocalized, ILanguage } from "@/modules/model";
 export interface IFooter {
   translations?: IEntityLocalized[];
   links?: IEntity[];
+  languages: ILanguage[]
 }
 
 export function useFooter(props: IFooter) {
-  const {translations, links} = props
+  const {translations, links, languages} = props
 
-  return {translations, links}
+  return {translations, links, languages}
 }

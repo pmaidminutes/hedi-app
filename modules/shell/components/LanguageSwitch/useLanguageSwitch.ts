@@ -1,14 +1,16 @@
 import { useRouter } from "next/router";
-import { IEntityLocalized } from "@/modules/model";
+import { IEntityLocalized, ILanguage } from "@/modules/model";
 import { VerticalDirection } from "carbon-components-react/typings/shared";
 
 export interface ILanguageSwitchProps {
   translations: IEntityLocalized[];
   direction?: VerticalDirection;
+  languages: ILanguage[]
 }
 export function useLanguageSwitch({
   translations,
   direction = "bottom",
+  languages
 }: ILanguageSwitchProps) {
   const router = useRouter();
   const { locales, asPath: currentPath, locale } = router;
@@ -18,11 +20,12 @@ export function useLanguageSwitch({
       lang,
       path:
         findLocaledUrlpath(lang, translations) ?? `/${locale}${currentPath}`,
+        label: languages.find((language:ILanguage) => language.code === lang)?.label ?? ''
     })) ?? [];
 
+  console.log({items}, {translations})
   return {
     items,
-    translations,
     direction,
   };
 }

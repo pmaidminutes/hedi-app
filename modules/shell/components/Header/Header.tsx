@@ -35,9 +35,9 @@ export const Header: React.FunctionComponent<HeaderProps> = ({
       </HeaderName>
       <HeaderGlobalBar>
         <GlobalSearchMenu />
-        {translations !== undefined ? (
+        {/* {translations !== undefined ? (
           <LanguageSwitch translations={translations} />
-        ) : null}
+        ) : null} */}
         <UserProfileMenu />
       </HeaderGlobalBar>
     </CarbonHeader>
