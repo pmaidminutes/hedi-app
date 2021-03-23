@@ -12,7 +12,7 @@ export const SimplePageView: React.FC<{
         <AspectRatio ratio="2x1">
           <Image
             src={
-              "http://appstaging.projekt-hedi.de" + content.posterImage.route
+              "https://appstaging.projekt-hedi.de" + content.posterImage.route
             }
             alt={content.posterImage.alt}
             className="hedi-header-image"
@@ -23,7 +23,7 @@ export const SimplePageView: React.FC<{
       )}
       <Grid>
         <Row>
-          <Column>
+          <Column className="hedi--titlegroup">
             <h1>{content.longTitle ?? content.label}</h1>
             <HTMLWithNextImage data={content.body} />
           </Column>
