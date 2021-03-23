@@ -5,7 +5,9 @@ import { HTMLWithNextImage } from "@/modules/react/html";
 
 export const SimplePageView: React.FC<{
   content: IAppPage;
-}> = ({ content, children }) => {
+  url?: string;
+  alt?: string;
+}> = ({ content, url, alt, children }) => {
   return (
     <div className={`hedi--simple-page hedi--${content.key}-page`}>
       {content.posterImage && (
@@ -24,11 +26,13 @@ export const SimplePageView: React.FC<{
 
       <Grid condensed fullWidth>
         <Row>
-          <Column sm={0} md={3} lg={6}>
-            <div aspect-ratio>
-              <img src="/Pregnancy_pink80.svg" alt=""></img>
-            </div>
-          </Column>
+          {url ? (
+            <Column sm={0} md={3} lg={6}>
+              <div aspect-ratio>
+                <img src={url} alt={alt ?? ""}></img>
+              </div>
+            </Column>
+          ) : null}
           <Column>
             <Grid>
               <Row>

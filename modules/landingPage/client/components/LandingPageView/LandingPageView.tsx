@@ -11,7 +11,7 @@ import {
 
 export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   return (
-    <SimplePageView content={content}>
+    <SimplePageView url="/Pregnancy_pink80.svg" alt="Beschreibung des Bildes" content={content}>
       <Row>
         {content.links.map(link => (
           <Column>
