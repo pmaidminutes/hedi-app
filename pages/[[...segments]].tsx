@@ -28,10 +28,6 @@ import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
 
-import { TryEditProfile } from "@/modules/editProfile/components";
-import { EditProfilePathsGQL } from "@/modules/editProfile/query";
-import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
-
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
@@ -65,7 +61,6 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     //InstitutionPathsGQL,
     //SearchViewPathsGQL,
     LoginViewPathsGQL,
-    EditProfilePathsGQL,
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
     SimplePageViewPathsGQL,
@@ -113,7 +108,6 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
-    if (!content) content = await getEditProfileProps(params?.segments, locale);
     // if (!content) content = await getCategoryProps(params?.segments, locale);
     // if (!content) content = await getArticleProps(params?.segments, locale);
     // if (!content) content = await getGlossaryProps(params?.segments, locale);
@@ -164,7 +158,6 @@ export default function segments(props: ISegmentPageProps) {
         <TryRegistration {...content} />
         <TryProfile {...content} />
         <TryLogin {...content} />
-        <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
         <TrySimplePage content={content} />
         <TryLandingPage {...content} />
