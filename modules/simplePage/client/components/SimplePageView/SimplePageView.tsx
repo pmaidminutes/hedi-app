@@ -11,7 +11,6 @@ export const SimplePageView: React.FC<{
   return (
     <div className={`hedi--simple-page hedi--${content.key}-page`}>
       {content.posterImage && (
-        <AspectRatio ratio="2x1">
           <Image
             src={
               "https://appstaging.projekt-hedi.de" + content.posterImage.route
@@ -21,7 +20,6 @@ export const SimplePageView: React.FC<{
             width={content.posterImage.width}
             height={content.posterImage.height}
           />
-        </AspectRatio>
       )}
 
       <Grid condensed fullWidth>
