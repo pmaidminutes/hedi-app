@@ -8,3 +8,4 @@ export * from "./getMidwifePaths";
 export * from "./getMidwifeWithParents";
 export * from "./getOrganisation";
 export * from "./getOrganisationPaths";
+export * from "./getProfile";

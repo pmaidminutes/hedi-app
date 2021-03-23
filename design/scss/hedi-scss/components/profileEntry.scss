@@ -1,0 +1,13 @@
+.hedi--profile-entry {
+
+  img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    background-color:$blue-30;
+  }
+
+  > div > div:not(:first-child) {
+    background-color: #fff;
+  }
+}

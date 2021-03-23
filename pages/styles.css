@@ -17020,6 +17020,10 @@ a.bx--navigation-link:focus {
 .leaflet-container {
   height: 300px; }
 
+address {
+  display: flex;
+  flex-direction: column; }
+
 .hedi-category-color--pregnancy header {
   background-color: #2A84C6 !important; }
 
@@ -17083,6 +17087,70 @@ a.bx--navigation-link:focus {
   .hedi__categoryentry a h4 {
     color: red; }
 
+.hedi__footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem; }
+  .hedi__footer a {
+    font-family: "Roboto Slab", serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.375;
+    letter-spacing: 0;
+    text-decoration: none; }
+    .hedi__footer a:not(:last-child) {
+      margin-right: 1rem; }
+
+.hedi--profile-entry img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  background-color: #AEC1EA; }
+
+.hedi--profile-entry > div > div:not(:first-child) {
+  background-color: #fff; }
+
+.hedi--profile--tile .bx--tile {
+  width: 100%; }
+
+.hedi--profile--tile img, .hedi--profile--tile svg {
+  max-width: 130px;
+  max-height: 140px;
+  height: auto; }
+
+.hedi--related-profiles {
+  background-color: #AEC1EA;
+  background-image: url(/images/Baby_Hand_gedreht.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+  color: #fff;
+  padding: 2rem;
+  width: 100%; }
+  .hedi--related-profiles--profile {
+    height: 100%; }
+    .hedi--related-profiles--profile svg {
+      position: absolute;
+      bottom: 0;
+      right: 0; }
+
+.hedi__row-with-bg {
+  padding: 2rem 0;
+  position: relative; }
+  .hedi__row-with-bg::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/profile_bg.png);
+    filter: opacity(0.5);
+    background-size: contain; }
+  .hedi__row-with-bg > div {
+    position: relative;
+    width: 100%; }
+
 .hedi--edit-profile .hedi--group--language-skills .bx--data-table-content {
   overflow-x: visible !important; }
 
@@ -17121,20 +17189,21 @@ a.bx--navigation-link:focus {
     line-height: 1.29;
     letter-spacing: 0; }
 
-.hedi--footer {
-  align-items: center;
+.hedi--language-skills tr {
   display: flex;
-  justify-content: flex-end;
-  padding: 1rem; }
-  .hedi--footer a {
-    font-family: "Roboto Slab", serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.375;
-    letter-spacing: 0;
-    text-decoration: none; }
-    .hedi--footer a:not(:last-child) {
-      margin-right: 1rem; }
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff; }
+  .hedi--language-skills tr:not(:last-child) {
+    margin-bottom: .5rem; }
+  .hedi--language-skills tr td:first-child {
+    min-width: 100px; }
+
+.hedi--language-skills .bx--tile {
+  width: 100%; }
+
+.hedi--language-skills svg {
+  color: #942345; }
 
 .hidden {
   display: none; }

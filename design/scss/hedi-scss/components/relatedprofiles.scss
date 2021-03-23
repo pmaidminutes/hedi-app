@@ -1,0 +1,19 @@
+.hedi--related-profiles {
+  background-color: $blue-30;
+  background-image:url(/images/Baby_Hand_gedreht.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;;
+  color: #fff;
+  padding: 2rem;
+  width: 100%;
+
+  &--profile {
+    height: 100%;
+    svg {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+  }
+}

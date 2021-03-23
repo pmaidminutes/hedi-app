@@ -1,11 +1,29 @@
+import { useState } from "react";
 import useSWR from "swr";
-import { IHTTPError } from "@/modules/common/error";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IRegisterRequest, IRegisterResponse } from "../types";
 
-export function useRegister(info: IRegisterRequest) {
-  const registerResult = useSWR<IHTTPError | IRegisterResponse>(
-    info.name || info.mail || info.pass
+export const useRegister = () => {
+  const [response, setResponse] = useState<IRegisterResponse>({
+    success: false,
+  });
+  const [loading, setLoading] = useState(false);
+
+  const register = async (info: IRegisterRequest) => {
+    setLoading(true);
+    const resp = await jsonFetcher<IRegisterResponse>(
+      "/api/register/?" + encodeInfo(info)
+    );
+    setResponse(resp);
+    setLoading(false);
+  };
+
+  return { response, loading, register };
+};
+
+export function useRegisterEager(info: IRegisterRequest) {
+  const registerResult = useSWR<IRegisterResponse>(
+    info.passcode || info.name || info.pass
       ? "/api/register/?" + encodeInfo(info)
       : null,
     url => jsonFetcher<IRegisterResponse>(url)
