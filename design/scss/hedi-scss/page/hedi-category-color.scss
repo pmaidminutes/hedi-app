@@ -6,7 +6,7 @@ $primary-color-map: (
   finances: $green-primary,
   advice: $orange-primary,
   root: $blue-primary,
-  default: $purple-primary,
+  default: $blue-primary,
 );
 
 $light-color-map: (
@@ -16,7 +16,7 @@ $light-color-map: (
   finances: $green-10,
   advice: $orange-10,
   root: $blue-10,
-  default: $purple-10,
+  default: $blue-10,
 );
 
 @mixin colorClass($name) {
@@ -38,4 +38,5 @@ $light-color-map: (
   @include colorClass(finances);
   @include colorClass(advice);
   @include colorClass(root);
+  @include colorClass(default);
 }
