@@ -1,22 +1,11 @@
 import React from "react";
+import { useFooter, IFooter } from "./useFooter";
 import { Link } from "carbon-components-react";
-import { IEntity, IEntityTranslated, IEntityLocalized } from "@/modules/model";
 import { LanguageSwitch } from "../LanguageSwitch";
-interface IFooter {
-  translations?: IEntityLocalized[];
-  links?: IEntity[];
-}
 
-type FooterProps = Pick<
-  IEntityTranslated<IEntityLocalized>,
-  "label" | "translations"
->;
-
-export const Footer: React.FunctionComponent<IFooter> = ({
-  links,
-  translations,
-}) => {
-  console.log({links}, {translations})
+export const Footer: React.FunctionComponent<IFooter> = props => {
+  const { links, translations } = useFooter(props);
+  console.log({ links }, { translations });
   return (
     <footer aria-label="footer" className="hedi--footer">
       {links
@@ -31,7 +20,9 @@ export const Footer: React.FunctionComponent<IFooter> = ({
             );
           })
         : null}
-      {translations ? <LanguageSwitch translations={translations} type="text"/> : null}
+      {translations ? (
+        <LanguageSwitch translations={translations} type="text" />
+      ) : null}
     </footer>
   );
 };
