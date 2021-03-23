@@ -166,7 +166,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryLogin {...content} />
         <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
-        <TrySimpleAppPage {...content} />
+        <TrySimpleAppPage content={content} />
         <TryLandingPage {...content} />
       </Content>
       <Footer />
