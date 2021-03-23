@@ -1,14 +1,14 @@
 import { IImage, ImageFields } from "@/modules/editorial/types";
 import {
+  BodyFields,
+  EntityTranslatedFields,
+  IBody,
   IEntityLocalized,
   IEntityTranslated,
-  EntityTranslatedFields,
   IRouteLabeled,
-  RouteLabelFields,
   IWithUIElements,
+  RouteLabelFields,
   WithUIElementsFields,
-  IBody,
-  BodyFields,
 } from "@/modules/model";
 
 export interface IAppPage
@@ -18,7 +18,7 @@ export interface IAppPage
   routelabel: IRouteLabeled;
   key: string;
   longTitle?: string;
-  posterImage?: IImage;
+  posterImage: IImage;
 }
 
 export function isIAppPage(obj: any): obj is IAppPage {
