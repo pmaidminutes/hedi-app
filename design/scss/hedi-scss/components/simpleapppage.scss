@@ -2,8 +2,9 @@
 
 .hedi--simple-page {
   .hedi--app-page-image {
-    float: right;
-    width: auto;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
     img {
     height: 100%;
     width: auto;
