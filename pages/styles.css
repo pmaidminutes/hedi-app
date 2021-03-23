@@ -16930,18 +16930,19 @@ address {
   .hedi__categoryentry a h4 {
     color: red; }
 
-.hedi__footer {
+.hedi--footer {
+  align-items: center;
   display: flex;
   justify-content: flex-end;
   padding: 1rem; }
-  .hedi__footer a {
+  .hedi--footer a {
     font-family: "Roboto Slab", serif;
     font-size: 1rem;
     font-weight: 500;
     line-height: 1.375;
     letter-spacing: 0;
     text-decoration: none; }
-    .hedi__footer a:not(:last-child) {
+    .hedi--footer a:not(:last-child) {
       margin-right: 1rem; }
 
 .hedi--profile-entry img {

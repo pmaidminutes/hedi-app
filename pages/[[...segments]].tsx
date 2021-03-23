@@ -12,8 +12,6 @@ import {
 } from "@/modules/model";
 import { TryProfile } from "@/modules/profile/client/components";
 import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
-import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
-import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
@@ -34,6 +32,14 @@ import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simple
 import { Content } from "carbon-components-react";
 import Head from "next/head";
 // Types
+
+import {
+  getShell,
+  getShellLinksGQL,
+  LanguagesGQL,
+} from "@/modules/shell/query";
+import { useShell } from "@/modules/shell/hooks";
+import { IShellProps } from "@/modules/shell/types";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
@@ -53,15 +59,8 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
   const pathQueries = [
-    //PagePathsGQL,
-    //ArticlePathsGQL,
-    //CategoryPathsGQL,
-    //GlossaryPathsGQL,
     CaregiverPathsGQL,
     MidwifePathsGQL,
-    //OrganisationPathsGQL,
-    //InstitutionPathsGQL,
-    //SearchViewPathsGQL,
     LoginViewPathsGQL,
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
@@ -75,12 +74,6 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
 
   return { paths, fallback: "blocking" };
 };
-
-interface IShellProps {
-  // TODO: to be implemented
-  // header?: IHeaderProps
-  // footer?: IFooter
-}
 
 interface ISegmentPageProps {
   content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
@@ -105,20 +98,10 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
-    console.log(params?.segments);
-    // if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getProfileProps(params?.segments, locale);
-
-    // if (!content) content = await getCategoryProps(params?.segments, locale);
-    // if (!content) content = await getArticleProps(params?.segments, locale);
-    // if (!content) content = await getGlossaryProps(params?.segments, locale);
-    // if (!content)
-    //   content = await getOrganisationProps(params?.segments, locale);
-    // if (!content) content = await getInstitutionProps(params?.segments, locale);
-    // if (!content) content = await getPageProps(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
     if (!content)
@@ -126,20 +109,23 @@ export const getStaticProps: GetStaticProps<
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
-    // console.log("couldn't find content for path ", segments.join("/"));
-    // throw Error("Houston, we have got a problem");
   }
+  // ShellStuff
+  const shellQueries = [
+    getShellLinksGQL("links", ["viewprofile"]),
+    LanguagesGQL,
+  ];
+  const { links, languages } = await getShell(locale, shellQueries);
+  const shell = useShell(languages, content, links);
 
   return {
-    props: { content, shell: {} },
-    // revalidate: content.type === "Search" ? 15 : false,
+    props: { content, shell },
   };
 };
 
 export default function segments(props: ISegmentPageProps) {
-  const { content } = props;
+  const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
-
   useEffect(() => {
     setHediStyle(content?.appstyle ?? "");
   }, [content]);
@@ -149,14 +135,8 @@ export default function segments(props: ISegmentPageProps) {
       <Head>
         <title>HEDI App</title>
       </Head>
-      <Header {...content} />
+      <Header {...shell} />
       <Content>
-        {/* <BreadCrumb content={content} />
-        <TryCategory {...content} />
-        <TryArticle {...content} />
-        <TryGlossary {...content} />
-        <TrySearch {...content} />
-        <TryPage {...content} /> */}
         <TryRegistration {...content} />
         <TryProfile {...content} />
         <TryLogin {...content} />
@@ -164,7 +144,7 @@ export default function segments(props: ISegmentPageProps) {
         <TrySimplePage content={content} />
         <TryLandingPage {...content} />
       </Content>
-      <Footer />
+      <Footer {...shell} />
     </div>
   );
 }
