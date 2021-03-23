@@ -7,4 +7,12 @@ export type ProfileType =
   | "Organisation"
   | "Institution";
 
+export const ProfileTypeNameArray = [
+  "Parent",
+  "Caregiver",
+  "Midwife",
+  "Organisation",
+  "Institution",
+];
+
 export type Profile = ICaregiver | IMidwife | IOrganisation | IInstitution;

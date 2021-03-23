@@ -5,6 +5,7 @@ import {
   InstitutionFields,
   OrganisationFields,
   Profile,
+  ProfileTypeNameArray,
 } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
@@ -41,6 +42,7 @@ export async function getProfile(route: string): Promise<ProfileView | null> {
   if (!profiles?.[0]) return null;
 
   const profile = profiles[0];
+  if (!ProfileTypeNameArray.includes(profile.type)) return null;
 
   const subquery = gql`
     query getProfileElements($lang: String!){
