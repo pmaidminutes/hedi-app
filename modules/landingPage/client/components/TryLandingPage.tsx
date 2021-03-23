@@ -1,6 +1,6 @@
 import { ITyped } from "@/modules/model";
+import { LandingPageView } from ".";
 import { ILandingPageView } from "../../types/ILandingPageView";
-import { LandingPageView } from "./LandingPageView/LandingPageView";
 
 export const TryLandingPage = (content: ITyped): JSX.Element | null =>
   content.type === "LandingPage" ? (
