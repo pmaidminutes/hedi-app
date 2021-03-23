@@ -12,10 +12,5 @@ export const TrySimpleAppPage = ({
   simpleAppPageKeys
     .map(key => capitalizeFirstLetter(key))
     .includes(content.type) ? (
-    <SimpleAppPageView
-      content={content as IAppPage}
-      rootCssClass={`simple-app-page ${
-        (content as IAppPage)?.key || null
-      }-page`}
-    />
+    <SimpleAppPageView content={content as IAppPage} />
   ) : null;
