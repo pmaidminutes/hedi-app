@@ -56,9 +56,12 @@ import {
   IAppStyled,
   IEntityLocalized,
   IEntityTranslated,
+  IEntity,
+  ILanguage,
 } from "@/modules/model";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { getSegmentsPaths } from "@/modules/common/query";
+import {  getShell, IShell } from "@/modules/shell/query";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -101,6 +104,13 @@ interface IShellProps {
   // TODO: to be implemented
   // header?: IHeaderProps
   // footer?: IFooter
+}
+
+interface IFooter extends Partial<INav> {
+  languageSwitch?: string;
+}
+interface INav {
+  links: IEntity[];
 }
 
 interface ISegmentPageProps {
@@ -147,15 +157,30 @@ export const getStaticProps: GetStaticProps<
     // console.log("couldn't find content for path ", segments.join("/"));
     // throw Error("Houston, we have got a problem");
   }
+  // const results = Promise.all(gql, gql...)
+  const { links, languages } = await getShell(locale)
+  console.log({links}, {languages})
+
+
+  const { translations } = content;
+  const languageSwitchLinks: IEntity[] =translations.map((translation: IEntityLocalized) => {
+    return {
+      route: translation.route,
+      label: languages.find((language:ILanguage) => language.code === translation.lang).label,
+      type: "Link",
+    };
+  }) ;
+
+  console.log({languageSwitchLinks})
 
   return {
-    props: { content, shell: {} },
+    props: { content, shell: {links, translations:languageSwitchLinks} },
     revalidate: content.type === "Search" ? 15 : false,
   };
 };
 
 export default function segments(props: ISegmentPageProps) {
-  const { content } = props;
+  const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
 
   useEffect(() => {
@@ -181,7 +206,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryUserFeedbackThanks {...content} />
         <TryLandingPage {...content} />
       </Content>
-      <Footer {...content} />
+      <Footer {...shell} />
     </div>
   );
 }
