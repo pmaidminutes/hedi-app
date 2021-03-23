@@ -21,7 +21,7 @@ export const Footer: React.FunctionComponent<IFooter> = props => {
           })
         : null}
       {translations ? (
-        <LanguageSwitch translations={translations} type="text" />
+        <LanguageSwitch translations={translations} direction="top"/>
       ) : null}
     </footer>
   );

@@ -17122,6 +17122,7 @@ a.bx--navigation-link:focus {
     letter-spacing: 0; }
 
 .hedi--footer {
+  align-items: center;
   display: flex;
   justify-content: flex-end;
   padding: 1rem; }
