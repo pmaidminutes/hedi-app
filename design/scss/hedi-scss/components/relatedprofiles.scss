@@ -8,6 +8,11 @@
   padding: 2rem;
   width: 100%;
 
+  ClickableTile{
+   color:red;
+   margin-bottom: $spacing-md; 
+  }
+
   &--profile {
     height: 100%;
     svg {
