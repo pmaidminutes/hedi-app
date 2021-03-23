@@ -21,7 +21,7 @@ export async function registerQuery(
     }
   `;
   const client = await getServiceClient(GQLEndpoint.Internal);
-  client.request;
+  registerData.lang = registerData.lang ?? "de";
   return client
     .request<{ register: IRegisterResponse; error?: any }>(
       mutation,
