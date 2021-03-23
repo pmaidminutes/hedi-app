@@ -22,8 +22,7 @@ import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/user
 
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
-
-import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators";
+import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
 
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
