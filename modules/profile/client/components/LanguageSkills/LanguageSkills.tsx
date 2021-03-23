@@ -5,6 +5,7 @@ import { LanguageSkill } from "./LanguageSkill";
 
 export const LanguageSkills = (props: ILanguageSkillsProps) => {
   const { languageSkills, headline } = useLanguageSkills(props);
+  if (!languageSkills?.length) return null;
   return (
     <section className="hedi--language-skills">
       <Tile>
