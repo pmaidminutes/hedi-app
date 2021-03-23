@@ -29,6 +29,7 @@ function generateLanguageSwitchLinks(
   translations: IEntityLocalized[],
   languages: ILanguage[]
 ) {
+  if(!translations)return null
   return translations.map((translation: IEntityLocalized) => {
     return {
       route: translation.route,
