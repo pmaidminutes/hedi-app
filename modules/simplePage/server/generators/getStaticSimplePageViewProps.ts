@@ -1,6 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
-import { getSimpleAppPagesView } from "../../query";
+import { getSimplePageView } from "../../query";
 
 export const getStaticProps = async (
   segments?: string[],
@@ -9,6 +9,6 @@ export const getStaticProps = async (
   if (!segments) {
     return null;
   } else {
-    return getSimpleAppPagesView(segmentsToRoute(segments, locale));
+    return getSimplePageView(segmentsToRoute(segments, locale));
   }
 };

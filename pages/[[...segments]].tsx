@@ -25,20 +25,20 @@ import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/user
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 
-import { TrySimpleAppPage } from "@/modules/simpleAppPage/client/components";
-import { getStaticProps as getStaticSimpleAppPageViewProps } from "@/modules/simpleAppPage/server/generators";
 
-import { TryEditProfile } from "@/modules/editProfile/components";
-import { EditProfilePathsGQL } from "@/modules/editProfile/query";
-import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
 import {getStaticProps as getProfileProps} from '@/modules/profile/server/generators'
+
+import { TrySimplePage } from "@/modules/simplePage/client/components";
+import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
+
+
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
-import { SimpleAppPagesViewPathsGQL } from "@/modules/simpleAppPage/query";
+import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -65,10 +65,9 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     //InstitutionPathsGQL,
     //SearchViewPathsGQL,
     LoginViewPathsGQL,
-    EditProfilePathsGQL,
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
-    SimpleAppPagesViewPathsGQL,
+    SimplePageViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -113,8 +112,8 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
-    if (!content) content = await getEditProfileProps(params?.segments, locale);
     if (!content) content = await getProfileProps(params?.segments, locale);
+
     // if (!content) content = await getCategoryProps(params?.segments, locale);
     // if (!content) content = await getArticleProps(params?.segments, locale);
     // if (!content) content = await getGlossaryProps(params?.segments, locale);
@@ -125,7 +124,7 @@ export const getStaticProps: GetStaticProps<
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
     if (!content)
-      content = await getStaticSimpleAppPageViewProps(params?.segments, locale);
+      content = await getStaticSimplePageViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
@@ -163,9 +162,8 @@ export default function segments(props: ISegmentPageProps) {
         <TryRegistration {...content} />
         <TryProfile {...content} />
         <TryLogin {...content} />
-        <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
-        <TrySimpleAppPage content={content} />
+        <TrySimplePage content={content} />
         <TryLandingPage {...content} />
       </Content>
       <Footer />
