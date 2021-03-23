@@ -1,10 +1,9 @@
-import { IHTTPError } from "@/modules/common/error";
-import { jsonFetcher } from "@/modules/common/utils";
 import useSWR from "swr";
+import { jsonFetcher } from "@/modules/common/utils";
 import { IRegisterRequest, IRegisterResponse } from "../types";
 
 export function useValidate(info: IRegisterRequest) {
-  const validateResult = useSWR<IHTTPError | IRegisterResponse>(
+  const validateResult = useSWR<IRegisterResponse>(
     info.passcode && info.passcode.length > 5
       ? "/api/register/validate/?" + encodeInfo(info)
       : null,

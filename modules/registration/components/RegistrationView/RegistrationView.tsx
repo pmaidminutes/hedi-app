@@ -47,7 +47,7 @@ export const RegistrationView = ({
         </Column>
         <Column>
           <Row>
-            <RegisterForm elements={content.elements} eagerValidate={true} />
+            <RegisterForm elements={content.elements} />
           </Row>
         </Column>
         <Column>
