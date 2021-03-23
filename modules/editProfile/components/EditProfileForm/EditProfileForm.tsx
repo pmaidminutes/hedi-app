@@ -261,7 +261,7 @@ export const EditProfileForm = ({
             <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
           }>
           <Row>
-            <Column>
+            <Column sm={4} md={6} lg={8}>
               <ContentSwitcher
                 onChange={handleContentSwitcherChange}
                 size="xl"
