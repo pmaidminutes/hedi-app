@@ -13,6 +13,7 @@
     "design": "node ./design/fileExists.js && node ./design/buildImports.js && HEDI_ENV=DESIGN next dev"
   },
   "dependencies": {
+    "@carbon/ibmdotcom-react": "^1.16.1",
     "@carbon/icons": "^10.19.0",
     "@carbon/icons-react": "^10.21.0",
     "@types/carbon__icons-react": "^10.20.0",

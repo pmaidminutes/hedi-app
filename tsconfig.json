@@ -15,6 +15,7 @@
     "jsx": "preserve",
     "sourceMap": true,
     "baseUrl": ".",
+
     "paths": {
       "@/modules/*": ["modules/*"],
       "matrix-js-sdk": ["node_modules/@types/matrix-js-sdk/index.d.ts"],
