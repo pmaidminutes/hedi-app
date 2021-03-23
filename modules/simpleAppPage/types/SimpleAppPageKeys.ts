@@ -1,1 +1,1 @@
-export const simpleAppPageKeys = ["impressum", "privacy"];
+export const simpleAppPageKeys = ["imprint", "privacy"];
