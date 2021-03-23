@@ -1,11 +1,7 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
 import { ISegmentParam } from "@/modules/common/types";
-import { TryEditProfile } from "@/modules/editProfile/components";
-import { EditProfilePathsGQL } from "@/modules/editProfile/query";
-import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
-import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
+
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
@@ -25,12 +21,24 @@ import { Footer, Header } from "@/modules/shell/components";
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
+
+import { TryLandingPage } from "@/modules/landingPage/client/components";
+import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
+
+import { TrySimpleAppPage } from "@/modules/simpleAppPage/client/components";
+import { getStaticProps as getStaticSimpleAppPageViewProps } from "@/modules/simpleAppPage/server/generators";
+
+import { TryEditProfile } from "@/modules/editProfile/components";
+import { EditProfilePathsGQL } from "@/modules/editProfile/query";
+import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
+
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
 // Types
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useEffect, useState } from "react";
+import { SimpleAppPagesViewPathsGQL } from "@/modules/simpleAppPage/query";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -60,6 +68,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     EditProfilePathsGQL,
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
+    SimpleAppPagesViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -116,6 +125,8 @@ export const getStaticProps: GetStaticProps<
     // if (!content) content = await getPageProps(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
+    if (!content)
+      content = await getStaticSimpleAppPageViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
@@ -155,6 +166,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryLogin {...content} />
         <TryEditProfile {...content} />
         <TryUserFeedbackThanks {...content} />
+        <TrySimpleAppPage {...content} />
         <TryLandingPage {...content} />
       </Content>
       <Footer />
