@@ -3,7 +3,7 @@ import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
 import Image from "next/image";
 import { HTMLWithNextImage } from "@/modules/react/html";
 
-export const SimpleAppPageView: React.FC<{
+export const SimplePageView: React.FC<{
   content: IAppPage;
 }> = ({ content, children }) => {
   return (

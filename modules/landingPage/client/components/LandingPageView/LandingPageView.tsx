@@ -1,4 +1,4 @@
-import { SimpleAppPageView } from "@/modules/common/components/AppPage";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 import { tryGet } from "@/modules/common/utils";
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
 import {
@@ -11,7 +11,7 @@ import {
 
 export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   return (
-    <SimpleAppPageView content={content}>
+    <SimplePageView content={content}>
       <Row>
         {content.links.map(link => (
           <Column>
@@ -22,6 +22,6 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
           </Column>
         ))}
       </Row>
-    </SimpleAppPageView>
+    </SimplePageView>
   );
 };
