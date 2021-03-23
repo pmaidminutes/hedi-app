@@ -1,9 +1,10 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import NextAuth from "next-auth";
 import { getToken } from "next-auth/jwt";
-import { getOptions } from "./serviceInitOptions";
-import { toAuthHeader, tryRefresh } from "../query";
+import { getOptions } from "./serviceOptions";
+import { toAuthHeader } from "../query";
 import { IAuthHeader, IUserAuth } from "../types";
+import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
 
 export const withAuth = async (
   req: NextApiRequest,
@@ -15,17 +16,21 @@ export const withAuth = async (
 
 export const getUserAuth = async (
   req: NextApiRequest
-): Promise<IUserAuth | null> => {
+): Promise<IUserAuth | IHTTPError> => {
   const secret = process.env.NEXTAUTH_JWT_SECRET;
-  if (!secret) return null;
-  const auth = await (getToken({ req, secret }) as Promise<IUserAuth>);
-  // TODO either expiry time or refresh logic is not reliable
-  return tryRefresh(auth) as Promise<IUserAuth | null>;
+  if (!secret) return { code: 501, text: "Service Unavailable" };
+  return getToken({ req, secret }).catch<IHTTPError>(e => e) as Promise<
+    IUserAuth | IHTTPError
+  >;
 };
 
 export const getUserAuthHeader = async (
   req: NextApiRequest
 ): Promise<IAuthHeader | null> => {
   const auth = await getUserAuth(req);
-  return auth ? toAuthHeader(auth) : null;
+  if (IsIHTTPError(auth)) {
+    console.error(auth);
+    return null;
+  }
+  return toAuthHeader(auth);
 };

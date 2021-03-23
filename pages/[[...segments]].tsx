@@ -25,6 +25,8 @@ import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/user
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 
+import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators";
+
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
 
@@ -108,11 +110,11 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
+    if (!content) content = await getProfileProps(params?.segments, locale);
+
     // if (!content) content = await getCategoryProps(params?.segments, locale);
     // if (!content) content = await getArticleProps(params?.segments, locale);
     // if (!content) content = await getGlossaryProps(params?.segments, locale);
-    if (!content) content = await getCaregiverProps(params?.segments, locale);
-    if (!content) content = await getMidwifeProps(params?.segments, locale);
     // if (!content)
     //   content = await getOrganisationProps(params?.segments, locale);
     // if (!content) content = await getInstitutionProps(params?.segments, locale);
@@ -130,7 +132,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: { content, shell: {} },
-    revalidate: content.type === "Search" ? 15 : false,
+    // revalidate: content.type === "Search" ? 15 : false,
   };
 };
 

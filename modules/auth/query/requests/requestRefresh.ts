@@ -1,6 +1,7 @@
 import * as querystring from "querystring";
 import { ITokenResponse } from "./types";
 import { toCSRFObject } from "../utils";
+import { IHTTPError } from "@/modules/common/error";
 
 export async function requestRefresh(refreshToken: string, csrfToken: string) {
   const body = {
@@ -10,12 +11,16 @@ export async function requestRefresh(refreshToken: string, csrfToken: string) {
     client_secret: process.env.NEXTAUTH_CMS_SECRET,
   };
 
-  return fetch(process.env.CMS_URL + "/oauth2/token", {
+  const response = await fetch(process.env.CMS_URL + "/oauth2/token", {
     method: "POST",
     headers: {
       "Content-Type": "application/x-www-form-urlencoded",
       ...toCSRFObject(csrfToken),
     },
     body: querystring.stringify(body),
-  }).then(res => res.json() as Promise<ITokenResponse>);
+  });
+  if (response.status === 200)
+    return response.json() as Promise<ITokenResponse>;
+  else
+    return { code: response.status, text: response.statusText } as IHTTPError;
 }
