@@ -1,7 +1,7 @@
 import { IAppPage } from "@/modules/common/types";
-import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
-import Image from "next/image";
 import { HTMLWithNextImage } from "@/modules/react/html";
+import { AspectRatio, Column, Grid, Row } from "carbon-components-react";
+import Image from "next/image";
 
 export const SimplePageView: React.FC<{
   content: IAppPage;

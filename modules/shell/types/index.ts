@@ -1,6 +1,4 @@
-import {
-  IEntity,
-} from "@/modules/model";
+import { IEntity } from "@/modules/model";
 
 interface INav {
   links: IEntity[];

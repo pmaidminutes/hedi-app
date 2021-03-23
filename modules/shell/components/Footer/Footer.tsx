@@ -20,10 +20,7 @@ export const Footer = (props: IFooter) => {
           })
         : null}
       {languageSwitchLinks ? (
-        <LanguageSwitch
-          links={languageSwitchLinks}
-          direction="top"
-        />
+        <LanguageSwitch links={languageSwitchLinks} direction="top" />
       ) : null}
     </footer>
   );

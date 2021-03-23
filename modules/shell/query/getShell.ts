@@ -19,7 +19,10 @@ export const getShellLinksGQL = (name: string, keys: string[]) => {
   }`;
 };
 
-export async function getShell(lang: string = "de", gqlQueries: string[]): Promise<IShell> {
+export async function getShell(
+  lang: string = "de",
+  gqlQueries: string[]
+): Promise<IShell> {
   const query = gql`
     query getShell(
         $lang: String!
