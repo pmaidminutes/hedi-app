@@ -49,7 +49,7 @@ export const RegistrationView = ({
           </Row>
           <Row>
             <button onClick={() => router.back()}>
-              {tryGetValue("back", content.elements, "")}
+              {tryGetValue("back", content.elements)}
             </button>
           </Row>
         </Column>

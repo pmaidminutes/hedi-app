@@ -25,6 +25,7 @@ const getLoginFormProps = (
   usernameInput: getTextInputProps("username", elements),
   passwordInput: getTextInputProps("password", elements),
   submitButtonText: tryGetValue("submit", elements),
+  backButtonText: tryGetValue("back", elements),
   onSubmit: e => handleSubmit(e),
 });
 
