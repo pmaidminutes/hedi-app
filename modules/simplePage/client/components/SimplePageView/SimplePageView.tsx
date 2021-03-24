@@ -11,15 +11,13 @@ export const SimplePageView: React.FC<{
   return (
     <div className={`hedi--simple-page hedi--${content.key}-page`}>
       {content.posterImage && (
-          <Image
-            src={
-              "https://appstaging.projekt-hedi.de" + content.posterImage.route
-            }
-            alt={content.posterImage.alt}
-            className="hedi-header-image"
-            width={content.posterImage.width}
-            height={content.posterImage.height}
-          />
+        <Image
+          src={"https://appstaging.projekt-hedi.de" + content.posterImage.route}
+          alt={content.posterImage.alt}
+          className="hedi-header-image"
+          width={content.posterImage.width}
+          height={content.posterImage.height}
+        />
       )}
 
       <Grid condensed fullWidth>
@@ -33,17 +31,17 @@ export const SimplePageView: React.FC<{
           ) : null}
           <Column>
             {/* <Grid> */}
-              {/* <Row> */}
-                <Column className="hedi--titlegroup">
-                  <h1>{content.longTitle ?? content.label}</h1>
-                  <HTMLWithNextImage data={content.body} />
-                </Column>
-              {/* </Row> */}
-              {children && (
-                <div className={`hedi--group hedi--group--${content.key}`}>
-                  {children}
-                </div>
-              )}
+            {/* <Row> */}
+            <Column className="hedi--titlegroup">
+              <h1>{content.longTitle ?? content.label}</h1>
+              <HTMLWithNextImage data={content.body} />
+            </Column>
+            {/* </Row> */}
+            {children && (
+              <div className={`hedi--group hedi--group--${content.key}`}>
+                {children}
+              </div>
+            )}
             {/* </Grid> */}
           </Column>
         </Row>

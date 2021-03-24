@@ -6,8 +6,9 @@ import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 import { ITyped } from "@/modules/model";
-import { TryProfile } from "@/modules/profile/client/components";
-import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
+import { TryProfile, TryProfileList } from "@/modules/profile/client/components";
+import { CaregiverPathsGQL, MidwifePathsGQL,ProfileListPathsGQL } from "@/modules/profile/query";
+import { getStaticProps as getProfileListViewProps } from "@/modules/profile/server/generators/getProfileListStaticProps";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
@@ -55,6 +56,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const pathQueries = [
     CaregiverPathsGQL,
     MidwifePathsGQL,
+    ProfileListPathsGQL,
     LoginViewPathsGQL,
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
@@ -96,6 +98,8 @@ export const getStaticProps: GetStaticProps<
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getProfileProps(params?.segments, locale);
+    if (!content)
+      content = await getProfileListViewProps(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
     if (!content)
@@ -141,6 +145,7 @@ export default function segments(props: ISegmentPageProps) {
       <Content>
         <TryRegistration {...content} key="registration" />
         <TryProfile {...content} key="profile" />
+        <TryProfileList {...content} key="profileList" />
         <TryLogin {...content} key="login" />
         <TryUserFeedbackThanks {...content} key="userfeedback" />
         <TrySimplePage content={content} key="simplepage" />

@@ -1,19 +1,16 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import {
   CaregiverFields,
-  ICaregiver,
   MidwifeFields,
-  IMidwife,
-  IOrganisation,
-  IInstitution,
   InstitutionFields,
   OrganisationFields,
+  Profile,
+  ProfileTypeNameArray,
 } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 
-export type Profile = ICaregiver | IMidwife | IOrganisation | IInstitution;
 export type ProfileView = Profile & {
   elements: IUIElementTexts[];
 };
@@ -45,6 +42,7 @@ export async function getProfile(route: string): Promise<ProfileView | null> {
   if (!profiles?.[0]) return null;
 
   const profile = profiles[0];
+  if (!ProfileTypeNameArray.includes(profile.type)) return null;
 
   const subquery = gql`
     query getProfileElements($lang: String!){

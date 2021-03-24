@@ -1,6 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
 import { IEntity } from "@/modules/model";
 
-export interface IRegistrationView extends IAppPage {
+export interface ILoginView extends IAppPage {
   links: (IEntity & { key: string })[];
 }

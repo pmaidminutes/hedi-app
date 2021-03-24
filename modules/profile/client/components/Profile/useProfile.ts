@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { getTextInputProps } from "@/modules/common/utils";
+import { getTextInputProps, tryGetValue } from "@/modules/common/utils";
 import { ProfileView } from "@/modules/profile/query";
 import { isICaregiver, isIMidwife } from "../../../types";
 export interface IProfileViewProps {
@@ -24,14 +24,18 @@ export function useProfile(props: IProfileViewProps) {
     displayAddress,
     lat,
     long,
+    services,
   } = content;
   const languagesHeadline = getTextInputProps("fluency", elements);
   const servicesHeadline = getTextInputProps("services", elements);
   const contactHeadline = getTextInputProps("office_hrs", elements);
   const relatedHeadline = getTextInputProps("linked_profile", elements);
 
-  const services =
-    isICaregiver(content) || isIMidwife(content) ? content.services : null;
+  // HACK proper domain impl
+  const domainMidwife = tryGetValue("midwife_label", elements, "Hebamme");
+  const domains = isICaregiver(content)
+    ? content.domains
+    : [{ type: "Domain", label: domainMidwife, route: "/" + domainMidwife }];
 
   return {
     languagesData: {
@@ -40,6 +44,7 @@ export function useProfile(props: IProfileViewProps) {
     },
     profileEntryData: {
       displayName,
+      domains,
       postal_code,
       city,
       mail,
