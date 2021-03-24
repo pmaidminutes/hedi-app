@@ -4,12 +4,11 @@ interface IRowWithBg {
   children: ReactNode;
   imageSrc?: string;
 }
-export const RowWithBg = (props: IRowWithBg) => {
+export const BgImgContainer = (props: IRowWithBg) => {
   const { children } = props;
   return (
-    <Row className="hedi__row-with-bg">
+    <div className="hedi--bg-img-container">
       <div>{children}</div>
-    </Row>
+    </div>
   );
 };
-

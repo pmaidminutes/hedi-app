@@ -1,7 +1,8 @@
+import { tryGetValue } from "@/modules/common/utils";
 import { useTextInput } from "@/modules/react/hooks";
 import { HTMLWithNextImage } from "@/modules/react/html";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 import { Column, Grid, Row } from "carbon-components-react";
-import Image from "next/image";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { IRegisterError, IRegisterInfo } from "../../types";
@@ -23,7 +24,6 @@ export const RegistrationView = ({
   //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
   const router = useRouter();
-  const backLink = () => router.back();
   useEffect(() => {
     if (onChange && (name || pass)) {
       onChange({ name, pass });
@@ -31,29 +31,24 @@ export const RegistrationView = ({
   }, [name, pass]);
   return (
     <>
-      <Image
-        {...content.posterImage}
-        src={"http://appstaging.projekt-hedi.de" + content.posterImage?.route}
-      />
+      <SimplePageView content={content}></SimplePageView>
+
+      <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
       <Grid>
-        <Row>
-          <h2>{content.longTitle ?? content.label}</h2>
-        </Row>
-        <Row>
-          <HTMLWithNextImage data={content.body} />
-        </Row>
         <Column>
-          <Row></Row>
+          <Row>
+            {
+              //TODO image to the left should be added
+            }
+          </Row>
         </Column>
         <Column>
           <Row>
             <RegisterForm elements={content.elements} />
           </Row>
-        </Column>
-        <Column>
           <Row>
             <button onClick={() => router.back()}>
-              {content.elements.find(e => e.identifier === "back")?.value}
+              {tryGetValue("back", content.elements)}
             </button>
           </Row>
         </Column>

@@ -1,3 +1,5 @@
+@import "./theme/hedi-theme.scss";
+
 .hedi--edit-profile {
 
   // required to make the dropdowns visible tables
@@ -7,4 +9,36 @@
       overflow-x: visible !important; 
     }
   }
+
+  .bx--form-item {
+    margin-bottom: $spacing-lg;
+  }
+
+
+  .bx--label h2, h3, h4{
+    color: black;
+  }  
+
+  div.hedi--group--profile-type {
+    padding: $spacing-xl $spacing-md $spacing-xs $spacing-md;
+    margin-bottom: $layout-sm;
+    background-color: $blue-primary;
+  }
+
+
+  div.hedi--group--profile-type h2{
+    color: white;
+  }
+
+  .hedi--service-selection {
+    margin-bottom: $spacing-md;
+  }
+
+  .hedi--service-selection__head {
+    margin-bottom: 0;
+  }
+
+ 
+  
+
 }

@@ -1,6 +1,6 @@
-import { SimplePageView } from "@/modules/simplePage/client/components";
 import { tryGet } from "@/modules/common/utils";
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 import {
   Button,
   ButtonSet,
@@ -8,20 +8,22 @@ import {
   FormLabel,
   Row,
 } from "carbon-components-react";
+import { ButtonContainer } from "@/modules/common/components";
 
 export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   return (
-    <SimplePageView content={content}>
-      <Row>
+    <SimplePageView
+      url="/Pregnancy_pink80.svg"
+      alt="Beschreibung des Bildes"
+      content={content}>
+      <ButtonContainer>
         {content.links.map(link => (
-          <Column>
-            <ButtonSet stacked>
-              <FormLabel>{tryGet(link.key, content.elements)?.help}</FormLabel>
-              <Button href={link.route}>{link.label}</Button>
-            </ButtonSet>
-          </Column>
+          <div>
+            <FormLabel>{tryGet(link.key, content.elements)?.help}</FormLabel>
+            <Button href={link.route}>{link.label}</Button>
+          </div>
         ))}
-      </Row>
+      </ButtonContainer>
     </SimplePageView>
   );
 };

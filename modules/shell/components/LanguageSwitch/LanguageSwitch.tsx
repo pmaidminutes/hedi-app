@@ -13,22 +13,24 @@ export const LanguageSwitch = (
 ): JSX.Element | null => {
   const { direction, links } = useLanguageSwitch(props);
 
-  return (
-    <OverflowMenu
-      renderIcon={Language32}
-      ariaLabel="Language Menu"
-      size="xl"
-      direction={direction}
-      flipped={true}>
-      {links.map((item, index) => (
-        <OverflowMenuItem
-          key={index}
-          aria-label={item.label}
-          href={item.route}
-          itemText={item.label}
-          hasDivider={true}
-        />
-      ))}
-    </OverflowMenu>
-  );
+  if (links) {
+    return (
+      <OverflowMenu
+        renderIcon={Language32}
+        ariaLabel="Language Menu"
+        size="xl"
+        direction={direction}
+        flipped={true}>
+        {links.map((item, index) => (
+          <OverflowMenuItem
+            key={index}
+            aria-label={item.label}
+            href={item.route}
+            itemText={item.label}
+            hasDivider={true}
+          />
+        ))}
+      </OverflowMenu>
+    );
+  } else return null;
 };
