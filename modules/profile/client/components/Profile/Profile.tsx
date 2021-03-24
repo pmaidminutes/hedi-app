@@ -67,7 +67,7 @@ export const Profile = (props: IProfileViewProps) => {
             displayName: content.displayName,
           } as Location)
         } */}
-        <MapClient {...mapData} />
+        {/* <MapClient {...mapData} /> */}
       </Grid>
     </>
   );
