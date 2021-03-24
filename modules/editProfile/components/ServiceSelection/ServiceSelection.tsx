@@ -31,7 +31,7 @@ export const ServiceSelection = ({
       <div
         className="hedi--service-selection__head"
         onClick={() => handleComponentClick()}>
-        <h2>{serviceGroup.label}</h2>
+        <h4>{serviceGroup.label}</h4>
         <span className="bx--tile__checkmark">
           {isExpanded ? <ChevronUp16 /> : <ChevronDown16 />}
         </span>

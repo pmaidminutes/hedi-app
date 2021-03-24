@@ -1,7 +1,6 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
 import { ISegmentParam } from "@/modules/common/types";
-import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
@@ -13,11 +12,17 @@ import {
 } from "@/modules/model";
 import { TryProfile } from "@/modules/profile/client/components";
 import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
-import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { Footer, Header } from "@/modules/shell/components";
+
+import { TryLandingPage } from "@/modules/landingPage/client/components";
+import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
+
+
+// Components
+
 import { useShell } from "@/modules/shell/hooks";
 // Types
 import {
