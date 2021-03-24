@@ -10,7 +10,7 @@ interface ITagList {
 export const TagList = ({ tags, headline, tagType }: ITagList): JSX.Element => {
   return (
     <aside className="hedi__tag-list">
-      {headline ? <h3>{headline}</h3> : null}
+      {headline ? <h5>{headline}</h5> : null}
 
       {tags && tags?.length > 0
         ? tags.map(tag => (

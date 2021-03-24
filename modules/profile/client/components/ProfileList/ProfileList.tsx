@@ -81,12 +81,10 @@ export const ProfileList = ({ content }: { content: ProfileListView }) => {
           </Column>
         </Row>
         {content.profiles.map(profile => (
-          <Row>
-            <ProfileEntry
-              {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
-              key={profile.route}
-            />
-          </Row>
+          <ProfileEntry
+            {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
+            key={profile.route}
+          />
         ))}
       </Grid>
     </div>
