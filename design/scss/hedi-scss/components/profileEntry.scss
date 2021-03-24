@@ -1,13 +1,38 @@
+@import "./theme/hedi-theme.scss";
+
+.hedi--profile-list { 
+background-color: $ui-01;
+}
+
 .hedi--profile-entry {
+  margin-bottom: $spacing-md;
+
+  > div > div:not(:first-child) {
+    background-color: white;
+  }
 
   img {
     width: 100%;
-    max-width: 300px;
+    max-width: 350px;
     height: auto;
-    background-color:$blue-30;
+    background-color:$blue-60;
   }
 
-  > div > div:not(:first-child) {
-    background-color: #fff;
+  .hedi--profile-entry-content {
+   padding: $spacing-md 0; 
+  
+  }
+
+  .hedi--spacing {
+  padding-top: $spacing-2xl;
+  }
+
+  &--with-services {
+   //background-color: red;
+   background-color: white;
+
+   .hedi__tag-list {
+  padding-top: $spacing-sm;
+   }
   }
 }
