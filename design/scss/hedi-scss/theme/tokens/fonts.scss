@@ -1,11 +1,12 @@
   
-// @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
-// $roboto: 'Roboto', sans-serif;
-// @import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
-// $roboto-slab: 'Roboto Slab', serif;
-// @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
-// $roboto-mono: 'Roboto Mono', monospace;
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+$roboto: 'Roboto', sans-serif;
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
+$roboto-slab: 'Roboto Slab', serif;
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
+$roboto-mono: 'Roboto Mono', monospace;
 
+/* 
   @font-face {
     font-family: 'Roboto', sans-serif;
     font-weight: 300;
@@ -27,18 +28,18 @@
 
 
   @font-face {
-    font-weight: 300 400 500;
+    font-weight: 300  500;
     font-family: 'Roboto Slab', serif;
     src: url('/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
     }
     $roboto-slab: 'Roboto Slab', serif;
 
  @font-face {
-    font-weight: 300 400 500;
+    font-weight: 300 500;
     font-family: 'Roboto Mono', monospace;
     src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
      }
- $roboto-mono: 'Roboto Mono', monospace;
+ $roboto-mono: 'Roboto Mono', monospace; */
 
 
 @mixin theme-fonts {
