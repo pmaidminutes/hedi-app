@@ -5,5 +5,5 @@ interface INav {
 }
 
 export interface IShellProps extends INav {
-  languageSwitchLinks: IEntity[];
+  languageSwitchLinks: IEntity[] | null;
 }

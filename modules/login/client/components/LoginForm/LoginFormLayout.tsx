@@ -27,23 +27,28 @@ export const LoginFormLayout = ({
   const router = useRouter();
   return (
     <Grid>
-      <Column>
-        <Row></Row>
-      </Column>
-      <Column>
-        <Row>
-          <Form {...formProps}>
+      <Row>
+        <Form {...formProps}>
+          <Row>
             <TextInput type="text" {...usernameInput} />
+          </Row>
+          <Row>
             <TextInput type="password" {...passwordInput} />
-            <Button type="submit">{submitButtonText}</Button>
-          </Form>
-        </Row>
-        <Row>
-          <button type="button" onClick={() => router.back()}>
-            {backButtonText}
-          </button>
-        </Row>
-      </Column>
+          </Row>
+          <Row>
+            <Column>
+              <Button type="submit">{submitButtonText}</Button>
+            </Column>
+          </Row>
+          <Row>
+            <Column>
+              <button type="button" onClick={() => router.back()}>
+                {backButtonText}
+              </button>
+            </Column>
+          </Row>
+        </Form>
+      </Row>
     </Grid>
   );
 };

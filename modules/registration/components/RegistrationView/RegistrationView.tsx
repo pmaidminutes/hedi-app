@@ -24,7 +24,6 @@ export const RegistrationView = ({
   //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
   const router = useRouter();
-  const backLink = () => router.back();
   useEffect(() => {
     if (onChange && (name || pass)) {
       onChange({ name, pass });

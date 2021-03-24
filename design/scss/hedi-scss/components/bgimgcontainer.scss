@@ -1,4 +1,4 @@
-.hedi__row-with-bg {
+.hedi--bg-img-container {
   padding: 2rem 0;
   position: relative;
   &::before {
@@ -15,5 +15,13 @@
   > div {
     position: relative;
     width: 100%;
+  }
+  @media(max-width: 768px) {
+    padding: 2rem;
+  }
+
+  .bx--row {
+    margin-right: 0;
+    margin-left: 0;
   }
 }

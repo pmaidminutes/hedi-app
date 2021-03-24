@@ -4,7 +4,7 @@ import { ITyped } from "@/modules/model";
 import { Column, Grid, Row } from "carbon-components-react";
 import { Contact } from "../Contact";
 import { ProfileEntry } from "../ProfileEntry";
-import { RowWithBg } from "@/modules/common/components";
+import { BgImgContainer } from "@/modules/common/components";
 import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
@@ -34,11 +34,10 @@ export const Profile = (props: IProfileViewProps) => {
   } = useProfile(props);
   return (
     <>
+      <BgImgContainer>
+        <ProfileEntry {...profileEntryData} />
+      </BgImgContainer>
       <Grid fullWidth={true} narrow>
-        <RowWithBg>
-          <ProfileEntry {...profileEntryData} />
-        </RowWithBg>
-
         <Row>
           <Column lg={6}>
             <Services {...servicesData} />
