@@ -1,8 +1,8 @@
-import { IService, TagType } from "@/modules/model";
+import { ITag, TagType } from "@/modules/model";
 import { Tag } from "../Tag";
 
 interface ITagList {
-  tags?: IService[];
+  tags?: ITag[];
   headline?: String;
   tagType?: TagType;
 }
