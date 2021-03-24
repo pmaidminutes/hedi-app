@@ -20,5 +20,6 @@ export * from "./ITyped";
 export * from "./IUIElementTexts";
 export * from "./IUIText";
 export * from "./IWithLanguageSkills";
+export * from "./IWithServices";
 export * from "./IWithUIElements";
 export * from "./IWithUITexts";

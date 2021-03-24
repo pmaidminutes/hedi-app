@@ -6,7 +6,7 @@ import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { UserFeedbackAppPageEntry } from "@/modules/userFeedback/client/components/UserFeedbackEntry/UserFeedbackAppPageEntry";
 import { Column, Row } from "carbon-components-react";
 import { IAppPage } from "@/modules/common/types";
-import { RowWithBg, Seperator } from "@/modules/common/components";
+import { BgImgContainer, Seperator } from "@/modules/common/components";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
 import { useProfile } from "@/modules/profile/client/components/Profile/useProfile";
 import { ProfileView } from "@/modules/profile/query";
@@ -45,9 +45,9 @@ export default function UserFeedbackForm({
         <h1>{content.longTitle ?? content.label}</h1>
         <Row>
           <Column lg={6} sm={12}>
-            <RowWithBg>
+            <BgImgContainer>
               <ProfileEntry {...profileEntryData} />
-            </RowWithBg>
+            </BgImgContainer>
           </Column>
           <Column lg={6} sm={12}>
             <UserFeedbackAppPageEntry
