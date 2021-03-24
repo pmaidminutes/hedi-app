@@ -15,9 +15,8 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     servicesHeadline,
   } = useProfileEntry(props);
   const className =
-    "hedi--profile-entry" + services
-      ? " hedi--profile-entry--with-services"
-      : "";
+    "hedi--profile-entry" +
+    (services ? " hedi--profile-entry--with-services" : "");
   return (
     <>
       <section className={className}>
