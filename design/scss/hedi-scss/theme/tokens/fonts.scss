@@ -27,12 +27,14 @@
 
 
   @font-face {
+    font-weight: 300 400 500;
     font-family: 'Roboto Slab', serif;
     src: url('/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
     }
     $roboto-slab: 'Roboto Slab', serif;
 
  @font-face {
+    font-weight: 300 400 500;
     font-family: 'Roboto Mono', monospace;
     src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
      }
