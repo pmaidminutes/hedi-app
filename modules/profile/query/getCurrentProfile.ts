@@ -42,12 +42,13 @@ export async function getCurrentProfile(
 
   const client = await getClient(GQLEndpoint.User, authHeader);
   const { profile } = await client
-    .request<{ profile: Profile }>(query, { lang })
+    .request<{ profile: Profile | {} }>(query, { lang })
     .catch(e => {
       console.warn(e);
       return { profile: null };
     });
-  if (!profile) return null;
+
+  if (!profile || profile === {}) return null; // {} case is, profile available but not of any of the queried types
 
   const internalClient = await getServiceClient(GQLEndpoint.Internal);
   const subquery = gql`
@@ -65,5 +66,5 @@ export async function getCurrentProfile(
     }
   );
 
-  return { ...profile, elements: uiTexts[0].elements };
+  return { ...(profile as Profile), elements: uiTexts[0].elements };
 }
