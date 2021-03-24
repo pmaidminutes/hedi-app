@@ -1,10 +1,8 @@
+import { SkipBack20 } from "@carbon/icons-react";
 import {
   Button,
-  Column,
   Form,
   FormProps,
-  Grid,
-  Row,
   TextInput,
   TextInputProps,
 } from "carbon-components-react";
@@ -26,24 +24,22 @@ export const LoginFormLayout = ({
 }: ILoginFormLayoutProps) => {
   const router = useRouter();
   return (
-    <Grid>
-      <Column>
-        <Row></Row>
-      </Column>
-      <Column>
-        <Row>
-          <Form {...formProps}>
-            <TextInput type="text" {...usernameInput} />
-            <TextInput type="password" {...passwordInput} />
-            <Button type="submit">{submitButtonText}</Button>
-          </Form>
-        </Row>
-        <Row>
-          <button type="button" onClick={() => router.back()}>
-            {backButtonText}
-          </button>
-        </Row>
-      </Column>
-    </Grid>
+    <>
+      <Form {...formProps}>
+        <TextInput type="text" {...usernameInput} />
+
+        <TextInput type="password" {...passwordInput} />
+
+        <Button type="submit">{submitButtonText}</Button>
+      </Form>
+      <Button
+        hasIconOnly
+        tooltip={backButtonText}
+        renderIcon={SkipBack20}
+        kind="ghost"
+        onClick={() => router.back()}>
+        {backButtonText}
+      </Button>
+    </>
   );
 };

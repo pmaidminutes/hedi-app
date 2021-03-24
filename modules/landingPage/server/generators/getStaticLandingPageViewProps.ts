@@ -1,10 +1,18 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
 import { getLandingPageView } from "@/modules/landingPage/query";
+import { IPageConfig } from "@/modules/shell/types";
 
 export const getStaticProps = async (
   segments?: string[],
   locale = "de"
-): Promise<IAppPage | null> => {
-  return getLandingPageView(segmentsToRoute(segments || [], locale), locale);
+): Promise<(IAppPage & IPageConfig) | null> => {
+  const content = await getLandingPageView(
+    segmentsToRoute(segments || [], locale),
+    locale
+  );
+
+  if (!content) return null;
+  const pageConfig = { useHeader: false};
+  return { ...content, ...pageConfig };
 };

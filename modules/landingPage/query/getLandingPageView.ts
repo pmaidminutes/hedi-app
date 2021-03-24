@@ -46,13 +46,16 @@ export async function getLandingPageView(
         key
         ${EntityFields}
       }
+      linksIfLoggedIn: appPagesByKey(keys: ["editProfile"], lang: $lang) {
+        key
+        ${EntityFields}
+      }
     }
   `;
-  const subResults = await client.request<Pick<ILandingPageView, "links">>(
-    subquery,
-    {
-      lang,
-    }
-  );
+  const subResults = await client.request<
+    Pick<ILandingPageView, "links" | "linksIfLoggedIn">
+  >(subquery, {
+    lang,
+  });
   return { ...appPage, ...subResults };
 }

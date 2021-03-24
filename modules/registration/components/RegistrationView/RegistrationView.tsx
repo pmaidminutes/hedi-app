@@ -2,7 +2,8 @@ import { tryGetValue } from "@/modules/common/utils";
 import { useTextInput } from "@/modules/react/hooks";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import { Column, Grid, Row } from "carbon-components-react";
+import { SkipBack20 } from "@carbon/icons-react";
+import { Button } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { IRegisterError, IRegisterInfo } from "../../types";
@@ -24,36 +25,27 @@ export const RegistrationView = ({
   //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
   const router = useRouter();
-  const backLink = () => router.back();
   useEffect(() => {
     if (onChange && (name || pass)) {
       onChange({ name, pass });
     }
   }, [name, pass]);
   return (
-    <>
-      <SimplePageView content={content}></SimplePageView>
-
+    <SimplePageView
+      url="/Pregnancy_pink80.svg"
+      alt="Beschreibung des Bildes"
+      content={content}>
       <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
-      <Grid>
-        <Column>
-          <Row>
-            {
-              //TODO image to the left should be added
-            }
-          </Row>
-        </Column>
-        <Column>
-          <Row>
-            <RegisterForm elements={content.elements} />
-          </Row>
-          <Row>
-            <button onClick={() => router.back()}>
-              {tryGetValue("back", content.elements)}
-            </button>
-          </Row>
-        </Column>
-      </Grid>
-    </>
+
+      <RegisterForm elements={content.elements} />
+      <Button
+        hasIconOnly
+        tooltip={tryGetValue("back", content.elements)}
+        renderIcon={SkipBack20}
+        kind="ghost"
+        onClick={() => router.back()}>
+        {tryGetValue("back", content.elements)}
+      </Button>
+    </SimplePageView>
   );
 };
