@@ -6,8 +6,8 @@
     justify-content: flex-end;
     width: 100%;
     img {
-    height: 100%;
-    width: auto;
+    height: auto;
+    min-width: 80px;
     max-height: 250px;
     }
   }

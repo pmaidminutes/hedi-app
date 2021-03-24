@@ -1,5 +1,4 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
-import { IMutationResponse } from "@/modules/model/IMutationResponse";
 import { NextApiHandler } from "next";
 import { ProfileView } from "../query";
 import { getCurrentProfile } from "../query/getCurrentProfile";
@@ -9,7 +8,7 @@ export const getCurrentProfileAPI: NextApiHandler<ProfileView | null> = async (
   res
 ) => {
   if (!req.body) {
-    res.status(400).json(null); // TODO is it ok to return null?
+    res.status(400).json(null);
     return;
   }
 
@@ -17,11 +16,11 @@ export const getCurrentProfileAPI: NextApiHandler<ProfileView | null> = async (
 
   const authHeader = await getUserAuthHeader(req);
   if (!authHeader) {
-    res.status(401).json(null); // TODO is it ok to return null?
+    res.status(401).json(null);
     return;
   }
 
   const profile = await getCurrentProfile(lang, authHeader);
   if (profile) res.status(200).json(profile);
-  else res.status(500).json(null); // TODO is it ok to return null?
+  else res.status(500).json(null);
 };

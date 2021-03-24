@@ -1,23 +1,17 @@
 .hedi--scroll-to-top {
-  button {
-    position: fixed;
-    cursor: pointer;
-    bottom: 15px;
-    right: 15px;
-    font-size: 25px;
-    color: #ffffff;
-    background-color: #000000;
-    z-index: 4;
-    width: 45px;
-    text-align: center;
-    height: 45px;
-    line-height: 45px;
+  button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+    background-color: $blue-80;
     border-radius: 50%;
-    -webkit-transition: 0.5s;
+    bottom: 45px;
+    color: $text-04;
+    cursor: pointer;
+    text-align: center;
+    position: fixed;
+    right: 15px;
     transition: 0.5s;
+    z-index: 4;
     &:hover {
-      color: #ffffff;
-      background: #ff3366;
+      background: $blue-60;
     }
   }
 }
