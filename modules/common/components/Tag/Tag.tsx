@@ -8,7 +8,7 @@ interface ITagProps {
 }
 export const Tag = ({ tag, type }: ITagProps): JSX.Element => {
   return (
-    <CarbonTag type={type ? type : "magenta"}>
+    <CarbonTag type={type ? type : "blue"}>
       <Link href={tag.route} className="bx--tag__label hedi-unstyled-link">
         {tag.label}
       </Link>

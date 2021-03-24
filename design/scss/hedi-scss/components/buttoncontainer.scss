@@ -1,6 +1,14 @@
 .hedi--button-container {
   display: flex;
+  
+  div {
+    flex-direction: column;
+    max-width: 200px;
+    margin-right: $spacing-md;
+  }
 
-  // > div {
-  // }
+  label {
+    min-height: $spacing-xl;
+  }
+
 }

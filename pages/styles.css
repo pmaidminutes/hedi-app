@@ -13,6 +13,9 @@
 @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
 @import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
 @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
 html,
 body,
 div,
@@ -17114,6 +17117,12 @@ address {
 
 .hedi--button-container {
   display: flex; }
+  .hedi--button-container div {
+    flex-direction: column;
+    max-width: 200px;
+    margin-right: 1rem; }
+  .hedi--button-container label {
+    min-height: 2rem; }
 
 .hedi__categoryentry a {
   text-decoration: none; }
@@ -17162,7 +17171,14 @@ address {
     .hedi--footer a:not(:last-child) {
       margin-right: 1rem; }
 
-.hedi--header .bx--header__name img {
+.hedi--group form {
+  -webkit-margin-after: 0.75rem;
+          margin-block-end: 0.75rem; }
+  .hedi--group form .bx--text-input-wrapper {
+    -webkit-margin-after: 1rem;
+            margin-block-end: 1rem; }
+
+.hedi--header .bx--header__name svg {
   height: 50px;
   width: auto;
   max-height: 100%; }
@@ -17183,24 +17199,19 @@ address {
 .hedi--language-skills svg {
   color: #942345; }
 
-.hedi--scroll-to-top button {
-  position: fixed;
-  cursor: pointer;
-  bottom: 15px;
-  right: 15px;
-  font-size: 25px;
-  color: #ffffff;
-  background-color: #000000;
-  z-index: 4;
-  width: 45px;
-  text-align: center;
-  height: 45px;
-  line-height: 45px;
+.hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  background-color: #005D90;
   border-radius: 50%;
-  transition: 0.5s; }
-  .hedi--scroll-to-top button:hover {
-    color: #ffffff;
-    background: #ff3366; }
+  bottom: 45px;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: center;
+  position: fixed;
+  right: 15px;
+  transition: 0.5s;
+  z-index: 4; }
+  .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger:hover {
+    background: #2A84C6; }
 
 .hedi-separator {
   display: block;
@@ -17244,8 +17255,8 @@ address {
   justify-content: flex-end;
   width: 100%; }
   .hedi--simple-page .hedi--app-page-image img {
-    height: 100%;
-    width: auto;
+    height: auto;
+    min-width: 80px;
     max-height: 250px; }
 
 .hedi--simple-page .hedi--titlegroup {
@@ -17254,14 +17265,26 @@ address {
 .hedi--simple-page h1 {
   margin-bottom: 1.5rem; }
 
-.hedi--profile-entry img {
-  width: 100%;
-  max-width: 300px;
-  height: auto;
-  background-color: #AEC1EA; }
+.hedi--profile-list {
+  background-color: #f4f4f4; }
 
-.hedi--profile-entry > div > div:not(:first-child) {
-  background-color: #fff; }
+.hedi--profile-entry {
+  margin-bottom: 1rem; }
+  .hedi--profile-entry > div > div:not(:first-child) {
+    background-color: white; }
+  .hedi--profile-entry img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    background-color: #2A84C6; }
+  .hedi--profile-entry .hedi--profile-entry-content {
+    padding: 1rem 0; }
+  .hedi--profile-entry .hedi--spacing {
+    padding-top: 2.5rem; }
+  .hedi--profile-entry--with-services {
+    background-color: white; }
+    .hedi--profile-entry--with-services .hedi__tag-list {
+      padding-top: 0.75rem; }
 
 .hedi--profile--tile .bx--tile {
   width: 100%;
@@ -17293,6 +17316,11 @@ address {
 
 .bx--content {
   padding: 0; }
+
+@media (max-width: 768px) {
+  .bx--row {
+    margin-right: 0;
+    margin-left: -0; } }
 
 .hidden {
   display: none; }
