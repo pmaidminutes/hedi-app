@@ -37,7 +37,7 @@ export async function getLoginView(route: string): Promise<ILoginView | null> {
     query getLoginViewOtherLinks(
       $lang: String!
     ) {
-      links: appPagesByKey(keys: ["registration", "editprofile"], lang: $lang) {
+      links: appPages(lang: $lang) {
         key
         ${EntityFields}
       }

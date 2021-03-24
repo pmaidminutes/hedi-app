@@ -39,7 +39,7 @@ export async function getRegistrationView(
     query getLoginViewOtherLinks(
       $lang: String!
     ) {
-      links: appPagesByKey(keys: ["login", "editprofile"], lang: $lang) {
+      links: appPages(lang: $lang) {
         key
         ${EntityFields}
       }

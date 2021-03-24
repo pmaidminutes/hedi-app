@@ -1,4 +1,4 @@
-import { tryGetValue } from "@/modules/common/utils";
+import { tryGetRedirect, tryGetValue } from "@/modules/common/utils";
 import { useTextInput } from "@/modules/react/hooks";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { SimplePageView } from "@/modules/simplePage/client/components";
@@ -37,7 +37,10 @@ export const RegistrationView = ({
       content={content}>
       <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
 
-      <RegisterForm elements={content.elements} />
+      <RegisterForm
+        elements={content.elements}
+        redirect={tryGetRedirect("redirect", content.elements, content.links)}
+      />
       <Button
         hasIconOnly
         tooltip={tryGetValue("back", content.elements)}
