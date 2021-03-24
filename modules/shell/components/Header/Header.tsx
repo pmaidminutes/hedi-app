@@ -9,6 +9,7 @@ import {
 
 import { GlobalSearchMenu } from "../GlobalSearchMenu";
 import { UserProfileMenu } from "../UserProfileMenu";
+import Logo from './assets/hedi_logo_single_new.svg'
 
 export const Header = (props: IHeader) => {
   const { appstyle, languageSwitchLinks } = useHeader(props);
@@ -18,10 +19,12 @@ export const Header = (props: IHeader) => {
   return (
     <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
       <HeaderName prefix="" href={`/${locale}`}>
-        <img
-          src="/images/hedi_logos/hedi_logo_color_dark.svg"
+        {/* <img
+          src="/images/hedi_logos/hedi_logo_single.svg"
           alt="HEDI Logo"
-        />
+        /> */}
+        <Logo />
+
       </HeaderName>
       <HeaderGlobalBar>
         <GlobalSearchMenu />

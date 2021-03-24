@@ -1,15 +1,16 @@
 import React from "react";
-import { Star32, StarFilled32 } from "@carbon/icons-react";
-const MAX_STARS = 5;
+import { Star16, StarFilled16 } from "@carbon/icons-react";
+const MAX_STARS = 10;
 export const Stars = ({ level }: { level: number }) => {
   return (
     <>
       {[...Array(level)].map(x => (
-        <StarFilled32 />
+        <StarFilled16 />
       ))}
       {[...Array(MAX_STARS - level)].map(x => (
-        <Star32 />
+        <Star16 />
       ))}
     </>
   );
 };
+1

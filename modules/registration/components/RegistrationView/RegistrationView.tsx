@@ -2,8 +2,9 @@ import { tryGetValue } from "@/modules/common/utils";
 import { useTextInput } from "@/modules/react/hooks";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import { SkipBack20 } from "@carbon/icons-react";
-import { Button } from "carbon-components-react";
+import {
+  SkipBack20, ArrowLeft16} from "@carbon/icons-react";
+import { Button, Column } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 import { IRegisterError, IRegisterInfo } from "../../types";
@@ -35,17 +36,17 @@ export const RegistrationView = ({
       url="/Pregnancy_pink80.svg"
       alt="Beschreibung des Bildes"
       content={content}>
+      <Column lg={8} md={6}>
       <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
-
-      <RegisterForm elements={content.elements} />
-      <Button
-        hasIconOnly
-        tooltip={tryGetValue("back", content.elements)}
-        renderIcon={SkipBack20}
-        kind="ghost"
-        onClick={() => router.back()}>
-        {tryGetValue("back", content.elements)}
-      </Button>
+        <RegisterForm elements={content.elements} />
+        <Button
+          tooltip={tryGetValue("back", content.elements)}
+          renderIcon={ArrowLeft16}
+          kind="ghost"
+          onClick={() => router.back()}>
+          {tryGetValue("back", content.elements)}
+        </Button>
+      </Column>
     </SimplePageView>
   );
 };

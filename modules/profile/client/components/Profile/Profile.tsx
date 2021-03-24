@@ -37,7 +37,7 @@ export const Profile = (props: IProfileViewProps) => {
       <BgImgContainer>
         <ProfileEntry {...profileEntryData} />
       </BgImgContainer>
-      <Grid fullWidth={true} narrow>
+      <Grid fullWidth={true}>
         <Row>
           <Column lg={6}>
             <Services {...servicesData} />
@@ -67,7 +67,7 @@ export const Profile = (props: IProfileViewProps) => {
             displayName: content.displayName,
           } as Location)
         } */}
-        <MapClient {...mapData} />
+        {/* <MapClient {...mapData} /> */}
       </Grid>
     </>
   );

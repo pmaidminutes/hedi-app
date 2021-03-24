@@ -1,7 +1,9 @@
 .hedi--header {
- .bx--header__name img {
-    height: 50px;
-    width: auto;
-    max-height: 100%;
+  .bx--header__name {
+    svg {
+      height: 50px;
+      width: auto;
+      max-height: 100%;
+    }
   }
 }

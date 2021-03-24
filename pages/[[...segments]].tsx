@@ -5,7 +5,7 @@ import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
-import { ITyped } from "@/modules/model";
+import { IEntityLocalized, IEntityTranslated, ITyped } from "@/modules/model";
 import {
   TryProfile,
   TryProfileList,
@@ -133,6 +133,8 @@ export const getStaticProps: GetStaticProps<
 
 export default function segments(props: ISegmentPageProps) {
   const { content, shell } = props;
+  const { label } = content as IEntityLocalized;
+
   const [hediStyle, setHediStyle] = useState("");
   const [hasHeader, setHasHeader] = useState(true);
   useEffect(() => {
@@ -146,7 +148,7 @@ export default function segments(props: ISegmentPageProps) {
   return (
     <div className={hediStyle}>
       <Head>
-        <title>HEDI App</title>
+        <title>HEDI{label ? ` - ${label}` : null}</title>
       </Head>
       {hasHeader ? <Header {...shell} /> : null}
       <Content>
