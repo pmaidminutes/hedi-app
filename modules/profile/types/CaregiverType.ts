@@ -1,13 +1,11 @@
-import { IAppPage } from "@/modules/common/types";
 import {
   EntityTranslatedFields,
   IEntityLocalized,
   IEntityTranslated,
   IWithLanguageSkills,
   WithLanguageSkillsFields,
-  IUIElementTexts,
-  ServiceFields,
-  IService,
+  IWithServices,
+  WithServiceFields,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -26,9 +24,8 @@ export interface ICaregiver
     IAddress,
     IContact,
     IWithLanguageSkills,
-    IWithAssociations {
-  services: IService[];
-}
+    IWithServices,
+    IWithAssociations {}
 
 export function isICaregiver(obj: any): obj is ICaregiver {
   return obj && obj.type === "Caregiver";
@@ -39,6 +36,6 @@ ${DetailedNameFields}
 ${AddressFields}
 ${ContactFields}
 ${WithLanguageSkillsFields}
+${WithServiceFields}
 ${AssociationsFields}
-services { ${ServiceFields} }
 `;
