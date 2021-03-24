@@ -1,4 +1,4 @@
-import { IUIElementTexts } from "@/modules/model";
+import { IEntity, IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
 
 export const hasElement = (identifier: string, elements?: IUIElementTexts[]) =>
@@ -16,6 +16,16 @@ export const tryGetValue = (
   fallback?: string
 ): string =>
   elements?.find(item => item.identifier === identifier)?.value ??
+  fallback ??
+  identifier;
+
+export const tryGetRedirect = (
+  identifier: string,
+  elements?: IUIElementTexts[],
+  links?: (IEntity & { key: string })[],
+  fallback?: string
+): string =>
+  links?.find(item => item.key === tryGetValue(identifier, elements))?.route ??
   fallback ??
   identifier;
 

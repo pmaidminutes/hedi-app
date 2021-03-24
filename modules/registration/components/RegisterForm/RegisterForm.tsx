@@ -16,9 +16,11 @@ import { RegisterInputs } from "../RegisterInputs";
 export const RegisterForm = ({
   elements,
   eagerValidate,
+  redirect,
 }: {
   elements: IUIElementTexts[];
   eagerValidate?: boolean;
+  redirect: string;
 }) => {
   const router = useRouter();
   // TODO handle error states more gracefully, errors should not persist
@@ -35,7 +37,7 @@ export const RegisterForm = ({
   };
 
   if (response?.success && codeResponse?.success) {
-    router.push("/" + router.locale);
+    router.push(redirect);
   }
 
   return (
