@@ -1,6 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import { AspectRatio, Column, Grid, Row } from "carbon-components-react";
+import { Column, Grid, Row } from "carbon-components-react";
 import Image from "next/image";
 
 export const SimplePageView: React.FC<{
@@ -30,19 +30,15 @@ export const SimplePageView: React.FC<{
             </Column>
           ) : null}
           <Column>
-            {/* <Grid> */}
-            {/* <Row> */}
             <Column className="hedi--titlegroup">
               <h1>{content.longTitle ?? content.label}</h1>
               <HTMLWithNextImage data={content.body} />
             </Column>
-            {/* </Row> */}
             {children && (
               <div className={`hedi--group hedi--group--${content.key}`}>
                 {children}
               </div>
             )}
-            {/* </Grid> */}
           </Column>
         </Row>
       </Grid>

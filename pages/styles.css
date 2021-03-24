@@ -17183,24 +17183,19 @@ address {
 .hedi--language-skills svg {
   color: #942345; }
 
-.hedi--scroll-to-top button {
-  position: fixed;
-  cursor: pointer;
-  bottom: 15px;
-  right: 15px;
-  font-size: 25px;
-  color: #ffffff;
-  background-color: #000000;
-  z-index: 4;
-  width: 45px;
-  text-align: center;
-  height: 45px;
-  line-height: 45px;
+.hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  background-color: #005D90;
   border-radius: 50%;
-  transition: 0.5s; }
-  .hedi--scroll-to-top button:hover {
-    color: #ffffff;
-    background: #ff3366; }
+  bottom: 45px;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: center;
+  position: fixed;
+  right: 15px;
+  transition: 0.5s;
+  z-index: 4; }
+  .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger:hover {
+    background: #2A84C6; }
 
 .hedi-separator {
   display: block;

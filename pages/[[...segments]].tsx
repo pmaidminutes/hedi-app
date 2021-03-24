@@ -6,8 +6,15 @@ import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 import { ITyped } from "@/modules/model";
-import { TryProfile, TryProfileList } from "@/modules/profile/client/components";
-import { CaregiverPathsGQL, MidwifePathsGQL,ProfileListPathsGQL } from "@/modules/profile/query";
+import {
+  TryProfile,
+  TryProfileList,
+} from "@/modules/profile/client/components";
+import {
+  CaregiverPathsGQL,
+  MidwifePathsGQL,
+  ProfileListPathsGQL,
+} from "@/modules/profile/query";
 import { getStaticProps as getProfileListViewProps } from "@/modules/profile/server/generators/getProfileListStaticProps";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
@@ -38,6 +45,7 @@ import { Content } from "carbon-components-react";
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { useState, useEffect } from "react";
+import { ScrollToTop } from "@/modules/common/components";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -127,7 +135,6 @@ export default function segments(props: ISegmentPageProps) {
   const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
   const [hasHeader, setHasHeader] = useState(true);
-  console.log({ shell });
   useEffect(() => {
     setHasHeader(shell.useHeader ?? true);
   }, [shell.useHeader]);
@@ -152,6 +159,7 @@ export default function segments(props: ISegmentPageProps) {
         <TryLandingPage {...content} key="landingpage" />
       </Content>
       <Footer {...shell} />
+      <ScrollToTop />
     </div>
   );
 }
