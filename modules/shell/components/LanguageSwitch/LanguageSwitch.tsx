@@ -1,47 +1,36 @@
 // Types
-import { IEntityLocalized } from "@/modules/model";
+import { useLanguageSwitch, ILanguageSwitchProps } from "./useLanguageSwitch";
 import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
-import { useRouter } from "next/router";
 import { Language32 } from "@carbon/icons-react";
-
 /**
  * Language Switch Component.
  *
  * @param {array[]} translations - A List of locales and url paths of translations of the current page.
+ * @param {string} type - "component" as default and "text" for only showing text link
  */
-export const LanguageSwitch = ({
-  translations,
-}: {
-  translations: IEntityLocalized[];
-}): JSX.Element => {
-  const router = useRouter();
-  const { locales, asPath: currentPath, locale } = router;
+export const LanguageSwitch = (
+  props: ILanguageSwitchProps
+): JSX.Element | null => {
+  const { direction, links } = useLanguageSwitch(props);
 
-  // TODO this method will route to not existing pages (e.g. locale en, path = currentPath)
-  const items =
-    locales?.map(lang => ({
-      lang,
-      path:
-        findLocaledUrlpath(lang, translations) ?? `/${locale}${currentPath}`,
-    })) ?? [];
-  return (
-    <OverflowMenu
-      renderIcon={Language32}
-      ariaLabel="Language Menu"
-      size="xl"
-      flipped={true}>
-      {items.map((item, index) => (
-        <OverflowMenuItem
-          key={index}
-          aria-label={item.lang}
-          href={item.path}
-          itemText={item.lang}
-          hasDivider={true}></OverflowMenuItem>
-      ))}
-    </OverflowMenu>
-  );
+  if (links) {
+    return (
+      <OverflowMenu
+        renderIcon={Language32}
+        ariaLabel="Language Menu"
+        size="xl"
+        direction={direction}
+        flipped={true}>
+        {links.map((item, index) => (
+          <OverflowMenuItem
+            key={index}
+            aria-label={item.label}
+            href={item.route}
+            itemText={item.label}
+            hasDivider={true}
+          />
+        ))}
+      </OverflowMenu>
+    );
+  } else return null;
 };
-
-function findLocaledUrlpath(locale: string, translations: IEntityLocalized[]) {
-  return translations.find(translation => translation.lang === locale)?.route;
-}

@@ -1,58 +1,58 @@
 import { MapClient } from "@/modules/map/client/components";
 import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
-import { IProfile } from "@/modules/model/IProfile";
-import {
-  ICaregiver,
-  IInstitution,
-  IMidwife,
-  IOrganisation,
-  isICaregiver,
-  isIMidwife,
-} from "@/modules/profile/types";
 import { Column, Grid, Row } from "carbon-components-react";
-import { Address } from "../Address";
 import { Contact } from "../Contact";
-import { DetailedName } from "../DetailedName";
 import { ProfileEntry } from "../ProfileEntry";
+import { BgImgContainer } from "@/modules/common/components";
+import { Services } from "../Services";
+import { LanguageSkills } from "../LanguageSkills";
+import { RelatedProfiles } from "../RelatedProfiles";
+import { IProfileViewProps, useProfile } from "./useProfile";
+import { ProfileView } from "@/modules/profile/query/getProfile";
 
-interface IProfileProps {
-  content: ICaregiver | IMidwife | IOrganisation | IInstitution;
-}
 const locations: Location[] = [];
 
 export const TryProfile = (content: ITyped): JSX.Element | null => {
-  switch (content.type) {
-    case "Midwife":
-      return <Profile content={content as ICaregiver} />;
-    case "Caregiver":
-      return <Profile content={content as IMidwife} />;
-    case "Organisation":
-      return <Profile content={content as IOrganisation} />;
-    case "Institution":
-      return <Profile content={content as IInstitution} />;
-    default:
-      return null;
-  }
+  if (
+    ["Midwife", "Caregiver", "Organisation", "Institution"].includes(
+      content.type
+    )
+  )
+    return <Profile content={content as ProfileView} />;
+  else return null;
 };
 
-export const Profile = ({ content }: IProfileProps) => {
+export const Profile = (props: IProfileViewProps) => {
+  const {
+    languagesData,
+    profileEntryData,
+    servicesData,
+    contactData,
+    relatedProfilesData,
+    mapData,
+  } = useProfile(props);
   return (
     <>
-      <Grid>
+      <BgImgContainer>
+        <ProfileEntry {...profileEntryData} />
+      </BgImgContainer>
+      <Grid fullWidth={true} narrow>
         <Row>
-          <Column lg={16}>
-            <DetailedName content={content} />
+          <Column lg={6}>
+            <Services {...servicesData} />
           </Column>
-          <Column sm={3} md={4} lg={8}>
-            <Address content={content} />
+          <Column lg={6}>
+            <Contact {...contactData} />
           </Column>
-
-          <Column sm={3} md={4} lg={8}>
-            <Contact content={content} />
+          <Column lg={8}>
+            <LanguageSkills {...languagesData} />
           </Column>
         </Row>
-        {isICaregiver(content) || isIMidwife(content)
+        <Row>
+          <RelatedProfiles {...relatedProfilesData} />
+        </Row>
+        {/* {hasMap)
           ? content.associations.map((entry: IProfile) => {
               return <ProfileEntry profile={entry} key={entry.route} />;
             })
@@ -66,8 +66,8 @@ export const Profile = ({ content }: IProfileProps) => {
             long: content.long,
             displayName: content.displayName,
           } as Location)
-        }
-        <MapClient currentLocation={locations[0]} locations={locations} />
+        } */}
+        <MapClient {...mapData} />
       </Grid>
     </>
   );

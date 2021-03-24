@@ -1,0 +1,15 @@
+@import "./theme/hedi-theme.scss";
+
+.hedi--profile--tile {
+
+  .bx--tile {
+    width: 100%;
+    margin-bottom: $spacing-md;
+  }
+
+  img, svg {
+    max-width: 130px;
+    max-height: 140px;
+    height: auto;
+  }
+}

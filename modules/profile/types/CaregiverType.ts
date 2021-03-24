@@ -4,6 +4,10 @@ import {
   IEntityTranslated,
   IWithLanguageSkills,
   WithLanguageSkillsFields,
+  IWithServices,
+  WithServiceFields,
+  IEntity,
+  EntityFields,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -22,7 +26,10 @@ export interface ICaregiver
     IAddress,
     IContact,
     IWithLanguageSkills,
-    IWithAssociations {}
+    IWithServices,
+    IWithAssociations {
+  domains: IEntity[]; //TODO proper impl
+}
 
 export function isICaregiver(obj: any): obj is ICaregiver {
   return obj && obj.type === "Caregiver";
@@ -33,5 +40,7 @@ ${DetailedNameFields}
 ${AddressFields}
 ${ContactFields}
 ${WithLanguageSkillsFields}
+${WithServiceFields}
 ${AssociationsFields}
+domains { ${EntityFields} }
 `;

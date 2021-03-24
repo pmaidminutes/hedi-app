@@ -4,6 +4,8 @@ import {
   IEntityTranslated,
   IWithLanguageSkills,
   WithLanguageSkillsFields,
+  IWithServices,
+  WithServiceFields,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -22,6 +24,7 @@ export interface IMidwife
     IAddress,
     IContact,
     IWithLanguageSkills,
+    IWithServices,
     IWithAssociations {
   verified: boolean;
   service_area: string;
@@ -36,6 +39,7 @@ export const MidwifeFields = `${EntityTranslatedFields}
   ${AddressFields}
   ${ContactFields}
   ${WithLanguageSkillsFields}
+  ${WithServiceFields}
   verified
   service_area
   ${AssociationsFields}

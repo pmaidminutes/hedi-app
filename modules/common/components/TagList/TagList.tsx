@@ -1,18 +1,22 @@
-import { ITagged } from "@/modules/model";
+import { ITag, TagType } from "@/modules/model";
 import { Tag } from "../Tag";
-import { Grid, Row, Column } from "carbon-components-react";
 
-export const TagList = ({ tags }: ITagged): JSX.Element => {
+interface ITagList {
+  tags?: ITag[];
+  headline?: String;
+  tagType?: TagType;
+}
+
+export const TagList = ({ tags, headline, tagType }: ITagList): JSX.Element => {
   return (
-    <Grid>
-      <h3>Browse by tags</h3>
-      <Row>
-        <Column sm={4} md={6} lg={10}>
-          {tags.map(tag => (
-            <Tag tag={tag} key={tag.route} />
-          ))}
-        </Column>
-      </Row>
-    </Grid>
+    <aside className="hedi__tag-list">
+      {headline ? <h3>{headline}</h3> : null}
+
+      {tags && tags?.length > 0
+        ? tags.map(tag => (
+            <Tag type={tagType ?? null} tag={tag} key={tag.route} />
+          ))
+        : null}
+    </aside>
   );
 };

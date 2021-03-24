@@ -1,64 +1,50 @@
-import { TryArticle } from "@/modules/editorial/article/client/components";
-import { ArticlePathsGQL } from "@/modules/editorial/article/query";
-import { getStaticProps as getArticleProps } from "@/modules/editorial/article/server";
-
-import { TryPage } from "@/modules/editorial/page/client/components";
-import { PagePathsGQL } from "@/modules/editorial/page/query";
-import { getStaticProps as getPageProps } from "@/modules/editorial/page/server";
-
-import { TryCategory } from "@/modules/editorial/category/client/components";
-import { CategoryPathsGQL } from "@/modules/editorial/category/query";
-import { getStaticProps as getCategoryProps } from "@/modules/editorial/category/server";
-
-import { TryGlossary } from "@/modules/editorial/glossary/client/components";
-import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
-import { getStaticProps as getGlossaryProps } from "@/modules/editorial/glossary/server";
-
-import { TryProfile } from "@/modules/profile/client/components";
-import {
-  CaregiverPathsGQL,
-  InstitutionPathsGQL,
-  MidwifePathsGQL,
-  OrganisationPathsGQL,
-} from "@/modules/profile/query";
-import { getStaticProps as getCaregiverProps } from "@/modules/profile/server/generators/getCaregiverStaticProps";
-import { getStaticProps as getInstitutionProps } from "@/modules/profile/server/generators/getInstitutionStaticProps";
-import { getStaticProps as getMidwifeProps } from "@/modules/profile/server/generators/getMidwifeStaticProps";
-import { getStaticProps as getOrganisationProps } from "@/modules/profile/server/generators/getOrganisationStaticProps";
-
-import { TrySearch } from "@/modules/search/client/components";
-import { SearchViewPathsGQL } from "@/modules/search/query";
-import { getStaticProps as getSearchViewProps } from "@/modules/search/server";
-
+import { getSegmentsPaths } from "@/modules/common/query";
+// Types
+import { ISegmentParam } from "@/modules/common/types";
+import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
+import { ITyped } from "@/modules/model";
+import {
+  TryProfile,
+  TryProfileList,
+} from "@/modules/profile/client/components";
+import {
+  CaregiverPathsGQL,
+  MidwifePathsGQL,
+  ProfileListPathsGQL,
+} from "@/modules/profile/query";
+import { getStaticProps as getProfileListViewProps } from "@/modules/profile/server/generators/getProfileListStaticProps";
+import { TryRegistration } from "@/modules/registration/components";
+import { RegistrationViewPathsGQL } from "@/modules/registration/query";
+import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
+import { Footer, Header } from "@/modules/shell/components";
 
+import { TryLandingPage } from "@/modules/landingPage/client/components";
+import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
+
+// Components
+
+import { useShell } from "@/modules/shell/hooks";
+// Types
+import {
+  getShell,
+  getShellLinksGQL,
+  LanguagesGQL,
+} from "@/modules/shell/query";
+import { IShellProps, IPageConfig } from "@/modules/shell/types";
+import { TrySimplePage } from "@/modules/simplePage/client/components";
+import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
+import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
-
-import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
-
-import { TryEditProfile } from "@/modules/editProfile/components";
-import { EditProfilePathsGQL } from "@/modules/editProfile/query";
-import { getStaticProps as getEditProfileProps } from "@/modules/editProfile/server/generators";
-
 // Components
 import { Content } from "carbon-components-react";
 import Head from "next/head";
-import { useEffect, useState } from "react";
-import { BreadCrumb, Header, Footer } from "@/modules/shell/components";
-// Types
-import { ISegmentParam } from "@/modules/common/types";
-import {
-  IAppStyled,
-  IEntityLocalized,
-  IEntityTranslated,
-} from "@/modules/model";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { getSegmentsPaths } from "@/modules/common/query";
+import { useState, useEffect } from "react";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -75,18 +61,13 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
   const pathQueries = [
-    //PagePathsGQL,
-    //ArticlePathsGQL,
-    //CategoryPathsGQL,
-    //GlossaryPathsGQL,
     CaregiverPathsGQL,
     MidwifePathsGQL,
-    //OrganisationPathsGQL,
-    //InstitutionPathsGQL,
-    //SearchViewPathsGQL,
+    ProfileListPathsGQL,
     LoginViewPathsGQL,
-    EditProfilePathsGQL,
+    RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
+    SimplePageViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -97,15 +78,9 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   return { paths, fallback: "blocking" };
 };
 
-interface IShellProps {
-  // TODO: to be implemented
-  // header?: IHeaderProps
-  // footer?: IFooter
-}
-
 interface ISegmentPageProps {
-  content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
-  shell: IShellProps;
+  content: ITyped;
+  shell: Partial<IShellProps>;
 }
 
 export const getStaticProps: GetStaticProps<
@@ -113,7 +88,7 @@ export const getStaticProps: GetStaticProps<
   ISegmentParam
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
-  let content;
+  let content: (ITyped & IPageConfig) | null = null;
 
   if (isDesignContext) {
     const data = dynamicProps?.find(
@@ -126,62 +101,64 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
-    console.log(params?.segments);
-    // if (!content) content = await getSearchViewProps(params?.segments, locale);
     if (!content) content = await getLoginViewProps(params?.segments, locale);
-    if (!content) content = await getEditProfileProps(params?.segments, locale);
-    // if (!content) content = await getCategoryProps(params?.segments, locale);
-    // if (!content) content = await getArticleProps(params?.segments, locale);
-    // if (!content) content = await getGlossaryProps(params?.segments, locale);
-    if (!content) content = await getCaregiverProps(params?.segments, locale);
-    if (!content) content = await getMidwifeProps(params?.segments, locale);
-    // if (!content)
-    //   content = await getOrganisationProps(params?.segments, locale);
-    // if (!content) content = await getInstitutionProps(params?.segments, locale);
-    // if (!content) content = await getPageProps(params?.segments, locale);
+    if (!content)
+      content = await getRegistrationViewProps(params?.segments, locale);
+    if (!content) content = await getProfileProps(params?.segments, locale);
+    if (!content)
+      content = await getProfileListViewProps(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
+    if (!content)
+      content = await getStaticSimplePageViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
-    // console.log("couldn't find content for path ", segments.join("/"));
-    // throw Error("Houston, we have got a problem");
   }
+  if (!content) throw Error;
+  // ShellStuff
+  const shellQueries = [
+    getShellLinksGQL("footer", ["imprint", "privacy"]),
+    getShellLinksGQL("header", ["imprint", "privacy"]),
+    LanguagesGQL,
+  ];
+  const { languages, ...rest } = await getShell(locale, shellQueries);
+  const shell = useShell(languages, content, rest);
 
   return {
-    props: { content, shell: {} },
-    revalidate: content.type === "Search" ? 15 : false,
+    props: { content, shell },
   };
 };
 
 export default function segments(props: ISegmentPageProps) {
-  const { content } = props;
+  const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
+  const [hasHeader, setHasHeader] = useState(true);
+  console.log({ shell });
+  useEffect(() => {
+    setHasHeader(shell.useHeader ?? true);
+  }, [shell.useHeader]);
 
   useEffect(() => {
-    setHediStyle(content?.appstyle ?? "");
-  }, [content]);
+    setHediStyle(shell?.appstyle ?? "");
+  }, [shell.appstyle]);
 
   return (
     <div className={hediStyle}>
       <Head>
         <title>HEDI App</title>
       </Head>
-      <Header {...content} />
+      {hasHeader ? <Header {...shell} /> : null}
       <Content>
-        {/* <BreadCrumb content={content} />
-        <TryCategory {...content} />
-        <TryArticle {...content} />
-        <TryGlossary {...content} />
-        <TrySearch {...content} />
-        <TryPage {...content} /> */}
-        <TryProfile {...content} />
-        <TryLogin {...content} />
-        <TryEditProfile {...content} />
-        <TryUserFeedbackThanks {...content} />
-        <TryLandingPage {...content} />
+        <TryRegistration {...content} key="registration" />
+        <TryProfile {...content} key="profile" />
+        <TryProfileList {...content} key="profileList" />
+        <TryLogin {...content} key="login" />
+        <TryUserFeedbackThanks {...content} key="userfeedback" />
+        <TrySimplePage content={content} key="simplepage" />
+        <TryLandingPage {...content} key="landingpage" />
       </Content>
-      <Footer />
+      <Footer {...shell} />
     </div>
   );
 }

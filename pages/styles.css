@@ -1,6 +1,18 @@
 @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
 @import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
 @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
+@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
 html,
 body,
 div,
@@ -17020,68 +17032,175 @@ a.bx--navigation-link:focus {
 .leaflet-container {
   height: 300px; }
 
-.hedi-category-color--pregnancy header {
+address {
+  display: flex;
+  flex-direction: column; }
+
+.hedi-category-color--pregnancy {
   background-color: #2A84C6 !important; }
+  .hedi-category-color--pregnancy .hedi-article-container {
+    background-color: #ECF0FF; }
+  .hedi-category-color--pregnancy .hedi-auto-suggest {
+    background-color: #2A84C6; }
 
-.hedi-category-color--pregnancy .hedi-article-container {
-  background-color: #ECF0FF; }
-
-.hedi-category-color--pregnancy .hedi-auto-suggest {
-  background-color: #2A84C6; }
-
-.hedi-category-color--birth header {
+.hedi-category-color--birth {
   background-color: #E35C8D !important; }
+  .hedi-category-color--birth .hedi-article-container {
+    background-color: #FFEAEC; }
+  .hedi-category-color--birth .hedi-auto-suggest {
+    background-color: #E35C8D; }
 
-.hedi-category-color--birth .hedi-article-container {
-  background-color: #FFEAEC; }
-
-.hedi-category-color--birth .hedi-auto-suggest {
-  background-color: #E35C8D; }
-
-.hedi-category-color--after-birth header {
+.hedi-category-color--after-birth {
   background-color: #574E90 !important; }
+  .hedi-category-color--after-birth .hedi-article-container {
+    background-color: #FBECFC; }
+  .hedi-category-color--after-birth .hedi-auto-suggest {
+    background-color: #574E90; }
 
-.hedi-category-color--after-birth .hedi-article-container {
-  background-color: #FBECFC; }
-
-.hedi-category-color--after-birth .hedi-auto-suggest {
-  background-color: #574E90; }
-
-.hedi-category-color--finances header {
+.hedi-category-color--finances {
   background-color: #007362 !important; }
+  .hedi-category-color--finances .hedi-article-container {
+    background-color: #D9F6F6; }
+  .hedi-category-color--finances .hedi-auto-suggest {
+    background-color: #007362; }
 
-.hedi-category-color--finances .hedi-article-container {
-  background-color: #D9F6F6; }
-
-.hedi-category-color--finances .hedi-auto-suggest {
-  background-color: #007362; }
-
-.hedi-category-color--advice header {
+.hedi-category-color--advice {
   background-color: #C94E1B !important; }
+  .hedi-category-color--advice .hedi-article-container {
+    background-color: #FFEDDF; }
+  .hedi-category-color--advice .hedi-auto-suggest {
+    background-color: #C94E1B; }
 
-.hedi-category-color--advice .hedi-article-container {
-  background-color: #FFEDDF; }
-
-.hedi-category-color--advice .hedi-auto-suggest {
-  background-color: #C94E1B; }
-
-.hedi-category-color--root header {
+.hedi-category-color--root {
   background-color: #2A84C6 !important; }
+  .hedi-category-color--root .hedi-article-container {
+    background-color: #ECF0FF; }
+  .hedi-category-color--root .hedi-auto-suggest {
+    background-color: #2A84C6; }
 
-.hedi-category-color--root .hedi-article-container {
-  background-color: #ECF0FF; }
-
-.hedi-category-color--root .hedi-auto-suggest {
-  background-color: #2A84C6; }
+.hedi-category-color--default {
+  background-color: #2A84C6 !important; }
+  .hedi-category-color--default .hedi-article-container {
+    background-color: #ECF0FF; }
+  .hedi-category-color--default .hedi-auto-suggest {
+    background-color: #2A84C6; }
 
 .hedi__audioplayer {
   width: 100%;
   height: 30px; }
 
+.hedi--bg-img-container {
+  padding: 2rem 0;
+  position: relative; }
+  .hedi--bg-img-container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(/images/profile_bg.png);
+    filter: opacity(0.5);
+    background-size: contain; }
+  .hedi--bg-img-container > div {
+    position: relative;
+    width: 100%; }
+  @media (max-width: 768px) {
+    .hedi--bg-img-container {
+      padding: 2rem; } }
+  .hedi--bg-img-container .bx--row {
+    margin-right: 0;
+    margin-left: 0; }
+
+.hedi--button-container {
+  display: flex; }
+
 .hedi__categoryentry a {
   text-decoration: none; }
   .hedi__categoryentry a h4 {
     color: red; }
+
+.hedi--edit-profile .hedi--group--language-skills .bx--data-table-content {
+  overflow-x: visible !important; }
+
+.hedi--edit-profile .bx--form-item {
+  margin-bottom: 1.5rem; }
+
+.hedi--edit-profile .bx--label h2, .hedi--edit-profile h3, .hedi--edit-profile h4 {
+  color: black; }
+
+.hedi--edit-profile div.hedi--group--profile-type {
+  padding: 2rem 1rem 0.5rem 1rem;
+  margin-bottom: 2rem;
+  background-color: #2A84C6; }
+
+.hedi--edit-profile div.hedi--group--profile-type h2 {
+  color: white; }
+
+.hedi--edit-profile .hedi--service-selection {
+  margin-bottom: 1rem; }
+
+.hedi--edit-profile .hedi--service-selection__head {
+  margin-bottom: 0; }
+
+.hedi--footer {
+  align-items: center;
+  display: flex;
+  justify-content: flex-end; }
+  .hedi--footer a {
+    font-family: "Roboto Slab", serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.375;
+    letter-spacing: 0;
+    text-decoration: none;
+    padding: 1rem;
+    background-color: transparent;
+    transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9); }
+    .hedi--footer a:hover {
+      background-color: #e5e5e5; }
+    .hedi--footer a:not(:last-child) {
+      margin-right: 1rem; }
+
+.hedi--header .bx--header__name img {
+  height: 50px;
+  width: auto;
+  max-height: 100%; }
+
+.hedi--language-skills tr {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff; }
+  .hedi--language-skills tr:not(:last-child) {
+    margin-bottom: .5rem; }
+  .hedi--language-skills tr td:first-child {
+    min-width: 100px; }
+
+.hedi--language-skills .bx--tile {
+  width: 100%; }
+
+.hedi--language-skills svg {
+  color: #942345; }
+
+.hedi--scroll-to-top button {
+  position: fixed;
+  cursor: pointer;
+  bottom: 15px;
+  right: 15px;
+  font-size: 25px;
+  color: #ffffff;
+  background-color: #000000;
+  z-index: 4;
+  width: 45px;
+  text-align: center;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 50%;
+  transition: 0.5s; }
+  .hedi--scroll-to-top button:hover {
+    color: #ffffff;
+    background: #ff3366; }
 
 .hedi-separator {
   display: block;
@@ -17089,48 +17208,91 @@ a.bx--navigation-link:focus {
   border-bottom: 2px solid #dde1e6;
   margin: 1.5rem 0; }
 
-.hedi-service_selection {
+.hedi--service-selection {
   background-color: #f4f4f4; }
-  .hedi-service_selection:hover {
+  .hedi--service-selection:hover {
     background-color: #e5e5e5; }
-  .hedi-service_selection__head {
+  .hedi--service-selection__head {
     cursor: pointer;
     margin-bottom: 1rem; }
-    .hedi-service_selection__head .bx--tile__checkmark {
+    .hedi--service-selection__head .bx--tile__checkmark {
       opacity: 1; }
-  .hedi-service_selection__content {
+  .hedi--service-selection__content {
     display: block;
     visibility: hidden;
     opacity: 0;
     transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9), visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
     height: 0; }
-  .hedi-service_selection.is-expanded .hedi-service_selection__content {
+  .hedi--service-selection .bx--tile--selectable {
+    min-height: 1rem; }
+  .hedi--service-selection.is-expanded .hedi--service-selection__content {
     visibility: inherit;
     opacity: 1;
     transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9), visibility 110ms cubic-bezier(0.2, 0, 0.38, 0.9);
     height: 100%; }
-  .hedi-service_selection .bx--accordion__content {
+  .hedi--service-selection .bx--accordion__content {
     padding-right: 0; }
-  .hedi-service_selection .bx--accordion__title {
+  .hedi--service-selection .bx--accordion__title {
     font-family: "Roboto Slab", serif;
     font-size: 1.75rem;
     font-weight: 400;
     line-height: 1.29;
     letter-spacing: 0; }
 
-.hedi__footer {
+.hedi--simple-page .hedi--app-page-image {
   display: flex;
   justify-content: flex-end;
-  padding: 1rem; }
-  .hedi__footer a {
-    font-family: "Roboto Slab", serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.375;
-    letter-spacing: 0;
-    text-decoration: none; }
-    .hedi__footer a:not(:last-child) {
-      margin-right: 1rem; }
+  width: 100%; }
+  .hedi--simple-page .hedi--app-page-image img {
+    height: 100%;
+    width: auto;
+    max-height: 250px; }
+
+.hedi--simple-page .hedi--titlegroup {
+  margin-bottom: 4rem; }
+
+.hedi--simple-page h1 {
+  margin-bottom: 1.5rem; }
+
+.hedi--profile-entry img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  background-color: #AEC1EA; }
+
+.hedi--profile-entry > div > div:not(:first-child) {
+  background-color: #fff; }
+
+.hedi--profile--tile .bx--tile {
+  width: 100%;
+  margin-bottom: 1rem; }
+
+.hedi--profile--tile img, .hedi--profile--tile svg {
+  max-width: 130px;
+  max-height: 140px;
+  height: auto; }
+
+.hedi--related-profiles {
+  background-color: #AEC1EA;
+  background-image: url(/images/Baby_Hand_gedreht.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+  color: #fff;
+  padding: 2rem;
+  width: 100%; }
+  .hedi--related-profiles ClickableTile {
+    color: red;
+    margin-bottom: 1rem; }
+  .hedi--related-profiles--profile {
+    height: 100%; }
+    .hedi--related-profiles--profile svg {
+      position: absolute;
+      bottom: 0;
+      right: 0; }
+
+.bx--content {
+  padding: 0; }
 
 .hidden {
   display: none; }

@@ -1,32 +1,20 @@
 import { FormEventHandler } from "react";
 import useSWR from "swr";
-import { jsonFetcher, setProperty } from "@/modules/common/utils";
+import { setProperty } from "@/modules/common/utils";
 import {
   IEditProfile,
   EditProfileFieldArray,
   EditProfileInput,
-  IUpsertProfile,
 } from "../../types";
+import { upsertProfile } from "../../request";
 
-function postProfile(
-  url: string,
-  profile: EditProfileInput
-): Promise<IUpsertProfile> {
-  return fetch(url, {
-    method: "POST",
-    body: JSON.stringify(profile),
-  }).then(res => res.json());
-}
-
-export function useEditProfileForm() {
+export function useEditProfileForm(lang: string) {
   const {
     data,
     error,
     isValidating,
     mutate,
-  } = useSWR("/api/account/editProfile", url =>
-    jsonFetcher<IUpsertProfile>(url)
-  );
+  } = useSWR("/api/account/editProfile", url => upsertProfile(url, { lang }));
 
   const onSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
@@ -36,14 +24,22 @@ export function useEditProfileForm() {
     EditProfileFieldArray.forEach(key => {
       let value = form.get(key)?.valueOf();
       if (value === "on") value = true;
+      if (key === "domains" || key === "services")
+        value = form.getAll(key)?.valueOf();
+      if (key === "languageSkills")
+        value = (form.getAll(key)?.valueOf() as string[]).map(v =>
+          JSON.parse(v)
+        );
       if (value && value !== profileData?.[key]) {
-        setProperty(delta, key, value as string | boolean);
-        setProperty(profileData, key, value as string | boolean);
+        setProperty(delta, key, value as any);
+        setProperty(profileData, key, value as any);
       }
     });
     if (Object.keys(delta).length > 0) {
       mutate({ success: false, profile: profileData }, false); //optimistic
-      mutate(postProfile("/api/account/editProfile", delta));
+      mutate(
+        upsertProfile("/api/account/editProfile", { profile: delta, lang })
+      );
     }
   };
 

@@ -1,5 +1,4 @@
-// TODO rename
-.hedi-service_selection {
+.hedi--service-selection {
   background-color: $ui-01;
   &:hover {
     background-color: $hover-ui;
@@ -22,8 +21,13 @@
     height: 0;
   }
 
+  .bx--tile--selectable {
+    min-height: $spacing-md;
+
+  }
+
   &.is-expanded {
-    .hedi-service_selection__content {
+    .hedi--service-selection__content {
       visibility: inherit;
       opacity: 1;
       transition: opacity 110ms cubic-bezier(0.2, 0, 0.38, 0.9),

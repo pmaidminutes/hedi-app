@@ -1,28 +1,19 @@
 import { getUser } from "@/modules/auth/client";
-import { IEditProfileView } from "../../types";
+import { extractConfig, IEditProfileView } from "../../types";
 import { EditProfileForm, useEditProfileForm } from "../EditProfileForm";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 
 export const EditProfile = ({ content }: { content: IEditProfileView }) => {
   const [user] = getUser();
   if (!user) return null; //TODO senseful redirect
 
-  const main = content.elements;
-  const Parent =
-    content.children.find(ap => ap.key === "editprofile_Parent")?.elements ??
-    [];
-  const Caregiver =
-    content.children.find(ap => ap.key === "editprofile_Caregiver")?.elements ??
-    [];
-  const Midwife =
-    content.children.find(ap => ap.key === "editprofile_Midwife")?.elements ??
-    [];
-
-  // TODO content.domainOptions
-  // TODO content.languageOptions for languageSkills
   return (
-    <EditProfileForm
-      uiElementMap={{ main, Parent, Caregiver, Midwife }}
-      {...useEditProfileForm()}
-    />
+    <SimplePageView content={content}>
+      <EditProfileForm
+        className="hedi--edit-profile"
+        config={extractConfig(content)}
+        {...useEditProfileForm(content.lang)}
+      />
+    </SimplePageView>
   );
 };
