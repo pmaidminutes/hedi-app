@@ -1,6 +1,6 @@
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
-import { getLangByRoute } from "@/modules/common/utils";
+import { getLangByRoute, tryGetValue } from "@/modules/common/utils";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import { EntityFields } from "@/modules/model";
 import { IRegistrationView } from "../types";
@@ -35,11 +35,16 @@ export async function getRegistrationView(
   if (!(view && view.key === "registration")) {
     return null;
   }
+  const keys = [
+    tryGetValue("success", view.elements),
+    tryGetValue("redirect", view.elements),
+  ];
   const subquery = gql`
     query getLoginViewOtherLinks(
+      $keys: [String!]!
       $lang: String!
     ) {
-      links: appPages(lang: $lang) {
+      links: appPagesByKey(keys: $keys, lang: $lang) {
         key
         ${EntityFields}
       }
@@ -49,6 +54,7 @@ export async function getRegistrationView(
     subquery,
     {
       lang,
+      keys,
     }
   );
   view.type = "Registration";
