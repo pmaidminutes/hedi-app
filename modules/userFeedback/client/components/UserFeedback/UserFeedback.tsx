@@ -1,7 +1,7 @@
 import { getUser } from "@/modules/auth/client";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import UserFeedbackForm from "@/modules/userFeedback/client/components/UserFeedbackForm/UserFeedbackForm";
-import { getCurrentUserProfile } from "@/modules/editProfile/query/getCurrentUserProfile";
+import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
 import { useRouter } from "next/router";
 import { tryGet } from "@/modules/common/utils";
 import {
@@ -20,13 +20,16 @@ export const UserFeedback = ({
   content: IUserFeedbackView;
   locale: string;
 }) => {
-  const [user, loading] = getUser();
+  const [user, userIsLoading] = getUser();
   const router = useRouter();
   useEffect(() => {
-    if (!loading && !user) router.push("/" + locale);
-  }, [user, loading]);
-  const currentProfile = getCurrentUserProfile(locale);
-  if (!currentProfile || !currentProfile.route) {
+    if (!userIsLoading && !user) router.push("/" + locale);
+  }, [user, userIsLoading]);
+  const [currentProfile, currentProfileIsLoading] = getCurrentUserProfile(
+    user,
+    locale
+  );
+  if (!currentProfileIsLoading && (!currentProfile || !currentProfile.route)) {
     const noProfileElement = tryGet("no_profile", content.elements);
     return (
       <Row>
@@ -42,12 +45,12 @@ export const UserFeedback = ({
     );
   }
 
-  return (
+  return currentProfile ? (
     <UserFeedbackForm
       content={content}
       locale={locale}
       className="hedi--user-feedback"
       profile={currentProfile}
     />
-  );
+  ) : null;
 };

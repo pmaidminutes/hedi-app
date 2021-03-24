@@ -13,4 +13,4 @@ export const Stars = ({ level }: { level: number }) => {
     </>
   );
 };
-1
+1;

@@ -4,6 +4,6 @@ export interface IFooter extends Partial<IShellProps> {}
 
 export function useFooter(props: IFooter) {
   const { languageSwitchLinks, footer } = props;
-  
+
   return { languageSwitchLinks, footer };
 }

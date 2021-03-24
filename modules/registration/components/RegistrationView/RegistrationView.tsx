@@ -2,8 +2,7 @@ import { tryGetValue } from "@/modules/common/utils";
 import { useTextInput } from "@/modules/react/hooks";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import {
-  SkipBack20, ArrowLeft16} from "@carbon/icons-react";
+import { SkipBack20, ArrowLeft16 } from "@carbon/icons-react";
 import { Button, Column } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -37,7 +36,7 @@ export const RegistrationView = ({
       alt="Beschreibung des Bildes"
       content={content}>
       <Column lg={8} md={6}>
-      <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
+        <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
         <RegisterForm elements={content.elements} />
         <Button
           tooltip={tryGetValue("back", content.elements)}

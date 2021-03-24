@@ -9,7 +9,7 @@ import {
 
 import { GlobalSearchMenu } from "../GlobalSearchMenu";
 import { UserProfileMenu } from "../UserProfileMenu";
-import Logo from './assets/hedi_logo_single_new.svg'
+import Logo from "./assets/hedi_logo_single_new.svg";
 
 export const Header = (props: IHeader) => {
   const { appstyle, languageSwitchLinks } = useHeader(props);
@@ -24,7 +24,6 @@ export const Header = (props: IHeader) => {
           alt="HEDI Logo"
         /> */}
         <Logo />
-
       </HeaderName>
       <HeaderGlobalBar>
         <GlobalSearchMenu />

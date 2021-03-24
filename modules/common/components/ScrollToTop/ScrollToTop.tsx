@@ -3,7 +3,9 @@ import { ArrowUp32 } from "@carbon/icons-react";
 import { useScrollToTop, IScroll } from "./useScrollToTop";
 
 export const ScrollToTop = (props: IScroll): JSX.Element => {
-  const { handleRouteChangeComplete, isVisible, buttonText } = useScrollToTop(props);
+  const { handleRouteChangeComplete, isVisible, buttonText } = useScrollToTop(
+    props
+  );
 
   return (
     <div className="hedi--scroll-to-top">
