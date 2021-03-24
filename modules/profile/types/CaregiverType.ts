@@ -6,6 +6,8 @@ import {
   WithLanguageSkillsFields,
   IWithServices,
   WithServiceFields,
+  IEntity,
+  EntityFields,
 } from "@/modules/model";
 import { AddressFields, IAddress } from "@/modules/model/IAddress";
 import { ContactFields, IContact } from "@/modules/model/IContact";
@@ -25,7 +27,9 @@ export interface ICaregiver
     IContact,
     IWithLanguageSkills,
     IWithServices,
-    IWithAssociations {}
+    IWithAssociations {
+  domains: IEntity[]; //TODO proper impl
+}
 
 export function isICaregiver(obj: any): obj is ICaregiver {
   return obj && obj.type === "Caregiver";
@@ -38,4 +42,5 @@ ${ContactFields}
 ${WithLanguageSkillsFields}
 ${WithServiceFields}
 ${AssociationsFields}
+domains { ${EntityFields} }
 `;

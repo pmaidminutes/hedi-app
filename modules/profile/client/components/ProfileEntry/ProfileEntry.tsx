@@ -4,6 +4,7 @@ import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
 export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
   const {
     displayName,
+    domains,
     postal_code,
     city,
     mail,
@@ -22,8 +23,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
           <Column lg={10}>
             {/* TODO reuse contact */}
             <h2>{displayName}</h2>
-            {/* TODO subtitle? */}
-            <h3>psychosoziale Beratung</h3>
+            <h3>{domains?.map(d => d.label).join(" & ")}</h3>
             <address>
               {postal_code} {city}
               {/* TODO right number for phone linking */}
