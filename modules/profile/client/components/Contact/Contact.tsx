@@ -17,7 +17,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
       <Tile>
-        <img src="/images/Pregnancy_blue.svg" alt="" />
+        <img src="/images/Pregnancy_pink80.svg" alt="" />
         <address>
           <p>{displayAddress}</p>
           <p>
@@ -28,6 +28,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
           </p>
         </address>
         {/* TODO right number for phone linking */}
+
         <p>
           <a href={`tel:${phone}`} target="_blank" title="Telefonnummer">
             {phone}
@@ -43,12 +44,14 @@ export const Contact = (props: IContactProps): JSX.Element => {
             {website}
           </a>
         </p>
-        {consultation_hours ? (
-          <>
-            <h3>{headline}</h3>
-            <p>{consultation_hours}</p>
-          </>
-        ) : null}
+        <div className="hedi--consultation-hours-wrapper">
+          {consultation_hours ? (
+            <>
+              <h3>{headline}</h3>
+              <p>{consultation_hours}</p>
+            </>
+          ) : null}
+        </div>
       </Tile>
     </section>
   );
