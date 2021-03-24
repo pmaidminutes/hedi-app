@@ -37,7 +37,7 @@ export const Profile = (props: IProfileViewProps) => {
       <BgImgContainer>
         <ProfileEntry {...profileEntryData} />
       </BgImgContainer>
-      <Grid fullWidth={true} narrow>
+      <Grid fullWidth={true}>
         <Row>
           <Column lg={6}>
             <Services {...servicesData} />
