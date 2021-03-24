@@ -1,5 +1,5 @@
 .hedi--related-profiles {
-  background-color: $blue-30;
+  background-color: $blue-60;
   background-image:url(/images/Baby_Hand_gedreht.svg);
   background-repeat: no-repeat;
   background-position: right center;
@@ -8,13 +8,11 @@
   padding: 2rem;
   width: 100%;
 
-  ClickableTile{
-   color:red;
-   margin-bottom: $spacing-md; 
-  }
 
   &--profile {
     height: 100%;
+    margin-bottom: $spacing-md;
+
     svg {
       position: absolute;
       bottom: 0;
