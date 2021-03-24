@@ -1,7 +1,7 @@
 import { getUser } from "@/modules/auth/client";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import UserFeedbackForm from "@/modules/userFeedback/client/components/UserFeedbackForm/UserFeedbackForm";
-import { getCurrentUserProfile } from "@/modules/profile/query/getCurrentUserProfile";
+import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
 import { useRouter } from "next/router";
 import { tryGet } from "@/modules/common/utils";
 import {

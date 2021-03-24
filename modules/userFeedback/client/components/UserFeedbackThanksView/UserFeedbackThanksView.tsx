@@ -1,8 +1,8 @@
 import { getUser } from "@/modules/auth/client";
 import { IAppPage } from "@/modules/common/types";
-import { getCurrentUserProfile } from "@/modules/profile/query/getCurrentUserProfile";
+import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import { getCurrentUserHasFeedback } from "@/modules/userFeedback/query/getCurrentUserHasFeedback";
+import { getCurrentUserHasFeedback } from "@/modules/userFeedback/request/getCurrentUserHasFeedback";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
