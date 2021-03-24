@@ -18,7 +18,10 @@ export const Header = (props: IHeader) => {
   return (
     <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
       <HeaderName prefix="" href={`/${locale}`}>
-        <img src="/images/hedi_logos/hedi_logo_color_dark.svg" alt="HEDI Logo" />
+        <img
+          src="/images/hedi_logos/hedi_logo_color_dark.svg"
+          alt="HEDI Logo"
+        />
       </HeaderName>
       <HeaderGlobalBar>
         <GlobalSearchMenu />

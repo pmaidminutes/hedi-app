@@ -1,5 +1,8 @@
 // Overwrite carbon class temp
 
 .bx--content {
-  padding: 0;
+  @media(min-width: 768px) {
+    padding: 0;
+
+  }
 }

@@ -1,2 +1,2 @@
-export * from './getShell'
-export * from './getLanguages'
+export * from "./getShell";
+export * from "./getLanguages";
