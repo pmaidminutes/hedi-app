@@ -17171,6 +17171,13 @@ address {
     .hedi--footer a:not(:last-child) {
       margin-right: 1rem; }
 
+.hedi--group form {
+  -webkit-margin-after: 0.75rem;
+          margin-block-end: 0.75rem; }
+  .hedi--group form .bx--text-input-wrapper {
+    -webkit-margin-after: 1rem;
+            margin-block-end: 1rem; }
+
 .hedi--header .bx--header__name svg {
   height: 50px;
   width: auto;
