@@ -1,15 +1,6 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import {
-  EntityFields,
-  IEntity,
-  ILanguage,
-  LanguageFields,
-} from "@/modules/model";
-
-export interface IShell {
-  links: IEntity[];
-  languages: ILanguage[];
-}
+import { EntityFields, IEntity, ILanguage } from "@/modules/model";
+import { IShell } from "../types";
 
 export const getShellLinksGQL = (name: string, keys: string[]) => {
   return `${name}:appPagesByKey(keys:[${keys
@@ -33,22 +24,17 @@ export async function getShell(
   `;
 
   const client = await getServiceClient(GQLEndpoint.Internal);
-  const { links, languages } = await client
-    .request<{
-      links: IEntity[];
-      languages: ILanguage[];
-    }>(query, { lang })
+  return client
+    .request<IShell>(query, { lang })
     .catch(e => {
       console.warn(e);
       return { links: [], languages: [] };
     });
-  if (!links?.[0] || !languages?.[0]) return { links: [], languages: [] };
-
-  return { links: typeAsLink(links), languages };
+  // rest umbauen
 }
 
-const typeAsLink = (array: IEntity[]) => {
-  return array.map(element => {
-    return { type: "Link", route: element.route, label: element.label };
-  });
-};
+// const typeAsLink = (array: IEntity[]) => {
+//   return array.map(element => {
+//     return { type: "Link", route: element.route, label: element.label };
+//   });
+// };

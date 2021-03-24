@@ -1,35 +1,44 @@
-import {
-  IAppStyled,
-  IEntity,
-  IEntityLocalized,
-  IEntityTranslated,
-  ILanguage,
-} from "@/modules/model";
-import { IShellProps } from "../types";
+import { setProperty } from "@/modules/common/utils";
+import { IEntity, IEntityLocalized, ILanguage } from "@/modules/model";
+import { IPageConfig, IShellProps } from "../types";
 
 export function useShell(
   languages: ILanguage[],
-  content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>,
-  links: IEntity[]
+  content: IPageConfig,
+  links: Record<string, IEntity[]>
 ): IShellProps {
-  const { translations } = content;
-
-  const languageSwitchLinks = generateLanguageSwitchLinks(
+  const {
     translations,
-    languages
-  );
+    appstyle,
+    useBreadCrumb,
+    revalidate,
+    useHeader,
+  } = content;
 
-  return {
-    languageSwitchLinks,
-    links,
-  };
+  // TODO type?
+  let shell = {} as any;
+  for (let key of Object.keys(links)) {
+    setProperty(shell, key, links[key] as any);
+  }
+  if (translations)
+    setProperty(
+      shell,
+      "languageSwitchLinks",
+      generateLanguageSwitchLinks(languages, translations)
+    );
+  setProperty(shell, "useHeader", useHeader !== undefined ? useHeader : true);
+  if (appstyle) setProperty(shell, "appstyle", appstyle);
+  if (revalidate) setProperty(shell, "revalidate", revalidate);
+  if (useBreadCrumb) setProperty(shell, "useBreadCrumb", useBreadCrumb);
+
+  return shell;
 }
 
 function generateLanguageSwitchLinks(
-  translations: IEntityLocalized[],
-  languages: ILanguage[]
+  languages: ILanguage[],
+  translations?: IEntityLocalized[]
 ) {
-  if (!translations) return null;
+  if (!translations) return [];
   return translations.map((translation: IEntityLocalized) => {
     return {
       route: translation.route,
