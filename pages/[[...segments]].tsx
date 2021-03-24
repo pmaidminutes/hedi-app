@@ -10,8 +10,16 @@ import {
   IEntityLocalized,
   IEntityTranslated,
 } from "@/modules/model";
-import { TryProfile } from "@/modules/profile/client/components";
-import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
+import {
+  TryProfile,
+  TryProfileList,
+} from "@/modules/profile/client/components";
+import {
+  CaregiverPathsGQL,
+  MidwifePathsGQL,
+  ProfileListPathsGQL,
+} from "@/modules/profile/query";
+import { getStaticProps as getProfileListViewProps } from "@/modules/profile/server/generators/getProfileListStaticProps";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
@@ -26,7 +34,6 @@ import { getStaticProps as getProfileProps } from "@/modules/profile/server/gene
 
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
-
 
 // Components
 import { Content } from "carbon-components-react";
@@ -61,6 +68,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const pathQueries = [
     CaregiverPathsGQL,
     MidwifePathsGQL,
+    ProfileListPathsGQL,
     LoginViewPathsGQL,
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
@@ -103,6 +111,8 @@ export const getStaticProps: GetStaticProps<
       content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getProfileProps(params?.segments, locale);
     if (!content)
+      content = await getProfileListViewProps(params?.segments, locale);
+    if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
     if (!content)
       content = await getStaticSimplePageViewProps(params?.segments, locale);
@@ -139,6 +149,7 @@ export default function segments(props: ISegmentPageProps) {
       <Content>
         <TryRegistration {...content} />
         <TryProfile {...content} />
+        <TryProfileList {...content} />
         <TryLogin {...content} />
         <TryUserFeedbackThanks {...content} />
         <TrySimplePage content={content} />
