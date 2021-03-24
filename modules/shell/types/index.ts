@@ -7,6 +7,7 @@ interface INav {
 export interface IShellProps extends Partial<IAppStyled>, Pick<IPageConfig, "useBreadCrumb" | "revalidate" | "useHeader"> {
   languageSwitchLinks: IEntity[];
   header?: INav;
+  footer?: IEntity[];
 }
 
 export interface IPageConfig extends Partial<IAppStyled> {

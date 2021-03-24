@@ -4,11 +4,11 @@ import { Link } from "carbon-components-react";
 import { LanguageSwitch } from "../LanguageSwitch";
 
 export const Footer = (props: IFooter) => {
-  const { links, languageSwitchLinks } = useFooter(props);
+  const { footer, languageSwitchLinks } = useFooter(props);
   return (
     <footer aria-label="footer" className="hedi--footer">
-      {links
-        ? links.map((link, index) => {
+      {footer
+        ? footer.map((link, index) => {
             return (
               <Link
                 key={link.label + index}

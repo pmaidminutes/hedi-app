@@ -127,7 +127,6 @@ export default function segments(props: ISegmentPageProps) {
   const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
   const [hasHeader, setHasHeader] = useState(true);
-  console.log({ shell });
   useEffect(() => {
     setHasHeader(shell.useHeader ?? true);
   }, [shell.useHeader]);
