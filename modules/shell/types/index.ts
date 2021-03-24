@@ -4,14 +4,14 @@ interface INav {
   links?: IEntity[];
 }
 
-export interface IShellProps extends Partial<IAppStyled>, IPageConfig {
+export interface IShellProps extends Partial<IAppStyled>, Pick<IPageConfig, "useBreadCrumb" | "revalidate" | "useHeader"> {
   languageSwitchLinks: IEntity[];
+  header?: INav;
 }
 
 export interface IPageConfig extends Partial<IAppStyled> {
   translations?: IEntityLocalized[];
-  header?: INav;
-  footer?: INav;
+  useHeader?: boolean;
   // TODO: Serverseitig
   useBreadCrumb?: boolean;
   revalidate?: boolean | number;
