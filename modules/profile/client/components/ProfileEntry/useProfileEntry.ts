@@ -6,7 +6,9 @@ export interface IProfileEntryProps
     Pick<IDetailedName, "displayName">,
     Pick<IContact, "mail" | "website" | "phone">,
     Partial<Pick<Profile, "services">>,
-    Partial<Pick<ICaregiver, "domains">> {}
+    Partial<Pick<ICaregiver, "domains">> {
+  servicesHeadline?: string;
+}
 
 export function useProfileEntry(props: IProfileEntryProps) {
   const {
@@ -17,6 +19,7 @@ export function useProfileEntry(props: IProfileEntryProps) {
     website,
     phone,
     services,
+    servicesHeadline,
     domains,
   } = props;
 
@@ -28,6 +31,7 @@ export function useProfileEntry(props: IProfileEntryProps) {
     website,
     phone,
     services,
+    servicesHeadline,
     domains,
   };
 }

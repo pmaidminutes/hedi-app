@@ -1,4 +1,5 @@
 import { Row, Column } from "carbon-components-react";
+import { TagList } from "@/modules/common/components";
 import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
 
 export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
@@ -10,11 +11,16 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     mail,
     website,
     phone,
+    services,
+    servicesHeadline,
   } = useProfileEntry(props);
-
+  const className =
+    "hedi--profile-entry" + services
+      ? " hedi--profile-entry--with-services"
+      : "";
   return (
     <>
-      <section className="hedi--profile-entry">
+      <section className={className}>
         <Row>
           <Column lg={{ span: 4, offset: 1 }}>
             {/* TODO image dynamisch */}
@@ -43,6 +49,11 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
                 {website}
               </a>
             </p>
+            {services && (
+              <TagList
+                tags={services}
+                headline={servicesHeadline ?? "Tätigkeiten"}></TagList>
+            )}
           </Column>
         </Row>
       </section>
