@@ -34,11 +34,10 @@ export const Profile = (props: IProfileViewProps) => {
   } = useProfile(props);
   return (
     <>
+      <BgImgContainer>
+        <ProfileEntry {...profileEntryData} />
+      </BgImgContainer>
       <Grid fullWidth={true} narrow>
-        <BgImgContainer>
-          <ProfileEntry {...profileEntryData} />
-        </BgImgContainer>
-
         <Row>
           <Column lg={6}>
             <Services {...servicesData} />

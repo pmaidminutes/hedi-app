@@ -16,4 +16,12 @@
     position: relative;
     width: 100%;
   }
+  @media(max-width: 768px) {
+    padding: 2rem;
+  }
+
+  .bx--row {
+    margin-right: 0;
+    margin-left: 0;
+  }
 }
