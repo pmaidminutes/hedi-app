@@ -5,11 +5,7 @@ import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
-import {
-  IAppStyled,
-  IEntityLocalized,
-  IEntityTranslated,
-} from "@/modules/model";
+import { ITyped } from "@/modules/model";
 import { TryProfile } from "@/modules/profile/client/components";
 import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
 import { TryRegistration } from "@/modules/registration/components";
@@ -20,7 +16,6 @@ import { Footer, Header } from "@/modules/shell/components";
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
 
-
 // Components
 
 import { useShell } from "@/modules/shell/hooks";
@@ -30,7 +25,7 @@ import {
   getShellLinksGQL,
   LanguagesGQL,
 } from "@/modules/shell/query";
-import { IShellProps } from "@/modules/shell/types";
+import { IShellProps, IPageConfig } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
@@ -41,7 +36,7 @@ import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/user
 import { Content } from "carbon-components-react";
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -75,8 +70,8 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
 };
 
 interface ISegmentPageProps {
-  content: IEntityTranslated<IEntityLocalized> & Partial<IAppStyled>;
-  shell: IShellProps;
+  content: ITyped;
+  shell: Partial<IShellProps>;
 }
 
 export const getStaticProps: GetStaticProps<
@@ -84,7 +79,7 @@ export const getStaticProps: GetStaticProps<
   ISegmentParam
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
-  let content;
+  let content: (ITyped & IPageConfig) | null = null;
 
   if (isDesignContext) {
     const data = dynamicProps?.find(
@@ -109,13 +104,15 @@ export const getStaticProps: GetStaticProps<
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
   }
+  if (!content) throw Error;
   // ShellStuff
   const shellQueries = [
-    getShellLinksGQL("links", ["viewprofile"]),
+    getShellLinksGQL("footer", ["imprint", "privacy"]),
+    getShellLinksGQL("header", ["imprint", "privacy"]),
     LanguagesGQL,
   ];
-  const { links, languages } = await getShell(locale, shellQueries);
-  const shell = useShell(languages, content, links);
+  const { languages, ...rest } = await getShell(locale, shellQueries);
+  const shell = useShell(languages, content, rest);
 
   return {
     props: { content, shell },
@@ -125,16 +122,22 @@ export const getStaticProps: GetStaticProps<
 export default function segments(props: ISegmentPageProps) {
   const { content, shell } = props;
   const [hediStyle, setHediStyle] = useState("");
-  useEffect(() => {
-    setHediStyle(content?.appstyle ?? "");
-  }, [content]);
+  const [hasHeader, setHasHeader] = useState(true);
+  console.log({ shell });
+  // useEffect(() => {
+  //   setHasHeader(shell.useHeader ?? true);
+  // }, [shell.useHeader]);
+
+  // useEffect(() => {
+  //   setHediStyle(shell?.appstyle ?? "");
+  // }, [shell.appstyle]);
 
   return (
     <div className={hediStyle}>
       <Head>
         <title>HEDI App</title>
       </Head>
-      <Header {...shell} />
+      {hasHeader ? <Header {...shell} /> : null}
       <Content>
         <TryRegistration {...content} key="registration" />
         <TryProfile {...content} key="profile" />
