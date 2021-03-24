@@ -14,7 +14,6 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     services,
     servicesHeadline,
   } = useProfileEntry(props);
-  console.log({ services });
   const className =
     "hedi--profile-entry" +
     (services ? " hedi--profile-entry--with-services" : "");
