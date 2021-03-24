@@ -11,8 +11,8 @@ export const getStaticProps = async (
     segmentsToRoute(segments || [], locale),
     locale
   );
-return content
-  // if (!content) return null;
-  // const pageConfig = { useHeader: false, useFooter: true };
-  // return { ...content, ...pageConfig };
+
+  if (!content) return null;
+  const pageConfig = { useHeader: false};
+  return { ...content, ...pageConfig };
 };

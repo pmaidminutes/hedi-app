@@ -37,7 +37,7 @@ import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/user
 import { Content } from "carbon-components-react";
 import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -128,13 +128,13 @@ export default function segments(props: ISegmentPageProps) {
   const [hediStyle, setHediStyle] = useState("");
   const [hasHeader, setHasHeader] = useState(true);
   console.log({ shell });
-  // useEffect(() => {
-  //   setHasHeader(shell.useHeader ?? true);
-  // }, [shell.useHeader]);
+  useEffect(() => {
+    setHasHeader(shell.useHeader ?? true);
+  }, [shell.useHeader]);
 
-  // useEffect(() => {
-  //   setHediStyle(shell?.appstyle ?? "");
-  // }, [shell.appstyle]);
+  useEffect(() => {
+    setHediStyle(shell?.appstyle ?? "");
+  }, [shell.appstyle]);
 
   return (
     <div className={hediStyle}>

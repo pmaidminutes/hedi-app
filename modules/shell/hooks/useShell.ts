@@ -7,7 +7,13 @@ export function useShell(
   content: IPageConfig,
   links: Record<string, IEntity[]>
 ): IShellProps {
-  const { translations, appstyle, useBreadCrumb, revalidate } = content;
+  const {
+    translations,
+    appstyle,
+    useBreadCrumb,
+    revalidate,
+    useHeader,
+  } = content;
 
   // TODO type?
   let shell = {} as any;
@@ -20,10 +26,10 @@ export function useShell(
       "languageSwitchLinks",
       generateLanguageSwitchLinks(languages, translations)
     );
+  setProperty(shell, "useHeader", useHeader !== undefined ? useHeader : true);
   if (appstyle) setProperty(shell, "appstyle", appstyle);
   if (revalidate) setProperty(shell, "revalidate", revalidate);
   if (useBreadCrumb) setProperty(shell, "useBreadCrumb", useBreadCrumb);
-
 
   return shell;
 }
