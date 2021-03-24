@@ -2,6 +2,7 @@ import { IAppPage } from "@/modules/common/types";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { AspectRatio, Column, Grid, Row } from "carbon-components-react";
 import Image from "next/image";
+import { ScrollToTop } from "@/modules/common/components";
 
 export const SimplePageView: React.FC<{
   content: IAppPage;
@@ -46,6 +47,7 @@ export const SimplePageView: React.FC<{
           </Column>
         </Row>
       </Grid>
+      <ScrollToTop />
     </div>
   );
 };
