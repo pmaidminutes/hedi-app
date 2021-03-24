@@ -2,10 +2,12 @@ import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { EntityFields } from "@/modules/model";
+import { IRegistrationView } from "../types";
 
 export async function getRegistrationView(
   route: string
-): Promise<IAppPage | null> {
+): Promise<IRegistrationView | null> {
   const lang = getLangByRoute(route);
 
   const query = gql`
@@ -18,21 +20,37 @@ export async function getRegistrationView(
     }
   `;
   const client = await getServiceClient(GQLEndpoint.Internal);
-  return client
+  const view = await client
     .request<{ appPages: IAppPage[] }>(query, {
       routes: [route],
       lang,
     })
     .then(data => {
-      const view = data.appPages?.[0];
-      if (view && view.key === "registration") {
-        view.type = "Registration";
-        return view;
-      }
-      return null;
+      return data.appPages?.[0];
     })
     .catch(e => {
       console.warn(e);
       return null;
     });
+  if (!(view && view.key === "registration")) {
+    return null;
+  }
+  const subquery = gql`
+    query getLoginViewOtherLinks(
+      $lang: String!
+    ) {
+      links: appPagesByKey(keys: ["login", "editprofile"], lang: $lang) {
+        key
+        ${EntityFields}
+      }
+    }
+  `;
+  const subResults = await client.request<Pick<IRegistrationView, "links">>(
+    subquery,
+    {
+      lang,
+    }
+  );
+  view.type = "Registration";
+  return { ...view, ...subResults };
 }
