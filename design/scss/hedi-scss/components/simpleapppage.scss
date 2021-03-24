@@ -1,0 +1,22 @@
+@import "./theme/hedi-theme.scss";
+
+.hedi--simple-page {
+  .hedi--app-page-image {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+    img {
+    height: 100%;
+    width: auto;
+    max-height: 250px;
+    }
+  }
+
+  .hedi--titlegroup {
+    margin-bottom: $layout-lg;
+  }
+
+  h1 {
+    margin-bottom: $spacing-lg;
+  }
+}

@@ -11,5 +11,7 @@
 @import "./page/page.scss";
 // components -> all components concerning
 @import "./components/components.scss";
+// overwrite carbon classes
+@import "./carbon-overwrite.scss";
 // helper -> helper classes like ".hidden"
-@import "./helper.scss"
+@import "./helper.scss";

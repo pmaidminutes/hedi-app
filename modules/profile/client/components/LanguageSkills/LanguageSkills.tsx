@@ -7,7 +7,7 @@ export const LanguageSkills = (props: ILanguageSkillsProps) => {
   const { languageSkills, headline } = useLanguageSkills(props);
   if (!languageSkills?.length) return null;
   return (
-    <section className="hedi--language-skills">
+    <section className="hedi--language-skills hedi--profile--tile">
       <Tile>
         <h3>{headline}</h3>
         <table>
