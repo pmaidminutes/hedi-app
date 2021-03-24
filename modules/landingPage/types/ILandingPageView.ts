@@ -3,4 +3,5 @@ import { IEntity } from "@/modules/model";
 
 export interface ILandingPageView extends IAppPage {
   links: (IEntity & { key: string })[];
+  linksIfLoggedIn: (IEntity & { key: string })[];
 }
