@@ -6,7 +6,7 @@ export interface IUserFeedbackEntryProps {
 }
 
 export const UserFeedbackAppPageEntry = (content: IAppPage) => {
-  const entryModel = { ...content, showTitle: false };
+  const entryModel = { ...content, showTitle: false, hideLegends: true };
   return (
     <div className="hedi--userfeedback-item">
       <div

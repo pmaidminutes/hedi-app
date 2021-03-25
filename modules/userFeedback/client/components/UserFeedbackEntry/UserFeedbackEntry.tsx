@@ -6,12 +6,14 @@ export interface IUserFeedbackEntryProps {
   elements: IUIElementTexts[];
   label: string;
   showTitle?: boolean;
+  hideLegends?: boolean;
 }
 
 export const UserFeedbackEntry = ({
   elements,
   label,
   showTitle,
+  hideLegends,
 }: IUserFeedbackEntryProps) => {
   const titleInput = getTextInputProps("title", elements);
 
@@ -33,7 +35,7 @@ export const UserFeedbackEntry = ({
       <TextArea
         id="body"
         name={`userfeedback-${label}-body`}
-        labelText={showTitle ? tryGet("body")?.value || "Body" : label}
+        labelText={hideLegends ? "" : tryGet("body")?.value || "Body"}
         placeholder={tryGet("body")?.placeholder}
         helperText={tryGet("body")?.help}
       />
