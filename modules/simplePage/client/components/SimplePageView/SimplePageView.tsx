@@ -27,17 +27,17 @@ export const SimplePageView: React.FC<{
       <Grid fullWidth>
         <Row>
           {url ? (
-            <Column sm={0} md={3} lg={6}>
+            <Column sm={0} md={2} lg={5}>
               <div className="hedi--app-page-image">
                 <img src={url} alt={alt ?? ""}></img>
               </div>
             </Column>
           ) : null}
-          <Column>
-            <Column className="hedi--titlegroup">
+          <Column md={2} lg={6}>
+            <div className="hedi--titlegroup">
               <h1>{content.longTitle ?? content.label}</h1>
               <HTMLWithNextImage data={content.body} />
-            </Column>
+            </div>
             {children && (
               <div className={`hedi--group hedi--group--${content.key}`}>
                 {children}

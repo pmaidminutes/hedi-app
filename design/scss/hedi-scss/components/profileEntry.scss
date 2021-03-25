@@ -27,6 +27,22 @@ background-color: $ui-01;
   padding-top: $spacing-2xl;
   }
 
+  h2 {
+  padding-bottom: $spacing-2xs;
+  }
+
+  h3 {
+  font-weight: 300;
+  font-size: 1.25rem;
+  padding-bottom: $spacing-2xs;
+  }
+
+  h5 {
+  padding-bottom: $spacing-2xs;
+  }
+
+
+
   &--with-services {
    //background-color: red;
    background-color: white;

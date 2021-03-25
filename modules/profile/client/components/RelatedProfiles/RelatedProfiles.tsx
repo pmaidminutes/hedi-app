@@ -37,7 +37,7 @@ export const RelatedProfiles = (props: IRelatedProfilesProps) => {
   const { headline } = useRelatedProfiles(props);
   return (
     <section className="hedi--related-profiles">
-      <AspectRatio ratio="16x9">
+      <AspectRatio ratio="2x1">
         <Row>
           {data.map((profile, index) => (
             <RelatedProfile key={index} {...profile} />
