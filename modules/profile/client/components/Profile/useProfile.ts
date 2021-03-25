@@ -8,7 +8,6 @@ export interface IProfileViewProps {
 
 export function useProfile(props: IProfileViewProps) {
   const { content } = props;
-  console.log({ content });
   const {
     languageSkills,
     elements,
