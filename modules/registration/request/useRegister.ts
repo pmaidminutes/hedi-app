@@ -2,6 +2,7 @@ import { useState } from "react";
 import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IRegisterRequest, IRegisterResponse } from "../types";
+import { signIn } from "next-auth/client";
 
 export const useRegister = () => {
   const [response, setResponse] = useState<IRegisterResponse>({
@@ -17,8 +18,13 @@ export const useRegister = () => {
     setResponse(resp);
     setLoading(false);
   };
+  const autoSignIn = (info: IRegisterRequest) => {
+    if (response.success) {
+      signIn("credentials", { username: info.name, password: info.pass });
+    }
+  };
 
-  return { response, loading, register };
+  return { response, loading, register, autoSignIn };
 };
 
 export function useRegisterEager(info: IRegisterRequest) {
