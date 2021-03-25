@@ -5,6 +5,7 @@ export interface IHeader extends Partial<IShellProps>, Partial<IAppStyled> {}
 export function useHeader({
   appstyle = "hedi-category-color--default",
   languageSwitchLinks,
+  header,
 }: IHeader) {
-  return { appstyle, languageSwitchLinks };
+  return { appstyle, languageSwitchLinks, headerLinks: header };
 }
