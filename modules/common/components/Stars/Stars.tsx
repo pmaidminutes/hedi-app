@@ -4,13 +4,12 @@ const MAX_STARS = 10;
 export const Stars = ({ level }: { level: number }) => {
   return (
     <>
-      {[...Array(level)].map(x => (
-        <StarFilled16 />
+      {[...Array(level)].map((x, index) => (
+        <StarFilled16 key={"star-" + index} />
       ))}
-      {[...Array(MAX_STARS - level)].map(x => (
-        <Star16 />
+      {[...Array(MAX_STARS - level)].map((x, index) => (
+        <Star16 key={"star-" + (level + index)} />
       ))}
     </>
   );
 };
-1;
