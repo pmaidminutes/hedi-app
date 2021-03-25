@@ -5,21 +5,16 @@ import { getShell } from "@/modules/shell/query";
 import { useShell } from "@/modules/shell/hooks";
 import { Shell } from "@/modules/shell/components";
 
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import {
-  Button,
-  ButtonSet,
-  Column,
-  FormLabel,
-  Row,
-} from "carbon-components-react";
+import { Button, Column } from "carbon-components-react";
 
 import { IAppPage } from "@/modules/common/types/appPage";
 import { tryGet } from "@/modules/common/utils";
 import { getUser } from "@/modules/auth/client";
 import { getProfileStatic } from "@/modules/profile/query";
 import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 
 export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
   locale,
@@ -65,20 +60,22 @@ export default function myProfile(props: IPageProps<IAppPage>) {
     currentProfileIsLoading,
   ]);
   const noProfileElement = tryGet("no_profile", content.elements);
-
+  content.longTitle = "";
+  content.label = "";
+  content.body = noProfileElement?.description ?? "";
   return (
     <Shell {...props}>
       {!userIsLoading && user && (
-        <Row>
-          <Column>
-            <ButtonSet stacked>
-              <FormLabel>{noProfileElement?.description}</FormLabel>
-              <Button href={"/" + content.lang + "/user/profile/edit"}>
-                {noProfileElement?.value}
-              </Button>
-            </ButtonSet>
+        <SimplePageView
+          url="/Pregnancy_pink80.svg"
+          alt="Beschreibung des Bildes"
+          content={content}>
+          <Column lg={8} md={6}>
+            <Button href={"/" + content.lang + "/user/profile/edit"}>
+              {noProfileElement?.value}
+            </Button>
           </Column>
-        </Row>
+        </SimplePageView>
       )}
     </Shell>
   );
