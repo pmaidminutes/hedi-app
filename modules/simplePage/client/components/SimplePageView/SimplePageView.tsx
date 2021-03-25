@@ -7,9 +7,13 @@ export const SimplePageView: React.FC<{
   content: IAppPage;
   url?: string;
   alt?: string;
-}> = ({ content, url, alt, children }) => {
+  customKey?: string;
+}> = ({ content, url, alt, customKey, children }) => {
   return (
-    <div className={`hedi--simple-page hedi--${content.key}-page`}>
+    <div
+      className={`hedi--simple-page ${
+        content.key !== undefined ? `hedi--${content.key}-page` : null
+      } ${customKey !== undefined ? `hedi--${customKey}` : null}`}>
       {content.posterImage && (
         <Image
           src={"https://appstaging.projekt-hedi.de" + content.posterImage.route}
