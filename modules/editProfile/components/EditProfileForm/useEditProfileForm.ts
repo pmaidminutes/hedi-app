@@ -7,12 +7,15 @@ import {
   EditProfileInput,
 } from "../../types";
 import { upsertProfile } from "../../request";
+import { useRouter } from "next/router";
 
-export function useEditProfileForm(lang: string) {
+export function useEditProfileForm(lang: string, username?: string | null) {
   const { data, error, isValidating, mutate } = useSWR(
-    "/api/user/profile/edit",
+    ["/api/user/profile/edit", username],
     url => upsertProfile(url, { lang })
   );
+
+  const router = useRouter();
 
   const onSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
@@ -35,7 +38,12 @@ export function useEditProfileForm(lang: string) {
     });
     if (Object.keys(delta).length > 0) {
       mutate({ success: false, profile: profileData }, false); //optimistic
-      mutate(upsertProfile("/api/user/profile/edit", { profile: delta, lang }));
+      mutate(
+        upsertProfile("/api/user/profile/edit", { profile: delta, lang })
+      ).then(resp => {
+        if (resp?.success && resp.route) router.push(resp.route);
+        return resp;
+      });
     }
   };
 

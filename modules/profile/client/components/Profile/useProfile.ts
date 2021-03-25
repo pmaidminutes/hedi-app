@@ -9,7 +9,6 @@ export interface IProfileViewProps {
 export function useProfile(props: IProfileViewProps) {
   const { content } = props;
   const [hasServices, setHasServices] = useState(true);
-  console.log({ content });
   const {
     languageSkills,
     elements,

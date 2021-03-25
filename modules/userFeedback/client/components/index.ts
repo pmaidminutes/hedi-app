@@ -4,3 +4,4 @@ export * from "./UserFeedbackForm/UserFeedbackForm";
 export * from "./UserFeedbackSendbox/UserFeedbackSendbox";
 export * from "./UserFeedbackThanksView";
 export * from "./TryUserFeedbackThanks";
+export * from "./UserFeedback/UserFeedback";

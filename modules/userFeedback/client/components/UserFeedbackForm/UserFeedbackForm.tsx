@@ -13,6 +13,9 @@ import { ProfileView } from "@/modules/profile/query";
 import { Services } from "@/modules/profile/client/components/Services";
 import { LanguageSkills } from "@/modules/profile/client/components/LanguageSkills";
 import { Contact } from "@/modules/profile/client/components/Contact";
+import { useRouter } from "next/router";
+import { useState } from "react";
+import { tryGet } from "@/modules/common/utils";
 
 interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
@@ -21,12 +24,18 @@ interface IUserFeedbackFormProps {
   profile: ProfileView;
 }
 
+const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
+
 export default function UserFeedbackForm({
   content,
   locale,
   className,
   profile,
 }: IUserFeedbackFormProps) {
+  const router = useRouter();
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
   const getSubPage = (key: string, subPages: IAppPage[]) =>
     subPages?.find(page => page.key == key) || ({} as IAppPage);
 
@@ -38,10 +47,25 @@ export default function UserFeedbackForm({
     relatedProfilesData,
     mapData,
   } = useProfile({ content: profile });
+  const onSuccess = () => {
+    const thanksPageRoute = getSubPage("userfeedbackThanks", content.subPages)
+      .route;
+    setSuccessMessage(
+      tryGet("success_message", content.elements)?.description || null
+    );
+    setTimeout(() => router.push(thanksPageRoute), REDIRECT_DELAY);
+  };
+  const onError = () =>
+    setErrorMessage(
+      tryGet("error_message", content.elements)?.description || null
+    );
 
   return (
     <div className={className}>
-      <MultipleUserFeedback lang={locale}>
+      <MultipleUserFeedback
+        lang={locale}
+        onSuccess={onSuccess}
+        onError={onError}>
         <h1>{content.longTitle ?? content.label}</h1>
         <Row>
           <Column lg={6} sm={12}>
@@ -107,7 +131,11 @@ export default function UserFeedbackForm({
             />
           </Column>
         </Row>
-        <UserFeedbackSendbox elements={content.elements} />
+        <UserFeedbackSendbox
+          elements={content.elements}
+          errorMessage={errorMessage}
+          successMessage={successMessage}
+        />
       </MultipleUserFeedback>
     </div>
   );

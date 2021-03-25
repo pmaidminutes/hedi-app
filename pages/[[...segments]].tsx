@@ -19,20 +19,16 @@ import { getProfileListPage } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
-import { Footer, Header } from "@/modules/shell/components";
 
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getProfilePage } from "@/modules/profile/server/generators";
 
 // Components
 
+import { getShell } from "@/modules/shell/query";
 import { useShell } from "@/modules/shell/hooks";
-// Types
-import {
-  getShell,
-  getShellLinksGQL,
-  LanguagesGQL,
-} from "@/modules/shell/query";
+import { Shell } from "@/modules/shell/components";
+
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
@@ -41,11 +37,7 @@ import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components"
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
 // Components
-import { Content } from "carbon-components-react";
-import Head from "next/head";
 import { GetStaticPaths, GetStaticProps } from "next/types";
-import { useState, useEffect } from "react";
-import { ScrollToTop } from "@/modules/common/components";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -116,36 +108,20 @@ export const getStaticProps: GetStaticProps<
   const shellKey = {
     header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
     footer: ["imprint", "privacy"],
+    userMenu: ["login", "logout", "viewprofile"],
   };
   const shellConfig = await getShell(locale, shellKey);
   const shell = useShell(content, shellConfig);
-
   return {
     props: { content, shell },
   };
 };
 
 export default function segments(props: IPageProps<IEntity>) {
-  const { content, shell } = props;
-  const { label } = content;
-
-  const [hediStyle, setHediStyle] = useState("");
-  const [hasHeader, setHasHeader] = useState(true);
-  useEffect(() => {
-    setHasHeader(shell.useHeader ?? true);
-  }, [shell.useHeader]);
-
-  useEffect(() => {
-    setHediStyle(shell?.appstyle ?? "");
-  }, [shell.appstyle]);
-
+  const { content } = props;
   return (
-    <div className={hediStyle}>
-      <Head>
-        <title>HEDI{label ? ` - ${label}` : null}</title>
-      </Head>
-      {hasHeader ? <Header {...shell} /> : null}
-      <Content>
+    <Shell {...props}>
+      <>
         <TryRegistration {...content} key="registration" />
         <TryProfile {...content} key="profile" />
         <TryProfileList {...content} key="profileList" />
@@ -153,9 +129,7 @@ export default function segments(props: IPageProps<IEntity>) {
         <TryUserFeedbackThanks {...content} key="userfeedback" />
         <TrySimplePage content={content} key="simplepage" />
         <TryLandingPage {...content} key="landingpage" />
-      </Content>
-      <Footer {...shell} />
-      <ScrollToTop />
-    </div>
+      </>
+    </Shell>
   );
 }

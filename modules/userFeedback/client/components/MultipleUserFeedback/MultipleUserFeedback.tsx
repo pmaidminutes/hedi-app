@@ -4,11 +4,11 @@ import { Form } from "carbon-components-react";
 import { FormEvent } from "react";
 import { clientInformationCollector } from "../../helper/ClientInformationCollector";
 
-// TODO under development
-export const MultipleUserFeedback: React.FC<{ lang: string }> = ({
-  lang,
-  children,
-}) => {
+export const MultipleUserFeedback: React.FC<{
+  lang: string;
+  onSuccess?: () => void;
+  onError?: () => void;
+}> = ({ lang, onSuccess, onError, children }) => {
   const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -40,14 +40,18 @@ export const MultipleUserFeedback: React.FC<{ lang: string }> = ({
               // TODO handle item error
             }
           }
-          if (!resp.map(respItem => !respItem.success).length) {
-            // TODO handle totally-success
+          if (!resp.filter(respItem => !respItem.success).length) {
+            if (onSuccess) onSuccess();
+          } else {
             // TODO how to handle partially succeeded mutations
+            if (onError) onError();
           }
+        } else {
+          if (onError) onError();
         }
       })
       .catch(err => {
-        // TODO handle error
+        if (onError) onError();
       });
     return false;
   };

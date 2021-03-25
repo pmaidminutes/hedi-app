@@ -1,7 +1,7 @@
 import { MapClient } from "@/modules/map/client/components";
 import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
-import { Column, Grid, Row } from "carbon-components-react";
+import { Column, Grid, Row, Button } from "carbon-components-react";
 import { Contact } from "../Contact";
 import { ProfileEntry } from "../ProfileEntry";
 import { BgImgContainer } from "@/modules/common/components";
@@ -10,6 +10,9 @@ import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
 import { IProfileViewProps, useProfile } from "./useProfile";
 import { ProfileView } from "@/modules/profile/query/getProfile";
+import { getUser } from "@/modules/auth/client";
+import { tryGetValue } from "@/modules/common/utils";
+import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
 
 const locations: Location[] = [];
 
@@ -33,7 +36,13 @@ export const Profile = (props: IProfileViewProps) => {
     mapData,
     hasServices,
   } = useProfile(props);
-  console.log(servicesData.services);
+
+  const [user, userIsLoading] = getUser();
+  const [currentProfile, currentProfileLoading] = getCurrentUserProfile(
+    user,
+    props.content.lang
+  );
+
   return (
     <>
       <BgImgContainer>
@@ -72,6 +81,16 @@ export const Profile = (props: IProfileViewProps) => {
           } as Location)
         } */}
         {/* <MapClient {...mapData} /> */}
+        {!currentProfileLoading &&
+          !userIsLoading &&
+          currentProfile &&
+          currentProfile.route == props.content.route && (
+            <Row>
+              <Button href={"/" + props.content.lang + "/user/profile/edit"}>
+                {tryGetValue("edit_button", props.content.elements)}
+              </Button>
+            </Row>
+          )}
       </Grid>
     </>
   );
