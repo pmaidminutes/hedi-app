@@ -24,6 +24,7 @@ export const UserProfileMenu = ({
   const [hasMounted, setHasMounted] = useState(false);
   const [user, loading] = getUser();
   const router = useRouter();
+  console.log(userMenuLinks, "userMenuLinksuserMenuLinksuserMenuLinks");
   const navigateMenu = (routeKey: string) => {
     if (AssertClientSide()) {
       const routePath = tryGetKeyLinks(
@@ -73,7 +74,7 @@ export const UserProfileMenu = ({
           renderIcon={Login32}
           ariaLabel="User Profile Menu"
           size="xl"
-          flipped={false}>
+          flipped={true}>
           <OverflowMenuItem
             aria-label={"Login Component"}
             onClick={() => navigateMenu("login")}
