@@ -5,7 +5,7 @@ import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
-import { IEntityLocalized, IEntityTranslated, ITyped } from "@/modules/model";
+import { IEntity } from "@/modules/model";
 import {
   TryProfile,
   TryProfileList,
@@ -15,14 +15,14 @@ import {
   MidwifePathsGQL,
   ProfileListPathsGQL,
 } from "@/modules/profile/query";
-import { getStaticProps as getProfileListViewProps } from "@/modules/profile/server/generators/getProfileListStaticProps";
+import { getProfileListPage } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { Footer, Header } from "@/modules/shell/components";
 
 import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
+import { getProfilePage } from "@/modules/profile/server/generators";
 
 // Components
 
@@ -33,7 +33,7 @@ import {
   getShellLinksGQL,
   LanguagesGQL,
 } from "@/modules/shell/query";
-import { IShellProps, IPageConfig } from "@/modules/shell/types";
+import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
@@ -79,17 +79,12 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   return { paths, fallback: "blocking" };
 };
 
-interface ISegmentPageProps {
-  content: ITyped;
-  shell: Partial<IShellProps>;
-}
-
 export const getStaticProps: GetStaticProps<
-  ISegmentPageProps,
+  IPageProps<IEntity>,
   ISegmentParam
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
-  let content: (ITyped & IPageConfig) | null = null;
+  let content: (IEntity & IPageConfig) | null = null;
 
   if (isDesignContext) {
     const data = dynamicProps?.find(
@@ -105,9 +100,8 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
-    if (!content) content = await getProfileProps(params?.segments, locale);
-    if (!content)
-      content = await getProfileListViewProps(params?.segments, locale);
+    if (!content) content = await getProfilePage(params?.segments, locale);
+    if (!content) content = await getProfileListPage(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
     if (!content)
@@ -118,22 +112,22 @@ export const getStaticProps: GetStaticProps<
   }
   if (!content) throw Error;
   // ShellStuff
-  const shellQueries = [
-    getShellLinksGQL("footer", ["imprint", "privacy"]),
-    getShellLinksGQL("header", ["imprint", "privacy"]),
-    LanguagesGQL,
-  ];
-  const { languages, ...rest } = await getShell(locale, shellQueries);
-  const shell = useShell(languages, content, rest);
+
+  const shellKey = {
+    header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
+    footer: ["imprint", "privacy"],
+  };
+  const shellConfig = await getShell(locale, shellKey);
+  const shell = useShell(content, shellConfig);
 
   return {
     props: { content, shell },
   };
 };
 
-export default function segments(props: ISegmentPageProps) {
+export default function segments(props: IPageProps<IEntity>) {
   const { content, shell } = props;
-  const { label } = content as IEntityLocalized;
+  const { label } = content;
 
   const [hediStyle, setHediStyle] = useState("");
   const [hasHeader, setHasHeader] = useState(true);

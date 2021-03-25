@@ -33,7 +33,7 @@ export const RegisterInputs = ({
         onChange={setName}
         autoComplete="off"
         invalid={!!errors?.name}
-        invalidText={errors?.name}
+        //invalidText={errors?.name}
       />
       <TextInput
         {...getTextInputProps("pass", elements)}
@@ -41,7 +41,7 @@ export const RegisterInputs = ({
         required
         onChange={setPass}
         invalid={!!errors?.pass}
-        invalidText={errors?.pass}
+        //invalidText={errors?.pass}
       />
       <Button type="submit" size="field">
         {elements.find(e => e.identifier === "submit")?.value}

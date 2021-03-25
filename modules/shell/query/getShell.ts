@@ -1,19 +1,27 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { EntityFields, IEntity, ILanguage } from "@/modules/model";
+import { LanguageSkill } from "@/modules/profile/client/components/LanguageSkills";
 import { IShell } from "../types";
+import { ShellLinkFields } from "../types/shellLinks";
+import { LanguagesGQL } from "./getLanguages";
 
 export const getShellLinksGQL = (name: string, keys: string[]) => {
   return `${name}:appPagesByKey(keys:[${keys
     .map(key => `"${key}"`)
     .join(",")}],lang: $lang) {
-    ${EntityFields}
+    ${ShellLinkFields}
   }`;
 };
 
 export async function getShell(
   lang: string = "de",
-  gqlQueries: string[]
+  // TODO besser typen
+  linkKeys: Record<string, string[]>
 ): Promise<IShell> {
+  const gqlQueries = Object.entries(linkKeys).map(([key, value]) =>
+    getShellLinksGQL(key, value)
+  );
+  gqlQueries.push(LanguagesGQL);
+
   const query = gql`
     query getShell(
         $lang: String!

@@ -27,16 +27,18 @@ export const RegisterForm = ({
   const [passcode, setPasscode] = useTextInput();
   const [info, setInfo] = useState<IRegisterInfo>();
 
-  const { response, loading, register } = useRegister();
+  const { response, loading, register, autoSignIn } = useRegister();
   const { data: codeResponse } = useValidate({ passcode });
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (codeResponse?.success && info && !loading)
+    if (codeResponse?.success && info && !loading) {
       register({ ...info, lang: router.locale, commit: true });
+    }
   };
 
   if (response?.success && codeResponse?.success) {
+    autoSignIn({ ...info });
     router.push(redirect);
   }
 

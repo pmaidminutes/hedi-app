@@ -1,3 +1,4 @@
+import { IShellLink } from "./shellLinks";
 import {
   IAppStyled,
   IEntity,
@@ -5,20 +6,20 @@ import {
   ILanguage,
 } from "@/modules/model";
 
-interface INav {
-  links?: IEntity[];
-}
-
 export interface IShellProps
   extends Partial<IAppStyled>,
-    Pick<IPageConfig, "useBreadCrumb" | "revalidate" | "useHeader"> {
+    Pick<
+      IPageConfig,
+      "needsAuth" | "useHeader" | "useBreadCrumb" | "revalidate"
+    > {
   languageSwitchLinks: IEntity[];
-  header?: INav;
-  footer?: IEntity[];
+  header?: IShellLink[];
+  footer?: IShellLink[];
 }
 
 export interface IPageConfig extends Partial<IAppStyled> {
   translations?: IEntityLocalized[];
+  needsAuth?: boolean;
   useHeader?: boolean;
   // TODO: Serverseitig
   useBreadCrumb?: boolean;
@@ -29,4 +30,9 @@ export interface IPageConfig extends Partial<IAppStyled> {
 
 export interface IShell extends Record<string, IEntity[]> {
   languages: ILanguage[];
+}
+
+export interface IPageProps<T> {
+  content: T;
+  shell: Partial<IShellProps>;
 }

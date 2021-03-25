@@ -11,3 +11,4 @@ export * from "./getOrganisationPaths";
 export * from "./getProfile";
 export * from "./getProfileListPaths";
 export * from "./getProfileList";
+export * from "./getProfileStatic";
