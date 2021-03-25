@@ -15,14 +15,14 @@ import {
   MidwifePathsGQL,
   ProfileListPathsGQL,
 } from "@/modules/profile/query";
-import { getStaticProps as getProfileListViewProps } from "@/modules/profile/server/generators/getProfileListStaticProps";
+import { getProfileListPage } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 import { Footer, Header } from "@/modules/shell/components";
 
 import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getStaticProps as getProfileProps } from "@/modules/profile/server/generators/getProfileStaticProps";
+import { getProfilePage } from "@/modules/profile/server/generators";
 
 // Components
 
@@ -100,9 +100,8 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
-    if (!content) content = await getProfileProps(params?.segments, locale);
-    if (!content)
-      content = await getProfileListViewProps(params?.segments, locale);
+    if (!content) content = await getProfilePage(params?.segments, locale);
+    if (!content) content = await getProfileListPage(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksViewProps(params?.segments, locale);
     if (!content)
