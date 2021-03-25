@@ -24,7 +24,7 @@ export const SimplePageView: React.FC<{
         />
       )}
 
-      <Grid condensed fullWidth>
+      <Grid fullWidth>
         <Row>
           {url ? (
             <Column sm={0} md={3} lg={6}>

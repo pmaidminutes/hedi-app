@@ -1,12 +1,13 @@
 .hedi--language-skills {
+    margin-bottom: $layout-sm;
 
   tr {
     display: flex;
     align-items: center;
-    padding: 1rem;
+    padding: $spacing-md;
     background-color: #fff;
     &:not(:last-child) {
-      margin-bottom: .5rem;
+      margin-bottom: $spacing-xs;
     }
     td:first-child {
       min-width: 100px;
@@ -19,4 +20,8 @@
   svg {
     color: $pink-80;
   }
+
+  h3, h4, h5 {
+    padding-bottom: $spacing-xs;
+    }
 }

@@ -1,3 +1,12 @@
 .hedi--profile-services {
-margin-top: $spacing-md;
+margin-bottom: $layout-sm;
+
+h3, h4, h5 {
+padding-bottom: $spacing-xs;
+}
+
+img {
+margin-bottom: $layout-sm;
+}
+
 }

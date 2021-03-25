@@ -1,6 +1,7 @@
-import { Row, Column, AspectRatio } from "carbon-components-react";
+import { Row, Column, Link, AspectRatio } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
 import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
+import { Launch16 } from "@carbon/icons-react";
 
 export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
   const {
@@ -23,7 +24,11 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
         <Row>
           <Column sm={4} md={2} lg={3} className="hedi--profile-entry-image">
             {/* TODO image dynamisch */}
-            <img src="/images/Profilbild_bw.png" alt="Profil Bild" style={{}} />
+            <img
+              src="/images/Profile_Person_grey70.svg"
+              alt="Profil Bild"
+              style={{}}
+            />
           </Column>
           <Column sm={4} md={6} lg={10}>
             <div className="hedi--profile-entry-content">
@@ -37,19 +42,34 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
 
               <div className="hedi--spacing">
                 <p>
-                  <a href={`tel:${phone}`} target="_blank">
+                  <Link
+                    href={`tel:${phone}`}
+                    target="_blank"
+                    title="Telefonnummer"
+                    className="bx--link--lg">
                     {phone}
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href={`mailto:${mail}`} target="_blank">
+                  <Link
+                    href={`mailto:${mail}`}
+                    target="_blank"
+                    title="E-Mail Address"
+                    className="bx--link--lg"
+                    inline>
                     {mail}
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href={website} target="_blank">
-                    {website}
-                  </a>
+                  {website ? (
+                    <Link
+                      href={website}
+                      target="_blank"
+                      title="Webseite"
+                      className="bx--link--lg">
+                      {website} <Launch16></Launch16>
+                    </Link>
+                  ) : null}
                 </p>
               </div>
               {services && services.length > 0 && (
