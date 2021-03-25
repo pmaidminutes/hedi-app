@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { getTextInputProps, tryGetValue } from "@/modules/common/utils";
 import { ProfileView } from "@/modules/profile/query";
 import { isICaregiver, isIMidwife } from "../../../types";
@@ -8,6 +8,7 @@ export interface IProfileViewProps {
 
 export function useProfile(props: IProfileViewProps) {
   const { content } = props;
+  const [hasServices, setHasServices] = useState(true);
   console.log({ content });
   const {
     languageSkills,
@@ -30,6 +31,10 @@ export function useProfile(props: IProfileViewProps) {
   const servicesHeadline = getTextInputProps("services", elements);
   const contactHeadline = getTextInputProps("office_hrs", elements);
   const relatedHeadline = getTextInputProps("linked_profile", elements);
+
+  useEffect(() => {
+    setHasServices(services.length > 0 ? true : false);
+  }, [services]);
 
   // HACK proper domain impl
   const domainMidwife = tryGetValue("midwife_label", elements, "Hebamme");
@@ -70,6 +75,7 @@ export function useProfile(props: IProfileViewProps) {
     relatedProfilesData: {
       headline: relatedHeadline,
     },
+    hasServices,
     mapData: {
       currentLocation: {
         lat,

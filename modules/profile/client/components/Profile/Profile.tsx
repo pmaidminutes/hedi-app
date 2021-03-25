@@ -31,7 +31,9 @@ export const Profile = (props: IProfileViewProps) => {
     contactData,
     relatedProfilesData,
     mapData,
+    hasServices,
   } = useProfile(props);
+  console.log(servicesData.services);
   return (
     <>
       <BgImgContainer>
@@ -39,9 +41,11 @@ export const Profile = (props: IProfileViewProps) => {
       </BgImgContainer>
       <Grid fullWidth={true}>
         <Row>
-          <Column lg={6}>
-            <Services {...servicesData} />
-          </Column>
+          {hasServices ? (
+            <Column lg={6}>
+              <Services {...servicesData} />
+            </Column>
+          ) : null}
           <Column lg={6}>
             <Contact {...contactData} />
           </Column>
