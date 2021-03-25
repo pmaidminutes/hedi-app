@@ -26,33 +26,36 @@ export const MultipleUserFeedback: React.FC<{
     const entriesToSend: UserFeedbackInput[] = [];
     for (const key in entryGroups) {
       if (Object.prototype.hasOwnProperty.call(entryGroups, key)) {
-        entriesToSend.push({ metadata, ...entryGroups[key] });
+        if (entryGroups[key].body)
+          entriesToSend.push({ metadata, ...entryGroups[key] });
       }
     }
-    sendUserFeedbacks(entriesToSend, lang)
-      .then(resp => {
-        if (resp && resp.length == entriesToSend.length) {
-          for (let index = 0; index < resp.length; index++) {
-            const itemResult = resp[index];
-            if (itemResult.success) {
-              // TODO handle item success
-            } else {
-              // TODO handle item error
+    if (entriesToSend.length) {
+      sendUserFeedbacks(entriesToSend, lang)
+        .then(resp => {
+          if (resp && resp.length == entriesToSend.length) {
+            for (let index = 0; index < resp.length; index++) {
+              const itemResult = resp[index];
+              if (itemResult.success) {
+                // TODO handle item success
+              } else {
+                // TODO handle item error
+              }
             }
-          }
-          if (!resp.filter(respItem => !respItem.success).length) {
-            if (onSuccess) onSuccess();
+            if (!resp.filter(respItem => !respItem.success).length) {
+              if (onSuccess) onSuccess();
+            } else {
+              // TODO how to handle partially succeeded mutations
+              if (onError) onError();
+            }
           } else {
-            // TODO how to handle partially succeeded mutations
             if (onError) onError();
           }
-        } else {
+        })
+        .catch(err => {
           if (onError) onError();
-        }
-      })
-      .catch(err => {
-        if (onError) onError();
-      });
+        });
+    }
     return false;
   };
 
