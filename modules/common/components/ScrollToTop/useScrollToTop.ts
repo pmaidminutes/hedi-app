@@ -20,8 +20,8 @@ export function useScrollToTop({
   };
 
   const router = useRouter();
-  const { locale } = router
-  
+  const { locale } = router;
+
   const buttonText = locale === "de" ? "nach oben" : "back to top";
 
   const handleScroll = () => {
@@ -42,6 +42,6 @@ export function useScrollToTop({
   return {
     buttonText,
     isVisible,
-    handleRouteChangeComplete
+    handleRouteChangeComplete,
   };
 }

@@ -1,10 +1,17 @@
-import { IAppStyled, IEntity, IEntityLocalized, ILanguage } from "@/modules/model";
+import {
+  IAppStyled,
+  IEntity,
+  IEntityLocalized,
+  ILanguage,
+} from "@/modules/model";
 
 interface INav {
   links?: IEntity[];
 }
 
-export interface IShellProps extends Partial<IAppStyled>, Pick<IPageConfig, "useBreadCrumb" | "revalidate" | "useHeader"> {
+export interface IShellProps
+  extends Partial<IAppStyled>,
+    Pick<IPageConfig, "useBreadCrumb" | "revalidate" | "useHeader"> {
   languageSwitchLinks: IEntity[];
   header?: INav;
   footer?: IEntity[];

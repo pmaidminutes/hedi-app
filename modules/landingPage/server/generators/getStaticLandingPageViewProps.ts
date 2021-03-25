@@ -13,6 +13,6 @@ export const getStaticProps = async (
   );
 
   if (!content) return null;
-  const pageConfig = { useHeader: false};
+  const pageConfig = { useHeader: false };
   return { ...content, ...pageConfig };
 };

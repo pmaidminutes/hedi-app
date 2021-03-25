@@ -1,9 +1,9 @@
-import { tryGetValue } from "@/modules/common/utils";
+import { tryGetRedirect, tryGetValue } from "@/modules/common/utils";
+import { useLoginView } from "@/modules/login/hooks";
 import { useTextInput } from "@/modules/react/hooks";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import {
-  SkipBack20, ArrowLeft16} from "@carbon/icons-react";
+import { SkipBack20, ArrowLeft16 } from "@carbon/icons-react";
 import { Button, Column } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -26,6 +26,7 @@ export const RegistrationView = ({
   //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
   const router = useRouter();
+  useLoginView(tryGetRedirect("redirect", content.elements, content.links));
   useEffect(() => {
     if (onChange && (name || pass)) {
       onChange({ name, pass });
@@ -37,8 +38,11 @@ export const RegistrationView = ({
       alt="Beschreibung des Bildes"
       content={content}>
       <Column lg={8} md={6}>
-      <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
-        <RegisterForm elements={content.elements} />
+        <HTMLWithNextImage data={tryGetValue("body", content.elements, "")} />
+        <RegisterForm
+          elements={content.elements}
+          redirect={tryGetRedirect("success", content.elements, content.links)}
+        />
         <Button
           tooltip={tryGetValue("back", content.elements)}
           renderIcon={ArrowLeft16}
