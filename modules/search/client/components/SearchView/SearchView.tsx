@@ -204,7 +204,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                     }
                     return (
                       <ProfileEntry
-                        profile={entry}
+                        {...entry} // HACK, just done to get it building, validate
                         key={entry.route + locale}
                       />
                     );
