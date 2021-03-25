@@ -24,7 +24,6 @@ export const UserProfileMenu = ({
   const [hasMounted, setHasMounted] = useState(false);
   const [user, loading] = getUser();
   const router = useRouter();
-  console.log(userMenuLinks, "userMenuLinksuserMenuLinksuserMenuLinks");
   const navigateMenu = (routeKey: string) => {
     if (AssertClientSide()) {
       const routePath = tryGetKeyLinks(
