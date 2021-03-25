@@ -31,7 +31,7 @@ export async function getUserFeedbackStatic(
       $lang: String!
       $includeSelf: Boolean
     ) {
-      subPages: appPagesByKey(keys: ["userfeedback_languages","userfeedback_contact_freetimes","userfeedback_usage","userfeedback_profile","userfeedback_activities","userfeedback_summary"], lang: $lang) {
+      subPages: appPagesByKey(keys: ["userfeedback_languages","userfeedback_contact_freetimes","userfeedback_usage","userfeedback_profile","userfeedback_activities","userfeedback_summary","userfeedbackThanks"], lang: $lang) {
         ${AppPageFields}
       }
     }
