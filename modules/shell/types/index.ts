@@ -30,3 +30,8 @@ export interface IPageConfig extends Partial<IAppStyled> {
 export interface IShell extends Record<string, IEntity[]> {
   languages: ILanguage[];
 }
+
+export interface IPageProps<T> {
+  content: T;
+  shell: Partial<IShellProps>;
+}

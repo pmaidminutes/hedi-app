@@ -5,7 +5,7 @@ import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
-import { IEntityLocalized, IEntityTranslated, ITyped } from "@/modules/model";
+import { IEntity } from "@/modules/model";
 import {
   TryProfile,
   TryProfileList,
@@ -33,7 +33,7 @@ import {
   getShellLinksGQL,
   LanguagesGQL,
 } from "@/modules/shell/query";
-import { IShellProps, IPageConfig } from "@/modules/shell/types";
+import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
@@ -79,17 +79,12 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   return { paths, fallback: "blocking" };
 };
 
-interface ISegmentPageProps {
-  content: ITyped;
-  shell: Partial<IShellProps>;
-}
-
 export const getStaticProps: GetStaticProps<
-  ISegmentPageProps,
+  IPageProps<IEntity>,
   ISegmentParam
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
-  let content: (ITyped & IPageConfig) | null = null;
+  let content: (IEntity & IPageConfig) | null = null;
 
   if (isDesignContext) {
     const data = dynamicProps?.find(
@@ -131,9 +126,9 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default function segments(props: ISegmentPageProps) {
+export default function segments(props: IPageProps<IEntity>) {
   const { content, shell } = props;
-  const { label } = content as IEntityLocalized;
+  const { label } = content;
 
   const [hediStyle, setHediStyle] = useState("");
   const [hasHeader, setHasHeader] = useState(true);
