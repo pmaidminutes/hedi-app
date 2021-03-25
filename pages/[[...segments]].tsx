@@ -114,6 +114,7 @@ export const getStaticProps: GetStaticProps<
   const shell = useShell(content, shellConfig);
   return {
     props: { content, shell },
+    revalidate: content.revalidate,
   };
 };
 
