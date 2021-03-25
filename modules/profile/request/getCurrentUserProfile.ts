@@ -13,7 +13,7 @@ export function getCurrentUserProfile(
   useEffect(() => {
     const requestHasFeedback = async () => {
       setLoading(true);
-      const resp = await getCurrentProfile("/api/user/currentProfile", {
+      const resp = await getCurrentProfile("/api/user/profile", {
         lang,
       });
       if (resp) setProfile(resp);
