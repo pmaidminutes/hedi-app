@@ -12,6 +12,7 @@ import {
   Row,
 } from "carbon-components-react";
 import { useEffect } from "react";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 
 export const UserFeedback = ({
   content,
@@ -32,25 +33,28 @@ export const UserFeedback = ({
   if (!currentProfileIsLoading && (!currentProfile || !currentProfile.route)) {
     const noProfileElement = tryGet("no_profile", content.elements);
     return (
-      <Row>
-        <Column>
-          <ButtonSet stacked>
-            <FormLabel>{noProfileElement?.description}</FormLabel>
-            <Button href={"/" + locale + "/user/profile/edit"}>
-              {noProfileElement?.value}
-            </Button>
-          </ButtonSet>
-        </Column>
-      </Row>
+      <SimplePageView content={content}>
+        <Row>
+          <Column>
+            <ButtonSet stacked>
+              <FormLabel>{noProfileElement?.description}</FormLabel>
+              <Button href={"/" + locale + "/user/profile/edit"}>
+                {noProfileElement?.value}
+              </Button>
+            </ButtonSet>
+          </Column>
+        </Row>
+      </SimplePageView>
     );
   }
 
   return currentProfile ? (
-    <UserFeedbackForm
-      content={content}
-      locale={locale}
-      className="hedi--user-feedback"
-      profile={currentProfile}
-    />
+    <SimplePageView content={content}>
+      <UserFeedbackForm
+        content={content}
+        locale={locale}
+        profile={currentProfile}
+      />
+    </SimplePageView>
   ) : null;
 };

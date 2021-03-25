@@ -20,7 +20,6 @@ import { tryGet } from "@/modules/common/utils";
 interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
   locale: string;
-  className: string;
   profile: ProfileView;
 }
 
@@ -29,7 +28,6 @@ const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
 export default function UserFeedbackForm({
   content,
   locale,
-  className,
   profile,
 }: IUserFeedbackFormProps) {
   const router = useRouter();
@@ -61,82 +59,73 @@ export default function UserFeedbackForm({
     );
 
   return (
-    <div className={className}>
-      <MultipleUserFeedback
-        lang={locale}
-        onSuccess={onSuccess}
-        onError={onError}>
-        <h1>{content.longTitle ?? content.label}</h1>
-        <Row>
-          <Column lg={6} sm={12}>
-            <BgImgContainer>
-              <ProfileEntry {...profileEntryData} />
-            </BgImgContainer>
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_profile", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={6} sm={12}>
-            <Services {...servicesData} />
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_activities", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={6} sm={12}>
-            <Contact {...contactData} />
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage(
-                "userfeedback_contact_freetimes",
-                content.subPages
-              )}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={6} sm={12}>
-            <LanguageSkills {...languagesData} />
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_languages", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_usage", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_summary", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <UserFeedbackSendbox
-          elements={content.elements}
-          errorMessage={errorMessage}
-          successMessage={successMessage}
-        />
-      </MultipleUserFeedback>
-    </div>
+    <MultipleUserFeedback lang={locale} onSuccess={onSuccess} onError={onError}>
+      <Row>
+        <Column lg={6} sm={12}>
+          <BgImgContainer>
+            <ProfileEntry {...profileEntryData} />
+          </BgImgContainer>
+        </Column>
+        <Column lg={6} sm={12}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_profile", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column lg={6} sm={12}>
+          <Services {...servicesData} />
+        </Column>
+        <Column lg={6} sm={12}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_activities", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column lg={6} sm={12}>
+          <Contact {...contactData} />
+        </Column>
+        <Column lg={6} sm={12}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_contact_freetimes", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column lg={6} sm={12}>
+          <LanguageSkills {...languagesData} />
+        </Column>
+        <Column lg={6} sm={12}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_languages", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column lg={12}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_usage", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column lg={12}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_summary", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <UserFeedbackSendbox
+        elements={content.elements}
+        errorMessage={errorMessage}
+        successMessage={successMessage}
+      />
+    </MultipleUserFeedback>
   );
 }
