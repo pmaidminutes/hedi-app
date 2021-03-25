@@ -6,6 +6,42 @@ $roboto-slab: 'Roboto Slab', serif;
 @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
 $roboto-mono: 'Roboto Mono', monospace;
 
+/* 
+  @font-face {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 300;
+    src: url('/fonts/Roboto/Roboto-Light.ttf') format('truetype');
+  }
+
+  @font-face {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    src: url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
+    }
+
+  @font-face {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+    src: url('/fonts/Roboto/Roboto-Medium.ttf') format('truetype');
+  }
+  $roboto: 'Roboto', sans-serif;
+
+
+  @font-face {
+    font-weight: 300  500;
+    font-family: 'Roboto Slab', serif;
+    src: url('/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
+    }
+    $roboto-slab: 'Roboto Slab', serif;
+
+ @font-face {
+    font-weight: 300 500;
+    font-family: 'Roboto Mono', monospace;
+    src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
+     }
+ $roboto-mono: 'Roboto Mono', monospace; */
+
+
 @mixin theme-fonts {
   $carbon--font-families: (
     'mono': $roboto-mono,

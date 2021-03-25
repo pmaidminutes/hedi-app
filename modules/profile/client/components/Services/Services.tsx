@@ -9,7 +9,7 @@ export const Services = (props: IServicesProps) => {
       <section className="hedi--profile-services hedi--profile--tile">
         <Tile>
           {/* TODO import as svg, alt*/}
-          <img src="/images/Baby_Hand_blue.svg" alt="" />
+          <img src="/images/Baby_Hand_pink80.svg" alt="" />
           <TagList
             tags={services}
             headline={headline}
