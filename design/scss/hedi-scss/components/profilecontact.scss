@@ -1,5 +1,9 @@
 .hedi--profile-contact {
-margin-top: $spacing-md;
+margin-bottom: $layout-sm;
+
+img {
+    margin-bottom: $layout-sm;
+    }
 
 address {
 padding-bottom: $spacing-sm;
@@ -9,5 +13,13 @@ padding-bottom: $spacing-sm;
 padding-top: $spacing-sm;
 }
 
+h3, h4, h5 {
+padding-bottom: $spacing-xs;
+}
+
+// set launch Icon down.
+// svg {
+// margin-bottom: -2px;
+// }
 
 }
