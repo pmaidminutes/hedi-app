@@ -1,4 +1,5 @@
 import { IEntity, IUIElementTexts } from "@/modules/model";
+import { IShellLink } from "@/modules/shell/types/shellLinks";
 import { TextInputProps } from "carbon-components-react";
 
 export const hasElement = (identifier: string, elements?: IUIElementTexts[]) =>
@@ -45,8 +46,14 @@ export const getTextInputProps = (
     "aria-label": element?.description,
   };
 };
+export const tryGetKeyLabel = (
+  key: string,
+  links?: IShellLink[],
+  fallback?: string
+): string => links?.find(item => item.key === key)?.label ?? fallback ?? "/";
+
 export const tryGetKeyLinks = (
   key: string,
-  links?: (IEntity & { key: string })[],
+  links?: IShellLink[],
   fallback?: string
 ): string => links?.find(item => item.key === key)?.label ?? fallback ?? key;

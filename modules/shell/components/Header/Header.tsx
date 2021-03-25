@@ -62,10 +62,7 @@ export const Header = (props: IHeader) => {
         {languageSwitchLinks !== undefined ? (
           <LanguageSwitch links={languageSwitchLinks} />
         ) : null}
-        <UserProfileMenu
-          userMenuLinks={userMenuLinks}
-          headerLinks={headerLinks}
-        />
+        <UserProfileMenu userMenuLinks={userMenuLinks} />
       </HeaderGlobalBar>
       <SideNav
         aria-label="Side navigation"

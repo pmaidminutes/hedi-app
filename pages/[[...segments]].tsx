@@ -116,7 +116,7 @@ export const getStaticProps: GetStaticProps<
   const shellKey = {
     header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
     footer: ["imprint", "privacy"],
-    userMenu: ["login", "logout"],
+    userMenu: ["login", "logout", "viewprofile"],
   };
   const shellConfig = await getShell(locale, shellKey);
   const shell = useShell(content, shellConfig);
