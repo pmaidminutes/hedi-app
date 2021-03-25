@@ -1,6 +1,7 @@
-import { Row, Column, AspectRatio } from "carbon-components-react";
+import { Row, Column, Link, AspectRatio } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
 import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
+import { Launch16 } from "@carbon/icons-react";
 
 export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
   const {
@@ -37,19 +38,32 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
 
               <div className="hedi--spacing">
                 <p>
-                  <a href={`tel:${phone}`} target="_blank">
+                  <Link
+                    href={`tel:${phone}`}
+                    target="_blank"
+                    title="Telefonnummer"
+                    className="bx--link--lg">
                     {phone}
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href={`mailto:${mail}`} target="_blank">
+                  <Link
+                    href={`mailto:${mail}`}
+                    target="_blank"
+                    title="E-Mail Address"
+                    className="bx--link--lg"
+                    inline>
                     {mail}
-                  </a>
+                  </Link>
                 </p>
                 <p>
-                  <a href={website} target="_blank">
-                    {website}
-                  </a>
+                  <Link
+                    href={website}
+                    target="_blank"
+                    title="Webseite"
+                    className="bx--link--lg">
+                    {website} <Launch16></Launch16>
+                  </Link>
                 </p>
               </div>
               {services && services.length > 0 && (

@@ -1,5 +1,6 @@
 import { IContactProps, useContact } from "./useContact";
 import { Tile, Link } from "carbon-components-react";
+import { Launch16 } from "@carbon/icons-react";
 
 export const Contact = (props: IContactProps): JSX.Element => {
   const {
@@ -53,9 +54,8 @@ export const Contact = (props: IContactProps): JSX.Element => {
             href={website}
             target="_blank"
             title="Webseite"
-            className="bx--link--lg"
-            inline>
-            {website}
+            className="bx--link--lg">
+            {website} <Launch16></Launch16>
           </Link>
         </p>
         <div className="hedi--consultation-hours-wrapper">
