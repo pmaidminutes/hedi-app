@@ -1,5 +1,5 @@
 .hedi--profile-contact {
-margin-top: $spacing-md;
+margin-bottom: $layout-sm;
 
 address {
 padding-bottom: $spacing-sm;
@@ -7,6 +7,10 @@ padding-bottom: $spacing-sm;
    
 .hedi--consultation-hours-wrapper {
 padding-top: $spacing-sm;
+}
+
+h3, h4, h5 {
+padding-bottom: $spacing-xs;
 }
 
 
