@@ -1,12 +1,7 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { getLangByRoute } from "@/modules/common/utils";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 
-export async function getProfileStatic(
-  route: string
-): Promise<IAppPage | null> {
-  const lang = getLangByRoute(route);
-
+export async function getProfileStatic(lang: string): Promise<IAppPage | null> {
   const client = await getServiceClient(GQLEndpoint.Internal);
   const query = gql`
     query getProfileStatic(
