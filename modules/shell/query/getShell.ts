@@ -1,12 +1,12 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { EntityFields, IEntity, ILanguage } from "@/modules/model";
 import { IShell } from "../types";
+import { ShellLinkFields } from "../types/shellLinks";
 
 export const getShellLinksGQL = (name: string, keys: string[]) => {
   return `${name}:appPagesByKey(keys:[${keys
     .map(key => `"${key}"`)
     .join(",")}],lang: $lang) {
-    ${EntityFields}
+    ${ShellLinkFields}
   }`;
 };
 
