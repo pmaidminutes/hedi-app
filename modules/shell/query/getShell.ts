@@ -9,6 +9,7 @@ export const getShellLinksGQL = (name: string, keys: string[]) => {
     .map(key => `"${key}"`)
     .join(",")}],lang: $lang) {
     ${ShellLinkFields}
+    key
   }`;
 };
 

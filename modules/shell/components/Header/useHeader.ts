@@ -6,6 +6,12 @@ export function useHeader({
   appstyle = "hedi-category-color--default",
   languageSwitchLinks,
   header,
+  userMenu,
 }: IHeader) {
-  return { appstyle, languageSwitchLinks, headerLinks: header };
+  return {
+    appstyle,
+    languageSwitchLinks,
+    headerLinks: header,
+    userMenuLinks: userMenu,
+  };
 }
