@@ -13,10 +13,10 @@ import {
 } from "@/modules/common/utils";
 import { useRouter } from "next/router";
 import { IShellLink } from "../../types/shellLinks";
+import { signOut } from "next-auth/client";
 
 export interface IUserMenuProps {
   userMenuLinks?: IShellLink[];
-  headerLinks?: IShellLink[];
 }
 export const UserProfileMenu = ({
   userMenuLinks,
@@ -33,6 +33,14 @@ export const UserProfileMenu = ({
       );
       router.push(routePath);
     }
+  };
+  const logoutUser = () => {
+    const callbackRoute = tryGetKeyLinks(
+      "logout",
+      userMenuLinks,
+      "/" + router.locale
+    );
+    signOut({ callbackUrl: callbackRoute });
   };
   useEffect(() => {
     setHasMounted(true);
@@ -63,10 +71,7 @@ export const UserProfileMenu = ({
             aria-label={"Logout Component"}
             itemText={tryGetKeyLabel("logout", userMenuLinks)}
             hasDivider={false}
-            onClick={() => {
-              logout;
-              navigateMenu("logout");
-            }}></OverflowMenuItem>
+            onClick={() => logoutUser()}></OverflowMenuItem>
         </OverflowMenu>
       ) : (
         <OverflowMenu
