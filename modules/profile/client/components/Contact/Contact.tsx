@@ -50,13 +50,15 @@ export const Contact = (props: IContactProps): JSX.Element => {
           </Link>
         </p>
         <p>
-          <Link
-            href={website}
-            target="_blank"
-            title="Webseite"
-            className="bx--link--lg">
-            {website} <Launch16></Launch16>
-          </Link>
+          {website ? (
+            <Link
+              href={website}
+              target="_blank"
+              title="Webseite"
+              className="bx--link--lg">
+              {website} <Launch16></Launch16>
+            </Link>
+          ) : null}
         </p>
         <div className="hedi--consultation-hours-wrapper">
           {consultation_hours ? (
