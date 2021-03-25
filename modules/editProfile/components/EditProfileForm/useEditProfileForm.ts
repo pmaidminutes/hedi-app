@@ -9,12 +9,10 @@ import {
 import { upsertProfile } from "../../request";
 
 export function useEditProfileForm(lang: string) {
-  const {
-    data,
-    error,
-    isValidating,
-    mutate,
-  } = useSWR("/api/account/editProfile", url => upsertProfile(url, { lang }));
+  const { data, error, isValidating, mutate } = useSWR(
+    "/api/user/profile/edit",
+    url => upsertProfile(url, { lang })
+  );
 
   const onSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
@@ -37,9 +35,7 @@ export function useEditProfileForm(lang: string) {
     });
     if (Object.keys(delta).length > 0) {
       mutate({ success: false, profile: profileData }, false); //optimistic
-      mutate(
-        upsertProfile("/api/account/editProfile", { profile: delta, lang })
-      );
+      mutate(upsertProfile("/api/user/profile/edit", { profile: delta, lang }));
     }
   };
 
