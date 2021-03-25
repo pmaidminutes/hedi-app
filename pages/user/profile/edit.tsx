@@ -1,50 +1,45 @@
-import { Footer, Header } from "@/modules/shell/components";
-import { EditProfile } from "@/modules/editProfile/components";
-import { getEditProfileStatic } from "@/modules/editProfile/query";
+import React from "react";
+import { GetStaticProps } from "next/types";
 
-import { Content } from "carbon-components-react";
-import Head from "next/head";
-// Types
-import { GetStaticPaths, GetStaticProps } from "next/types";
+import { IPageProps } from "@/modules/shell/types";
+import { getShell } from "@/modules/shell/query";
+import { useShell } from "@/modules/shell/hooks";
+import { Shell } from "@/modules/shell/components";
+
 import { IEditProfileView } from "@/modules/editProfile/types";
+import { getEditProfileStatic } from "@/modules/editProfile/query";
+import { EditProfile } from "@/modules/editProfile/components";
 
-interface IShellProps {
-  // TODO: to be implemented
-  // header?: IHeaderProps
-  // footer?: IFooter
-}
+export const getStaticProps: GetStaticProps<
+  IPageProps<IEditProfileView>
+> = async ({ locale }) => {
+  const shellKeys = {
+    header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
+    footer: ["imprint", "privacy"],
+  };
 
-interface IEditProfilePageProps {
-  content: IEditProfileView;
-  shell: IShellProps;
-}
+  const [content, shellConfig] = await Promise.all([
+    getEditProfileStatic(locale ?? "de"),
+    getShell(locale, shellKeys),
+  ]);
 
-export const getStaticProps: GetStaticProps<IEditProfilePageProps> = async ({
-  locale,
-}) => {
-  const content = await getEditProfileStatic(locale ?? "de");
   if (!content) {
     console.error("err");
     throw Error();
   }
 
+  const shell = useShell(content, shellConfig);
+
   return {
-    props: { content, shell: {} },
+    props: { content, shell },
   };
 };
 
-export default function segments(props: IEditProfilePageProps) {
+export default function segments(props: IPageProps<IEditProfileView>) {
   const { content } = props;
   return (
-    <div>
-      <Head>
-        <title>HEDI - {content.label}</title>
-      </Head>
-      <Header {...content} />
-      <Content>
-        <EditProfile content={content as IEditProfileView} />
-      </Content>
-      <Footer />
-    </div>
+    <Shell {...props}>
+      <EditProfile content={content as IEditProfileView} />
+    </Shell>
   );
 }
