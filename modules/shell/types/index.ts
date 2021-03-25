@@ -1,13 +1,10 @@
+import { IShellLink } from "./shellLinks";
 import {
   IAppStyled,
   IEntity,
   IEntityLocalized,
   ILanguage,
 } from "@/modules/model";
-
-interface INav {
-  links?: IEntity[];
-}
 
 export interface IShellProps
   extends Partial<IAppStyled>,
@@ -16,8 +13,8 @@ export interface IShellProps
       "needsAuth" | "useHeader" | "useBreadCrumb" | "revalidate"
     > {
   languageSwitchLinks: IEntity[];
-  header?: INav;
-  footer?: IEntity[];
+  header?: IShellLink[];
+  footer?: IShellLink[];
 }
 
 export interface IPageConfig extends Partial<IAppStyled> {
