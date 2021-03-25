@@ -24,7 +24,11 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
         <Row>
           <Column sm={4} md={2} lg={3} className="hedi--profile-entry-image">
             {/* TODO image dynamisch */}
-            <img src="/images/Profilbild_bw.png" alt="Profil Bild" style={{}} />
+            <img
+              src="/images/Profile_Person_grey70.svg"
+              alt="Profil Bild"
+              style={{}}
+            />
           </Column>
           <Column sm={4} md={6} lg={10}>
             <div className="hedi--profile-entry-content">
