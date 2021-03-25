@@ -114,7 +114,12 @@ export const getStaticProps: GetStaticProps<
   // ShellStuff
   const shellQueries = [
     getShellLinksGQL("footer", ["imprint", "privacy"]),
-    getShellLinksGQL("header", ["imprint", "privacy"]),
+    getShellLinksGQL("header", [
+      "editprofile",
+      "viewprofile",
+      "profiles",
+      "userfeedback",
+    ]),
     LanguagesGQL,
   ];
   const { languages, ...rest } = await getShell(locale, shellQueries);
