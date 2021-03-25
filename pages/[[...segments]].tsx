@@ -112,19 +112,14 @@ export const getStaticProps: GetStaticProps<
   }
   if (!content) throw Error;
   // ShellStuff
-  const shellQueries = [
-    getShellLinksGQL("footer", ["imprint", "privacy"]),
-    getShellLinksGQL("header", [
-      "imprint",
-      "privacy",
-      "login",
-      "logout",
-      "editprofile",
-    ]),
-    LanguagesGQL,
-  ];
-  const { languages, ...rest } = await getShell(locale, shellQueries);
-  const shell = useShell(languages, content, rest);
+
+  const shellKey = {
+    header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
+    footer: ["imprint", "privacy"],
+    userMenu: ["login", "logout"],
+  };
+  const shellConfig = await getShell(locale, shellKey);
+  const shell = useShell(content, shellConfig);
   return {
     props: { content, shell },
   };

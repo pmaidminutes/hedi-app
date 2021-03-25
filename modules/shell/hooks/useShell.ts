@@ -1,11 +1,12 @@
 import { setProperty } from "@/modules/common/utils";
 import { IEntity, IEntityLocalized, ILanguage } from "@/modules/model";
-import { IPageConfig, IShellProps } from "../types";
+import { IPageConfig, IShell, IShellProps } from "../types";
 
 export function useShell(
-  languages: ILanguage[],
   content: IPageConfig,
-  links: Record<string, IEntity[]>
+  shellConfig: IShell
+  // languages: ILanguage[],
+  // links: Record<string, IEntity[]>
 ): IShellProps {
   const {
     translations,
@@ -14,6 +15,7 @@ export function useShell(
     revalidate,
     useHeader,
   } = content;
+  const { languages, ...links } = shellConfig;
 
   // TODO type?
   let shell = {} as any;
