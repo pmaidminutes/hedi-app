@@ -114,12 +114,17 @@ export const getStaticProps: GetStaticProps<
   // ShellStuff
   const shellQueries = [
     getShellLinksGQL("footer", ["imprint", "privacy"]),
-    getShellLinksGQL("header", ["imprint", "privacy"]),
+    getShellLinksGQL("header", [
+      "imprint",
+      "privacy",
+      "login",
+      "logout",
+      "editprofile",
+    ]),
     LanguagesGQL,
   ];
   const { languages, ...rest } = await getShell(locale, shellQueries);
   const shell = useShell(languages, content, rest);
-
   return {
     props: { content, shell },
   };

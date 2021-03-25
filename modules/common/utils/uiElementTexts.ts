@@ -45,3 +45,8 @@ export const getTextInputProps = (
     "aria-label": element?.description,
   };
 };
+export const tryGetKeyLinks = (
+  key: string,
+  links?: (IEntity & { key: string })[],
+  fallback?: string
+): string => links?.find(item => item.key === key)?.label ?? fallback ?? key;

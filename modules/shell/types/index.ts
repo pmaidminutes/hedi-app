@@ -6,7 +6,7 @@ import {
 } from "@/modules/model";
 
 interface INav {
-  links?: IEntity[];
+  links?: (IEntity & { key: string })[];
 }
 
 export interface IShellProps

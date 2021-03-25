@@ -12,17 +12,13 @@ import { UserProfileMenu } from "../UserProfileMenu";
 import Logo from "./assets/hedi_logo_single_new.svg";
 
 export const Header = (props: IHeader) => {
-  const { appstyle, languageSwitchLinks } = useHeader(props);
+  const { header, appstyle, languageSwitchLinks } = useHeader(props);
   const router = useRouter();
   const { locale } = router;
 
   return (
     <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
       <HeaderName prefix="" href={`/${locale}`}>
-        {/* <img
-          src="/images/hedi_logos/hedi_logo_single.svg"
-          alt="HEDI Logo"
-        /> */}
         <Logo />
       </HeaderName>
       <HeaderGlobalBar>
@@ -30,7 +26,7 @@ export const Header = (props: IHeader) => {
         {languageSwitchLinks !== undefined ? (
           <LanguageSwitch links={languageSwitchLinks} />
         ) : null}
-        <UserProfileMenu />
+        <UserProfileMenu headerLinks={header} />
       </HeaderGlobalBar>
     </CarbonHeader>
   );
