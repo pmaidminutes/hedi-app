@@ -46,6 +46,9 @@ export const EditProfileForm = ({
   const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
     profile?.type
   );
+
+  // TODO check submitted + success state to show a successfully saved toast
+
   return (
     <Form {...formProps}>
       {errors?.generic && (
