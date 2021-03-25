@@ -46,6 +46,8 @@ export const EditProfileForm = ({
     profile?.type
   );
 
+  // TODO check submitted + success state to show a successfully saved toast
+
   return (
     <Form {...formProps}>
       {errors?.generic && (

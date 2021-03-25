@@ -1,43 +1,44 @@
 import { GetStaticProps } from "next";
+
+import { IPageProps } from "@/modules/shell/types";
+import { getShell } from "@/modules/shell/query";
+import { useShell } from "@/modules/shell/hooks";
+import { Shell } from "@/modules/shell/components";
+
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { getUserFeedbackStatic } from "@/modules/userFeedback/query";
-import { Footer, Header } from "@/modules/shell/components";
+import { UserFeedback } from "@/modules/userFeedback/client/components";
 
-import { Content } from "carbon-components-react";
-import Head from "next/head";
-import { UserFeedback } from "@/modules/userFeedback/client/components/UserFeedback/UserFeedback";
+export const getStaticProps: GetStaticProps<
+  IPageProps<IUserFeedbackView>
+> = async ({ locale }) => {
+  const shellKeys = {
+    header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
+    footer: ["imprint", "privacy"],
+  };
 
-interface IUserFeedbackProps {
-  content: IUserFeedbackView;
-  locale: string;
-}
+  const [content, shellConfig] = await Promise.all([
+    getUserFeedbackStatic(locale ?? "de"),
+    getShell(locale, shellKeys),
+  ]);
 
-export const getStaticProps: GetStaticProps<IUserFeedbackProps> = async ({
-  locale,
-}) => {
-  locale = locale ?? "de";
-  const content = await getUserFeedbackStatic(locale);
   if (!content) {
     console.error("err");
     throw Error();
   }
 
+  const shell = useShell(content, shellConfig);
+
   return {
-    props: { content, locale: locale },
+    props: { content, shell },
   };
 };
 
-export default function userfeedback({ content, locale }: IUserFeedbackProps) {
+export default function userfeedback(props: IPageProps<IUserFeedbackView>) {
+  const { content } = props;
   return (
-    <div>
-      <Head>
-        <title>HEDI - {content.label}</title>
-      </Head>
-      <Header {...content} />
-      <Content>
-        <UserFeedback content={content} locale={locale} />
-      </Content>
-      <Footer />
-    </div>
+    <Shell {...props}>
+      <UserFeedback content={content} locale={content.lang} />
+    </Shell>
   );
 }

@@ -15,6 +15,7 @@ export interface IShellProps
   languageSwitchLinks: IEntity[];
   header?: IShellLink[];
   footer?: IShellLink[];
+  userMenu?: IShellLink[];
 }
 
 export interface IPageConfig extends Partial<IAppStyled> {
