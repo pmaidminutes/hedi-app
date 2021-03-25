@@ -7,7 +7,8 @@ import { clientInformationCollector } from "../../helper/ClientInformationCollec
 export const MultipleUserFeedback: React.FC<{
   lang: string;
   onSuccess?: () => void;
-}> = ({ lang, onSuccess, children }) => {
+  onError?: () => void;
+}> = ({ lang, onSuccess, onError, children }) => {
   const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -40,14 +41,17 @@ export const MultipleUserFeedback: React.FC<{
             }
           }
           if (!resp.filter(respItem => !respItem.success).length) {
-            // TODO handle totally-success
-            // TODO how to handle partially succeeded mutations
             if (onSuccess) onSuccess();
+          } else {
+            // TODO how to handle partially succeeded mutations
+            if (onError) onError();
           }
+        } else {
+          if (onError) onError();
         }
       })
       .catch(err => {
-        // TODO handle error
+        if (onError) onError();
       });
     return false;
   };
