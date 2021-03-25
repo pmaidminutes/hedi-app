@@ -29,6 +29,7 @@ export const LanguageSkillsSelection = ({
     languageSkillEntries,
     handleAddClick,
     handleRemoveClick,
+    isMobileContext,
   } = useLanguageSkillsSelection(data);
   return (
     <Table>
@@ -42,6 +43,7 @@ export const LanguageSkillsSelection = ({
           </TableHeader>
           <TableHeader>
             <Button
+              hasIconOnly={isMobileContext}
               kind="tertiary"
               renderIcon={Add32}
               iconDescription={tryGetValue(
@@ -50,7 +52,13 @@ export const LanguageSkillsSelection = ({
                 "weitere Hinzufügen"
               )}
               onClick={handleAddClick}>
-              {tryGetValue("add-languageSkill", config.elements, "Hinzufügen")}
+              {!isMobileContext
+                ? tryGetValue(
+                    "add-languageSkill",
+                    config.elements,
+                    "Hinzufügen"
+                  )
+                : null}
             </Button>
           </TableHeader>
         </TableRow>
