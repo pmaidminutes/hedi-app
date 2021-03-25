@@ -11,7 +11,7 @@ export function getCurrentUserProfile(
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const requestHasFeedback = async () => {
+    const requestCurrentProfile = async () => {
       setLoading(true);
       const resp = await getCurrentProfile("/api/user/profile", {
         lang,
@@ -21,8 +21,8 @@ export function getCurrentUserProfile(
       setLoading(false);
     };
 
-    if (user) requestHasFeedback();
-  }, [user]);
+    if (user?.name) requestCurrentProfile();
+  }, [user?.name]);
 
   return [profile, loading];
 }
