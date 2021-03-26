@@ -58,7 +58,7 @@ export const Profile = (props: IProfileViewProps) => {
         <Row>
           {hasServices ? (
             <Column lg={8}>
-              <Services {...servicesData} />
+              <Services {...servicesData} headlineType="h3" />
             </Column>
           ) : null}
           <Column lg={8}>
