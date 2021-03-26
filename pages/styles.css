@@ -16688,16 +16688,14 @@ h1 {
   background-color: transparent;
   display: flex;
   justify-content: flex-end;
-  margin: 1rem 0; }
+  margin-top: 0.5rem 0; }
+  .hedi--footer svg {
+    fill: #697077; }
   .hedi--footer a, .hedi--footer .bx--link {
-    font-family: "Roboto Slab", serif;
-    font-size: 1.25rem;
-    font-weight: 400;
-    line-height: 1.4;
-    letter-spacing: 0;
+    font-size: 1rem;
     background-color: transparent;
     color: #a2a9b0;
-    padding: 1rem;
+    padding: 0.5rem;
     transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
     text-decoration: none; }
     .hedi--footer a:hover, .hedi--footer .bx--link:hover {
@@ -16902,6 +16900,7 @@ h1 {
  $roboto-mono: 'Roboto Mono', monospace; */
 .hedi--simple-page .hedi--hero-image {
   min-width: 100%;
+  width: 100%;
   height: auto; }
 
 .hedi--simple-page .hedi-app-page-image-wrapper {
@@ -17124,8 +17123,11 @@ h1 {
     src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
      }
  $roboto-mono: 'Roboto Mono', monospace; */
-.hedi--multiple-user-feedback {
-  color: black; }
+.hedi--userfeedback-page p {
+  margin-bottom: 0.5rem !important; }
+
+.hedi--userfeedback-page .hedi-seperator {
+  margin-bottom: 2rem; }
 
 .hedi--userfeedback-item {
   height: calc(100% - 2rem);
@@ -17133,6 +17135,8 @@ h1 {
   flex-direction: column; }
   .hedi--userfeedback-item .bx--text-area__wrapper {
     height: 100%; }
+  .hedi--userfeedback-item .hedi--send-button {
+    margin-top: 1rem; }
 
 .hedi--login-form .hedi--block-label {
   display: block; }
