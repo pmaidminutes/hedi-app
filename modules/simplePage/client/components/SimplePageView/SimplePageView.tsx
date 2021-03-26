@@ -24,7 +24,7 @@ export const SimplePageView: React.FC<{
       } ${customKey !== undefined ? `hedi--${customKey}` : ""}`}>
       {content.posterImage && (
         <Image
-          src={"https://appstaging.projekt-hedi.de" + content.posterImage.route}
+          src={"https://assets.projekt-hedi.de" + content.posterImage.route}
           alt={content.posterImage.alt}
           className="hedi-header-image"
           width={content.posterImage.width}

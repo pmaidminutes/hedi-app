@@ -9,7 +9,14 @@ module.exports = {
   },
   images: {
     domains: [
+      'https://assets.projekt-hedi.de',
+      'https://testassets.projekt-hedi.de',
+      'https://appstaging.projekt-hedi.de',
+      'https://test.projekt-hedi.de',
+      'assets.projekt-hedi.de',
+      'testassets.projekt-hedi.de',
       'appstaging.projekt-hedi.de',
+      'test.projekt-hedi.de',
       'localhost:3000'
     ],
   },
