@@ -23,13 +23,18 @@ export const SimplePageView: React.FC<{
         content.key !== undefined ? `hedi--${content.key}-page` : ""
       } ${customKey !== undefined ? `hedi--${customKey}` : ""}`}>
       {content.posterImage && (
-        <Image
+        <img
+          className="hedi--hero-image"
           src={"https://assets.projekt-hedi.de" + content.posterImage.route}
           alt={content.posterImage.alt}
-          className="hedi-header-image"
-          width={content.posterImage.width}
-          height={content.posterImage.height}
         />
+        // <Image
+        //   src={"https://assets.projekt-hedi.de" + content.posterImage.route}
+        //   alt={content.posterImage.alt}
+        //   className="hedi-header-image"
+        //   width={content.posterImage.width}
+        //   height={content.posterImage.height}
+        // />
       )}
       {!!url ? (
         <TwoColumns {...props} left={left} right={right} />

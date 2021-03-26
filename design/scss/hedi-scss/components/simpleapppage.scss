@@ -1,6 +1,11 @@
 @import "./theme/hedi-theme.scss";
 
 .hedi--simple-page {
+
+  .hedi--hero-image {
+    min-width: 100%;
+    height: auto;
+  }
     
   .hedi-app-page-image-wrapper {
     height: 100%;
