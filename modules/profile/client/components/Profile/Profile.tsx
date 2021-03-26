@@ -51,20 +51,28 @@ export const Profile = (props: IProfileViewProps) => {
     <>
       <BgImgContainer>
         <Grid>
-          <ProfileEntry {...profileEntryData} />
+          {!currentProfileLoading &&
+            !userIsLoading &&
+            currentProfile &&
+            currentProfile.route == props.content.route && (
+              <Button href={"/" + props.content.lang + "/user/profile/edit"}>
+                {tryGetValue("edit_button", props.content.elements)}
+              </Button>
+            )}
+          <ProfileEntry isNarrow={true} {...profileEntryData} />
         </Grid>
       </BgImgContainer>
       <Grid>
         <Row>
           {hasServices ? (
-            <Column lg={6}>
-              <Services {...servicesData} />
+            <Column lg={8}>
+              <Services {...servicesData} headlineType="h3" />
             </Column>
           ) : null}
-          <Column lg={6}>
+          <Column lg={8}>
             <Contact {...contactData} />
           </Column>
-          <Column lg={6}>
+          <Column lg={8}>
             <LanguageSkills {...languagesData} />
           </Column>
         </Row>
@@ -87,16 +95,6 @@ export const Profile = (props: IProfileViewProps) => {
           } as Location)
         } */}
         {/* <MapClient {...mapData} /> */}
-        {!currentProfileLoading &&
-          !userIsLoading &&
-          currentProfile &&
-          currentProfile.route == props.content.route && (
-            <Row>
-              <Button href={"/" + props.content.lang + "/user/profile/edit"}>
-                {tryGetValue("edit_button", props.content.elements)}
-              </Button>
-            </Row>
-          )}
       </Grid>
     </>
   );

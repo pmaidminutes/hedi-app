@@ -45,7 +45,7 @@ export const LanguageSkillsSelection = ({
           <TableHeader>
             <Button
               hasIconOnly={isMobileContext}
-              kind="tertiary"
+              kind="primary"
               renderIcon={Add32}
               iconDescription={tryGetValue(
                 "add-languageSkill",

@@ -1,0 +1,15 @@
+.hedi--profile-list {
+  .bx--tile--clickable {
+    background-color: white;
+    margin: $spacing-md 0;
+    &:hover {
+      background: #e5e5e5;
+    }
+
+    .hedi--profile-entry > div > div:not(:first-child),
+    .hedi--profile-entry--with-services {
+      background-color: transparent;
+    }
+  }
+
+}
