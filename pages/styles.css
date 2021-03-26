@@ -17028,6 +17028,13 @@ h1 {
 .hedi--multiple-user-feedback {
   color: black; }
 
+.hedi--userfeedback-item {
+  height: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column; }
+  .hedi--userfeedback-item .bx--text-area__wrapper {
+    height: 100%; }
+
 .hedi--login-form .hedi--block-label {
   display: block; }
 
