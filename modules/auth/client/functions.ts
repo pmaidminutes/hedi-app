@@ -1,6 +1,5 @@
 import { User } from "next-auth";
 import { signIn, signOut, useSession } from "next-auth/client";
-import { getUserAuthHeader } from "../server";
 
 export const getUser = (): [User | undefined, boolean] => {
   const [session, loading] = useSession();
