@@ -50,7 +50,8 @@ export const tryGetKeyLabel = (
   key: string,
   links?: IShellLink[],
   fallback?: string
-): string => links?.find(item => item.key === key)?.label ?? fallback ?? key;
+): string =>
+  links?.find(item => item.key === key)?.longTitle ?? fallback ?? key;
 
 export const tryGetKeyLinks = (
   key: string,
