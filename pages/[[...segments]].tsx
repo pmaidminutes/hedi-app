@@ -123,13 +123,13 @@ export default function segments(props: IPageProps<IEntity>) {
   return (
     <Shell {...props}>
       <>
-        <TryRegistration {...content} key="registration" />
-        <TryProfile {...content} key="profile" />
-        <TryProfileList {...content} key="profileList" />
-        <TryLogin {...content} key="login" />
-        <TryUserFeedbackThanks {...content} key="userfeedback" />
+        <TryRegistration content={content} key="registration" />
+        <TryProfile content={content} key="profile" />
+        <TryProfileList content={content} key="profileList" />
+        <TryLogin content={content} key="login" />
+        <TryUserFeedbackThanks content={content} key="userfeedback" />
         <TrySimplePage content={content} key="simplepage" />
-        <TryLandingPage {...content} key="landingpage" />
+        <TryLandingPage content={content} key="landingpage" />
       </>
     </Shell>
   );
