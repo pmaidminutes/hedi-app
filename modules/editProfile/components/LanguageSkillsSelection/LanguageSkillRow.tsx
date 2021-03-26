@@ -8,6 +8,7 @@ import { tryGetValue } from "@/modules/common/utils";
 export type LanguageSkillRowProps = {
   config: {
     elements?: IUIElementTexts[];
+    languageLevelElements: IUIElementTexts[];
     languageOptions: ILanguage[];
   };
   data: ILanguageSkillEntry;
@@ -15,7 +16,7 @@ export type LanguageSkillRowProps = {
 };
 
 export const LanguageSkillRow = ({
-  config: { elements, languageOptions },
+  config: { elements, languageLevelElements, languageOptions },
   data,
   handleDeleteClick,
 }: LanguageSkillRowProps) => {
@@ -48,8 +49,12 @@ export const LanguageSkillRow = ({
           titleText=""
           light
           selectedItem={languageSkill.level}
-          items={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-          itemToString={i => i.toString()}
+          items={languageLevelElements.map(level => parseInt(level.identifier))}
+          itemToString={i =>
+            languageLevelElements.find(
+              level => level.identifier == i.toString()
+            )?.value || i.toString()
+          }
           onChange={handleLevelChange}
         />
       </TableCell>

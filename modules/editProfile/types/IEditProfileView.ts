@@ -10,6 +10,7 @@ import { ProfileType } from "@/modules/profile/types";
 export interface IEditProfileFormConfig {
   lang: string;
   elements: IUIElementTexts[];
+  languageLevelElements: IUIElementTexts[];
   conditionalElements: Partial<Record<ProfileType, IUIElementTexts[]>>;
   languageOptions: ILanguage[];
   domainOptions: IEntity[];
@@ -23,6 +24,7 @@ export const extractConfig = (
 ): IEditProfileFormConfig => ({
   lang: view.lang,
   elements: view.elements,
+  languageLevelElements: view.languageLevelElements,
   conditionalElements: view.conditionalElements,
   languageOptions: view.languageOptions,
   domainOptions: view.domainOptions,
