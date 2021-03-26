@@ -20,8 +20,8 @@ export const SimplePageView: React.FC<{
   return (
     <div
       className={`hedi--simple-page ${
-        content.key !== undefined ? `hedi--${content.key}-page` : null
-      } ${customKey !== undefined ? `hedi--${customKey}` : null}`}>
+        content.key !== undefined ? `hedi--${content.key}-page` : ""
+      } ${customKey !== undefined ? `hedi--${customKey}` : ""}`}>
       {content.posterImage && (
         <Image
           src={"https://appstaging.projekt-hedi.de" + content.posterImage.route}
