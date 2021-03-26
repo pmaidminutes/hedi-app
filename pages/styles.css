@@ -17014,6 +17014,11 @@ h1 {
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry--with-services {
     background-color: transparent; }
 
+.hedi--profile-list .hedi--profile-entry + svg {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem; }
+
 /* 
   @font-face {
     font-family: 'Roboto', sans-serif;

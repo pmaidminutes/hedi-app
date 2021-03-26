@@ -6,6 +6,7 @@ import { isICaregiver, isIMidwife, Profile } from "@/modules/profile/types";
 import { tryGetValue } from "@/modules/common/utils";
 import NextLink from "next/link";
 import { ClickableTile } from "carbon-components-react";
+import { ArrowRight24 } from "@carbon/icons-react";
 
 export const TryProfileList = ({
   content,
@@ -77,6 +78,7 @@ export const ProfileList = ({ content }: { content: ProfileListView }) => {
               isNarrow={false}
               key={profile.route}
             />
+            <ArrowRight24 />
           </ClickableTile>
         </NextLink>
       ))}
