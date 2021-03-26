@@ -74,6 +74,7 @@ export const ProfileList = ({ content }: { content: ProfileListView }) => {
             <ProfileEntry
               {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
               // isTitleAsLink={true}
+              isNarrow={false}
               key={profile.route}
             />
           </ClickableTile>
