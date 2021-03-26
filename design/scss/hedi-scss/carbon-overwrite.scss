@@ -3,12 +3,12 @@
 .bx--content {
   // @media(min-width: 768px) {
   padding: 0;
-
+  min-height: 95vh;
   // }
 }
 
 .bx--row {
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     // margin-right: 0;
     // margin-left: 0;
   }

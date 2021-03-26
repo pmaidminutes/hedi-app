@@ -11,7 +11,6 @@ export const Contact = (props: IContactProps): JSX.Element => {
     street,
     house_number,
     city,
-    displayAddress,
     postal_code,
     headline,
   } = useContact(props);
@@ -20,7 +19,6 @@ export const Contact = (props: IContactProps): JSX.Element => {
       <Tile>
         <img src="/images/Pregnancy_pink80.svg" alt="" />
         <address>
-          <p>{displayAddress}</p>
           <p>
             {street} {house_number}
           </p>

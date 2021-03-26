@@ -10,11 +10,3 @@ address {
 h1 {
   margin: $spacing-lg 0;
 }
-
-ul {
-@extend .bx--list--unordered;
-}
-
-li {
-  @extend .bx--list__item;
-  }

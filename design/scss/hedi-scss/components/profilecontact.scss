@@ -3,6 +3,7 @@ margin-bottom: $layout-sm;
 
 img {
     margin-bottom: $layout-sm;
+    margin-left: -1.5rem;
     }
 
 address {
@@ -18,8 +19,10 @@ padding-bottom: $spacing-xs;
 }
 
 // set launch Icon down.
-// svg {
-// margin-bottom: -2px;
-// }
+a > svg {
+margin-bottom: -2px;
+}
+
+
 
 }

@@ -60,6 +60,37 @@ export const EditProfileForm = ({
 
       <input id="type" name="type" value={profileType} hidden={true} readOnly />
 
+      <div className="hedi--group hedi--group--profile-type">
+        <FormGroup
+          legendText={
+            <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
+          }>
+          <Row>
+            <Column sm={4} md={6} lg={8}>
+              <ContentSwitcher
+                onChange={handleContentSwitcherChange}
+                size="xl"
+                selectedIndex={profileType === "Midwife" ? 0 : 1}>
+                <Switch
+                  name="Midwife"
+                  text={tryGetValue("type-midwife", elements, "Hebamme")}
+                  onClick={() => {}}
+                  onKeyDown={() => {}}
+                  defaultChecked={profileType === "Midwife"}
+                />
+                <Switch
+                  name="Caregiver"
+                  text={tryGetValue("type-caregiver", elements, "Betreuende")}
+                  onClick={() => {}}
+                  onKeyDown={() => {}}
+                  defaultChecked={profileType === "Caregiver"}
+                />
+              </ContentSwitcher>
+            </Column>
+          </Row>
+        </FormGroup>
+      </div>
+
       <div className="hedi--group hedi--group--name">
         <FormGroup
           legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}>
@@ -254,37 +285,6 @@ export const EditProfileForm = ({
             config={{ elements, languageOptions }}
             data={profile?.languageSkills}
           />
-        </FormGroup>
-      </div>
-
-      <div className="hedi--group hedi--group--profile-type">
-        <FormGroup
-          legendText={
-            <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
-          }>
-          <Row>
-            <Column sm={4} md={6} lg={8}>
-              <ContentSwitcher
-                onChange={handleContentSwitcherChange}
-                size="xl"
-                selectedIndex={profileType === "Midwife" ? 0 : 1}>
-                <Switch
-                  name="Midwife"
-                  text={tryGetValue("type-midwife", elements, "Hebamme")}
-                  onClick={() => {}}
-                  onKeyDown={() => {}}
-                  defaultChecked={profileType === "Midwife"}
-                />
-                <Switch
-                  name="Caregiver"
-                  text={tryGetValue("type-caregiver", elements, "Betreuende")}
-                  onClick={() => {}}
-                  onKeyDown={() => {}}
-                  defaultChecked={profileType === "Caregiver"}
-                />
-              </ContentSwitcher>
-            </Column>
-          </Row>
         </FormGroup>
       </div>
 

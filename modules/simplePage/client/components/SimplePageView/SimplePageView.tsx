@@ -45,7 +45,7 @@ const SingleColumn: React.FC<{
   condensed?: boolean;
   narrow?: boolean;
 }> = ({ content, condensed, narrow, children }) => (
-  <Grid fullWidth>
+  <Grid>
     <Row condensed={condensed} narrow={narrow}>
       <Column className="hedi--titlegroup">
         <h1>{content.longTitle ?? content.label}</h1>
@@ -69,7 +69,7 @@ const TwoColumns: React.FC<{
   left?: ColumnDefaultProps;
   right?: ColumnDefaultProps;
 }> = ({ content, url, alt, condensed, narrow, left, right, children }) => (
-  <Grid fullWidth>
+  <Grid>
     <Row>
       <Column {...left}>
         <div className="hedi--app-page-image">
@@ -78,7 +78,7 @@ const TwoColumns: React.FC<{
       </Column>
 
       <Column {...right} className="hedi--col--grid-nest">
-        <Grid fullWidth>
+        <Grid>
           <Row condensed={condensed} narrow={narrow}>
             <Column className="hedi--titlegroup">
               <h1>{content.longTitle ?? content.label}</h1>
