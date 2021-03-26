@@ -45,7 +45,7 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     servicesData,
     contactData,
     relatedProfilesData,
-    mapData,
+    // mapData, HACK currently incompatible
   } = useProfile({ content: profile });
 
   const { subPages, elements } = content;

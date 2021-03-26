@@ -38,7 +38,7 @@ export const Profile = (props: IProfileViewProps) => {
     servicesData,
     contactData,
     relatedProfilesData,
-    mapData,
+    // mapData, HACK currently incompatible
     hasServices,
   } = useProfile(props);
 
