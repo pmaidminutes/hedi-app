@@ -27,6 +27,10 @@ export function useProfileEntry(props: IProfileEntryProps) {
     isNarrow = false,
   } = props;
 
+  const className =
+    "hedi--profile-entry" +
+    (services ? " hedi--profile-entry--with-services" : "");
+
   return {
     displayName,
     postal_code,
@@ -39,5 +43,6 @@ export function useProfileEntry(props: IProfileEntryProps) {
     domains,
     route,
     isNarrow,
+    className,
   };
 }
