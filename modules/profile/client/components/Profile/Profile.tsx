@@ -62,7 +62,7 @@ export const Profile = (props: IProfileViewProps) => {
           <Column lg={6}>
             <Contact {...contactData} />
           </Column>
-          <Column lg={8}>
+          <Column lg={6}>
             <LanguageSkills {...languagesData} />
           </Column>
         </Row>
