@@ -21,7 +21,6 @@ export function useScrollToTop({
     }
   };
 
-  console.log({ isAtTheBottom });
   useEffect(() => {
     if (!isAtTheBottom && currenPosition > 99) setIsAtTheBottom(true);
     if (isAtTheBottom && currenPosition < 99) setIsAtTheBottom(false);
@@ -33,7 +32,7 @@ export function useScrollToTop({
   const buttonText = locale === "de" ? "nach oben" : "back to top";
 
   const handleScroll = () => {
-    if (typeof window !== undefined && typeof document !== undefined) {
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
       const totalheight = document.documentElement.scrollHeight;
       const scrollheight = window.pageYOffset + window.innerHeight;
       setCurrentPosition((scrollheight / totalheight) * 100);
