@@ -15,6 +15,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     services,
     servicesHeadline,
     route,
+    isNarrow,
   } = useProfileEntry(props);
   const className =
     "hedi--profile-entry" +
@@ -22,7 +23,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
   return (
     <>
       <section className={className}>
-        <Row>
+        <Row narrow={isNarrow}>
           <Column sm={4} md={2} lg={3} className="hedi--profile-entry-image">
             {/* TODO image dynamisch */}
             <img

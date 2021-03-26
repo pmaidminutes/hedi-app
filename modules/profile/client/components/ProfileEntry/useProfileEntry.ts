@@ -8,6 +8,7 @@ export interface IProfileEntryProps
     Partial<Pick<Profile, "services" | "route">>,
     Partial<Pick<ICaregiver, "domains">> {
   servicesHeadline?: string;
+  isNarrow?: boolean;
   // isTitleAsLink?: boolean
 }
 
@@ -23,6 +24,7 @@ export function useProfileEntry(props: IProfileEntryProps) {
     servicesHeadline,
     domains,
     route,
+    isNarrow = false,
   } = props;
 
   return {
@@ -36,5 +38,6 @@ export function useProfileEntry(props: IProfileEntryProps) {
     servicesHeadline,
     domains,
     route,
+    isNarrow,
   };
 }

@@ -51,7 +51,15 @@ export const Profile = (props: IProfileViewProps) => {
     <>
       <BgImgContainer>
         <Grid>
-          <ProfileEntry {...profileEntryData} />
+          {!currentProfileLoading &&
+            !userIsLoading &&
+            currentProfile &&
+            currentProfile.route == props.content.route && (
+              <Button href={"/" + props.content.lang + "/user/profile/edit"}>
+                {tryGetValue("edit_button", props.content.elements)}
+              </Button>
+            )}
+          <ProfileEntry isNarrow={true} {...profileEntryData} />
         </Grid>
       </BgImgContainer>
       <Grid>
@@ -87,16 +95,6 @@ export const Profile = (props: IProfileViewProps) => {
           } as Location)
         } */}
         {/* <MapClient {...mapData} /> */}
-        {!currentProfileLoading &&
-          !userIsLoading &&
-          currentProfile &&
-          currentProfile.route == props.content.route && (
-            <Row>
-              <Button href={"/" + props.content.lang + "/user/profile/edit"}>
-                {tryGetValue("edit_button", props.content.elements)}
-              </Button>
-            </Row>
-          )}
       </Grid>
     </>
   );
