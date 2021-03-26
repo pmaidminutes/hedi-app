@@ -16612,22 +16612,25 @@ h1 {
 
 .hedi--footer {
   align-items: center;
+  background-color: transparent;
   display: flex;
-  justify-content: flex-end; }
-  .hedi--footer a {
+  justify-content: flex-end;
+  margin: 1rem 0; }
+  .hedi--footer a, .hedi--footer .bx--link {
     font-family: "Roboto Slab", serif;
-    font-size: 1rem;
-    font-weight: 500;
-    line-height: 1.375;
+    font-size: 1.25rem;
+    font-weight: 400;
+    line-height: 1.4;
     letter-spacing: 0;
-    text-decoration: none;
-    padding: 1rem;
     background-color: transparent;
-    transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9); }
-    .hedi--footer a:hover {
+    color: #a2a9b0;
+    padding: 1rem;
+    transition: background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
+    text-decoration: none; }
+    .hedi--footer a:hover, .hedi--footer .bx--link:hover {
       background-color: #e5e5e5; }
-    .hedi--footer a:not(:last-child) {
-      margin-right: 1rem; }
+    .hedi--footer a:not(:last-child), .hedi--footer .bx--link:not(:last-child) {
+      margin-right: 2rem; }
 
 .hedi--group form {
   -webkit-margin-after: 0.75rem;
@@ -16672,7 +16675,7 @@ h1 {
 .hedi--header .bx--side-nav__header-navigation > li {
   padding-bottom: 0.5rem; }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .hedi--header .bx--header__menu-toggle__hidden {
     display: none; } }
 
@@ -17024,7 +17027,8 @@ h1 {
   display: block; }
 
 .bx--content {
-  padding: 0; }
+  padding: 0;
+  min-height: 95vh; }
 
 .hidden {
   display: none; }

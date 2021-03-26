@@ -1,4 +1,4 @@
-import { Row, Column, Link, AspectRatio } from "carbon-components-react";
+import { Row, Column, Link } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
 import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
 import { Launch16 } from "@carbon/icons-react";
@@ -14,6 +14,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     phone,
     services,
     servicesHeadline,
+    route,
   } = useProfileEntry(props);
   const className =
     "hedi--profile-entry" +
@@ -30,7 +31,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
               style={{}}
             />
           </Column>
-          <Column sm={4} md={6} lg={10}>
+          <Column sm={4} md={6} lg={13}>
             <div className="hedi--profile-entry-content">
               {/* TODO reuse contact */}
               <h2>{displayName}</h2>

@@ -50,9 +50,11 @@ export const Profile = (props: IProfileViewProps) => {
   return (
     <>
       <BgImgContainer>
-        <ProfileEntry {...profileEntryData} />
+        <Grid>
+          <ProfileEntry {...profileEntryData} />
+        </Grid>
       </BgImgContainer>
-      <Grid fullWidth={true}>
+      <Grid>
         <Row>
           {hasServices ? (
             <Column lg={6}>

@@ -12,25 +12,13 @@ const data = [
     longtitle: "Geburtshaus Sonnenschein",
     description: "Hebammenpraxis",
     city: "Hamburg",
-    route: "/iwohin",
+    route: "/",
   },
   {
-    longtitle: "Geburtshaus Sonnenschein",
+    longtitle: "Hebammenpraxis Eimsbüttel",
     description: "Hebammenpraxis",
     city: "Hamburg",
-    route: "/iwohin",
-  },
-  {
-    longtitle: "Geburtshaus Sonnenschein",
-    description: "Hebammenpraxis",
-    city: "Hamburg",
-    route: "/iwohin",
-  },
-  {
-    longtitle: "Geburtshaus Sonnenschein",
-    description: "Hebammenpraxis",
-    city: "Hamburg",
-    route: "/iwohin",
+    route: "/",
   },
 ];
 export const RelatedProfiles = (props: IRelatedProfilesProps) => {
