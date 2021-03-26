@@ -9,6 +9,7 @@ import {
   IUIElementTexts,
   LanguageFields,
   ServiceGroupFields,
+  WithUIElementsFields,
 } from "@/modules/model";
 import { ProfileType } from "@/modules/profile/types";
 
@@ -53,6 +54,9 @@ export async function getEditProfileStatic(
       serviceGroups(lang: $lang) {
         ${ServiceGroupFields}
       }
+      languageLevels: appPagesByKey(keys: ["languageLevels"], lang: $lang) {
+        ${WithUIElementsFields}
+      }
     }
   `;
   const {
@@ -60,11 +64,13 @@ export async function getEditProfileStatic(
     domainOptions,
     languageOptions,
     serviceGroups,
+    languageLevels,
   } = await client.request<{
     subPages: IAppPage[];
     domainOptions: IEntity[];
     languageOptions: ILanguage[];
     serviceGroups: IServiceGroup[];
+    languageLevels: { elements: IUIElementTexts[] }[];
   }>(subquery, {
     lang,
   });
@@ -81,6 +87,10 @@ export async function getEditProfileStatic(
 
   return {
     ...appPage,
+    languageLevelElements:
+      languageLevels[0]?.elements.filter(
+        elm => !isNaN(parseInt(elm.identifier))
+      ) || [],
     conditionalElements,
     languageOptions,
     domainOptions,

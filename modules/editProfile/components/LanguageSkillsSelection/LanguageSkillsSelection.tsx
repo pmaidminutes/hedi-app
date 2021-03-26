@@ -16,6 +16,7 @@ import { tryGetValue } from "@/modules/common/utils";
 export type LanguageSkillsSelectionProps = {
   config: {
     elements?: IUIElementTexts[];
+    languageLevelElements: IUIElementTexts[];
     languageOptions: ILanguage[];
   };
   data?: ILanguageSkillEntry[];
