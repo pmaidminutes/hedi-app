@@ -16943,6 +16943,18 @@ h1 {
   .hedi--profile-services img {
     margin-bottom: 2rem; }
 
+.hedi--profile-list .bx--tile--clickable {
+  background-color: white;
+  margin: 1rem 0; }
+  .hedi--profile-list .bx--tile--clickable:hover {
+    background: #e5e5e5; }
+  .hedi--profile-list .bx--tile--clickable .hedi--profile-entry > div > div:not(:first-child),
+  .hedi--profile-list .bx--tile--clickable .hedi--profile-entry--with-services {
+    background-color: transparent; }
+
+.hedi--profile-list .hedi--profile-entry .hedi--profile-entry-image {
+  margin-left: 0; }
+
 /* 
   @font-face {
     font-family: 'Roboto', sans-serif;
