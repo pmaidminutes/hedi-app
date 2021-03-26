@@ -5,9 +5,10 @@ export interface IProfileEntryProps
   extends Pick<IAddress, "postal_code" | "city">,
     Pick<IDetailedName, "displayName">,
     Pick<IContact, "mail" | "website" | "phone">,
-    Partial<Pick<Profile, "services">>,
+    Partial<Pick<Profile, "services" | "route">>,
     Partial<Pick<ICaregiver, "domains">> {
   servicesHeadline?: string;
+  // isTitleAsLink?: boolean
 }
 
 export function useProfileEntry(props: IProfileEntryProps) {
@@ -21,6 +22,7 @@ export function useProfileEntry(props: IProfileEntryProps) {
     services,
     servicesHeadline,
     domains,
+    route,
   } = props;
 
   return {
@@ -33,5 +35,6 @@ export function useProfileEntry(props: IProfileEntryProps) {
     services,
     servicesHeadline,
     domains,
+    route,
   };
 }
