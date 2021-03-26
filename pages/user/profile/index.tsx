@@ -7,7 +7,7 @@ import { Shell } from "@/modules/shell/components";
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { Button, Column } from "carbon-components-react";
+import { Button, Column, Row } from "carbon-components-react";
 
 import { IAppPage } from "@/modules/common/types/appPage";
 import { tryGet } from "@/modules/common/utils";
@@ -69,12 +69,15 @@ export default function myProfile(props: IPageProps<IAppPage>) {
         <SimplePageView
           url="/Pregnancy_pink80.svg"
           alt="Beschreibung des Bildes"
-          content={content}>
-          <Column lg={8} md={6}>
-            <Button href={"/" + content.lang + "/user/profile/edit"}>
-              {noProfileElement?.value}
-            </Button>
-          </Column>
+          content={content}
+          rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
+          <Row>
+            <Column>
+              <Button href={"/" + content.lang + "/user/profile/edit"}>
+                {noProfileElement?.value}
+              </Button>
+            </Column>
+          </Row>
         </SimplePageView>
       )}
     </Shell>
