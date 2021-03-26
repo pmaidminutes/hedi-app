@@ -7,18 +7,6 @@ import {
 import { IUIElementTexts } from "@/modules/model";
 import { FormEventHandler, useEffect, useState } from "react";
 
-const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
-  event.preventDefault();
-  const {
-    username: { value: username },
-    password: { value: password },
-  } = event.target as typeof event.target & {
-    username: { value: string };
-    password: { value: string };
-  };
-  login(username, password);
-};
-
 const getLoginFormProps = (
   elements: IUIElementTexts[]
 ): ILoginFormLayoutProps => ({
@@ -26,7 +14,7 @@ const getLoginFormProps = (
   passwordInput: getTextInputProps("password", elements),
   submitButtonText: tryGetValue("submit", elements),
   backButtonText: tryGetValue("back", elements),
-  onSubmit: e => handleSubmit(e),
+  invalidUserText: tryGetValue("invalid", elements),
 });
 
 export const useLoginForm = ({
