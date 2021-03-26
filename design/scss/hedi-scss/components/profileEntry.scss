@@ -20,12 +20,30 @@ background-color: $ui-01;
 
   .hedi--profile-entry-content {
    padding: $spacing-md 0; 
-  
   }
 
   .hedi--spacing {
   padding-top: $spacing-2xl;
   }
+
+  h2 {
+  padding-bottom: $spacing-2xs;
+  }
+
+  h3 {
+  font-weight: 300;
+  font-size: 1.25rem;
+  padding-bottom: $spacing-2xs;
+  }
+
+  h5 {
+  padding-bottom: $spacing-2xs;
+  }
+
+  //setzt das Launch Icon 2px runter
+  a > svg {
+    margin-bottom: -2px;
+    }
 
   &--with-services {
    //background-color: red;
