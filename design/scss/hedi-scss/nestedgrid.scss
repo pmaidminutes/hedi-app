@@ -1,0 +1,10 @@
+// the column, which contains the nested grid
+.hedi--col--grid-nest {
+  padding-left: 0;
+  padding-right: 0;
+
+  .bx--grid {
+    padding-left: $spacing-md;
+    padding-right: $spacing-md;
+  }
+}
