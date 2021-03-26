@@ -16842,13 +16842,16 @@ h1 {
 .hedi--profile-contact {
   margin-bottom: 2rem; }
   .hedi--profile-contact img {
-    margin-bottom: 2rem; }
+    margin-bottom: 2rem;
+    margin-left: -1.5rem; }
   .hedi--profile-contact address {
     padding-bottom: 0.75rem; }
   .hedi--profile-contact .hedi--consultation-hours-wrapper {
     padding-top: 0.75rem; }
   .hedi--profile-contact h3, .hedi--profile-contact h4, .hedi--profile-contact h5 {
     padding-bottom: 0.5rem; }
+  .hedi--profile-contact a > svg {
+    margin-bottom: -2px; }
 
 /* 
   @font-face {
@@ -16908,6 +16911,8 @@ h1 {
     padding-bottom: 0.25rem; }
   .hedi--profile-entry h5 {
     padding-bottom: 0.25rem; }
+  .hedi--profile-entry a > svg {
+    margin-bottom: -2px; }
   .hedi--profile-entry--with-services {
     background-color: white; }
     .hedi--profile-entry--with-services .hedi__tag-list {
