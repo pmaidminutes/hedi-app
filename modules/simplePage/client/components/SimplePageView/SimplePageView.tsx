@@ -71,7 +71,7 @@ const TwoColumns: React.FC<{
 }> = ({ content, url, alt, condensed, narrow, left, right, children }) => (
   <Grid>
     <Row>
-      <Column {...left}>
+      <Column {...left} className="hedi-app-page-image-wrapper">
         <div className="hedi--app-page-image">
           <img src={url} alt={alt ?? ""}></img>
         </div>

@@ -1,9 +1,16 @@
 @import "./theme/hedi-theme.scss";
 
 .hedi--simple-page {
+    
+  .hedi-app-page-image-wrapper {
+    height: 100%;
+    align-self: center;
+   }
+  
   .hedi--app-page-image {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     width: 100%;
     img {
       height: auto;
@@ -11,6 +18,8 @@
       max-height: 250px;
     }
   }
+
+
 
   .hedi--titlegroup {
     margin-bottom: $layout-lg;
