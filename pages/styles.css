@@ -16672,7 +16672,7 @@ h1 {
 .hedi--header .bx--side-nav__header-navigation > li {
   padding-bottom: 0.5rem; }
 
-@media (min-width: 768px) {
+@media (min-width: 769px) {
   .hedi--header .bx--header__menu-toggle__hidden {
     display: none; } }
 
