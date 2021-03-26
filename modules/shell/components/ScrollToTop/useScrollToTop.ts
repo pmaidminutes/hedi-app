@@ -12,6 +12,8 @@ export function useScrollToTop({
   behavior = "smooth",
 }: IScroll) {
   let [isVisible, setIsVisible] = useState<boolean>(false);
+  const [currenPosition, setCurrentPosition] = useState(0);
+  const [isAtTheBottom, setIsAtTheBottom] = useState(false);
 
   const handleRouteChangeComplete = () => {
     if (typeof window !== "undefined") {
@@ -19,13 +21,24 @@ export function useScrollToTop({
     }
   };
 
+  console.log({ isAtTheBottom });
+  useEffect(() => {
+    if (!isAtTheBottom && currenPosition > 99) setIsAtTheBottom(true);
+    if (isAtTheBottom && currenPosition < 99) setIsAtTheBottom(false);
+  }, [currenPosition]);
+
   const router = useRouter();
   const { locale } = router;
 
   const buttonText = locale === "de" ? "nach oben" : "back to top";
 
   const handleScroll = () => {
-    setIsVisible(window.pageYOffset > 100);
+    if (typeof window !== undefined && typeof document !== undefined) {
+      const totalheight = document.documentElement.scrollHeight;
+      const scrollheight = window.pageYOffset + window.innerHeight;
+      setCurrentPosition((scrollheight / totalheight) * 100);
+      setIsVisible(window.pageYOffset > 100);
+    }
   };
 
   useEffect(() => {
@@ -40,6 +53,7 @@ export function useScrollToTop({
   }, [behavior, left, top]);
 
   return {
+    isAtTheBottom,
     buttonText,
     isVisible,
     handleRouteChangeComplete,

@@ -16736,16 +16736,19 @@ h1 {
 .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
   background-color: #005D90;
   border-radius: 50%;
-  bottom: 45px;
+  bottom: 2rem;
   color: #ffffff;
   cursor: pointer;
   text-align: center;
   position: fixed;
-  right: 15px;
+  right: 1rem;
   transition: 0.5s;
   z-index: 4; }
   .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger:hover {
     background: #2A84C6; }
+
+.hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  bottom: 4rem; }
 
 .hedi-separator {
   display: block;
