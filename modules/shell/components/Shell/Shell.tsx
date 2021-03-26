@@ -3,7 +3,7 @@ import Head from "next/head";
 import { Content } from "carbon-components-react";
 
 import { IEntity } from "@/modules/model";
-import { ScrollToTop } from "@/modules/common/components";
+import { ScrollToTop } from "../ScrollToTop";
 
 import { Header, Footer } from "..";
 import { IPageProps } from "../../types";

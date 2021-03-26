@@ -9,9 +9,10 @@ interface ITagProps {
 export const Tag = ({ tag, type }: ITagProps): JSX.Element => {
   return (
     <CarbonTag type={type ? type : "blue"}>
-      <Link href={tag.route} className="bx--tag__label hedi-unstyled-link">
+      {/* <Link href={tag.route} className="bx--tag__label hedi-unstyled-link">
         {tag.label}
-      </Link>
+      </Link> */}
+      <span className="bx--tag__label hedi-unstyled-link">{tag.label}</span>
     </CarbonTag>
   );
 };

@@ -31,7 +31,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
               style={{}}
             />
           </Column>
-          <Column sm={4} md={6} lg={10}>
+          <Column sm={4} md={6} lg={13}>
             <div className="hedi--profile-entry-content">
               {/* TODO reuse contact */}
               <h2>{displayName}</h2>
