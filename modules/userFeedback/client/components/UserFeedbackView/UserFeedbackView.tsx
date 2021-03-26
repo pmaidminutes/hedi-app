@@ -8,18 +8,25 @@ import {
   Button,
   ButtonSet,
   Column,
+  ColumnDefaultProps,
   FormLabel,
   Row,
 } from "carbon-components-react";
 import { useEffect } from "react";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 
-export const UserFeedback = ({
+export const UserFeedbackView = ({
   content,
   locale,
+  leftColumnProps,
+  rightColumnProps,
+  centerProps,
 }: {
   content: IUserFeedbackView;
   locale: string;
+  leftColumnProps?: ColumnDefaultProps;
+  rightColumnProps?: ColumnDefaultProps;
+  centerProps?: ColumnDefaultProps;
 }) => {
   const [user, userIsLoading] = getUser();
   const router = useRouter();
@@ -54,6 +61,9 @@ export const UserFeedback = ({
         content={content}
         locale={locale}
         profile={currentProfile}
+        leftColumnProps={leftColumnProps}
+        rightColumnProps={rightColumnProps}
+        centerProps={centerProps}
       />
     </SimplePageView>
   ) : null;
