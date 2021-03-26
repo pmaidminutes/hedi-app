@@ -13,10 +13,12 @@ import {
   ContentSwitcher,
   Switch,
   SelectableTile,
+  ToastNotification,
 } from "carbon-components-react";
 import {
   getTextInputProps,
   hasElement,
+  tryGet,
   tryGetValue,
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
@@ -28,6 +30,7 @@ type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
   data: IUpsertProfile;
   isValidating?: boolean;
+  isSuccessfullySaved?: boolean;
 };
 
 export const EditProfileForm = ({
@@ -41,6 +44,7 @@ export const EditProfileForm = ({
   },
   data: { success, errors, profile },
   isValidating,
+  isSuccessfullySaved,
   ...formProps
 }: EditProfileInputProps) => {
   const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
@@ -361,10 +365,18 @@ export const EditProfileForm = ({
 
       {isValidating ? (
         <InlineLoading status="active" />
-      ) : (
+      ) : !isSuccessfullySaved ? (
         <Button type="submit">
           {tryGetValue("submit", elements, "Profil speichern")}
         </Button>
+      ) : (
+        <ToastNotification
+          title={tryGet("success_message", elements)?.value || "Success"}
+          subtitle={tryGet("success_message", elements)?.description}
+          caption={<InlineLoading status="active" />}
+          kind="success"
+          lowContrast
+        />
       )}
     </Form>
   );
