@@ -4,6 +4,8 @@ import { ProfileListView } from "@/modules/profile/query";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
 import { isICaregiver, isIMidwife, Profile } from "@/modules/profile/types";
 import { tryGetValue } from "@/modules/common/utils";
+import NextLink from "next/link";
+import { ClickableTile } from "carbon-components-react";
 
 export const TryProfileList = ({
   content,
@@ -27,6 +29,7 @@ const extractProfileEntry = (
     website,
     phone,
     services,
+    route,
   } = profile;
   const domainMidwife = {
     type: "Domain",
@@ -48,6 +51,7 @@ const extractProfileEntry = (
     services,
     servicesHeadline,
     domains,
+    route,
   };
 };
 
@@ -65,10 +69,15 @@ export const ProfileList = ({ content }: { content: ProfileListView }) => {
   return (
     <SimplePageView content={content} customKey="profile-list">
       {content.profiles.map(profile => (
-        <ProfileEntry
-          {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
-          key={profile.route}
-        />
+        <NextLink href={profile.route ?? "#"} passHref>
+          <ClickableTile href={profile.route}>
+            <ProfileEntry
+              {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
+              // isTitleAsLink={true}
+              key={profile.route}
+            />
+          </ClickableTile>
+        </NextLink>
       ))}
     </SimplePageView>
   );
