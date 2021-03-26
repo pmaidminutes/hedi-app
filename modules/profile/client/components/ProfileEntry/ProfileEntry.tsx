@@ -35,7 +35,22 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
             <div className="hedi--profile-entry-content">
               {/* TODO reuse contact */}
               <h2>{displayName}</h2>
-              <h3>{domains?.map(d => d.label).join(" & ")}</h3>
+              <h3>
+                {domains?.map((domain, index) => {
+                  console.log(index, domains.length);
+                  return (
+                    <>
+                      <span>{domain.label}</span>
+                      {domains.length > index + 1 ? (
+                        <span className="hedi--ampersand">
+                          {" "}
+                          & <br />
+                        </span>
+                      ) : null}
+                    </>
+                  );
+                })}
+              </h3>
               <address>
                 {postal_code} {city}
                 {/* TODO right number for phone linking */}
