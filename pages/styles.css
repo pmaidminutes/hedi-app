@@ -16916,8 +16916,8 @@ h1 {
 .hedi--simple-page p:last-of-type {
   margin-bottom: 3rem; }
 
-.hedi--simple-page h1 {
-  margin: 1.5rem 0; }
+.hedi--simple-page h2 {
+  margin-bottom: 1rem; }
 
 .hedi--profile-contact {
   margin-bottom: 2rem; }

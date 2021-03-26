@@ -33,7 +33,7 @@ export const RegistrationView = ({
   }, [name, pass]);
   return (
     <SimplePageView
-      url="/Pregnancy_pink80.svg"
+      url="/images/Pregnancy_blue.svg"
       alt="Beschreibung des Bildes"
       content={content}
       rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>

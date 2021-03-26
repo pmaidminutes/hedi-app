@@ -17,7 +17,7 @@ export const LoginView = ({ content }: { content: ILoginView }) => {
   return (
     <SimplePageView
       content={content}
-      url="/Pregnancy_pink80.svg"
+      url="/images/Pregnancy_blue.svg"
       alt="Beschreibung des Bildes"
       customKey="login-form"
       rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
