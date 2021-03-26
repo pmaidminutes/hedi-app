@@ -8,7 +8,6 @@ import {
   HeaderGlobalBar,
   HeaderNavigation,
   HeaderMenuItem,
-  HeaderMenu,
   HeaderMenuButton,
   SideNav,
   SideNavItems,
@@ -20,7 +19,12 @@ import { UserProfileMenu } from "../UserProfileMenu";
 import Logo from "./assets/hedi_logo_single_new.svg";
 
 export const Header = (props: IHeader) => {
-  const { appstyle, languageSwitchLinks, headerLinks } = useHeader(props);
+  const {
+    appstyle,
+    languageSwitchLinks,
+    headerLinks,
+    userMenuLinks,
+  } = useHeader(props);
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const router = useRouter();
   const { locale } = router;
@@ -28,7 +32,6 @@ export const Header = (props: IHeader) => {
   const onClickSideNavExpand = () => {
     setIsSideNavExpanded(prev => !prev);
   };
-  console.log({ headerLinks });
 
   return (
     <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
@@ -59,7 +62,7 @@ export const Header = (props: IHeader) => {
         {languageSwitchLinks !== undefined ? (
           <LanguageSwitch links={languageSwitchLinks} />
         ) : null}
-        <UserProfileMenu />
+        <UserProfileMenu userMenuLinks={userMenuLinks} />
       </HeaderGlobalBar>
       <SideNav
         aria-label="Side navigation"

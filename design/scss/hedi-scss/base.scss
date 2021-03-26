@@ -6,3 +6,7 @@ address {
   display: flex;
   flex-direction: column;
 }
+
+h1 {
+  margin: $spacing-lg 0;
+}

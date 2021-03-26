@@ -1,5 +1,6 @@
 import { IContactProps, useContact } from "./useContact";
-import { Tile } from "carbon-components-react";
+import { Tile, Link } from "carbon-components-react";
+import { Launch16 } from "@carbon/icons-react";
 
 export const Contact = (props: IContactProps): JSX.Element => {
   const {
@@ -10,7 +11,6 @@ export const Contact = (props: IContactProps): JSX.Element => {
     street,
     house_number,
     city,
-    displayAddress,
     postal_code,
     headline,
   } = useContact(props);
@@ -19,7 +19,6 @@ export const Contact = (props: IContactProps): JSX.Element => {
       <Tile>
         <img src="/images/Pregnancy_pink80.svg" alt="" />
         <address>
-          <p>{displayAddress}</p>
           <p>
             {street} {house_number}
           </p>
@@ -30,19 +29,34 @@ export const Contact = (props: IContactProps): JSX.Element => {
         {/* TODO right number for phone linking */}
 
         <p>
-          <a href={`tel:${phone}`} target="_blank" title="Telefonnummer">
+          <Link
+            href={`tel:${phone}`}
+            target="_blank"
+            title="Telefonnummer"
+            className="bx--link--lg">
             {phone}
-          </a>
+          </Link>
         </p>
         <p>
-          <a href={`mailto:${mail}`} target="_blank" title="E-Mail Address">
+          <Link
+            href={`mailto:${mail}`}
+            target="_blank"
+            title="E-Mail Address"
+            className="bx--link--lg"
+            inline>
             {mail}
-          </a>
+          </Link>
         </p>
         <p>
-          <a href={website} target="_blank" title="Webseite">
-            {website}
-          </a>
+          {website ? (
+            <Link
+              href={website}
+              target="_blank"
+              title="Webseite"
+              className="bx--link--lg">
+              {website} <Launch16></Launch16>
+            </Link>
+          ) : null}
         </p>
         <div className="hedi--consultation-hours-wrapper">
           {consultation_hours ? (

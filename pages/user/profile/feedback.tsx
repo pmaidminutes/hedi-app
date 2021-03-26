@@ -7,7 +7,7 @@ import { Shell } from "@/modules/shell/components";
 
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { getUserFeedbackStatic } from "@/modules/userFeedback/query";
-import { UserFeedback } from "@/modules/userFeedback/client/components";
+import { UserFeedbackView } from "@/modules/userFeedback/client/components";
 
 export const getStaticProps: GetStaticProps<
   IPageProps<IUserFeedbackView>
@@ -38,7 +38,7 @@ export default function userfeedback(props: IPageProps<IUserFeedbackView>) {
   const { content } = props;
   return (
     <Shell {...props}>
-      <UserFeedback content={content} locale={content.lang} />
+      <UserFeedbackView content={content} locale={content.lang} />
     </Shell>
   );
 }

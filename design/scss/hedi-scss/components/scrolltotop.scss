@@ -2,16 +2,22 @@
   button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
     background-color: $blue-80;
     border-radius: 50%;
-    bottom: 45px;
+    bottom: $spacing-xl;
     color: $text-04;
     cursor: pointer;
     text-align: center;
     position: fixed;
-    right: 15px;
+    right: $spacing-md;
     transition: 0.5s;
     z-index: 4;
     &:hover {
       background: $blue-60;
+    }
+  }
+
+  &__bottom {
+    button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+      bottom: $layout-lg;
     }
   }
 }

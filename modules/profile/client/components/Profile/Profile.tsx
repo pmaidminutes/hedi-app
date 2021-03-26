@@ -16,7 +16,11 @@ import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserP
 
 const locations: Location[] = [];
 
-export const TryProfile = (content: ITyped): JSX.Element | null => {
+export const TryProfile = ({
+  content,
+}: {
+  content: ITyped;
+}): JSX.Element | null => {
   if (
     ["Midwife", "Caregiver", "Organisation", "Institution"].includes(
       content.type
@@ -34,6 +38,7 @@ export const Profile = (props: IProfileViewProps) => {
     contactData,
     relatedProfilesData,
     mapData,
+    hasServices,
   } = useProfile(props);
 
   const [user, userIsLoading] = getUser();
@@ -45,17 +50,21 @@ export const Profile = (props: IProfileViewProps) => {
   return (
     <>
       <BgImgContainer>
-        <ProfileEntry {...profileEntryData} />
+        <Grid>
+          <ProfileEntry {...profileEntryData} />
+        </Grid>
       </BgImgContainer>
-      <Grid fullWidth={true}>
+      <Grid>
         <Row>
-          <Column lg={6}>
-            <Services {...servicesData} />
-          </Column>
+          {hasServices ? (
+            <Column lg={6}>
+              <Services {...servicesData} />
+            </Column>
+          ) : null}
           <Column lg={6}>
             <Contact {...contactData} />
           </Column>
-          <Column lg={8}>
+          <Column lg={6}>
             <LanguageSkills {...languagesData} />
           </Column>
         </Row>

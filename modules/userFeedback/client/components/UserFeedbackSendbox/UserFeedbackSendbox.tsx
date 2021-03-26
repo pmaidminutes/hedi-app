@@ -1,5 +1,6 @@
+import { tryGet } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
-import { Button } from "carbon-components-react";
+import { Button, InlineNotification } from "carbon-components-react";
 
 export interface IUserFeedbackSendboxProps {
   elements: IUIElementTexts[];
@@ -12,20 +13,24 @@ export const UserFeedbackSendbox = ({
   errorMessage,
   successMessage,
 }: IUserFeedbackSendboxProps) => {
-  const getUIElement = (identifier: string) => {
-    return elements.find(item => item.identifier === identifier);
-  };
-
   return (
     <div className="hedi--userfeedback-sendbox">
       {errorMessage && (
-        <div className="hedi--userfeedback-error">{errorMessage}</div>
+        <InlineNotification
+          kind="error"
+          title={tryGet("error_message", elements)?.value || "Error"}
+          subtitle={errorMessage}
+        />
       )}
       {successMessage && (
-        <div className="hedi--userfeedback-success">{successMessage}</div>
+        <InlineNotification
+          kind="success"
+          title={tryGet("success_message", elements)?.value || "Success"}
+          subtitle={successMessage}
+        />
       )}
       <Button type="submit" size="field">
-        {getUIElement("submit")?.value || "Submit"}
+        {tryGet("submit", elements)?.value || "Submit"}
       </Button>
     </div>
   );

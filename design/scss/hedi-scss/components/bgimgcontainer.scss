@@ -1,5 +1,6 @@
 .hedi--bg-img-container {
-  padding: 2rem 0;
+  padding: $spacing-xl 0;
+  margin-bottom: $layout-sm;
   position: relative;
   &::before {
     content: "";
@@ -19,7 +20,7 @@
   }
 
   @media(max-width: 768px) {
-    padding: 2rem;
+    padding: $spacing-md;
   }
 
   .bx--row {

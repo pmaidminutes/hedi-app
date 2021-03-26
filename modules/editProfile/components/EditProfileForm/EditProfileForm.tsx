@@ -24,7 +24,6 @@ import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
-
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
   data: IUpsertProfile;
@@ -61,11 +60,42 @@ export const EditProfileForm = ({
 
       <input id="type" name="type" value={profileType} hidden={true} readOnly />
 
+      <div className="hedi--group hedi--group--profile-type">
+        <FormGroup
+          legendText={
+            <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
+          }>
+          <Row>
+            <Column sm={4} md={6} lg={8}>
+              <ContentSwitcher
+                onChange={handleContentSwitcherChange}
+                size="xl"
+                selectedIndex={profileType === "Midwife" ? 0 : 1}>
+                <Switch
+                  name="Midwife"
+                  text={tryGetValue("type-midwife", elements, "Hebamme")}
+                  onClick={() => {}}
+                  onKeyDown={() => {}}
+                  defaultChecked={profileType === "Midwife"}
+                />
+                <Switch
+                  name="Caregiver"
+                  text={tryGetValue("type-caregiver", elements, "Betreuende")}
+                  onClick={() => {}}
+                  onKeyDown={() => {}}
+                  defaultChecked={profileType === "Caregiver"}
+                />
+              </ContentSwitcher>
+            </Column>
+          </Row>
+        </FormGroup>
+      </div>
+
       <div className="hedi--group hedi--group--name">
         <FormGroup
           legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}>
           <Row>
-            <Column lg={2}>
+            <Column lg={2} md={2}>
               <TextInput
                 {...getTextInputProps("prefix", elements)}
                 name="prefix"
@@ -74,7 +104,7 @@ export const EditProfileForm = ({
                 defaultValue={profile?.prefix}
               />
             </Column>
-            <Column lg={6}>
+            <Column lg={6} md={6}>
               <TextInput
                 {...getTextInputProps("forename", elements)}
                 name="forename"
@@ -85,7 +115,7 @@ export const EditProfileForm = ({
             </Column>
           </Row>
           <Row>
-            <Column lg={6}>
+            <Column lg={6} md={6}>
               <TextInput
                 {...getTextInputProps("surname", elements)}
                 name="surname"
@@ -106,7 +136,7 @@ export const EditProfileForm = ({
             <h2>{tryGetValue("group-address", elements, "Adresse")}</h2>
           }>
           <Row>
-            <Column lg={6}>
+            <Column lg={6} md={6}>
               <TextInput
                 {...getTextInputProps("city", elements)}
                 name="city"
@@ -115,7 +145,7 @@ export const EditProfileForm = ({
                 defaultValue={profile?.city}
               />
             </Column>
-            <Column lg={2}>
+            <Column lg={2} md={2}>
               <TextInput
                 {...getTextInputProps("postal_code", elements)}
                 name="postal_code"
@@ -126,7 +156,7 @@ export const EditProfileForm = ({
             </Column>
           </Row>
           <Row>
-            <Column lg={6}>
+            <Column lg={6} md={6}>
               <TextInput
                 {...getTextInputProps("street", elements)}
                 name="street"
@@ -135,7 +165,7 @@ export const EditProfileForm = ({
                 defaultValue={profile?.street}
               />
             </Column>
-            <Column lg={2}>
+            <Column lg={2} md={2}>
               <TextInput
                 {...getTextInputProps("house_number", elements)}
                 name="house_number"
@@ -147,7 +177,7 @@ export const EditProfileForm = ({
           </Row>
           {hasElement("room", conditionalElements[profileType]) && (
             <Row>
-              <Column lg={8}>
+              <Column lg={8} md={4}>
                 <TextInput
                   {...getTextInputProps(
                     "room",
@@ -171,7 +201,7 @@ export const EditProfileForm = ({
             <h2>{tryGetValue("group-contact", elements, "Kontakt")}</h2>
           }>
           <Row>
-            <Column lg={6}>
+            <Column lg={6} md={6}>
               <TextInput
                 {...getTextInputProps("phone", elements)}
                 name="phone"
@@ -181,7 +211,7 @@ export const EditProfileForm = ({
               />
             </Column>
             {hasElement("phone_private", conditionalElements[profileType]) && (
-              <Column lg={6}>
+              <Column lg={6} md={6}>
                 <TextInput
                   {...getTextInputProps(
                     "phone_private",
@@ -196,7 +226,7 @@ export const EditProfileForm = ({
             )}
           </Row>
           <Row>
-            <Column lg={6}>
+            <Column lg={6} md={6}>
               <TextInput
                 {...getTextInputProps("mail", elements)}
                 name="mail"
@@ -226,7 +256,7 @@ export const EditProfileForm = ({
             conditionalElements[profileType]
           ) && (
             <Row>
-              <Column lg={6}>
+              <Column lg={6} md={6}>
                 <TextArea
                   {...getTextInputProps(
                     "consultation_hours",
@@ -255,37 +285,6 @@ export const EditProfileForm = ({
             config={{ elements, languageOptions }}
             data={profile?.languageSkills}
           />
-        </FormGroup>
-      </div>
-
-      <div className="hedi--group hedi--group--profile-type">
-        <FormGroup
-          legendText={
-            <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
-          }>
-          <Row>
-            <Column sm={4} md={6} lg={8}>
-              <ContentSwitcher
-                onChange={handleContentSwitcherChange}
-                size="xl"
-                selectedIndex={profileType === "Midwife" ? 0 : 1}>
-                <Switch
-                  name="Midwife"
-                  text={tryGetValue("type-midwife", elements, "Hebamme")}
-                  onClick={() => {}}
-                  onKeyDown={() => {}}
-                  defaultChecked={profileType === "Midwife"}
-                />
-                <Switch
-                  name="Caregiver"
-                  text={tryGetValue("type-caregiver", elements, "Betreuende")}
-                  onClick={() => {}}
-                  onKeyDown={() => {}}
-                  defaultChecked={profileType === "Caregiver"}
-                />
-              </ContentSwitcher>
-            </Column>
-          </Row>
         </FormGroup>
       </div>
 

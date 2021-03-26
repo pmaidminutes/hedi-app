@@ -4,7 +4,7 @@ import {
 } from "@/modules/userFeedback/client/components";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { UserFeedbackAppPageEntry } from "@/modules/userFeedback/client/components/UserFeedbackEntry/UserFeedbackAppPageEntry";
-import { Column, Row } from "carbon-components-react";
+import { Column, ColumnDefaultProps, Row } from "carbon-components-react";
 import { IAppPage } from "@/modules/common/types";
 import { BgImgContainer, Seperator } from "@/modules/common/components";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
@@ -20,8 +20,10 @@ import { tryGet } from "@/modules/common/utils";
 interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
   locale: string;
-  className: string;
   profile: ProfileView;
+  leftColumnProps?: ColumnDefaultProps;
+  rightColumnProps?: ColumnDefaultProps;
+  centerProps?: ColumnDefaultProps;
 }
 
 const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
@@ -29,8 +31,10 @@ const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
 export default function UserFeedbackForm({
   content,
   locale,
-  className,
   profile,
+  leftColumnProps,
+  rightColumnProps,
+  centerProps,
 }: IUserFeedbackFormProps) {
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -60,83 +64,77 @@ export default function UserFeedbackForm({
       tryGet("error_message", content.elements)?.description || null
     );
 
+  const left = leftColumnProps ?? { sm: 12, lg: 6, xlg: 7 };
+  const right = rightColumnProps ?? { sm: 12, lg: 6, xlg: 7 };
+  const center = centerProps ?? { lg: { span: 10, offset: 3 } };
   return (
-    <div className={className}>
-      <MultipleUserFeedback
-        lang={locale}
-        onSuccess={onSuccess}
-        onError={onError}>
-        <h1>{content.longTitle ?? content.label}</h1>
-        <Row>
-          <Column lg={6} sm={12}>
-            <BgImgContainer>
-              <ProfileEntry {...profileEntryData} />
-            </BgImgContainer>
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_profile", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={6} sm={12}>
-            <Services {...servicesData} />
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_activities", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={6} sm={12}>
-            <Contact {...contactData} />
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage(
-                "userfeedback_contact_freetimes",
-                content.subPages
-              )}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={6} sm={12}>
-            <LanguageSkills {...languagesData} />
-          </Column>
-          <Column lg={6} sm={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_languages", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_usage", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <Seperator />
-        <Row>
-          <Column lg={12}>
-            <UserFeedbackAppPageEntry
-              {...getSubPage("userfeedback_summary", content.subPages)}
-            />
-          </Column>
-        </Row>
-        <UserFeedbackSendbox
-          elements={content.elements}
-          errorMessage={errorMessage}
-          successMessage={successMessage}
-        />
-      </MultipleUserFeedback>
-    </div>
+    <MultipleUserFeedback lang={locale} onSuccess={onSuccess} onError={onError}>
+      <Row>
+        <Column {...left}>
+          <BgImgContainer>
+            <ProfileEntry {...profileEntryData} />
+          </BgImgContainer>
+        </Column>
+        <Column {...right}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_profile", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column {...left}>
+          <Services {...servicesData} />
+        </Column>
+        <Column {...right}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_activities", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column {...left}>
+          <Contact {...contactData} />
+        </Column>
+        <Column {...right}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_contact_freetimes", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column {...left}>
+          <LanguageSkills {...languagesData} />
+        </Column>
+        <Column {...right}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_languages", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column {...center}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_usage", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <Seperator />
+      <Row>
+        <Column {...center}>
+          <UserFeedbackAppPageEntry
+            {...getSubPage("userfeedback_summary", content.subPages)}
+          />
+        </Column>
+      </Row>
+      <UserFeedbackSendbox
+        elements={content.elements}
+        errorMessage={errorMessage}
+        successMessage={successMessage}
+      />
+    </MultipleUserFeedback>
   );
 }
