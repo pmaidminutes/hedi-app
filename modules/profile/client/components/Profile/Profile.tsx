@@ -16,7 +16,11 @@ import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserP
 
 const locations: Location[] = [];
 
-export const TryProfile = (content: ITyped): JSX.Element | null => {
+export const TryProfile = ({
+  content,
+}: {
+  content: ITyped;
+}): JSX.Element | null => {
   if (
     ["Midwife", "Caregiver", "Organisation", "Institution"].includes(
       content.type

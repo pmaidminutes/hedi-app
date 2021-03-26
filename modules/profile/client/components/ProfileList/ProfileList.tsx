@@ -5,7 +5,11 @@ import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
 import { isICaregiver, isIMidwife, Profile } from "@/modules/profile/types";
 import { tryGetValue } from "@/modules/common/utils";
 
-export const TryProfileList = (content: ITyped): JSX.Element | null => {
+export const TryProfileList = ({
+  content,
+}: {
+  content: ITyped;
+}): JSX.Element | null => {
   if (content.type !== "ProfileList") return null;
   return <ProfileList content={content as ProfileListView} />;
 };
