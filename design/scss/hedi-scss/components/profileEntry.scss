@@ -5,7 +5,7 @@ background-color: $ui-01;
 }
 
 .hedi--profile-entry {
-  margin-bottom: $spacing-md;
+  margin-bottom: $spacing-sm;
 
   > div > div:not(:first-child) {
     background-color: white;
@@ -20,6 +20,10 @@ background-color: $ui-01;
 
   .hedi--profile-entry-content {
    padding: $spacing-md 0; 
+  }
+
+  .hedi--profile-entry-image {
+  margin-left: -1rem;
   }
 
   .hedi--spacing {

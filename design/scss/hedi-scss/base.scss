@@ -10,3 +10,13 @@ address {
 h1 {
   margin: $spacing-lg 0;
 }
+
+.bx--tag {
+line-height: 1.5;
+margin: 0.3rem 0.5rem;
+padding: 0.35rem 0.8rem;
+}
+
+.bx--tag--blue {
+  color: $blue-90;
+}
