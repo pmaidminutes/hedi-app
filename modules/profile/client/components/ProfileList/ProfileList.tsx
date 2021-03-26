@@ -1,7 +1,5 @@
-import { AspectRatio, Column, Grid, Row } from "carbon-components-react";
-import Image from "next/image";
-import { HTMLWithNextImage } from "@/modules/react/html";
 import { ITyped } from "@/modules/model";
+import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ProfileListView } from "@/modules/profile/query";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
 import { isICaregiver, isIMidwife, Profile } from "@/modules/profile/types";
@@ -61,32 +59,13 @@ export const ProfileList = ({ content }: { content: ProfileListView }) => {
     "Tätigkeiten"
   );
   return (
-    <div className={`hedi--profile-list`}>
-      {content.posterImage && (
-        <AspectRatio ratio="2x1">
-          <Image
-            src={content.posterImage.route}
-            alt={content.posterImage.alt}
-            className="hedi-header-image"
-            width={content.posterImage.width}
-            height={content.posterImage.height}
-          />
-        </AspectRatio>
-      )}
-      <Grid>
-        <Row>
-          <Column>
-            <h1>{content.longTitle ?? content.label}</h1>
-            <HTMLWithNextImage data={content.body} />
-          </Column>
-        </Row>
-        {content.profiles.map(profile => (
-          <ProfileEntry
-            {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
-            key={profile.route}
-          />
-        ))}
-      </Grid>
-    </div>
+    <SimplePageView content={content} customKey="profile-list">
+      {content.profiles.map(profile => (
+        <ProfileEntry
+          {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
+          key={profile.route}
+        />
+      ))}
+    </SimplePageView>
   );
 };
