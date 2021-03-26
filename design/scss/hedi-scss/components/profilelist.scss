@@ -3,11 +3,15 @@
     background-color: white;
     margin: $spacing-md 0;
 
-    .hedi--profile-list__item {
+    &.hedi--profile-list__item {
       &--midwife {
-        // background-color: $pink;
+        background-color: $orange-40;
+      }
+      &--caregiver {
+        background-color: $green-40;
       }
     }
+
     &:hover {
       background: #e5e5e5;
     }

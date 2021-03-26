@@ -17011,6 +17011,10 @@ h1 {
 .hedi--profile-list .bx--tile--clickable {
   background-color: white;
   margin: 1rem 0; }
+  .hedi--profile-list .bx--tile--clickable.hedi--profile-list__item--midwife {
+    background-color: #E18F60; }
+  .hedi--profile-list .bx--tile--clickable.hedi--profile-list__item--caregiver {
+    background-color: #6DB2AA; }
   .hedi--profile-list .bx--tile--clickable:hover {
     background: #e5e5e5; }
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry > div > div:not(:first-child),
