@@ -37,14 +37,8 @@ export default function UserFeedbackForm({
   centerProps,
 }: IUserFeedbackFormProps) {
   const router = useRouter();
-  // const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  // const [successMessage, setSuccessMessage] = useState<string | null>(null);
-  const [errorMessage, setErrorMessage] = useState<string | null>(
-    "error message"
-  );
-  const [successMessage, setSuccessMessage] = useState<string | null>(
-    "success msg"
-  );
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   const getSubPage = (key: string, subPages: IAppPage[]) =>
     subPages?.find(page => page.key == key) || ({} as IAppPage);
