@@ -57,14 +57,14 @@ export const Profile = (props: IProfileViewProps) => {
       <Grid>
         <Row>
           {hasServices ? (
-            <Column lg={6}>
+            <Column lg={8}>
               <Services {...servicesData} />
             </Column>
           ) : null}
-          <Column lg={6}>
+          <Column lg={8}>
             <Contact {...contactData} />
           </Column>
-          <Column lg={6}>
+          <Column lg={8}>
             <LanguageSkills {...languagesData} />
           </Column>
         </Row>
