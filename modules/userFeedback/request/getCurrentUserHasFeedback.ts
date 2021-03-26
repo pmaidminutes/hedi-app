@@ -19,8 +19,8 @@ export function getCurrentUserHasFeedback(
       setLoading(false);
     };
 
-    if (user) requestHasFeedback();
-  }, [user]);
+    if (user?.name) requestHasFeedback();
+  }, [user?.name]);
 
   return [hasFeedback, loading];
 }

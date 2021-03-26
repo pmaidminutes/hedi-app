@@ -8,7 +8,8 @@ export const getUser = (): [User | undefined, boolean] => {
   return [user, loading];
 };
 
-export const login = (username: string, password: string) =>
-  signIn("credentials", { username, password });
+export const login = (username: string, password: string) => {
+  signIn("credentials", { username, password, redirect: false });
+};
 
 export const logout = () => signOut();

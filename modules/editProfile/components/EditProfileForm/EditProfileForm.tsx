@@ -33,6 +33,7 @@ type EditProfileInputProps = FormProps & {
 export const EditProfileForm = ({
   config: {
     elements,
+    languageLevelElements,
     conditionalElements,
     domainOptions,
     languageOptions,
@@ -282,7 +283,11 @@ export const EditProfileForm = ({
             <h2>{tryGetValue("group-languageSkills", elements, "Sprachen")}</h2>
           }>
           <LanguageSkillsSelection
-            config={{ elements, languageOptions }}
+            config={{
+              elements,
+              languageLevelElements,
+              languageOptions,
+            }}
             data={profile?.languageSkills}
           />
         </FormGroup>

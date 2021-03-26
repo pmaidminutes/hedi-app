@@ -9,7 +9,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   const [user] = getUser();
   return (
     <SimplePageView
-      url="/Pregnancy_pink80.svg"
+      url="/images/Pregnancy_blue.svg"
       alt="Beschreibung des Bildes"
       content={content}>
       <Row>

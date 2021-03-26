@@ -1,10 +1,11 @@
+import { getUser } from "@/modules/auth/client";
 import {
   Button,
   Form,
   FormProps,
   TextInput,
   TextInputProps,
-  Column,
+  ToastNotification,
 } from "carbon-components-react";
 
 export interface ILoginFormLayoutProps extends FormProps {
@@ -21,9 +22,19 @@ export const LoginFormLayout = ({
   backButtonText,
   ...formProps
 }: ILoginFormLayoutProps) => {
+  const [user, loading] = getUser();
   return (
     <>
       <Form {...formProps}>
+        {/*  {!(user)?
+      <ToastNotification
+          kind="error"
+          lowContrast={true}
+          title="Error"
+          caption="Invalid information" 
+          hideCloseButton={true}
+          style={{ minWidth: "50rem", marginBottom: ".5rem" }}
+        />:""} */}
         <TextInput type="text" {...usernameInput} />
 
         <TextInput type="password" {...passwordInput} />

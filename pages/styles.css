@@ -16916,8 +16916,8 @@ h1 {
 .hedi--simple-page p:last-of-type {
   margin-bottom: 3rem; }
 
-.hedi--simple-page h1 {
-  margin: 1.5rem 0; }
+.hedi--simple-page h2 {
+  margin-bottom: 1rem; }
 
 .hedi--profile-contact {
   margin-bottom: 2rem; }
@@ -17013,6 +17013,11 @@ h1 {
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry > div > div:not(:first-child),
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry--with-services {
     background-color: transparent; }
+
+.hedi--profile-list .hedi--profile-entry + svg {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem; }
 
 /* 
   @font-face {
