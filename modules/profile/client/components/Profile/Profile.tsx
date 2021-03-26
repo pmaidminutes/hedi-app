@@ -13,6 +13,7 @@ import { ProfileView } from "@/modules/profile/query/getProfile";
 import { getUser } from "@/modules/auth/client";
 import { tryGetValue } from "@/modules/common/utils";
 import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { Edit24 } from "@carbon/icons-react";
 
 const locations: Location[] = [];
 
@@ -55,9 +56,18 @@ export const Profile = (props: IProfileViewProps) => {
             !userIsLoading &&
             currentProfile &&
             currentProfile.route == props.content.route && (
-              <Button href={"/" + props.content.lang + "/user/profile/edit"}>
-                {tryGetValue("edit_button", props.content.elements)}
-              </Button>
+              <Row narrow className={"hedi--profile-edit-button"}>
+                <Button
+                  size="sm"
+                  kind="secondary"
+                  href={"/" + props.content.lang + "/user/profile/edit"}>
+                  {tryGetValue("edit_button", props.content.elements)}{" "}
+                  <Edit24
+                    aria-label="Edit Profile"
+                    className="hedi--profile-edit-icon"
+                  />
+                </Button>
+              </Row>
             )}
           <ProfileEntry isNarrow={true} {...profileEntryData} />
         </Grid>

@@ -48,7 +48,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
           />
         </Column>
       </Row>
-      <Seperator />
+      <Row>
+        <Column lg={{ span: 16 }}>
+          <Seperator />
+        </Column>
+      </Row>
       <Row>
         <Column {...left}>
           <Services {...servicesData} />
@@ -59,7 +63,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
           />
         </Column>
       </Row>
-      <Seperator />
+      <Row>
+        <Column lg={{ span: 16 }}>
+          <Seperator />
+        </Column>
+      </Row>
       <Row>
         <Column {...left}>
           <Contact {...contactData} />
@@ -70,7 +78,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
           />
         </Column>
       </Row>
-      <Seperator />
+      <Row>
+        <Column lg={{ span: 16 }}>
+          <Seperator />
+        </Column>
+      </Row>
       <Row>
         <Column {...left}>
           <LanguageSkills {...languagesData} />
@@ -81,7 +93,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
           />
         </Column>
       </Row>
-      <Seperator />
+      <Row>
+        <Column lg={{ span: 16 }}>
+          <Seperator />
+        </Column>
+      </Row>
       <Row>
         <Column {...center}>
           <UserFeedbackAppPageEntry
@@ -89,7 +105,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
           />
         </Column>
       </Row>
-      <Seperator />
+      <Row>
+        <Column lg={{ span: 16 }}>
+          <Seperator />
+        </Column>
+      </Row>
       <Row>
         <Column {...center}>
           <UserFeedbackAppPageEntry
@@ -97,11 +117,15 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
           />
         </Column>
       </Row>
-      <UserFeedbackSendbox
-        elements={elements}
-        errorMessage={errorMessage}
-        successMessage={successMessage}
-      />
+      <Row>
+        <Column {...center}>
+          <UserFeedbackSendbox
+            elements={elements}
+            errorMessage={errorMessage}
+            successMessage={successMessage}
+          />
+        </Column>
+      </Row>
     </MultipleUserFeedback>
   );
 }

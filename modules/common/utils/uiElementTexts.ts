@@ -54,7 +54,7 @@ export const tryGetKeyLabel = (
   const link = links?.find(item => item.key === key);
   if (!link) return fallback ?? key;
   return link.longTitle ?? link.label ?? fallback ?? key;
-}
+};
 
 export const tryGetKeyLinks = (
   key: string,

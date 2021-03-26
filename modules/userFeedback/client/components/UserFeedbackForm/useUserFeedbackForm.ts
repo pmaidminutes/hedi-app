@@ -63,9 +63,9 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
       tryGet("error_message", content.elements)?.description || null
     );
 
-  const left = leftColumnProps ?? { sm: 12, lg: 6, xlg: 7 };
-  const right = rightColumnProps ?? { sm: 12, lg: 6, xlg: 7 };
-  const center = centerProps ?? { lg: { span: 10, offset: 3 } };
+  const left = leftColumnProps ?? { sm: 4, lg: { span: 8 } };
+  const right = rightColumnProps ?? { sm: 4, lg: { span: 8 } };
+  const center = centerProps ?? { lg: { span: 8, offset: 4 } };
 
   return {
     locale,

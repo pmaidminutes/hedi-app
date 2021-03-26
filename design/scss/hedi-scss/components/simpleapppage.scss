@@ -4,6 +4,7 @@
 
   .hedi--hero-image {
     min-width: 100%;
+    width: 100%;
     height: auto;
   }
     
@@ -28,8 +29,8 @@
     margin-bottom: $layout-md;
   }
 
-  h1 {
-    margin: $spacing-lg 0;
+  h2 {
+    margin-bottom: $spacing-md;
   }
 
   ul {
