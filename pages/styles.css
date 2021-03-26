@@ -16549,6 +16549,11 @@ h1 {
   .hedi--bg-img-container .bx--row {
     margin-right: 0;
     margin-left: 0; }
+  .hedi--bg-img-container .hedi--profile-edit-button {
+    flex-direction: row;
+    justify-content: flex-end; }
+  .hedi--bg-img-container .hedi--profile-edit-icon {
+    padding-left: 0.5rem; }
 
 .hedi--button-container {
   display: flex; }
