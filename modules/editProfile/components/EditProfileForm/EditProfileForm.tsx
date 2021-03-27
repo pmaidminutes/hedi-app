@@ -281,21 +281,23 @@ export const EditProfileForm = ({
 
       <Seperator />
 
-      {/* <div className="hedi--group hedi--group--language-skills">
+      <div className="hedi--group hedi--group--language-skills">
         <FormGroup
           legendText={
             <h2>{tryGetValue("group-languageSkills", elements, "Sprachen")}</h2>
           }>
-          <LanguageSkillsSelection
-            config={{
-              elements,
-              languageLevelElements,
-              languageOptions,
-            }}
-            data={profile?.languageSkills}
-          />
+          <Row>
+            <LanguageSkillsSelection
+              config={{
+                elements,
+                languageLevelElements,
+                languageOptions,
+              }}
+              data={profile?.languageSkills}
+            />
+          </Row>
         </FormGroup>
-      </div> */}
+      </div>
 
       {profileType !== "Parent" && profileType !== "Midwife" && (
         <div className="hedi--group hedi--group--domains">
