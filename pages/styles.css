@@ -17011,10 +17011,10 @@ h1 {
 .hedi--profile-list .bx--tile--clickable {
   background-color: white;
   margin: 1rem 0; }
-  .hedi--profile-list .bx--tile--clickable.hedi--profile-list__item--midwife {
-    background-color: #E18F60; }
-  .hedi--profile-list .bx--tile--clickable.hedi--profile-list__item--caregiver {
-    background-color: #6DB2AA; }
+  .hedi--profile-list .bx--tile--clickable.hedi--profile-list__item--midwife .hedi--profile-entry-image svg .cls-1 {
+    fill: #4E1913; }
+  .hedi--profile-list .bx--tile--clickable.hedi--profile-list__item--caregiver .hedi--profile-entry-image svg .cls-1 {
+    fill: #003824; }
   .hedi--profile-list .bx--tile--clickable:hover {
     background: #e5e5e5; }
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry > div > div:not(:first-child),
@@ -17150,6 +17150,10 @@ h1 {
 .bx--content {
   padding: 0;
   min-height: 95vh; }
+
+@media (max-width: 769px) {
+  .bx--row {
+    max-width: 100%; } }
 
 .hidden {
   display: none; }
