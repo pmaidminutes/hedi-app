@@ -16545,7 +16545,7 @@ h1 {
   .hedi--bg-img-container .hedi--profile-entry-image {
     background-color: #fff; }
     @media (max-width: 769px) {
-      .hedi--bg-img-container .hedi--profile-entry-image {
+      .hedi--bg-img-container .hedi--profile-entry-image svg {
         max-height: 200px; } }
   .hedi--bg-img-container > div {
     position: relative;
@@ -16683,7 +16683,8 @@ h1 {
   background-color: transparent;
   display: flex;
   justify-content: flex-end;
-  margin-top: 0.5rem 0; }
+  margin-top: 0.5rem;
+  padding: 0 2rem; }
   .hedi--footer svg {
     fill: #697077; }
   .hedi--footer a, .hedi--footer .bx--link {
@@ -16801,7 +16802,11 @@ h1 {
   width: 100%; }
 
 .hedi--language-skills svg {
-  color: #942345; }
+  color: #D36E3C; }
+  .hedi--language-skills svg.inactive {
+    color: #F7CEB2; }
+    .hedi--language-skills svg.inactive path:first-child {
+      display: none; }
 
 @media (max-width: 769px) {
   .hedi--language-skills table {
@@ -16813,7 +16818,7 @@ h1 {
 .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
   background-color: #005D90;
   border-radius: 50%;
-  bottom: 2rem;
+  bottom: 1.5rem;
   color: #ffffff;
   cursor: pointer;
   text-align: center;
@@ -16825,7 +16830,7 @@ h1 {
     background: #2A84C6; }
 
 .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-  bottom: 6rem; }
+  bottom: 3rem; }
 
 .hedi-separator {
   display: block;
@@ -17072,7 +17077,7 @@ h1 {
 .hedi--profile--tile h3,
 .hedi--profile--tile h4,
 .hedi--profile--tile h5 {
-  padding-bottom: 0.5rem; }
+  padding-bottom: 0.75rem; }
 
 @media (max-width: 769px) {
   img {
@@ -17089,8 +17094,9 @@ h1 {
   background-color: #2A84C6;
   background-image: url(/images/Baby_Hand_gedreht.svg);
   background-repeat: no-repeat;
-  background-position: right center;
-  background-size: contain;
+  background-position-x: 101%;
+  background-position-y: 2rem;
+  background-size: 180px;
   color: #fff;
   padding: 1rem;
   width: 100%; }
@@ -17101,12 +17107,11 @@ h1 {
     .hedi--related-profiles {
       padding: 0.5rem; } }
   .hedi--related-profiles--profile {
-    height: 100%;
-    margin-bottom: 1rem; }
+    margin: 1rem 0; }
     .hedi--related-profiles--profile svg {
       position: absolute;
-      bottom: 0;
-      right: 0; }
+      bottom: 0.5rem;
+      right: 0.5rem; }
 
 /* 
   @font-face {

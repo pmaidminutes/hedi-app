@@ -16,8 +16,18 @@
   }
 
   svg {
-    color: $pink-80;
+    color: $orange-50;
+
+    &.inactive{
+      color: $orange-20;
+      path:first-child{
+        display: none;
+      }
+    }
   }
+  // svg {
+  //   color: $pink-80;
+  // }
 
   @media (max-width: 769px) {
     table {

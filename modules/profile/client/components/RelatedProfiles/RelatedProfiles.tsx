@@ -3,7 +3,7 @@ import {
   IRelatedProfilesProps,
   useRelatedProfiles,
 } from "./useRelatedProfiles";
-import { AspectRatio, Row } from "carbon-components-react";
+import { Grid, Row } from "carbon-components-react";
 import { RelatedProfile } from "./RelatedProfile";
 
 // TODO remove testdata
@@ -25,13 +25,14 @@ export const RelatedProfiles = (props: IRelatedProfilesProps) => {
   const { headline } = useRelatedProfiles(props);
   return (
     <section className="hedi--related-profiles">
-      <AspectRatio ratio="2x1">
+      <Grid>
+        <h3>{headline}</h3>
         <Row>
           {data.map((profile, index) => (
             <RelatedProfile key={index} {...profile} />
           ))}
         </Row>
-      </AspectRatio>
+      </Grid>
     </section>
   );
 };

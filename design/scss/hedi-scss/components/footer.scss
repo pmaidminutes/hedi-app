@@ -3,8 +3,8 @@
   background-color: transparent;
   display: flex;
   justify-content: flex-end;
-  margin-top: $spacing-xs 0;
-  // padding: $carbon--spacing-05 ;
+  margin-top: $spacing-xs;
+  padding: 0 $spacing-xl;
 
   svg {
     fill: $cool-gray-60;

@@ -2,7 +2,7 @@
   button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
     background-color: $blue-80;
     border-radius: 50%;
-    bottom: $spacing-xl;
+    bottom: $spacing-lg;
     color: $text-04;
     cursor: pointer;
     text-align: center;
@@ -17,7 +17,7 @@
 
   &__bottom {
     button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-      bottom: $layout-xl;
+      bottom: $layout-md;
     }
   }
 }

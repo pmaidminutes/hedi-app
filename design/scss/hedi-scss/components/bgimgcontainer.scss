@@ -23,7 +23,9 @@
       background-color: #fff;
 
       @media (max-width: 769px) {
-        max-height: 200px;
+        svg {
+          max-height: 200px;
+        }
       }
     }
   }
