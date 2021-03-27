@@ -18,7 +18,7 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
   return (
     <>
       <MapContainer
-        center={convertToCoordinates(currentLocation.lat, currentLocation.long)}
+        // center={convertToCoordinates(currentLocation.lat, currentLocation.long)} HACK currently incompatible
         zoom={12}
         scrollWheelZoom={false}>
         <TileLayer
@@ -27,7 +27,7 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
         />
         {locations?.map((location: Location) => (
           <Marker
-            position={convertToCoordinates(location.lat, location.long)}
+            position={convertToCoordinates("", "")} // (location.lat, location.long) HACK currently incompatible
             icon={iconPerson}
             key={location.displayName}>
             <Popup>{location.displayName}</Popup>

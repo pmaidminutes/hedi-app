@@ -52,7 +52,7 @@ export const Page = ({ content }: IPageProps): JSX.Element => {
         <>
           {" "}
           <div className="hedi-separator"></div>
-          <TagList tags={tags} />{" "}
+          {/* <TagList tags={tags} />{" "} //TODO currently broken due to work in IService */}
         </>
       ) : null}
     </>

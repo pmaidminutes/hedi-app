@@ -16,6 +16,7 @@ export const getStaticProps: GetStaticProps<
   const shellKeys = {
     header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
     footer: ["imprint", "privacy"],
+    userMenu: ["login", "logout", "viewprofile"],
   };
 
   const [content, shellConfig] = await Promise.all([

@@ -22,6 +22,7 @@ export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
   const shellKeys = {
     header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
     footer: ["imprint", "privacy"],
+    userMenu: ["login", "logout", "viewprofile"],
   };
 
   const [content, shellConfig] = await Promise.all([
@@ -35,7 +36,6 @@ export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
   }
 
   const shell = useShell(content, shellConfig);
-
   return {
     props: { content, shell },
   };
