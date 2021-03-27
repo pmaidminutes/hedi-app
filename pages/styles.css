@@ -16642,25 +16642,31 @@ h1 {
 .hedi--edit-profile .hedi--group--language-skills .bx--data-table-content {
   overflow-x: visible !important; }
 
+.hedi--edit-profile .hedi--group--profile-type .bx--row {
+  max-width: 100%; }
+
 .hedi--edit-profile .bx--form-item {
   margin-bottom: 1.5rem; }
 
-.hedi--edit-profile .bx--label h2, .hedi--edit-profile h3, .hedi--edit-profile h4 {
+.hedi--edit-profile .bx--label h2,
+.hedi--edit-profile h3,
+.hedi--edit-profile h4 {
   color: black; }
 
-.hedi--edit-profile div.hedi--group--profile-type {
-  padding: 2rem 1rem 0.5rem 1rem;
+.hedi--edit-profile .hedi--group--profile-type {
+  width: 100%;
+  padding: 1rem;
   margin-bottom: 2rem;
   background-color: #2A84C6; }
-
-.hedi--edit-profile div.hedi--group--profile-type h2 {
-  color: white; }
+  .hedi--edit-profile .hedi--group--profile-type h2 {
+    color: white; }
+  .hedi--edit-profile .hedi--group--profile-type .bx--content-switcher {
+    max-width: 550px; }
 
 .hedi--edit-profile .hedi--service-selection {
   margin-bottom: 1rem; }
-
-.hedi--edit-profile .hedi--service-selection__head {
-  margin-bottom: 0; }
+  .hedi--edit-profile .hedi--service-selection__head {
+    margin-bottom: 0; }
 
 .hedi--edit-profile .bx--tile--is-selected {
   background-color: #2A84C6;
@@ -16911,6 +16917,14 @@ h1 {
   width: 100%;
   height: auto; }
 
+@supports ((-o-object-fit: cover) or (object-fit: cover)) {
+  .hedi--simple-page .hedi--hero-image {
+    min-height: 200px;
+    -o-object-fit: cover;
+       object-fit: cover;
+    -o-object-position: center;
+       object-position: center; } }
+
 .hedi--simple-page .hedi-app-page-image-wrapper {
   height: 100%;
   align-self: center; }
@@ -17080,13 +17094,13 @@ h1 {
   padding-bottom: 0.75rem; }
 
 @media (max-width: 769px) {
-  img {
+  .hedi--profile--tile img {
     position: absolute;
     right: 0;
     z-index: 1;
     top: 50%;
     transform: translateY(-50%); }
-  aside {
+  .hedi--profile--tile aside {
     position: relative;
     z-index: 2; } }
 
@@ -17095,7 +17109,7 @@ h1 {
   background-image: url(/images/Baby_Hand_gedreht.svg);
   background-repeat: no-repeat;
   background-position-x: 101%;
-  background-position-y: 2rem;
+  background-position-y: 3rem;
   background-size: 180px;
   color: #fff;
   padding: 1rem;

@@ -38,7 +38,6 @@ export const Profile = (props: IProfileViewProps) => {
     servicesData,
     contactData,
     relatedProfilesData,
-    mapData,
     hasServices,
   } = useProfile(props);
 

@@ -18,18 +18,17 @@
   h5 {
     padding-bottom: $spacing-sm;
   }
-}
-
-@media (max-width: 769px) {
-  img {
-    position: absolute;
-    right: 0;
-    z-index: 1;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-  aside {
-    position: relative;
-    z-index: 2;
+  @media (max-width: 769px) {
+    img {
+      position: absolute;
+      right: 0;
+      z-index: 1;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+    aside {
+      position: relative;
+      z-index: 2;
+    }
   }
 }

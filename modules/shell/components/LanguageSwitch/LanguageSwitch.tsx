@@ -1,7 +1,7 @@
 // Types
 import { useLanguageSwitch, ILanguageSwitchProps } from "./useLanguageSwitch";
 import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
-import { Language32 } from "@carbon/icons-react";
+import { Translate32 } from "@carbon/icons-react";
 /**
  * Language Switch Component.
  *
@@ -16,7 +16,7 @@ export const LanguageSwitch = (
   if (links) {
     return (
       <OverflowMenu
-        renderIcon={Language32}
+        renderIcon={Translate32}
         ariaLabel="Language Menu"
         size="xl"
         direction={direction}
