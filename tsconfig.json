@@ -23,8 +23,5 @@
   },
 
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
-  "exclude": [
-    "node_modules", 
-    "modules/common/components/VideoPlayer/*",
-    "pages/playground/video.ts"]
+  "exclude": ["node_modules"]
 }
