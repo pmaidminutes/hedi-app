@@ -16540,20 +16540,19 @@ h1 {
     background-image: url(/images/profile_bg.png);
     filter: opacity(0.75);
     background-size: contain; }
+  .hedi--bg-img-container .bx--row--narrow {
+    justify-content: flex-end; }
+  .hedi--bg-img-container .hedi--profile-entry-image {
+    background-color: #fff; }
+    @media (max-width: 769px) {
+      .hedi--bg-img-container .hedi--profile-entry-image {
+        max-height: 200px; } }
   .hedi--bg-img-container > div {
     position: relative;
     width: 100%; }
-  @media (max-width: 768px) {
+  @media (max-width: 769px) {
     .hedi--bg-img-container {
       padding: 1rem; } }
-  .hedi--bg-img-container .bx--row {
-    margin-right: 0;
-    margin-left: 0; }
-  .hedi--bg-img-container .hedi--profile-edit-button {
-    flex-direction: row;
-    justify-content: flex-end; }
-  .hedi--bg-img-container .hedi--profile-edit-icon {
-    padding-left: 0.5rem; }
 
 .hedi--button-container {
   display: flex; }
@@ -16788,23 +16787,28 @@ h1 {
     src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
      }
  $roboto-mono: 'Roboto Mono', monospace; */
-.hedi--language-skills {
-  margin-bottom: 2rem; }
-  .hedi--language-skills tr {
-    display: flex;
-    align-items: center;
-    padding: 1rem;
-    background-color: #fff; }
-    .hedi--language-skills tr:not(:last-child) {
-      margin-bottom: 0.5rem; }
-    .hedi--language-skills tr td:first-child {
-      min-width: 100px; }
-  .hedi--language-skills .bx--tile {
+.hedi--language-skills tr {
+  display: flex;
+  align-items: center;
+  padding: 1rem;
+  background-color: #fff; }
+  .hedi--language-skills tr:not(:last-child) {
+    margin-bottom: 0.5rem; }
+  .hedi--language-skills tr td:first-child {
+    min-width: 100px; }
+
+.hedi--language-skills .bx--tile {
+  width: 100%; }
+
+.hedi--language-skills svg {
+  color: #942345; }
+
+@media (max-width: 769px) {
+  .hedi--language-skills table {
     width: 100%; }
-  .hedi--language-skills svg {
-    color: #942345; }
-  .hedi--language-skills h3, .hedi--language-skills h4, .hedi--language-skills h5 {
-    padding-bottom: 0.5rem; }
+  .hedi--language-skills tbody tr {
+    display: flex;
+    justify-content: space-between; } }
 
 .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
   background-color: #005D90;
@@ -16922,19 +16926,18 @@ h1 {
 .hedi--simple-page h2 {
   margin-bottom: 1rem; }
 
-.hedi--profile-contact {
-  margin-bottom: 2rem; }
-  .hedi--profile-contact img {
-    margin-bottom: 2rem;
-    margin-left: -1.5rem; }
-  .hedi--profile-contact address {
-    padding-bottom: 0.75rem; }
-  .hedi--profile-contact .hedi--consultation-hours-wrapper {
-    padding-top: 0.75rem; }
-  .hedi--profile-contact h3, .hedi--profile-contact h4, .hedi--profile-contact h5 {
-    padding-bottom: 0.5rem; }
-  .hedi--profile-contact a > svg {
-    margin-bottom: -2px; }
+.hedi--profile-contact img {
+  margin-bottom: 2rem;
+  margin-left: -1.5rem; }
+
+.hedi--profile-contact address {
+  padding-bottom: 0.75rem; }
+
+.hedi--profile-contact .hedi--consultation-hours-wrapper {
+  padding-top: 0.75rem; }
+
+.hedi--profile-contact a > svg {
+  margin-bottom: -2px; }
 
 /* 
   @font-face {
@@ -17001,12 +17004,8 @@ h1 {
     .hedi--profile-entry--with-services .hedi__tag-list {
       padding-top: 0.75rem; }
 
-.hedi--profile-services {
+.hedi--profile-services img {
   margin-bottom: 2rem; }
-  .hedi--profile-services h3, .hedi--profile-services h4, .hedi--profile-services h5 {
-    padding-bottom: 0.5rem; }
-  .hedi--profile-services img {
-    margin-bottom: 2rem; }
 
 .hedi--profile-list .bx--tile--clickable {
   background-color: white;
@@ -17064,10 +17063,27 @@ h1 {
   width: 100%;
   margin-bottom: 1rem; }
 
-.hedi--profile--tile img, .hedi--profile--tile svg {
+.hedi--profile--tile img,
+.hedi--profile--tile svg {
   max-width: 130px;
   max-height: 140px;
   height: auto; }
+
+.hedi--profile--tile h3,
+.hedi--profile--tile h4,
+.hedi--profile--tile h5 {
+  padding-bottom: 0.5rem; }
+
+@media (max-width: 769px) {
+  img {
+    position: absolute;
+    right: 0;
+    z-index: 1;
+    top: 50%;
+    transform: translateY(-50%); }
+  aside {
+    position: relative;
+    z-index: 2; } }
 
 .hedi--related-profiles {
   background-color: #2A84C6;
@@ -17150,10 +17166,6 @@ h1 {
 .bx--content {
   padding: 0;
   min-height: 95vh; }
-
-@media (max-width: 769px) {
-  .bx--row {
-    max-width: 100%; } }
 
 .hidden {
   display: none; }

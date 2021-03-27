@@ -56,23 +56,20 @@ export const Profile = (props: IProfileViewProps) => {
             !userIsLoading &&
             currentProfile &&
             currentProfile.route == props.content.route && (
-              <Row narrow className={"hedi--profile-edit-button"}>
+              <Row narrow>
                 <Button
                   size="sm"
                   kind="secondary"
+                  renderIcon={Edit24}
                   href={"/" + props.content.lang + "/user/profile/edit"}>
                   {tryGetValue("edit_button", props.content.elements)}{" "}
-                  <Edit24
-                    aria-label="Edit Profile"
-                    className="hedi--profile-edit-icon"
-                  />
                 </Button>
               </Row>
             )}
           <ProfileEntry isNarrow={true} {...profileEntryData} />
         </Grid>
       </BgImgContainer>
-      <Grid>
+      <Grid className="hedi--profile">
         <Row>
           {hasServices ? (
             <Column lg={8}>

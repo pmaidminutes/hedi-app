@@ -1,6 +1,4 @@
 .hedi--language-skills {
-    margin-bottom: $layout-sm;
-
   tr {
     display: flex;
     align-items: center;
@@ -21,7 +19,13 @@
     color: $pink-80;
   }
 
-  h3, h4, h5 {
-    padding-bottom: $spacing-xs;
+  @media (max-width: 769px) {
+    table {
+      width: 100%;
     }
+    tbody tr {
+      display: flex;
+      justify-content: space-between;
+    }
+  }
 }

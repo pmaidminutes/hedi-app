@@ -6,7 +6,7 @@ import { ArrowRight24 } from "@carbon/icons-react";
 export const RelatedProfile = (props: IRelatedProfile) => {
   const { longtitle, city, route, description } = useRelatedProfile(props);
   return (
-    <Column sm={2} md={3} lg={3} className="hedi--related-profiles--profile">
+    <Column md={3} lg={3} className="hedi--related-profiles--profile">
       <ClickableTile href={route}>
         <AspectRatio ratio="1x1">
           <h4>{longtitle}</h4>
