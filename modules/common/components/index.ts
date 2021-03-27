@@ -6,4 +6,3 @@ export * from "./Seperator";
 export * from "./Stars";
 export * from "./Tag";
 export * from "./TagList";
-export * from "./VideoPlayer";
