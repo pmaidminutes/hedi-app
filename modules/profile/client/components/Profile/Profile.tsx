@@ -9,10 +9,10 @@ import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
 import { IProfileViewProps, useProfile } from "./useProfile";
-import { ProfileView } from "@/modules/profile/query/getProfile";
+import { ProfileView } from "../../../query/getProfile";
 import { getUser } from "@/modules/auth/client";
 import { tryGetValue } from "@/modules/common/utils";
-import { useCurrentProfile } from "@/modules/profile/client/hooks";
+import { useCurrentProfileEntity } from "../../hooks";
 import { Edit24 } from "@carbon/icons-react";
 
 const locations: Location[] = [];
@@ -43,7 +43,7 @@ export const Profile = (props: IProfileViewProps) => {
   } = useProfile(props);
 
   const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileLoading] = useCurrentProfile(
+  const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
     user,
     props.content.lang
   );
