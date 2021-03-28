@@ -30,6 +30,15 @@ export function jsonFetcher<T>(url: RequestInfo) {
     .then(jsonResponse => jsonResponse as T);
 }
 
+export function jsonPost<T>(url: RequestInfo, data: object) {
+  return fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then(res => res.json())
+    .then(jsonResponse => jsonResponse as T);
+}
+
 export function getLangByRoute(route: string) {
   return route
     .split("/")
