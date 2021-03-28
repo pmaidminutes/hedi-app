@@ -13,7 +13,7 @@ export const getProfileListPage = async (
 
   return {
     ...content,
-    useHeader: true,
+    useHeader: "AUTHORIZED",
     revalidate: 1,
   };
 };

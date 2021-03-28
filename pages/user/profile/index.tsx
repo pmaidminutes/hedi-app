@@ -36,6 +36,7 @@ export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
   }
 
   const shell = useShell(content, shellConfig);
+  shell.useHeader = "AUTHORIZED";
   return {
     props: { content, shell },
   };

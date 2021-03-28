@@ -18,10 +18,12 @@ export interface IShellProps
   userMenu?: IShellLink[];
 }
 
+export type AccessRule = false | "AUTHORIZED" | true; // HACK definition for quick compatibility actual meaning: hidden, authorized user, always
+
 export interface IPageConfig extends Partial<IAppStyled> {
   translations?: IEntityLocalized[];
   needsAuth?: boolean;
-  useHeader?: boolean;
+  useHeader?: AccessRule;
   // TODO: Serverseitig
   useBreadCrumb?: boolean;
   revalidate?: boolean | number;

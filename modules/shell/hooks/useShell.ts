@@ -28,7 +28,7 @@ export function useShell(
       "languageSwitchLinks",
       generateLanguageSwitchLinks(languages, translations)
     );
-  setProperty(shell, "useHeader", useHeader !== undefined ? useHeader : true);
+  setProperty(shell, "useHeader", useHeader !== undefined ? useHeader : false);
   if (appstyle) setProperty(shell, "appstyle", appstyle);
   if (revalidate) setProperty(shell, "revalidate", revalidate);
   if (useBreadCrumb) setProperty(shell, "useBreadCrumb", useBreadCrumb);

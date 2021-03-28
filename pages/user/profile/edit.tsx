@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<
   }
 
   const shell = useShell(content, shellConfig);
-
+  shell.useHeader = true;
   return {
     props: { content, shell },
   };

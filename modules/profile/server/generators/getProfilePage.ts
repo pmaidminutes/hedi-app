@@ -14,7 +14,7 @@ export const getProfilePage = async (
 
   return {
     ...content,
-    useHeader: true,
+    useHeader: "AUTHORIZED",
     revalidate: 1,
   };
 };

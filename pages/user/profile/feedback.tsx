@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps<
   }
 
   const shell = useShell(content, shellConfig);
-
+  shell.useHeader = "AUTHORIZED";
   return {
     props: { content, shell },
   };
