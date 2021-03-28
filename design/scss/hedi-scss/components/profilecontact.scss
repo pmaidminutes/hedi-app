@@ -1,28 +1,19 @@
 .hedi--profile-contact {
-margin-bottom: $layout-sm;
-
-img {
+  img {
     margin-bottom: $layout-sm;
     margin-left: -1.5rem;
-    }
+  }
 
-address {
-padding-bottom: $spacing-sm;
-}
-   
-.hedi--consultation-hours-wrapper {
-padding-top: $spacing-sm;
-}
+  address {
+    padding-bottom: $spacing-sm;
+  }
 
-h3, h4, h5 {
-padding-bottom: $spacing-xs;
-}
+  .hedi--consultation-hours-wrapper {
+    padding-top: $spacing-sm;
+  }
 
-// set launch Icon down.
-a > svg {
-margin-bottom: -2px;
-}
-
-
-
+  // set launch Icon down.
+  a > svg {
+    margin-bottom: -2px;
+  }
 }

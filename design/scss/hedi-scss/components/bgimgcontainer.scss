@@ -13,29 +13,34 @@
     filter: opacity(0.75);
     background-size: contain;
   }
-  
+
+  .bx--row--narrow {
+    justify-content: flex-end;
+  }
+
+  .hedi--profile-entry {
+    &-image {
+      background-color: #fff;
+
+      @media (max-width: 769px) {
+        svg {
+          max-height: 200px;
+        }
+      }
+    }
+  }
+
   > div {
     position: relative;
     width: 100%;
   }
 
-  @media(max-width: 768px) {
+  @media (max-width: 769px) {
     padding: $spacing-md;
   }
 
-  .bx--row {
-    margin-right: 0;
-    margin-left: 0;
-  }
-
-  .hedi--profile-edit-button {
-    flex-direction: row;
-    justify-content: flex-end;
-  }
-
-  .hedi--profile-edit-icon {
-    padding-left: 0.5rem;
-  }
-
-
+  // .bx--row {
+  //   margin-right: 0;
+  //   margin-left: 0;
+  // }
 }

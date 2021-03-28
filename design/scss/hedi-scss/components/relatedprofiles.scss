@@ -1,9 +1,10 @@
 .hedi--related-profiles {
   background-color: $blue-60;
-  background-image:url(/images/Baby_Hand_gedreht.svg);
+  background-image: url(/images/Baby_Hand_gedreht.svg);
   background-repeat: no-repeat;
-  background-position: right center;
-  background-size: contain;;
+  background-position-x: 101%;
+  background-position-y: 3rem;
+  background-size: 180px;
   color: #fff;
   padding: $spacing-md;
   width: 100%;
@@ -17,13 +18,13 @@
   }
 
   &--profile {
-    height: 100%;
-    margin-bottom: $spacing-md;
+    // height: 100%;
+    margin: $spacing-md 0;
 
     svg {
       position: absolute;
-      bottom: 0;
-      right: 0;
+      bottom: 0.5rem;
+      right: 0.5rem;
     }
   }
 }

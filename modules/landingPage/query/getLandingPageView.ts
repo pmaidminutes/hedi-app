@@ -45,10 +45,12 @@ export async function getLandingPageView(
       links: appPagesByKey(keys: ["registration","login"], lang: $lang) {
         key
         ${EntityFields}
+        longTitle
       }
       linksIfLoggedIn: appPagesByKey(keys: ["editProfile"], lang: $lang) {
         key
         ${EntityFields}
+        longTitle
       }
     }
   `;

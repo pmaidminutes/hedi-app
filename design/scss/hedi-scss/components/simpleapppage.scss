@@ -1,18 +1,25 @@
 @import "./theme/hedi-theme.scss";
 
 .hedi--simple-page {
-
   .hedi--hero-image {
     min-width: 100%;
     width: 100%;
     height: auto;
   }
-    
+
+  @supports (object-fit: cover) {
+    .hedi--hero-image {
+      min-height: 200px;
+      object-fit: cover;
+      object-position: center;
+    }
+  }
+
   .hedi-app-page-image-wrapper {
     height: 100%;
     align-self: center;
-   }
-  
+  }
+
   .hedi--app-page-image {
     display: flex;
     justify-content: flex-end;

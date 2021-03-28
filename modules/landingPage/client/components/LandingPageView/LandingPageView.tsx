@@ -21,7 +21,9 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
                     <FormLabel>
                       {tryGet(link.key, content.elements)?.help}
                     </FormLabel>
-                    <Button href={link.route}>{link.label}</Button>
+                    <Button href={link.route}>
+                      {link.longTitle ?? link.label}
+                    </Button>
                   </div>
                 ))
               : content.links.map(link => (
@@ -29,7 +31,9 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
                     <FormLabel>
                       {tryGet(link.key, content.elements)?.help}
                     </FormLabel>
-                    <Button href={link.route}>{link.label}</Button>
+                    <Button href={link.route}>
+                      {link.longTitle ?? link.label}
+                    </Button>
                   </div>
                 ))}
           </ButtonContainer>

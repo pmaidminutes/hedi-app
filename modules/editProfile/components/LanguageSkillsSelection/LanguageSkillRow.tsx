@@ -28,7 +28,7 @@ export const LanguageSkillRow = ({
   } = useLanguageSkillRow(data);
   return (
     <TableRow>
-      <TableCell>
+      <TableCell data-th={tryGetValue("language", elements, "Sprache")}>
         <Dropdown
           id="langcode"
           titleText=""
@@ -42,7 +42,7 @@ export const LanguageSkillRow = ({
           onChange={handleLanguageChange}
         />
       </TableCell>
-      <TableCell>
+      <TableCell data-th={tryGetValue("level", elements, "Verständnis")}>
         <Dropdown
           id="level"
           label={tryGetValue("level", elements, "Verständnis")}

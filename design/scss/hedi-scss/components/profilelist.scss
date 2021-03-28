@@ -5,10 +5,14 @@
 
     &.hedi--profile-list__item {
       &--midwife {
-        background-color: $orange-40;
+        .hedi--profile-entry-image svg .cls-1 {
+          fill: $orange-100;
+        }
       }
       &--caregiver {
-        background-color: $green-40;
+        .hedi--profile-entry-image svg .cls-1 {
+          fill: $green-100;
+        }
       }
     }
 
