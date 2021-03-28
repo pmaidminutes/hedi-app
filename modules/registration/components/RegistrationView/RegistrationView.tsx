@@ -1,5 +1,5 @@
 import { tryGetRedirect, tryGetValue } from "@/modules/common/utils";
-import { useLoginView } from "@/modules/login/hooks";
+import { useAuthorizedRedirect } from "@/modules/react/hooks";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
 import { Button, Column, Row } from "carbon-components-react";
@@ -16,7 +16,9 @@ type RegisterInputProps = {
 
 export const RegistrationView = ({ content }: RegisterInputProps) => {
   const router = useRouter();
-  useLoginView(tryGetRedirect("redirect", content.elements, content.links));
+  useAuthorizedRedirect(
+    tryGetRedirect("redirect", content.elements, content.links)
+  );
 
   return (
     <SimplePageView
