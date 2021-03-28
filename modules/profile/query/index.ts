@@ -13,3 +13,4 @@ export * from "./getProfileListPaths";
 export * from "./getProfileList";
 export * from "./getProfileStatic";
 export * from "./getCurrentProfile";
+export * from "./getCurrentProfileEntity";
