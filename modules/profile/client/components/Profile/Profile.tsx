@@ -12,7 +12,7 @@ import { IProfileViewProps, useProfile } from "./useProfile";
 import { ProfileView } from "@/modules/profile/query/getProfile";
 import { getUser } from "@/modules/auth/client";
 import { tryGetValue } from "@/modules/common/utils";
-import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { useCurrentProfile } from "@/modules/profile/client/hooks";
 import { Edit24 } from "@carbon/icons-react";
 
 const locations: Location[] = [];
@@ -43,7 +43,7 @@ export const Profile = (props: IProfileViewProps) => {
   } = useProfile(props);
 
   const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileLoading] = getCurrentUserProfile(
+  const [currentProfile, currentProfileLoading] = useCurrentProfile(
     user,
     props.content.lang
   );

@@ -1,13 +1,8 @@
 import { ProfileView } from "../query";
 
-export function getCurrentProfile(
-  url: string,
-  data: {
-    lang: string;
-  }
-): Promise<ProfileView> {
-  return fetch(url, {
+export function getCurrentProfile(lang: string): Promise<ProfileView> {
+  return fetch("/api/user/profile", {
     method: "POST",
-    body: JSON.stringify(data),
+    body: JSON.stringify({ lang }),
   }).then(res => res.json());
 }

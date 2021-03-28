@@ -13,7 +13,7 @@ import { IAppPage } from "@/modules/common/types/appPage";
 import { tryGet } from "@/modules/common/utils";
 import { getUser } from "@/modules/auth/client";
 import { getProfileStatic } from "@/modules/profile/query";
-import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { useCurrentProfile } from "@/modules/profile/client/hooks/useCurrentProfile";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 
 export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
@@ -45,7 +45,7 @@ export default function myProfile(props: IPageProps<IAppPage>) {
   const { content } = props;
   const router = useRouter();
   const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileIsLoading] = getCurrentUserProfile(
+  const [currentProfile, currentProfileIsLoading] = useCurrentProfile(
     user,
     content.lang
   );
