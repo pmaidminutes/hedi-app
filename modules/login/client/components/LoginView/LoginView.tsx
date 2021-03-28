@@ -8,7 +8,7 @@ import { LoginForm } from "../LoginForm";
 import { ILoginView } from "../../../types";
 
 export const LoginView = ({ content }: { content: ILoginView }) => {
-  const { backButtonProps } = useLoginView(content);
+  const { backButtonProps, redirectUrl } = useLoginView(content);
 
   return (
     <SimplePageView
@@ -19,7 +19,7 @@ export const LoginView = ({ content }: { content: ILoginView }) => {
       rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
       <Row>
         <Column>
-          <LoginForm {...content} />
+          <LoginForm {...content} redirectUrl={redirectUrl} />
         </Column>
       </Row>
       <Row>

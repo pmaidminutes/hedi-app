@@ -20,5 +20,5 @@ export const useLoginView = (content: ILoginView) => {
     onClick: () => router.back(),
     children: backButtonText,
   };
-  return { backButtonProps };
+  return { backButtonProps, redirectUrl };
 };

@@ -1,48 +1,47 @@
-import { IAppPage } from "@/modules/common/types";
-import { hasElement, tryGet } from "@/modules/common/utils";
-import { useLoginForm } from "@/modules/login/hooks";
 import { ILoginView } from "@/modules/login/types";
-import { Button, Column, FormLabel, Row } from "carbon-components-react";
-import { LoginFormLayout } from "./LoginFormLayout";
-import { ArrowLeft16 } from "@carbon/icons-react";
-import { useRouter } from "next/router";
+import { useLoginForm } from "./useLoginForm";
 
-export type LoginFormProps = Pick<IAppPage, "elements" | "lang">;
+import {
+  Button,
+  Form,
+  InlineLoading,
+  TextInput,
+  ToastNotification,
+} from "carbon-components-react";
 
-export const LoginForm = (definition: ILoginView) => {
-  const router = useRouter();
+export type LoginFormProps = Pick<ILoginView, "elements" | "lang"> & {
+  redirectUrl?: string;
+};
 
-  const loginFormProps = useLoginForm(definition);
+export const LoginForm = (props: LoginFormProps) => {
+  const {
+    usernameInput,
+    passwordInput,
+    submitButtonText,
+    handleSubmit,
+    loginLoading,
+    loginNotification,
+  } = useLoginForm(props);
+
   return (
-    <>
-      <Row>
-        <Column>
-          <LoginFormLayout {...loginFormProps}></LoginFormLayout>
-        </Column>
-      </Row>
-      <Row>
-        {definition.links.map(link => (
-          <Column>
-            <FormLabel className="hedi--block-label">
-              {tryGet(link.key, definition.elements)?.help}
-            </FormLabel>
-            {hasElement(link.key, definition.elements) && (
-              <Button href={link.route}>{link.label}</Button>
-            )}
-          </Column>
-        ))}
-      </Row>
-      <Row>
-        <Column>
-          <Button
-            tooltip={loginFormProps.backButtonText}
-            renderIcon={ArrowLeft16}
-            kind="ghost"
-            onClick={() => router.back()}>
-            {loginFormProps.backButtonText}
-          </Button>
-        </Column>
-      </Row>
-    </>
+    <Form onSubmit={handleSubmit}>
+      <TextInput type="text" {...usernameInput} />
+
+      <TextInput type="password" {...passwordInput} />
+
+      {loginNotification && (
+        <ToastNotification
+          kind="error"
+          lowContrast={true}
+          hideCloseButton={true}
+          style={{ width: "100%" }}
+          {...loginNotification}
+        />
+      )}
+
+      <Button type="submit">
+        {loginLoading ? <InlineLoading status="active" /> : submitButtonText}
+      </Button>
+    </Form>
   );
 };
