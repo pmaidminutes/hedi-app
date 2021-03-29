@@ -334,14 +334,17 @@ export const EditProfileForm = ({
               <h2>{tryGetValue("group-services", elements, "Angebote")}</h2>
             }>
             <Row>
-              {conditionalServiceGroups[profileType]?.map(serviceGroup => (
-                <Column lg={8} key={serviceGroup.route}>
-                  <ServiceSelection
-                    config={{ elements, serviceGroup }}
-                    data={profile?.services}
-                  />
-                </Column>
-              ))}
+              {
+                //key needs to include profile type because servicegroup items can change
+                conditionalServiceGroups[profileType]?.map(serviceGroup => (
+                  <Column lg={8} key={serviceGroup.route + profileType}>
+                    <ServiceSelection
+                      config={{ elements, serviceGroup }}
+                      data={profile?.services}
+                    />
+                  </Column>
+                ))
+              }
             </Row>
           </FormGroup>
         </div>
