@@ -65,7 +65,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
           {consultation_hours ? (
             <>
               <h3>{officeHrsHeadline}</h3>
-              <p>{consultation_hours}</p>
+              <pre>{consultation_hours}</pre>
             </>
           ) : null}
         </div>
