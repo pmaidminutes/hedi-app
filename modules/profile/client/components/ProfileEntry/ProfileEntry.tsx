@@ -18,6 +18,8 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     route,
     isNarrow,
     className,
+    prettyUrl,
+    phoneLink,
   } = useProfileEntry(props);
 
   return (
@@ -52,7 +54,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
               <div className="hedi--spacing">
                 <p>
                   <Link
-                    href={`tel:${phone}`}
+                    href={`tel:${phoneLink}`}
                     target="_blank"
                     title="Telefonnummer"
                     className="bx--link--lg">
@@ -76,7 +78,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
                       target="_blank"
                       title="Webseite"
                       className="bx--link--lg">
-                      {website} <Launch16></Launch16>
+                      {prettyUrl} <Launch16 />
                     </Link>
                   ) : null}
                 </p>
