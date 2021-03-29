@@ -28,6 +28,7 @@ import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
+import { ChangeEvent, useState } from "react";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -35,14 +36,16 @@ type EditProfileInputProps = FormProps & {
   isValidating?: boolean;
   isSuccessfullySaved?: boolean;
 };
-
 const getRequiredTextInputProps = (
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
   identifier: string,
   elements?: IUIElementTexts[]
-): Pick<TextInputProps, "id" | "labelText" | "placeholder" | "aria-label"> => {
+): Pick<TextInputProps, "id" | "labelText" | "placeholder" | "aria-label"> & {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+} => {
   const props = getTextInputProps(identifier, elements);
   delete props.helperText; // HACK removed helperText to not be shown always and to show it just in validation error cases
-  return { ...props };
+  return { ...props, onChange };
 };
 
 export const EditProfileForm = ({
@@ -62,8 +65,25 @@ export const EditProfileForm = ({
   const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
     profile?.type
   );
+  // TODO find better way to combine frontend and backend errors
+  const [validationErrors, setValidationErrors] = useState<{
+    [key: string]: string;
+  }>({});
 
-  // TODO check submitted + success state to show a successfully saved toast
+  const handleRequiredFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const key = e.target.name;
+    if (!e.target.value) {
+      const message = tryGet(e.target.name, elements)?.help ?? "x";
+      setValidationErrors(previous => ({ ...previous, [key]: message }));
+    } else {
+      setValidationErrors(previous => {
+        const { [key]: _, ...rest } = previous;
+        return { ...rest };
+      });
+    }
+  };
+
+  const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
 
   return (
     <Form {...formProps}>
@@ -123,10 +143,14 @@ export const EditProfileForm = ({
             </Column>
             <Column lg={6} md={6}>
               <TextInput
-                {...getRequiredTextInputProps("forename", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "forename",
+                  elements
+                )}
                 name="forename"
-                invalid={!!errors?.forename}
-                invalidText={errors?.forename}
+                invalid={!!getError("forename")}
+                invalidText={getError("forename")}
                 defaultValue={profile?.forename}
               />
             </Column>
@@ -134,10 +158,14 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getRequiredTextInputProps("surname", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "surname",
+                  elements
+                )}
                 name="surname"
-                invalid={!!errors?.surname}
-                invalidText={errors?.surname}
+                invalid={!!getError("surname")}
+                invalidText={getError("surname")}
                 defaultValue={profile?.surname}
               />
             </Column>
@@ -155,10 +183,14 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getRequiredTextInputProps("city", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "city",
+                  elements
+                )}
                 name="city"
-                invalid={!!errors?.city}
-                invalidText={errors?.city}
+                invalid={!!getError("city")}
+                invalidText={getError("city")}
                 defaultValue={profile?.city}
               />
             </Column>
@@ -220,10 +252,14 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getRequiredTextInputProps("phone", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "phone",
+                  elements
+                )}
                 name="phone"
-                invalid={!!errors?.phone}
-                invalidText={errors?.phone}
+                invalid={!!getError("phone")}
+                invalidText={getError("phone")}
                 defaultValue={profile?.phone}
               />
             </Column>
@@ -245,10 +281,14 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getRequiredTextInputProps("mail", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "mail",
+                  elements
+                )}
                 name="mail"
-                invalid={!!errors?.mail}
-                invalidText={errors?.mail}
+                invalid={!!getError("mail")}
+                invalidText={getError("mail")}
                 defaultValue={profile?.mail}
               />
             </Column>
@@ -395,7 +435,8 @@ export const EditProfileForm = ({
         />
       )}
 
-      {errors && Object.keys(errors).length != 0 && (
+      {((errors && Object.keys(errors).length != 0) ||
+        Object.keys(validationErrors).length != 0) && (
         <ToastNotification
           title={tryGet("error_message", elements)?.value || "Error"}
           subtitle={tryGet("error_message", elements)?.description}
