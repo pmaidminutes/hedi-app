@@ -17153,6 +17153,7 @@ h1 {
   background-position-y: 3rem;
   background-size: 180px;
   color: #fff;
+  min-height: 25vh;
   padding: 1rem;
   width: 100%; }
   @media (max-width: 1056px) {
