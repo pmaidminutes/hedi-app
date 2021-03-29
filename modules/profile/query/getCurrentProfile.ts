@@ -42,7 +42,7 @@ export async function getCurrentProfile(
       return { profile: null };
     });
 
-  if (!profile || profile === {}) return null; // {} case is, profile available but not of any of the queried types
+  if (!profile || Object.keys(profile).length === 0) return null; // {} case is, profile available but not of any of the queried types
 
   const internalClient = await getServiceClient(GQLEndpoint.Internal);
   const subquery = gql`
