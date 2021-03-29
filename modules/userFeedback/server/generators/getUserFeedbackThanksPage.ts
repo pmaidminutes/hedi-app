@@ -9,7 +9,9 @@ export const getUserFeedbackThanksPage = async (
 ): Promise<(IAppPage & IPageConfig) | null> => {
   if (!segments) return null;
 
-  const content = getUserFeedbackThanksView(segmentsToRoute(segments, locale));
+  const content = await getUserFeedbackThanksView(
+    segmentsToRoute(segments, locale)
+  );
   if (!content) return null;
 
   return {

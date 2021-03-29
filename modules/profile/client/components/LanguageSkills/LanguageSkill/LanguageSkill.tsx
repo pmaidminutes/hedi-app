@@ -1,6 +1,6 @@
 import React from "react";
 import { useLanguageSkill, ILanguageSkillProps } from "./useLanguageSkill";
-import { Stars } from "@/modules/common/components";
+import { Rating } from "@/modules/common/components";
 
 export const LanguageSkill = (props: ILanguageSkillProps) => {
   const { label, level } = useLanguageSkill(props);
@@ -8,7 +8,7 @@ export const LanguageSkill = (props: ILanguageSkillProps) => {
     <tr>
       <td>{label}</td>
       <td>
-        <Stars level={level} />
+        <Rating level={level} />
       </td>
     </tr>
   );
