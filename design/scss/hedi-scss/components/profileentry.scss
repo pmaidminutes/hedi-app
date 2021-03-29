@@ -5,9 +5,9 @@
 }
 
 .hedi--profile-entry {
-  > div > div:not(:first-child) {
-    // background-color: white;
-  }
+  margin-bottom: $spacing-sm;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
   img {
     width: 100%;
@@ -16,12 +16,12 @@
     background-color: $ui-02;
   }
 
-  .hedi--profile-entry-content {
-    padding: $spacing-md;
-  }
-
   .hedi--spacing {
     padding-top: $spacing-2xl;
+  }
+
+  .hedi--profile-entry-content {
+    padding: $spacing-md;
   }
 
   h2,
