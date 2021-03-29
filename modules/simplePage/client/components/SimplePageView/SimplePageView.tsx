@@ -29,6 +29,7 @@ export const SimplePageView: React.FC<{
           alt={content.posterImage.alt}
           width={content.posterImage.width}
           height={content.posterImage.height}
+          layout="responsive"
         />
       )}
       {!!url ? (

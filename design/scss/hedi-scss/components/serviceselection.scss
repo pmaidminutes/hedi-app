@@ -26,6 +26,12 @@
 
   }
 
+  &:not(.is-expanded) {
+    .hedi--service-selection__content {
+      display: none;
+    }
+  }
+
   &.is-expanded {
     .hedi--service-selection__content {
       visibility: inherit;

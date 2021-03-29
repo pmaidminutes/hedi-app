@@ -1,9 +1,9 @@
 import { ProfileView } from "@/modules/profile/query";
-import { getCurrentProfile } from "@/modules/profile/request/getCurrentProfile";
+import { requestCurrentProfile } from "../../request";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
 
-export function getCurrentUserProfile(
+export function useCurrentProfile(
   user: User | undefined,
   lang: string
 ): [ProfileView | null, boolean] {
@@ -11,18 +11,20 @@ export function getCurrentUserProfile(
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const requestCurrentProfile = async () => {
+    const fetchCurrentProfile = async () => {
       setLoading(true);
-      const resp = await getCurrentProfile("/api/user/profile", {
-        lang,
-      });
-      if (resp) setProfile(resp);
+      const profile = await requestCurrentProfile(lang).catch(() =>
+        setLoading(false)
+      );
+      if (profile) setProfile(profile);
 
       setLoading(false);
     };
 
-    if (user?.name) requestCurrentProfile();
-  }, [user?.name]);
+    // we can trigger without waiting on user info
+    // api does serverside validation anyways
+    fetchCurrentProfile();
+  }, [user?.name, lang]);
 
   return [profile, loading];
 }
