@@ -7,11 +7,11 @@ export const hasCurrentUserUserFeedbackAPI: NextApiHandler<
 > = async (req, res) => {
   const authHeader = await getUserAuthHeader(req);
   if (!authHeader) {
-    res.status(401).json(null);
+    res.status(401).send(null);
     return;
   }
 
   const hasUserFeedback = await hasCurrentUserUserFeedback(authHeader);
   if (hasUserFeedback != null) res.status(200).json(hasUserFeedback);
-  else res.status(500).json(null);
+  else res.status(500).send(null);
 };
