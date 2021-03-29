@@ -16,7 +16,6 @@ export const ProfileListItem = (props: IProfileItem) => {
     route,
     profileType,
   } = useProfileItem(props);
-  console.log({ profileType });
   return (
     <NextLink href={route ?? "#"} passHref>
       <ClickableTile href={route} className={profileType ?? ""}>
