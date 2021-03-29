@@ -38,6 +38,7 @@ import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { landingPagePaths } from "@/modules/landingPage/types";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -67,6 +68,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   for (const lang of locales) {
     paths.push(...(await getSegmentsPaths(pathQueries, lang)));
   }
+  paths.push(...landingPagePaths);
 
   return { paths, fallback: "blocking" };
 };
@@ -102,7 +104,13 @@ export const getStaticProps: GetStaticProps<
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
   }
-  if (!content) throw Error;
+  if (!content)
+    return {
+      redirect: {
+        destination: "/" + (locale ?? ""),
+        permanent: false,
+      },
+    };
   // ShellStuff
 
   const shellKey = {
