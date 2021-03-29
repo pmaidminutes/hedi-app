@@ -1,6 +1,7 @@
 import { TagList } from "@/modules/common/components";
 import { Tile } from "carbon-components-react";
 import { useServices, IServicesProps } from "./useServices";
+import BabyOnHand from "./assets/baby.svg";
 
 export const Services = (props: IServicesProps) => {
   const { headline, services, tagType, headlineType } = useServices(props);
@@ -9,7 +10,8 @@ export const Services = (props: IServicesProps) => {
       <section className="hedi--profile-services hedi--profile--tile">
         <Tile>
           {/* TODO import as svg, alt*/}
-          <img src="/images/Baby_Hand_pink80.svg" alt="" />
+          <BabyOnHand />
+          {/* <img src="/images/Baby_Hand_pink80.svg" alt="" /> */}
           <TagList
             headlineType={headlineType}
             tags={services}
