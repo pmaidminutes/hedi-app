@@ -1,17 +1,19 @@
 @import "./theme/hedi-theme.scss";
 
 .hedi--userfeedback-page {
-
-// Überschreibt das default Padding vom
-// CMS bottom
+  // Überschreibt das default Padding vom
+  // CMS bottom
   p {
     margin-bottom: $spacing-xs !important;
   }
 
-.hedi-seperator {
-  margin-bottom: $spacing-xl;
-}
+  .hedi-seperator {
+    margin-bottom: $spacing-xl;
+  }
 
+  .hedi--userfeedback-sendbox {
+    margin-top: $spacing-md;
+  }
 }
 
 .hedi--userfeedback-item {
@@ -19,13 +21,7 @@
   display: flex;
   flex-direction: column;
 
-
   .bx--text-area__wrapper {
     height: 100%;
   }
-
-  .hedi--send-button {
-  margin-top: $spacing-md;
-  }
-
 }

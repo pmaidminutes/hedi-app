@@ -1,5 +1,5 @@
 import { Button, Dropdown, TableCell, TableRow } from "carbon-components-react";
-import { Delete32 } from "@carbon/icons-react";
+import { TrashCan32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../types";
 import { useLanguageSkillRow } from "./useLanguageSkillRow";
@@ -61,7 +61,7 @@ export const LanguageSkillRow = ({
       <TableCell>
         <Button
           kind="ghost"
-          renderIcon={Delete32}
+          renderIcon={TrashCan32}
           iconDescription={tryGetValue(
             "remove-languageSkill",
             elements,

@@ -1,4 +1,9 @@
 .hedi--profile-contact {
+  svg {
+    .cls-1 {
+      fill: $orange-50;
+    }
+  }
   img {
     margin-bottom: $layout-sm;
     margin-left: -1.5rem;
@@ -16,4 +21,14 @@
   a > svg {
     margin-bottom: -2px;
   }
+
+  .hedi--consultation-hours-wrapper {
+    line-height: 1.5;
+  }
+
+  .hedi-seperator {
+  margin-top: $spacing-lg;
+  }
+
+
 }

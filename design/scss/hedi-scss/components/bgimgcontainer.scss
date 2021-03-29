@@ -19,8 +19,9 @@
   }
 
   .hedi--profile-entry {
+    background-color: #fff;
+    // background-color: $warm-gray-10;
     &-image {
-      background-color: #fff;
 
       @media (max-width: 769px) {
         svg {
@@ -39,8 +40,4 @@
     padding: $spacing-md;
   }
 
-  // .bx--row {
-  //   margin-right: 0;
-  //   margin-left: 0;
-  // }
 }

@@ -38,7 +38,7 @@ export const Header = (props: IHeader) => {
       <HeaderName prefix="" href={`/${locale}`}>
         <Logo />
       </HeaderName>
-      <HeaderNavigation style={{ display: "block" }}>
+      <HeaderNavigation aria-label="Navigation" style={{ display: "block" }}>
         <HeaderMenuButton
           aria-label="Open menu"
           onClick={onClickSideNavExpand}
