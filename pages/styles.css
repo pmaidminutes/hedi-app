@@ -16542,7 +16542,7 @@ h1 {
     background-size: contain; }
   .hedi--bg-img-container .bx--row--narrow {
     justify-content: flex-end; }
-  .hedi--bg-img-container .hedi--profile-entry-image {
+  .hedi--bg-img-container .hedi--profile-entry {
     background-color: #fff; }
     @media (max-width: 769px) {
       .hedi--bg-img-container .hedi--profile-entry-image svg {
@@ -17030,39 +17030,47 @@ h1 {
 .hedi--profile-list {
   background-color: #f4f4f4; }
 
-.hedi--profile-entry {
-  margin-bottom: 0.75rem; }
-  .hedi--profile-entry > div > div:not(:first-child) {
-    background-color: white; }
-  .hedi--profile-entry img {
-    width: 100%;
-    max-width: 350px;
-    height: auto;
-    background-color: #ffffff; }
-  .hedi--profile-entry .hedi--profile-entry-content {
-    padding: 1rem; }
-  .hedi--profile-entry .hedi--spacing {
-    padding-top: 2.5rem; }
-  .hedi--profile-entry h2 {
-    padding-bottom: 0.25rem; }
-  .hedi--profile-entry h3 {
-    font-weight: 300;
-    font-size: 1.25rem;
-    padding-bottom: 0.25rem; }
-  .hedi--profile-entry h5 {
-    padding-bottom: 0.25rem; }
-  .hedi--profile-entry a > svg {
-    margin-bottom: -2px; }
-  .hedi--profile-entry--with-services {
-    background-color: white; }
-    .hedi--profile-entry--with-services .hedi__tag-list {
-      padding-top: 0.75rem; }
+.hedi--profile-entry img {
+  width: 100%;
+  max-width: 350px;
+  height: auto;
+  background-color: #ffffff; }
+
+.hedi--profile-entry .hedi--profile-entry-content {
+  padding: 1rem; }
+
+.hedi--profile-entry .hedi--spacing {
+  padding-top: 2.5rem; }
+
+.hedi--profile-entry h2,
+.hedi--profile-entry h3,
+.hedi--profile-entry h5 {
+  padding-bottom: 0.25rem; }
+
+.hedi--profile-entry h3 {
+  font-weight: 300;
+  font-size: 1.25rem; }
+
+.hedi--profile-entry a > svg {
+  margin-bottom: -2px; }
+
+.hedi--profile-entry--with-services {
+  background-color: white; }
+  .hedi--profile-entry--with-services .hedi__tag-list {
+    padding-top: 0.75rem; }
 
 .hedi--profile-services svg .cls-1 {
   fill: #D36E3C; }
 
 .hedi--profile-services img {
   margin-bottom: 2rem; }
+
+.hedi--profile-list .hedi--profile-entry {
+  margin-bottom: 0.75rem; }
+  .hedi--profile-list .hedi--profile-entry + svg {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem; }
 
 .hedi--profile-list .bx--tile--clickable {
   background-color: white;
@@ -17076,11 +17084,6 @@ h1 {
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry > div > div:not(:first-child),
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry--with-services {
     background-color: transparent; }
-
-.hedi--profile-list .hedi--profile-entry + svg {
-  position: absolute;
-  right: 1rem;
-  bottom: 1rem; }
 
 /* 
   @font-face {
