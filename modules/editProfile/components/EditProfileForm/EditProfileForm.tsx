@@ -123,7 +123,7 @@ export const EditProfileForm = ({
             </Column>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("forename", elements)}
+                {...getRequiredTextInputProps("forename", elements)}
                 name="forename"
                 invalid={!!errors?.forename}
                 invalidText={errors?.forename}
@@ -134,7 +134,7 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("surname", elements)}
+                {...getRequiredTextInputProps("surname", elements)}
                 name="surname"
                 invalid={!!errors?.surname}
                 invalidText={errors?.surname}

@@ -48,12 +48,10 @@ export function useEditProfileForm(
       }
     });
     const errors: { [key: string]: string } = {};
-    if (!delta.city && !newData.city)
-      errors.city = tryGet("city", elements)?.help || "";
-    if (!delta.mail && !newData.mail)
-      errors.mail = tryGet("mail", elements)?.help || "";
-    if (!delta.phone && !newData.phone)
-      errors.phone = tryGet("phone", elements)?.help || "";
+    ["city", "mail", "phone", "forename", "surname"].forEach(field => {
+      if (!(delta as any)[field] && !(newData as any)[field])
+        errors[field] = tryGet(field, elements)?.help || "";
+    });
 
     if (Object.keys(errors).length == 0) {
       if (Object.keys(delta).length > 0) {
