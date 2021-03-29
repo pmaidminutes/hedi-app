@@ -52,20 +52,6 @@ export const Profile = (props: IProfileViewProps) => {
     <>
       <BgImgContainer>
         <Grid>
-          {!currentProfileLoading &&
-            !userIsLoading &&
-            currentProfile &&
-            currentProfile.route == props.content.route && (
-              <Row>
-                <Button
-                  size="sm"
-                  kind="secondary"
-                  renderIcon={Edit24}
-                  href={"/" + props.content.lang + "/user/profile/edit"}>
-                  {tryGetValue("edit_button", props.content.elements)}{" "}
-                </Button>
-              </Row>
-            )}
           <ProfileEntry isNarrow={false} {...profileEntryData} />
         </Grid>
       </BgImgContainer>

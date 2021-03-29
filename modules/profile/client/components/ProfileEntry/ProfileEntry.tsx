@@ -1,7 +1,7 @@
-import { Row, Column, Link } from "carbon-components-react";
+import { Row, Column, Link, Button } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
 import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
-import { Launch16 } from "@carbon/icons-react";
+import { Launch16, Edit24 } from "@carbon/icons-react";
 import HediPerson from "./assets/hedi_person.svg";
 
 export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
@@ -20,8 +20,10 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     className,
     prettyUrl,
     phoneLink,
+    editButtonProps,
   } = useProfileEntry(props);
 
+  console.log({ editButtonProps });
   return (
     <>
       <section className={className}>
@@ -92,6 +94,15 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
             </div>
           </Column>
         </Row>
+        {editButtonProps?.isShowing ? (
+          <Button
+            kind="ghost"
+            size="sm"
+            renderIcon={Edit24}
+            href={editButtonProps.link}>
+            {editButtonProps.text}
+          </Button>
+        ) : null}
       </section>
     </>
   );
