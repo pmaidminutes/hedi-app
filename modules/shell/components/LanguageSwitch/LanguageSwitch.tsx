@@ -12,8 +12,8 @@ import { tryGet } from "@/modules/common/utils";
 export const LanguageSwitch = (
   props: ILanguageSwitchProps
 ): JSX.Element | null => {
-  const { direction, links, shellConfigs } = useLanguageSwitch(props);
-  const tooltip = tryGet("menu_language", shellConfigs)?.value;
+  const { direction, links, config } = useLanguageSwitch(props);
+  const tooltip = tryGet("menu_language", config)?.value;
 
   if (links) {
     return (

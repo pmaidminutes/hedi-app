@@ -4,7 +4,7 @@ import { Link } from "carbon-components-react";
 import { LanguageSwitch } from "../LanguageSwitch";
 
 export const Footer = (props: IFooter) => {
-  const { footer, languageSwitchLinks, shellConfigs } = useFooter(props);
+  const { footer, languageSwitchLinks, shellConfig } = useFooter(props);
   return (
     <footer aria-label="footer" className="hedi--footer">
       {footer
@@ -23,7 +23,7 @@ export const Footer = (props: IFooter) => {
         <LanguageSwitch
           links={languageSwitchLinks}
           direction="top"
-          shellConfigs={shellConfigs}
+          config={shellConfig}
         />
       ) : null}
     </footer>

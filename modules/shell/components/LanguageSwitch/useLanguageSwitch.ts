@@ -4,16 +4,16 @@ import { VerticalDirection } from "carbon-components-react/typings/shared";
 export interface ILanguageSwitchProps {
   direction?: VerticalDirection;
   links: IEntity[];
-  shellConfigs?: IUIElementTexts[];
+  config?: IUIElementTexts[];
 }
 export function useLanguageSwitch({
   links,
-  shellConfigs,
+  config,
   direction = "bottom",
 }: ILanguageSwitchProps) {
   return {
     links,
     direction,
-    shellConfigs,
+    config,
   };
 }

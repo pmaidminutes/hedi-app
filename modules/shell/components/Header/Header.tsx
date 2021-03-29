@@ -24,7 +24,7 @@ export const Header = (props: IHeader) => {
     languageSwitchLinks,
     headerLinks,
     userMenuLinks,
-    shellConfigs,
+    shellConfig,
   } = useHeader(props);
   const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
   const router = useRouter();
@@ -61,15 +61,9 @@ export const Header = (props: IHeader) => {
       <HeaderGlobalBar>
         {/* <GlobalSearchMenu /> */}
         {languageSwitchLinks !== undefined ? (
-          <LanguageSwitch
-            links={languageSwitchLinks}
-            shellConfigs={shellConfigs}
-          />
+          <LanguageSwitch links={languageSwitchLinks} config={shellConfig} />
         ) : null}
-        <UserProfileMenu
-          userMenuLinks={userMenuLinks}
-          shellConfigs={shellConfigs}
-        />
+        <UserProfileMenu userMenuLinks={userMenuLinks} config={shellConfig} />
       </HeaderGlobalBar>
       <SideNav
         aria-label="Side navigation"

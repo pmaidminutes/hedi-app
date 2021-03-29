@@ -1,10 +1,9 @@
-import { AppPageFields } from "@/modules/common/types";
+import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { WithUIElementsFields } from "@/modules/model";
 import { IShell } from "../types";
 import { ShellLinkFields } from "../types/shellLinks";
 import { LanguagesGQL } from "./getLanguages";
-export const getShellConfigGQL = (name: string) =>
-  `${name}:appPagesByKey(keys:["shellConfigs"], lang: $lang){${AppPageFields}}`;
 
 export const getShellLinksGQL = (name: string, keys: string[]) => {
   return `${name}:appPagesByKey(keys:[${keys
@@ -24,23 +23,33 @@ export async function getShell(
     getShellLinksGQL(key, value)
   );
   gqlQueries.push(LanguagesGQL);
-  gqlQueries.push(getShellConfigGQL("shellConfigs"));
 
   const query = gql`
     query getShell(
         $lang: String!
         $includeSelf: Boolean
     ) {
+      shellAppPage:appPagesByKey(keys:["shellConfigs"], lang: $lang){${WithUIElementsFields}}
       ${gqlQueries.join("\n")}
     }
   `;
 
   const client = await getServiceClient(GQLEndpoint.Internal);
   return client
-    .request<IShell>(query, { lang })
+    .request<Omit<IShell, "shellConfig"> & { shellAppPage: IAppPage[] }>(
+      query,
+      { lang }
+    )
+    .then(res => {
+      const { shellAppPage, ...rest } = res;
+      return {
+        shellConfig: shellAppPage?.[0].elements ?? [],
+        ...rest,
+      } as IShell;
+    })
     .catch(e => {
       console.warn(e);
-      return { links: [], languages: [], shellConfigs: [] };
+      return { links: [], languages: [], shellConfig: [] };
     });
   // rest umbauen
 }

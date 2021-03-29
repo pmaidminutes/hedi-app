@@ -14,7 +14,7 @@ export interface IShellProps
       IPageConfig,
       "redirectUnAuthorized" | "useHeader" | "useBreadCrumb" | "revalidate"
     > {
-  shellConfigs: IUIElementTexts[];
+  shellConfig: IUIElementTexts[];
   languageSwitchLinks: IEntity[];
   header?: IShellLink[];
   footer?: IShellLink[];
@@ -34,10 +34,15 @@ export interface IPageConfig extends Partial<IAppStyled> {
 
 // export type shellRecords = "header" | "footer"
 
-export interface IShell extends Record<string, IEntity[] | IAppPage[]> {
+// interface IShell extends Record<string, IEntity[]> {
+//   languages: ILanguage[];
+//   shellConfig:  IUIElementTexts[];
+// }
+
+export type IShell = Record<string, IEntity[]> & {
   languages: ILanguage[];
-  shellConfigs: IAppPage[];
-}
+  shellConfig: IUIElementTexts[];
+};
 
 export interface IPageProps<T> {
   content: T;

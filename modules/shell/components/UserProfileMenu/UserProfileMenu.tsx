@@ -19,11 +19,11 @@ import { IUIElementTexts } from "@/modules/model";
 
 export interface IUserMenuProps {
   userMenuLinks?: IShellLink[];
-  shellConfigs?: IUIElementTexts[];
+  config?: IUIElementTexts[];
 }
 export const UserProfileMenu = ({
   userMenuLinks,
-  shellConfigs,
+  config,
 }: IUserMenuProps): JSX.Element | null => {
   const [hasMounted, setHasMounted] = useState(false);
   const [user, loading] = getUser();
@@ -53,7 +53,7 @@ export const UserProfileMenu = ({
   if (!hasMounted) {
     return null;
   }
-  const menuTooltip = tryGet("menu_userProfile", shellConfigs)?.value;
+  const menuTooltip = tryGet("menu_userProfile", config)?.value;
 
   return (
     <>

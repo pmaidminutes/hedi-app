@@ -7,13 +7,13 @@ export function useHeader({
   languageSwitchLinks,
   header,
   userMenu,
-  shellConfigs,
+  shellConfig,
 }: IHeader) {
   return {
     appstyle,
     languageSwitchLinks,
     headerLinks: header,
     userMenuLinks: userMenu,
-    shellConfigs,
+    shellConfig,
   };
 }

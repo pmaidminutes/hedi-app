@@ -19,7 +19,7 @@ export const getStaticProps: GetStaticProps<
     userMenu: ["login", "logout", "viewprofile"],
   };
 
-  const [content, shellConfig] = await Promise.all([
+  const [content, shellData] = await Promise.all([
     getEditProfileStatic(locale ?? "de"),
     getShell(locale, shellKeys),
   ]);
@@ -29,7 +29,7 @@ export const getStaticProps: GetStaticProps<
     throw Error();
   }
 
-  const shell = useShell(content, shellConfig);
+  const shell = useShell(content, shellData);
   shell.useHeader = true;
   shell.redirectUnAuthorized = "/" + locale;
   return {

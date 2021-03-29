@@ -118,8 +118,8 @@ export const getStaticProps: GetStaticProps<
     footer: ["imprint", "privacy"],
     userMenu: ["login", "logout", "viewprofile"],
   };
-  const shellConfig = await getShell(locale, shellKey);
-  const shell = useShell(content, shellConfig);
+  const shellData = await getShell(locale, shellKey);
+  const shell = useShell(content, shellData);
   return {
     props: { content, shell },
     revalidate: content.revalidate,
