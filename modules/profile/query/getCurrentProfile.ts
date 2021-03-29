@@ -6,22 +6,16 @@ import {
 } from "@/modules/graphql";
 import {
   CaregiverFields,
-  ICaregiver,
   MidwifeFields,
-  IMidwife,
-  IOrganisation,
-  IInstitution,
   InstitutionFields,
   OrganisationFields,
+  Profile,
 } from "../types";
-import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
+import { WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 import { IAuthHeader } from "@/modules/auth/types";
+import { ProfileView } from "./getProfile";
 
-export type Profile = ICaregiver | IMidwife | IOrganisation | IInstitution;
-export type ProfileView = Profile & {
-  elements: IUIElementTexts[];
-};
 export async function getCurrentProfile(
   lang: string,
   authHeader: IAuthHeader

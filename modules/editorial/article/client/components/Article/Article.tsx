@@ -56,7 +56,7 @@ export const Article = ({ content }: IArticleProps): JSX.Element => {
         <>
           {" "}
           <Seperator />
-          <TagList tags={tags} />{" "}
+          {/* <TagList tags={tags} />{" "} //TODO currently broken due to work in IService */}
         </>
       ) : null}
     </>

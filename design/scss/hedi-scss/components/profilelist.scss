@@ -2,6 +2,20 @@
   .bx--tile--clickable {
     background-color: white;
     margin: $spacing-md 0;
+
+    &.hedi--profile-list__item {
+      &--midwife {
+        .hedi--profile-entry-image svg .cls-1 {
+          fill: $orange-100;
+        }
+      }
+      &--caregiver {
+        .hedi--profile-entry-image svg .cls-1 {
+          fill: $green-100;
+        }
+      }
+    }
+
     &:hover {
       background: #e5e5e5;
     }
@@ -12,4 +26,9 @@
     }
   }
 
+  .hedi--profile-entry + svg {
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+  }
 }

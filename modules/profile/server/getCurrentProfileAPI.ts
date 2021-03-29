@@ -1,7 +1,7 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
 import { NextApiHandler } from "next";
 import { ProfileView } from "../query";
-import { getCurrentProfile } from "../query/getCurrentProfile";
+import { getCurrentProfile } from "../query";
 
 export const getCurrentProfileAPI: NextApiHandler<ProfileView | null> = async (
   req,

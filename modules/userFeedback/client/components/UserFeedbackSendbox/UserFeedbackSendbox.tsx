@@ -29,7 +29,7 @@ export const UserFeedbackSendbox = ({
           subtitle={successMessage}
         />
       )}
-      <Button type="submit" size="field">
+      <Button type="submit" size="field" className="hedi--send-button">
         {tryGet("submit", elements)?.value || "Submit"}
       </Button>
     </div>

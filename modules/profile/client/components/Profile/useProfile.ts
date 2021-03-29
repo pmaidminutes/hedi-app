@@ -22,8 +22,8 @@ export function useProfile(props: IProfileViewProps) {
     street,
     house_number,
     displayAddress,
-    lat,
-    long,
+    // lat,
+    // long,
     services,
   } = content;
   const languagesHeadline = getTextInputProps("fluency", elements);
@@ -75,14 +75,14 @@ export function useProfile(props: IProfileViewProps) {
       headline: relatedHeadline,
     },
     hasServices,
-    mapData: {
-      currentLocation: {
-        lat,
-        long,
-        displayName,
-      },
-      // TODO: handling associates
-      locations: [{ lat, long, displayName }],
-    },
+    // mapData: { HACK currently incompatible
+    //   currentLocation: {
+    //     lat,
+    //     long,
+    //     displayName,
+    //   },
+    //   // TODO: handling associates
+    //   locations: [{ lat, long, displayName }],
+    // },
   };
 }

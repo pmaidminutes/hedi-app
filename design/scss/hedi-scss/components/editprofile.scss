@@ -1,14 +1,19 @@
 @import "./theme/hedi-theme.scss";
 
-
-
 .hedi--edit-profile {
-
   // required to make the dropdowns visible tables
   // cannot be set directly on the table, since the overflow is defined on a wrapping node
-  .hedi--group--language-skills {
-    .bx--data-table-content {
-      overflow-x: visible !important; 
+  .hedi--group {
+    &--language-skills {
+      .bx--data-table-content {
+        overflow-x: visible !important;
+      }
+    }
+
+    &--profile-type {
+      .bx--row {
+        max-width: 100%;
+      }
     }
   }
 
@@ -16,58 +21,54 @@
     margin-bottom: $spacing-lg;
   }
 
-
-  .bx--label h2, h3, h4{
+  .bx--label h2,
+  h3,
+  h4 {
     color: black;
-  }  
-
-  div.hedi--group--profile-type {
-    padding: $spacing-xl $spacing-md $spacing-xs $spacing-md;
-    margin-bottom: $layout-sm;
-    background-color: $blue-primary;
   }
 
+  .hedi--group--profile-type {
+    width: 100%;
+    padding: $spacing-md;
+    // padding: $spacing-xl $spacing-md $spacing-xs $spacing-md;
+    margin-bottom: $layout-sm;
+    background-color: $blue-primary;
 
-  div.hedi--group--profile-type h2{
-    color: white;
+    h2 {
+      color: white;
+    }
+    .bx--content-switcher {
+      max-width: 550px;
+    }
   }
 
   .hedi--service-selection {
     margin-bottom: $spacing-md;
+
+    &__head {
+      margin-bottom: 0;
+    }
   }
 
-  .hedi--service-selection__head {
-    margin-bottom: 0;
-  }
-
-  .bx--tile {
+  .bx--tile--is-selected {
+    background-color: $blue-60;
+    color: white;
+    font-size: 1.1rem;
     outline: 1px solid white;
     outline-offset: -1px;
   }
 
-  
-
-  .bx--tile--is-selected {
-  background-color: $blue-60;
-  color: white;
-  font-size: 1.1rem;
-  outline: 1px solid white;
-  outline-offset: -1px;
-}
-
-.is-expanded {
-  .hedi--service-selection__content {
-  margin-top: $spacing-md;
-}
-}
-
+  .is-expanded {
+    .hedi--service-selection__content {
+      margin-top: $spacing-md;
+    }
+  }
 
   .bx--tile-input:checked + .bx--tile > .bx--tile__checkmark svg {
     fill: white;
   }
 
   h4 {
-  padding-bottom: $spacing-md;  
+    padding-bottom: $spacing-md;
   }
-
 }

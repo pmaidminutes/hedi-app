@@ -9,10 +9,11 @@ import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
 import { IProfileViewProps, useProfile } from "./useProfile";
-import { ProfileView } from "@/modules/profile/query/getProfile";
+import { ProfileView } from "../../../query/getProfile";
 import { getUser } from "@/modules/auth/client";
 import { tryGetValue } from "@/modules/common/utils";
-import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { useCurrentProfileEntity } from "../../hooks";
+import { Edit24 } from "@carbon/icons-react";
 
 const locations: Location[] = [];
 
@@ -37,12 +38,12 @@ export const Profile = (props: IProfileViewProps) => {
     servicesData,
     contactData,
     relatedProfilesData,
-    mapData,
+    // mapData, HACK currently incompatible
     hasServices,
   } = useProfile(props);
 
   const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileLoading] = getCurrentUserProfile(
+  const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
     user,
     props.content.lang
   );
@@ -55,31 +56,36 @@ export const Profile = (props: IProfileViewProps) => {
             !userIsLoading &&
             currentProfile &&
             currentProfile.route == props.content.route && (
-              <Button href={"/" + props.content.lang + "/user/profile/edit"}>
-                {tryGetValue("edit_button", props.content.elements)}
-              </Button>
+              <Row narrow>
+                <Button
+                  size="sm"
+                  kind="secondary"
+                  renderIcon={Edit24}
+                  href={"/" + props.content.lang + "/user/profile/edit"}>
+                  {tryGetValue("edit_button", props.content.elements)}{" "}
+                </Button>
+              </Row>
             )}
           <ProfileEntry isNarrow={true} {...profileEntryData} />
         </Grid>
       </BgImgContainer>
-      <Grid>
+      <Grid className="hedi--profile">
         <Row>
           {hasServices ? (
-            <Column lg={8}>
+            <Column lg={6} md={4}>
               <Services {...servicesData} headlineType="h3" />
             </Column>
           ) : null}
-          <Column lg={8}>
+          <Column lg={6} md={4}>
             <Contact {...contactData} />
           </Column>
-          <Column lg={8}>
+          <Column lg={4} md={4}>
             <LanguageSkills {...languagesData} />
           </Column>
         </Row>
-        <Row>
-          <RelatedProfiles {...relatedProfilesData} />
-        </Row>
-        {/* {hasMap)
+      </Grid>
+      <RelatedProfiles {...relatedProfilesData} />
+      {/* {hasMap)
           ? content.associations.map((entry: IProfile) => {
               return <ProfileEntry profile={entry} key={entry.route} />;
             })
@@ -94,8 +100,7 @@ export const Profile = (props: IProfileViewProps) => {
             displayName: content.displayName,
           } as Location)
         } */}
-        {/* <MapClient {...mapData} /> */}
-      </Grid>
+      {/* <MapClient {...mapData} /> */}
     </>
   );
 };

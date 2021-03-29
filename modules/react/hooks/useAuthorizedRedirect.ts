@@ -1,14 +1,18 @@
 import { getUser } from "@/modules/auth/client";
 import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { DependencyList, useEffect } from "react";
 
-export const useLoginView = (redirect: string) => {
+export const useAuthorizedRedirect = (
+  redirectUrl: string,
+  deps?: DependencyList
+): void => {
   const [user, loading] = getUser();
   const router = useRouter();
+
   useEffect(() => {
     if (!loading && user) {
       // redirects to landing pages
-      router.push(redirect);
+      router.push(redirectUrl);
     }
-  }, [user, loading]);
+  }, [user, loading, ...(deps ? deps : [])]);
 };

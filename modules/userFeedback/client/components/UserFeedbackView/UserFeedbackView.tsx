@@ -1,7 +1,7 @@
 import { getUser } from "@/modules/auth/client";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import UserFeedbackForm from "@/modules/userFeedback/client/components/UserFeedbackForm/UserFeedbackForm";
-import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { useCurrentProfile } from "@/modules/profile/client/hooks";
 import { useRouter } from "next/router";
 import { tryGet } from "@/modules/common/utils";
 import {
@@ -33,7 +33,7 @@ export const UserFeedbackView = ({
   useEffect(() => {
     if (!userIsLoading && !user) router.push("/" + locale);
   }, [user, userIsLoading]);
-  const [currentProfile, currentProfileIsLoading] = getCurrentUserProfile(
+  const [currentProfile, currentProfileIsLoading] = useCurrentProfile(
     user,
     locale
   );

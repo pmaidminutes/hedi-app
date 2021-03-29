@@ -1,4 +1,4 @@
-import { FormEventHandler } from "react";
+import { FormEventHandler, useState } from "react";
 import useSWR from "swr";
 import { setProperty, tryGet } from "@/modules/common/utils";
 import {
@@ -23,6 +23,7 @@ export function useEditProfileForm(
   );
 
   const router = useRouter();
+  const [isSuccessfullySaved, setIsSuccessfullySaved] = useState(false);
 
   const onSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
@@ -56,13 +57,18 @@ export function useEditProfileForm(
 
     if (Object.keys(errors).length == 0) {
       if (Object.keys(delta).length > 0) {
-        mutate({ success: false, profile: profileData }, false); //optimistic
         mutate(
-          upsertProfile("/api/user/profile/edit", { profile: delta, lang })
-        ).then(resp => {
-          if (resp?.success && resp.route) router.push(resp.route);
-          return resp;
-        });
+          upsertProfile("/api/user/profile/edit", {
+            profile: delta,
+            lang,
+          }).then(resp => {
+            if (resp?.success && resp?.route) {
+              setIsSuccessfullySaved(true);
+              router.push(resp.route);
+            }
+            return resp;
+          })
+        );
       }
     } else {
       mutate(
@@ -79,6 +85,7 @@ export function useEditProfileForm(
   return {
     data: data ?? { success: false },
     isValidating,
+    isSuccessfullySaved,
     onSubmit,
   };
 }

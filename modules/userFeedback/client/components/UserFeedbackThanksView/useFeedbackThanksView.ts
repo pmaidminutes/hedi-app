@@ -1,6 +1,6 @@
 import { getUser } from "@/modules/auth/client";
 import { IAppPage } from "@/modules/common/types";
-import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "@/modules/userFeedback/request/getCurrentUserHasFeedback";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
   const { elements } = content;
 
   const [user, loading] = getUser();
-  const [currentProfile, currentProfileLoading] = getCurrentUserProfile(
+  const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
     user,
     content.lang
   );
