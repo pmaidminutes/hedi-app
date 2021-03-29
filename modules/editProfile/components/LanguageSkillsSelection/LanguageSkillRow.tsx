@@ -45,7 +45,12 @@ export const LanguageSkillRow = ({
       <TableCell data-th={tryGetValue("level", elements, "Verständnis")}>
         <Dropdown
           id="level"
-          label={tryGetValue("level", elements, "Verständnis")}
+          label={
+            languageLevelElements.find(
+              element => parseInt(element.identifier) === 0
+            )?.value ?? "Please Select"
+          }
+          ariaLabel={tryGetValue("level", elements, "Verständnis")}
           titleText=""
           light
           selectedItem={languageSkill.level}
