@@ -26,11 +26,23 @@ import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
+import { IUIElementTexts } from "@/modules/model";
+import { TextInputProps } from "carbon-components-react";
+
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
   data: IUpsertProfile;
   isValidating?: boolean;
   isSuccessfullySaved?: boolean;
+};
+
+const getRequiredTextInputProps = (
+  identifier: string,
+  elements?: IUIElementTexts[]
+): Pick<TextInputProps, "id" | "labelText" | "placeholder" | "aria-label"> => {
+  const props = getTextInputProps(identifier, elements);
+  delete props.helperText; // HACK removed helperText to not be shown always and to show it just in validation error cases
+  return { ...props };
 };
 
 export const EditProfileForm = ({
@@ -111,7 +123,7 @@ export const EditProfileForm = ({
             </Column>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("forename", elements)}
+                {...getRequiredTextInputProps("forename", elements)}
                 name="forename"
                 invalid={!!errors?.forename}
                 invalidText={errors?.forename}
@@ -122,7 +134,7 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("surname", elements)}
+                {...getRequiredTextInputProps("surname", elements)}
                 name="surname"
                 invalid={!!errors?.surname}
                 invalidText={errors?.surname}
@@ -143,7 +155,7 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("city", elements)}
+                {...getRequiredTextInputProps("city", elements)}
                 name="city"
                 invalid={!!errors?.city}
                 invalidText={errors?.city}
@@ -208,7 +220,7 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("phone", elements)}
+                {...getRequiredTextInputProps("phone", elements)}
                 name="phone"
                 invalid={!!errors?.phone}
                 invalidText={errors?.phone}
@@ -233,12 +245,11 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("mail", elements)}
+                {...getRequiredTextInputProps("mail", elements)}
                 name="mail"
                 invalid={!!errors?.mail}
                 invalidText={errors?.mail}
                 defaultValue={profile?.mail}
-                required
               />
             </Column>
             {hasElement("website", conditionalElements[profileType]) && (
