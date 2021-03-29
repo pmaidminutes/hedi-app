@@ -1,6 +1,6 @@
 import { IAddress, IContact, IDetailedName } from "@/modules/model";
 import { ICaregiver, Profile } from "@/modules/profile/types";
-import { prettyfyUrl, formatPhoneNumber } from "@/modules/common/utils";
+import { prettifyUrl, formatPhoneNumber } from "@/modules/common/utils";
 
 export interface IProfileEntryProps
   extends Pick<IAddress, "postal_code" | "city">,
@@ -28,7 +28,7 @@ export function useProfileEntry(props: IProfileEntryProps) {
     isNarrow = false,
   } = props;
 
-  const prettyUrl = website ? prettyfyUrl(website) : null;
+  const prettyUrl = website ? prettifyUrl(website) : null;
   const phoneLink = phone ? formatPhoneNumber(phone) : null;
 
   const className =

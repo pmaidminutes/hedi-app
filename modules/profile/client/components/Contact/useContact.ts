@@ -1,6 +1,6 @@
 import { TextInputProps } from "carbon-components-react";
 import { IAddress, IContact } from "@/modules/model";
-import { prettyfyUrl, formatPhoneNumber } from "@/modules/common/utils";
+import { prettifyUrl, formatPhoneNumber } from "@/modules/common/utils";
 
 export interface IContactProps
   extends Pick<
@@ -27,7 +27,7 @@ export function useContact(props: IContactProps) {
     postal_code,
     headline,
   } = props;
-  const prettyUrl = website ? prettyfyUrl(website) : null;
+  const prettyUrl = website ? prettifyUrl(website) : null;
   const phoneLink = phone ? formatPhoneNumber(phone) : null;
   const { labelText } = headline;
 
