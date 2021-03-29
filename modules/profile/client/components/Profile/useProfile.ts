@@ -8,6 +8,7 @@ export interface IProfileViewProps {
 
 export function useProfile(props: IProfileViewProps) {
   const { content } = props;
+  console.log({ props });
   const [hasServices, setHasServices] = useState(true);
   const {
     languageSkills,
@@ -28,7 +29,8 @@ export function useProfile(props: IProfileViewProps) {
   } = content;
   const languagesHeadline = getTextInputProps("fluency", elements);
   const servicesHeadline = getTextInputProps("services", elements);
-  const contactHeadline = getTextInputProps("office_hrs", elements);
+  const contactHeadline = getTextInputProps("contact", elements);
+  const officeHrsHeadline = getTextInputProps("office_hrs", elements);
   const relatedHeadline = getTextInputProps("linked_profile", elements);
 
   useEffect(() => {
@@ -61,6 +63,7 @@ export function useProfile(props: IProfileViewProps) {
     },
     contactData: {
       headline: contactHeadline,
+      officeHrsHeadline,
       phone,
       mail,
       website,

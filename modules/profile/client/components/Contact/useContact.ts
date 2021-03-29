@@ -11,6 +11,10 @@ export interface IContactProps
     TextInputProps,
     "id" | "labelText" | "placeholder" | "helperText" | "aria-label"
   >;
+  officeHrsHeadline: Pick<
+    TextInputProps,
+    "id" | "labelText" | "placeholder" | "helperText" | "aria-label"
+  >;
 }
 
 export function useContact(props: IContactProps) {
@@ -25,6 +29,7 @@ export function useContact(props: IContactProps) {
     displayAddress,
     postal_code,
     headline,
+    officeHrsHeadline,
   } = props;
 
   const { labelText } = headline;
@@ -40,5 +45,6 @@ export function useContact(props: IContactProps) {
     displayAddress,
     postal_code,
     headline: labelText as String,
+    officeHrsHeadline: officeHrsHeadline.labelText as String,
   };
 }
