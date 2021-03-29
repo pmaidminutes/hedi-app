@@ -12,7 +12,11 @@ export const EditProfile = ({ content }: { content: IEditProfileView }) => {
     setConfig(extractConfig(content));
   }, [content.lang]);
 
-  const editFormProps = useEditProfileForm(content.lang, user?.name);
+  const editFormProps = useEditProfileForm(
+    content.lang,
+    content.elements,
+    user?.name
+  );
   return (
     <SimplePageView content={content}>
       <EditProfileForm
