@@ -14,6 +14,7 @@ export const getProfileListPage = async (
   return {
     ...content,
     useHeader: "AUTHORIZED",
+    redirectUnAuthorized: "/" + content.lang,
     revalidate: 1,
   };
 };
