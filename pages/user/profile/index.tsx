@@ -1,4 +1,5 @@
 import { GetStaticProps } from "next";
+import Link from "next/link";
 
 import { IPageProps } from "@/modules/shell/types";
 import { getShell } from "@/modules/shell/query";
@@ -10,15 +11,19 @@ import { useRouter } from "next/router";
 import { Button, Column, Row } from "carbon-components-react";
 
 import { IAppPage } from "@/modules/common/types/appPage";
-import { tryGet } from "@/modules/common/utils";
 import { getUser } from "@/modules/auth/client";
 import { getProfileStatic } from "@/modules/profile/query";
-import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
+import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { SimplePageView } from "@/modules/simplePage/client/components";
+import { IShellLink } from "@/modules/shell/types/shellLinks";
 
-export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
-  locale,
-}) => {
+export interface INoProfileView extends IAppPage {
+  links: IShellLink[];
+}
+
+export const getStaticProps: GetStaticProps<
+  IPageProps<INoProfileView>
+> = async ({ locale }) => {
   const shellKeys = {
     header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
     footer: ["imprint", "privacy"],
@@ -36,16 +41,22 @@ export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
   }
 
   const shell = useShell(content, shellConfig);
+  const withLinks: INoProfileView = {
+    ...content,
+    links: [],
+  };
+  const editProfileLink = shell.header?.find(l => l.key === "editprofile");
+  if (editProfileLink) withLinks.links.push(editProfileLink);
   return {
-    props: { content, shell },
+    props: { content: withLinks, shell },
   };
 };
 
-export default function myProfile(props: IPageProps<IAppPage>) {
+export default function myProfile(props: IPageProps<INoProfileView>) {
   const { content } = props;
   const router = useRouter();
   const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileIsLoading] = getCurrentUserProfile(
+  const [currentProfile, currentProfileIsLoading] = useCurrentProfileEntity(
     user,
     content.lang
   );
@@ -59,10 +70,9 @@ export default function myProfile(props: IPageProps<IAppPage>) {
     currentProfile?.route,
     currentProfileIsLoading,
   ]);
-  const noProfileElement = tryGet("no_profile", content.elements);
-  content.longTitle = "";
-  content.label = "";
-  content.body = noProfileElement?.description ?? "";
+  const editLink = content.links.find(l => l.key === "editprofile");
+  const editLinkHref = editLink?.route ?? `/${content.lang}/user/profile/edit`;
+  const editLinkLabel = editLink?.longTitle ?? editLink?.label;
   return (
     <Shell {...props}>
       {!userIsLoading && user && (
@@ -73,9 +83,9 @@ export default function myProfile(props: IPageProps<IAppPage>) {
           rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
           <Row>
             <Column>
-              <Button href={"/" + content.lang + "/user/profile/edit"}>
-                {noProfileElement?.value}
-              </Button>
+              <Link href={editLinkHref} passHref>
+                <Button>{editLinkLabel}</Button>
+              </Link>
             </Column>
           </Row>
         </SimplePageView>

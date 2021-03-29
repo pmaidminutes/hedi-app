@@ -1,14 +1,14 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
+import { IEntity } from "@/modules/model";
 import { NextApiHandler } from "next";
-import { ProfileView } from "../query";
-import { getCurrentProfile } from "../query";
+import { getCurrentProfileEntity } from "../query";
 
-export const getCurrentProfileAPI: NextApiHandler<ProfileView | null> = async (
+export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async (
   req,
   res
 ) => {
   if (!req.body) {
-    res.status(400).json(null);
+    res.status(400);
     return;
   }
 
@@ -16,11 +16,11 @@ export const getCurrentProfileAPI: NextApiHandler<ProfileView | null> = async (
 
   const authHeader = await getUserAuthHeader(req);
   if (!authHeader) {
-    res.status(401).json(null);
+    res.status(401);
     return;
   }
 
-  const profile = await getCurrentProfile(lang, authHeader);
+  const profile = await getCurrentProfileEntity(lang, authHeader);
   if (profile) res.status(200).json(profile);
-  else res.status(500).json(null);
+  else res.status(500);
 };

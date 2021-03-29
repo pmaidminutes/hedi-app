@@ -26,8 +26,17 @@ export const segmentsToRoute = (segments: string[], locale: string) =>
 
 export function jsonFetcher<T>(url: RequestInfo) {
   return fetch(url)
-    .then(response => response.json())
-    .then(jsonResponse => jsonResponse as T);
+    .then(response => (response.bodyUsed ? response.json() : null))
+    .then(jsonResponse => jsonResponse as T); // TODO must be | null as well
+}
+
+export function jsonPost<T>(url: RequestInfo, data: object) {
+  return fetch(url, {
+    method: "POST",
+    body: JSON.stringify(data),
+  })
+    .then(response => (response.bodyUsed ? response.json() : null))
+    .then(jsonResponse => jsonResponse as T | null);
 }
 
 export function getLangByRoute(route: string) {
