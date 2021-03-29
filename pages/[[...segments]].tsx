@@ -35,7 +35,7 @@ import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
-import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
+import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
 
@@ -95,7 +95,7 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
     if (!content)
-      content = await getUserFeedbackThanksViewProps(params?.segments, locale);
+      content = await getUserFeedbackThanksPage(params?.segments, locale);
     if (!content)
       content = await getStaticSimplePageViewProps(params?.segments, locale);
   }

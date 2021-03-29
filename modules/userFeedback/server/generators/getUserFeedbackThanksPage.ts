@@ -3,7 +3,7 @@ import { segmentsToRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
 import { getUserFeedbackThanksView } from "../../query";
 
-export const getStaticProps = async (
+export const getUserFeedbackThanksPage = async (
   segments?: string[],
   locale = "de"
 ): Promise<(IAppPage & IPageConfig) | null> => {
@@ -15,5 +15,6 @@ export const getStaticProps = async (
   return {
     ...content,
     useHeader: "AUTHORIZED",
+    redirectUnAuthorized: "/" + locale,
   };
 };
