@@ -14,6 +14,7 @@ export function useShell(
     useBreadCrumb,
     revalidate,
     useHeader,
+    redirectUnAuthorized,
   } = content;
   const { languages, ...links } = shellConfig;
 
@@ -28,7 +29,9 @@ export function useShell(
       "languageSwitchLinks",
       generateLanguageSwitchLinks(languages, translations)
     );
-  setProperty(shell, "useHeader", useHeader !== undefined ? useHeader : false);
+  if (useHeader) setProperty(shell, "useHeader", useHeader);
+  if (redirectUnAuthorized)
+    setProperty(shell, "redirectUnAuthorized", redirectUnAuthorized);
   if (appstyle) setProperty(shell, "appstyle", appstyle);
   if (revalidate) setProperty(shell, "revalidate", revalidate);
   if (useBreadCrumb) setProperty(shell, "useBreadCrumb", useBreadCrumb);
