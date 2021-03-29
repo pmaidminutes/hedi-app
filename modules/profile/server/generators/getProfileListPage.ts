@@ -13,7 +13,8 @@ export const getProfileListPage = async (
 
   return {
     ...content,
-    useHeader: true,
+    useHeader: "AUTHORIZED",
+    redirectUnAuthorized: "/" + content.lang,
     revalidate: 1,
   };
 };

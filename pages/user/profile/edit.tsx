@@ -30,7 +30,8 @@ export const getStaticProps: GetStaticProps<
   }
 
   const shell = useShell(content, shellConfig);
-
+  shell.useHeader = true;
+  shell.redirectUnAuthorized = "/" + locale;
   return {
     props: { content, shell },
   };

@@ -1,15 +1,20 @@
-import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
+import { IPageConfig } from "@/modules/shell/types";
 import { getRegistrationView } from "../../query";
 import { IRegistrationView } from "../../types";
 
 export const getStaticProps = async (
   segments?: string[],
   locale = "de"
-): Promise<IRegistrationView | null> => {
-  if (!segments) {
-    return null;
-  } else {
-    return getRegistrationView(segmentsToRoute(segments, locale));
-  }
+): Promise<(IRegistrationView & IPageConfig) | null> => {
+  if (!segments) return null;
+
+  const content = await getRegistrationView(segmentsToRoute(segments, locale));
+
+  if (!content) return null;
+
+  return {
+    ...content,
+    useHeader: "AUTHORIZED",
+  };
 };

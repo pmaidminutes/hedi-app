@@ -10,7 +10,7 @@ export interface IShellProps
   extends Partial<IAppStyled>,
     Pick<
       IPageConfig,
-      "needsAuth" | "useHeader" | "useBreadCrumb" | "revalidate"
+      "redirectUnAuthorized" | "useHeader" | "useBreadCrumb" | "revalidate"
     > {
   languageSwitchLinks: IEntity[];
   header?: IShellLink[];
@@ -18,10 +18,12 @@ export interface IShellProps
   userMenu?: IShellLink[];
 }
 
+export type AccessRule = false | "AUTHORIZED" | true; // HACK definition for quick compatibility actual meaning: hidden, authorized user, always
+
 export interface IPageConfig extends Partial<IAppStyled> {
   translations?: IEntityLocalized[];
-  needsAuth?: boolean;
-  useHeader?: boolean;
+  redirectUnAuthorized?: string; // HACK
+  useHeader?: AccessRule;
   // TODO: Serverseitig
   useBreadCrumb?: boolean;
   revalidate?: boolean | number;

@@ -35,7 +35,11 @@ export function jsonPost<T>(url: RequestInfo, data: object) {
     method: "POST",
     body: JSON.stringify(data),
   })
-    .then(response => (response.bodyUsed ? response.json() : null))
+    .then(response => {
+      const length = response.headers.get("Content-Length");
+      if (length && parseInt(length) > 1) return response.json();
+      else return null;
+    })
     .then(jsonResponse => jsonResponse as T | null);
 }
 

@@ -41,6 +41,8 @@ export const getStaticProps: GetStaticProps<
   }
 
   const shell = useShell(content, shellConfig);
+  shell.useHeader = "AUTHORIZED";
+  shell.redirectUnAuthorized = "/" + locale;
   const withLinks: INoProfileView = {
     ...content,
     links: [],
@@ -61,7 +63,6 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
     content.lang
   );
   useEffect(() => {
-    if (!userIsLoading && !user) router.push("/" + content.lang);
     if (!currentProfileIsLoading && currentProfile)
       router.push(currentProfile.route);
   }, [
