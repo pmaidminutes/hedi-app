@@ -16891,6 +16891,8 @@ h1 {
     height: 0; }
   .hedi--service-selection .bx--tile--selectable {
     min-height: 1rem; }
+  .hedi--service-selection:not(.is-expanded) .hedi--service-selection__content {
+    display: none; }
   .hedi--service-selection.is-expanded .hedi--service-selection__content {
     visibility: inherit;
     opacity: 1;
@@ -16975,6 +16977,9 @@ h1 {
 .hedi--simple-page h2 {
   margin-bottom: 1rem; }
 
+.hedi--profile-contact svg .cls-1 {
+  fill: #D36E3C; }
+
 .hedi--profile-contact img {
   margin-bottom: 2rem;
   margin-left: -1.5rem; }
@@ -17052,6 +17057,9 @@ h1 {
     background-color: white; }
     .hedi--profile-entry--with-services .hedi__tag-list {
       padding-top: 0.75rem; }
+
+.hedi--profile-services svg .cls-1 {
+  fill: #D36E3C; }
 
 .hedi--profile-services img {
   margin-bottom: 2rem; }

@@ -1,6 +1,7 @@
 import { IContactProps, useContact } from "./useContact";
 import { Tile, Link } from "carbon-components-react";
 import { Launch16 } from "@carbon/icons-react";
+import PregnantWoman from "./assets/pregnant.svg";
 
 export const Contact = (props: IContactProps): JSX.Element => {
   const {
@@ -13,11 +14,13 @@ export const Contact = (props: IContactProps): JSX.Element => {
     city,
     postal_code,
     headline,
+    officeHrsHeadline,
   } = useContact(props);
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
       <Tile>
-        <img src="/images/Pregnancy_pink80.svg" alt="" />
+        <h2>{headline}</h2>
+        <PregnantWoman />
         <address>
           <p>
             {street} {house_number}
@@ -61,7 +64,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
         <div className="hedi--consultation-hours-wrapper">
           {consultation_hours ? (
             <>
-              <h3>{headline}</h3>
+              <h3>{officeHrsHeadline}</h3>
               <p>{consultation_hours}</p>
             </>
           ) : null}
