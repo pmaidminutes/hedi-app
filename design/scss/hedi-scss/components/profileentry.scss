@@ -6,6 +6,8 @@ background-color: $ui-01;
 
 .hedi--profile-entry {
   margin-bottom: $spacing-sm;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
 
   > div > div:not(:first-child) {
     background-color: white;
@@ -19,7 +21,7 @@ background-color: $ui-01;
   }
 
   .hedi--profile-entry-content {
-   padding: $spacing-md; 
+   //padding: $spacing-md; 
   }
 
   .hedi--spacing {
