@@ -1,4 +1,13 @@
 .hedi--profile-list {
+  .hedi--profile-entry {
+    margin-bottom: $spacing-sm;
+    + svg {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+    }
+  }
+
   .bx--tile--clickable {
     background-color: white;
     margin: $spacing-md 0;
@@ -24,11 +33,5 @@
     .hedi--profile-entry--with-services {
       background-color: transparent;
     }
-  }
-
-  .hedi--profile-entry + svg {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
   }
 }

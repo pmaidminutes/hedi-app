@@ -56,7 +56,7 @@ export const Profile = (props: IProfileViewProps) => {
             !userIsLoading &&
             currentProfile &&
             currentProfile.route == props.content.route && (
-              <Row narrow>
+              <Row>
                 <Button
                   size="sm"
                   kind="secondary"
@@ -66,7 +66,7 @@ export const Profile = (props: IProfileViewProps) => {
                 </Button>
               </Row>
             )}
-          <ProfileEntry isNarrow={true} {...profileEntryData} />
+          <ProfileEntry isNarrow={false} {...profileEntryData} />
         </Grid>
       </BgImgContainer>
       <Grid className="hedi--profile">
