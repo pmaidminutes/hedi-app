@@ -37,6 +37,7 @@ export const getStaticProps: GetStaticProps<IPageProps<IAppPage>> = async ({
 
   const shell = useShell(content, shellConfig);
   shell.useHeader = "AUTHORIZED";
+  shell.redirectUnAuthorized = "/" + locale;
   return {
     props: { content, shell },
   };
@@ -51,7 +52,6 @@ export default function myProfile(props: IPageProps<IAppPage>) {
     content.lang
   );
   useEffect(() => {
-    if (!userIsLoading && !user) router.push("/" + content.lang);
     if (!currentProfileIsLoading && currentProfile)
       router.push(currentProfile.route);
   }, [
