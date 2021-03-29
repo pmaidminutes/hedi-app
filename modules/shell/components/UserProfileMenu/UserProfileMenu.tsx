@@ -8,18 +8,22 @@ import { Login32, UserProfile32 } from "@carbon/icons-react";
 import { getUser, logout } from "@/modules/auth/client/";
 import {
   AssertClientSide,
+  tryGet,
   tryGetKeyLabel,
   tryGetKeyLinks,
 } from "@/modules/common/utils";
 import { useRouter } from "next/router";
 import { IShellLink } from "../../types/shellLinks";
 import { signOut } from "next-auth/client";
+import { IUIElementTexts } from "@/modules/model";
 
 export interface IUserMenuProps {
   userMenuLinks?: IShellLink[];
+  shellConfigs?: IUIElementTexts[];
 }
 export const UserProfileMenu = ({
   userMenuLinks,
+  shellConfigs,
 }: IUserMenuProps): JSX.Element | null => {
   const [hasMounted, setHasMounted] = useState(false);
   const [user, loading] = getUser();
@@ -49,6 +53,7 @@ export const UserProfileMenu = ({
   if (!hasMounted) {
     return null;
   }
+  const menuTooltip = tryGet("menu_userProfile", shellConfigs)?.value;
 
   return (
     <>
@@ -56,6 +61,8 @@ export const UserProfileMenu = ({
         <Loading />
       ) : user ? (
         <OverflowMenu
+          title={menuTooltip}
+          iconDescription={menuTooltip}
           renderIcon={UserProfile32}
           ariaLabel="User Profile Menu"
           size="xl"
@@ -75,6 +82,8 @@ export const UserProfileMenu = ({
         </OverflowMenu>
       ) : (
         <OverflowMenu
+          title={menuTooltip}
+          iconDescription={menuTooltip}
           renderIcon={Login32}
           ariaLabel="User Profile Menu"
           size="xl"

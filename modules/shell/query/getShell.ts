@@ -1,8 +1,10 @@
+import { AppPageFields } from "@/modules/common/types";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { LanguageSkill } from "@/modules/profile/client/components/LanguageSkills";
 import { IShell } from "../types";
 import { ShellLinkFields } from "../types/shellLinks";
 import { LanguagesGQL } from "./getLanguages";
+export const getShellConfigGQL = (name: string) =>
+  `${name}:appPagesByKey(keys:["shellConfigs"], lang: $lang){${AppPageFields}}`;
 
 export const getShellLinksGQL = (name: string, keys: string[]) => {
   return `${name}:appPagesByKey(keys:[${keys
@@ -22,6 +24,7 @@ export async function getShell(
     getShellLinksGQL(key, value)
   );
   gqlQueries.push(LanguagesGQL);
+  gqlQueries.push(getShellConfigGQL("shellConfigs"));
 
   const query = gql`
     query getShell(
@@ -37,7 +40,7 @@ export async function getShell(
     .request<IShell>(query, { lang })
     .catch(e => {
       console.warn(e);
-      return { links: [], languages: [] };
+      return { links: [], languages: [], shellConfigs: [] };
     });
   // rest umbauen
 }

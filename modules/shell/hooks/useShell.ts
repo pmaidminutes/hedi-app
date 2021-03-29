@@ -16,10 +16,10 @@ export function useShell(
     useHeader,
     redirectUnAuthorized,
   } = content;
-  const { languages, ...links } = shellConfig;
+  const { languages, shellConfigs, ...links } = shellConfig;
 
   // TODO type?
-  let shell = {} as any;
+  let shell = { shellConfigs: shellConfigs?.[0].elements } as any;
   for (let key of Object.keys(links)) {
     setProperty(shell, key, links[key] as any);
   }

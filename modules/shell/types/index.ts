@@ -4,7 +4,9 @@ import {
   IEntity,
   IEntityLocalized,
   ILanguage,
+  IUIElementTexts,
 } from "@/modules/model";
+import { IAppPage } from "@/modules/common/types";
 
 export interface IShellProps
   extends Partial<IAppStyled>,
@@ -12,6 +14,7 @@ export interface IShellProps
       IPageConfig,
       "redirectUnAuthorized" | "useHeader" | "useBreadCrumb" | "revalidate"
     > {
+  shellConfigs: IUIElementTexts[];
   languageSwitchLinks: IEntity[];
   header?: IShellLink[];
   footer?: IShellLink[];
@@ -31,8 +34,9 @@ export interface IPageConfig extends Partial<IAppStyled> {
 
 // export type shellRecords = "header" | "footer"
 
-export interface IShell extends Record<string, IEntity[]> {
+export interface IShell extends Record<string, IEntity[] | IAppPage[]> {
   languages: ILanguage[];
+  shellConfigs: IAppPage[];
 }
 
 export interface IPageProps<T> {

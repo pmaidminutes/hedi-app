@@ -2,6 +2,7 @@
 import { useLanguageSwitch, ILanguageSwitchProps } from "./useLanguageSwitch";
 import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
 import { Translate32 } from "@carbon/icons-react";
+import { tryGet } from "@/modules/common/utils";
 /**
  * Language Switch Component.
  *
@@ -11,13 +12,16 @@ import { Translate32 } from "@carbon/icons-react";
 export const LanguageSwitch = (
   props: ILanguageSwitchProps
 ): JSX.Element | null => {
-  const { direction, links } = useLanguageSwitch(props);
+  const { direction, links, shellConfigs } = useLanguageSwitch(props);
+  const tooltip = tryGet("menu_language", shellConfigs)?.value;
 
   if (links) {
     return (
       <OverflowMenu
         renderIcon={Translate32}
         ariaLabel="Language Menu"
+        iconDescription={tooltip}
+        title={tooltip}
         size="xl"
         direction={direction}
         flipped={true}>
