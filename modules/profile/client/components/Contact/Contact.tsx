@@ -16,6 +16,8 @@ export const Contact = (props: IContactProps): JSX.Element => {
     postal_code,
     headline,
     officeHrsHeadline,
+    phoneLink,
+    prettyUrl,
   } = useContact(props);
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
@@ -34,7 +36,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
 
         <p>
           <Link
-            href={`tel:${phone}`}
+            href={`tel:${phoneLink}`}
             target="_blank"
             title="Telefonnummer"
             className="bx--link--lg">
@@ -58,7 +60,8 @@ export const Contact = (props: IContactProps): JSX.Element => {
               target="_blank"
               title="Webseite"
               className="bx--link--lg">
-              {website} <Launch16></Launch16>
+              {prettyUrl}
+              <Launch16 />
             </Link>
           ) : null}
         </p>

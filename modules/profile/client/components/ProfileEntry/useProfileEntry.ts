@@ -1,5 +1,6 @@
 import { IAddress, IContact, IDetailedName } from "@/modules/model";
 import { ICaregiver, Profile } from "@/modules/profile/types";
+import { prettifyUrl, formatPhoneNumber } from "@/modules/common/utils";
 
 export interface IProfileEntryProps
   extends Pick<IAddress, "postal_code" | "city">,
@@ -27,6 +28,9 @@ export function useProfileEntry(props: IProfileEntryProps) {
     isNarrow = false,
   } = props;
 
+  const prettyUrl = website ? prettifyUrl(website) : null;
+  const phoneLink = phone ? formatPhoneNumber(phone) : null;
+
   const className =
     "hedi--profile-entry" +
     (services ? " hedi--profile-entry--with-services" : "");
@@ -44,5 +48,7 @@ export function useProfileEntry(props: IProfileEntryProps) {
     route,
     isNarrow,
     className,
+    prettyUrl,
+    phoneLink,
   };
 }
