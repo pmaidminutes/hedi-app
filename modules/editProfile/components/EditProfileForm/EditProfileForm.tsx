@@ -394,6 +394,16 @@ export const EditProfileForm = ({
           lowContrast
         />
       )}
+
+      {errors && Object.keys(errors).length != 0 && (
+        <ToastNotification
+          title={tryGet("error_message", elements)?.value || "Error"}
+          subtitle={tryGet("error_message", elements)?.description}
+          caption=""
+          kind="error"
+          lowContrast
+        />
+      )}
     </Form>
   );
 };

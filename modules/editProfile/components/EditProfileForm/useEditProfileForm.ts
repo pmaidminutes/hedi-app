@@ -1,6 +1,6 @@
 import { FormEventHandler, useState } from "react";
 import useSWR from "swr";
-import { setProperty, tryGet } from "@/modules/common/utils";
+import { setProperty, tryGet, AssertClientSide } from "@/modules/common/utils";
 import {
   IEditProfile,
   EditProfileFieldArray,
@@ -76,7 +76,11 @@ export function useEditProfileForm(
           profile: newData,
         } as IUpsertProfile,
         false
-      );
+      ).then(resp => {
+        if (AssertClientSide()) {
+          window.scrollTo(0, 60);
+        }
+      });
     }
   };
 
