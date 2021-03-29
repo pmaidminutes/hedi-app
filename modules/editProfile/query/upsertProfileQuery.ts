@@ -27,7 +27,15 @@ export async function upsertProfileQuery(
   const client = await getClient(GQLEndpoint.User, authHeader);
   const result = await client
     .request<{ upsertProfile: IUpsertProfile }>(mutation, input)
-    .then(data => data.upsertProfile)
+    .then(data => {
+      if (
+        Array.isArray(data.upsertProfile?.errors) &&
+        !data.upsertProfile.errors.length
+      ) {
+        data.upsertProfile.errors = undefined;
+      }
+      return data.upsertProfile;
+    })
     .catch(e => {
       console.warn(e);
       return { code: 500, text: "Internal Server Error" };
