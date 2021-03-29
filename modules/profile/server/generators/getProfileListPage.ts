@@ -1,6 +1,6 @@
 import { segmentsToRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
-import { getProfileList, ProfileListView } from "../../query";
+import { getProfileListView, ProfileListView } from "../../query";
 
 export const getProfileListPage = async (
   segments?: string[],
@@ -8,7 +8,7 @@ export const getProfileListPage = async (
 ): Promise<(ProfileListView & IPageConfig) | null> => {
   if (!segments) return null;
 
-  const content = await getProfileList(segmentsToRoute(segments, locale));
+  const content = await getProfileListView(segmentsToRoute(segments, locale));
   if (!content) return null;
 
   return {
