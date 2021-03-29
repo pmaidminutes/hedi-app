@@ -26,7 +26,7 @@ export const segmentsToRoute = (segments: string[], locale: string) =>
 
 export function jsonFetcher<T>(url: RequestInfo) {
   return fetch(url)
-    .then(response => (response.bodyUsed ? response.json() : null))
+    .then(response => response.json().catch(() => null))
     .then(jsonResponse => jsonResponse as T); // TODO must be | null as well
 }
 
@@ -35,11 +35,7 @@ export function jsonPost<T>(url: RequestInfo, data: object) {
     method: "POST",
     body: JSON.stringify(data),
   })
-    .then(response => {
-      const length = response.headers.get("Content-Length");
-      if (length && parseInt(length) > 1) return response.json();
-      else return null;
-    })
+    .then(response => response.json().catch(() => null))
     .then(jsonResponse => jsonResponse as T | null);
 }
 
