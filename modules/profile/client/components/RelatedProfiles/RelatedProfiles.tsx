@@ -22,15 +22,19 @@ const data = [
   },
 ];
 export const RelatedProfiles = (props: IRelatedProfilesProps) => {
-  const { headline } = useRelatedProfiles(props);
+  const { headline, profiles } = useRelatedProfiles(props);
   return (
     <section className="hedi--related-profiles">
       <Grid>
         <h3>{headline}</h3>
         <Row>
-          {data.map((profile, index) => (
-            <RelatedProfile key={index} {...profile} />
-          ))}
+          {profiles
+            ? profiles.map((profile, index) => (
+                <RelatedProfile key={index} {...profile} />
+              ))
+            : data.map((profile, index) => (
+                <RelatedProfile key={index} {...profile} />
+              ))}
         </Row>
       </Grid>
     </section>
