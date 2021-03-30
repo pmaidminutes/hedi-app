@@ -23,16 +23,20 @@ export const LoginView = ({ content }: { content: ILoginView }) => {
         </Column>
       </Row>
       <Row>
-        {content.links.map(link => (
-          <Column>
-            <FormLabel className="hedi--block-label">
-              {tryGet(link.key, content.elements)?.help}
-            </FormLabel>
-            {hasElement(link.key, content.elements) && (
-              <Button href={link.route}>{link.label}</Button>
-            )}
-          </Column>
-        ))}
+        {content.links.map(link => {
+          if (link.key !== "registration") {
+            return (
+              <Column>
+                <FormLabel className="hedi--block-label">
+                  {tryGet(link.key, content.elements)?.help}
+                </FormLabel>
+                {hasElement(link.key, content.elements) && (
+                  <Button href={link.route}>{link.label}</Button>
+                )}
+              </Column>
+            );
+          }
+        })}
       </Row>
       <Row>
         <Column>

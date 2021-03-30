@@ -17244,6 +17244,23 @@ h1 {
 .hedi--login-form .hedi--block-label {
   display: block; }
 
+.hedi--login-form .hedi--group--login form div:last-child {
+  display: flex;
+  align-items: flex-end; }
+  .hedi--login-form .hedi--group--login form div:last-child span {
+    -webkit-margin-start: 10px;
+            margin-inline-start: 10px;
+    font-size: 0.9em; }
+  @media (max-width: 769px) {
+    .hedi--login-form .hedi--group--login form div:last-child {
+      flex-direction: column;
+      align-items: flex-start; }
+      .hedi--login-form .hedi--group--login form div:last-child span {
+        -webkit-margin-start: 0;
+                margin-inline-start: 0;
+        -webkit-margin-before: 1rem;
+                margin-block-start: 1rem; } }
+
 .hedi--group--registration label[for="registrationcode"] {
   font-size: 1rem; }
 
