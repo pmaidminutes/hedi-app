@@ -1,6 +1,6 @@
 import { FormEventHandler, useState } from "react";
 import useSWR from "swr";
-import { setProperty, tryGet, AssertClientSide } from "@/modules/common/utils";
+import { setProperty } from "@/modules/common/utils";
 import {
   IEditProfile,
   EditProfileFieldArray,
@@ -10,6 +10,14 @@ import {
 import { upsertProfile } from "../../request";
 import { useRouter } from "next/router";
 import { IUIElementTexts } from "@/modules/model";
+
+export const orderedRequiredFields = [
+  "forename",
+  "surname",
+  "city",
+  "phone",
+  "mail",
+];
 
 export function useEditProfileForm(
   lang: string,
@@ -46,40 +54,20 @@ export function useEditProfileForm(
         setProperty(profileData, key, value as any);
       }
     });
-    const errors: { [key: string]: string } = {};
-    ["city", "mail", "phone", "forename", "surname"].forEach(field => {
-      if (!(delta as any)[field] && !(newData as any)[field])
-        errors[field] = tryGet(field, elements)?.help || "";
-    });
 
-    if (Object.keys(errors).length == 0) {
-      if (Object.keys(delta).length > 0) {
-        mutate(
-          upsertProfile("/api/user/profile/edit", {
-            profile: delta,
-            lang,
-          }).then(resp => {
-            if (resp?.success && resp?.route) {
-              setIsSuccessfullySaved(true);
-              router.push(resp.route);
-            }
-            return resp;
-          })
-        );
-      }
-    } else {
+    if (Object.keys(delta).length > 0) {
       mutate(
-        {
-          success: false,
-          errors: errors,
-          profile: newData,
-        } as IUpsertProfile,
-        false
-      ).then(resp => {
-        if (AssertClientSide()) {
-          window.scrollTo(0, 60);
-        }
-      });
+        upsertProfile("/api/user/profile/edit", {
+          profile: delta,
+          lang,
+        }).then(resp => {
+          if (resp?.success && resp?.route) {
+            setIsSuccessfullySaved(true);
+            router.push(resp.route);
+          }
+          return resp;
+        })
+      );
     }
   };
 

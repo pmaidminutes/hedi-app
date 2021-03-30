@@ -28,7 +28,8 @@ import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState, RefObject, FormEvent } from "react";
+import { orderedRequiredFields } from "./useEditProfileForm";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -91,8 +92,54 @@ export const EditProfileForm = ({
   const anyError = () =>
     (errors && Object.keys(errors).length != 0) ||
     Object.keys(validationErrors).length != 0;
+
+
+  const refs: {
+    [key: string]: RefObject<HTMLInputElement>;
+  } = orderedRequiredFields
+    .map(field => ({
+      field: field,
+      ref: useRef<HTMLInputElement>(null),
+    }))
+    .reduce(
+      (result, item) => {
+        result[item.field] = item.ref;
+        return result;
+      },
+      {} as {
+        [key: string]: RefObject<HTMLInputElement>;
+      }
+    );
+
+  const scrollToErrors = (currentErrors: { [key: string]: string }) => {
+    for (let key of Object.keys(currentErrors)) {
+      refs[key].current?.scrollIntoView();
+      window.scrollBy(0, -100);
+      return true;
+    }
+    return false;
+  };
+  
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.target as HTMLFormElement);
+
+    const currentErrors: { [key: string]: string } = {};
+    orderedRequiredFields.forEach(field => {
+      if (!form.get(field)) {
+        const message = tryGet(field, elements)?.help || "";
+        currentErrors[field] = message;
+      }
+    });
+    setValidationErrors(currentErrors);
+    const anyValidationErrors = scrollToErrors(currentErrors);
+    if (!anyValidationErrors && onSubmit) onSubmit(e);
+  };
+        
+  const { onSubmit, ...formPropsRest } = formProps;
+        
   return (
-    <Form {...formProps}>
+    <Form {...formPropsRest} onSubmit={handleSubmit}>
       {errors?.generic && (
         <InlineNotification
           kind="error"
@@ -158,6 +205,7 @@ export const EditProfileForm = ({
                 invalid={typeof getError("forename") === "string"}
                 invalidText={getError("forename")}
                 defaultValue={profile?.forename}
+                ref={refs.forename}
               />
             </Column>
           </Row>
@@ -173,6 +221,7 @@ export const EditProfileForm = ({
                 invalid={typeof getError("surname") === "string"}
                 invalidText={getError("surname")}
                 defaultValue={profile?.surname}
+                ref={refs.surname}
               />
             </Column>
           </Row>
@@ -198,6 +247,7 @@ export const EditProfileForm = ({
                 invalid={typeof getError("city") === "string"}
                 invalidText={getError("city")}
                 defaultValue={profile?.city}
+                ref={refs.city}
               />
             </Column>
             <Column lg={2} md={2}>
@@ -267,6 +317,7 @@ export const EditProfileForm = ({
                 invalid={typeof getError("phone") === "string"}
                 invalidText={getError("phone")}
                 defaultValue={profile?.phone}
+                ref={refs.phone}
               />
             </Column>
             {hasElement("phone_private", conditionalElements[profileType]) && (
@@ -296,6 +347,7 @@ export const EditProfileForm = ({
                 invalid={typeof getError("mail") === "string"}
                 invalidText={getError("mail")}
                 defaultValue={profile?.mail}
+                ref={refs.mail}
               />
             </Column>
             {hasElement("website", conditionalElements[profileType]) && (
