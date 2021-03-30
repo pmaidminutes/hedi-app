@@ -23,7 +23,6 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     editButtonProps,
   } = useProfileEntry(props);
 
-  console.log({ editButtonProps });
   return (
     <>
       <section className={className}>
