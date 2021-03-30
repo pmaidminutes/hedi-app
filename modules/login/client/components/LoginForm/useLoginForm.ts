@@ -30,7 +30,12 @@ export interface ILoginFormElementProps {
   successNotification?: ToastNotificationProps;
 }
 
-export function useLoginForm({ elements, lang, redirectUrl }: LoginFormProps) {
+export function useLoginForm({
+  elements,
+  lang,
+  redirectUrl,
+  links,
+}: LoginFormProps) {
   const router = useRouter();
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
@@ -57,12 +62,15 @@ export function useLoginForm({ elements, lang, redirectUrl }: LoginFormProps) {
   }, [lang]);
 
   const { loginNotification, successNotification, ...rest } = elementProps;
+  // TODO mod links and elements here in hook
   return {
     ...rest,
     handleSubmit,
     loginLoading,
     loginNotification: loginError ? loginNotification : undefined,
     successNotification: loginSuccess ? successNotification : undefined,
+    links,
+    elements,
   };
 }
 
