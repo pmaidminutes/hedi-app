@@ -49,9 +49,9 @@ export const LoginForm = (props: LoginFormProps) => {
           kind="success"
           lowContrast={true}
           hideCloseButton={true}
+          caption={<InlineLoading status="active" />}
           style={{ width: "100%" }}
           {...successNotification}
-          caption={<InlineLoading status="active" />}
         />
       )}
       <div>
