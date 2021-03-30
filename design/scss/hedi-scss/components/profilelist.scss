@@ -13,13 +13,21 @@
     margin: $spacing-md 0;
     &.hedi--profile-list__item {
       &--midwife {
+        $midwifeColor: $pink-60;
+        // .hedi--profile-entry-content h3 {
+        //   color: $midwifeColor;
+        // }
         .hedi--profile-entry-image svg .cls-1 {
-          fill: $orange-100;
+          fill: $midwifeColor;
         }
       }
       &--caregiver {
+        $caregiverColor: $green-60;
+        // .hedi--profile-entry-content h3 {
+        //   color: $caregiverColor;
+        // }
         .hedi--profile-entry-image svg .cls-1 {
-          fill: $green-100;
+          fill: $caregiverColor;
         }
       }
     }
@@ -42,9 +50,7 @@
 
   @media (max-width: 672px) {
     .hedi--profile-entry-image {
-    max-width: 50%;
+      max-width: 50%;
     }
-
   }
-
 }
