@@ -30,11 +30,9 @@ export const UserProfileMenu = ({
   const router = useRouter();
   const navigateMenu = (routeKey: string) => {
     if (AssertClientSide()) {
-      const routePath = tryGetKeyLinks(
-        routeKey,
-        userMenuLinks,
-        "/" + router.locale
-      );
+      const routePath =
+        userMenuLinks?.find(l => l.key === routeKey)?.route ??
+        "/" + router.locale;
       router.push(routePath);
     }
   };
