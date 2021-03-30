@@ -10,7 +10,7 @@ export function useProfileItem(props: IProfileItem) {
   const { profile, elements } = props;
   const { route } = profile;
 
-  const midwifeLabel = tryGetValue("midwife_label", elements, "Hebamme");
+  const midwifeLabel = tryGetValue("domain_midwife", elements, "Hebamme");
   const servicesHeadline = tryGetValue("services", elements, "Tätigkeiten");
 
   const profileType = isICaregiver(profile)

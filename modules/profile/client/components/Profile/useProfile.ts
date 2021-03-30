@@ -71,7 +71,7 @@ export function useProfile(props: IProfileViewProps) {
   }, [services]);
 
   // HACK proper domain impl
-  const domainMidwife = tryGetValue("midwife_label", elements, "Hebamme");
+  const domainMidwife = tryGetValue("domain_midwife", elements, "Hebamme");
   const domains = isICaregiver(content)
     ? content.domains
     : [{ type: "Domain", label: domainMidwife, route: "/" + domainMidwife }];
