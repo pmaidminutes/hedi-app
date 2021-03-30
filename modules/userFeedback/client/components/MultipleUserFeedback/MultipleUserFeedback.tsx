@@ -8,7 +8,8 @@ export const MultipleUserFeedback: React.FC<{
   lang: string;
   onSuccess?: () => void;
   onError?: () => void;
-}> = ({ lang, onSuccess, onError, children }) => {
+  onEmptyError?: () => void;
+}> = ({ lang, onSuccess, onError, onEmptyError, children }) => {
   const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
@@ -55,6 +56,8 @@ export const MultipleUserFeedback: React.FC<{
         .catch(err => {
           if (onError) onError();
         });
+    } else {
+      if (onEmptyError) onEmptyError();
     }
     return false;
   };
