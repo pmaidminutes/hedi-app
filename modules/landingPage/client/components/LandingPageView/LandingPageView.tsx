@@ -27,6 +27,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
             ))
           : links.map((link, index) => (
               <Column
+                key={index}
                 lg={
                   isLastElement(index + 1, links)
                     ? { span: 5, offset: 1 }
