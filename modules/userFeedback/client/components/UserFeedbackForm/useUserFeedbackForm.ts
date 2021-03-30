@@ -10,6 +10,7 @@ import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { ProfileView } from "@/modules/profile/query";
 import { IAppPage } from "@/modules/common/types";
 
+import { headlineType } from "@/modules/profile/client/components/Services/useServices";
 export interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
   locale: string;
@@ -51,7 +52,11 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   const { subPages, elements } = content;
 
   // TODO improve
-  const servicesDataWithHeadlineType = { ...servicesData, headlineType: "h3" };
+  const serviceHeadlineType: headlineType = "h3";
+  const servicesDataWithHeadlineType = {
+    ...servicesData,
+    headlineType: serviceHeadlineType,
+  };
 
   const onSuccess = () => {
     const thanksPageRoute = getSubPage("userfeedbackThanks", content.subPages)
