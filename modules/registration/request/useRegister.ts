@@ -19,7 +19,7 @@ export const useRegister = () => {
     setLoading(false);
   };
   const autoSignIn = (info: IRegisterRequest, redirect?: string) => {
-    const dest = `${window.location.protocol}//${window.location.hostname}/${redirect}`;
+    const dest = `${window.location.protocol}//${window.location.hostname}${redirect}`;
     signIn("credentials", {
       username: info.name,
       password: info.pass,
