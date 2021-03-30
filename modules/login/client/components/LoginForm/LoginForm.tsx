@@ -54,12 +54,16 @@ export const LoginForm = (props: LoginFormProps) => {
           caption={<InlineLoading status="active" />}
         />
       )}
-      {!successNotification && (
-        <Button type="submit">
-          {loginLoading ? <InlineLoading status="active" /> : submitButtonText}
-        </Button>
-      )}
       <div>
+        {!successNotification && (
+          <Button type="submit">
+            {loginLoading ? (
+              <InlineLoading status="active" />
+            ) : (
+              submitButtonText
+            )}
+          </Button>
+        )}
         {links.map(link => {
           if (link.key === "registration") {
             return (
