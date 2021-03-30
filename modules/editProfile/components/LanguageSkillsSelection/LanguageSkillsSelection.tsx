@@ -1,5 +1,6 @@
 import {
   Button,
+  Column,
   Table,
   TableBody,
   TableHead,
@@ -33,49 +34,63 @@ export const LanguageSkillsSelection = ({
     isMobileContext,
   } = useLanguageSkillsSelection(data);
   return (
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableHeader>
-            {tryGetValue("language", config.elements, "Sprache")}
-          </TableHeader>
-          <TableHeader>
-            {tryGetValue("level", config.elements, "Verständnis")}
-          </TableHeader>
-          <TableHeader>
-            <Button
-              hasIconOnly={isMobileContext}
-              kind="tertiary"
-              renderIcon={Add32}
-              iconDescription={tryGetValue(
-                "add-languageSkill",
-                config.elements,
-                "weitere Hinzufügen"
-              )}
-              onClick={handleAddClick}>
-              {!isMobileContext
-                ? tryGetValue(
+    <>
+      <Column>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableHeader>
+                {tryGetValue("language", config.elements, "Sprache")}
+              </TableHeader>
+              <TableHeader>
+                {tryGetValue("level", config.elements, "Verständnis")}
+              </TableHeader>
+              <TableHeader>
+                <Button
+                  kind="primary"
+                  renderIcon={Add32}
+                  iconDescription={tryGetValue(
+                    "add-languageSkill",
+                    config.elements,
+                    "weitere Hinzufügen"
+                  )}
+                  onClick={handleAddClick}>
+                  {tryGetValue(
                     "add-languageSkill",
                     config.elements,
                     "Hinzufügen"
-                  )
-                : null}
-            </Button>
-          </TableHeader>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {languageSkillEntries?.map((ls, i) => (
-          <LanguageSkillRow
-            key={ls.langcode + i}
-            config={config}
-            data={ls}
-            handleDeleteClick={() => {
-              handleRemoveClick(i);
-            }}
-          />
-        ))}
-      </TableBody>
-    </Table>
+                  )}
+                </Button>
+              </TableHeader>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {languageSkillEntries?.map((ls, i) => (
+              <LanguageSkillRow
+                key={ls.langcode + i}
+                config={config}
+                data={ls}
+                handleDeleteClick={() => {
+                  handleRemoveClick(i);
+                }}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </Column>
+      <Column>
+        <Button
+          className="mobile-only"
+          hasIconOnly={true}
+          kind="primary"
+          renderIcon={Add32}
+          iconDescription={tryGetValue(
+            "add-languageSkill",
+            config.elements,
+            "weitere Hinzufügen"
+          )}
+          onClick={handleAddClick}></Button>
+      </Column>
+    </>
   );
 };

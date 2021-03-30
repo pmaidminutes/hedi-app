@@ -28,10 +28,10 @@ export const credentialProvider = Providers.Credentials({
       );
       if (IsIHTTPError(response)) {
         // Error or custom uri (as pure string) can be passed here
-        return Promise.reject(new Error(response.text));
+        return Promise.resolve(null);
       } else {
         return response;
       }
-    } else return null;
+    } else return Promise.resolve(null);
   },
 });

@@ -24,11 +24,12 @@ export const SimplePageView: React.FC<{
       } ${customKey !== undefined ? `hedi--${customKey}` : ""}`}>
       {content.posterImage && (
         <Image
+          className="hedi--hero-image"
           src={"https://assets.projekt-hedi.de" + content.posterImage.route}
           alt={content.posterImage.alt}
-          className="hedi-header-image"
           width={content.posterImage.width}
           height={content.posterImage.height}
+          layout="responsive"
         />
       )}
       {!!url ? (
@@ -71,7 +72,7 @@ const TwoColumns: React.FC<{
 }> = ({ content, url, alt, condensed, narrow, left, right, children }) => (
   <Grid>
     <Row>
-      <Column {...left}>
+      <Column {...left} className="hedi-app-page-image-wrapper">
         <div className="hedi--app-page-image">
           <img src={url} alt={alt ?? ""}></img>
         </div>

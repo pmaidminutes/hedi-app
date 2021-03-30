@@ -10,8 +10,7 @@
  
   $focus: $blue-primary !global;
   $interactive-01: $blue-primary !global;
-
-  //$hover-primary: $green-50 !global;
+  $hover-primary: $blue-80 !global;
 
   //$interactive-02: $cool-gray-60 !global;
   //$hover-secondary: $cool-gray-50 !global;
@@ -24,7 +23,7 @@
   // $interactive-01: #0f62fe !global;
   // $interactive-02: #393939 !global;
   // $interactive-03: #0f62fe !global;
-  // $interactive-04: #0f62fe !global;
+    $interactive-04: $blue-50 !global; //für aktivierte Links
   // $ui-background: #ffffff !global;
   // $ui-01: #f4f4f4 !global;
   // $ui-02: #ffffff !global;
@@ -40,7 +39,7 @@
   // $icon-01: #161616 !global;
   // $icon-02: #525252 !global;
   // $icon-03: #ffffff !global;
-  //$link-01: $purple-primary !global;
+    $link-01: $blue-60 !global;
   //$inverse-link: $purple-30 !global;
   // $field-01: #f4f4f4 !global;
   // $field-02: #ffffff !global;
@@ -59,9 +58,9 @@
   // $danger-02: #da1e28 !global;
   // $focus: #0f62fe !global;
   // $inverse-focus-ui: #ffffff !global;
-  // $hover-primary: $pink-primary !global;
-  // $active-primary: #002d9c !global;
-  //$hover-primary-text: $purple-primary !global; //link hover farbe
+  // $hover-primary: $blue-90 !global;
+    $active-primary: $blue-90 !global; // link geklickt Farbe
+    $hover-primary-text: $blue-80 !global; //link hover farbe
   // $hover-secondary: #4c4c4c !global;
   // $active-secondary: #6f6f6f !global;
   // $hover-tertiary: #0353e9 !global;

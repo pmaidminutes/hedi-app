@@ -1,8 +1,7 @@
 import { getUser } from "@/modules/auth/client";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import UserFeedbackForm from "@/modules/userFeedback/client/components/UserFeedbackForm/UserFeedbackForm";
-import { getCurrentUserProfile } from "@/modules/profile/request/getCurrentUserProfile";
-import { useRouter } from "next/router";
+import { useCurrentProfile } from "@/modules/profile/client/hooks";
 import { tryGet } from "@/modules/common/utils";
 import {
   Button,
@@ -12,7 +11,6 @@ import {
   FormLabel,
   Row,
 } from "carbon-components-react";
-import { useEffect } from "react";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 
 export const UserFeedbackView = ({
@@ -29,11 +27,7 @@ export const UserFeedbackView = ({
   centerProps?: ColumnDefaultProps;
 }) => {
   const [user, userIsLoading] = getUser();
-  const router = useRouter();
-  useEffect(() => {
-    if (!userIsLoading && !user) router.push("/" + locale);
-  }, [user, userIsLoading]);
-  const [currentProfile, currentProfileIsLoading] = getCurrentUserProfile(
+  const [currentProfile, currentProfileIsLoading] = useCurrentProfile(
     user,
     locale
   );

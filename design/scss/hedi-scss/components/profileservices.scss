@@ -1,12 +1,11 @@
 .hedi--profile-services {
-margin-bottom: $layout-sm;
+  svg {
+    .cls-1 {
+      fill: $orange-50;
+    }
+  }
 
-h3, h4, h5 {
-padding-bottom: $spacing-xs;
-}
-
-img {
-margin-bottom: $layout-sm;
-}
-
+  img {
+    margin-bottom: $layout-sm;
+  }
 }

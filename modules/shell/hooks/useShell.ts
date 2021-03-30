@@ -1,10 +1,10 @@
 import { setProperty } from "@/modules/common/utils";
-import { IEntity, IEntityLocalized, ILanguage } from "@/modules/model";
+import { IEntityLocalized, ILanguage } from "@/modules/model";
 import { IPageConfig, IShell, IShellProps } from "../types";
 
 export function useShell(
   content: IPageConfig,
-  shellConfig: IShell
+  shellData: IShell
   // languages: ILanguage[],
   // links: Record<string, IEntity[]>
 ): IShellProps {
@@ -14,26 +14,29 @@ export function useShell(
     useBreadCrumb,
     revalidate,
     useHeader,
+    redirectUnAuthorized,
   } = content;
-  const { languages, ...links } = shellConfig;
+  const { languages, shellConfig, ...links } = shellData;
 
   // TODO type?
-  let shell = {} as any;
+  let shellProps = { shellConfig } as any;
   for (let key of Object.keys(links)) {
-    setProperty(shell, key, links[key] as any);
+    setProperty(shellProps, key, links[key] as any);
   }
   if (translations)
     setProperty(
-      shell,
+      shellProps,
       "languageSwitchLinks",
       generateLanguageSwitchLinks(languages, translations)
     );
-  setProperty(shell, "useHeader", useHeader !== undefined ? useHeader : true);
-  if (appstyle) setProperty(shell, "appstyle", appstyle);
-  if (revalidate) setProperty(shell, "revalidate", revalidate);
-  if (useBreadCrumb) setProperty(shell, "useBreadCrumb", useBreadCrumb);
+  if (useHeader) setProperty(shellProps, "useHeader", useHeader);
+  if (redirectUnAuthorized)
+    setProperty(shellProps, "redirectUnAuthorized", redirectUnAuthorized);
+  if (appstyle) setProperty(shellProps, "appstyle", appstyle);
+  if (revalidate) setProperty(shellProps, "revalidate", revalidate);
+  if (useBreadCrumb) setProperty(shellProps, "useBreadCrumb", useBreadCrumb);
 
-  return shell;
+  return shellProps;
 }
 
 function generateLanguageSwitchLinks(

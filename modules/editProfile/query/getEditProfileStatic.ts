@@ -81,9 +81,14 @@ export async function getEditProfileStatic(
     return acc;
   }, {} as Record<ProfileType, IUIElementTexts[]>);
 
-  // TODO filter out services which are groups at the same time
-  const Midwife = serviceGroups.filter(sg => sg.midwife);
   const Caregiver = serviceGroups.filter(sg => sg.caregiver);
+  const Midwife = serviceGroups.filter(sg => sg.midwife);
+  for (let i = 0; i < Midwife.length; i++) {
+    Midwife[i] = { ...Midwife[i] }; // break up reference shared with caregiver
+    Midwife[i].services = Midwife[i].services.filter(
+      s => !Midwife.find(sg => sg.route === s.route)
+    );
+  }
 
   return {
     ...appPage,

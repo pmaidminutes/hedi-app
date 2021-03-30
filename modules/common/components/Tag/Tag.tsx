@@ -1,9 +1,9 @@
-import { ITag, TagType } from "@/modules/model";
+import { ITag, TagType, IService } from "@/modules/model";
 
 import { Tag as CarbonTag, Link } from "carbon-components-react";
 
 interface ITagProps {
-  tag: ITag;
+  tag: IService;
   type?: TagType | null;
 }
 export const Tag = ({ tag, type }: ITagProps): JSX.Element => {

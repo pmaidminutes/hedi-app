@@ -1,0 +1,51 @@
+@import "./theme/hedi-theme.scss";
+
+.hedi--profile-list {
+  background-color: $ui-01;
+}
+
+.hedi--profile-entry {
+  margin-bottom: $spacing-sm;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  img {
+    width: 100%;
+    max-width: 350px;
+    height: auto;
+    background-color: $ui-02;
+  }
+
+  .hedi--spacing {
+    padding-top: $spacing-2xl;
+  }
+
+  .hedi--profile-entry-content {
+    padding: $spacing-md;
+  }
+
+  h2,
+  h3,
+  h5 {
+    padding-bottom: $spacing-2xs;
+  }
+
+  h3 {
+    font-weight: 300;
+    font-size: 1.25rem;
+  }
+
+  //setzt das Launch Icon 2px runter
+  a > svg {
+    margin-bottom: -2px;
+  }
+
+  &--with-services {
+    //background-color: red;
+    background-color: white;
+
+    .hedi__tag-list {
+      padding-top: $spacing-sm;
+    }
+  }
+}

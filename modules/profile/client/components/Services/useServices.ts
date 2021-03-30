@@ -8,12 +8,13 @@ export interface IServicesProps {
   >;
   tagType?: TagType;
   services: IService[] | null;
+  headlineType?: "h3" | "h5";
 }
 
 export function useServices(props: IServicesProps) {
-  const { headline, services, tagType } = props;
+  const { headline, services, tagType, headlineType = "h5" } = props;
 
   const { labelText } = headline;
 
-  return { headline: labelText as String, services, tagType };
+  return { headline: labelText as String, services, tagType, headlineType };
 }

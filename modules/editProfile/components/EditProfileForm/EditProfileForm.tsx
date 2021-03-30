@@ -13,10 +13,12 @@ import {
   ContentSwitcher,
   Switch,
   SelectableTile,
+  ToastNotification,
 } from "carbon-components-react";
 import {
   getTextInputProps,
   hasElement,
+  tryGet,
   tryGetValue,
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
@@ -24,10 +26,26 @@ import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
+import { IUIElementTexts } from "@/modules/model";
+import { TextInputProps } from "carbon-components-react";
+import { ChangeEvent, useState } from "react";
+
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
   data: IUpsertProfile;
   isValidating?: boolean;
+  isSuccessfullySaved?: boolean;
+};
+const getRequiredTextInputProps = (
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void,
+  identifier: string,
+  elements?: IUIElementTexts[]
+): Pick<TextInputProps, "id" | "labelText" | "placeholder" | "aria-label"> & {
+  onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+} => {
+  const props = getTextInputProps(identifier, elements);
+  delete props.helperText; // HACK removed helperText to not be shown always and to show it just in validation error cases
+  return { ...props, onChange };
 };
 
 export const EditProfileForm = ({
@@ -41,13 +59,31 @@ export const EditProfileForm = ({
   },
   data: { success, errors, profile },
   isValidating,
+  isSuccessfullySaved,
   ...formProps
 }: EditProfileInputProps) => {
   const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
     profile?.type
   );
+  // TODO find better way to combine frontend and backend errors
+  const [validationErrors, setValidationErrors] = useState<{
+    [key: string]: string;
+  }>({});
 
-  // TODO check submitted + success state to show a successfully saved toast
+  const handleRequiredFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const key = e.target.name;
+    if (!e.target.value) {
+      const message = tryGet(e.target.name, elements)?.help ?? "x";
+      setValidationErrors(previous => ({ ...previous, [key]: message }));
+    } else {
+      setValidationErrors(previous => {
+        const { [key]: _, ...rest } = previous;
+        return { ...rest };
+      });
+    }
+  };
+
+  const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
 
   return (
     <Form {...formProps}>
@@ -61,36 +97,36 @@ export const EditProfileForm = ({
 
       <input id="type" name="type" value={profileType} hidden={true} readOnly />
 
-      <div className="hedi--group hedi--group--profile-type">
-        <FormGroup
-          legendText={
-            <h2>{tryGetValue("group-type", elements, "Tätigkeitsbereich")}</h2>
-          }>
-          <Row>
-            <Column sm={4} md={6} lg={8}>
-              <ContentSwitcher
-                onChange={handleContentSwitcherChange}
-                size="xl"
-                selectedIndex={profileType === "Midwife" ? 0 : 1}>
-                <Switch
-                  name="Midwife"
-                  text={tryGetValue("type-midwife", elements, "Hebamme")}
-                  onClick={() => {}}
-                  onKeyDown={() => {}}
-                  defaultChecked={profileType === "Midwife"}
-                />
-                <Switch
-                  name="Caregiver"
-                  text={tryGetValue("type-caregiver", elements, "Betreuende")}
-                  onClick={() => {}}
-                  onKeyDown={() => {}}
-                  defaultChecked={profileType === "Caregiver"}
-                />
-              </ContentSwitcher>
-            </Column>
-          </Row>
-        </FormGroup>
-      </div>
+      <Row>
+        <div className="hedi--group hedi--group--profile-type">
+          <FormGroup
+            legendText={
+              <h2>
+                {tryGetValue("group-type", elements, "Tätigkeitsbereich")}
+              </h2>
+            }>
+            <ContentSwitcher
+              onChange={handleContentSwitcherChange}
+              size="xl"
+              selectedIndex={profileType === "Midwife" ? 0 : 1}>
+              <Switch
+                name="Midwife"
+                text={tryGetValue("type-midwife", elements, "Hebamme")}
+                onClick={() => {}}
+                onKeyDown={() => {}}
+                defaultChecked={profileType === "Midwife"}
+              />
+              <Switch
+                name="Caregiver"
+                text={tryGetValue("type-caregiver", elements, "Betreuende")}
+                onClick={() => {}}
+                onKeyDown={() => {}}
+                defaultChecked={profileType === "Caregiver"}
+              />
+            </ContentSwitcher>
+          </FormGroup>
+        </div>
+      </Row>
 
       <div className="hedi--group hedi--group--name">
         <FormGroup
@@ -107,10 +143,14 @@ export const EditProfileForm = ({
             </Column>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("forename", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "forename",
+                  elements
+                )}
                 name="forename"
-                invalid={!!errors?.forename}
-                invalidText={errors?.forename}
+                invalid={!!getError("forename")}
+                invalidText={getError("forename")}
                 defaultValue={profile?.forename}
               />
             </Column>
@@ -118,10 +158,14 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("surname", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "surname",
+                  elements
+                )}
                 name="surname"
-                invalid={!!errors?.surname}
-                invalidText={errors?.surname}
+                invalid={!!getError("surname")}
+                invalidText={getError("surname")}
                 defaultValue={profile?.surname}
               />
             </Column>
@@ -139,10 +183,14 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("city", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "city",
+                  elements
+                )}
                 name="city"
-                invalid={!!errors?.city}
-                invalidText={errors?.city}
+                invalid={!!getError("city")}
+                invalidText={getError("city")}
                 defaultValue={profile?.city}
               />
             </Column>
@@ -204,10 +252,14 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("phone", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "phone",
+                  elements
+                )}
                 name="phone"
-                invalid={!!errors?.phone}
-                invalidText={errors?.phone}
+                invalid={!!getError("phone")}
+                invalidText={getError("phone")}
                 defaultValue={profile?.phone}
               />
             </Column>
@@ -229,16 +281,19 @@ export const EditProfileForm = ({
           <Row>
             <Column lg={6} md={6}>
               <TextInput
-                {...getTextInputProps("mail", elements)}
+                {...getRequiredTextInputProps(
+                  handleRequiredFieldChange,
+                  "mail",
+                  elements
+                )}
                 name="mail"
-                invalid={!!errors?.mail}
-                invalidText={errors?.mail}
+                invalid={!!getError("mail")}
+                invalidText={getError("mail")}
                 defaultValue={profile?.mail}
-                required
               />
             </Column>
             {hasElement("website", conditionalElements[profileType]) && (
-              <Column lg={6}>
+              <Column lg={6} md={6}>
                 <TextInput
                   {...getTextInputProps(
                     "website",
@@ -282,14 +337,16 @@ export const EditProfileForm = ({
           legendText={
             <h2>{tryGetValue("group-languageSkills", elements, "Sprachen")}</h2>
           }>
-          <LanguageSkillsSelection
-            config={{
-              elements,
-              languageLevelElements,
-              languageOptions,
-            }}
-            data={profile?.languageSkills}
-          />
+          <Row>
+            <LanguageSkillsSelection
+              config={{
+                elements,
+                languageLevelElements,
+                languageOptions,
+              }}
+              data={profile?.languageSkills}
+            />
+          </Row>
         </FormGroup>
       </div>
 
@@ -328,14 +385,17 @@ export const EditProfileForm = ({
               <h2>{tryGetValue("group-services", elements, "Angebote")}</h2>
             }>
             <Row>
-              {conditionalServiceGroups[profileType]?.map(serviceGroup => (
-                <Column lg={8} key={serviceGroup.route}>
-                  <ServiceSelection
-                    config={{ elements, serviceGroup }}
-                    data={profile?.services}
-                  />
-                </Column>
-              ))}
+              {
+                //key needs to include profile type because servicegroup items can change
+                conditionalServiceGroups[profileType]?.map(serviceGroup => (
+                  <Column lg={8} key={serviceGroup.route + profileType}>
+                    <ServiceSelection
+                      config={{ elements, serviceGroup }}
+                      data={profile?.services}
+                    />
+                  </Column>
+                ))
+              }
             </Row>
           </FormGroup>
         </div>
@@ -361,10 +421,29 @@ export const EditProfileForm = ({
 
       {isValidating ? (
         <InlineLoading status="active" />
-      ) : (
+      ) : !isSuccessfullySaved ? (
         <Button type="submit">
           {tryGetValue("submit", elements, "Profil speichern")}
         </Button>
+      ) : (
+        <ToastNotification
+          title={tryGet("success_message", elements)?.value || "Success"}
+          subtitle={tryGet("success_message", elements)?.description}
+          caption={<InlineLoading status="active" />}
+          kind="success"
+          lowContrast
+        />
+      )}
+
+      {((errors && Object.keys(errors).length != 0) ||
+        Object.keys(validationErrors).length != 0) && (
+        <ToastNotification
+          title={tryGet("error_message", elements)?.value || "Error"}
+          subtitle={tryGet("error_message", elements)?.description}
+          caption=""
+          kind="error"
+          lowContrast
+        />
       )}
     </Form>
   );

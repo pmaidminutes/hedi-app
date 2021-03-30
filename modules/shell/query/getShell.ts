@@ -1,5 +1,6 @@
+import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { LanguageSkill } from "@/modules/profile/client/components/LanguageSkills";
+import { WithUIElementsFields } from "@/modules/model";
 import { IShell } from "../types";
 import { ShellLinkFields } from "../types/shellLinks";
 import { LanguagesGQL } from "./getLanguages";
@@ -28,16 +29,27 @@ export async function getShell(
         $lang: String!
         $includeSelf: Boolean
     ) {
+      shellAppPage:appPagesByKey(keys:["shellConfigs"], lang: $lang){${WithUIElementsFields}}
       ${gqlQueries.join("\n")}
     }
   `;
 
   const client = await getServiceClient(GQLEndpoint.Internal);
   return client
-    .request<IShell>(query, { lang })
+    .request<Omit<IShell, "shellConfig"> & { shellAppPage: IAppPage[] }>(
+      query,
+      { lang }
+    )
+    .then(res => {
+      const { shellAppPage, ...rest } = res;
+      return {
+        shellConfig: shellAppPage?.[0].elements ?? [],
+        ...rest,
+      } as IShell;
+    })
     .catch(e => {
       console.warn(e);
-      return { links: [], languages: [] };
+      return { links: [], languages: [], shellConfig: [] };
     });
   // rest umbauen
 }

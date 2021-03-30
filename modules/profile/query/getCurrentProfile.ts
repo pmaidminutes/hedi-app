@@ -6,22 +6,16 @@ import {
 } from "@/modules/graphql";
 import {
   CaregiverFields,
-  ICaregiver,
   MidwifeFields,
-  IMidwife,
-  IOrganisation,
-  IInstitution,
   InstitutionFields,
   OrganisationFields,
+  Profile,
 } from "../types";
-import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
+import { WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 import { IAuthHeader } from "@/modules/auth/types";
+import { ProfileView } from "./getProfile";
 
-export type Profile = ICaregiver | IMidwife | IOrganisation | IInstitution;
-export type ProfileView = Profile & {
-  elements: IUIElementTexts[];
-};
 export async function getCurrentProfile(
   lang: string,
   authHeader: IAuthHeader
@@ -48,7 +42,7 @@ export async function getCurrentProfile(
       return { profile: null };
     });
 
-  if (!profile || profile === {}) return null; // {} case is, profile available but not of any of the queried types
+  if (!profile || Object.keys(profile).length === 0) return null; // {} case is, profile available but not of any of the queried types
 
   const internalClient = await getServiceClient(GQLEndpoint.Internal);
   const subquery = gql`

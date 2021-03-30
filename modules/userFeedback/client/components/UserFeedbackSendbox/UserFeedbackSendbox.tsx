@@ -20,6 +20,7 @@ export const UserFeedbackSendbox = ({
           kind="error"
           title={tryGet("error_message", elements)?.value || "Error"}
           subtitle={errorMessage}
+          lowContrast
         />
       )}
       {successMessage && (
@@ -27,6 +28,7 @@ export const UserFeedbackSendbox = ({
           kind="success"
           title={tryGet("success_message", elements)?.value || "Success"}
           subtitle={successMessage}
+          lowContrast
         />
       )}
       <Button type="submit" size="field">

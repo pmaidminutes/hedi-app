@@ -1,8 +1,27 @@
 @import "./theme/hedi-theme.scss";
 
-.hedi--multiple-user-feedback {
-//color:red; 
-// Css klappt
-color:black;
+.hedi--userfeedback-page {
+  // Überschreibt das default Padding vom
+  // CMS bottom
+  p {
+    margin-bottom: $spacing-xs !important;
+  }
 
+  .hedi-seperator {
+    margin-bottom: $spacing-xl;
+  }
+
+  .hedi--userfeedback-sendbox {
+    margin-top: $spacing-md;
+  }
+}
+
+.hedi--userfeedback-item {
+  height: calc(100% - 2rem);
+  display: flex;
+  flex-direction: column;
+
+  .bx--text-area__wrapper {
+    height: 100%;
+  }
 }

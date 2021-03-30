@@ -3,13 +3,18 @@
   background-color: transparent;
   display: flex;
   justify-content: flex-end;
-  margin: $spacing-md 0;
-  // padding: $carbon--spacing-05 ;
+  margin-top: $spacing-xs;
+  padding: 0 $spacing-xl;
+
+  svg {
+    fill: $cool-gray-60;
+  }
   a, .bx--link {
-    @include carbon--type-style("productive-heading-03");
+    // @include carbon--type-style("productive-heading-03");
+    font-size: 1rem;
     background-color:transparent;
     color: $cool-gray-40;
-    padding: 1rem;
+    padding: 0.5rem;
     transition:  background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
     text-decoration: none;
     &:hover {
