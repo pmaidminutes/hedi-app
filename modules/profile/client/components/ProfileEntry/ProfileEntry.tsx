@@ -37,7 +37,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
               <h3>
                 {domains?.map((domain, index) => (
                   <>
-                    <span>{domain.label}</span>
+                    <span key={domain.label + index}>{domain.label}</span>
                     {domains.length > index + 1 ? (
                       <span className="hedi--ampersand">
                         {" "}
