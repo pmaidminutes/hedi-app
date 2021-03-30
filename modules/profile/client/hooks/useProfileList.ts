@@ -5,7 +5,7 @@ import { Profile } from "../../types";
 export function useProfileList(initialData: Profile[], lang: string) {
   const response = useSWR<Profile[]>(
     ["/api/profiles", lang, initialData],
-    jsonFetcher,
+    (url, data) => jsonFetcher(`${url}/?lang=${data}`),
     {
       initialData: initialData,
       revalidateOnMount: true,
