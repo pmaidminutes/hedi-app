@@ -5,4 +5,11 @@
       margin-block-end: $spacing-md;
     }
   }
+
+  &--contact {
+    textarea {
+      min-height: $layout-lg*2;
+      
+    }
+  }
 }

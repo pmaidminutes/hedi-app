@@ -8,7 +8,7 @@ export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async 
   res
 ) => {
   if (!req.body) {
-    res.status(400);
+    res.status(400).send(null);
     return;
   }
 
@@ -16,11 +16,11 @@ export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async 
 
   const authHeader = await getUserAuthHeader(req);
   if (!authHeader) {
-    res.status(401);
+    res.status(401).send(null);
     return;
   }
 
   const profile = await getCurrentProfileEntity(lang, authHeader);
   if (profile) res.status(200).json(profile);
-  else res.status(500);
+  else res.status(500).send(null);
 };

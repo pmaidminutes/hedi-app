@@ -10,7 +10,7 @@ export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
   }, [data]);
 
   const handleAddClick = () => {
-    setLanguageSkillEntries(p => [...p, { langcode: "en", level: 5 }]);
+    setLanguageSkillEntries(p => [...p, { langcode: "en", level: 0 }]);
   };
 
   const handleRemoveClick = (i: number) => {

@@ -19,8 +19,15 @@
   }
 
   .hedi--profile-entry {
+    background-color: #fff;
+    position: relative;
+    // background-color: $warm-gray-10;
+    > .bx--btn--ghost {
+      position: absolute;
+      right: 0;
+      bottom: 0;
+    }
     &-image {
-      background-color: #fff;
 
       @media (max-width: 769px) {
         svg {
@@ -39,8 +46,4 @@
     padding: $spacing-md;
   }
 
-  // .bx--row {
-  //   margin-right: 0;
-  //   margin-left: 0;
-  // }
 }

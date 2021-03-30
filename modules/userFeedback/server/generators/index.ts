@@ -1,1 +1,1 @@
-export * from "./getStaticLoginViewProps";
+export * from "./getUserFeedbackThanksPage";

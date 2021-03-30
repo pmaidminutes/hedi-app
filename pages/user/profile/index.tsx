@@ -30,7 +30,7 @@ export const getStaticProps: GetStaticProps<
     userMenu: ["login", "logout", "viewprofile"],
   };
 
-  const [content, shellConfig] = await Promise.all([
+  const [content, shellData] = await Promise.all([
     getProfileStatic(locale ?? "de"),
     getShell(locale, shellKeys),
   ]);
@@ -40,7 +40,9 @@ export const getStaticProps: GetStaticProps<
     throw Error();
   }
 
-  const shell = useShell(content, shellConfig);
+  const shell = useShell(content, shellData);
+  shell.useHeader = "AUTHORIZED";
+  shell.redirectUnAuthorized = "/" + locale;
   const withLinks: INoProfileView = {
     ...content,
     links: [],
@@ -61,7 +63,6 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
     content.lang
   );
   useEffect(() => {
-    if (!userIsLoading && !user) router.push("/" + content.lang);
     if (!currentProfileIsLoading && currentProfile)
       router.push(currentProfile.route);
   }, [

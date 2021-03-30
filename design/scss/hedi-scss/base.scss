@@ -12,11 +12,16 @@ h1 {
 }
 
 .bx--tag {
+font-size: 0.75rem;
 line-height: 1.5;
-margin: 0.3rem 0.5rem;
-padding: 0.35rem 0.8rem;
+margin: 0.25rem 0.5rem;
+padding: 0.25rem 0.75rem;
 }
 
 .bx--tag--blue {
   color: $blue-90;
+}
+
+.bx--toast-notification__title {
+font-weight: 500;
 }

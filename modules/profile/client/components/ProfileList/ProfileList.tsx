@@ -2,6 +2,7 @@ import { ITyped } from "@/modules/model";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ProfileListView } from "@/modules/profile/query";
 import { ProfileListItem } from "./ProfileListItem";
+import { useProfileList } from "../../hooks/useProfileList";
 
 export const TryProfileList = ({
   content,
@@ -13,11 +14,17 @@ export const TryProfileList = ({
 };
 
 export const ProfileList = ({ content }: { content: ProfileListView }) => {
+  const { data: profiles } = useProfileList(content.profiles, content.lang);
+
   const { elements } = content;
   return (
     <SimplePageView content={content} customKey="profile-list">
-      {content.profiles.map(profile => (
-        <ProfileListItem profile={profile} elements={elements} />
+      {(profiles ?? content.profiles).map(profile => (
+        <ProfileListItem
+          profile={profile}
+          elements={elements}
+          key={profile.route}
+        />
       ))}
     </SimplePageView>
   );

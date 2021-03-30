@@ -1,5 +1,5 @@
 import { Button, Dropdown, TableCell, TableRow } from "carbon-components-react";
-import { Delete32 } from "@carbon/icons-react";
+import { TrashCan32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../types";
 import { useLanguageSkillRow } from "./useLanguageSkillRow";
@@ -45,7 +45,12 @@ export const LanguageSkillRow = ({
       <TableCell data-th={tryGetValue("level", elements, "Verständnis")}>
         <Dropdown
           id="level"
-          label={tryGetValue("level", elements, "Verständnis")}
+          label={
+            languageLevelElements.find(
+              element => parseInt(element.identifier) === 0
+            )?.value ?? "Please Select"
+          }
+          ariaLabel={tryGetValue("level", elements, "Verständnis")}
           titleText=""
           light
           selectedItem={languageSkill.level}
@@ -61,7 +66,7 @@ export const LanguageSkillRow = ({
       <TableCell>
         <Button
           kind="ghost"
-          renderIcon={Delete32}
+          renderIcon={TrashCan32}
           iconDescription={tryGetValue(
             "remove-languageSkill",
             elements,

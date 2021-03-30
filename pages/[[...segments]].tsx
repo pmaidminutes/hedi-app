@@ -35,9 +35,10 @@ import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
-import { getStaticProps as getUserFeedbackThanksViewProps } from "@/modules/userFeedback/server/generators";
+import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
+import { landingPagePaths } from "@/modules/landingPage/types";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -67,6 +68,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   for (const lang of locales) {
     paths.push(...(await getSegmentsPaths(pathQueries, lang)));
   }
+  paths.push(...landingPagePaths);
 
   return { paths, fallback: "blocking" };
 };
@@ -95,14 +97,20 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
     if (!content)
-      content = await getUserFeedbackThanksViewProps(params?.segments, locale);
+      content = await getUserFeedbackThanksPage(params?.segments, locale);
     if (!content)
       content = await getStaticSimplePageViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
   }
-  if (!content) throw Error;
+  if (!content)
+    return {
+      redirect: {
+        destination: "/" + (locale ?? ""),
+        permanent: false,
+      },
+    };
   // ShellStuff
 
   const shellKey = {
@@ -110,8 +118,8 @@ export const getStaticProps: GetStaticProps<
     footer: ["imprint", "privacy"],
     userMenu: ["login", "logout", "viewprofile"],
   };
-  const shellConfig = await getShell(locale, shellKey);
-  const shell = useShell(content, shellConfig);
+  const shellData = await getShell(locale, shellKey);
+  const shell = useShell(content, shellData);
   return {
     props: { content, shell },
     revalidate: content.revalidate,

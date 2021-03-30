@@ -17,7 +17,7 @@ export const getStaticProps: GetStaticProps<
     footer: ["imprint", "privacy"],
   };
 
-  const [content, shellConfig] = await Promise.all([
+  const [content, shellData] = await Promise.all([
     getUserFeedbackStatic(locale ?? "de"),
     getShell(locale, shellKeys),
   ]);
@@ -27,8 +27,9 @@ export const getStaticProps: GetStaticProps<
     throw Error();
   }
 
-  const shell = useShell(content, shellConfig);
-
+  const shell = useShell(content, shellData);
+  shell.useHeader = "AUTHORIZED";
+  shell.redirectUnAuthorized = "/" + locale;
   return {
     props: { content, shell },
   };

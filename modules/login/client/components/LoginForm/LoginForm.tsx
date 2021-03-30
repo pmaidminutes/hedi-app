@@ -1,5 +1,6 @@
 import { ILoginView } from "@/modules/login/types";
 import { useLoginForm } from "./useLoginForm";
+import { tryGet } from "@/modules/common/utils";
 
 import {
   Button,
@@ -7,9 +8,10 @@ import {
   InlineLoading,
   TextInput,
   ToastNotification,
+  Link,
 } from "carbon-components-react";
 
-export type LoginFormProps = Pick<ILoginView, "elements" | "lang"> & {
+export type LoginFormProps = Pick<ILoginView, "elements" | "lang" | "links"> & {
   redirectUrl?: string;
 };
 
@@ -21,6 +23,9 @@ export const LoginForm = (props: LoginFormProps) => {
     handleSubmit,
     loginLoading,
     loginNotification,
+    successNotification,
+    links,
+    elements,
   } = useLoginForm(props);
 
   return (
@@ -39,9 +44,39 @@ export const LoginForm = (props: LoginFormProps) => {
         />
       )}
 
-      <Button type="submit">
-        {loginLoading ? <InlineLoading status="active" /> : submitButtonText}
-      </Button>
+      {successNotification && (
+        <ToastNotification
+          kind="success"
+          lowContrast={true}
+          hideCloseButton={true}
+          style={{ width: "100%" }}
+          {...successNotification}
+          caption={<InlineLoading status="active" />}
+        />
+      )}
+      <div>
+        {!successNotification && (
+          <Button type="submit">
+            {loginLoading ? (
+              <InlineLoading status="active" />
+            ) : (
+              submitButtonText
+            )}
+          </Button>
+        )}
+        {links.map((link, index) => {
+          if (link.key === "registration") {
+            return (
+              <span key={link.key + index}>
+                {tryGet(link.key, elements)?.help}
+                <Link href={link.route}>
+                  {tryGet(link.key, elements)?.placeholder}
+                </Link>
+              </span>
+            );
+          }
+        })}
+      </div>
     </Form>
   );
 };

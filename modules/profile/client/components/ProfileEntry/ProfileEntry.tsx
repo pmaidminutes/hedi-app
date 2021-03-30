@@ -1,7 +1,7 @@
-import { Row, Column, Link } from "carbon-components-react";
+import { Row, Column, Link, Button } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
 import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
-import { Launch16 } from "@carbon/icons-react";
+import { Launch16, Edit24 } from "@carbon/icons-react";
 import HediPerson from "./assets/hedi_person.svg";
 
 export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
@@ -18,6 +18,9 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     route,
     isNarrow,
     className,
+    prettyUrl,
+    phoneLink,
+    editButtonProps,
   } = useProfileEntry(props);
 
   return (
@@ -34,7 +37,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
               <h3>
                 {domains?.map((domain, index) => (
                   <>
-                    <span>{domain.label}</span>
+                    <span key={domain.label + index}>{domain.label}</span>
                     {domains.length > index + 1 ? (
                       <span className="hedi--ampersand">
                         {" "}
@@ -52,7 +55,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
               <div className="hedi--spacing">
                 <p>
                   <Link
-                    href={`tel:${phone}`}
+                    href={`tel:${phoneLink}`}
                     target="_blank"
                     title="Telefonnummer"
                     className="bx--link--lg">
@@ -76,7 +79,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
                       target="_blank"
                       title="Webseite"
                       className="bx--link--lg">
-                      {website} <Launch16></Launch16>
+                      {prettyUrl} <Launch16 />
                     </Link>
                   ) : null}
                 </p>
@@ -90,6 +93,15 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
             </div>
           </Column>
         </Row>
+        {editButtonProps?.isShowing ? (
+          <Button
+            kind="ghost"
+            size="sm"
+            renderIcon={Edit24}
+            href={editButtonProps.link}>
+            {editButtonProps.text}
+          </Button>
+        ) : null}
       </section>
     </>
   );

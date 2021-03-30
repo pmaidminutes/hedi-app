@@ -4,24 +4,29 @@ import {
   IEntity,
   IEntityLocalized,
   ILanguage,
+  IUIElementTexts,
 } from "@/modules/model";
+import { IAppPage } from "@/modules/common/types";
 
 export interface IShellProps
   extends Partial<IAppStyled>,
     Pick<
       IPageConfig,
-      "needsAuth" | "useHeader" | "useBreadCrumb" | "revalidate"
+      "redirectUnAuthorized" | "useHeader" | "useBreadCrumb" | "revalidate"
     > {
+  shellConfig: IUIElementTexts[];
   languageSwitchLinks: IEntity[];
   header?: IShellLink[];
   footer?: IShellLink[];
   userMenu?: IShellLink[];
 }
 
+export type AccessRule = false | "AUTHORIZED" | true; // HACK definition for quick compatibility actual meaning: hidden, authorized user, always
+
 export interface IPageConfig extends Partial<IAppStyled> {
   translations?: IEntityLocalized[];
-  needsAuth?: boolean;
-  useHeader?: boolean;
+  redirectUnAuthorized?: string; // HACK
+  useHeader?: AccessRule;
   // TODO: Serverseitig
   useBreadCrumb?: boolean;
   revalidate?: boolean | number;
@@ -29,9 +34,15 @@ export interface IPageConfig extends Partial<IAppStyled> {
 
 // export type shellRecords = "header" | "footer"
 
-export interface IShell extends Record<string, IEntity[]> {
+// interface IShell extends Record<string, IEntity[]> {
+//   languages: ILanguage[];
+//   shellConfig:  IUIElementTexts[];
+// }
+
+export type IShell = Record<string, IEntity[]> & {
   languages: ILanguage[];
-}
+  shellConfig: IUIElementTexts[];
+};
 
 export interface IPageProps<T> {
   content: T;
