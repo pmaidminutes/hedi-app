@@ -8,9 +8,8 @@ import { Shell } from "@/modules/shell/components";
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { Button, Column, Row, Loading, Grid } from "carbon-components-react";
+import { Button, Column, Row, Loading } from "carbon-components-react";
 
-import { BgImgContainer, FullWidthBg } from "@/modules/common/components";
 import { IAppPage } from "@/modules/common/types/appPage";
 import { getUser } from "@/modules/auth/client";
 import { getProfileStatic } from "@/modules/profile/query";
@@ -75,7 +74,6 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
   const editLink = content.links.find(l => l.key === "editprofile");
   const editLinkHref = editLink?.route ?? `/${content.lang}/user/profile/edit`;
   const editLinkLabel = editLink?.longTitle ?? editLink?.label;
-  console.log({ userIsLoading }, { currentProfileIsLoading }, { user });
   return (
     <Shell {...props}>
       {currentProfileIsLoading ? (
