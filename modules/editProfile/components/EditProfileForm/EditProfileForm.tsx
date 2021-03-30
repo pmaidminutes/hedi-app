@@ -84,7 +84,9 @@ export const EditProfileForm = ({
   };
 
   const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
-
+  const anyError = () =>
+    (errors && Object.keys(errors).length != 0) ||
+    Object.keys(validationErrors).length != 0;
   return (
     <Form {...formProps}>
       {errors?.generic && (
@@ -149,7 +151,7 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="forename"
-                invalid={!!getError("forename")}
+                invalid={typeof getError("forename") === "string"}
                 invalidText={getError("forename")}
                 defaultValue={profile?.forename}
               />
@@ -164,7 +166,7 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="surname"
-                invalid={!!getError("surname")}
+                invalid={typeof getError("surname") === "string"}
                 invalidText={getError("surname")}
                 defaultValue={profile?.surname}
               />
@@ -189,7 +191,7 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="city"
-                invalid={!!getError("city")}
+                invalid={typeof getError("city") === "string"}
                 invalidText={getError("city")}
                 defaultValue={profile?.city}
               />
@@ -258,7 +260,7 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="phone"
-                invalid={!!getError("phone")}
+                invalid={typeof getError("phone") === "string"}
                 invalidText={getError("phone")}
                 defaultValue={profile?.phone}
               />
@@ -287,7 +289,7 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="mail"
-                invalid={!!getError("mail")}
+                invalid={typeof getError("mail") === "string"}
                 invalidText={getError("mail")}
                 defaultValue={profile?.mail}
               />
@@ -418,33 +420,37 @@ export const EditProfileForm = ({
           </FormGroup>
         </div>
       )}
-
-      {isValidating ? (
-        <InlineLoading status="active" />
-      ) : !isSuccessfullySaved ? (
-        <Button type="submit">
-          {tryGetValue("submit", elements, "Profil speichern")}
-        </Button>
-      ) : (
-        <ToastNotification
-          title={tryGet("success_message", elements)?.value || "Success"}
-          subtitle={tryGet("success_message", elements)?.description}
-          caption={<InlineLoading status="active" />}
-          kind="success"
-          lowContrast
-        />
-      )}
-
-      {((errors && Object.keys(errors).length != 0) ||
-        Object.keys(validationErrors).length != 0) && (
-        <ToastNotification
-          title={tryGet("error_message", elements)?.value || "Error"}
-          subtitle={tryGet("error_message", elements)?.description}
-          caption=""
-          kind="error"
-          lowContrast
-        />
-      )}
+      <Row>
+        <Column lg={8} md={8}>
+          {isValidating ? (
+            <InlineLoading status="active" />
+          ) : isSuccessfullySaved ? (
+            <ToastNotification
+              title={tryGet("success_message", elements)?.value || "Success"}
+              subtitle={tryGet("success_message", elements)?.description}
+              caption={<InlineLoading status="active" />}
+              kind="success"
+              lowContrast
+              hideCloseButton
+              style={{ width: "100%" }}
+            />
+          ) : anyError() ? (
+            <ToastNotification
+              title={tryGet("error_message", elements)?.value || "Error"}
+              subtitle={tryGet("error_message", elements)?.description}
+              caption=""
+              kind="error"
+              lowContrast
+              hideCloseButton
+              style={{ width: "100%" }}
+            />
+          ) : (
+            <Button type="submit">
+              {tryGetValue("submit", elements, "Profil speichern")}
+            </Button>
+          )}
+        </Column>
+      </Row>
     </Form>
   );
 };
