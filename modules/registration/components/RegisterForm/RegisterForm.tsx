@@ -1,9 +1,9 @@
-import { getTextInputProps } from "@/modules/common/utils";
+import { getTextInputProps, tryGet, tryGetValue } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import {
   Form,
-  InlineNotification,
+  InlineLoading,
   TextInput,
   ToastNotification,
 } from "carbon-components-react";
@@ -38,27 +38,31 @@ export const RegisterForm = ({
   };
 
   if (response?.success && codeResponse?.success) {
-    autoSignIn({ ...info });
+    autoSignIn({ ...info }, redirect);
     router.push(redirect);
   }
 
   return (
     <Form onSubmit={handleSubmit}>
       {response?.errors?.generic && (
-        <InlineNotification
+        <ToastNotification
           kind="error"
-          title="Error" //TODO pull from AppPages
-          subtitle={response.errors.generic}
+          lowContrast={true}
+          title={tryGetValue("error_message", elements, "Error")}
+          subtitle={tryGet("error_message", elements)?.description}
+          hideCloseButton={true}
+          style={{ width: "100%", marginBottom: ".5rem" }}
         />
       )}
       {response?.success && (
         <ToastNotification
           kind="success"
           lowContrast={true}
-          title="Success"
-          caption="Login created" //TODO pull from AppPages
+          title={tryGetValue("success_message", elements, "")}
+          subtitle={tryGet("success_message", elements)?.description}
+          caption={<InlineLoading status="active" />}
           hideCloseButton={true}
-          style={{ minWidth: "50rem", marginBottom: ".5rem" }}
+          style={{ width: "100%", marginBottom: ".5rem" }}
         />
       )}
 
