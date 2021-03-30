@@ -50,6 +50,9 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
 
   const { subPages, elements } = content;
 
+  // TODO improve
+  const servicesDataWithHeadlineType = { ...servicesData, headlineType: "h3" };
+
   const onSuccess = () => {
     const thanksPageRoute = getSubPage("userfeedbackThanks", content.subPages)
       .route;
@@ -75,7 +78,7 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     right,
     center,
     profileEntryData,
-    servicesData,
+    servicesData: servicesDataWithHeadlineType,
     contactData,
     languagesData,
     errorMessage,
