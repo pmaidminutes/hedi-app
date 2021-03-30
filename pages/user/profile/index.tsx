@@ -78,19 +78,10 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
   console.log({ userIsLoading }, { currentProfileIsLoading }, { user });
   return (
     <Shell {...props}>
-      {currentProfileIsLoading ? <Loading /> : null}
-      {!userIsLoading && user && (
-        <>
-          <FullWidthBg>
-            <div
-              style={{
-                padding: "10rem",
-                backgroundColor: "rgba(255,255,255,0.8)",
-              }}>
-              <h1>Geich gehts weiter</h1>
-            </div>
-          </FullWidthBg>
-          {/* <SimplePageView
+      {currentProfileIsLoading ? (
+        <Loading />
+      ) : (
+        <SimplePageView
           url="/Pregnancy_pink80.svg"
           alt="Beschreibung des Bildes"
           content={content}
@@ -102,8 +93,7 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
               </Link>
             </Column>
           </Row>
-          </SimplePageView> */}
-        </>
+        </SimplePageView>
       )}
     </Shell>
   );
