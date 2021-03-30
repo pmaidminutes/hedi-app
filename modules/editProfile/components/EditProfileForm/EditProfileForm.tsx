@@ -43,9 +43,13 @@ const getRequiredTextInputProps = (
 ): Pick<TextInputProps, "id" | "labelText" | "placeholder" | "aria-label"> & {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 } => {
-  const props = getTextInputProps(identifier, elements);
-  delete props.helperText; // HACK removed helperText to not be shown always and to show it just in validation error cases
-  return { ...props, onChange };
+  // HACK removed helperText to not be shown always and to show it just in validation error cases
+  const { helperText, labelText, ...rest } = getTextInputProps(
+    identifier,
+    elements
+  );
+
+  return { labelText: <strong>{labelText}*</strong>, ...rest, onChange };
 };
 
 export const EditProfileForm = ({
