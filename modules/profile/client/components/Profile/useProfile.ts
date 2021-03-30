@@ -43,6 +43,11 @@ export function useProfile(props: IProfileViewProps) {
   const relatedHeadline = getTextInputProps("linked_profile", elements);
   const editBtnText = tryGetValue("edit_button", elements);
   const editProfileLink = "/" + lang + "/user/profile/edit";
+  // HACK
+  const fakeRelatedProfiles = [
+    getTextInputProps("fake_related_1", elements),
+    getTextInputProps("fake_related_2", elements),
+  ];
 
   useEffect(() => {
     setHasEditProfileBtn(
@@ -105,6 +110,7 @@ export function useProfile(props: IProfileViewProps) {
     },
     relatedProfilesData: {
       headline: relatedHeadline,
+      profiles: fakeRelatedProfiles,
     },
     hasServices,
     // mapData: { HACK currently incompatible

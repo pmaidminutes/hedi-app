@@ -8,7 +8,7 @@ import { Shell } from "@/modules/shell/components";
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
-import { Button, Column, Row } from "carbon-components-react";
+import { Button, Column, Row, Loading } from "carbon-components-react";
 
 import { IAppPage } from "@/modules/common/types/appPage";
 import { getUser } from "@/modules/auth/client";
@@ -76,7 +76,9 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
   const editLinkLabel = editLink?.longTitle ?? editLink?.label;
   return (
     <Shell {...props}>
-      {!userIsLoading && user && (
+      {currentProfileIsLoading ? (
+        <Loading />
+      ) : (
         <SimplePageView
           url="/Pregnancy_pink80.svg"
           alt="Beschreibung des Bildes"

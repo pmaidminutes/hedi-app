@@ -23,6 +23,7 @@ export const LoginForm = (props: LoginFormProps) => {
     handleSubmit,
     loginLoading,
     loginNotification,
+    successNotification,
     links,
     elements,
   } = useLoginForm(props);
@@ -42,14 +43,31 @@ export const LoginForm = (props: LoginFormProps) => {
           {...loginNotification}
         />
       )}
+
+      {successNotification && (
+        <ToastNotification
+          kind="success"
+          lowContrast={true}
+          hideCloseButton={true}
+          style={{ width: "100%" }}
+          {...successNotification}
+          caption={<InlineLoading status="active" />}
+        />
+      )}
       <div>
-        <Button type="submit">
-          {loginLoading ? <InlineLoading status="active" /> : submitButtonText}
-        </Button>
-        {links.map(link => {
+        {!successNotification && (
+          <Button type="submit">
+            {loginLoading ? (
+              <InlineLoading status="active" />
+            ) : (
+              submitButtonText
+            )}
+          </Button>
+        )}
+        {links.map((link, index) => {
           if (link.key === "registration") {
             return (
-              <span>
+              <span key={link.key + index}>
                 {tryGet(link.key, elements)?.help}
                 <Link href={link.route}>
                   {tryGet(link.key, elements)?.placeholder}

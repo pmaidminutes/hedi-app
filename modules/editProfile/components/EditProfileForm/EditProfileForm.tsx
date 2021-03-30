@@ -28,7 +28,8 @@ import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useRef, useState, RefObject, FormEvent } from "react";
+import { orderedRequiredFields } from "./useEditProfileForm";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -43,9 +44,13 @@ const getRequiredTextInputProps = (
 ): Pick<TextInputProps, "id" | "labelText" | "placeholder" | "aria-label"> & {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
 } => {
-  const props = getTextInputProps(identifier, elements);
-  delete props.helperText; // HACK removed helperText to not be shown always and to show it just in validation error cases
-  return { ...props, onChange };
+  // HACK removed helperText to not be shown always and to show it just in validation error cases
+  const { helperText, labelText, ...rest } = getTextInputProps(
+    identifier,
+    elements
+  );
+
+  return { labelText: <strong>{labelText}*</strong>, ...rest, onChange };
 };
 
 export const EditProfileForm = ({
@@ -84,9 +89,57 @@ export const EditProfileForm = ({
   };
 
   const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
+  const anyError = () =>
+    (errors && Object.keys(errors).length != 0) ||
+    Object.keys(validationErrors).length != 0;
 
+
+  const refs: {
+    [key: string]: RefObject<HTMLInputElement>;
+  } = orderedRequiredFields
+    .map(field => ({
+      field: field,
+      ref: useRef<HTMLInputElement>(null),
+    }))
+    .reduce(
+      (result, item) => {
+        result[item.field] = item.ref;
+        return result;
+      },
+      {} as {
+        [key: string]: RefObject<HTMLInputElement>;
+      }
+    );
+
+  const scrollToErrors = (currentErrors: { [key: string]: string }) => {
+    for (let key of Object.keys(currentErrors)) {
+      refs[key].current?.scrollIntoView();
+      window.scrollBy(0, -100);
+      return true;
+    }
+    return false;
+  };
+  
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const form = new FormData(e.target as HTMLFormElement);
+
+    const currentErrors: { [key: string]: string } = {};
+    orderedRequiredFields.forEach(field => {
+      if (!form.get(field)) {
+        const message = tryGet(field, elements)?.help || "";
+        currentErrors[field] = message;
+      }
+    });
+    setValidationErrors(currentErrors);
+    const anyValidationErrors = scrollToErrors(currentErrors);
+    if (!anyValidationErrors && onSubmit) onSubmit(e);
+  };
+        
+  const { onSubmit, ...formPropsRest } = formProps;
+        
   return (
-    <Form {...formProps}>
+    <Form {...formPropsRest} onSubmit={handleSubmit}>
       {errors?.generic && (
         <InlineNotification
           kind="error"
@@ -149,9 +202,10 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="forename"
-                invalid={!!getError("forename")}
+                invalid={typeof getError("forename") === "string"}
                 invalidText={getError("forename")}
                 defaultValue={profile?.forename}
+                ref={refs.forename}
               />
             </Column>
           </Row>
@@ -164,9 +218,10 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="surname"
-                invalid={!!getError("surname")}
+                invalid={typeof getError("surname") === "string"}
                 invalidText={getError("surname")}
                 defaultValue={profile?.surname}
+                ref={refs.surname}
               />
             </Column>
           </Row>
@@ -189,9 +244,10 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="city"
-                invalid={!!getError("city")}
+                invalid={typeof getError("city") === "string"}
                 invalidText={getError("city")}
                 defaultValue={profile?.city}
+                ref={refs.city}
               />
             </Column>
             <Column lg={2} md={2}>
@@ -258,9 +314,10 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="phone"
-                invalid={!!getError("phone")}
+                invalid={typeof getError("phone") === "string"}
                 invalidText={getError("phone")}
                 defaultValue={profile?.phone}
+                ref={refs.phone}
               />
             </Column>
             {hasElement("phone_private", conditionalElements[profileType]) && (
@@ -287,9 +344,10 @@ export const EditProfileForm = ({
                   elements
                 )}
                 name="mail"
-                invalid={!!getError("mail")}
+                invalid={typeof getError("mail") === "string"}
                 invalidText={getError("mail")}
                 defaultValue={profile?.mail}
+                ref={refs.mail}
               />
             </Column>
             {hasElement("website", conditionalElements[profileType]) && (
@@ -418,33 +476,37 @@ export const EditProfileForm = ({
           </FormGroup>
         </div>
       )}
-
-      {isValidating ? (
-        <InlineLoading status="active" />
-      ) : !isSuccessfullySaved ? (
-        <Button type="submit">
-          {tryGetValue("submit", elements, "Profil speichern")}
-        </Button>
-      ) : (
-        <ToastNotification
-          title={tryGet("success_message", elements)?.value || "Success"}
-          subtitle={tryGet("success_message", elements)?.description}
-          caption={<InlineLoading status="active" />}
-          kind="success"
-          lowContrast
-        />
-      )}
-
-      {((errors && Object.keys(errors).length != 0) ||
-        Object.keys(validationErrors).length != 0) && (
-        <ToastNotification
-          title={tryGet("error_message", elements)?.value || "Error"}
-          subtitle={tryGet("error_message", elements)?.description}
-          caption=""
-          kind="error"
-          lowContrast
-        />
-      )}
+      <Row>
+        <Column lg={8} md={8}>
+          {isValidating ? (
+            <InlineLoading status="active" />
+          ) : isSuccessfullySaved ? (
+            <ToastNotification
+              title={tryGet("success_message", elements)?.value || "Success"}
+              subtitle={tryGet("success_message", elements)?.description}
+              caption={<InlineLoading status="active" />}
+              kind="success"
+              lowContrast
+              hideCloseButton
+              style={{ width: "100%" }}
+            />
+          ) : anyError() ? (
+            <ToastNotification
+              title={tryGet("error_message", elements)?.value || "Error"}
+              subtitle={tryGet("error_message", elements)?.description}
+              caption=""
+              kind="error"
+              lowContrast
+              hideCloseButton
+              style={{ width: "100%" }}
+            />
+          ) : (
+            <Button type="submit">
+              {tryGetValue("submit", elements, "Profil speichern")}
+            </Button>
+          )}
+        </Column>
+      </Row>
     </Form>
   );
 };

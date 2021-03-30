@@ -22,11 +22,12 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
                     {tryGet(link.key, content.elements)?.help}
                   </FormLabel>
                 </div>
-                <Button href={link.route}>{link.label}</Button>
+                <Button href={link.route}>{link.longTitle}</Button>
               </Column>
             ))
           : links.map((link, index) => (
               <Column
+                key={index}
                 lg={
                   isLastElement(index + 1, links)
                     ? { span: 5, offset: 1 }

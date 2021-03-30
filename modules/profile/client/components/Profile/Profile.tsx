@@ -1,7 +1,7 @@
 import { MapClient } from "@/modules/map/client/components";
 import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
-import { Column, Grid, Row, Button } from "carbon-components-react";
+import { Column, Grid, Row } from "carbon-components-react";
 import { Contact } from "../Contact";
 import { ProfileEntry } from "../ProfileEntry";
 import { BgImgContainer } from "@/modules/common/components";
@@ -10,10 +10,6 @@ import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
 import { IProfileViewProps, useProfile } from "./useProfile";
 import { ProfileView } from "../../../query/getProfile";
-import { getUser } from "@/modules/auth/client";
-import { tryGetValue } from "@/modules/common/utils";
-import { useCurrentProfileEntity } from "../../hooks";
-import { Edit24 } from "@carbon/icons-react";
 
 const locations: Location[] = [];
 
@@ -41,12 +37,6 @@ export const Profile = (props: IProfileViewProps) => {
     // mapData, HACK currently incompatible
     hasServices,
   } = useProfile(props);
-
-  const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
-    user,
-    props.content.lang
-  );
 
   return (
     <>

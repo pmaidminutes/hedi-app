@@ -10,6 +10,7 @@ import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { ProfileView } from "@/modules/profile/query";
 import { IAppPage } from "@/modules/common/types";
 
+import { headlineType } from "@/modules/profile/client/components/Services/useServices";
 export interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
   locale: string;
@@ -50,18 +51,34 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
 
   const { subPages, elements } = content;
 
+  // TODO improve
+  const serviceHeadlineType: headlineType = "h3";
+  const servicesDataWithHeadlineType = {
+    ...servicesData,
+    headlineType: serviceHeadlineType,
+  };
+
   const onSuccess = () => {
     const thanksPageRoute = getSubPage("userfeedbackThanks", content.subPages)
       .route;
+    setErrorMessage(null);
     setSuccessMessage(
       tryGet("success_message", content.elements)?.description || null
     );
     setTimeout(() => router.push(thanksPageRoute), REDIRECT_DELAY);
   };
-  const onError = () =>
+  const onError = () => {
+    setSuccessMessage(null);
     setErrorMessage(
       tryGet("error_message", content.elements)?.description || null
     );
+  };
+  const onEmptyError = () => {
+    setSuccessMessage(null);
+    setErrorMessage(
+      tryGet("empty_error_message", content.elements)?.description || null
+    );
+  };
 
   const left = leftColumnProps ?? { sm: 4, lg: { span: 8 } };
   const right = rightColumnProps ?? { sm: 4, lg: { span: 8 } };
@@ -71,11 +88,12 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     locale,
     onSuccess,
     onError,
+    onEmptyError,
     left,
     right,
     center,
     profileEntryData,
-    servicesData,
+    servicesData: servicesDataWithHeadlineType,
     contactData,
     languagesData,
     errorMessage,
