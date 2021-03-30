@@ -16961,6 +16961,10 @@ h1 {
   width: 100%;
   height: auto; }
 
+.hedi--simple-page .hedi--titlegroup p {
+  -webkit-margin-after: 1rem;
+          margin-block-end: 1rem; }
+
 @supports ((-o-object-fit: cover) or (object-fit: cover)) {
   .hedi--simple-page .hedi--hero-image {
     min-height: 200px;

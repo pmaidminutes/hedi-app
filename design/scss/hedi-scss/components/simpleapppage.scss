@@ -7,6 +7,12 @@
     height: auto;
   }
 
+  .hedi--titlegroup {
+    p {
+      margin-block-end: $spacing-md;
+    }
+  }
+
   @supports (object-fit: cover) {
     .hedi--hero-image {
       min-height: 200px;

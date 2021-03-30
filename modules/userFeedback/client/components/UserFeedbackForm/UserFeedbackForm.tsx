@@ -20,6 +20,7 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
     locale,
     onSuccess,
     onError,
+    onEmptyError,
     left,
     right,
     center,
@@ -35,7 +36,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
   } = useUserFeedbackForm(props);
 
   return (
-    <MultipleUserFeedback lang={locale} onSuccess={onSuccess} onError={onError}>
+    <MultipleUserFeedback
+      lang={locale}
+      onSuccess={onSuccess}
+      onError={onError}
+      onEmptyError={onEmptyError}>
       <Row>
         <Column {...left}>
           <BgImgContainer>

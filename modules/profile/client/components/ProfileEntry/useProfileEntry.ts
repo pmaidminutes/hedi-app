@@ -20,7 +20,6 @@ export interface IProfileEntryProps
 }
 
 export function useProfileEntry(props: IProfileEntryProps) {
-  console.log({ props });
   const {
     displayName,
     postal_code,

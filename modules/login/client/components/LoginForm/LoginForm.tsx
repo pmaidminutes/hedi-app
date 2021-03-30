@@ -64,10 +64,10 @@ export const LoginForm = (props: LoginFormProps) => {
             )}
           </Button>
         )}
-        {links.map(link => {
+        {links.map((link, index) => {
           if (link.key === "registration") {
             return (
-              <span>
+              <span key={link.key + index}>
                 {tryGet(link.key, elements)?.help}
                 <Link href={link.route}>
                   {tryGet(link.key, elements)?.placeholder}

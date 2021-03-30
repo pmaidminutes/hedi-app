@@ -23,10 +23,10 @@ export const LoginView = ({ content }: { content: ILoginView }) => {
         </Column>
       </Row>
       <Row>
-        {content.links.map(link => {
+        {content.links.map((link, index) => {
           if (link.key !== "registration") {
             return (
-              <Column>
+              <Column key={link.key + index}>
                 <FormLabel className="hedi--block-label">
                   {tryGet(link.key, content.elements)?.help}
                 </FormLabel>
