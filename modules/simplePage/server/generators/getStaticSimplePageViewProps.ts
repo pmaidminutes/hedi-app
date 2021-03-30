@@ -9,7 +9,7 @@ export const getStaticProps = async (
 ): Promise<(IAppPage & IPageConfig) | null> => {
   if (!segments) return null;
 
-  const content = getSimplePageView(segmentsToRoute(segments, locale));
+  const content = await getSimplePageView(segmentsToRoute(segments, locale));
 
   if (!content) return null;
 
