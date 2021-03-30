@@ -27,19 +27,24 @@ export interface ILoginFormElementProps {
   handleSubmit: FormEventHandler<HTMLFormElement>;
   loginLoading?: boolean;
   loginNotification?: ToastNotificationProps;
+  successNotification?: ToastNotificationProps;
 }
 
 export function useLoginForm({ elements, lang, redirectUrl }: LoginFormProps) {
   const router = useRouter();
   const [loginLoading, setLoginLoading] = useState(false);
   const [loginError, setLoginError] = useState(false);
+  const [loginSuccess, setLoginSuccess] = useState(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
     if (redirectUrl) router.prefetch(redirectUrl);
     setLoginLoading(true);
+    setLoginError(false);
+    setLoginSuccess(false);
     submitLogin(event, redirectUrl).then(resp => {
       setLoginLoading(false);
       if (!resp.ok) setLoginError(true);
+      else setLoginSuccess(true);
     });
   };
 
@@ -51,12 +56,13 @@ export function useLoginForm({ elements, lang, redirectUrl }: LoginFormProps) {
     setElementProps(getElementProps(elements, setLoginError));
   }, [lang]);
 
-  const { loginNotification, ...rest } = elementProps;
+  const { loginNotification, successNotification, ...rest } = elementProps;
   return {
     ...rest,
     handleSubmit,
     loginLoading,
     loginNotification: loginError ? loginNotification : undefined,
+    successNotification: loginSuccess ? successNotification : undefined,
   };
 }
 
@@ -79,6 +85,10 @@ function getElementProps(
     loginNotification: {
       title: tryGetValue("invalid", elements),
       caption: tryGet("invalid", elements)?.description,
+    },
+    successNotification: {
+      title: tryGetValue("success", elements),
+      subtitle: tryGet("success", elements)?.description,
     },
   };
 }
