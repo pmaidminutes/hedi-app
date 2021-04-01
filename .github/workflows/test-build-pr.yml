@@ -1,8 +1,6 @@
 name: "Test-Build-PR"
 on:
   pull_request:
-    branches-ignore: # disabled. Remove `-ignore` in order to enable
-      - master
     types:
       - opened
       - synchronize
@@ -13,23 +11,30 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          ref: ${{ github.event.pull_request.head.sha }}
+        #with:
+        #  ref: ${{ github.event.pull_request.head.sha }}
       - uses: actions/setup-node@v1
         with:
           node-version: "14.x"
-      - name: Get yarn cache
-        id: yarn-cache
+      - name: Get yarn cache dir
+        id: yarn-cache-dir
         run: echo "::set-output name=dir::$(yarn cache dir)"
-      - uses: actions/cache@v1
+      - name: cache yarn cache
+        id: cache-yarn-cache
+        uses: actions/cache@v2
+        env: 
+          cache-name: cache-yarn-lock
         with:
-          path: ${{ steps.yarn-cache.outputs.dir }}
-          key: ${{ runner.os }}-node12x-yarn-${{ hashFiles('**/yarn.lock') }}
+          path: |
+            ${{ steps.yarn-cache-dir.outputs.dir }}
+            node_modules
+          key: ${{ runner.os }}-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
-      - run: yarn install --frozen-lockfile
-      - run: yarn build
-        if: always()
-      - run: echo "::set-output name=pull_number::$(jq --raw-output .pull_request.number)"
-        id: pull_number
+            ${{ runner.os }}-${{ env.cache-name }}-
+            ${{ runner.os }}-
+      - name: Install dependencies
+        if: steps.cache-yarn-cache.outputs.cache-hit != 'true' 
+        run: yarn install --frozen-lockfile --prefer-offline
+      - name: Build Project
+        run: yarn build
         if: always()
