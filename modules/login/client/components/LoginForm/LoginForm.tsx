@@ -7,7 +7,7 @@ import {
   Form,
   InlineLoading,
   TextInput,
-  ToastNotification,
+  InlineNotification,
   Link,
 } from "carbon-components-react";
 
@@ -35,7 +35,7 @@ export const LoginForm = (props: LoginFormProps) => {
       <TextInput type="password" {...passwordInput} />
 
       {loginNotification && (
-        <ToastNotification
+        <InlineNotification
           kind="error"
           lowContrast={true}
           hideCloseButton={true}
@@ -45,7 +45,7 @@ export const LoginForm = (props: LoginFormProps) => {
       )}
 
       {successNotification && (
-        <ToastNotification
+        <InlineNotification
           kind="success"
           lowContrast={true}
           hideCloseButton={true}
@@ -54,7 +54,7 @@ export const LoginForm = (props: LoginFormProps) => {
           {...successNotification}
         />
       )}
-      <div>
+      <div className="hedi--login-buttoncontainer">
         {!successNotification && (
           <Button type="submit">
             {loginLoading ? (
