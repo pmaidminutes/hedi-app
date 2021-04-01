@@ -23,12 +23,17 @@
     position: relative;
     // background-color: $warm-gray-10;
     > .bx--btn--ghost {
-      position: absolute;
-      right: 0;
-      bottom: 0;
+      position: relative;
+      // TODO anders positionieren
+      transform: translateX(90%);
+      @media (min-width: 769px) {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        transform: translateX(0);
+      }
     }
     &-image {
-
       @media (max-width: 769px) {
         svg {
           max-height: 200px;
@@ -45,5 +50,4 @@
   @media (max-width: 769px) {
     padding: $spacing-md;
   }
-
 }
