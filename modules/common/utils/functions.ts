@@ -70,3 +70,9 @@ export function formatPhoneNumber(phoneNumber: string) {
     ? newString
     : newString;
 }
+
+export function transformStringToUrl(string: string) {
+  return string.startsWith("http://") || string.startsWith("https://")
+    ? string
+    : `http://${string}`;
+}
