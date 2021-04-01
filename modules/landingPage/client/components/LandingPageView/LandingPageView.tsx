@@ -16,7 +16,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
       <Row>
         {user
           ? linksIfLoggedIn.map(link => (
-              <Column>
+              <Column key={link.route}>
                 <div>
                   <FormLabel>
                     {tryGet(link.key, content.elements)?.help}

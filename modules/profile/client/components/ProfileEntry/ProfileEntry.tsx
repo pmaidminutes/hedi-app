@@ -39,7 +39,9 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
                   <>
                     <span key={domain.label + index}>{domain.label}</span>
                     {domains.length > index + 1 ? (
-                      <span className="hedi--ampersand">
+                      <span
+                        className="hedi--ampersand"
+                        key={"domain-amp" + index}>
                         {" "}
                         & <br />
                       </span>
