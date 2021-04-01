@@ -11,17 +11,7 @@ h1 {
   margin: $spacing-lg 0;
 }
 
-.bx--tag {
-font-size: 0.75rem;
-line-height: 1.5;
-margin: 0.25rem 0.5rem;
-padding: 0.25rem 0.75rem;
+pre {
+  white-space: pre-wrap;
 }
 
-.bx--tag--blue {
-  color: $blue-90;
-}
-
-.bx--toast-notification__title {
-font-weight: 500;
-}
