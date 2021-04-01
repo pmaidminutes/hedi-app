@@ -9,7 +9,7 @@ import {
 } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import { useRegister, useValidate } from "../../request";
+import { useRegister } from "../../request";
 import { IRegisterInfo } from "../../types";
 import { RegisterInputs } from "../RegisterInputs";
 
@@ -28,16 +28,15 @@ export const RegisterForm = ({
   const [info, setInfo] = useState<IRegisterInfo>();
 
   const { response, loading, register, autoSignIn } = useRegister();
-  const { data: codeResponse } = useValidate({ passcode });
-
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (codeResponse?.success && info && !loading) {
+    if (info && !loading) {
+      info.passcode = passcode;
       register({ ...info, lang: router.locale, commit: true });
     }
   };
 
-  if (response?.success && codeResponse?.success) {
+  if (response?.success) {
     autoSignIn({ ...info }, redirect);
     router.push(redirect);
   }
@@ -70,8 +69,8 @@ export const RegisterForm = ({
         {...getTextInputProps("registrationcode", elements)}
         required
         onChange={setPasscode}
-        invalid={!!codeResponse?.errors?.passcode}
-        //invalidText={passcodeData?.errors?.passcode} TODO use with translations only
+        invalid={!!response?.errors?.code}
+        invalidText={tryGetValue("invalid_passcode", elements)}
       />
       {!!passcode && (
         <RegisterInputs
