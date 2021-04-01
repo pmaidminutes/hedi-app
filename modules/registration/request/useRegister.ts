@@ -18,10 +18,13 @@ export const useRegister = () => {
     setResponse(resp);
     setLoading(false);
   };
-  const autoSignIn = (info: IRegisterRequest) => {
-    if (response.success) {
-      signIn("credentials", { username: info.name, password: info.pass });
-    }
+  const autoSignIn = (info: IRegisterRequest, redirect?: string) => {
+    const dest = `${window.location.protocol}//${window.location.hostname}${redirect}`;
+    signIn("credentials", {
+      username: info.name,
+      password: info.pass,
+      callbackUrl: dest,
+    });
   };
 
   return { response, loading, register, autoSignIn };
