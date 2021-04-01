@@ -66,16 +66,16 @@ export const Contact = (props: IContactProps): JSX.Element => {
           ) : null}
         </p>
 
-        <Seperator />
+        {consultation_hours ? (
+          <>
+            <Seperator />
 
-        <div className="hedi--consultation-hours-wrapper">
-          {consultation_hours ? (
-            <>
+            <div className="hedi--consultation-hours-wrapper">
               <h3>{officeHrsHeadline}</h3>
               <pre>{consultation_hours}</pre>
-            </>
-          ) : null}
-        </div>
+            </div>
+          </>
+        ) : null}
       </Tile>
     </section>
   );
