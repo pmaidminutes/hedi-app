@@ -32,6 +32,7 @@ export const LanguageSkillsSelection = ({
     handleAddClick,
     handleRemoveClick,
     isMobileContext,
+    handleItemChange,
   } = useLanguageSkillsSelection(data);
   return (
     <>
@@ -73,6 +74,7 @@ export const LanguageSkillsSelection = ({
                 handleDeleteClick={() => {
                   handleRemoveClick(i);
                 }}
+                handleChange={changedData => handleItemChange(i, changedData)}
               />
             ))}
           </TableBody>
