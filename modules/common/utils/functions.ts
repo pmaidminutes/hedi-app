@@ -72,9 +72,9 @@ export function formatPhoneNumber(phoneNumber: string) {
 }
 
 export function transformStringToUrl(string: string) {
-  return string.startsWith("http://") ||
-    string.startsWith("https://") ||
-    !string
+  return !string ||
+    string.startsWith("http://") ||
+    string.startsWith("https://")
     ? string
     : `http://${string}`;
 }
