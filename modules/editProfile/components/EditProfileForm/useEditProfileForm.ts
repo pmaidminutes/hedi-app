@@ -36,7 +36,6 @@ export function useEditProfileForm(
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const delta = {} as EditProfileInput;
-    const newData = {} as EditProfileInput;
     const profileData = data?.profile ?? ({} as IEditProfile);
 
     EditProfileFieldArray.forEach(key => {
@@ -48,11 +47,15 @@ export function useEditProfileForm(
         value = (form.getAll(key)?.valueOf() as string[])
           .map(v => JSON.parse(v))
           .sort((a, b) => b.level - a.level);
-      setProperty(newData, key, value as any);
-      if (value && value !== profileData?.[key]) {
-        setProperty(delta, key, value as any);
-        setProperty(profileData, key, value as any);
-      }
+      if (typeof value !== "undefined" && value !== null)
+        if (
+          (typeof value === "string" && value !== (profileData?.[key] ?? "")) ||
+          ((Array.isArray(value) || typeof value === "object") &&
+            JSON.stringify(value) !== JSON.stringify(profileData?.[key]))
+        ) {
+          setProperty(delta, key, value as any);
+          setProperty(profileData, key, value as any);
+        }
     });
 
     if (Object.keys(delta).length > 0) {
