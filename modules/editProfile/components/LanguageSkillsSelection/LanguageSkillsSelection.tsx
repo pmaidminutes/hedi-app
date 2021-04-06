@@ -31,7 +31,6 @@ export const LanguageSkillsSelection = ({
     languageSkillEntries,
     handleAddClick,
     handleRemoveClick,
-    isMobileContext,
   } = useLanguageSkillsSelection(data);
   return (
     <>

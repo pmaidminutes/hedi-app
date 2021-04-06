@@ -3,7 +3,6 @@ import { ILanguageSkillEntry } from "../../types";
 
 export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
   const [languageSkillEntries, setLanguageSkillEntries] = useState(data ?? []);
-  const [isMobileContext, setIsMobileContext] = useState(false);
 
   useEffect(() => {
     setLanguageSkillEntries(data?.sort((a, b) => b.level - a.level) ?? []);
@@ -20,22 +19,7 @@ export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
     });
   };
 
-  const handleResize = () => {
-    const width = window.innerWidth;
-    if (!isMobileContext && width < 768) {
-      setIsMobileContext(true);
-    } else if (isMobileContext && width > 768) {
-      setIsMobileContext(false);
-    }
-  };
-
-  useEffect(() => {
-    if (typeof window !== "undefined")
-      window.addEventListener("resize", handleResize);
-  });
-
   return {
-    isMobileContext,
     languageSkillEntries,
     handleAddClick,
     handleRemoveClick,
