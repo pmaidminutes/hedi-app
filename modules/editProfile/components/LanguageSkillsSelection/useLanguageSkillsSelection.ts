@@ -1,12 +1,15 @@
+import { AssertClientSide } from "@/modules/common/utils";
 import { useEffect, useState } from "react";
 import { ILanguageSkillEntry } from "../../types";
 
 export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
-  const [languageSkillEntries, setLanguageSkillEntries] = useState(data ?? []);
+  const [languageSkillEntries, setLanguageSkillEntries] = useState(
+    data?.sort((a, b) => b.level - a.level) ?? []
+  );
   const [isMobileContext, setIsMobileContext] = useState(false);
 
   useEffect(() => {
-    setLanguageSkillEntries(data?.sort((a, b) => b.level - a.level) ?? []);
+    setLanguageSkillEntries(data ?? []);
   }, [data]);
 
   const handleAddClick = () => {
@@ -16,7 +19,14 @@ export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
   const handleRemoveClick = (i: number) => {
     setLanguageSkillEntries(p => {
       p.splice(i, 1);
-      return [...p].sort((a, b) => b.level - a.level);
+      return [...p];
+    });
+  };
+
+  const handleItemChange = (i: number, data: ILanguageSkillEntry) => {
+    setLanguageSkillEntries(previous => {
+      previous[i] = data;
+      return [...previous];
     });
   };
 
@@ -30,8 +40,7 @@ export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined")
-      window.addEventListener("resize", handleResize);
+    if (AssertClientSide()) window.addEventListener("resize", handleResize);
   });
 
   return {
@@ -39,5 +48,6 @@ export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
     languageSkillEntries,
     handleAddClick,
     handleRemoveClick,
+    handleItemChange,
   };
 };

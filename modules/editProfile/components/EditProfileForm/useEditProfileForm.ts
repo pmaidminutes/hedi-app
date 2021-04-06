@@ -45,9 +45,9 @@ export function useEditProfileForm(
       if (key === "domains" || key === "services")
         value = form.getAll(key)?.valueOf();
       if (key === "languageSkills")
-        value = (form.getAll(key)?.valueOf() as string[]).map(v =>
-          JSON.parse(v)
-        );
+        value = (form.getAll(key)?.valueOf() as string[])
+          .map(v => JSON.parse(v))
+          .sort((a, b) => b.level - a.level);
       setProperty(newData, key, value as any);
       if (value && value !== profileData?.[key]) {
         setProperty(delta, key, value as any);
