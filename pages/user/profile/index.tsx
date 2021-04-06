@@ -80,7 +80,7 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
         <Loading />
       ) : (
         <SimplePageView
-          url="/Pregnancy_pink80.svg"
+          url="/svg/pregnancy_pink80.svg"
           alt="Beschreibung des Bildes"
           content={content}
           rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
