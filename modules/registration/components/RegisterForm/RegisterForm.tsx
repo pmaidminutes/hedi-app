@@ -69,7 +69,7 @@ export const RegisterForm = ({
         {...getTextInputProps("registrationcode", elements)}
         required
         onChange={setPasscode}
-        invalid={!!response?.errors?.code}
+        invalid={!!response?.errors?.passcode}
         invalidText={tryGetValue("invalid_passcode", elements)}
       />
       {!!passcode && (

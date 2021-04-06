@@ -20,7 +20,7 @@ export const useRegister = () => {
             "/api/register/?" + encodeInfo(info)
           )
         )
-      : setResponse({ errors: { code: true } } as IRegisterResponse);
+      : setResponse({ errors: { passcode: "invalid" } } as IRegisterResponse);
     setLoading(false);
   };
 
