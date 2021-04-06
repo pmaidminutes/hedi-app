@@ -3,6 +3,7 @@ import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IRegisterRequest, IRegisterResponse } from "../types";
 import { signIn } from "next-auth/client";
+import { useValidate } from "./useValidate";
 
 export const useRegister = () => {
   const [response, setResponse] = useState<IRegisterResponse>({
@@ -12,12 +13,17 @@ export const useRegister = () => {
 
   const register = async (info: IRegisterRequest) => {
     setLoading(true);
-    const resp = await jsonFetcher<IRegisterResponse>(
-      "/api/register/?" + encodeInfo(info)
-    );
-    setResponse(resp);
+    const codeResponse = await useValidate(info);
+    codeResponse?.success
+      ? setResponse(
+          await jsonFetcher<IRegisterResponse>(
+            "/api/register/?" + encodeInfo(info)
+          )
+        )
+      : setResponse({ errors: { passcode: "invalid" } } as IRegisterResponse);
     setLoading(false);
   };
+
   const autoSignIn = (info: IRegisterRequest, redirect?: string) => {
     const dest = `${window.location.protocol}//${window.location.hostname}${redirect}`;
     signIn("credentials", {
