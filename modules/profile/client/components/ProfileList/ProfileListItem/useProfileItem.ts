@@ -1,5 +1,5 @@
 import { isICaregiver, isIMidwife, Profile } from "@/modules/profile/types";
-import { tryGetValue } from "@/modules/common/utils";
+import { tryGetValue, transformStringToUrl } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 
 export interface IProfileItem {
@@ -53,13 +53,13 @@ export const extractProfileEntry = (
     : isIMidwife(profile)
     ? [domainMidwife]
     : undefined;
-
+  // TODO transform Website at another place
   return {
     displayName,
     postal_code,
     city,
     mail,
-    website,
+    website: transformStringToUrl(website),
     phone,
     services,
     servicesHeadline,

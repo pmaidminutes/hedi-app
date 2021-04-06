@@ -1,5 +1,9 @@
 import { useState, useEffect } from "react";
-import { getTextInputProps, tryGetValue } from "@/modules/common/utils";
+import {
+  getTextInputProps,
+  tryGetValue,
+  transformStringToUrl,
+} from "@/modules/common/utils";
 import { ProfileView } from "@/modules/profile/query";
 import { isICaregiver, isIMidwife } from "../../../types";
 import { useCurrentProfileEntity } from "../../hooks";
@@ -76,6 +80,7 @@ export function useProfile(props: IProfileViewProps) {
     ? content.domains
     : [{ type: "Domain", label: domainMidwife, route: "/" + domainMidwife }];
 
+  // TODO transform Website at another place
   return {
     languagesData: {
       languageSkills,
@@ -87,7 +92,7 @@ export function useProfile(props: IProfileViewProps) {
       postal_code,
       city,
       mail,
-      website,
+      website: transformStringToUrl(website),
       phone,
       editButtonProps,
     },
@@ -100,7 +105,7 @@ export function useProfile(props: IProfileViewProps) {
       officeHrsHeadline,
       phone,
       mail,
-      website,
+      website: transformStringToUrl(website),
       consultation_hours,
       street,
       house_number,
