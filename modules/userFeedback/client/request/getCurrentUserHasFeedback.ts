@@ -1,7 +1,7 @@
 import { jsonFetcher } from "@/modules/common/utils";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
-import { currentUserHasFeedbackAPIUrl } from "../types";
+import { currentUserHasFeedbackAPIUrl } from "../../types";
 
 export function getCurrentUserHasFeedback(
   user: User | undefined
