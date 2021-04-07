@@ -10,7 +10,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   const { links, linksIfLoggedIn, isLastElement } = useLandingPage(content);
   return (
     <SimplePageView
-      url="/images/Pregnancy_blue.svg"
+      url={process.env.NEXT_PUBLIC_IMG}
       alt="Beschreibung des Bildes"
       content={content}>
       <Row>
