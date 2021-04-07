@@ -6,9 +6,9 @@ export const validateRegisterAPI: NextApiHandler<IRegisterResponse> = async (
   res
 ) => {
   const validPasccode: boolean =
-    query.passcode === process.env.REGISTER_VALIDATE;
+    query.registrationcode === process.env.REGISTER_VALIDATE;
   const data = validPasccode
     ? { success: true }
-    : { success: false, errors: { passcode: "Invalid passcode" } };
+    : { success: false, errors: { registrationcode: "invalid_passcode" } };
   return res.send(data);
 };

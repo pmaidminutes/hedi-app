@@ -8,7 +8,7 @@ import {
   ToastNotification,
 } from "carbon-components-react";
 import { useRouter } from "next/router";
-import { FormEvent, useState } from "react";
+import { FormEvent, useState, useEffect } from "react";
 import { useRegister } from "../../request";
 import { IRegisterInfo } from "../../types";
 import { RegisterInputs } from "../RegisterInputs";
@@ -24,15 +24,24 @@ export const RegisterForm = ({
 }) => {
   const router = useRouter();
   // TODO handle error states more gracefully, errors should not persist
-  const [passcode, setPasscode] = useTextInput();
+  const [registrationcode, setRegistrationcode] = useTextInput();
   const [info, setInfo] = useState<IRegisterInfo>();
-
+  const [registerError, setRegisterError] = useState(false);
   const { response, loading, register, autoSignIn } = useRegister();
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  useEffect(() => {
+    if (registrationcode) {
+      setRegisterError(false);
+      setInfo({ registrationcode });
+    }
+  }, [info, registrationcode]);
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    console.log(info);
     if (info && !loading) {
-      info.passcode = passcode;
-      register({ ...info, lang: router.locale, commit: true });
+      //info.registrationcode = registrationcode;
+      await register({ ...info, lang: router.locale, commit: true });
+      setRegisterError(true);
     }
   };
 
@@ -43,7 +52,7 @@ export const RegisterForm = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      {response?.errors?.generic && (
+      {registerError && response?.errors?.generic && (
         <ToastNotification
           kind="error"
           lowContrast={true}
@@ -68,14 +77,16 @@ export const RegisterForm = ({
       <TextInput
         {...getTextInputProps("registrationcode", elements)}
         required
-        onChange={setPasscode}
-        invalid={!!response?.errors?.passcode}
-        invalidText={tryGetValue("invalid_passcode", elements)}
+        onChange={setRegistrationcode}
+        invalid={registerError && !!response?.errors?.registrationcode}
+        invalidText={
+          registerError ? tryGetValue("invalid_passcode", elements) : ""
+        }
       />
-      {!!passcode && (
+      {!!registrationcode && (
         <RegisterInputs
           onChange={setInfo}
-          errors={response?.errors}
+          errors={registerError ? response?.errors : {}}
           elements={elements}
         />
       )}

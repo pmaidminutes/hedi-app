@@ -10,7 +10,6 @@ export const useRegister = () => {
     success: false,
   });
   const [loading, setLoading] = useState(false);
-
   const register = async (info: IRegisterRequest) => {
     setLoading(true);
     const codeResponse = await useValidate(info);
@@ -20,7 +19,9 @@ export const useRegister = () => {
             "/api/register/?" + encodeInfo(info)
           )
         )
-      : setResponse({ errors: { passcode: "invalid" } } as IRegisterResponse);
+      : setResponse({
+          errors: { registrationcode: "invalid" },
+        } as IRegisterResponse);
     setLoading(false);
   };
 
@@ -38,7 +39,7 @@ export const useRegister = () => {
 
 export function useRegisterEager(info: IRegisterRequest) {
   const registerResult = useSWR<IRegisterResponse>(
-    info.passcode || info.name || info.pass
+    info.registrationcode || info.name || info.pass
       ? "/api/register/?" + encodeInfo(info)
       : null,
     url => jsonFetcher<IRegisterResponse>(url)
