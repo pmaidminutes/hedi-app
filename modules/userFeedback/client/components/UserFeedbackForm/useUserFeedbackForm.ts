@@ -3,7 +3,10 @@ import { useState } from "react";
 // Next
 import { useRouter } from "next/router";
 // hooks
-import { useProfile } from "@/modules/profile/client/components/Profile/useProfile";
+import {
+  transformProfile,
+  getProfileViewData,
+} from "@/modules/profile/client/components/Profile";
 // types
 import { ColumnDefaultProps } from "carbon-components-react";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
@@ -46,10 +49,19 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     servicesData,
     contactData,
     relatedProfilesData,
+    lang,
+    elements: profileElements,
     // mapData, HACK currently incompatible
-  } = useProfile({ content: profile });
+  } = transformProfile({ content: profile });
 
   const { subPages, elements } = content;
+  const {
+    servicesHeadline,
+    languagesHeadline,
+    contactHeadline,
+    relatedHeadline,
+    officeHrsHeadline,
+  } = getProfileViewData(profileElements, lang);
 
   // TODO improve
   const serviceHeadlineType: headlineType = "h3";
@@ -100,6 +112,11 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     successMessage,
     subPages,
     elements,
+    servicesHeadline,
+    languagesHeadline,
+    contactHeadline,
+    relatedHeadline,
+    officeHrsHeadline,
     getSubPage,
   };
 }

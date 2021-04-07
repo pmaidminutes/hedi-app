@@ -1,5 +1,5 @@
-import { MapClient } from "@/modules/map/client/components";
-import { Location } from "@/modules/map/types";
+// import { MapClient } from "@/modules/map/client/components";
+// import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
 import { Column, Grid, Row } from "carbon-components-react";
 import { Contact } from "../Contact";
@@ -8,10 +8,12 @@ import { BgImgContainer } from "@/modules/common/components";
 import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
-import { IProfileViewProps, useProfile } from "./useProfile";
 import { ProfileView } from "../../../query/getProfile";
+import { getProfileViewData } from "./getProfileViewData";
+import { transformProfile, IProfileViewProps } from "./transformProfile";
+import { useEditProfileButton, useServices } from "../../hooks";
 
-const locations: Location[] = [];
+// const locations: Location[] = [];
 
 export const TryProfile = ({
   content,
@@ -34,33 +36,58 @@ export const Profile = (props: IProfileViewProps) => {
     servicesData,
     contactData,
     relatedProfilesData,
-    // mapData, HACK currently incompatible
-    hasServices,
-  } = useProfile(props);
+    lang,
+    route,
+    elements,
+    services,
+  } = transformProfile(props);
+
+  const {
+    servicesHeadline,
+    languagesHeadline,
+    contactHeadline,
+    relatedHeadline,
+    officeHrsHeadline,
+  } = getProfileViewData(elements, lang);
+
+  const { editButtonProps } = useEditProfileButton(lang, route, elements);
+  const { hasServices } = useServices(services);
 
   return (
     <>
       <BgImgContainer>
         <Grid>
-          <ProfileEntry isNarrow={false} {...profileEntryData} />
+          <ProfileEntry
+            isNarrow={false}
+            editButtonProps={editButtonProps}
+            {...profileEntryData}
+          />
         </Grid>
       </BgImgContainer>
       <Grid className="hedi--profile">
         <Row>
           {hasServices ? (
             <Column lg={6} md={4}>
-              <Services {...servicesData} headlineType="h3" />
+              <Services
+                headline={servicesHeadline}
+                {...servicesData}
+                headlineType="h3"
+              />
             </Column>
           ) : null}
           <Column lg={6} md={4}>
-            <Contact {...contactData} />
+            <Contact
+              officeHrsHeadline={officeHrsHeadline}
+              headline={contactHeadline}
+              {...contactData}
+            />
           </Column>
           <Column lg={4} md={4}>
-            <LanguageSkills {...languagesData} />
+            <LanguageSkills headline={languagesHeadline} {...languagesData} />
           </Column>
         </Row>
       </Grid>
-      <RelatedProfiles {...relatedProfilesData} />
+      <RelatedProfiles headline={relatedHeadline} {...relatedProfilesData} />
       {/* {hasMap)
           ? content.associations.map((entry: IProfile) => {
               return <ProfileEntry profile={entry} key={entry.route} />;
