@@ -1,5 +1,5 @@
 import { ProfileView } from "@/modules/profile/query";
-import { requestCurrentProfile } from "../../request";
+import { requestCurrentProfile } from "../request";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
 
