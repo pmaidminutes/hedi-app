@@ -1,8 +1,8 @@
 import React from "react";
 import {
   IRelatedProfilesProps,
-  useRelatedProfiles,
-} from "./useRelatedProfiles";
+  transformRelatedProfiles,
+} from "./transformRelatedProfiles";
 import { Grid, Row } from "carbon-components-react";
 import { RelatedProfile } from "./RelatedProfile";
 
@@ -22,7 +22,7 @@ const data = [
   },
 ];
 export const RelatedProfiles = (props: IRelatedProfilesProps) => {
-  const { headline, profiles } = useRelatedProfiles(props);
+  const { headline, profiles } = transformRelatedProfiles(props);
   return (
     <section className="hedi--related-profiles">
       <Grid>
