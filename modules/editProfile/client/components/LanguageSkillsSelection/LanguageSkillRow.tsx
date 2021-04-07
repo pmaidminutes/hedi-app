@@ -13,19 +13,21 @@ export type LanguageSkillRowProps = {
   };
   data: ILanguageSkillEntry;
   handleDeleteClick?: () => void;
+  handleChange?: (data: ILanguageSkillEntry) => void;
 };
 
 export const LanguageSkillRow = ({
   config: { elements, languageLevelElements, languageOptions },
   data,
   handleDeleteClick,
+  handleChange,
 }: LanguageSkillRowProps) => {
   // TODO add undefined entry for newly added rows
   const {
     languageSkill,
     handleLanguageChange,
     handleLevelChange,
-  } = useLanguageSkillRow(data);
+  } = useLanguageSkillRow(data, handleChange);
   return (
     <TableRow>
       <TableCell data-th={tryGetValue("language", elements, "Sprache")}>

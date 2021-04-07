@@ -31,6 +31,7 @@ export const LanguageSkillsSelection = ({
     languageSkillEntries,
     handleAddClick,
     handleRemoveClick,
+    handleItemChange,
   } = useLanguageSkillsSelection(data);
   return (
     <>
@@ -72,6 +73,7 @@ export const LanguageSkillsSelection = ({
                 handleDeleteClick={() => {
                   handleRemoveClick(i);
                 }}
+                handleChange={changedData => handleItemChange(i, changedData)}
               />
             ))}
           </TableBody>
