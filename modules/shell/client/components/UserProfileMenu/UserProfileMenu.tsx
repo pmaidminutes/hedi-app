@@ -13,7 +13,7 @@ import {
   tryGetKeyLinks,
 } from "@/modules/common/utils";
 import { useRouter } from "next/router";
-import { IShellLink } from "../../types/shellLinks";
+import { IShellLink } from "../../../types/shellLinks";
 import { signOut } from "next-auth/client";
 import { IUIElementTexts } from "@/modules/model";
 

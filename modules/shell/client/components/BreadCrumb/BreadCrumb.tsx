@@ -1,4 +1,4 @@
-import { constructBreadCrumbPathData } from "../../server";
+import { constructBreadCrumbPathData } from "../../../server";
 import {
   IAppStyled,
   IEntityLocalized,

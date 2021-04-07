@@ -3,8 +3,8 @@ import { GetStaticProps } from "next/types";
 
 import { IPageProps } from "@/modules/shell/types";
 import { getShell } from "@/modules/shell/query";
-import { useShell } from "@/modules/shell/hooks";
-import { Shell } from "@/modules/shell/components";
+import { useShell } from "@/modules/shell/client/hooks";
+import { Shell } from "@/modules/shell/client/components";
 
 import { IEditProfileView } from "@/modules/editProfile/types";
 import { getEditProfileStatic } from "@/modules/editProfile/query";

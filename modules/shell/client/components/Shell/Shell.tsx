@@ -7,8 +7,8 @@ import { getUser } from "@/modules/auth/client";
 import { ScrollToTop } from "../ScrollToTop";
 
 import { Header, Footer } from "..";
-import { IPageProps } from "../../types";
-import { checkAccess } from "../../utils";
+import { IPageProps } from "../../../types";
+import { checkAccess } from "../../../utils";
 import { usePageAccess } from "./usePageAccess";
 
 export const Shell: React.FC<IPageProps<IEntity>> = props => {

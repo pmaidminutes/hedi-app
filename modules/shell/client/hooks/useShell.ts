@@ -1,6 +1,6 @@
 import { setProperty } from "@/modules/common/utils";
 import { IEntityLocalized, ILanguage } from "@/modules/model";
-import { IPageConfig, IShell, IShellProps } from "../types";
+import { IPageConfig, IShell, IShellProps } from "../../types";
 
 export function useShell(
   content: IPageConfig,

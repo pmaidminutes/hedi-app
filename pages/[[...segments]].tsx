@@ -26,8 +26,8 @@ import { getProfilePage } from "@/modules/profile/server/generators";
 // Components
 
 import { getShell } from "@/modules/shell/query";
-import { useShell } from "@/modules/shell/hooks";
-import { Shell } from "@/modules/shell/components";
+import { useShell } from "@/modules/shell/client/hooks";
+import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
