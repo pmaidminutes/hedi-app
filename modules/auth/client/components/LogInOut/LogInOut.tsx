@@ -3,9 +3,9 @@ import { Loading } from "carbon-components-react";
 import { LogIn, LogOut } from "..";
 
 export const LogInOut = () => {
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
 
-  return loading ? (
+  return isLoading ? (
     <Loading />
   ) : user ? (
     <LogOut label={`logged in as ${user.name}`} />

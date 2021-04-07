@@ -10,7 +10,9 @@ export const UserFeedbackThanksView = (props: IUserFeedbackThanksProps) => {
   const { content, elements } = useFeedbackThanksView(props);
 
   return (
-    <SimplePageView url={process.env.NEXT_PUBLIC_IMG_HEADER} content={content}>
+    <SimplePageView
+      url={process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}
+      content={content}>
       <div className="hedi-app-page-link-buttons">
         {elements.map(element => (
           <Button

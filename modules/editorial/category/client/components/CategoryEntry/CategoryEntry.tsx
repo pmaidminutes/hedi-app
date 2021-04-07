@@ -16,7 +16,7 @@ export const CategoryEntry = ({
         <a href={route}>
           {image === null ? (
             <Image
-              src={process.env.NEXT_PUBLIC_ARTICLE_HEADER_TMP || ""}
+              src={process.env.NEXT_PUBLIC_CATEGORY_HEADER_TMP || ""}
               layout="responsive"
               width="auto"
               height="auto"

@@ -37,28 +37,28 @@ export function useLoginForm({
   links,
 }: LoginFormProps) {
   const router = useRouter();
-  const [loginLoading, setLoginLoading] = useState(false);
-  const [loginError, setLoginError] = useState(false);
-  const [loginSuccess, setLoginSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = event => {
     if (redirectUrl) router.prefetch(redirectUrl);
-    setLoginLoading(true);
-    setLoginError(false);
-    setLoginSuccess(false);
+    setIsLoading(true);
+    setHasError(false);
+    setIsSuccess(false);
     submitLogin(event, redirectUrl).then(resp => {
-      setLoginLoading(false);
-      if (!resp.ok) setLoginError(true);
-      else setLoginSuccess(true);
+      setIsLoading(false);
+      if (!resp.ok) setHasError(true);
+      else setIsSuccess(true);
     });
   };
 
   const [elementProps, setElementProps] = useState(
-    getElementProps(elements, setLoginError)
+    getElementProps(elements, setHasError)
   );
 
   useEffect(() => {
-    setElementProps(getElementProps(elements, setLoginError));
+    setElementProps(getElementProps(elements, setHasError));
   }, [lang]);
 
   const { loginNotification, successNotification, ...rest } = elementProps;
@@ -66,9 +66,9 @@ export function useLoginForm({
   return {
     ...rest,
     handleSubmit,
-    loginLoading,
-    loginNotification: loginError ? loginNotification : undefined,
-    successNotification: loginSuccess ? successNotification : undefined,
+    isLoading,
+    loginNotification: hasError ? loginNotification : undefined,
+    successNotification: isSuccess ? successNotification : undefined,
     links,
     elements,
   };
