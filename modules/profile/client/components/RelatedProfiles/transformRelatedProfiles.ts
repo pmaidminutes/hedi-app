@@ -9,7 +9,7 @@ export interface IRelatedProfilesProps {
   profiles?: any[];
 }
 
-export function useRelatedProfiles(props: IRelatedProfilesProps) {
+export function transformRelatedProfiles(props: IRelatedProfilesProps) {
   const { headline, profiles } = props;
 
   const { labelText } = headline;
