@@ -8,7 +8,7 @@ import { Shell } from "@/modules/shell/components";
 
 import { IEditProfileView } from "@/modules/editProfile/types";
 import { getEditProfileStatic } from "@/modules/editProfile/query";
-import { EditProfile } from "@/modules/editProfile/components";
+import { EditProfile } from "@/modules/editProfile/client/components";
 
 export const getStaticProps: GetStaticProps<
   IPageProps<IEditProfileView>

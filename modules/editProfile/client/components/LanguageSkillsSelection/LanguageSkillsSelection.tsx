@@ -9,7 +9,7 @@ import {
 } from "carbon-components-react";
 import { Add32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
-import { ILanguageSkillEntry } from "../../types";
+import { ILanguageSkillEntry } from "../../../types";
 import { LanguageSkillRow } from "./LanguageSkillRow";
 import { useLanguageSkillsSelection } from "./useLanguageSkillsSelection";
 import { tryGetValue } from "@/modules/common/utils";

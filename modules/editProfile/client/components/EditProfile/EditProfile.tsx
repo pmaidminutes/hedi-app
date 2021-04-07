@@ -1,5 +1,5 @@
 import { getUser } from "@/modules/auth/client";
-import { extractConfig, IEditProfileView } from "../../types";
+import { extractConfig, IEditProfileView } from "../../../types";
 import { EditProfileForm, useEditProfileForm } from "../EditProfileForm";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { useEffect, useState } from "react";

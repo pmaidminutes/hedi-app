@@ -22,7 +22,7 @@ import {
   tryGetValue,
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
-import { IEditProfileFormConfig, IUpsertProfile } from "../../types";
+import { IEditProfileFormConfig, IUpsertProfile } from "../../../types";
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
@@ -93,7 +93,6 @@ export const EditProfileForm = ({
     (errors && Object.keys(errors).length != 0) ||
     Object.keys(validationErrors).length != 0;
 
-
   const refs: {
     [key: string]: RefObject<HTMLInputElement>;
   } = orderedRequiredFields
@@ -119,7 +118,7 @@ export const EditProfileForm = ({
     }
     return false;
   };
-  
+
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
@@ -135,9 +134,9 @@ export const EditProfileForm = ({
     const anyValidationErrors = scrollToErrors(currentErrors);
     if (!anyValidationErrors && onSubmit) onSubmit(e);
   };
-        
+
   const { onSubmit, ...formPropsRest } = formProps;
-        
+
   return (
     <Form {...formPropsRest} onSubmit={handleSubmit}>
       {errors?.generic && (

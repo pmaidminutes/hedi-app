@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ILanguageSkillEntry } from "../../types";
+import { ILanguageSkillEntry } from "../../../types";
 
 export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
   const [languageSkillEntries, setLanguageSkillEntries] = useState(data ?? []);

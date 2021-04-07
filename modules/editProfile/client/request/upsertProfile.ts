@@ -1,4 +1,4 @@
-import { EditProfileInput, IUpsertProfile } from "../types";
+import { EditProfileInput, IUpsertProfile } from "../../types";
 
 export function upsertProfile(
   url: string,

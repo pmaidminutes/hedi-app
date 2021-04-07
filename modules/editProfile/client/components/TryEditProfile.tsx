@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { IEditProfileView } from "../types";
+import { IEditProfileView } from "../../types";
 import { EditProfile } from "./EditProfile";
 
 export const TryEditProfile = (content: ITyped): JSX.Element | null =>

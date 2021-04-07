@@ -1,7 +1,7 @@
 import { Button, Dropdown, TableCell, TableRow } from "carbon-components-react";
 import { TrashCan32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
-import { ILanguageSkillEntry } from "../../types";
+import { ILanguageSkillEntry } from "../../../types";
 import { useLanguageSkillRow } from "./useLanguageSkillRow";
 import { tryGetValue } from "@/modules/common/utils";
 
