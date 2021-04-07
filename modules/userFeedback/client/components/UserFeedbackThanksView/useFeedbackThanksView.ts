@@ -1,7 +1,7 @@
 import { getUser } from "@/modules/auth/client";
 import { IAppPage } from "@/modules/common/types";
 import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
-import { getCurrentUserHasFeedback } from "@/modules/userFeedback/request/getCurrentUserHasFeedback";
+import { getCurrentUserHasFeedback } from "@/modules/userFeedback/client/request/getCurrentUserHasFeedback";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 

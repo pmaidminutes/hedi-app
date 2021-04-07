@@ -1,5 +1,5 @@
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { IUserFeedback } from "../types";
+import { IUserFeedback } from "../../types";
 
 export async function sendUserFeedbacks(
   userfeedbacks: Partial<IUserFeedback>[],
