@@ -5,7 +5,7 @@ import { SimplePageView } from "@/modules/simplePage/client/components";
 import { useEffect, useState } from "react";
 
 export const EditProfile = ({ content }: { content: IEditProfileView }) => {
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
 
   const [config, setConfig] = useState(extractConfig(content));
   useEffect(() => {

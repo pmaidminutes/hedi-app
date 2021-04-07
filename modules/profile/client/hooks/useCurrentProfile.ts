@@ -8,17 +8,17 @@ export function useCurrentProfile(
   lang: string
 ): [ProfileView | null, boolean] {
   const [profile, setProfile] = useState<ProfileView | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCurrentProfile = async () => {
-      setLoading(true);
+      setIsLoading(true);
       const profile = await requestCurrentProfile(lang).catch(() =>
-        setLoading(false)
+        setIsLoading(false)
       );
       if (profile) setProfile(profile);
 
-      setLoading(false);
+      setIsLoading(false);
     };
 
     // we can trigger without waiting on user info
@@ -26,5 +26,5 @@ export function useCurrentProfile(
     fetchCurrentProfile();
   }, [user?.name, lang]);
 
-  return [profile, loading];
+  return [profile, isLoading];
 }

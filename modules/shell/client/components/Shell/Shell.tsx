@@ -14,23 +14,23 @@ import { usePageAccess } from "./usePageAccess";
 export const Shell: React.FC<IPageProps<IEntity>> = props => {
   const { content, shell, children } = props;
   const [hediStyle, setHediStyle] = useState("");
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
   const [hasHeader, setHasHeader] = useState(shell.useHeader === true);
   useEffect(() => {
     setHasHeader(checkAccess(!!user, shell.useHeader));
-  }, [shell.useHeader, user?.name, loading]);
+  }, [shell.useHeader, user?.name, isLoading]);
 
   useEffect(() => {
     setHediStyle(shell?.appstyle ?? "");
   }, [shell.appstyle]);
 
-  const pageAccess = usePageAccess(shell?.redirectUnAuthorized);
+  const hasPageAccess = usePageAccess(shell?.redirectUnAuthorized);
   return (
     <div className={hediStyle}>
       <Head>
         <title>HEDI{content.label ? ` - ${content.label}` : null}</title>
       </Head>
-      {pageAccess ? (
+      {hasPageAccess ? (
         <>
           {hasHeader ? <Header {...shell} /> : null}
           <Content>{children}</Content>

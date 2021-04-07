@@ -4,23 +4,23 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export const usePageAccess = (redirectUnAuthorized?: string) => {
-  const [pageAccess, setPageAccess] = useState(!redirectUnAuthorized);
+  const [hasPageAccess, setHasPageAccess] = useState(!redirectUnAuthorized);
   const router = useRouter();
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
   useEffect(() => {
-    if (!redirectUnAuthorized) setPageAccess(true);
+    if (!redirectUnAuthorized) setHasPageAccess(true);
     else {
-      setPageAccess(false);
-      if (loading) {
-        setPageAccess(false);
+      setHasPageAccess(false);
+      if (isLoading) {
+        setHasPageAccess(false);
         router.prefetch(redirectUnAuthorized);
-      } else if (user) setPageAccess(true);
+      } else if (user) setHasPageAccess(true);
       else if (typeof redirectUnAuthorized === "string" && AssertClientSide()) {
         router.push(redirectUnAuthorized, redirectUnAuthorized, {
           shallow: false,
         });
       }
     }
-  }, [redirectUnAuthorized, user, loading]);
-  return pageAccess;
+  }, [redirectUnAuthorized, user, isLoading]);
+  return hasPageAccess;
 };

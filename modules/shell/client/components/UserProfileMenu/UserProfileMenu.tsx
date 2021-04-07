@@ -26,7 +26,7 @@ export const UserProfileMenu = ({
   config,
 }: IUserMenuProps): JSX.Element | null => {
   const [hasMounted, setHasMounted] = useState(false);
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
   const router = useRouter();
   const navigateMenu = (routeKey: string) => {
     if (AssertClientSide()) {
@@ -55,7 +55,7 @@ export const UserProfileMenu = ({
 
   return (
     <>
-      {loading ? (
+      {isLoading ? (
         <Loading />
       ) : user ? (
         <OverflowMenu

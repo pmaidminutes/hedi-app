@@ -5,16 +5,16 @@ import { Button, Form } from "carbon-components-react";
 import { SearchInput } from "@/modules/search/client/components";
 
 export const GlobalSearchMenu = () => {
-  const [visible, setVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
   return (
     <>
       <Button
-        renderIcon={visible ? Close32 : Search32}
+        renderIcon={isVisible ? Close32 : Search32}
         iconDescription="Icon Description"
         hasIconOnly
-        onClick={() => setVisible(prev => !prev)}
+        onClick={() => setIsVisible(prev => !prev)}
       />
       <Form
         style={{ width: "100%" }}
@@ -22,7 +22,7 @@ export const GlobalSearchMenu = () => {
           router.push("/search/" + searchText);
           e.preventDefault();
         }}
-        className={visible ? "" : "hidden"}>
+        className={isVisible ? "" : "hidden"}>
         <SearchInput
           onQueryChanged={e => setSearchText(e)}
           id={"search-header"}

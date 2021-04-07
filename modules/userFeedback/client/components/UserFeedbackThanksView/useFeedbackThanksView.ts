@@ -13,7 +13,7 @@ export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
   const { content } = props;
   const { elements } = content;
 
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
   const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
     user,
     content.lang
@@ -22,7 +22,7 @@ export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
 
   const router = useRouter();
   useEffect(() => {
-    if (!loading && !user) router.push("/" + content.lang);
+    if (!isLoading && !user) router.push("/" + content.lang);
     else if (
       !currentProfileLoading &&
       (!currentProfile || !currentProfile.route)
@@ -32,7 +32,7 @@ export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
       router.push("/" + content.lang + "/user/profile/feedback");
   }, [
     user,
-    loading,
+    isLoading,
     currentProfile,
     currentProfileLoading,
     hasFeedback,
