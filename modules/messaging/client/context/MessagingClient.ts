@@ -1,5 +1,5 @@
 import { createClient, MatrixClient } from "matrix-js-sdk";
-import { login } from "../../request";
+import { login } from "../request";
 
 export type SessionState = never | "logged_out" | "logging_in" | "logged_in";
 
