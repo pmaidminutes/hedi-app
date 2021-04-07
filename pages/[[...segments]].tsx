@@ -16,7 +16,7 @@ import {
   ProfileListPathsGQL,
 } from "@/modules/profile/query";
 import { getProfileListPage } from "@/modules/profile/server/generators";
-import { TryRegistration } from "@/modules/registration/components";
+import { TryRegistration } from "@/modules/registration/client/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 
@@ -26,8 +26,8 @@ import { getProfilePage } from "@/modules/profile/server/generators";
 // Components
 
 import { getShell } from "@/modules/shell/query";
-import { useShell } from "@/modules/shell/hooks";
-import { Shell } from "@/modules/shell/components";
+import { useShell } from "@/modules/shell/client/hooks";
+import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";

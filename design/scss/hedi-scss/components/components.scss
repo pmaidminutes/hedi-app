@@ -1,27 +1,12 @@
-@import "./audioplayer.scss";
-@import "./bgimgcontainer.scss";
-@import "./buttoncontainer.scss";
-@import "./categoryentry.scss";
-@import "./contentswitcher.scss";
-@import "./editprofile.scss";
-@import "./footer.scss";
-@import "./group.scss";
-@import "./header.scss";
-@import "./landingpage.scss";
-@import "./languageskills.scss";
-@import "./scrolltotop.scss";
-@import "./seperator.scss";
-@import "./serviceselection.scss";
-@import "./simpleapppage.scss";
-// Profile
-@import "./profile.scss";
-@import "./profilecontact.scss";
-@import "./profileentry.scss";
-@import "./profileservices.scss";
-@import "./profilelist.scss";
-@import "./profiletile.scss";
-@import "./relatedprofiles.scss";
-//
-@import "./userfeedbackform.scss";
-@import "./login.scss";
-@import "./registrationview.scss";
+@import "./common/common.scss";
+@import "./editorial/editorial.scss";
+@import "./editprofile/editprofile.scss";
+@import "./login/login.scss";
+@import "./profile/profile.scss";
+@import "./registration/registration.scss";
+@import "./shell//shell.scss";
+@import "./simplepage/simpleapppage.scss";
+@import "./userfeedback/userfeedback.scss";
+
+@import "./_group.scss";
+

@@ -8,7 +8,7 @@ import { Dev } from "./Dev/Dev";
 // HACK only for dev usage
 export const MessagingAllInOne = () => {
   const client = useMessagingService();
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
   if (user) client.loginSSO();
 
   const [roomSelection, setRoomSelection] = useState<string[]>([]);

@@ -23,7 +23,7 @@ export const Category = ({ content }: ICategoryProps): JSX.Element => {
         <Column sm={4} md={5} lg={10}>
           <AspectRatio ratio="2x1">
             <img
-              src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
+              src={process.env.NEXT_PUBLIC_ARTICLE_HEADER_TMP}
               alt="illustration of sleeping family"
               className="hedi-header-image"
               style={{ maxWidth: "100%" }}

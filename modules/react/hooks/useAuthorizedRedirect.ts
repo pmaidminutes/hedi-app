@@ -6,13 +6,13 @@ export const useAuthorizedRedirect = (
   redirectUrl: string,
   deps?: DependencyList
 ): void => {
-  const [user, loading] = getUser();
+  const [user, isLoading] = getUser();
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading && user) {
+    if (!isLoading && user) {
       // redirects to landing pages
       router.push(redirectUrl);
     }
-  }, [user, loading, ...(deps ? deps : [])]);
+  }, [user, isLoading, ...(deps ? deps : [])]);
 };
