@@ -32,6 +32,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
     successMessage,
     subPages,
     elements,
+    servicesHeadline,
+    languagesHeadline,
+    contactHeadline,
+    relatedHeadline,
+    officeHrsHeadline,
     getSubPage,
   } = useUserFeedbackForm(props);
 
@@ -60,7 +65,7 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
       </Row>
       <Row>
         <Column {...left}>
-          <Services {...servicesData} />
+          <Services headline={servicesHeadline} {...servicesData} />
         </Column>
         <Column {...right}>
           <UserFeedbackAppPageEntry
@@ -75,7 +80,11 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
       </Row>
       <Row>
         <Column {...left}>
-          <Contact {...contactData} />
+          <Contact
+            headline={contactHeadline}
+            officeHrsHeadline={officeHrsHeadline}
+            {...contactData}
+          />
         </Column>
         <Column {...right}>
           <UserFeedbackAppPageEntry
@@ -90,7 +99,7 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
       </Row>
       <Row>
         <Column {...left}>
-          <LanguageSkills {...languagesData} />
+          <LanguageSkills headline={languagesHeadline} {...languagesData} />
         </Column>
         <Column {...right}>
           <UserFeedbackAppPageEntry
