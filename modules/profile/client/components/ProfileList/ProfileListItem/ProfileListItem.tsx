@@ -1,9 +1,6 @@
 import React from "react";
-import {
-  extractProfileEntry,
-  useProfileItem,
-  IProfileItem,
-} from "./useProfileItem";
+import { transformProfileItem, IProfileItem } from "./transformProfileItem";
+import { extractProfileEntry } from "./extractProfileEntry";
 import NextLink from "next/link";
 import { ClickableTile } from "carbon-components-react";
 import { ArrowRight24 } from "@carbon/icons-react";
@@ -15,7 +12,7 @@ export const ProfileListItem = (props: IProfileItem) => {
     servicesHeadline,
     route,
     profileType,
-  } = useProfileItem(props);
+  } = transformProfileItem(props);
   return (
     <NextLink href={route ?? "#"} passHref>
       <ClickableTile href={route} className={profileType ?? ""}>
