@@ -18,6 +18,7 @@
   }
 
   // set launch Icon down.
+  // TODO warum ist das an zwei stellen definiert
   a > svg {
     margin-bottom: -2px;
   }
@@ -30,6 +31,4 @@
     margin-top: $spacing-lg;
     border-color: $cool-gray-40;
   }
-
-
 }

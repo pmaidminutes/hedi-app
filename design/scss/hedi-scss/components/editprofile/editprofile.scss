@@ -1,4 +1,7 @@
-@import "./theme/hedi-theme.scss";
+// @import "./theme/hedi-theme.scss";
+@import "./contentswitcher";
+@import "./languageskills";
+@import "./serviceselection";
 
 .hedi--edit-profile {
   // required to make the dropdowns visible tables
@@ -30,7 +33,6 @@
   .hedi--group--profile-type {
     width: 100%;
     padding: $spacing-md;
-    // padding: $spacing-xl $spacing-md $spacing-xs $spacing-md;
     margin-bottom: $layout-sm;
     background-color: $blue-primary;
 

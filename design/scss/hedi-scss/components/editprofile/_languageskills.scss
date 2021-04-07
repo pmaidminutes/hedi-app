@@ -25,10 +25,6 @@
       }
     }
   }
-  // svg {
-  //   color: $pink-80;
-  // }
-
   @media (max-width: 769px) {
     table {
       width: 100%;
@@ -42,13 +38,6 @@
 
 .hedi--group--language-skills {
   @media (max-width: 769px) {
-    // .bx--data-table-content,
-    // .bx--data-table {
-    //   // width: 100%;
-    // }
-
-    
-
     thead {
       display: none;
     }
@@ -87,13 +76,5 @@
         display: inline-block;
       }
     }
-    // button {
-    //   float: right;
-    //   margin-top: 1rem;
-    // }
   }
 }
-
-// @media (min-width: 769px) {
-//   display: none;
-// }
