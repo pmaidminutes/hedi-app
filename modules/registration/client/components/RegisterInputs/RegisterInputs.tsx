@@ -17,18 +17,18 @@ export const RegisterInputs = ({
   elements,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
-  const [hasCredentialError, setHasCredentialError] = useState(true);
+  const [isCheckCredentialError, setIsCheckCredentialError] = useState(true);
   //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
 
   useEffect(() => {
     if (onChange && (name || pass)) {
       onChange({ name, pass });
-      setHasCredentialError(false);
+      setIsCheckCredentialError(false);
     }
   }, [name, pass]);
   useEffect(() => {
-    setHasCredentialError(true);
+    setIsCheckCredentialError(true);
   }, [errors]);
   return (
     <>
@@ -37,7 +37,7 @@ export const RegisterInputs = ({
         required
         onChange={setName}
         autoComplete="off"
-        invalid={hasCredentialError && !!errors?.name}
+        invalid={isCheckCredentialError && !!errors?.name}
         //invalidText={errors?.name}
       />
       <TextInput
@@ -45,7 +45,7 @@ export const RegisterInputs = ({
         type="password"
         required
         onChange={setPass}
-        invalid={hasCredentialError && !!errors?.pass}
+        invalid={isCheckCredentialError && !!errors?.pass}
         //invalidText={errors?.pass}
       />
       <Button type="submit" size="field">
