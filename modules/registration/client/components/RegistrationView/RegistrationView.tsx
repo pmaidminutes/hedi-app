@@ -4,8 +4,8 @@ import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
 import { Button, Column, Row } from "carbon-components-react";
 import { useRouter } from "next/router";
-import { IRegisterError, IRegisterInfo } from "../../types";
-import { IRegistrationView } from "../../types/IRegistrationView";
+import { IRegisterError, IRegisterInfo } from "../../../types";
+import { IRegistrationView } from "../../../types/IRegistrationView";
 import { RegisterForm } from "../RegisterForm";
 
 type RegisterInputProps = {

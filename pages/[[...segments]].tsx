@@ -16,7 +16,7 @@ import {
   ProfileListPathsGQL,
 } from "@/modules/profile/query";
 import { getProfileListPage } from "@/modules/profile/server/generators";
-import { TryRegistration } from "@/modules/registration/components";
+import { TryRegistration } from "@/modules/registration/client/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 

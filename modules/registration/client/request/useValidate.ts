@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
-import { IRegisterRequest, IRegisterResponse } from "../types";
+import { IRegisterRequest, IRegisterResponse } from "../../types";
 
 export function useValidate(info: IRegisterRequest) {
   const validateResult = useSWR<IRegisterResponse>(

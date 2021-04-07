@@ -10,7 +10,7 @@ import {
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
 import { useRegister, useValidate } from "../../request";
-import { IRegisterInfo } from "../../types";
+import { IRegisterInfo } from "../../../types";
 import { RegisterInputs } from "../RegisterInputs";
 
 export const RegisterForm = ({

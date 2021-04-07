@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
-import { IRegisterRequest, IRegisterResponse } from "../types";
+import { IRegisterRequest, IRegisterResponse } from "../../types";
 import { signIn } from "next-auth/client";
 
 export const useRegister = () => {

@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { IRegistrationView } from "../types";
+import { IRegistrationView } from "../../types";
 import { RegistrationView } from "./RegistrationView/RegistrationView";
 
 export const TryRegistration = ({
