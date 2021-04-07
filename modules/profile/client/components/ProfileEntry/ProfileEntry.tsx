@@ -1,6 +1,9 @@
 import { Row, Column, Link, Button } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
-import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
+import {
+  transformProfileEntry,
+  IProfileEntryProps,
+} from "./transformProfileEntry";
 import { Launch16, Edit24 } from "@carbon/icons-react";
 import HediPerson from "./assets/hedi_person.svg";
 
@@ -21,7 +24,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     prettyUrl,
     phoneLink,
     editButtonProps,
-  } = useProfileEntry(props);
+  } = transformProfileEntry(props);
 
   return (
     <>
