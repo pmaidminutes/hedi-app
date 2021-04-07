@@ -12,7 +12,7 @@ export interface IServicesProps {
 }
 export type headlineType = "h3" | "h5";
 
-export function useServices(props: IServicesProps) {
+export function transformServices(props: IServicesProps) {
   const { headline, services, tagType, headlineType = "h5" } = props;
 
   const { labelText } = headline;
