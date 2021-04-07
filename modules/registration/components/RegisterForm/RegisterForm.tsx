@@ -26,11 +26,11 @@ export const RegisterForm = ({
 
   const [registrationcode, setRegistrationcode] = useTextInput();
   const [info, setInfo] = useState<IRegisterInfo>();
-  const [registerError, setRegisterError] = useState(false);
+  const [hasRegisterError, setHasRegisterError] = useState(false);
   const { response, loading, register, autoSignIn } = useRegister();
   useEffect(() => {
     if (registrationcode) {
-      setRegisterError(false);
+      setHasRegisterError(false);
     }
   }, [registrationcode]);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -38,7 +38,7 @@ export const RegisterForm = ({
     if (info && !loading) {
       info.registrationcode = registrationcode;
       await register({ ...info, lang: router.locale, commit: true });
-      setRegisterError(true);
+      setHasRegisterError(true);
     }
   };
 
@@ -49,7 +49,7 @@ export const RegisterForm = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      {registerError && response?.errors?.generic && (
+      {hasRegisterError && response?.errors?.generic && (
         <ToastNotification
           kind="error"
           lowContrast={true}
@@ -75,7 +75,7 @@ export const RegisterForm = ({
         {...getTextInputProps("registrationcode", elements)}
         required
         onChange={setRegistrationcode}
-        invalid={registerError && !!response?.errors?.registrationcode}
+        invalid={hasRegisterError && !!response?.errors?.registrationcode}
         invalidText={tryGetValue("invalid_passcode", elements)}
       />
       {!!registrationcode && (
