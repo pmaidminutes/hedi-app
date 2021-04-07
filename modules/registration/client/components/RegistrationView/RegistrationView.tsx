@@ -22,7 +22,7 @@ export const RegistrationView = ({ content }: RegisterInputProps) => {
 
   return (
     <SimplePageView
-      url="/svg/pregnancy_blue.svg"
+      url={process.env.NEXT_PUBLIC_IMG_HEADER}
       alt="Beschreibung des Bildes"
       content={content}
       rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>

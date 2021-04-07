@@ -25,7 +25,7 @@ export const SimplePageView: React.FC<{
       {content.posterImage && (
         <Image
           className="hedi--hero-image"
-          src={"https://assets.projekt-hedi.de" + content.posterImage.route}
+          src={process.env.NEXT_PUBLIC_ASSETS_URL + content.posterImage.route}
           alt={content.posterImage.alt}
           width={content.posterImage.width}
           height={content.posterImage.height}
