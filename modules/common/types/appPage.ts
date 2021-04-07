@@ -21,6 +21,7 @@ export interface IAppPage
   posterImage: IImage;
 }
 
+// UNUSED
 export function isIAppPage(obj: any): obj is IAppPage {
   return obj && obj.typeName === "AppPage" && obj.key;
 }

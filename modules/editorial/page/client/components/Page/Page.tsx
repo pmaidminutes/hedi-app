@@ -7,6 +7,7 @@ interface IPageProps {
   content: IPage;
 }
 
+// UNUSED
 export const TryPage = (content: ITyped): JSX.Element | null =>
   content.type === "Page" ? <Page content={content as IPage} /> : null;
 

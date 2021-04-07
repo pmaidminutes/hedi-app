@@ -41,6 +41,7 @@ export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled {
   routelabel: IRouteLabeled;
 }
 
+// UNUSED
 export function isICategory(obj: any): obj is ICategory {
   return obj && obj.typeName === "Category";
 }
@@ -54,6 +55,7 @@ image { ${ImageFields} }
 ${RouteLabelFields}
 `;
 
+// UNUSED
 export const CategoryFrag = gql`
 fragment CategoryFrag on Category {
   ${CategoryFields}

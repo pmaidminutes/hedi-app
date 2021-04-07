@@ -5,7 +5,6 @@ import {
   IEditProfile,
   EditProfileFieldArray,
   EditProfileInput,
-  IUpsertProfile,
 } from "../../types";
 import { upsertProfile } from "../../request";
 import { useRouter } from "next/router";

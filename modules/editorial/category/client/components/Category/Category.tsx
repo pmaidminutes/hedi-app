@@ -8,6 +8,7 @@ interface ICategoryProps {
   content: ICategory;
 }
 
+//UNUSED
 export const TryCategory = (content: ITyped): JSX.Element | null =>
   content.type === "Category" || content.type === "CategoryRoot" ? (
     <Category content={content as ICategory} />

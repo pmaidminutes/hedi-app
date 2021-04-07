@@ -4,6 +4,7 @@ import { Search32, Close32 } from "@carbon/icons-react";
 import { Button, Form } from "carbon-components-react";
 import { SearchInput } from "@/modules/search/client/components";
 
+// UNUSED
 export const GlobalSearchMenu = () => {
   const [visible, setVisible] = useState(false);
   const router = useRouter();

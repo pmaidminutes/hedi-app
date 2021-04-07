@@ -4,6 +4,7 @@ export interface ITyped {
 
 export const implementsITyped = (obj: any) => !!(obj && obj.type);
 
+// UNUSED
 export function isITyped(obj: any): obj is ITyped {
   return implementsITyped(obj);
 }

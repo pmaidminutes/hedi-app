@@ -7,6 +7,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { coordinates, Location } from "../../types";
 import { convertToCoordinates } from "../functions";
 
+// UNUSED
 export default function MapClient({ locations, currentLocation }: coordinates) {
   const iconPerson = new L.Icon({
     //TODO to move thhe image to durpal

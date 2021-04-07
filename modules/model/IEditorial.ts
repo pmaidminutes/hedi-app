@@ -13,9 +13,11 @@ export interface IEditorial<T extends IEntityLocalized>
     ISummary,
     ITagged {}
 
+// UNUSED
 export const implementsIEditorial = (obj: any) =>
   implementsIContent(obj) && implementsISummary(obj) && implementsITagged(obj);
 
+// UNUSED
 export function isIEditorial<T extends IEntityLocalized>(
   obj: any
 ): obj is IEditorial<T> {

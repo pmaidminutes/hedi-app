@@ -1,5 +1,6 @@
 import { useEffect, MutableRefObject, EventHandler } from "react";
 
+// UNUSED
 export const useOnClickOutside = (
   ref: MutableRefObject<any>,
   handler: Function

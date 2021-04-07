@@ -9,6 +9,7 @@ interface IArticleProps {
   content: IArticle;
 }
 
+// UNUSED
 export const TryArticle = (content: ITyped): JSX.Element | null =>
   content.type === "Article" ? <Article content={content as IArticle} /> : null;
 
