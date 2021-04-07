@@ -2,6 +2,7 @@ import { IAppPage } from "@/modules/common/types";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
 
+// UNUSED
 export async function getUserFeedbackLabels(
   lang = "de"
 ): Promise<IUIElementTexts[] | null> {

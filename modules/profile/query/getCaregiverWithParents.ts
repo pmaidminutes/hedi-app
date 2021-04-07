@@ -4,6 +4,7 @@ import {
   ICaregiverWithParents,
 } from "../types/CaregiverWithParentsType";
 
+// UNUSED
 export async function getCaregiverWithParents(
   route: string,
   lang = "de"
