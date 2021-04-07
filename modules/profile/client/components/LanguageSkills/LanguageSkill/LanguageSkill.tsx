@@ -1,9 +1,12 @@
 import React from "react";
-import { useLanguageSkill, ILanguageSkillProps } from "./useLanguageSkill";
+import {
+  transformLanguageSkill,
+  ILanguageSkillProps,
+} from "./transformLanguageSkill";
 import { Rating } from "@/modules/common/components";
 
 export const LanguageSkill = (props: ILanguageSkillProps) => {
-  const { label, level } = useLanguageSkill(props);
+  const { label, level } = transformLanguageSkill(props);
   return (
     <tr>
       <td>{label}</td>
