@@ -1,4 +1,4 @@
-import { IContactProps, useContact } from "./useContact";
+import { IContactProps, transformContact } from "./transformContact";
 import { Tile, Link } from "carbon-components-react";
 import { Launch16 } from "@carbon/icons-react";
 import PregnantWoman from "./assets/pregnant.svg";
@@ -18,7 +18,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
     officeHrsHeadline,
     phoneLink,
     prettyUrl,
-  } = useContact(props);
+  } = transformContact(props);
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
       <Tile>
@@ -32,7 +32,6 @@ export const Contact = (props: IContactProps): JSX.Element => {
             {postal_code} {city}
           </p>
         </address>
-        {/* TODO right number for phone linking */}
 
         <p>
           <Link
