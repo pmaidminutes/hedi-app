@@ -14,18 +14,12 @@
     &.hedi--profile-list__item {
       &--midwife {
         $midwifeColor: $pink-60;
-        // .hedi--profile-entry-content h3 {
-        //   color: $midwifeColor;
-        // }
         .hedi--profile-entry-image svg .cls-1 {
           fill: $midwifeColor;
         }
       }
       &--caregiver {
         $caregiverColor: $green-60;
-        // .hedi--profile-entry-content h3 {
-        //   color: $caregiverColor;
-        // }
         .hedi--profile-entry-image svg .cls-1 {
           fill: $caregiverColor;
         }
@@ -33,6 +27,7 @@
     }
 
     &:hover {
+      // TODO color token
       background: #e5e5e5;
     }
 

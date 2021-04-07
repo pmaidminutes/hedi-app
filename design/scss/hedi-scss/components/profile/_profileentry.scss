@@ -1,5 +1,3 @@
-@import "./theme/hedi-theme.scss";
-
 .hedi--profile-list {
   background-color: $ui-01;
 }
@@ -36,12 +34,12 @@
   }
 
   //setzt das Launch Icon 2px runter
+  // TODO warum ist das an zwei stellen definiert
   a > svg {
     margin-bottom: -2px;
   }
 
   &--with-services {
-    //background-color: red;
     background-color: white;
 
     .hedi__tag-list {

@@ -38,12 +38,6 @@
 @import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
 @import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
 @import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
-@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
-@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
-@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
-@import url(https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500);
-@import url(https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500);
-@import url(https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500);
 html,
 body,
 div,
@@ -16788,40 +16782,6 @@ pre {
   margin-top: 1.5rem;
   border-color: #a2a9b0; }
 
-/* 
-  @font-face {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    src: url('/fonts/Roboto/Roboto-Light.ttf') format('truetype');
-  }
-
-  @font-face {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    src: url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
-    }
-
-  @font-face {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    src: url('/fonts/Roboto/Roboto-Medium.ttf') format('truetype');
-  }
-  $roboto: 'Roboto', sans-serif;
-
-
-  @font-face {
-    font-weight: 300  500;
-    font-family: 'Roboto Slab', serif;
-    src: url('/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
-    }
-    $roboto-slab: 'Roboto Slab', serif;
-
- @font-face {
-    font-weight: 300 500;
-    font-family: 'Roboto Mono', monospace;
-    src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
-     }
- $roboto-mono: 'Roboto Mono', monospace; */
 .hedi--profile-list {
   background-color: #f4f4f4; }
 
@@ -16881,40 +16841,6 @@ pre {
   .hedi--profile-list .hedi--profile-entry-image {
     max-width: 50%; } }
 
-/* 
-  @font-face {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 300;
-    src: url('/fonts/Roboto/Roboto-Light.ttf') format('truetype');
-  }
-
-  @font-face {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    src: url('/fonts/Roboto/Roboto-Regular.ttf') format('truetype');
-    }
-
-  @font-face {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 500;
-    src: url('/fonts/Roboto/Roboto-Medium.ttf') format('truetype');
-  }
-  $roboto: 'Roboto', sans-serif;
-
-
-  @font-face {
-    font-weight: 300  500;
-    font-family: 'Roboto Slab', serif;
-    src: url('/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf') format('truetype');
-    }
-    $roboto-slab: 'Roboto Slab', serif;
-
- @font-face {
-    font-weight: 300 500;
-    font-family: 'Roboto Mono', monospace;
-    src: url('/fonts/Roboto_Mono/RobotoMono-VariableFont_wght.ttf') format('truetype');
-     }
- $roboto-mono: 'Roboto Mono', monospace; */
 .hedi--profile--tile .bx--tile {
   width: 100%;
   margin-bottom: 1rem; }
