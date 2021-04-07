@@ -1,8 +1,8 @@
-import { getTextInputProps } from "@/modules/common/utils";
+import { getTextInputProps, tryGetValue } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import { Button, TextInput } from "carbon-components-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { IRegisterError, IRegisterInfo } from "../../types";
 
 type RegisterInputProps = {
@@ -17,14 +17,19 @@ export const RegisterInputs = ({
   elements,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
+  const [credentialError, setCredentialError] = useState(true);
   //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
+
   useEffect(() => {
     if (onChange && (name || pass)) {
       onChange({ name, pass });
+      setCredentialError(false);
     }
   }, [name, pass]);
-
+  useEffect(() => {
+    setCredentialError(true);
+  }, [errors]);
   return (
     <>
       <TextInput
@@ -32,7 +37,7 @@ export const RegisterInputs = ({
         required
         onChange={setName}
         autoComplete="off"
-        invalid={!!errors?.name}
+        invalid={credentialError && !!errors?.name}
         //invalidText={errors?.name}
       />
       <TextInput
@@ -40,11 +45,11 @@ export const RegisterInputs = ({
         type="password"
         required
         onChange={setPass}
-        invalid={!!errors?.pass}
+        invalid={credentialError && !!errors?.pass}
         //invalidText={errors?.pass}
       />
       <Button type="submit" size="field">
-        {elements.find(e => e.identifier === "submit")?.value}
+        {tryGetValue("submit", elements)}
       </Button>
     </>
   );

@@ -23,7 +23,7 @@ export const RegisterForm = ({
   redirect: string;
 }) => {
   const router = useRouter();
-  // TODO handle error states more gracefully, errors should not persist
+
   const [registrationcode, setRegistrationcode] = useTextInput();
   const [info, setInfo] = useState<IRegisterInfo>();
   const [registerError, setRegisterError] = useState(false);
@@ -31,15 +31,12 @@ export const RegisterForm = ({
   useEffect(() => {
     if (registrationcode) {
       setRegisterError(false);
-      setInfo({ registrationcode });
     }
-  }, [info, registrationcode]);
+  }, [registrationcode]);
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
-    console.log(info);
     if (info && !loading) {
-      //info.registrationcode = registrationcode;
+      info.registrationcode = registrationcode;
       await register({ ...info, lang: router.locale, commit: true });
       setRegisterError(true);
     }
@@ -79,14 +76,12 @@ export const RegisterForm = ({
         required
         onChange={setRegistrationcode}
         invalid={registerError && !!response?.errors?.registrationcode}
-        invalidText={
-          registerError ? tryGetValue("invalid_passcode", elements) : ""
-        }
+        invalidText={tryGetValue("invalid_passcode", elements)}
       />
       {!!registrationcode && (
         <RegisterInputs
           onChange={setInfo}
-          errors={registerError ? response?.errors : {}}
+          errors={response?.errors}
           elements={elements}
         />
       )}
