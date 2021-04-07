@@ -7,7 +7,7 @@ export interface ILanguageSkillsProps extends IWithLanguageSkills {
   >;
 }
 
-export function useLanguageSkills(props: ILanguageSkillsProps) {
+export function transfromLanguageSkills(props: ILanguageSkillsProps) {
   const { languageSkills, headline } = props;
 
   return { languageSkills, headline: headline?.labelText };
