@@ -16,7 +16,7 @@ export const CategoryEntry = ({
         <a href={route}>
           {image === null ? (
             <Image
-              src={"/dummy_img.png"}
+              src={"/dummy/images/dummy_img.png"}
               layout="responsive"
               width="auto"
               height="auto"

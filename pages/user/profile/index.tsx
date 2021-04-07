@@ -3,8 +3,8 @@ import Link from "next/link";
 
 import { IPageProps } from "@/modules/shell/types";
 import { getShell } from "@/modules/shell/query";
-import { useShell } from "@/modules/shell/hooks";
-import { Shell } from "@/modules/shell/components";
+import { useShell } from "@/modules/shell/client/hooks";
+import { Shell } from "@/modules/shell/client/components";
 
 import React, { useEffect } from "react";
 import { useRouter } from "next/router";
@@ -80,7 +80,7 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
         <Loading />
       ) : (
         <SimplePageView
-          url="/Pregnancy_pink80.svg"
+          url="/svg/pregnancy_pink80.svg"
           alt="Beschreibung des Bildes"
           content={content}
           rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
