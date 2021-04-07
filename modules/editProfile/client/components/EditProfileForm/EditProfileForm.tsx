@@ -89,7 +89,7 @@ export const EditProfileForm = ({
   };
 
   const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
-  const anyError = () =>
+  const hasError = () =>
     (errors && Object.keys(errors).length != 0) ||
     Object.keys(validationErrors).length != 0;
 
@@ -131,8 +131,8 @@ export const EditProfileForm = ({
       }
     });
     setValidationErrors(currentErrors);
-    const anyValidationErrors = scrollToErrors(currentErrors);
-    if (!anyValidationErrors && onSubmit) onSubmit(e);
+    const hasValidationErrors = scrollToErrors(currentErrors);
+    if (!hasValidationErrors && onSubmit) onSubmit(e);
   };
 
   const { onSubmit, ...formPropsRest } = formProps;
@@ -489,7 +489,7 @@ export const EditProfileForm = ({
               hideCloseButton
               style={{ width: "100%" }}
             />
-          ) : anyError() ? (
+          ) : hasError() ? (
             <ToastNotification
               title={tryGet("error_message", elements)?.value || "Error"}
               subtitle={tryGet("error_message", elements)?.description}

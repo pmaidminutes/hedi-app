@@ -8,17 +8,17 @@ export function useCurrentProfileEntity(
   lang: string
 ): [IEntity | null, boolean] {
   const [profile, setProfile] = useState<IEntity | null>(null);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const fetchCurrentProfileEntity = async () => {
-      setLoading(true);
+      setIsLoading(true);
       const entity = await requestCurrentProfileEntity(lang).catch(() =>
-        setLoading(false)
+        setIsLoading(false)
       );
       if (entity) setProfile(entity);
 
-      setLoading(false);
+      setIsLoading(false);
     };
 
     // we can trigger without waiting on user info
@@ -26,5 +26,5 @@ export function useCurrentProfileEntity(
     fetchCurrentProfileEntity();
   }, [user?.name, lang]);
 
-  return [profile, loading];
+  return [profile, isLoading];
 }
