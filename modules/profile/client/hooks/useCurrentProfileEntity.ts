@@ -1,7 +1,7 @@
 import { IEntity } from "@/modules/model";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
-import { requestCurrentProfileEntity } from "../../request";
+import { requestCurrentProfileEntity } from "../request";
 
 export function useCurrentProfileEntity(
   user: User | undefined,

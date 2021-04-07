@@ -1,5 +1,5 @@
 import { jsonPost } from "@/modules/common/utils";
-import { ProfileView } from "../query";
+import { ProfileView } from "../../query";
 
 export const requestCurrentProfile = (
   lang: string
