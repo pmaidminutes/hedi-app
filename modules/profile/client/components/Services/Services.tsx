@@ -1,10 +1,12 @@
 import { TagList } from "@/modules/common/components";
 import { Tile } from "carbon-components-react";
-import { useServices, IServicesProps } from "./useServices";
+import { transformServices, IServicesProps } from "./transformServices";
 import BabyOnHand from "./assets/baby.svg";
 
 export const Services = (props: IServicesProps) => {
-  const { headline, services, tagType, headlineType } = useServices(props);
+  const { headline, services, tagType, headlineType } = transformServices(
+    props
+  );
   if (services) {
     return (
       <section className="hedi--profile-services hedi--profile--tile">

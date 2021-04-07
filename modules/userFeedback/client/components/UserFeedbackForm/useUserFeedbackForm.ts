@@ -10,7 +10,7 @@ import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { ProfileView } from "@/modules/profile/query";
 import { IAppPage } from "@/modules/common/types";
 
-import { headlineType } from "@/modules/profile/client/components/Services/useServices";
+import { headlineType } from "@/modules/profile/client/components/Services/transformServices";
 export interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
   locale: string;
