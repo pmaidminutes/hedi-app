@@ -66,10 +66,14 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
     const typedAddress = typedLocation.replace(/\s/g, "+");
     setLocation(typedAddress);
   };
+
+  // UNUSED
   //TODO not used at the moment
   const resetFilter = function () {
     setFilter("");
   };
+
+  // UNUSED
   //TODO not used at the moment
   const removeFilter = function (removedFilter: string) {};
   //TODO temporary feature

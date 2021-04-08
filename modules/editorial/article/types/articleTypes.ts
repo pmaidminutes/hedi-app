@@ -36,6 +36,7 @@ export interface IArticle
   routelabel: IRouteLabeled;
 }
 
+// UNUSED
 export function isIArticle(obj: any): obj is IArticle {
   return obj && obj.typeName === "Article";
 }

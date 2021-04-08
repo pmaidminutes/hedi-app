@@ -6,6 +6,7 @@ export interface IWithMembers extends IProfile {
 
 export const implementsIWithMembers = (obj: any) => !!(obj && obj.members);
 
+// UNUSED
 export function isIWithMembers(obj: any): obj is IWithMembers {
   return implementsIWithMembers(obj);
 }

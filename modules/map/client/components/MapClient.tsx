@@ -7,10 +7,11 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { coordinates, Location } from "../../types";
 import { convertToCoordinates } from "../functions";
 
+// UNUSED
 export default function MapClient({ locations, currentLocation }: coordinates) {
   const iconPerson = new L.Icon({
     //TODO to move thhe image to durpal
-    iconUrl: "https://unpkg.com/leaflet@1.4.0/dist/images/marker-icon.png",
+    iconUrl: process.env.NEXT_PUBLIC_MAP_MARKER_ICON,
     iconSize: [25, 41],
     iconAnchor: [13, 0],
   });
@@ -23,7 +24,7 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
         scrollWheelZoom={false}>
         <TileLayer
           attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          url={process.env.NEXT_PUBLIC_MAP_OSM || ""}
         />
         {locations?.map((location: Location) => (
           <Marker

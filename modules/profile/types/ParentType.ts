@@ -23,6 +23,7 @@ export interface IParent
   first_pregnancy: boolean;
 }
 
+// UNUSED
 export function isIParent(obj: any): obj is IParent {
   return obj && obj.type === "Parent";
 }

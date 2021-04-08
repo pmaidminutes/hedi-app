@@ -6,6 +6,7 @@ export interface IWithUIElements {
 
 export const implementsIWithUIElements = (obj: any) => !!(obj && obj.elements);
 
+// UNUSED
 export function isIWithUIElements(obj: any): obj is IWithUIElements {
   return implementsIWithUIElements(obj);
 }

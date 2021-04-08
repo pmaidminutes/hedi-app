@@ -1,7 +1,11 @@
 import { useState } from "react";
 import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
-import { IRegisterRequest, IRegisterResponse } from "../../types";
+import {
+  IRegisterRequest,
+  IRegisterResponse,
+  registerAPIUrl,
+} from "../../types";
 import { signIn } from "next-auth/client";
 import { useValidate } from "./useValidate";
 
@@ -16,7 +20,7 @@ export const useRegister = () => {
     codeResponse?.success
       ? setResponse(
           await jsonFetcher<IRegisterResponse>(
-            "/api/register/?" + encodeInfo(info)
+            registerAPIUrl + "/?" + encodeInfo(info)
           )
         )
       : setResponse({
@@ -40,7 +44,7 @@ export const useRegister = () => {
 export function useRegisterEager(info: IRegisterRequest) {
   const registerResult = useSWR<IRegisterResponse>(
     info.registrationcode || info.name || info.pass
-      ? "/api/register/?" + encodeInfo(info)
+      ? registerAPIUrl + "/?" + encodeInfo(info)
       : null,
     url => jsonFetcher<IRegisterResponse>(url)
   );

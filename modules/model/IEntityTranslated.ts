@@ -12,6 +12,7 @@ export interface IEntityTranslated<T extends IEntityLocalized>
 export const implementsIEntityTranslated = (obj: any) =>
   implementsIEntityLocalized(obj) && obj.translations;
 
+// UNUSED
 export function isIEntityTranslated<T extends IEntityLocalized>(
   obj: any
 ): obj is IEntityTranslated<T> {

@@ -1,5 +1,6 @@
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import * as https from "https";
+import { messagingAPIBaseUrl } from "@/modules/messaging/types";
 
 export const config = {
   api: {
@@ -16,7 +17,7 @@ const msgHandler: NextApiHandler<any> = async (
   // https://gist.github.com/cmawhorter/a527a2350d5982559bb6
 
   req.pause();
-  const command = req.url?.replace("/api/msg", "");
+  const command = req.url?.replace(messagingAPIBaseUrl, "");
   // prohibited actions can be filtered here (e.g. roomCreate, invite)
 
   const { headers } = req;

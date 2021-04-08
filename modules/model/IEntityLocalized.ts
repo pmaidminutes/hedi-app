@@ -10,6 +10,7 @@ export interface IEntityLocalized extends IEntity, ILocalized {}
 export const implementsIEntityLocalized = (obj: any) =>
   implementsIEntity(obj) && implementsILocalized(obj);
 
+// UNUSED
 export function isILocalizedEntity(obj: any): obj is IEntityLocalized {
   return implementsIEntityLocalized(obj);
 }

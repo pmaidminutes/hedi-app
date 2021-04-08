@@ -11,7 +11,7 @@ export function AssertServerSide() {
 // --- Build assets URL --- //
 export function buildAssetUrl(url: string | undefined): string {
   if (url === undefined) return "";
-  const BASE_URL = "https://appstaging.projekt-hedi.de";
+  const BASE_URL = process.env.NEXT_PUBLIC_APP_URL;
   return `${BASE_URL}${url}`;
 }
 

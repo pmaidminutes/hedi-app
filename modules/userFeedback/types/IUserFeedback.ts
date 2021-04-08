@@ -9,6 +9,7 @@ export interface IUserFeedback extends IEntity {
   created?: Date;
 }
 
+// UNUSED
 export const implementsIUserFeedback = (obj: any) =>
   obj.body != null && obj.metadata != null;
 

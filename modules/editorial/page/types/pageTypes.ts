@@ -27,6 +27,7 @@ export interface IPage extends IPageEntry, IEditorial<IEntityLocalized> {
   posterImage?: IImage;
 }
 
+// UNUSED
 export function isIPage(obj: any): obj is IPage {
   return obj && obj.typeName === "Page";
 }
@@ -36,6 +37,7 @@ ${RouteLabelFields}
 posterImage {${ImageFields}}
 `;
 
+// UNUSED
 export const PageFrag = gql`
 fragment PageFrag on Page {
   ${PageFields} 
