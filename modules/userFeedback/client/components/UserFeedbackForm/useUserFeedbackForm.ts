@@ -25,7 +25,7 @@ export interface IUserFeedbackFormProps {
 // Constants
 const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
 // utils
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 
 export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   const {
@@ -75,20 +75,20 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
       .route;
     setErrorMessage(null);
     setSuccessMessage(
-      tryGet("success_message", content.elements)?.description || null
+      getUIElement("success_message", content.elements)?.description || null
     );
     setTimeout(() => router.push(thanksPageRoute), REDIRECT_DELAY);
   };
   const onError = () => {
     setSuccessMessage(null);
     setErrorMessage(
-      tryGet("error_message", content.elements)?.description || null
+      getUIElement("error_message", content.elements)?.description || null
     );
   };
   const onEmptyError = () => {
     setSuccessMessage(null);
     setErrorMessage(
-      tryGet("empty_error_message", content.elements)?.description || null
+      getUIElement("empty_error_message", content.elements)?.description || null
     );
   };
 

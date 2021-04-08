@@ -1,7 +1,7 @@
 import { Button, Column, FormLabel, Row } from "carbon-components-react";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
-import { hasElement, tryGet } from "@/modules/common/utils";
+import { hasElement, getUIElement } from "@/modules/common/utils";
 
 import { useLoginView } from "./useLoginView";
 import { LoginForm } from "../LoginForm";
@@ -28,7 +28,7 @@ export const LoginView = ({ content }: { content: ILoginView }) => {
             return (
               <Column key={link.key + index}>
                 <FormLabel className="hedi--block-label">
-                  {tryGet(link.key, content.elements)?.help}
+                  {getUIElement(link.key, content.elements)?.help}
                 </FormLabel>
                 {hasElement(link.key, content.elements) && (
                   <Button href={link.route}>{link.label}</Button>

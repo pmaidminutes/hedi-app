@@ -1,5 +1,5 @@
 import {
-  tryGetValue,
+  getUIElementValue,
   transformStringToUrl,
   getTextInputProps,
 } from "@/modules/common/utils";
@@ -36,7 +36,11 @@ export function transformProfile(props: IProfileViewProps) {
   ];
 
   // HACK proper domain impl
-  const domainMidwife = tryGetValue("domain_midwife", elements, "Hebamme");
+  const domainMidwife = getUIElementValue(
+    "domain_midwife",
+    elements,
+    "Hebamme"
+  );
   const domains = isICaregiver(content)
     ? content.domains
     : [{ type: "Domain", label: domainMidwife, route: "/" + domainMidwife }];
