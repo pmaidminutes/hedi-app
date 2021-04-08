@@ -24,12 +24,13 @@ import {
 import { Seperator } from "@/modules/common/components";
 import { IEditProfileFormConfig, IUpsertProfile } from "../../../types";
 import { ServiceSelection } from "../ServiceSelection";
-import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
+import { useProfileTypeSwitch } from "../../hooks";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
-import { ChangeEvent, useRef, useState, RefObject, FormEvent } from "react";
+import { ChangeEvent, useRef, RefObject } from "react";
 import { orderedRequiredFields } from "./useEditProfileForm";
+import { useValidationErrors } from "../../hooks";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -70,23 +71,6 @@ export const EditProfileForm = ({
   const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
     profile?.type
   );
-  // TODO find better way to combine frontend and backend errors
-  const [validationErrors, setValidationErrors] = useState<{
-    [key: string]: string;
-  }>({});
-
-  const handleRequiredFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const key = e.target.name;
-    if (!e.target.value) {
-      const message = tryGet(e.target.name, elements)?.help ?? "x";
-      setValidationErrors(previous => ({ ...previous, [key]: message }));
-    } else {
-      setValidationErrors(previous => {
-        const { [key]: _, ...rest } = previous;
-        return { ...rest };
-      });
-    }
-  };
 
   const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
   const hasError = () =>
@@ -110,32 +94,12 @@ export const EditProfileForm = ({
       }
     );
 
-  const scrollToErrors = (currentErrors: { [key: string]: string }) => {
-    for (let key of Object.keys(currentErrors)) {
-      refs[key].current?.scrollIntoView();
-      window.scrollBy(0, -100);
-      return true;
-    }
-    return false;
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = new FormData(e.target as HTMLFormElement);
-
-    const currentErrors: { [key: string]: string } = {};
-    orderedRequiredFields.forEach(field => {
-      if (!form.get(field)) {
-        const message = tryGet(field, elements)?.help || "";
-        currentErrors[field] = message;
-      }
-    });
-    setValidationErrors(currentErrors);
-    const hasValidationErrors = scrollToErrors(currentErrors);
-    if (!hasValidationErrors && onSubmit) onSubmit(e);
-  };
-
   const { onSubmit, ...formPropsRest } = formProps;
+  const {
+    validationErrors,
+    handleRequiredFieldChange,
+    handleSubmit,
+  } = useValidationErrors(elements, refs, onSubmit);
 
   return (
     <Form {...formPropsRest} onSubmit={handleSubmit}>
