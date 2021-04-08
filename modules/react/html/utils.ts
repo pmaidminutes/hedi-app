@@ -1,8 +1,8 @@
 import camelcase from "camelcase";
 import { CSSProperties, HTMLAttributes } from "react";
-import { StringProperties } from "@/modules/model";
+import { IParserAttributeInfo } from "./types";
 
-export const attributesToProps = (attributes?: StringProperties) => {
+export const attributesToProps = (attributes?: IParserAttributeInfo) => {
   if (!attributes) return attributes;
   const { class: className, style, ...rest } = attributes;
   let result: HTMLAttributes<any> = rest;
@@ -14,7 +14,7 @@ export const attributesToProps = (attributes?: StringProperties) => {
 export const parseCSSProperties = (text: string): CSSProperties | undefined => {
   if (!text || text === "") return undefined;
 
-  let result: StringProperties = {};
+  let result: { [k: string]: string } = {};
   for (const rule of text.split(";")) {
     if (rule) {
       const [k, v] = rule.split(":");

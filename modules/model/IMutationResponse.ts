@@ -1,8 +1,8 @@
-import { StringProperties } from ".";
+import { ErrorMap } from ".";
 
 export interface IMutationResponse {
   success: boolean;
-  errors: StringProperties;
+  errors: ErrorMap;
 }
 
 export const MutationResponseFields = `success
