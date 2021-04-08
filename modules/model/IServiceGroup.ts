@@ -14,6 +14,7 @@ export interface IServiceGroup extends IEntityLocalized {
 export const implementsIServiceGroup = (obj: any) =>
   implementsIEntityLocalized(obj) && obj.description != null;
 
+// UNUSED
 export function isIServiceGroup(obj: any): obj is IServiceGroup {
   return implementsIServiceGroup(obj);
 }

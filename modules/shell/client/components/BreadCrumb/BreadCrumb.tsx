@@ -19,6 +19,7 @@ interface IBreadCrumbProps {
     Partial<IRouteLabeled>;
 }
 
+// UNUSED
 export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   props: IBreadCrumbProps
 ): JSX.Element => {

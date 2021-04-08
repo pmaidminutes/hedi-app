@@ -6,6 +6,7 @@ export interface ILanguage extends IEntityTranslated<ILanguage> {
   isRTL: boolean;
 }
 
+// UNUSED
 export function isILanguage(obj: any): obj is ILanguage {
   return (
     obj &&

@@ -4,6 +4,7 @@ export interface IRouteLabeled {
 
 export const implementsIRouteLabeled = (obj: any) => !!(obj && obj.routelabel);
 
+// UNUSED
 export function isIRouteLabeled(obj: any): obj is IRouteLabeled {
   return implementsIRouteLabeled(obj);
 }

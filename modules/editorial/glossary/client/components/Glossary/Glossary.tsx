@@ -8,6 +8,7 @@ interface IGlossaryProps {
   content: IGlossaryGrouped;
 }
 
+// UNUSED
 export const TryGlossary = (content: ITyped): JSX.Element | null =>
   content.type === "Glossary" ? (
     <Glossary content={content as IGlossaryGrouped} />

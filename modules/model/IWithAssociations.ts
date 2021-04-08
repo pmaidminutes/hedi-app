@@ -7,6 +7,7 @@ export interface IWithAssociations extends IProfile {
 export const implementsIWithAssociations = (obj: any) =>
   !!(obj && obj.associations);
 
+// UNUSED
 export function isIWithAssociations(obj: any): obj is IWithAssociations {
   return implementsIWithAssociations(obj);
 }

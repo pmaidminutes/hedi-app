@@ -7,6 +7,7 @@ export interface IContact {
 }
 export const implementsIContact = (obj: any) => !!(obj && obj.type);
 
+// UNUSED
 export function isIContact(obj: any): obj is IContact {
   return implementsIContact(obj);
 }

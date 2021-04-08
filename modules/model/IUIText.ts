@@ -13,12 +13,14 @@ import {
 
 export interface IUIText
   extends IEntityTranslated<IEntityLocalized>,
-    IWithUITexts, 
+    IWithUITexts,
     IWithKey {}
 
+// UNUSED
 export const implementsIUIText = (obj: any) =>
   !!(implementsIEntityTranslated(obj) && implementsIWithUITexts(obj));
 
+// UNUSED
 export function isIUIText(obj: any): obj is IUIText {
   return obj && obj.typeName === "UIText";
 }

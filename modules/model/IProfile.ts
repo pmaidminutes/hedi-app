@@ -18,6 +18,7 @@ export const implementsIProfile = (obj: any) =>
   implementsIAddress(obj) &&
   implementsIContact(obj);
 
+// UNUSED
 export function isIProfile(obj: any): obj is IProfile {
   return implementsIProfile(obj);
 }
