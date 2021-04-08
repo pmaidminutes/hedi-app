@@ -1,8 +1,9 @@
+import { StringProperties } from "@/modules/model";
 import { EditProfileFields, IEditProfile } from "./IEditProfile";
 
 export interface IUpsertProfile {
   success: boolean;
-  errors?: { [key: string]: string };
+  errors?: StringProperties;
   profile?: IEditProfile;
   route?: string;
 }

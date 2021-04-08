@@ -23,3 +23,4 @@ export * from "./IWithLanguageSkills";
 export * from "./IWithServices";
 export * from "./IWithUIElements";
 export * from "./IWithUITexts";
+export * from "./StringProperties";

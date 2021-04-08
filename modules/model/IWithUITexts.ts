@@ -1,7 +1,7 @@
+import { StringProperties } from ".";
+
 export interface IWithUITexts {
-  texts: {
-    [key: string]: string;
-  };
+  texts: StringProperties;
 }
 
 export const implementsIWithUITexts = (obj: any) => !!(obj && obj.texts);

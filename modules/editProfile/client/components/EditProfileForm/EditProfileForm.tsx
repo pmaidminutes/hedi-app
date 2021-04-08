@@ -26,7 +26,7 @@ import { IEditProfileFormConfig, IUpsertProfile } from "../../../types";
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
-import { IUIElementTexts } from "@/modules/model";
+import { IUIElementTexts, StringProperties } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
 import { ChangeEvent, useRef, useState, RefObject, FormEvent } from "react";
 import { orderedRequiredFields } from "./useEditProfileForm";
@@ -71,9 +71,9 @@ export const EditProfileForm = ({
     profile?.type
   );
   // TODO find better way to combine frontend and backend errors
-  const [validationErrors, setValidationErrors] = useState<{
-    [key: string]: string;
-  }>({});
+  const [validationErrors, setValidationErrors] = useState<StringProperties>(
+    {}
+  );
 
   const handleRequiredFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name;
@@ -110,7 +110,7 @@ export const EditProfileForm = ({
       }
     );
 
-  const scrollToErrors = (currentErrors: { [key: string]: string }) => {
+  const scrollToErrors = (currentErrors: StringProperties) => {
     for (let key of Object.keys(currentErrors)) {
       refs[key].current?.scrollIntoView();
       window.scrollBy(0, -100);
@@ -123,7 +123,7 @@ export const EditProfileForm = ({
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
 
-    const currentErrors: { [key: string]: string } = {};
+    const currentErrors: StringProperties = {};
     orderedRequiredFields.forEach(field => {
       if (!form.get(field)) {
         const message = getUIElement(field, elements)?.help || "";
