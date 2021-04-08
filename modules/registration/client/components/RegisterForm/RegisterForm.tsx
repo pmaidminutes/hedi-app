@@ -12,7 +12,7 @@ import { FormEvent, useState } from "react";
 import { useRegister } from "../../request";
 import { IRegisterInfo } from "../../../types";
 import { RegisterInputs } from "../RegisterInputs";
-import { useRegistrationError } from "../../hooks/useRegistrationError";
+import { useRegistrationError } from "../../hooks";
 
 export const RegisterForm = ({
   elements,

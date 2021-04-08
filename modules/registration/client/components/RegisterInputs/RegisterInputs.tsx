@@ -3,7 +3,7 @@ import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import { Button, TextInput } from "carbon-components-react";
 import { IRegisterError, IRegisterInfo } from "../../../types";
-import { useCredentialChange } from "../../hooks/useCredentialChange";
+import { useCredentialChange } from "../../hooks";
 
 type RegisterInputProps = {
   errors?: IRegisterError;
