@@ -2,8 +2,8 @@ import { getTextInputProps, tryGetValue } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import { Button, TextInput } from "carbon-components-react";
-import { useEffect, useState } from "react";
 import { IRegisterError, IRegisterInfo } from "../../../types";
+import { useCredentialChange } from "../../hooks/useCredentialChange";
 
 type RegisterInputProps = {
   errors?: IRegisterError;
@@ -17,19 +17,16 @@ export const RegisterInputs = ({
   elements,
 }: RegisterInputProps) => {
   const [name, setName] = useTextInput();
-  const [isCheckCredentialError, setIsCheckCredentialError] = useState(true);
+
   //const [mail, setMail] = useTextInput();
   const [pass, setPass] = useTextInput();
+  const { isCheckCredentialError } = useCredentialChange(
+    name,
+    pass,
+    errors,
+    onChange
+  );
 
-  useEffect(() => {
-    if (onChange && (name || pass)) {
-      onChange({ name, pass });
-      setIsCheckCredentialError(false);
-    }
-  }, [name, pass]);
-  useEffect(() => {
-    setIsCheckCredentialError(true);
-  }, [errors]);
   return (
     <>
       <TextInput

@@ -8,6 +8,7 @@ import {
 } from "../../types";
 import { signIn } from "next-auth/client";
 import { useValidate } from "./useValidate";
+import { getEncodeInfo } from "../functions";
 
 export const useRegister = () => {
   const [response, setResponse] = useState<IRegisterResponse>({
@@ -20,7 +21,7 @@ export const useRegister = () => {
     codeResponse?.success
       ? setResponse(
           await jsonFetcher<IRegisterResponse>(
-            registerAPIUrl + "/?" + encodeInfo(info)
+            registerAPIUrl + "/?" + getEncodeInfo(info)
           )
         )
       : setResponse({
@@ -44,17 +45,9 @@ export const useRegister = () => {
 export function useRegisterEager(info: IRegisterRequest) {
   const registerResult = useSWR<IRegisterResponse>(
     info.registrationcode || info.name || info.pass
-      ? registerAPIUrl + "/?" + encodeInfo(info)
+      ? registerAPIUrl + "/?" + getEncodeInfo(info)
       : null,
     url => jsonFetcher<IRegisterResponse>(url)
   );
   return { ...registerResult };
-}
-
-function encodeInfo(info: IRegisterRequest) {
-  const infoParameters = new URLSearchParams();
-  Object.entries(info).forEach(entry => {
-    if (entry[1]) infoParameters.append(entry[0], entry[1]);
-  });
-  return infoParameters.toString();
 }

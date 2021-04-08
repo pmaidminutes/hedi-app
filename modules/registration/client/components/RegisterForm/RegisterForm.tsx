@@ -8,10 +8,11 @@ import {
   ToastNotification,
 } from "carbon-components-react";
 import { useRouter } from "next/router";
-import { FormEvent, useState, useEffect } from "react";
+import { FormEvent, useState } from "react";
 import { useRegister } from "../../request";
 import { IRegisterInfo } from "../../../types";
 import { RegisterInputs } from "../RegisterInputs";
+import { useRegistrationError } from "../../hooks/useRegistrationError";
 
 export const RegisterForm = ({
   elements,
@@ -26,19 +27,18 @@ export const RegisterForm = ({
 
   const [registrationcode, setRegistrationcode] = useTextInput();
   const [info, setInfo] = useState<IRegisterInfo>();
-  const [isCheckRegisterError, setIsCheckRegisterError] = useState(false);
   const { response, loading, register, autoSignIn } = useRegister();
-  useEffect(() => {
-    if (registrationcode) {
-      setIsCheckRegisterError(false);
-    }
-  }, [registrationcode]);
+  const {
+    isCheckRegisterCodeError,
+    handleCheckRegisterError,
+  } = useRegistrationError(registrationcode);
+
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (info && !loading) {
       info.registrationcode = registrationcode;
       await register({ ...info, lang: router.locale, commit: true });
-      setIsCheckRegisterError(true);
+      handleCheckRegisterError();
     }
   };
 
@@ -49,7 +49,7 @@ export const RegisterForm = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      {isCheckRegisterError && response?.errors?.generic && (
+      {isCheckRegisterCodeError && response?.errors?.generic && (
         <ToastNotification
           kind="error"
           lowContrast={true}
@@ -75,7 +75,9 @@ export const RegisterForm = ({
         {...getTextInputProps("registrationcode", elements)}
         required
         onChange={setRegistrationcode}
-        invalid={isCheckRegisterError && !!response?.errors?.registrationcode}
+        invalid={
+          isCheckRegisterCodeError && !!response?.errors?.registrationcode
+        }
         invalidText={tryGetValue("invalid_passcode", elements)}
       />
       {!!registrationcode && (
