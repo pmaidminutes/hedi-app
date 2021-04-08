@@ -25,7 +25,7 @@ export function useEditProfileButton(
       !currentProfileLoading &&
         !userIsLoading &&
         currentProfile &&
-        currentProfile.route == route
+        currentProfile.route === route
         ? true
         : false
     );
