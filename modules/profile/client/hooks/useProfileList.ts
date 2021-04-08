@@ -1,10 +1,10 @@
 import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
-import { Profile } from "../../types";
+import { Profile, profileListAPIUrl } from "../../types";
 
 export function useProfileList(initialData: Profile[], lang: string) {
   const response = useSWR<Profile[]>(
-    ["/api/profiles", lang, initialData],
+    [profileListAPIUrl, lang, initialData],
     (url, data) => jsonFetcher(`${url}/?lang=${data}`),
     {
       initialData: initialData,

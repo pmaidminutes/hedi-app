@@ -11,6 +11,7 @@ export interface IChildren extends IEntity, IDetailedName {
   birth_weight: string;
 }
 
+// UNUSED
 export function isIChildren(obj: any): obj is IChildren {
   return obj && obj.type === "Child";
 }

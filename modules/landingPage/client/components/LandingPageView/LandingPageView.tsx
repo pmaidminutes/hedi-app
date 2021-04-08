@@ -10,13 +10,13 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   const { links, linksIfLoggedIn, isLastElement } = useLandingPage(content);
   return (
     <SimplePageView
-      url="/svg/pregnancy_blue.svg"
+      url={process.env.NEXT_PUBLIC_IMG_HEADER}
       alt="Beschreibung des Bildes"
       content={content}>
       <Row>
         {user
           ? linksIfLoggedIn.map(link => (
-              <Column>
+              <Column key={link.route}>
                 <div>
                   <FormLabel>
                     {tryGet(link.key, content.elements)?.help}

@@ -16,7 +16,6 @@ export const LanguageSkills = (props: ILanguageSkillsProps) => {
         <table>
           <tbody>
             {languageSkills.map((skill, index) => (
-              // TODO other key
               <LanguageSkill
                 key={index + skill.language.label}
                 languageSkill={skill}

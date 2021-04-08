@@ -1,4 +1,3 @@
-@import "./theme/hedi-theme.scss";
 
 .hedi--simple-page {
   .hedi--hero-image {
@@ -41,8 +40,6 @@
   .hedi--titlegroup {
     margin-bottom: $layout-md;
   }
-
-  // h2 { margin-bottom: $spacing-md; }
 
   ul {
     @extend .bx--list--unordered;

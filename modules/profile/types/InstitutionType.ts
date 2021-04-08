@@ -26,6 +26,7 @@ export interface IInstitution
   service_area: string;
 }
 
+// UNUSED
 export function isIInstitution(obj: any): obj is IInstitution {
   return obj && obj.type === "Institution";
 }

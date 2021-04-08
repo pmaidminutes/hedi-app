@@ -7,6 +7,7 @@ export interface IDetailedName {
 }
 export const implementsIDetailedName = (obj: any) => !!(obj && obj.type);
 
+// UNUSED
 export function isIDetailedName(obj: any): obj is IDetailedName {
   return implementsIDetailedName(obj);
 }

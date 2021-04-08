@@ -1,12 +1,12 @@
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { IUserFeedback } from "../../types";
+import { IUserFeedback, mutateUserFeedbackAPIUrl } from "../../types";
 
 export async function sendUserFeedbacks(
   userfeedbacks: Partial<IUserFeedback>[],
   lang: string
 ): Promise<IMutationResponse[] | null> {
   return new Promise<IMutationResponse[] | null>((resolve, reject) => {
-    fetch("/api/userfeedback", {
+    fetch(mutateUserFeedbackAPIUrl, {
       method: "POST",
       body: JSON.stringify({ lang, userfeedbacks }),
     })

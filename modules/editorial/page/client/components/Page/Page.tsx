@@ -7,6 +7,7 @@ interface IPageProps {
   content: IPage;
 }
 
+// UNUSED
 export const TryPage = (content: ITyped): JSX.Element | null =>
   content.type === "Page" ? <Page content={content as IPage} /> : null;
 
@@ -17,7 +18,7 @@ export const Page = ({ content }: IPageProps): JSX.Element => {
     <>
       <AspectRatio ratio="2x1">
         <img
-          src="https://i.postimg.cc/6pqc7kKH/header2x1.jpg"
+          src={process.env.NEXT_PUBLIC_ARTICLE_HEADER_TMP}
           alt="illustration of sleeping family"
           className="hedi-header-image"
         />

@@ -14,6 +14,7 @@ export const implementsIUIElementTexts = (obj: any) =>
     obj.description != null
   );
 
+// UNUSED
 export function isIUIElementTexts(obj: any): obj is IUIElementTexts {
   return implementsIUIElementTexts(obj);
 }

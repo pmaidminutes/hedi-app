@@ -1,10 +1,14 @@
 import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
-import { IRegisterRequest, IRegisterResponse } from "../../types";
+import {
+  IRegisterRequest,
+  IRegisterResponse,
+  validateAPIUrl,
+} from "../../types";
 
 export async function useValidate(info: IRegisterRequest) {
   const validateResult = await jsonFetcher<IRegisterResponse>(
-    "/api/register/validate/?" + encodeInfo(info)
+    validateAPIUrl + "/?" + encodeInfo(info)
   );
   return { ...validateResult };
 }

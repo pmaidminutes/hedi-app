@@ -1,6 +1,7 @@
 import { IAppPage } from "@/modules/common/types";
 import { UserFeedbackEntry } from "./UserFeedbackEntry";
 
+// UNUSED
 export interface IUserFeedbackEntryProps {
   content: IAppPage;
 }

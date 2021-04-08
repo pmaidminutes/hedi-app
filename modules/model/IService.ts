@@ -11,6 +11,7 @@ export interface IService extends IEntityTranslated<IService> {
 export const implementsIService = (obj: any) =>
   implementsIEntityTranslated(obj) && obj.description != null;
 
+// UNUSED
 export function isIService(obj: any): obj is IService {
   return implementsIService(obj);
 }
