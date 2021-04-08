@@ -1,6 +1,5 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import { useHeader, IHeader } from "./useHeader";
+import { useSideNav } from "../../hooks";
+import { transformHeader, IHeader } from "./transformHeader";
 import { LanguageSwitch } from "../LanguageSwitch";
 import {
   Header as CarbonHeader,
@@ -25,14 +24,10 @@ export const Header = (props: IHeader) => {
     headerLinks,
     userMenuLinks,
     shellConfig,
-  } = useHeader(props);
-  const [isSideNavExpanded, setIsSideNavExpanded] = useState(false);
-  const router = useRouter();
-  const { locale } = router;
+    locale,
+  } = transformHeader(props);
 
-  const onClickSideNavExpand = () => {
-    setIsSideNavExpanded(prev => !prev);
-  };
+  const { isExpanded, toggleSideNav } = useSideNav();
 
   return (
     <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
@@ -42,8 +37,8 @@ export const Header = (props: IHeader) => {
       <HeaderNavigation aria-label="Navigation" style={{ display: "block" }}>
         <HeaderMenuButton
           aria-label="Open menu"
-          onClick={onClickSideNavExpand}
-          isActive={isSideNavExpanded}
+          onClick={toggleSideNav}
+          isActive={isExpanded}
         />
         {headerLinks
           ? headerLinks.map((link, index) => {
@@ -67,7 +62,7 @@ export const Header = (props: IHeader) => {
       </HeaderGlobalBar>
       <SideNav
         aria-label="Side navigation"
-        expanded={isSideNavExpanded}
+        expanded={isExpanded}
         isPersistent={false}>
         <SideNavItems>
           <HeaderSideNavItems>
