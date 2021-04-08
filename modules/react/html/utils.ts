@@ -2,7 +2,7 @@ import camelcase from "camelcase";
 import { CSSProperties, HTMLAttributes } from "react";
 import { StringProperties } from "@/modules/model";
 
-export const attributesToProps = (attributes?: IParserAttributeInfo) => {
+export const attributesToProps = (attributes?: StringProperties) => {
   if (!attributes) return attributes;
   const { class: className, style, ...rest } = attributes;
   let result: HTMLAttributes<any> = rest;

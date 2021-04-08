@@ -1,3 +1,4 @@
+import { StringProperties } from "@/modules/model";
 import { HTMLAttributes, ReactNode } from "react";
 
 export interface ITransformCallbackMap {
@@ -10,7 +11,7 @@ export interface IParserElementInfo {
   end: number;
   children: IParserElementInfo[];
   transform: ParseInfoTransformFn;
-  attributes?: IParserAttributeInfo;
+  attributes?: StringProperties;
   needsTransform?: boolean;
 }
 
@@ -19,7 +20,3 @@ export type ParseInfoTransformFn = (
   info: IParserElementInfo,
   props?: HTMLAttributes<any>
 ) => ReactNode;
-
-export interface IParserAttributeInfo {
-  [key: string]: string;
-}
