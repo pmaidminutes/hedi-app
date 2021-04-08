@@ -1,10 +1,10 @@
 import React from "react";
-import { useFooter, IFooter } from "./useFooter";
+import { transformFooter, IFooter } from "./transformFooter";
 import { Link } from "carbon-components-react";
 import { LanguageSwitch } from "../LanguageSwitch";
 
 export const Footer = (props: IFooter) => {
-  const { footer, languageSwitchLinks, shellConfig } = useFooter(props);
+  const { footer, languageSwitchLinks, shellConfig } = transformFooter(props);
   return (
     <footer aria-label="footer" className="hedi--footer">
       {footer
