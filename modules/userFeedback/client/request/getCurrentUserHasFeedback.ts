@@ -1,6 +1,7 @@
 import { jsonFetcher } from "@/modules/common/utils";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
+import { currentUserHasFeedbackAPIUrl } from "../../types";
 
 export function getCurrentUserHasFeedback(
   user: User | undefined
@@ -12,7 +13,7 @@ export function getCurrentUserHasFeedback(
     const requestHasFeedback = async () => {
       setIsLoading(true);
       const resp = await jsonFetcher<boolean | null>(
-        "/api/userfeedback/currentUser/hasFeedback"
+        currentUserHasFeedbackAPIUrl
       );
       if (resp) setHasFeedback(resp);
 

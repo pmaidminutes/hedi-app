@@ -6,6 +6,7 @@ import {
   EditProfileFieldArray,
   EditProfileInput,
   IUpsertProfile,
+  editProfileAPIUrl,
 } from "../../../types";
 import { upsertProfile } from "../../request";
 import { useRouter } from "next/router";
@@ -25,7 +26,7 @@ export function useEditProfileForm(
   username?: string | null
 ) {
   const { data, error, isValidating, mutate } = useSWR(
-    ["/api/user/profile/edit", username],
+    [editProfileAPIUrl, username],
     url => upsertProfile(url, { lang })
   );
 
@@ -60,7 +61,7 @@ export function useEditProfileForm(
 
     if (Object.keys(delta).length > 0) {
       mutate(
-        upsertProfile("/api/user/profile/edit", {
+        upsertProfile(editProfileAPIUrl, {
           profile: delta,
           lang,
         }).then(resp => {
