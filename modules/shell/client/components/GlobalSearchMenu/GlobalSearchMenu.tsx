@@ -1,31 +1,31 @@
-import { useState } from "react";
-import { useRouter } from "next/router";
+import { globalSearchMenuFunctions } from "./globalSearchMenuFunctions";
+import { useToggleVisibility } from "../../hooks";
 import { Search32, Close32 } from "@carbon/icons-react";
 import { Button, Form } from "carbon-components-react";
 import { SearchInput } from "@/modules/search/client/components";
 
-// UNUSED
 export const GlobalSearchMenu = () => {
-  const [isVisible, setIsVisible] = useState(false);
-  const router = useRouter();
-  const [searchText, setSearchText] = useState("");
+  const { isVisible, toggleVisibility } = useToggleVisibility();
+  const {
+    searchText,
+    handleSearchInput,
+    handleSearchSubmit,
+  } = globalSearchMenuFunctions();
+
   return (
     <>
       <Button
         renderIcon={isVisible ? Close32 : Search32}
+        // TODO description
         iconDescription="Icon Description"
         hasIconOnly
-        onClick={() => setIsVisible(prev => !prev)}
+        onClick={() => toggleVisibility()}
       />
       <Form
-        style={{ width: "100%" }}
-        onSubmit={e => {
-          router.push("/search/" + searchText);
-          e.preventDefault();
-        }}
-        className={isVisible ? "" : "hidden"}>
+        onSubmit={e => handleSearchSubmit(e)}
+        className={`hedi--global-search-menu ${isVisible ? "" : "hidden"}`}>
         <SearchInput
-          onQueryChanged={e => setSearchText(e)}
+          onQueryChanged={e => handleSearchInput(e)}
           id={"search-header"}
           query={searchText}
         />
