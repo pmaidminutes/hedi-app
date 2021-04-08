@@ -53,6 +53,10 @@ const getRequiredTextInputProps = (
   return { labelText: <strong>{labelText}*</strong>, ...rest, onChange };
 };
 
+type RefProperties = {
+  [key: string]: RefObject<HTMLInputElement>;
+};
+
 export const EditProfileForm = ({
   config: {
     elements,
@@ -93,22 +97,15 @@ export const EditProfileForm = ({
     (errors && Object.keys(errors).length != 0) ||
     Object.keys(validationErrors).length != 0;
 
-  const refs: {
-    [key: string]: RefObject<HTMLInputElement>;
-  } = orderedRequiredFields
+  const refs: RefProperties = orderedRequiredFields
     .map(field => ({
       field: field,
       ref: useRef<HTMLInputElement>(null),
     }))
-    .reduce(
-      (result, item) => {
-        result[item.field] = item.ref;
-        return result;
-      },
-      {} as {
-        [key: string]: RefObject<HTMLInputElement>;
-      }
-    );
+    .reduce((result, item) => {
+      result[item.field] = item.ref;
+      return result;
+    }, {} as RefProperties);
 
   const scrollToErrors = (currentErrors: StringProperties) => {
     for (let key of Object.keys(currentErrors)) {
