@@ -7,43 +7,23 @@ import {
 import { Login32, UserProfile32 } from "@carbon/icons-react";
 import { getUser, logout } from "@/modules/auth/client/";
 import {
-  AssertClientSide,
-  tryGet,
-  tryGetKeyLabel,
-  tryGetKeyLinks,
-} from "@/modules/common/utils";
-import { useRouter } from "next/router";
-import { IShellLink } from "../../../types/shellLinks";
-import { signOut } from "next-auth/client";
-import { IUIElementTexts } from "@/modules/model";
+  transformUserProfileMenu,
+  IUserMenuProps,
+} from "./transformUserProfileMenu";
 
-export interface IUserMenuProps {
-  userMenuLinks?: IShellLink[];
-  config?: IUIElementTexts[];
-}
-export const UserProfileMenu = ({
-  userMenuLinks,
-  config,
-}: IUserMenuProps): JSX.Element | null => {
+export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
+  const {
+    menuTooltip,
+    navigateMenu,
+    logoutUser,
+    loginText,
+    logoutText,
+    viewprofileText,
+  } = transformUserProfileMenu(props);
+
   const [hasMounted, setHasMounted] = useState(false);
   const [user, isLoading] = getUser();
-  const router = useRouter();
-  const navigateMenu = (routeKey: string) => {
-    if (AssertClientSide()) {
-      const routePath =
-        userMenuLinks?.find(l => l.key === routeKey)?.route ??
-        "/" + router.locale;
-      router.push(routePath);
-    }
-  };
-  const logoutUser = () => {
-    const callbackRoute = tryGetKeyLinks(
-      "logout",
-      userMenuLinks,
-      "/" + router.locale
-    );
-    signOut({ callbackUrl: callbackRoute });
-  };
+
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -51,7 +31,6 @@ export const UserProfileMenu = ({
   if (!hasMounted) {
     return null;
   }
-  const menuTooltip = tryGet("menu_userProfile", config)?.value;
 
   return (
     <>
@@ -67,14 +46,12 @@ export const UserProfileMenu = ({
           flipped={true}>
           <OverflowMenuItem
             aria-label={"Profile Component"}
-            itemText={
-              tryGetKeyLabel("viewprofile", userMenuLinks) + ` ${user.name}`
-            }
+            itemText={viewprofileText + ` ${user.name}`}
             hasDivider={false}
             onClick={() => navigateMenu("viewprofile")}></OverflowMenuItem>
           <OverflowMenuItem
             aria-label={"Logout Component"}
-            itemText={tryGetKeyLabel("logout", userMenuLinks)}
+            itemText={logoutText}
             hasDivider={false}
             onClick={() => logoutUser()}></OverflowMenuItem>
         </OverflowMenu>
@@ -90,10 +67,7 @@ export const UserProfileMenu = ({
             aria-label={"Login Component"}
             onClick={() => navigateMenu("login")}
             hasDivider={false}
-            itemText={tryGetKeyLabel(
-              "login",
-              userMenuLinks
-            )}></OverflowMenuItem>
+            itemText={loginText}></OverflowMenuItem>
         </OverflowMenu>
       )}
     </>
