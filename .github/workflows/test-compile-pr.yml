@@ -1,8 +1,13 @@
-name: "Test-Build-PR"
-on: workflow_dispatch
+name: "Test-Compile-PR"
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
 jobs:
   all_in_one:
-    name: "next build"
+    name: "next compile typescript"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -31,6 +36,6 @@ jobs:
       - name: Install dependencies
         if: steps.cache-all.outputs.cache-hit != 'true' 
         run: yarn install --frozen-lockfile --prefer-offline
-      - name: Build Project
-        run: yarn build
+      - name: Compile Project
+        run: yarn compileTS
         if: always()

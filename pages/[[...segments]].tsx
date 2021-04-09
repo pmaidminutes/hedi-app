@@ -47,6 +47,7 @@ const getDesignProps = async () => {
   const { existsSync } = await import("fs");
   const { join } = await import("path");
   if (existsSync(join(__dirname, "../design/imports")))
+    //@ts-ignore
     return import("../design/imports").then(({ propsMap }) => propsMap);
   else return null;
 };

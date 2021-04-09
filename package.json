@@ -10,7 +10,8 @@
     "start": "next start",
     "pretty": "prettier --write './**/*.ts*'",
     "export": "node exporter.js",
-    "design": "node ./design/fileExists.js && node ./design/buildImports.js && HEDI_ENV=DESIGN next dev"
+    "design": "node ./design/fileExists.js && node ./design/buildImports.js && HEDI_ENV=DESIGN next dev",
+    "compileTS": "tsc --version && tsc --pretty --noEmit --noErrorTruncation"
   },
   "dependencies": {
     "@carbon/ibmdotcom-react": "^1.16.1",
@@ -52,6 +53,7 @@
     "git-format-staged": "^2.1.0",
     "husky": "^4.3.5",
     "prettier": "^2.2.0",
+    "tsc": "^1.20150623.0",
     "typescript": "^4.0.5"
   },
   "husky": {
