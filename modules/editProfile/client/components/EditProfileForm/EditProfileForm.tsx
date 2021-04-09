@@ -18,8 +18,8 @@ import {
 import {
   getTextInputProps,
   hasElement,
-  tryGet,
-  tryGetValue,
+  getUIElement,
+  getUIElementValue,
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
 import {
@@ -120,7 +120,7 @@ export const EditProfileForm = ({
           <FormGroup
             legendText={
               <h2>
-                {tryGetValue("group-type", elements, "Tätigkeitsbereich")}
+                {getUIElementValue("group-type", elements, "Tätigkeitsbereich")}
               </h2>
             }>
             <ContentSwitcher
@@ -129,14 +129,18 @@ export const EditProfileForm = ({
               selectedIndex={profileType === "Midwife" ? 0 : 1}>
               <Switch
                 name="Midwife"
-                text={tryGetValue("type-midwife", elements, "Hebamme")}
+                text={getUIElementValue("type-midwife", elements, "Hebamme")}
                 onClick={() => {}}
                 onKeyDown={() => {}}
                 defaultChecked={profileType === "Midwife"}
               />
               <Switch
                 name="Caregiver"
-                text={tryGetValue("type-caregiver", elements, "Betreuende")}
+                text={getUIElementValue(
+                  "type-caregiver",
+                  elements,
+                  "Betreuende"
+                )}
                 onClick={() => {}}
                 onKeyDown={() => {}}
                 defaultChecked={profileType === "Caregiver"}
@@ -148,7 +152,9 @@ export const EditProfileForm = ({
 
       <div className="hedi--group hedi--group--name">
         <FormGroup
-          legendText={<h2>{tryGetValue("group-name", elements, "Name")}</h2>}>
+          legendText={
+            <h2>{getUIElementValue("group-name", elements, "Name")}</h2>
+          }>
           <Row>
             <Column lg={2} md={2}>
               <TextInput
@@ -198,7 +204,7 @@ export const EditProfileForm = ({
       <div className="hedi--group hedi--group--address">
         <FormGroup
           legendText={
-            <h2>{tryGetValue("group-address", elements, "Adresse")}</h2>
+            <h2>{getUIElementValue("group-address", elements, "Adresse")}</h2>
           }>
           <Row>
             <Column lg={6} md={6}>
@@ -268,7 +274,7 @@ export const EditProfileForm = ({
       <div className="hedi--group hedi--group--contact">
         <FormGroup
           legendText={
-            <h2>{tryGetValue("group-contact", elements, "Kontakt")}</h2>
+            <h2>{getUIElementValue("group-contact", elements, "Kontakt")}</h2>
           }>
           <Row>
             <Column lg={6} md={6}>
@@ -358,7 +364,9 @@ export const EditProfileForm = ({
       <div className="hedi--group hedi--group--language-skills">
         <FormGroup
           legendText={
-            <h2>{tryGetValue("group-languageSkills", elements, "Sprachen")}</h2>
+            <h2>
+              {getUIElementValue("group-languageSkills", elements, "Sprachen")}
+            </h2>
           }>
           <Row>
             <LanguageSkillsSelection
@@ -378,7 +386,11 @@ export const EditProfileForm = ({
           <FormGroup
             legendText={
               <h4>
-                {tryGetValue("group-domains", elements, "Arbeitsschwerpunkt")}
+                {getUIElementValue(
+                  "group-domains",
+                  elements,
+                  "Arbeitsschwerpunkt"
+                )}
               </h4>
             }>
             <Row>
@@ -405,7 +417,9 @@ export const EditProfileForm = ({
         <div className="hedi--group hedi--group--services">
           <FormGroup
             legendText={
-              <h2>{tryGetValue("group-services", elements, "Angebote")}</h2>
+              <h2>
+                {getUIElementValue("group-services", elements, "Angebote")}
+              </h2>
             }>
             <Row>
               {
@@ -447,8 +461,10 @@ export const EditProfileForm = ({
             <InlineLoading status="active" />
           ) : isSuccessfullySaved ? (
             <ToastNotification
-              title={tryGet("success_message", elements)?.value || "Success"}
-              subtitle={tryGet("success_message", elements)?.description}
+              title={
+                getUIElement("success_message", elements)?.value || "Success"
+              }
+              subtitle={getUIElement("success_message", elements)?.description}
               caption={<InlineLoading status="active" />}
               kind="success"
               lowContrast
@@ -457,8 +473,8 @@ export const EditProfileForm = ({
             />
           ) : hasError() ? (
             <ToastNotification
-              title={tryGet("error_message", elements)?.value || "Error"}
-              subtitle={tryGet("error_message", elements)?.description}
+              title={getUIElement("error_message", elements)?.value || "Error"}
+              subtitle={getUIElement("error_message", elements)?.description}
               caption=""
               kind="error"
               lowContrast
@@ -467,7 +483,7 @@ export const EditProfileForm = ({
             />
           ) : (
             <Button type="submit">
-              {tryGetValue("submit", elements, "Profil speichern")}
+              {getUIElementValue("submit", elements, "Profil speichern")}
             </Button>
           )}
         </Column>

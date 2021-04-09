@@ -2,6 +2,7 @@ import { getServiceClient, gql } from "@/modules/graphql";
 import { IMidwifeWithParents, MidwifeWithParentsFields } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 
+// UNUSED
 export async function getMidwifeWithParents(
   route: string
 ): Promise<IMidwifeWithParents | null> {

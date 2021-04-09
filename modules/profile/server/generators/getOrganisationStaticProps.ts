@@ -2,6 +2,7 @@ import { segmentsToRoute } from "@/modules/common/utils";
 import { getOrganisation } from "../../query";
 import { IOrganisation } from "../../types";
 
+// UNUSED
 export const getStaticProps = async (
   segments?: string[],
   locale = "de"

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { tryGetValue } from "@/modules/common/utils";
+import { getUIElementValue } from "@/modules/common/utils";
 import { useCurrentProfileEntity } from "./useCurrentProfileEntity";
 import { getUser } from "@/modules/auth/client";
 import { IUIElementTexts } from "@/modules/model";
@@ -11,7 +11,7 @@ export function useEditProfileButton(
 ) {
   const [hasEditProfileBtn, setHasEditProfileBtn] = useState(false);
 
-  const text = tryGetValue("edit_button", elements);
+  const text = getUIElementValue("edit_button", elements);
   const link = "/" + lang + "/user/profile/edit";
 
   const [user, userIsLoading] = getUser();

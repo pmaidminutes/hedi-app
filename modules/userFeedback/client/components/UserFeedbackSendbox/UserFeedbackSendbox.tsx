@@ -1,4 +1,4 @@
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { Button, InlineNotification } from "carbon-components-react";
 
@@ -18,7 +18,7 @@ export const UserFeedbackSendbox = ({
       {errorMessage && (
         <InlineNotification
           kind="error"
-          title={tryGet("error_message", elements)?.value || "Error"}
+          title={getUIElement("error_message", elements)?.value || "Error"}
           subtitle={errorMessage}
           lowContrast
         />
@@ -26,13 +26,13 @@ export const UserFeedbackSendbox = ({
       {successMessage && (
         <InlineNotification
           kind="success"
-          title={tryGet("success_message", elements)?.value || "Success"}
+          title={getUIElement("success_message", elements)?.value || "Success"}
           subtitle={successMessage}
           lowContrast
         />
       )}
       <Button type="submit" size="field">
-        {tryGet("submit", elements)?.value || "Submit"}
+        {getUIElement("submit", elements)?.value || "Submit"}
       </Button>
     </div>
   );

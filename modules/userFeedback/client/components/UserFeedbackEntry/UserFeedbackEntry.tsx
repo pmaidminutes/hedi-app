@@ -1,6 +1,6 @@
 import { TextInput, TextArea } from "carbon-components-react";
 import { IUIElementTexts } from "@/modules/model";
-import { getTextInputProps, tryGet } from "@/modules/common/utils";
+import { getTextInputProps, getUIElement } from "@/modules/common/utils";
 
 export interface IUserFeedbackEntryProps {
   elements: IUIElementTexts[];
@@ -35,9 +35,9 @@ export const UserFeedbackEntry = ({
       <TextArea
         id="body"
         name={`userfeedback-${label}-body`}
-        labelText={hideLegends ? "" : tryGet("body")?.value || "Body"}
-        placeholder={tryGet("body")?.placeholder}
-        helperText={tryGet("body")?.help}
+        labelText={hideLegends ? "" : getUIElement("body")?.value || "Body"}
+        placeholder={getUIElement("body")?.placeholder}
+        helperText={getUIElement("body")?.help}
       />
     </>
   );

@@ -1,4 +1,4 @@
-import { getTextInputProps, tryGetValue } from "@/modules/common/utils";
+import { getTextInputProps, getUIElementValue } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import { Button, TextInput } from "carbon-components-react";
@@ -46,7 +46,7 @@ export const RegisterInputs = ({
         //invalidText={errors?.pass}
       />
       <Button type="submit" size="field">
-        {tryGetValue("submit", elements)}
+        {getUIElementValue("submit", elements)}
       </Button>
     </>
   );

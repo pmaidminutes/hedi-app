@@ -1,5 +1,5 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { getLangByRoute, tryGetValue } from "@/modules/common/utils";
+import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
 import { ILoginView } from "../types";
@@ -33,7 +33,10 @@ export async function getLoginView(route: string): Promise<ILoginView | null> {
   if (!(loginView && loginView.key === "login")) {
     return null;
   }
-  const keys = ["registration", tryGetValue("redirect", loginView.elements)];
+  const keys = [
+    "registration",
+    getUIElementValue("redirect", loginView.elements),
+  ];
   const subquery = gql`
     query getLoginViewOtherLinks(
       $keys: [String!]!

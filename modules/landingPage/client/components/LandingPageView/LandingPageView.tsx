@@ -1,5 +1,5 @@
 import { getUser } from "@/modules/auth/client";
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { Button, FormLabel, Row, Column } from "carbon-components-react";
@@ -19,7 +19,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
               <Column key={link.route}>
                 <div>
                   <FormLabel>
-                    {tryGet(link.key, content.elements)?.help}
+                    {getUIElement(link.key, content.elements)?.help}
                   </FormLabel>
                 </div>
                 <Button href={link.route}>{link.longTitle}</Button>
@@ -37,7 +37,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
                 sm={2}>
                 <div key={link.label + index}>
                   <FormLabel>
-                    {tryGet(link.key, content.elements)?.help}
+                    {getUIElement(link.key, content.elements)?.help}
                   </FormLabel>
                 </div>
                 <Button

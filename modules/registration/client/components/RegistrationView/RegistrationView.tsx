@@ -1,4 +1,4 @@
-import { tryGetRedirect, tryGetValue } from "@/modules/common/utils";
+import { tryGetRedirect, getUIElementValue } from "@/modules/common/utils";
 import { useAuthorizedRedirect } from "@/modules/react/hooks";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
@@ -37,11 +37,11 @@ export const RegistrationView = ({ content }: RegisterInputProps) => {
             )}
           />
           <Button
-            tooltip={tryGetValue("back", content.elements)}
+            tooltip={getUIElementValue("back", content.elements)}
             renderIcon={ArrowLeft16}
             kind="ghost"
             onClick={() => router.back()}>
-            {tryGetValue("back", content.elements)}
+            {getUIElementValue("back", content.elements)}
           </Button>
         </Column>
       </Row>

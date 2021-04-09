@@ -6,7 +6,7 @@
  */
 
 import { NextApiRequest, NextApiResponse } from "next";
-
+//UNUSED
 export default (req: NextApiRequest, res: NextApiResponse) => {
   const {
     query: { lang },
