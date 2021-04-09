@@ -1,4 +1,8 @@
-import { tryGet, tryGetRedirect, tryGetValue } from "@/modules/common/utils";
+import {
+  getUIElement,
+  tryGetRedirect,
+  getUIElementValue,
+} from "@/modules/common/utils";
 import { useAuthorizedRedirect } from "@/modules/react/hooks";
 import { useRouter } from "next/router";
 import { ILoginView } from "../../../types";
@@ -13,7 +17,7 @@ export const useLoginView = (content: ILoginView) => {
   );
   useAuthorizedRedirect(redirectUrl);
 
-  const backButtonText = tryGetValue("back", content.elements);
+  const backButtonText = getUIElementValue("back", content.elements);
 
   const backButtonProps = {
     tooltip: backButtonText,

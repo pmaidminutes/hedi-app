@@ -19,7 +19,7 @@ export interface IProfileEntryProps
   // isTitleAsLink?: boolean
 }
 
-export function useProfileEntry(props: IProfileEntryProps) {
+export function transformProfileEntry(props: IProfileEntryProps) {
   const {
     displayName,
     postal_code,

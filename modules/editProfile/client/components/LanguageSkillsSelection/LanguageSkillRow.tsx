@@ -3,7 +3,7 @@ import { TrashCan32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../../types";
 import { useLanguageSkillRow } from "./useLanguageSkillRow";
-import { tryGetValue } from "@/modules/common/utils";
+import { getUIElementValue } from "@/modules/common/utils";
 
 export type LanguageSkillRowProps = {
   config: {
@@ -30,11 +30,11 @@ export const LanguageSkillRow = ({
   } = useLanguageSkillRow(data, handleChange);
   return (
     <TableRow>
-      <TableCell data-th={tryGetValue("language", elements, "Sprache")}>
+      <TableCell data-th={getUIElementValue("language", elements, "Sprache")}>
         <Dropdown
           id="langcode"
           titleText=""
-          label={tryGetValue("language", elements, "Sprache")}
+          label={getUIElementValue("language", elements, "Sprache")}
           light
           selectedItem={languageOptions.find(
             l => l.code === languageSkill.langcode
@@ -44,7 +44,7 @@ export const LanguageSkillRow = ({
           onChange={handleLanguageChange}
         />
       </TableCell>
-      <TableCell data-th={tryGetValue("level", elements, "Verständnis")}>
+      <TableCell data-th={getUIElementValue("level", elements, "Verständnis")}>
         <Dropdown
           id="level"
           label={
@@ -52,7 +52,7 @@ export const LanguageSkillRow = ({
               element => parseInt(element.identifier) === 0
             )?.value ?? "Please Select"
           }
-          ariaLabel={tryGetValue("level", elements, "Verständnis")}
+          ariaLabel={getUIElementValue("level", elements, "Verständnis")}
           titleText=""
           light
           selectedItem={languageSkill.level}
@@ -69,7 +69,7 @@ export const LanguageSkillRow = ({
         <Button
           kind="ghost"
           renderIcon={TrashCan32}
-          iconDescription={tryGetValue(
+          iconDescription={getUIElementValue(
             "remove-languageSkill",
             elements,
             "Sprache"

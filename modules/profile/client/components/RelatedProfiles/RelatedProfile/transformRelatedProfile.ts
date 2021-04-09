@@ -7,7 +7,7 @@ export interface IRelatedProfile {
   helperText?: string;
   labelText?: string;
 }
-export function useRelatedProfile(props: IRelatedProfile) {
+export function transformRelatedProfile(props: IRelatedProfile) {
   // HACK
   const {
     longtitle,

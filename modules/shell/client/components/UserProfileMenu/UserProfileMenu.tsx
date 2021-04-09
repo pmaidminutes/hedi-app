@@ -8,9 +8,9 @@ import { Login32, UserProfile32 } from "@carbon/icons-react";
 import { getUser, logout } from "@/modules/auth/client/";
 import {
   AssertClientSide,
-  tryGet,
-  tryGetKeyLabel,
-  tryGetKeyLinks,
+  getUIElement,
+  getMenuLinkLabel,
+  getLinkLabel,
 } from "@/modules/common/utils";
 import { useRouter } from "next/router";
 import { IShellLink } from "../../../types/shellLinks";
@@ -37,7 +37,7 @@ export const UserProfileMenu = ({
     }
   };
   const logoutUser = () => {
-    const callbackRoute = tryGetKeyLinks(
+    const callbackRoute = getLinkLabel(
       "logout",
       userMenuLinks,
       "/" + router.locale
@@ -51,7 +51,7 @@ export const UserProfileMenu = ({
   if (!hasMounted) {
     return null;
   }
-  const menuTooltip = tryGet("menu_userProfile", config)?.value;
+  const menuTooltip = getUIElement("menu_userProfile", config)?.value;
 
   return (
     <>
@@ -68,13 +68,13 @@ export const UserProfileMenu = ({
           <OverflowMenuItem
             aria-label={"Profile Component"}
             itemText={
-              tryGetKeyLabel("viewprofile", userMenuLinks) + ` ${user.name}`
+              getMenuLinkLabel("viewprofile", userMenuLinks) + ` ${user.name}`
             }
             hasDivider={false}
             onClick={() => navigateMenu("viewprofile")}></OverflowMenuItem>
           <OverflowMenuItem
             aria-label={"Logout Component"}
-            itemText={tryGetKeyLabel("logout", userMenuLinks)}
+            itemText={getMenuLinkLabel("logout", userMenuLinks)}
             hasDivider={false}
             onClick={() => logoutUser()}></OverflowMenuItem>
         </OverflowMenu>
@@ -90,7 +90,7 @@ export const UserProfileMenu = ({
             aria-label={"Login Component"}
             onClick={() => navigateMenu("login")}
             hasDivider={false}
-            itemText={tryGetKeyLabel(
+            itemText={getMenuLinkLabel(
               "login",
               userMenuLinks
             )}></OverflowMenuItem>

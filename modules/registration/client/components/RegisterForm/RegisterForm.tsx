@@ -1,4 +1,8 @@
-import { getTextInputProps, tryGet, tryGetValue } from "@/modules/common/utils";
+import {
+  getTextInputProps,
+  getUIElement,
+  getUIElementValue,
+} from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import {
@@ -9,9 +13,10 @@ import {
 } from "carbon-components-react";
 import { useRouter } from "next/router";
 import { FormEvent, useState } from "react";
-import { useRegister, useValidate } from "../../request";
+import { useRegister } from "../../request";
 import { IRegisterInfo } from "../../../types";
 import { RegisterInputs } from "../RegisterInputs";
+import { useRegistrationError } from "../../hooks";
 
 export const RegisterForm = ({
   elements,
@@ -23,16 +28,21 @@ export const RegisterForm = ({
   redirect: string;
 }) => {
   const router = useRouter();
-  // TODO handle error states more gracefully, errors should not persist
-  const [passcode, setPasscode] = useTextInput();
-  const [info, setInfo] = useState<IRegisterInfo>();
 
+  const [registrationcode, setRegistrationcode] = useTextInput();
+  const [info, setInfo] = useState<IRegisterInfo>();
   const { response, loading, register, autoSignIn } = useRegister();
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const {
+    isCheckRegisterCodeError,
+    handleCheckRegisterError,
+  } = useRegistrationError(registrationcode);
+
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (info && !loading) {
-      info.passcode = passcode;
-      register({ ...info, lang: router.locale, commit: true });
+      info.registrationcode = registrationcode;
+      await register({ ...info, lang: router.locale, commit: true });
+      handleCheckRegisterError();
     }
   };
 
@@ -43,12 +53,12 @@ export const RegisterForm = ({
 
   return (
     <Form onSubmit={handleSubmit}>
-      {response?.errors?.generic && (
+      {isCheckRegisterCodeError && response?.errors?.generic && (
         <ToastNotification
           kind="error"
           lowContrast={true}
-          title={tryGetValue("error_message", elements, "Error")}
-          subtitle={tryGet("error_message", elements)?.description}
+          title={getUIElementValue("error_message", elements, "Error")}
+          subtitle={getUIElement("error_message", elements)?.description}
           hideCloseButton={true}
           style={{ width: "100%", marginBottom: ".5rem" }}
         />
@@ -57,8 +67,8 @@ export const RegisterForm = ({
         <ToastNotification
           kind="success"
           lowContrast={true}
-          title={tryGetValue("success_message", elements, "")}
-          subtitle={tryGet("success_message", elements)?.description}
+          title={getUIElementValue("success_message", elements, "")}
+          subtitle={getUIElement("success_message", elements)?.description}
           caption={<InlineLoading status="active" />}
           hideCloseButton={true}
           style={{ width: "100%", marginBottom: ".5rem" }}
@@ -68,11 +78,13 @@ export const RegisterForm = ({
       <TextInput
         {...getTextInputProps("registrationcode", elements)}
         required
-        onChange={setPasscode}
-        invalid={!!response?.errors?.passcode}
-        invalidText={tryGetValue("invalid_passcode", elements)}
+        onChange={setRegistrationcode}
+        invalid={
+          isCheckRegisterCodeError && !!response?.errors?.registrationcode
+        }
+        invalidText={getUIElementValue("invalid_passcode", elements)}
       />
-      {!!passcode && (
+      {!!registrationcode && (
         <RegisterInputs
           onChange={setInfo}
           errors={response?.errors}

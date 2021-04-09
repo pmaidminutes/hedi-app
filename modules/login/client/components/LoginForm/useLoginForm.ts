@@ -11,7 +11,11 @@ import {
   ToastNotificationProps,
 } from "carbon-components-react";
 import { IUIElementTexts } from "@/modules/model";
-import { getTextInputProps, tryGet, tryGetValue } from "@/modules/common/utils";
+import {
+  getTextInputProps,
+  getUIElement,
+  getUIElementValue,
+} from "@/modules/common/utils";
 import { login } from "@/modules/auth/client";
 import { LoginFormProps } from "..";
 import { useRouter } from "next/router";
@@ -89,14 +93,14 @@ function getElementProps(
   return {
     usernameInput,
     passwordInput,
-    submitButtonText: tryGetValue("submit", elements),
+    submitButtonText: getUIElementValue("submit", elements),
     loginNotification: {
-      title: tryGetValue("invalid", elements),
-      caption: tryGet("invalid", elements)?.description,
+      title: getUIElementValue("invalid", elements),
+      caption: getUIElement("invalid", elements)?.description,
     },
     successNotification: {
-      title: tryGetValue("success", elements),
-      subtitle: tryGet("success", elements)?.description,
+      title: getUIElementValue("success", elements),
+      subtitle: getUIElement("success", elements)?.description,
     },
   };
 }

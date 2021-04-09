@@ -3,14 +3,17 @@ import { useState } from "react";
 // Next
 import { useRouter } from "next/router";
 // hooks
-import { useProfile } from "@/modules/profile/client/components/Profile/useProfile";
+import {
+  transformProfile,
+  getProfileViewData,
+} from "@/modules/profile/client/components/Profile";
 // types
 import { ColumnDefaultProps } from "carbon-components-react";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { ProfileView } from "@/modules/profile/query";
 import { IAppPage } from "@/modules/common/types";
 
-import { headlineType } from "@/modules/profile/client/components/Services/useServices";
+import { headlineType } from "@/modules/profile/client/components/Services/transformServices";
 export interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
   locale: string;
@@ -22,7 +25,7 @@ export interface IUserFeedbackFormProps {
 // Constants
 const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
 // utils
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 
 export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   const {
@@ -46,10 +49,19 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     servicesData,
     contactData,
     relatedProfilesData,
+    lang,
+    elements: profileElements,
     // mapData, HACK currently incompatible
-  } = useProfile({ content: profile });
+  } = transformProfile({ content: profile });
 
   const { subPages, elements } = content;
+  const {
+    servicesHeadline,
+    languagesHeadline,
+    contactHeadline,
+    relatedHeadline,
+    officeHrsHeadline,
+  } = getProfileViewData(profileElements, lang);
 
   // TODO improve
   const serviceHeadlineType: headlineType = "h3";
@@ -63,20 +75,20 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
       .route;
     setErrorMessage(null);
     setSuccessMessage(
-      tryGet("success_message", content.elements)?.description || null
+      getUIElement("success_message", content.elements)?.description || null
     );
     setTimeout(() => router.push(thanksPageRoute), REDIRECT_DELAY);
   };
   const onError = () => {
     setSuccessMessage(null);
     setErrorMessage(
-      tryGet("error_message", content.elements)?.description || null
+      getUIElement("error_message", content.elements)?.description || null
     );
   };
   const onEmptyError = () => {
     setSuccessMessage(null);
     setErrorMessage(
-      tryGet("empty_error_message", content.elements)?.description || null
+      getUIElement("empty_error_message", content.elements)?.description || null
     );
   };
 
@@ -100,6 +112,11 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     successMessage,
     subPages,
     elements,
+    servicesHeadline,
+    languagesHeadline,
+    contactHeadline,
+    relatedHeadline,
+    officeHrsHeadline,
     getSubPage,
   };
 }

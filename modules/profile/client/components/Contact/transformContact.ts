@@ -18,7 +18,7 @@ export interface IContactProps
   >;
 }
 
-export function useContact(props: IContactProps) {
+export function transformContact(props: IContactProps) {
   const {
     phone,
     mail,

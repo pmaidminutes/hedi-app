@@ -1,6 +1,9 @@
 import { Row, Column, Link, Button } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
-import { useProfileEntry, IProfileEntryProps } from "./useProfileEntry";
+import {
+  transformProfileEntry,
+  IProfileEntryProps,
+} from "./transformProfileEntry";
 import { Launch16, Edit24 } from "@carbon/icons-react";
 import HediPerson from "./assets/hedi_person.svg";
 
@@ -21,7 +24,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     prettyUrl,
     phoneLink,
     editButtonProps,
-  } = useProfileEntry(props);
+  } = transformProfileEntry(props);
 
   return (
     <>
@@ -39,7 +42,9 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
                   <>
                     <span key={domain.label + index}>{domain.label}</span>
                     {domains.length > index + 1 ? (
-                      <span className="hedi--ampersand">
+                      <span
+                        className="hedi--ampersand"
+                        key={"domain-amp" + index}>
                         {" "}
                         & <br />
                       </span>
