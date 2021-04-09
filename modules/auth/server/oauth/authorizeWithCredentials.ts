@@ -1,5 +1,5 @@
 import { requestUserInfo } from "./requests";
-import { IUserAuth } from "../types";
+import { IUserAuth } from "../../types";
 import { getAccess } from "./functions";
 import { IsIHTTPError } from "@/modules/common/error";
 

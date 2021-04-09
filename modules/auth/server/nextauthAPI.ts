@@ -1,7 +1,7 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import NextAuth, { NextAuthOptions } from "next-auth";
 import { credentialProvider } from "./providers";
-import { jwt } from "../query/jwtCallback";
+import { jwt } from "./oauth/jwtCallback";
 
 function getOptions(debug?: boolean): NextAuthOptions {
   return {

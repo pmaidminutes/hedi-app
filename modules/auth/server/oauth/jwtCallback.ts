@@ -2,7 +2,7 @@ import { IsIHTTPError } from "@/modules/common/error";
 import { User } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import { WithAdditionalParams } from "next-auth/_utils";
-import { IUserAuth } from "../types";
+import { IUserAuth } from "../../types";
 import { tryRefresh } from "./functions";
 import { getExpires } from "./utils";
 

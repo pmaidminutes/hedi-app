@@ -1,6 +1,6 @@
 import { tokenResponseToAuth } from "../utils";
 import { requestRefresh } from "../requests";
-import { IAuth } from "../../types";
+import { IAuth } from "../../../types";
 import { IsIHTTPError } from "@/modules/common/error";
 
 export async function tryRefresh<T extends IAuth>(auth: T) {

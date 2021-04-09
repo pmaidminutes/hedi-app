@@ -1,8 +1,8 @@
 import { NextApiRequest } from "next";
 import { getToken } from "next-auth/jwt";
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
-import { toAuthHeader } from "../query";
 import { IAuthHeader, IUserAuth } from "../types";
+import { toAuthHeader } from ".";
 
 export const getUserAuth = async (
   req: NextApiRequest

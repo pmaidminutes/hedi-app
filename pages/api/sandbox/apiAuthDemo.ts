@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import { queryServiceAuthHeader } from "@/modules/auth/query";
+import { queryServiceAuthHeader } from "@/modules/auth/server";
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
   res.statusCode = 200;

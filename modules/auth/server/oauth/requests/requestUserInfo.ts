@@ -1,4 +1,4 @@
-import { IUserInfoResponse } from "../../types";
+import { IUserInfoResponse } from "../../../types";
 import { toAuthHeader } from "../utils";
 import { IHTTPError } from "@/modules/common/error";
 

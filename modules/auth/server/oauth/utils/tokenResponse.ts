@@ -1,4 +1,4 @@
-import { IAuth } from "../../types";
+import { IAuth } from "../../../types";
 import { ITokenResponse } from "../requests/types";
 
 const getIAT = (now: number) => Math.floor(now / 1000);

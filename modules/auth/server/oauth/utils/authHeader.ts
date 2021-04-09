@@ -1,4 +1,4 @@
-import { IAuth, IAuthHeader } from "../../types";
+import { IAuth, IAuthHeader } from "../../../types";
 
 export const toCSRFObject = (csrfToken: string) => {
   return { "X-CSRF-Token": csrfToken };
