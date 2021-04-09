@@ -2,7 +2,7 @@
 import { useLanguageSwitch, ILanguageSwitchProps } from "./useLanguageSwitch";
 import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
 import { Translate32 } from "@carbon/icons-react";
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 /**
  * Language Switch Component.
  *
@@ -13,7 +13,7 @@ export const LanguageSwitch = (
   props: ILanguageSwitchProps
 ): JSX.Element | null => {
   const { direction, links, config } = useLanguageSwitch(props);
-  const tooltip = tryGet("menu_language", config)?.value;
+  const tooltip = getUIElement("menu_language", config)?.value;
 
   if (links) {
     return (

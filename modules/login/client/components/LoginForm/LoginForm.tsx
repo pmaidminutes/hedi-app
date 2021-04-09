@@ -1,6 +1,6 @@
 import { ILoginView } from "@/modules/login/types";
 import { useLoginForm } from "./useLoginForm";
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 
 import {
   Button,
@@ -68,9 +68,9 @@ export const LoginForm = (props: LoginFormProps) => {
           if (link.key === "registration") {
             return (
               <span key={link.key + index}>
-                {tryGet(link.key, elements)?.help}
+                {getUIElement(link.key, elements)?.help}
                 <Link href={link.route}>
-                  {tryGet(link.key, elements)?.placeholder}
+                  {getUIElement(link.key, elements)?.placeholder}
                 </Link>
               </span>
             );

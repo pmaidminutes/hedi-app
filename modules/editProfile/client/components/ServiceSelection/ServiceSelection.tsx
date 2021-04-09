@@ -3,7 +3,7 @@ import { useServiceSelection } from "./useServiceSelection";
 import { SelectableTile, Tile, Tag } from "carbon-components-react";
 import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { IServiceGroup, IUIElementTexts } from "@/modules/model";
-import { tryGetValue } from "@/modules/common/utils";
+import { getUIElementValue } from "@/modules/common/utils";
 
 export type ServiceSelectionProps = {
   config: {
@@ -50,7 +50,7 @@ export const ServiceSelection = ({
           )
         ) : (
           <Tag type={"warm-gray"}>
-            {tryGetValue("add-service", elements, "Hinzufügen")}
+            {getUIElementValue("add-service", elements, "Hinzufügen")}
           </Tag>
         )}
       </div>

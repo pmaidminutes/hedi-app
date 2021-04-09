@@ -1,6 +1,6 @@
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
-import { getLangByRoute, tryGetValue } from "@/modules/common/utils";
+import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import { EntityFields } from "@/modules/model";
 import { IRegistrationView } from "../types";
@@ -36,8 +36,8 @@ export async function getRegistrationView(
     return null;
   }
   const keys = [
-    tryGetValue("success", view.elements),
-    tryGetValue("redirect", view.elements),
+    getUIElementValue("success", view.elements),
+    getUIElementValue("redirect", view.elements),
   ];
   const subquery = gql`
     query getLoginViewOtherLinks(

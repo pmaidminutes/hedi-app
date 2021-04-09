@@ -2,7 +2,7 @@ import { getUser } from "@/modules/auth/client";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import UserFeedbackForm from "@/modules/userFeedback/client/components/UserFeedbackForm/UserFeedbackForm";
 import { useCurrentProfile } from "@/modules/profile/client/hooks";
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 import {
   Button,
   ButtonSet,
@@ -32,7 +32,7 @@ export const UserFeedbackView = ({
     locale
   );
   if (!currentProfileIsLoading && (!currentProfile || !currentProfile.route)) {
-    const noProfileElement = tryGet("no_profile", content.elements);
+    const noProfileElement = getUIElement("no_profile", content.elements);
     return (
       <SimplePageView content={content}>
         <Row>
