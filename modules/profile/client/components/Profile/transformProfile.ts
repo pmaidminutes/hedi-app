@@ -15,6 +15,7 @@ export function transformProfile(props: IProfileViewProps) {
   const {
     languageSkills,
     elements,
+    links,
     displayName,
     postal_code,
     city,
@@ -78,6 +79,7 @@ export function transformProfile(props: IProfileViewProps) {
     lang,
     route,
     elements,
+    links,
     services,
   };
 }

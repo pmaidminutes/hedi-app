@@ -1,5 +1,5 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { getLangByRoute } from "@/modules/common/utils";
+import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { IEditProfileView } from "../types";
@@ -44,10 +44,11 @@ export async function getEditProfile(
 
   const appPage = appPages[0];
   appPage.type = "EditProfile";
-
+  const keys = [getUIElementValue("redirect", appPage.elements)];
   const subquery = gql`
     query getEditProfileChildren(
       $lang: String!
+      $keys:[String!]!
       $includeSelf: Boolean
     ) {
       subPages: appPagesByKey(keys: ["editprofile_Parent","editprofile_Caregiver","editprofile_Midwife"], lang: $lang) {
@@ -65,6 +66,10 @@ export async function getEditProfile(
       languageLevels: appPagesByKey(keys: ["languageLevels"], lang: $lang) {
         ${WithUIElementsFields}
       }
+      links: appPagesByKey(keys: $keys, lang: $lang) {
+        key
+        ${EntityFields}
+      }
     }
   `;
   const {
@@ -73,14 +78,17 @@ export async function getEditProfile(
     languageOptions,
     serviceGroups,
     languageLevels,
+    links,
   } = await client.request<{
     subPages: IAppPage[];
     domainOptions: IEntity[];
     languageOptions: ILanguage[];
     serviceGroups: IServiceGroup[];
     languageLevels: { elements: IUIElementTexts[] }[];
+    links: (IEntity & { key: string })[];
   }>(subquery, {
     lang,
+    keys,
   });
 
   const conditionalElements = subPages.reduce((acc, page) => {
@@ -103,5 +111,6 @@ export async function getEditProfile(
       languageLevels[0]?.elements.filter(
         elm => !isNaN(parseInt(elm.identifier))
       ) || [],
+    links,
   };
 }

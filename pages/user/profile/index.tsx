@@ -16,6 +16,7 @@ import { getProfileStatic } from "@/modules/profile/query";
 import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { IShellLink } from "@/modules/shell/types/shellLinks";
+import { getUIElementRedirectRoute } from "@/modules/common/utils";
 
 export interface INoProfileView extends IAppPage {
   links: IShellLink[];
@@ -72,7 +73,13 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
     currentProfileIsLoading,
   ]);
   const editLink = content.links.find(l => l.key === "editprofile");
-  const editLinkHref = editLink?.route ?? `/${content.lang}/user/profile/edit`;
+  const editRoute = getUIElementRedirectRoute(
+    "editprofile",
+    content.elements,
+    content.links
+  );
+  const editLinkHref = editLink?.route ?? `/${content.lang}` + editRoute;
+
   const editLinkLabel = editLink?.longTitle ?? editLink?.label;
   return (
     <Shell {...props}>
@@ -80,7 +87,7 @@ export default function myProfile(props: IPageProps<INoProfileView>) {
         <Loading />
       ) : (
         <SimplePageView
-          url="/svg/pregnancy_pink80.svg"
+          url={process.env.NEXT_PUBLIC_IMG_HEADER_PROFILE}
           alt="Beschreibung des Bildes"
           content={content}
           rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>

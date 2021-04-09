@@ -20,7 +20,7 @@ export const getUIElementValue = (
   fallback ??
   identifier;
 
-export const tryGetRedirect = (
+export const getUIElementRedirectRoute = (
   identifier: string,
   elements?: IUIElementTexts[],
   links?: (IEntity & { key: string })[],

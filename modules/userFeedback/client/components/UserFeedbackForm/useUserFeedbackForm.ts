@@ -7,6 +7,8 @@ import {
   transformProfile,
   getProfileViewData,
 } from "@/modules/profile/client/components/Profile";
+import { getUIElementRedirectRoute } from "@/modules/common/utils";
+
 // types
 import { ColumnDefaultProps } from "carbon-components-react";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
@@ -54,14 +56,14 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     // mapData, HACK currently incompatible
   } = transformProfile({ content: profile });
 
-  const { subPages, elements } = content;
+  const { subPages, elements, links } = content;
   const {
     servicesHeadline,
     languagesHeadline,
     contactHeadline,
     relatedHeadline,
     officeHrsHeadline,
-  } = getProfileViewData(profileElements, lang);
+  } = getProfileViewData(profileElements, links, lang);
 
   // TODO improve
   const serviceHeadlineType: headlineType = "h3";
@@ -71,8 +73,11 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   };
 
   const onSuccess = () => {
-    const thanksPageRoute = getSubPage("userfeedbackThanks", content.subPages)
-      .route;
+    const thanksPageRoute = getUIElementRedirectRoute(
+      "success_redirect",
+      elements,
+      links
+    );
     setErrorMessage(null);
     setSuccessMessage(
       getUIElement("success_message", content.elements)?.description || null

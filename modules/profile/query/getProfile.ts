@@ -7,12 +7,18 @@ import {
   Profile,
   ProfileTypeNameArray,
 } from "../types";
-import { getLangByRoute } from "@/modules/common/utils";
-import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
+import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
+import {
+  EntityFields,
+  IEntity,
+  IUIElementTexts,
+  WithUIElementsFields,
+} from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 
 export type ProfileView = Profile & {
   elements: IUIElementTexts[];
+  links: (IEntity & { key: string })[];
 };
 export async function getProfile(route: string): Promise<ProfileView | null> {
   const lang = getLangByRoute(route);
@@ -55,6 +61,25 @@ export async function getProfile(route: string): Promise<ProfileView | null> {
   const { uiTexts } = await client.request<{ uiTexts: IAppPage[] }>(subquery, {
     lang,
   });
-
-  return { ...profile, elements: uiTexts[0].elements };
+  const uiTextElements = uiTexts[0].elements;
+  const keys = [getUIElementValue("edit_redirect", uiTextElements)];
+  const queryForLinks = gql`
+    query getProfileEditLinks(
+      $keys: [String!]!
+      $lang: String!
+    ) {
+      links: appPagesByKey(keys: $keys, lang: $lang) {
+        key
+        ${EntityFields}
+      }
+    }
+  `;
+  const linkResults = await client.request<Pick<ProfileView, "links">>(
+    queryForLinks,
+    {
+      lang,
+      keys,
+    }
+  );
+  return { ...profile, elements: uiTexts[0].elements, ...linkResults };
 }

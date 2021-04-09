@@ -1,6 +1,8 @@
 import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { IUserFeedbackView } from "../types";
+import { EntityFields } from "@/modules/model";
+import { getUIElementValue } from "@/modules/common/utils";
 
 export async function getUserFeedbackStatic(
   lang: string
@@ -31,7 +33,7 @@ export async function getUserFeedbackStatic(
       $lang: String!
       $includeSelf: Boolean
     ) {
-      subPages: appPagesByKey(keys: ["userfeedback_languages","userfeedback_contact_freetimes","userfeedback_usage","userfeedback_profile","userfeedback_activities","userfeedback_summary","userfeedbackThanks"], lang: $lang) {
+      subPages: appPagesByKey(keys: ["userfeedback_languages","userfeedback_contact_freetimes","userfeedback_usage","userfeedback_profile","userfeedback_activities","userfeedback_summary"], lang: $lang) {
         ${AppPageFields}
       }
     }
@@ -41,9 +43,31 @@ export async function getUserFeedbackStatic(
   }>(subquery, {
     lang,
   });
-
+  const keys = [
+    getUIElementValue("no_profile_redirect", appPage.elements),
+    getUIElementValue("success_redirect", appPage.elements),
+  ];
+  const queryForLinks = gql`
+    query getFeedbackViewOtherLinks(
+      $keys: [String!]!
+      $lang: String!
+    ) {
+      links: appPagesByKey(keys: $keys, lang: $lang) {
+        key
+        ${EntityFields}
+      }
+    }
+  `;
+  const linkResults = await client.request<Pick<IUserFeedbackView, "links">>(
+    queryForLinks,
+    {
+      lang,
+      keys,
+    }
+  );
   return {
     ...appPage,
     subPages,
+    ...linkResults,
   };
 }

@@ -12,6 +12,7 @@ import {
   WithUIElementsFields,
 } from "@/modules/model";
 import { ProfileType } from "@/modules/profile/types";
+import { getUIElementValue } from "@/modules/common/utils";
 
 export async function getEditProfileStatic(
   lang: string
@@ -36,10 +37,12 @@ export async function getEditProfileStatic(
 
   const appPage = appPages[0];
   appPage.type = "EditProfile";
+  const keys = [getUIElementValue("redirect", appPage.elements)];
 
   const subquery = gql`
     query getEditProfileChildren(
       $lang: String!
+      $keys:[String!]!
       $includeSelf: Boolean
     ) {
       subPages: appPagesByKey(keys: ["editprofile_Parent","editprofile_Caregiver","editprofile_Midwife"], lang: $lang) {
@@ -57,6 +60,10 @@ export async function getEditProfileStatic(
       languageLevels: appPagesByKey(keys: ["languageLevels"], lang: $lang) {
         ${WithUIElementsFields}
       }
+      links: appPagesByKey(keys: $keys, lang: $lang) {
+        key
+        ${EntityFields}
+      }
     }
   `;
   const {
@@ -65,14 +72,17 @@ export async function getEditProfileStatic(
     languageOptions,
     serviceGroups,
     languageLevels,
+    links,
   } = await client.request<{
     subPages: IAppPage[];
     domainOptions: IEntity[];
     languageOptions: ILanguage[];
     serviceGroups: IServiceGroup[];
     languageLevels: { elements: IUIElementTexts[] }[];
+    links: (IEntity & { key: string })[];
   }>(subquery, {
     lang,
+    keys,
   });
 
   const conditionalElements = subPages.reduce((acc, page) => {
@@ -100,5 +110,6 @@ export async function getEditProfileStatic(
     languageOptions,
     domainOptions,
     conditionalServiceGroups: { Midwife, Caregiver },
+    links,
   };
 }

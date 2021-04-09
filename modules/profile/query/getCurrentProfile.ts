@@ -11,10 +11,11 @@ import {
   OrganisationFields,
   Profile,
 } from "../types";
-import { WithUIElementsFields } from "@/modules/model";
+import { EntityFields, WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 import { IAuthHeader } from "@/modules/auth/types";
 import { ProfileView } from "./getProfile";
+import { getUIElementValue } from "@/modules/common/utils";
 
 export async function getCurrentProfile(
   lang: string,
@@ -59,6 +60,25 @@ export async function getCurrentProfile(
       lang,
     }
   );
-
-  return { ...(profile as Profile), elements: uiTexts[0].elements };
+  const uiTextElements = uiTexts[0].elements;
+  const keys = [getUIElementValue("edit_redirect", uiTextElements)];
+  const queryForLinks = gql`
+    query getProfileEditLinks(
+      $keys: [String!]!
+      $lang: String!
+    ) {
+      links: appPagesByKey(keys: $keys, lang: $lang) {
+        key
+        ${EntityFields}
+      }
+    }
+  `;
+  const linkResults = await internalClient.request<Pick<ProfileView, "links">>(
+    queryForLinks,
+    {
+      lang,
+      keys,
+    }
+  );
+  return { ...(profile as Profile), elements: uiTextElements, ...linkResults };
 }
