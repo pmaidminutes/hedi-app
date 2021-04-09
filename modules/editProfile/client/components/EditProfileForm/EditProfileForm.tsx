@@ -53,7 +53,7 @@ const getRequiredTextInputProps = (
   return { labelText: <strong>{labelText}*</strong>, ...rest, onChange };
 };
 
-type RefMap = { [key: string]: RefObject<HTMLInputElement> };
+type RefMap = Record<string, RefObject<HTMLInputElement>>;
 
 export const EditProfileForm = ({
   config: {
