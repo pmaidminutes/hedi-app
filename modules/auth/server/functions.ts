@@ -1,18 +1,8 @@
-import { NextApiResponse, NextApiRequest } from "next";
-import NextAuth from "next-auth";
+import { NextApiRequest } from "next";
 import { getToken } from "next-auth/jwt";
-import { getOptions } from "./serviceOptions";
+import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
 import { toAuthHeader } from "../query";
 import { IAuthHeader, IUserAuth } from "../types";
-import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
-
-export const withAuth = async (
-  req: NextApiRequest,
-  res: NextApiResponse,
-  debug?: boolean
-) => {
-  return NextAuth(req, res, getOptions(debug));
-};
 
 export const getUserAuth = async (
   req: NextApiRequest

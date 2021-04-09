@@ -1,1 +1,2 @@
-export { getUserAuth, getUserAuthHeader, withAuth } from "./api";
+export { nextauthAPI } from "./nextauthAPI";
+export * from "./functions";
