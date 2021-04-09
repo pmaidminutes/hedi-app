@@ -1,4 +1,8 @@
-import { getTextInputProps, tryGet, tryGetValue } from "@/modules/common/utils";
+import {
+  getTextInputProps,
+  getUIElement,
+  getUIElementValue,
+} from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 import { useTextInput } from "@/modules/react/hooks";
 import {
@@ -53,8 +57,8 @@ export const RegisterForm = ({
         <ToastNotification
           kind="error"
           lowContrast={true}
-          title={tryGetValue("error_message", elements, "Error")}
-          subtitle={tryGet("error_message", elements)?.description}
+          title={getUIElementValue("error_message", elements, "Error")}
+          subtitle={getUIElement("error_message", elements)?.description}
           hideCloseButton={true}
           style={{ width: "100%", marginBottom: ".5rem" }}
         />
@@ -63,8 +67,8 @@ export const RegisterForm = ({
         <ToastNotification
           kind="success"
           lowContrast={true}
-          title={tryGetValue("success_message", elements, "")}
-          subtitle={tryGet("success_message", elements)?.description}
+          title={getUIElementValue("success_message", elements, "")}
+          subtitle={getUIElement("success_message", elements)?.description}
           caption={<InlineLoading status="active" />}
           hideCloseButton={true}
           style={{ width: "100%", marginBottom: ".5rem" }}
@@ -78,7 +82,7 @@ export const RegisterForm = ({
         invalid={
           isCheckRegisterCodeError && !!response?.errors?.registrationcode
         }
-        invalidText={tryGetValue("invalid_passcode", elements)}
+        invalidText={getUIElementValue("invalid_passcode", elements)}
       />
       {!!registrationcode && (
         <RegisterInputs

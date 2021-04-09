@@ -1,6 +1,6 @@
 import { IEntity, IUIElementTexts } from "@/modules/model";
 import { VerticalDirection } from "carbon-components-react/typings/shared";
-import { tryGet } from "@/modules/common/utils";
+import { getUIElement } from "@/modules/common/utils";
 
 export interface ILanguageSwitchProps {
   direction?: VerticalDirection;
@@ -12,7 +12,7 @@ export function transformLanguageSwitch({
   config,
   direction = "bottom",
 }: ILanguageSwitchProps) {
-  const tooltip = tryGet("menu_language", config)?.value;
+  const tooltip = getUIElement("menu_language", config)?.value;
   return {
     links,
     direction,

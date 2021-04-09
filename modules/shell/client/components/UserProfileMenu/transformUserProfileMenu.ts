@@ -1,10 +1,10 @@
 import { IUIElementTexts } from "@/modules/model";
 import { IShellLink } from "@/modules/shell/types/shellLinks";
 import {
-  tryGet,
   AssertClientSide,
-  tryGetKeyLinks,
-  tryGetKeyLabel,
+  getUIElement,
+  getLinkLabel,
+  getMenuLinkLabel,
 } from "@/modules/common/utils";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/client";
@@ -16,10 +16,10 @@ export interface IUserMenuProps {
 export function transformUserProfileMenu(props: IUserMenuProps) {
   const { userMenuLinks, config } = props;
 
-  const menuTooltip = tryGet("menu_userProfile", config)?.value;
-  const loginText = tryGetKeyLabel("login", userMenuLinks);
-  const logoutText = tryGetKeyLabel("logout", userMenuLinks);
-  const viewprofileText = tryGetKeyLabel("viewprofile", userMenuLinks);
+  const menuTooltip = getUIElement("menu_userProfile", config)?.value;
+  const loginText = getMenuLinkLabel("login", userMenuLinks);
+  const logoutText = getMenuLinkLabel("logout", userMenuLinks);
+  const viewprofileText = getMenuLinkLabel("viewprofile", userMenuLinks);
 
   const router = useRouter();
   const navigateMenu = (routeKey: string) => {
@@ -32,7 +32,7 @@ export function transformUserProfileMenu(props: IUserMenuProps) {
   };
 
   const logoutUser = () => {
-    const callbackRoute = tryGetKeyLinks(
+    const callbackRoute = getLinkLabel(
       "logout",
       userMenuLinks,
       "/" + router.locale

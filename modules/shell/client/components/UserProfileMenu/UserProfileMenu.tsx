@@ -23,7 +23,6 @@ export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
 
   const [hasMounted, setHasMounted] = useState(false);
   const [user, isLoading] = getUser();
-
   useEffect(() => {
     setHasMounted(true);
   }, []);

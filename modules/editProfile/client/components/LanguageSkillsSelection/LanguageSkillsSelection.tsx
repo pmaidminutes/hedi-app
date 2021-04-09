@@ -12,7 +12,7 @@ import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../../types";
 import { LanguageSkillRow } from "./LanguageSkillRow";
 import { useLanguageSkillsSelection } from "./useLanguageSkillsSelection";
-import { tryGetValue } from "@/modules/common/utils";
+import { getUIElementValue } from "@/modules/common/utils";
 
 export type LanguageSkillsSelectionProps = {
   config: {
@@ -40,22 +40,22 @@ export const LanguageSkillsSelection = ({
           <TableHead>
             <TableRow>
               <TableHeader>
-                {tryGetValue("language", config.elements, "Sprache")}
+                {getUIElementValue("language", config.elements, "Sprache")}
               </TableHeader>
               <TableHeader>
-                {tryGetValue("level", config.elements, "Verständnis")}
+                {getUIElementValue("level", config.elements, "Verständnis")}
               </TableHeader>
               <TableHeader>
                 <Button
                   kind="primary"
                   renderIcon={Add32}
-                  iconDescription={tryGetValue(
+                  iconDescription={getUIElementValue(
                     "add-languageSkill",
                     config.elements,
                     "weitere Hinzufügen"
                   )}
                   onClick={handleAddClick}>
-                  {tryGetValue(
+                  {getUIElementValue(
                     "add-languageSkill",
                     config.elements,
                     "Hinzufügen"
@@ -85,7 +85,7 @@ export const LanguageSkillsSelection = ({
           hasIconOnly={true}
           kind="primary"
           renderIcon={Add32}
-          iconDescription={tryGetValue(
+          iconDescription={getUIElementValue(
             "add-languageSkill",
             config.elements,
             "weitere Hinzufügen"

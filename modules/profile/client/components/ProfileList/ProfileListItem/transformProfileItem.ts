@@ -1,5 +1,5 @@
 import { isICaregiver, isIMidwife, Profile } from "@/modules/profile/types";
-import { tryGetValue } from "@/modules/common/utils";
+import { getUIElementValue } from "@/modules/common/utils";
 import { IUIElementTexts } from "@/modules/model";
 
 export interface IProfileItem {
@@ -10,8 +10,12 @@ export function transformProfileItem(props: IProfileItem) {
   const { profile, elements } = props;
   const { route } = profile;
 
-  const midwifeLabel = tryGetValue("domain_midwife", elements, "Hebamme");
-  const servicesHeadline = tryGetValue("services", elements, "Tätigkeiten");
+  const midwifeLabel = getUIElementValue("domain_midwife", elements, "Hebamme");
+  const servicesHeadline = getUIElementValue(
+    "services",
+    elements,
+    "Tätigkeiten"
+  );
 
   const profileType = isICaregiver(profile)
     ? "hedi--profile-list__item--caregiver"
