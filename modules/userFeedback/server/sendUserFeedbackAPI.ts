@@ -1,4 +1,5 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
+import { sendAPIResult } from "@/modules/common/utils";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
 import { NextApiHandler } from "next";
 import { insertUserFeedbacks } from "../query";
@@ -34,6 +35,5 @@ export const sendUserFeedbacksAPI: NextApiHandler<
     userfeedbacks,
     lang
   );
-  if (mutationResult) res.status(200).json(mutationResult);
-  else res.status(500).json({ success: false, errors: {} });
+  sendAPIResult(res, mutationResult);
 };
