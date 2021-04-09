@@ -1,3 +1,3 @@
-import solrSuggestAPI from "@/modules/search/server/handler/solrSuggestAPI";
+import solrSuggestAPI from "@/modules/search/server/solrSuggestAPI";
 
 export default solrSuggestAPI;

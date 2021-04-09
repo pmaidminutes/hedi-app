@@ -4,9 +4,8 @@
  *
  * nest language specific calls into this folder
  */
-
-import { suggestServer } from "../request";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
+import { suggestServer } from "./request";
 
 const solrSuggestAPI: NextApiHandler<any> = async (
   req: NextApiRequest,

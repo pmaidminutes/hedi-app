@@ -21,7 +21,7 @@ import {
   IMidwife,
   IOrganisation,
 } from "@/modules/profile/types";
-import { searchServer } from "../request";
+import { searchServer } from "./request";
 import { NextApiHandler } from "next";
 
 export const solrSearchAPI: NextApiHandler<
