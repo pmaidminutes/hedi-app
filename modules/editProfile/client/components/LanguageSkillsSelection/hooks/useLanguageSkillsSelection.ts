@@ -1,6 +1,5 @@
-import { AssertClientSide } from "@/modules/common/utils";
+import { ILanguageSkillEntry } from "@/modules/editProfile/types";
 import { useEffect, useState } from "react";
-import { ILanguageSkillEntry } from "../../types";
 
 export const useLanguageSkillsSelection = (data?: ILanguageSkillEntry[]) => {
   const [languageSkillEntries, setLanguageSkillEntries] = useState(

@@ -22,15 +22,17 @@ import {
   tryGetValue,
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
-import { IEditProfileFormConfig, IUpsertProfile } from "../../../types";
+import {
+  IEditProfileFormConfig,
+  IUpsertProfile,
+  orderedRequiredFields,
+} from "../../../types";
 import { ServiceSelection } from "../ServiceSelection";
-import { useProfileTypeSwitch } from "../../hooks";
+import { useProfileTypeSwitch, useValidationErrors } from "./hooks";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
 import { ChangeEvent, useRef, RefObject } from "react";
-import { orderedRequiredFields } from "./useEditProfileForm";
-import { useValidationErrors } from "../../hooks";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;

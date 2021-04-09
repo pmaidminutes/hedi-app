@@ -2,7 +2,7 @@ import { Button, Dropdown, TableCell, TableRow } from "carbon-components-react";
 import { TrashCan32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../../types";
-import { useLanguageSkillRow } from "../../hooks";
+import { useLanguageSkillRow } from "./hooks";
 import { tryGetValue } from "@/modules/common/utils";
 
 export type LanguageSkillRowProps = {

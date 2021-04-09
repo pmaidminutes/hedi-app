@@ -1,7 +1,7 @@
 import { tryGet } from "@/modules/common/utils";
+import { orderedRequiredFields } from "@/modules/editProfile/types";
 import { IUIElementTexts } from "@/modules/model";
-import { ChangeEvent, FormEvent, RefObject, useEffect, useState } from "react";
-import { orderedRequiredFields } from "../components/EditProfileForm";
+import { ChangeEvent, FormEvent, RefObject, useState } from "react";
 
 export function useValidationErrors(
   elements: IUIElementTexts[],

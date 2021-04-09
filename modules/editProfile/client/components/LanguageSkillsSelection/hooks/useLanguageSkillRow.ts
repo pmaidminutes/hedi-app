@@ -1,7 +1,7 @@
+import { ILanguageSkillEntry } from "@/modules/editProfile/types";
 import { ILanguage } from "@/modules/model";
 import { OnChangeData } from "carbon-components-react";
 import { useEffect, useState } from "react";
-import { ILanguageSkillEntry } from "../../types";
 
 export const useLanguageSkillRow = (
   data: ILanguageSkillEntry,

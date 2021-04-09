@@ -1,5 +1,5 @@
 import React from "react";
-import { useServiceSelection } from "../../hooks";
+import { useServiceSelection } from "./hooks";
 import { SelectableTile, Tile, Tag } from "carbon-components-react";
 import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
 import { IServiceGroup, IUIElementTexts } from "@/modules/model";

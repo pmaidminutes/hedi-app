@@ -11,7 +11,7 @@ import { Add32 } from "@carbon/icons-react";
 import { ILanguage, IUIElementTexts } from "@/modules/model";
 import { ILanguageSkillEntry } from "../../../types";
 import { LanguageSkillRow } from "./LanguageSkillRow";
-import { useLanguageSkillsSelection } from "../../hooks";
+import { useLanguageSkillsSelection } from "./hooks";
 import { tryGetValue } from "@/modules/common/utils";
 
 export type LanguageSkillsSelectionProps = {
