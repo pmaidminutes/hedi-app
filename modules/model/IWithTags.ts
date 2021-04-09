@@ -16,17 +16,17 @@ export type TagType =
   | "warm-gray"
   | "high-contrast";
 
-export interface ITagged {
+export interface IWithTags {
   tags: ITag[];
 }
 
-export const implementsITagged = (obj: any) => !!(obj && obj.tags);
+export const implementsIWithTags = (obj: any) => !!(obj && obj.tags);
 
-export function isITagged(obj: any): obj is ITagged {
-  return implementsITagged(obj);
+export function isIWithTags(obj: any): obj is IWithTags {
+  return implementsIWithTags(obj);
 }
 
-export const TaggedFields = `
+export const WithTagsFields = `
   tags {
     ${EntityTranslatedFields}
   }

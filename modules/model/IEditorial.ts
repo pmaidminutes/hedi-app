@@ -6,25 +6,32 @@ import {
 } from "./IContent";
 import { IEntityLocalized } from "./IEntityLocalized";
 import { implementsISummary, ISummary, SummaryFields } from "./ISummary";
-import { implementsITagged, isITagged, ITagged, TaggedFields } from "./ITagged";
+import {
+  implementsIWithTags,
+  isIWithTags,
+  IWithTags,
+  WithTagsFields,
+} from "./IWithTags";
 
 export interface IEditorial<T extends IEntityLocalized>
   extends IContent<T>,
     ISummary,
-    ITagged {}
+    IWithTags {}
 
 // UNUSED
 export const implementsIEditorial = (obj: any) =>
-  implementsIContent(obj) && implementsISummary(obj) && implementsITagged(obj);
+  implementsIContent(obj) &&
+  implementsISummary(obj) &&
+  implementsIWithTags(obj);
 
 // UNUSED
 export function isIEditorial<T extends IEntityLocalized>(
   obj: any
 ): obj is IEditorial<T> {
-  return obj && isIContent(obj) && isITagged(obj) ? true : false;
+  return obj && isIContent(obj) && isIWithTags(obj) ? true : false;
 }
 
 export const EditorialFields = `
 ${ContentFields}
 ${SummaryFields}
-${TaggedFields}`;
+${WithTagsFields}`;
