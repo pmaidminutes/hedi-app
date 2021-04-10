@@ -6,6 +6,16 @@ export const queryServiceAuthHeader = async (
   username: string,
   password: string
 ) => {
-  const auth = await authorizeService(username, password);
-  return IsIHTTPError(auth) ? auth : toAuthHeader(auth);
+  const cached = process.env[username];
+  if (cached) {
+    // TODO handle refresh !
+    return toAuthHeader(JSON.parse(cached));
+  } else {
+    const auth = await authorizeService(username, password);
+    if (IsIHTTPError(auth)) return auth;
+    else {
+      process.env[username] = JSON.stringify(auth);
+      return toAuthHeader(auth);
+    }
+  }
 };
