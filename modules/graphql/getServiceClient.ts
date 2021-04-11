@@ -1,5 +1,5 @@
 import { IsIHTTPError } from "@/modules/common/error";
-import { queryServiceAuthHeader } from "@/modules/auth/server/oauth"; // HACK find out, why clientside elimination failes if importing from server/
+import { queryServiceAuthHeader } from "@/modules/auth/server";
 import { GQLEndpoint } from "./config";
 import { getClient } from "./getClient";
 

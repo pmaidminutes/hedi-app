@@ -1,5 +1,5 @@
 import { NextApiResponse, NextApiRequest } from "next";
-import NextAuth, { NextAuthOptions } from "next-auth";
+import { NextAuthHandler, NextAuthOptions } from "next-auth";
 import { credentialProvider } from "./providers";
 import { jwt } from "./oauth/jwtCallback";
 
@@ -20,5 +20,5 @@ export const nextauthAPI = async (
   res: NextApiResponse,
   debug = true
 ) => {
-  return NextAuth(req, res, getOptions(debug));
+  return NextAuthHandler(req, res, getOptions(debug));
 };
