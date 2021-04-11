@@ -1,16 +1,10 @@
 import { IsIHTTPError } from "@/modules/common/error";
-import { queryServiceAuthHeader } from "@/modules/auth/server";
+import { getServiceAuth } from "@/modules/auth/server";
 import { GQLEndpoint } from "./config";
 import { getClient } from "./getClient";
 
 export async function getServiceClient(endpoint = GQLEndpoint.Public) {
-  if (!(process.env.SERVICE_USER && process.env.SERVICE_SECRET))
-    throw new Error("[API SERVICE]: either service id or secret not specified");
-
-  const headers = await queryServiceAuthHeader(
-    process.env.SERVICE_USER,
-    process.env.SERVICE_SECRET
-  );
+  const headers = await getServiceAuth();
   if (!IsIHTTPError(headers)) return getClient(endpoint, headers);
 
   throw new Error("[API SERVICE]: service could not log in");
