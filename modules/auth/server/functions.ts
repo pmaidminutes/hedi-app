@@ -2,13 +2,14 @@ import { NextApiRequest } from "next";
 import { getToken } from "next-auth/jwt";
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
 import { IAuthHeader, IUserAuth } from "../types";
-import { toAuthHeader } from ".";
+import { toAuthHeader } from "./oauth";
 
-export const getUserAuth = async (
+const getUserAuth = async (
   req: NextApiRequest
 ): Promise<IUserAuth | IHTTPError> => {
+  if (!process.env.NEXTAUTH_JWT_SECRET)
+    throw new Error("FATAL: nextauth misconfigured");
   const secret = process.env.NEXTAUTH_JWT_SECRET;
-  if (!secret) return { code: 501, text: "Service Unavailable" };
   return getToken({ req, secret }).catch<IHTTPError>(e => e) as Promise<
     IUserAuth | IHTTPError
   >;
