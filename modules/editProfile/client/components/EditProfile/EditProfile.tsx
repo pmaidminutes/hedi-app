@@ -1,16 +1,12 @@
 import { getUser } from "@/modules/auth/client";
-import { extractConfig, IEditProfileView } from "../../../types";
+import { IEditProfileView } from "../../../types";
 import { EditProfileForm, useEditProfileForm } from "../EditProfileForm";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import { useEffect, useState } from "react";
+import { useConfig } from "./hooks";
 
 export const EditProfile = ({ content }: { content: IEditProfileView }) => {
   const [user, isLoading] = getUser();
-
-  const [config, setConfig] = useState(extractConfig(content));
-  useEffect(() => {
-    setConfig(extractConfig(content));
-  }, [content.lang]);
+  const config = useConfig(content);
 
   const editFormProps = useEditProfileForm(
     content.lang,
