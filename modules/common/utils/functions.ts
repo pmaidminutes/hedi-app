@@ -7,6 +7,14 @@ export function AssertServerSide() {
   return typeof window === "undefined";
 }
 
+export function AssertEnvDev() {
+  return process.env.NODE_ENV === "development";
+}
+
+export function AssertEnvProduction() {
+  return process.env.NODE_ENV === "production";
+}
+
 // HACK: should be solved on backend gql side
 // --- Build assets URL --- //
 export function buildAssetUrl(url: string | undefined): string {

@@ -30,7 +30,7 @@ import {
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch, useValidationErrors } from "./hooks";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
-import { IUIElementTexts } from "@/modules/model";
+import { IUIElementTexts, ErrorMap } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
 import { ChangeEvent, useRef, RefObject } from "react";
 
@@ -56,6 +56,8 @@ const getRequiredTextInputProps = (
   return { labelText: <strong>{labelText}*</strong>, ...rest, onChange };
 };
 
+type RefMap = Record<string, RefObject<HTMLInputElement>>;
+
 export const EditProfileForm = ({
   config: {
     elements,
@@ -79,22 +81,15 @@ export const EditProfileForm = ({
     (errors && Object.keys(errors).length != 0) ||
     Object.keys(validationErrors).length != 0;
 
-  const refs: {
-    [key: string]: RefObject<HTMLInputElement>;
-  } = orderedRequiredFields
+  const refs: RefMap = orderedRequiredFields
     .map(field => ({
       field: field,
       ref: useRef<HTMLInputElement>(null),
     }))
-    .reduce(
-      (result, item) => {
-        result[item.field] = item.ref;
-        return result;
-      },
-      {} as {
-        [key: string]: RefObject<HTMLInputElement>;
-      }
-    );
+    .reduce((result, item) => {
+      result[item.field] = item.ref;
+      return result;
+    }, {} as RefMap);
 
   const { onSubmit, ...formPropsRest } = formProps;
   const {
