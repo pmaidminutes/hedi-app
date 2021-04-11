@@ -10,5 +10,8 @@ export async function requestUserInfo(accessToken: string, csrfToken: string) {
   if (response.status === 200)
     return response.json() as Promise<IUserInfoResponse>;
   else
-    return { code: response.status, text: response.statusText } as IHTTPError;
+    return {
+      status: response.status,
+      message: response.statusText,
+    } as IHTTPError;
 }

@@ -28,5 +28,8 @@ export async function requestToken(
   if (response.status === 200)
     return response.json() as Promise<ITokenResponse>;
   else
-    return { code: response.status, text: response.statusText } as IHTTPError;
+    return {
+      status: response.status,
+      message: response.statusText,
+    } as IHTTPError;
 }

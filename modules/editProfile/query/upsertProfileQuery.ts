@@ -38,7 +38,7 @@ export async function upsertProfileQuery(
     })
     .catch(e => {
       console.warn(e);
-      return { code: 500, text: "Internal Server Error" };
+      return { status: 500, message: "Internal Server Error" };
     });
   return result;
 }

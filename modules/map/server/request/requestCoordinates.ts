@@ -9,5 +9,8 @@ export async function requestCoordinates(typedAddress: string) {
   );
   if (response.status === 200) return response.text() as Promise<string>;
   else
-    return { code: response.status, text: response.statusText } as IHTTPError;
+    return {
+      status: response.status,
+      message: response.statusText,
+    } as IHTTPError;
 }

@@ -7,8 +7,8 @@ export const sendAPIResult = (
 ) => {
   if (IsIHTTPError(responseObject))
     nextApiResponse
-      .status(responseObject.code)
-      .json({ success: false, errors: { http: responseObject.text } });
+      .status(responseObject.status)
+      .json({ success: false, errors: { http: responseObject.message } });
   else if (responseObject != null && responseObject !== undefined)
     nextApiResponse.status(200).json(responseObject);
   else

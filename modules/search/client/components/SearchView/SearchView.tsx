@@ -90,7 +90,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
     console.log("for now error");
     errorMessage = "No search Results";
   } else if (IsIHTTPError(data)) {
-    errorMessage = data.text;
+    errorMessage = data.message ?? `HTTP ${data.status} Error`;
   } else {
     loading = false;
   }
