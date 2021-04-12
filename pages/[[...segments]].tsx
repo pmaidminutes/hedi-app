@@ -7,6 +7,7 @@ import { LoginViewPathsGQL } from "@/modules/login/query";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 import { IEntity } from "@/modules/model";
 import {
+  TryViewProfile,
   TryProfile,
   TryProfileList,
 } from "@/modules/profile/client/components";
@@ -14,8 +15,12 @@ import {
   CaregiverPathsGQL,
   MidwifePathsGQL,
   ProfileListPathsGQL,
+  ViewProfilePathsGQL,
 } from "@/modules/profile/query";
-import { getProfileListPage } from "@/modules/profile/server/generators";
+import {
+  getProfileListPage,
+  getViewProfilePage,
+} from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/client/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
@@ -61,6 +66,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     ProfileListPathsGQL,
     LoginViewPathsGQL,
     RegistrationViewPathsGQL,
+    ViewProfilePathsGQL,
     UserFeedbackThanksViewPathsGQL,
     SimplePageViewPathsGQL,
   ];
@@ -95,6 +101,7 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
+    if (!content) content = await getViewProfilePage(params?.segments, locale);
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
     if (!content)
@@ -133,6 +140,7 @@ export default function segments(props: IPageProps<IEntity>) {
     <Shell {...props}>
       <>
         <TryRegistration content={content} key="registration" />
+        <TryViewProfile content={content} key="viewprofile" />
         <TryProfile content={content} key="profile" />
         <TryProfileList content={content} key="profileList" />
         <TryLogin content={content} key="login" />
