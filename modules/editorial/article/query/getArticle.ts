@@ -1,6 +1,7 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { ArticleFields, IArticle } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
+import { logAndNull } from "@/modules/common/error";
 
 export async function getArticle(route: string): Promise<IArticle | null> {
   const lang = getLangByRoute(route);
@@ -16,15 +17,8 @@ export async function getArticle(route: string): Promise<IArticle | null> {
       }
     }
   `;
-  const client = await getServiceClient();
-  return client
-    .request<{ articles: IArticle[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .then(data => data.articles?.[0])
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ articles: IArticle[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.articles[0] ?? null);
 }

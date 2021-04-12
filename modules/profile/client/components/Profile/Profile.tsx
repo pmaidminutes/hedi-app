@@ -39,6 +39,7 @@ export const Profile = (props: IProfileViewProps) => {
     lang,
     route,
     elements,
+    links,
     services,
   } = transformProfile(props);
 
@@ -48,9 +49,14 @@ export const Profile = (props: IProfileViewProps) => {
     contactHeadline,
     relatedHeadline,
     officeHrsHeadline,
-  } = getProfileViewData(elements, lang);
+  } = getProfileViewData(elements, links, lang);
 
-  const { editButtonProps } = useEditProfileButton(lang, route, elements);
+  const { editButtonProps } = useEditProfileButton(
+    lang,
+    route,
+    elements,
+    links
+  );
   const { hasServices } = useServices(services);
 
   return (

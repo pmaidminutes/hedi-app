@@ -5,20 +5,11 @@ import {
   IEditProfile,
   EditProfileFieldArray,
   EditProfileInput,
-  IUpsertProfile,
   editProfileAPIUrl,
 } from "../../../types";
 import { upsertProfile } from "../../request";
 import { useRouter } from "next/router";
 import { IUIElementTexts } from "@/modules/model";
-
-export const orderedRequiredFields = [
-  "forename",
-  "surname",
-  "city",
-  "phone",
-  "mail",
-];
 
 export function useEditProfileForm(
   lang: string,

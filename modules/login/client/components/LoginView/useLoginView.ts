@@ -1,6 +1,5 @@
 import {
-  getUIElement,
-  tryGetRedirect,
+  getUIElementRedirectRoute,
   getUIElementValue,
 } from "@/modules/common/utils";
 import { useAuthorizedRedirect } from "@/modules/react/hooks";
@@ -9,7 +8,7 @@ import { ILoginView } from "../../../types";
 
 export const useLoginView = (content: ILoginView) => {
   const router = useRouter();
-  const redirectUrl = tryGetRedirect(
+  const redirectUrl = getUIElementRedirectRoute(
     "redirect",
     content.elements,
     content.links,

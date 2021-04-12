@@ -1,3 +1,4 @@
+import { sendAPIResult } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
 import { registerQuery } from "../query";
 import { IRegisterResponse } from "../types";
@@ -14,6 +15,5 @@ export const registerAPI: NextApiHandler<IRegisterResponse> = async (
     ? query.commit[0]
     : query?.commit);
   const response = await registerQuery({ name, pass, lang, commit });
-  if (response) res.status(200).json(response);
-  else res.status(500).json({ success: false });
+  sendAPIResult(res, response);
 };

@@ -1,4 +1,5 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
+import { sendAPIResult } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
 import { hasCurrentUserUserFeedback } from "../query/hasCurrentUserUserFeedback";
 
@@ -12,6 +13,5 @@ export const hasCurrentUserUserFeedbackAPI: NextApiHandler<
   }
 
   const hasUserFeedback = await hasCurrentUserUserFeedback(authHeader);
-  if (hasUserFeedback != null) res.status(200).json(hasUserFeedback);
-  else res.status(500).send(null);
+  sendAPIResult(res, hasUserFeedback);
 };

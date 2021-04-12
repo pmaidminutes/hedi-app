@@ -1,4 +1,5 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { logAndNull } from "@/modules/common/error";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { ICategoryRoot, CategoryRootFields } from "../types";
 
 export async function getCategoryRoot(
@@ -12,20 +13,15 @@ export async function getCategoryRoot(
     }
   `;
 
-  const client = await getServiceClient();
-  return client
-    .request<{ categoryroot: ICategoryRoot | null }>(query, { lang })
-    .then(data => hackRootTranslationRoutes(data.categoryroot))
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ categoryroot: ICategoryRoot | null }>(query, {
+    lang,
+  }).then(data => hackRootTranslationRoutes(logAndNull(data)?.categoryroot));
 }
 
 function hackRootTranslationRoutes(
-  root: ICategoryRoot | null
+  root?: ICategoryRoot | null
 ): ICategoryRoot | null {
-  if (!root) return root;
+  if (!root) return null;
   root.translations = root.translations.map(t => ({ ...t, route: "/" }));
   return root;
 }

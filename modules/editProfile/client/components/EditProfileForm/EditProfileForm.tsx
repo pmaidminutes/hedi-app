@@ -22,14 +22,17 @@ import {
   getUIElementValue,
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
-import { IEditProfileFormConfig, IUpsertProfile } from "../../../types";
+import {
+  IEditProfileFormConfig,
+  IUpsertProfile,
+  orderedRequiredFields,
+} from "../../../types";
 import { ServiceSelection } from "../ServiceSelection";
-import { useProfileTypeSwitch } from "./useProfileTypeSwitch";
+import { useProfileTypeSwitch, useValidationErrors } from "./hooks";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
-import { IUIElementTexts } from "@/modules/model";
+import { IUIElementTexts, ErrorMap } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
-import { ChangeEvent, useRef, useState, RefObject, FormEvent } from "react";
-import { orderedRequiredFields } from "./useEditProfileForm";
+import { ChangeEvent, useRef, RefObject } from "react";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -53,6 +56,8 @@ const getRequiredTextInputProps = (
   return { labelText: <strong>{labelText}*</strong>, ...rest, onChange };
 };
 
+type RefMap = Record<string, RefObject<HTMLInputElement>>;
+
 export const EditProfileForm = ({
   config: {
     elements,
@@ -70,72 +75,28 @@ export const EditProfileForm = ({
   const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
     profile?.type
   );
-  // TODO find better way to combine frontend and backend errors
-  const [validationErrors, setValidationErrors] = useState<{
-    [key: string]: string;
-  }>({});
-
-  const handleRequiredFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const key = e.target.name;
-    if (!e.target.value) {
-      const message = getUIElement(e.target.name, elements)?.help ?? "x";
-      setValidationErrors(previous => ({ ...previous, [key]: message }));
-    } else {
-      setValidationErrors(previous => {
-        const { [key]: _, ...rest } = previous;
-        return { ...rest };
-      });
-    }
-  };
 
   const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
   const hasError = () =>
     (errors && Object.keys(errors).length != 0) ||
     Object.keys(validationErrors).length != 0;
 
-  const refs: {
-    [key: string]: RefObject<HTMLInputElement>;
-  } = orderedRequiredFields
+  const refs: RefMap = orderedRequiredFields
     .map(field => ({
       field: field,
       ref: useRef<HTMLInputElement>(null),
     }))
-    .reduce(
-      (result, item) => {
-        result[item.field] = item.ref;
-        return result;
-      },
-      {} as {
-        [key: string]: RefObject<HTMLInputElement>;
-      }
-    );
-
-  const scrollToErrors = (currentErrors: { [key: string]: string }) => {
-    for (let key of Object.keys(currentErrors)) {
-      refs[key].current?.scrollIntoView();
-      window.scrollBy(0, -100);
-      return true;
-    }
-    return false;
-  };
-
-  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const form = new FormData(e.target as HTMLFormElement);
-
-    const currentErrors: { [key: string]: string } = {};
-    orderedRequiredFields.forEach(field => {
-      if (!form.get(field)) {
-        const message = getUIElement(field, elements)?.help || "";
-        currentErrors[field] = message;
-      }
-    });
-    setValidationErrors(currentErrors);
-    const hasValidationErrors = scrollToErrors(currentErrors);
-    if (!hasValidationErrors && onSubmit) onSubmit(e);
-  };
+    .reduce((result, item) => {
+      result[item.field] = item.ref;
+      return result;
+    }, {} as RefMap);
 
   const { onSubmit, ...formPropsRest } = formProps;
+  const {
+    validationErrors,
+    handleRequiredFieldChange,
+    handleSubmit,
+  } = useValidationErrors(elements, refs, onSubmit);
 
   return (
     <Form {...formPropsRest} onSubmit={handleSubmit}>

@@ -1,9 +1,11 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { logAndNull } from "@/modules/common/error";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import {
   CaregiverWithParentsFields,
   ICaregiverWithParents,
 } from "../types/CaregiverWithParentsType";
 
+// UNUSED
 export async function getCaregiverWithParents(
   route: string,
   lang = "de"
@@ -20,15 +22,8 @@ export async function getCaregiverWithParents(
     }
   `;
 
-  const client = await getServiceClient();
-  return client
-    .request<{ caregivers: ICaregiverWithParents[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .then(data => data.caregivers[0])
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ caregivers: ICaregiverWithParents[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.caregivers?.[0] ?? null);
 }

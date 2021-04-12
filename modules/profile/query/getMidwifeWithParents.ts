@@ -1,7 +1,9 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { IMidwifeWithParents, MidwifeWithParentsFields } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
+import { logAndNull } from "@/modules/common/error";
 
+// UNUSED
 export async function getMidwifeWithParents(
   route: string
 ): Promise<IMidwifeWithParents | null> {
@@ -19,15 +21,8 @@ export async function getMidwifeWithParents(
       }
     `;
 
-  const client = await getServiceClient();
-  return client
-    .request<{ midwives: IMidwifeWithParents[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .then(data => data.midwives[0])
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ midwives: IMidwifeWithParents[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.midwives[0] ?? null);
 }

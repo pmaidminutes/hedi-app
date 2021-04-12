@@ -1,4 +1,7 @@
-import { tryGetRedirect, getUIElementValue } from "@/modules/common/utils";
+import {
+  getUIElementRedirectRoute,
+  getUIElementValue,
+} from "@/modules/common/utils";
 import { useAuthorizedRedirect } from "@/modules/react/hooks";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
@@ -17,7 +20,7 @@ type RegisterInputProps = {
 export const RegistrationView = ({ content }: RegisterInputProps) => {
   const router = useRouter();
   useAuthorizedRedirect(
-    tryGetRedirect("redirect", content.elements, content.links)
+    getUIElementRedirectRoute("redirect", content.elements, content.links)
   );
 
   return (
@@ -30,7 +33,7 @@ export const RegistrationView = ({ content }: RegisterInputProps) => {
         <Column>
           <RegisterForm
             elements={content.elements}
-            redirect={tryGetRedirect(
+            redirect={getUIElementRedirectRoute(
               "success",
               content.elements,
               content.links

@@ -1,4 +1,4 @@
-import { errorHandling, IHTTPError } from "@/modules/common/error";
+import { responseToIHTTPError, IHTTPError } from "@/modules/common/error";
 
 export async function suggestServer(
   lang: string,
@@ -9,19 +9,14 @@ export async function suggestServer(
   };
 
   const reqBody = JSON.stringify({ params });
-  const response = await fetch(process.env.SOLR_URL + "/suggest", {
+  return fetch(process.env.SOLR_URL + "/suggest", {
     method: "post",
     body: reqBody,
     headers: new Headers({
       "Content-Type": "application/json",
       Authorization: "Basic YWRtaW46YWlkbWludXRlcw==",
     }),
-  });
-  const jsonResponse = await response.json();
-
-  if (response.status !== 200) {
-    return errorHandling(response);
-  } else {
-    return jsonResponse as Promise<[]>;
-  }
+  }).then<[] | IHTTPError>(response =>
+    response.status === 200 ? response.json() : responseToIHTTPError(response)
+  );
 }

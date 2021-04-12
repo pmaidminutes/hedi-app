@@ -1,18 +1,24 @@
 import { useState, useEffect } from "react";
-import { getUIElementValue } from "@/modules/common/utils";
+import {
+  getUIElementRedirectRoute,
+  getUIElementValue,
+} from "@/modules/common/utils";
 import { useCurrentProfileEntity } from "./useCurrentProfileEntity";
 import { getUser } from "@/modules/auth/client";
-import { IUIElementTexts } from "@/modules/model";
+import { IEntity, IUIElementTexts } from "@/modules/model";
 
 export function useEditProfileButton(
   lang: string,
   route: string,
-  elements: IUIElementTexts[]
+  elements: IUIElementTexts[],
+  links: (IEntity & {
+    key: string;
+  })[]
 ) {
   const [hasEditProfileBtn, setHasEditProfileBtn] = useState(false);
 
   const text = getUIElementValue("edit_button", elements);
-  const link = "/" + lang + "/user/profile/edit";
+  const link = getUIElementRedirectRoute("edit_redirect", elements, links);
 
   const [user, userIsLoading] = getUser();
   const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(

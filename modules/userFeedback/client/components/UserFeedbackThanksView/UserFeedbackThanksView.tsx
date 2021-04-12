@@ -5,25 +5,32 @@ import {
   IUserFeedbackThanksProps,
   useFeedbackThanksView,
 } from "./useFeedbackThanksView";
+import { useRouter } from "next/router";
+import {
+  getUIElement,
+  getUIElementRedirectRoute,
+} from "@/modules/common/utils";
 
 export const UserFeedbackThanksView = (props: IUserFeedbackThanksProps) => {
-  const { content, elements } = useFeedbackThanksView(props);
-
+  const { content, elements, links } = useFeedbackThanksView(props);
+  const router = useRouter();
+  const backRoute = getUIElementRedirectRoute("back_page", elements, links);
+  const element = getUIElement("back", elements);
   return (
     <SimplePageView
       url={process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}
       content={content}>
       <div className="hedi-app-page-link-buttons">
-        {elements.map(element => (
+        {
           <Button
-            key={element.identifier + content.lang}
-            tooltip={element.value}
+            key={element?.identifier + content.lang}
+            tooltip={element?.value}
             renderIcon={ArrowLeft16}
             kind="ghost"
-            href={"/" + content.lang + "/user/profile"}>
-            {element.value}
+            onClick={() => router.push(backRoute)}>
+            {element?.value}
           </Button>
-        ))}
+        }
       </div>
     </SimplePageView>
   );

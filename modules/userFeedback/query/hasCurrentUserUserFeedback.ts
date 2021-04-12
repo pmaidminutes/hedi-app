@@ -1,6 +1,7 @@
-import { getClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, userGQuery } from "@/modules/graphql";
 
 import { IAuthHeader } from "@/modules/auth/types";
+import { logAndFallback } from "@/modules/common/error";
 
 export async function hasCurrentUserUserFeedback(
   authHeader: IAuthHeader
@@ -13,13 +14,12 @@ export async function hasCurrentUserUserFeedback(
     }
   `;
 
-  const client = await getClient(GQLEndpoint.User, authHeader);
-  const queryResult = await client
-    .request<{ currentUserUserFeedbacks: { route: string }[] }>(query)
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
-  if (!queryResult?.currentUserUserFeedbacks) return null;
+  const queryResult = await userGQuery<{
+    currentUserUserFeedbacks: { route: string }[];
+  }>(authHeader, query).then(data =>
+    logAndFallback(data, {
+      currentUserUserFeedbacks: [] as { route: string }[],
+    })
+  );
   return queryResult.currentUserUserFeedbacks.length > 0;
 }

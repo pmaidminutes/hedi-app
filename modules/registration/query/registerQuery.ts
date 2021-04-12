@@ -1,4 +1,5 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { logAndNull } from "@/modules/common/error";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import {
   IRegisterRequest,
   IRegisterResponse,
@@ -20,18 +21,9 @@ export async function registerQuery(
       }
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
   registerData.lang = registerData.lang ?? "de";
-  return client
-    .request<{ register: IRegisterResponse; error?: any }>(
-      mutation,
-      registerData
-    )
-    .then(data => {
-      return data.register;
-    })
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ register: IRegisterResponse; error?: any }>(
+    mutation,
+    registerData
+  ).then(data => logAndNull(data)?.register ?? null);
 }

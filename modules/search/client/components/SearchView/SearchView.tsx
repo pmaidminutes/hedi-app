@@ -5,7 +5,7 @@ import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { MapClient } from "@/modules/map/client/components";
 import { Location } from "@/modules/map/types";
-import { ITyped, IUIText } from "@/modules/model";
+import { ITyped } from "@/modules/model";
 import { ProfileEntry } from "@/modules/profile/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { Seperator } from "@/modules/common/components";
@@ -90,7 +90,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
     console.log("for now error");
     errorMessage = "No search Results";
   } else if (IsIHTTPError(data)) {
-    errorMessage = data.text;
+    errorMessage = data.message ?? `HTTP ${data.status} Error`;
   } else {
     loading = false;
   }

@@ -2,11 +2,12 @@ import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
 import { getUserFeedbackThanksView } from "../../query";
+import { IUserFeedbackThanksView } from "../../types/IUserFeedbackThanksView";
 
 export const getUserFeedbackThanksPage = async (
   segments?: string[],
   locale = "de"
-): Promise<(IAppPage & IPageConfig) | null> => {
+): Promise<(IUserFeedbackThanksView & IPageConfig) | null> => {
   if (!segments) return null;
 
   const content = await getUserFeedbackThanksView(

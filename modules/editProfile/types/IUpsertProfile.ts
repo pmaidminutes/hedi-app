@@ -1,8 +1,9 @@
+import { ErrorMap } from "@/modules/model";
 import { EditProfileFields, IEditProfile } from "./IEditProfile";
 
 export interface IUpsertProfile {
   success: boolean;
-  errors?: { [key: string]: string };
+  errors?: ErrorMap;
   profile?: IEditProfile;
   route?: string;
 }

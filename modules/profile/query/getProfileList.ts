@@ -1,4 +1,5 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { logAndFallback } from "@/modules/common/error";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { GraphQLClient } from "graphql-request";
 import {
   CaregiverFields,
@@ -22,25 +23,29 @@ export async function getProfileList(
   `;
 
   // gql endpoint should probably be user later, to respect
-  if (!client) client = await getServiceClient(GQLEndpoint.Internal);
+  // if (!client) client = await getServiceClient(GQLEndpoint.Internal);
 
-  if (!client)
-    //HACKY find a way to report the error
-    return [];
-
+  type subqueryType = {
+    caregivers: Profile[];
+    midwives: Profile[];
+    organisations: Profile[];
+    institutions: Profile[];
+  };
   const {
     caregivers,
     midwives,
     organisations,
     institutions,
-  } = await client.request<{
-    caregivers: Profile[];
-    midwives: Profile[];
-    organisations: Profile[];
-    institutions: Profile[];
-  }>(subquery, {
+  } = await serviceGQuery<subqueryType>(subquery, {
     lang,
-  });
+  }).then(data =>
+    logAndFallback(data, {
+      caregivers: [],
+      midwives: [],
+      organisations: [],
+      institutions: [],
+    } as subqueryType)
+  );
 
   const profiles: Profile[] = caregivers
     .concat(midwives)

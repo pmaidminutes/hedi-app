@@ -1,7 +1,8 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
+import { logAndNull } from "@/modules/common/error";
 
 export async function getSearchView(route: string): Promise<IAppPage | null> {
   const lang = getLangByRoute(route);
@@ -15,22 +16,15 @@ export async function getSearchView(route: string): Promise<IAppPage | null> {
       ${AppPagesGQL}
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  return client
-    .request<{ appPages: IAppPage[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .then(data => {
-      const view = data.appPages?.[0];
-      if (view && view.key === "search") {
-        view.type = "Search";
-        return view;
-      }
-      return null;
-    })
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => {
+    const view = logAndNull(data)?.appPages?.[0];
+    if (view && view.key === "search") {
+      view.type = "Search";
+      return view;
+    }
+    return null;
+  });
 }

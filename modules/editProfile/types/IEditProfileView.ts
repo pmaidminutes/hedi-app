@@ -17,7 +17,9 @@ export interface IEditProfileFormConfig {
   conditionalServiceGroups: Partial<Record<ProfileType, IServiceGroup[]>>;
 }
 
-export interface IEditProfileView extends IAppPage, IEditProfileFormConfig {}
+export interface IEditProfileView extends IAppPage, IEditProfileFormConfig {
+  links: (IEntity & { key: string })[];
+}
 
 export const extractConfig = (
   view: IEditProfileView

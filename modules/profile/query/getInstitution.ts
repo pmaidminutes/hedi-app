@@ -1,6 +1,7 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { IInstitution, InstitutionFields } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
+import { logAndNull } from "@/modules/common/error";
 
 export async function getInstitution(
   route: string
@@ -19,12 +20,8 @@ export async function getInstitution(
     }
   `;
 
-  const client = await getServiceClient();
-  return client
-    .request<{ institutions: IInstitution[] }>(query, { routes: [route], lang })
-    .then(data => data.institutions[0])
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ institutions: IInstitution[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.institutions[0] ?? null);
 }

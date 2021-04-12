@@ -1,5 +1,5 @@
-import { errorHandling, IHTTPError } from "@/modules/common/error";
-import { IContentEntry } from "../../types/types";
+import { responseToIHTTPError, IHTTPError } from "@/modules/common/error";
+import { IContentEntry } from "../../types";
 import {
   transformParamsToSolrRequestString,
   transformSolrResultToContentEntry,
@@ -31,11 +31,11 @@ export async function searchServer(
     }),
   });
 
+  if (response.status !== 200) return responseToIHTTPError(response);
   const jsonResponse = await response.json();
-  if (response.status !== 200) return errorHandling(response);
 
   const content = jsonResponse.response.docs;
-  if (!content?.length) return errorHandling(response);
+  if (!content?.length) return { status: 200, message: "No results yet!" };
 
   const highlightingContent = jsonResponse.highlighting;
   return content.map((entity: any) =>
@@ -44,6 +44,5 @@ export async function searchServer(
       lang,
       highlightingContent[entity.id]
     )
-  ) as Promise<IContentEntry[]>;
+  ) as IContentEntry[];
 }
-``;

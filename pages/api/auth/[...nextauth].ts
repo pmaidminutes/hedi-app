@@ -1,6 +1,3 @@
-import { NextApiRequest, NextApiResponse } from "next";
-import { withAuth } from "@/modules/auth/server";
+import { nextauthAPI } from "@/modules/auth/server/nextauthAPI";
 
-export default async (req: NextApiRequest, res: NextApiResponse) => {
-  return withAuth(req, res, true);
-};
+export default nextauthAPI;

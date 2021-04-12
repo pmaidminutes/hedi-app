@@ -1,8 +1,8 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
+import { logAndNull } from "@/modules/common/error";
 
 export async function getProfileStatic(lang: string): Promise<IAppPage | null> {
-  const client = await getServiceClient(GQLEndpoint.Internal);
   const query = gql`
     query getProfileStatic(
       $lang: String!
@@ -13,10 +13,9 @@ export async function getProfileStatic(lang: string): Promise<IAppPage | null> {
       }
     }
   `;
-  const { appPage } = await client.request<{
+  return serviceGQuery<{
     appPage: IAppPage[];
   }>(query, {
     lang,
-  });
-  return appPage[0] || null;
+  }).then(data => logAndNull(data)?.appPage?.[0] ?? null);
 }

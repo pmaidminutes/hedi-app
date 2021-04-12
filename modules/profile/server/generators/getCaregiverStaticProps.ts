@@ -2,6 +2,7 @@ import { segmentsToRoute } from "@/modules/common/utils";
 import { ICaregiver } from "../../types";
 import { getCaregiver } from "../../query";
 
+// UNUSED
 export const getStaticProps = async (
   segments?: string[],
   locale = "de"

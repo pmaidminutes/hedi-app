@@ -1,14 +1,26 @@
-import { getTextInputProps, getUIElementValue } from "@/modules/common/utils";
-import { IUIElementTexts } from "@/modules/model";
+import {
+  getTextInputProps,
+  getUIElementRedirectRoute,
+  getUIElementValue,
+} from "@/modules/common/utils";
+import { IEntity, IUIElementTexts } from "@/modules/model";
 
-export function getProfileViewData(elements: IUIElementTexts[], lang: string) {
+export function getProfileViewData(
+  elements: IUIElementTexts[],
+  links: (IEntity & { key: string })[],
+  lang: string
+) {
   const languagesHeadline = getTextInputProps("fluency", elements);
   const servicesHeadline = getTextInputProps("services", elements);
   const contactHeadline = getTextInputProps("contact", elements);
   const officeHrsHeadline = getTextInputProps("office_hrs", elements);
   const relatedHeadline = getTextInputProps("linked_profile", elements);
   const editBtnText = getUIElementValue("edit_button", elements);
-  const editProfileLink = "/" + lang + "/user/profile/edit";
+  const editProfileLink = getUIElementRedirectRoute(
+    "edit_redirect",
+    elements,
+    links
+  );
 
   return {
     languagesHeadline,

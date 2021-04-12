@@ -1,6 +1,8 @@
+import { ErrorMap } from ".";
+
 export interface IMutationResponse {
   success: boolean;
-  errors: { [key: string]: string };
+  errors: ErrorMap;
 }
 
 export const MutationResponseFields = `success

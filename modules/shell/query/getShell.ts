@@ -1,5 +1,6 @@
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { WithUIElementsFields } from "@/modules/model";
 import { IShell } from "../types";
 import { ShellLinkFields } from "../types/shellLinks";
@@ -33,24 +34,17 @@ export async function getShell(
       ${gqlQueries.join("\n")}
     }
   `;
-
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  return client
-    .request<Omit<IShell, "shellConfig"> & { shellAppPage: IAppPage[] }>(
-      query,
-      { lang }
-    )
-    .then(res => {
-      const { shellAppPage, ...rest } = res;
-      return {
-        shellConfig: shellAppPage?.[0].elements ?? [],
-        ...rest,
-      } as IShell;
-    })
-    .catch(e => {
-      console.warn(e);
-      return { links: [], languages: [], shellConfig: [] };
-    });
+  return serviceGQuery<
+    Omit<IShell, "shellConfig"> & { shellAppPage: IAppPage[] }
+  >(query, { lang }).then(data => {
+    const result = logAndNull(data);
+    if (!result) return { links: [], languages: [], shellConfig: [] };
+    const { shellAppPage, ...rest } = result;
+    return {
+      shellConfig: shellAppPage?.[0].elements ?? [],
+      ...rest,
+    } as IShell;
+  });
   // rest umbauen
 }
 

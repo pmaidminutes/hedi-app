@@ -1,9 +1,10 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
 import { simplePageKeys } from "../types/simplePageKeys";
 import { capitalizeFirstLetter } from "../helper/NamingHelpers";
+import { logAndNull } from "@/modules/common/error";
 
 export async function getSimplePageView(
   route: string
@@ -19,22 +20,15 @@ export async function getSimplePageView(
       ${AppPagesGQL}
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  return client
-    .request<{ appPages: IAppPage[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .then(data => {
-      const view = data.appPages?.[0];
-      if (view && simplePageKeys.includes(view.key)) {
-        view.type = capitalizeFirstLetter(view.key);
-        return view;
-      }
-      return null;
-    })
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => {
+    const view = logAndNull(data)?.appPages?.[0];
+    if (view && simplePageKeys.includes(view.key)) {
+      view.type = capitalizeFirstLetter(view.key);
+      return view;
+    }
+    return null;
+  });
 }

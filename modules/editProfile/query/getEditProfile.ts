@@ -1,5 +1,5 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
-import { getLangByRoute } from "@/modules/common/utils";
+import { gql, serviceGQuery } from "@/modules/graphql";
+import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { IEditProfileView } from "../types";
@@ -14,6 +14,7 @@ import {
   WithUIElementsFields,
 } from "@/modules/model";
 import { ProfileType } from "@/modules/profile/types";
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 
 export async function getEditProfile(
   route: string
@@ -29,25 +30,19 @@ export async function getEditProfile(
       ${AppPagesGQL}
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const { appPages } = await client
-    .request<{ appPages: IAppPage[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .catch(e => {
-      console.warn(e);
-      return { appPages: [] };
-    });
+  const appPage = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.appPages?.[0]);
 
-  if (!(appPages?.[0] && appPages[0].key === "editprofile")) return null;
+  if (!(appPage && appPage.key === "editprofile")) return null;
 
-  const appPage = appPages[0];
   appPage.type = "EditProfile";
-
+  const keys = [getUIElementValue("redirect", appPage.elements)];
   const subquery = gql`
     query getEditProfileChildren(
       $lang: String!
+      $keys:[String!]!
       $includeSelf: Boolean
     ) {
       subPages: appPagesByKey(keys: ["editprofile_Parent","editprofile_Caregiver","editprofile_Midwife"], lang: $lang) {
@@ -65,23 +60,42 @@ export async function getEditProfile(
       languageLevels: appPagesByKey(keys: ["languageLevels"], lang: $lang) {
         ${WithUIElementsFields}
       }
+      links: appPagesByKey(keys: $keys, lang: $lang) {
+        key
+        ${EntityFields}
+      }
     }
   `;
+
+  type subqueryType = {
+    subPages: IAppPage[];
+    domainOptions: IEntity[];
+    languageOptions: ILanguage[];
+    serviceGroups: IServiceGroup[];
+    languageLevels: { elements: IUIElementTexts[] }[];
+    links: (IEntity & { key: string })[];
+  };
+
   const {
     subPages,
     domainOptions,
     languageOptions,
     serviceGroups,
     languageLevels,
-  } = await client.request<{
-    subPages: IAppPage[];
-    domainOptions: IEntity[];
-    languageOptions: ILanguage[];
-    serviceGroups: IServiceGroup[];
-    languageLevels: { elements: IUIElementTexts[] }[];
-  }>(subquery, {
+    links,
+  } = await serviceGQuery<subqueryType>(subquery, {
     lang,
-  });
+    keys,
+  }).then(data =>
+    logAndFallback(data, {
+      subPages: [],
+      domainOptions: [],
+      languageOptions: [],
+      serviceGroups: [],
+      languageLevels: [],
+      links: [],
+    } as subqueryType)
+  );
 
   const conditionalElements = subPages.reduce((acc, page) => {
     const key = page.key.replace("editprofile_", "") as ProfileType;
@@ -103,5 +117,6 @@ export async function getEditProfile(
       languageLevels[0]?.elements.filter(
         elm => !isNaN(parseInt(elm.identifier))
       ) || [],
+    links,
   };
 }

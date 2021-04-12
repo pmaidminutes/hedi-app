@@ -1,4 +1,5 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
+import { sendAPIResult } from "@/modules/common/utils";
 import { IEntity } from "@/modules/model";
 import { NextApiHandler } from "next";
 import { getCurrentProfileEntity } from "../query";
@@ -21,6 +22,5 @@ export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async 
   }
 
   const profile = await getCurrentProfileEntity(lang, authHeader);
-  if (profile) res.status(200).json(profile);
-  else res.status(500).send(null);
+  sendAPIResult(res, profile);
 };

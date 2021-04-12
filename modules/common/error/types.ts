@@ -1,9 +1,9 @@
 export interface IHTTPError {
-  code: number;
-  text: string;
+  status: number;
+  message?: string;
 }
 
 export function IsIHTTPError(arg: any): arg is IHTTPError {
-  if (!arg || typeof arg !== "object") return false;
-  return "code" in arg && "text" in arg;
+  if (arg == null || typeof arg !== "object") return false;
+  return "status" in arg;
 }
