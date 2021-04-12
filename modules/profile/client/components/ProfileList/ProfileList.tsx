@@ -1,6 +1,6 @@
 import { ITyped } from "@/modules/model";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import type { ProfileListView } from "@/modules/profile/query";
+import type { ProfileListView } from "@/modules/profile/server";
 import { ProfileListItem } from "./ProfileListItem";
 import { useProfileList } from "../../hooks/useProfileList";
 
