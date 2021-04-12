@@ -25,7 +25,7 @@ async function getService(): Promise<IAuth | IHTTPError> {
     }
   } else {
     const cachedAuth = JSON.parse(process.env.SERVICE_AUTH);
-    const refreshedAuth = tryRefresh(cachedAuth);
+    const refreshedAuth = await tryRefresh(cachedAuth);
     if (cachedAuth !== refreshedAuth)
       process.env.SERVICE_AUTH = JSON.stringify(refreshedAuth);
     return refreshedAuth;
