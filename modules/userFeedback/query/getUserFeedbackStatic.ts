@@ -1,8 +1,9 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { IUserFeedbackView } from "../types";
 import { EntityFields } from "@/modules/model";
 import { getUIElementValue } from "@/modules/common/utils";
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 
 export async function getUserFeedbackStatic(
   lang: string
@@ -15,17 +16,12 @@ export async function getUserFeedbackStatic(
       appPages: appPagesByKey(keys: ["userfeedback"], lang: $lang) { ${AppPageFields} }
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const { appPages } = await client
-    .request<{ appPages: IAppPage[] }>(query, { lang })
-    .catch(e => {
-      console.warn(e);
-      return { appPages: [] };
-    });
+  const appPage = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    lang,
+  }).then(data => logAndNull(data)?.appPages?.[0]);
 
-  if (!(appPages?.[0] && appPages[0].key === "userfeedback")) return null;
+  if (!(appPage && appPage.key === "userfeedback")) return null;
 
-  const appPage = appPages[0];
   appPage.type = "UserFeedback";
 
   const subquery = gql`
@@ -38,11 +34,11 @@ export async function getUserFeedbackStatic(
       }
     }
   `;
-  const { subPages } = await client.request<{
+  const { subPages } = await serviceGQuery<{
     subPages: IAppPage[];
   }>(subquery, {
     lang,
-  });
+  }).then(data => logAndFallback(data, { subPages: [] as IAppPage[] }));
   const keys = [
     getUIElementValue("no_profile_redirect", appPage.elements),
     getUIElementValue("success_redirect", appPage.elements),
@@ -58,12 +54,14 @@ export async function getUserFeedbackStatic(
       }
     }
   `;
-  const linkResults = await client.request<Pick<IUserFeedbackView, "links">>(
+  const linkResults = await serviceGQuery<Pick<IUserFeedbackView, "links">>(
     queryForLinks,
     {
       lang,
       keys,
     }
+  ).then(data =>
+    logAndFallback(data, { links: [] } as Pick<IUserFeedbackView, "links">)
   );
   return {
     ...appPage,

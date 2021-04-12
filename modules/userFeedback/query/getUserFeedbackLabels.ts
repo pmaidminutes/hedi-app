@@ -1,5 +1,6 @@
+import { logAndNull } from "@/modules/common/error";
 import { IAppPage } from "@/modules/common/types";
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { IUIElementTexts, WithUIElementsFields } from "@/modules/model";
 
 // UNUSED
@@ -17,17 +18,8 @@ export async function getUserFeedbackLabels(
       }
   `;
 
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  return client
-    .request<{ appPagesByKey: IAppPage[] }>(query, {
-      keys: ["userfeedback"],
-      lang,
-    })
-    .then(data => {
-      return data.appPagesByKey[0]?.elements || null;
-    })
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ appPagesByKey: IAppPage[] }>(query, {
+    keys: ["userfeedback"],
+    lang,
+  }).then(data => logAndNull(data)?.appPagesByKey?.[0].elements ?? null);
 }

@@ -1,5 +1,6 @@
 import { join } from "path";
 import { GraphQLClient } from "graphql-request";
+import { AssertServerSide } from "@/modules/common/utils";
 
 enum GQLEndpoint {
   Public = "public",
@@ -8,11 +9,15 @@ enum GQLEndpoint {
 }
 
 const buildGQLURL = (endpoint = GQLEndpoint.Public) => {
-  if (!process.env.GQL_URL) throw new Error("FATAL: no server url specified");
+  if (AssertServerSide()) {
+    if (!process.env.GQL_URL) throw new Error("FATAL: no server url specified");
 
-  const clientURL = new URL(process.env.GQL_URL);
-  clientURL.pathname = join(clientURL.pathname, endpoint);
-  return clientURL;
+    const clientURL = new URL(process.env.GQL_URL);
+    clientURL.pathname = join(clientURL.pathname, endpoint);
+    return clientURL;
+  } else {
+    return new URL("https://projekt-hedi.de");
+  }
 };
 
 export const publicClient = new GraphQLClient(buildGQLURL().href);

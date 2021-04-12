@@ -1,7 +1,8 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { ILandingPageView } from "../types/ILandingPageView";
 import { EntityFields } from "@/modules/model";
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 
 export async function getLandingPageView(
   route: string,
@@ -17,18 +18,9 @@ export async function getLandingPageView(
         ${AppPageFields} 
       }
     }`;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const appPage = await client
-    .request<{ appPages: IAppPage[] }>(query, {
-      lang,
-    })
-    .then(data => {
-      return data.appPages?.[0];
-    })
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  const appPage = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    lang,
+  }).then(data => logAndNull(data)?.appPages?.[0] ?? null);
 
   if (!(appPage && appPage.key === "landingPage")) return null;
 
@@ -54,10 +46,15 @@ export async function getLandingPageView(
       }
     }
   `;
-  const subResults = await client.request<
+  const subResults = await serviceGQuery<
     Pick<ILandingPageView, "links" | "linksIfLoggedIn">
   >(subquery, {
     lang,
-  });
+  }).then(data =>
+    logAndFallback(data, { links: [], linksIfLoggedIn: [] } as Pick<
+      ILandingPageView,
+      "links" | "linksIfLoggedIn"
+    >)
+  );
   return { ...appPage, ...subResults };
 }

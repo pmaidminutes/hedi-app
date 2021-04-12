@@ -1,24 +1,28 @@
 import { NextApiHandler } from "next";
 import { querySSOLoginToken } from "../query";
 import { getUserAuthHeader } from "@/modules/auth/server";
-import { getClient, GQLEndpoint } from "@/modules/graphql";
+import { userGQuery } from "@/modules/graphql";
+import { IsIHTTPError } from "@/modules/common/error";
 
 const loginTokenAPI: NextApiHandler<any> = async (req, res) => {
   const authHeader = await getUserAuthHeader(req);
 
   if (authHeader) {
-    const gql = getClient(GQLEndpoint.User, authHeader);
-    const sessionResponse = await gql.rawRequest<{ msgSession: string }>(
+    userGQuery<{ msgSession: string }>(
+      authHeader,
       `query MSGSession { msgSession }`
-    );
-    if (sessionResponse.data) {
-      const tokenResponse = await querySSOLoginToken(
-        sessionResponse.data.msgSession
-      );
-      res.status(200).send(tokenResponse);
-    } else {
-      res.status(sessionResponse.status).json(sessionResponse.errors);
-    }
+    ).then(async data => {
+      if (IsIHTTPError(data)) {
+        if (data.errors) res.json(data.errors);
+        if (data.message) res.statusMessage = data.message;
+        res.status(data.status);
+        return;
+      } else {
+        const tokenResponse = await querySSOLoginToken(data.msgSession);
+        res.status(200).send(tokenResponse);
+        return;
+      }
+    });
   } else {
     res.status(401).send("Not Authenticated");
   }

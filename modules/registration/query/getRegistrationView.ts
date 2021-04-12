@@ -1,7 +1,8 @@
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
 import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { EntityFields } from "@/modules/model";
 import { IRegistrationView } from "../types";
 
@@ -19,19 +20,10 @@ export async function getRegistrationView(
       ${AppPagesGQL}
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const view = await client
-    .request<{ appPages: IAppPage[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .then(data => {
-      return data.appPages?.[0];
-    })
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  const view = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.appPages?.[0] ?? null);
   if (!(view && view.key === "registration")) {
     return null;
   }
@@ -50,12 +42,14 @@ export async function getRegistrationView(
       }
     }
   `;
-  const subResults = await client.request<Pick<IRegistrationView, "links">>(
+  const subResults = await serviceGQuery<Pick<IRegistrationView, "links">>(
     subquery,
     {
       lang,
       keys,
     }
+  ).then(data =>
+    logAndFallback(data, { links: [] } as Pick<IRegistrationView, "links">)
   );
   view.type = "Registration";
   return { ...view, ...subResults };

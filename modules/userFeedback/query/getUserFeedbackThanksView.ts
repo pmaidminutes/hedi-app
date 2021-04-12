@@ -1,9 +1,10 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
 import { IUserFeedbackThanksView } from "../types/IUserFeedbackThanksView";
 import { EntityFields } from "@/modules/model";
+import { logAndFallback } from "@/modules/common/error";
 
 export async function getUserFeedbackThanksView(
   route: string
@@ -19,16 +20,10 @@ export async function getUserFeedbackThanksView(
       ${AppPagesGQL}
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const { appPages } = await client
-    .request<{ appPages: IAppPage[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .catch(e => {
-      console.warn(e);
-      return { appPages: [] };
-    });
+  const { appPages } = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndFallback(data, { appPages: [] as IAppPage[] }));
 
   if (!(appPages?.[0] && appPages[0].key === "userfeedbackThanks")) return null;
   const appPage = appPages[0];
@@ -51,11 +46,16 @@ export async function getUserFeedbackThanksView(
         }
       }
     `;
-  const linkResults = await client.request<
+  const linkResults = await serviceGQuery<
     Pick<IUserFeedbackThanksView, "links">
   >(queryForLinks, {
     lang,
     keys,
-  });
+  }).then(data =>
+    logAndFallback(data, { links: [] } as Pick<
+      IUserFeedbackThanksView,
+      "links"
+    >)
+  );
   return { ...appPage, ...linkResults };
 }

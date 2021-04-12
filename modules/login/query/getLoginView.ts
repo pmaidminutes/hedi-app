@@ -1,9 +1,10 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
 import { ILoginView } from "../types";
 import { EntityFields } from "@/modules/model";
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 
 export async function getLoginView(route: string): Promise<ILoginView | null> {
   const lang = getLangByRoute(route);
@@ -17,19 +18,11 @@ export async function getLoginView(route: string): Promise<ILoginView | null> {
       ${AppPagesGQL}
     }
   `;
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const loginView = await client
-    .request<{ appPages: IAppPage[] }>(query, {
-      routes: [route],
-      lang,
-    })
-    .then(data => {
-      return data.appPages?.[0];
-    })
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  const loginView = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.appPages?.[0] ?? null);
+
   if (!(loginView && loginView.key === "login")) {
     return null;
   }
@@ -48,10 +41,12 @@ export async function getLoginView(route: string): Promise<ILoginView | null> {
       }
     }
   `;
-  const subResults = await client.request<Pick<ILoginView, "links">>(subquery, {
+  const subResults = await serviceGQuery<Pick<ILoginView, "links">>(subquery, {
     lang,
     keys,
-  });
+  }).then(data =>
+    logAndFallback(data, { links: [] } as Pick<ILoginView, "links">)
+  );
   {
     loginView.type = "Login";
     return { ...loginView, ...subResults };

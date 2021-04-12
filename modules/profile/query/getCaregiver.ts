@@ -1,6 +1,7 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { CaregiverFields, ICaregiver } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 
 export async function getCaregiver(route: string): Promise<ICaregiver | null> {
   const lang = getLangByRoute(route);
@@ -17,16 +18,8 @@ export async function getCaregiver(route: string): Promise<ICaregiver | null> {
     }
   `;
 
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const { caregivers } = await client
-    .request<{ caregivers: ICaregiver[] }>(query, { routes: [route], lang })
-    .catch(e => {
-      console.warn(e);
-      return { caregivers: [] };
-    });
-  if (!caregivers?.[0]) return null;
-
-  const caregiver = caregivers[0];
-
-  return { ...caregiver };
+  return serviceGQuery<{ caregivers: ICaregiver[] }>(query, {
+    routes: [route],
+    lang,
+  }).then<ICaregiver | null>(data => logAndNull(data)?.caregivers[0] ?? null);
 }

@@ -1,6 +1,7 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { ICategory, CategoryFields } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
+import { logAndNull } from "@/modules/common/error";
 
 export async function getCategory(route: string): Promise<ICategory | null> {
   const lang = getLangByRoute(route);
@@ -17,29 +18,21 @@ export async function getCategory(route: string): Promise<ICategory | null> {
     }
   `;
 
-  const client = await getServiceClient();
-
-  return (
-    client
-      .request<{ categories: ICategory[] }>(query, { routes: [route], lang })
-      // .then(data => data.categoryBySlug)
-      .then(data => filterUntranslatedArticles(data.categories[0]))
-      .catch(e => {
-        console.warn(e);
-        return null;
-      })
-  );
+  return serviceGQuery<{ categories: ICategory[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => filterUntranslatedArticles(logAndNull(data)?.categories[0]));
 }
 
 function filterUntranslatedArticles(
-  category: ICategory | null
+  category: ICategory | undefined
 ): ICategory | null {
   if (
     !category ||
     category.articles === null ||
     category.articles?.length === 0
   )
-    return category;
+    return null;
   category.articles = category.articles.filter(a => a.lang === category.lang);
   return category;
 }

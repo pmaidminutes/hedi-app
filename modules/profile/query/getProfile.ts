@@ -1,4 +1,4 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import {
   CaregiverFields,
   MidwifeFields,
@@ -15,6 +15,7 @@ import {
   WithUIElementsFields,
 } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
+import { logAndFallback, logAndNull } from "@/modules/common/error";
 
 export type ProfileView = Profile & {
   elements: IUIElementTexts[];
@@ -38,17 +39,11 @@ export async function getProfile(route: string): Promise<ProfileView | null> {
     }
   `;
 
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  const { profiles } = await client
-    .request<{ profiles: Profile[] }>(query, { routes: [route], lang })
-    .catch(e => {
-      console.warn(e);
-      return { profiles: [] };
-    });
-  if (!profiles?.[0]) return null;
-
-  const profile = profiles[0];
-  if (!ProfileTypeNameArray.includes(profile.type)) return null;
+  const profile = await serviceGQuery<{ profiles: Profile[] }>(query, {
+    routes: [route],
+    lang,
+  }).then(data => logAndNull(data)?.profiles?.[0]);
+  if (!profile || !ProfileTypeNameArray.includes(profile.type)) return null;
 
   const subquery = gql`
     query getProfileElements($lang: String!){
@@ -58,9 +53,9 @@ export async function getProfile(route: string): Promise<ProfileView | null> {
     }
   `;
 
-  const { uiTexts } = await client.request<{ uiTexts: IAppPage[] }>(subquery, {
+  const { uiTexts } = await serviceGQuery<{ uiTexts: IAppPage[] }>(subquery, {
     lang,
-  });
+  }).then(data => logAndFallback(data, { uiTexts: [] as IAppPage[] }));
   const uiTextElements = uiTexts[0].elements;
   const keys = [getUIElementValue("edit_redirect", uiTextElements)];
   const queryForLinks = gql`
@@ -74,12 +69,14 @@ export async function getProfile(route: string): Promise<ProfileView | null> {
       }
     }
   `;
-  const linkResults = await client.request<Pick<ProfileView, "links">>(
+  const linkResults = await serviceGQuery<Pick<ProfileView, "links">>(
     queryForLinks,
     {
       lang,
       keys,
     }
+  ).then(data =>
+    logAndFallback(data, { links: [] } as Pick<ProfileView, "links">)
   );
   return { ...profile, elements: uiTexts[0].elements, ...linkResults };
 }

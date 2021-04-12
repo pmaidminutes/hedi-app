@@ -1,6 +1,6 @@
 import { IAuthHeader } from "@/modules/auth/types";
-import { IHTTPError } from "@/modules/common/error";
-import { getClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
+import { gql, userGQuery } from "@/modules/graphql";
 import {
   EditProfileInput,
   IUpsertProfile,
@@ -24,21 +24,18 @@ export async function upsertProfileQuery(
       }
     }`;
 
-  const client = await getClient(GQLEndpoint.User, authHeader);
-  const result = await client
-    .request<{ upsertProfile: IUpsertProfile }>(mutation, input)
-    .then(data => {
-      if (
-        Array.isArray(data.upsertProfile?.errors) &&
-        !data.upsertProfile.errors.length
-      ) {
-        data.upsertProfile.errors = undefined;
-      }
-      return data.upsertProfile;
-    })
-    .catch(e => {
-      console.warn(e);
-      return { status: 500, message: "Internal Server Error" };
-    });
-  return result;
+  return userGQuery<{ upsertProfile: IUpsertProfile }>(
+    authHeader,
+    mutation,
+    input
+  ).then(data => {
+    if (IsIHTTPError(data)) return data;
+    if (
+      Array.isArray(data.upsertProfile?.errors) &&
+      !data.upsertProfile.errors.length
+    ) {
+      data.upsertProfile.errors = undefined;
+    }
+    return data.upsertProfile;
+  });
 }

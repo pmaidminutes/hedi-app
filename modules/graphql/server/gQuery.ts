@@ -6,7 +6,7 @@ import {
   RequestDocument,
   ClientError,
 } from "graphql-request/dist/types";
-import { getServiceAuth } from "@/modules/auth/server";
+import { getServiceAuth } from "@/modules/auth/server/serviceSession";
 import { IGQLError } from "./types";
 import { internalClient, publicClient, userClient } from "./clients";
 

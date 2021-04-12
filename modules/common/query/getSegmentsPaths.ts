@@ -1,7 +1,8 @@
-import { getServiceClient, gql, GQLEndpoint } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { IEntityLocalized } from "@/modules/model";
 import { routeToSegments } from "../utils";
 import { ISegmentPath } from "../types";
+import { logAndNull } from "../error";
 
 export async function getSegmentsPaths(
   gqlQueries: string[],
@@ -12,23 +13,18 @@ export async function getSegmentsPaths(
     ${gqlQueries.join("\n")}
   }`;
 
-  const client = await getServiceClient(GQLEndpoint.Internal);
-  if (!client) return [];
-
-  return client
-    .request<Record<string, IEntityLocalized[]>>(query, { lang })
-    .catch(error => {
-      console.error("error", error);
-      return [];
-    })
-    .then(response =>
-      Object.values(response).flatMap(ets =>
-        (Array.isArray(ets) ? ets : [ets])
-          .filter(e => e.lang === lang)
-          .map(e => ({
-            params: { segments: routeToSegments(e.route) },
-            locale: e.lang,
-          }))
-      )
-    );
+  return serviceGQuery<Record<string, IEntityLocalized[]>>(query, {
+    lang,
+  }).then(data =>
+    !logAndNull(data)
+      ? []
+      : Object.values(data).flatMap(ets =>
+          (Array.isArray(ets) ? ets : [ets])
+            .filter(e => e.lang === lang)
+            .map(e => ({
+              params: { segments: routeToSegments(e.route) },
+              locale: e.lang,
+            }))
+        )
+  );
 }

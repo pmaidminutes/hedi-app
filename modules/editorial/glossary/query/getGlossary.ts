@@ -1,7 +1,8 @@
-import { getServiceClient, gql } from "@/modules/graphql";
+import { gql, serviceGQuery } from "@/modules/graphql";
 import { GlossaryFields, IGlossary, IGlossaryGrouped } from "../types";
 import { glossaryToGroupedGlossary } from "./functions";
 import { getLangByRoute } from "@/modules/common/utils";
+import { logAndNull } from "@/modules/common/error";
 export async function getGlossary(
   route: string
 ): Promise<IGlossaryGrouped | null> {
@@ -19,14 +20,10 @@ export async function getGlossary(
     }
   `;
 
-  const client = await getServiceClient();
-  return client
-    .request<{ glossary: IGlossary }>(query, { route, lang })
-    .then(data =>
-      data.glossary ? glossaryToGroupedGlossary(data.glossary) : null
-    )
-    .catch(e => {
-      console.warn(e);
-      return null;
-    });
+  return serviceGQuery<{ glossary: IGlossary }>(query, { route, lang }).then(
+    data => {
+      const glossary = logAndNull(data)?.glossary;
+      return glossary ? glossaryToGroupedGlossary(glossary) : null;
+    }
+  );
 }
