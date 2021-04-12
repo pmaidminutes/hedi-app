@@ -1,3 +1,4 @@
+export * from "./TryUserFeedback";
 export * from "./UserFeedbackView";
 export * from "./MultipleUserFeedback/MultipleUserFeedback";
 export * from "./UserFeedbackEntry/UserFeedbackEntry";
