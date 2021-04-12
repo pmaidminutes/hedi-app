@@ -20,6 +20,10 @@ import { TryRegistration } from "@/modules/registration/client/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 
+import { EditProfilePathsGQL } from "@/modules/editProfile/query";
+import { getStaticProps as getEditProfilePage } from "@/modules/editProfile/server/generators";
+import { TryEditProfile } from "@/modules/editProfile/client/components";
+
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getProfilePage } from "@/modules/profile/server/generators";
 
@@ -65,6 +69,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     ProfileListPathsGQL,
     LoginViewPathsGQL,
     RegistrationViewPathsGQL,
+    EditProfilePathsGQL,
     UserFeedbackThanksViewPathsGQL,
     SimplePageViewPathsGQL,
     SearchViewPathsGQL,
@@ -100,6 +105,7 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
+    if (!content) content = await getEditProfilePage(params?.segments, locale);
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
     if (!content)
@@ -149,6 +155,7 @@ export default function segments(props: IPageProps<IEntity>) {
         <TryProfile content={content} key="profile" />
         <TryProfileList content={content} key="profileList" />
         <TryLogin content={content} key="login" />
+        <TryEditProfile content={content} key="editProfile" />
         <TryUserFeedbackThanks content={content} key="userfeedback" />
         <TrySimplePage content={content} key="simplepage" />
         <TryLandingPage content={content} key="landingpage" />
