@@ -1,11 +1,7 @@
-import { isICaregiver, isIMidwife, Profile } from "@/modules/profile/types";
+import { isICaregiver, isIMidwife } from "@/modules/profile/types";
 import { getUIElementValue } from "@/modules/common/utils";
-import { IUIElementTexts } from "@/modules/model";
+import { IProfileItem } from ".";
 
-export interface IProfileItem {
-  profile: Profile;
-  elements: IUIElementTexts[];
-}
 export function transformProfileItem(props: IProfileItem) {
   const { profile, elements } = props;
   const { route } = profile;

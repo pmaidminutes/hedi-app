@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  ILanguageSkillsProps,
-  transfromLanguageSkills,
-} from "./transformLanguageSkills";
+import { transfromLanguageSkills } from "./transformLanguageSkills";
 import { Tile } from "carbon-components-react";
 import { LanguageSkill } from "./LanguageSkill";
+import { ILanguageSkillsProps } from ".";
 
 export const LanguageSkills = (props: ILanguageSkillsProps) => {
   const { languageSkills, headline } = transfromLanguageSkills(props);
