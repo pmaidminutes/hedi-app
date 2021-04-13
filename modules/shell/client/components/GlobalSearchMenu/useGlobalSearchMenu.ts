@@ -11,6 +11,7 @@ export function useGlobalSearchMenu() {
 
   const handleSearchSubmit = (e: React.SyntheticEvent) => {
     e.preventDefault();
+    // TODO add dynamic route
     router.push("/search/" + searchText);
   };
 
