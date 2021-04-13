@@ -122,7 +122,13 @@ export const getStaticProps: GetStaticProps<
   // ShellStuff
 
   const shellKey = {
-    header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
+    header: [
+      "editprofile",
+      "viewprofile",
+      "profiles",
+      "userfeedback",
+      "search",
+    ],
     footer: ["imprint", "privacy"],
     userMenu: ["login", "logout", "viewprofile"],
   };
