@@ -64,7 +64,7 @@ export const UserFeedbackView = ({
       <UserFeedbackForm
         content={content}
         locale={locale}
-        profile={currentProfile}
+        profile={{ ...currentProfile, ...content.profileDefinition }}
         leftColumnProps={leftColumnProps}
         rightColumnProps={rightColumnProps}
         centerProps={centerProps}

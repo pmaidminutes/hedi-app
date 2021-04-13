@@ -5,7 +5,7 @@ import {
 } from "@/modules/common/utils";
 import { isICaregiver } from "../../../types";
 
-import { ProfileView } from "@/modules/profile/query";
+import { ProfileView } from "@/modules/profile/server";
 export interface IProfileViewProps {
   content: ProfileView;
 }
