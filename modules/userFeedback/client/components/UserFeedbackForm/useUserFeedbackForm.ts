@@ -22,7 +22,6 @@ import { headlineType } from "@/modules/profile/client/components/Services/trans
 export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   const {
     content,
-    locale,
     profile,
     leftColumnProps,
     rightColumnProps,
@@ -92,7 +91,7 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   const center = centerProps ?? { lg: { span: 8, offset: 4 } };
 
   return {
-    locale,
+    locale: content.lang,
     onSuccess,
     onError,
     onEmptyError,

@@ -4,10 +4,13 @@ import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "@/modules/userFeedback/client/request/getCurrentUserHasFeedback";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { IUserFeedbackThanksProps } from "./IUserFeedbackThanksProps";
+import { IUserFeedbackThanksView } from "@/modules/userFeedback/types";
 
-export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
-  const { content } = props;
+export function useFeedbackThanksView({
+  content,
+}: {
+  content: IUserFeedbackThanksView;
+}) {
   const { elements, links } = content;
 
   const [user, isLoading] = getUser();

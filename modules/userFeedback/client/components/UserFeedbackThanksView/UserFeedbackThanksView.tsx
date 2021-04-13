@@ -7,9 +7,11 @@ import {
   getUIElement,
   getUIElementRedirectRoute,
 } from "@/modules/common/utils";
-import { IUserFeedbackThanksProps } from "./IUserFeedbackThanksProps";
+import { IUserFeedbackThanksView } from "@/modules/userFeedback/types";
 
-export const UserFeedbackThanksView = (props: IUserFeedbackThanksProps) => {
+export const UserFeedbackThanksView = (props: {
+  content: IUserFeedbackThanksView;
+}) => {
   const { content, elements, links } = useFeedbackThanksView(props);
   const router = useRouter();
   const backRoute = getUIElementRedirectRoute("back_page", elements, links);
