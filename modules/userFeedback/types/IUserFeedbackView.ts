@@ -1,6 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
 import { IEntity } from "@/modules/model";
-import { ProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
+import { ProfileDefinition } from "@/modules/profile/types";
 
 export interface IUserFeedbackFormConfig {
   lang: string;

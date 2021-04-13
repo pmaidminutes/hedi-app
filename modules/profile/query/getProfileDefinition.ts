@@ -1,18 +1,10 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { getUIElementValue } from "@/modules/common/utils";
-import {
-  EntityFields,
-  IEntity,
-  IUIElementTexts,
-  WithUIElementsFields,
-} from "@/modules/model";
+import { EntityFields, WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 import { logAndFallback } from "@/modules/common/error";
+import { ProfileDefinition } from "../types";
 
-export type ProfileDefinition = {
-  elements: IUIElementTexts[];
-  links: (IEntity & { key: string })[];
-};
 export async function getProfileDefinition(
   lang: string
 ): Promise<ProfileDefinition | null> {

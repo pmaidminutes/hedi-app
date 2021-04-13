@@ -1,13 +1,7 @@
 import { getLangByRoute, segmentsToRoute } from "@/modules/common/utils";
-import { IPageConfig } from "@/modules/shell/types";
 import { getProfile } from "../../query";
-import {
-  getProfileDefinition,
-  ProfileDefinition,
-} from "../../query/getProfileDefinition";
-import { Profile } from "../../types";
-
-export type ProfileView = ProfileDefinition & Profile & IPageConfig;
+import { getProfileDefinition } from "../../query/getProfileDefinition";
+import { ProfileView } from "../../types";
 
 export const getProfilePage = async (
   segments?: string[],

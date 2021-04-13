@@ -8,7 +8,7 @@ import { BgImgContainer } from "@/modules/common/components";
 import { Services } from "../Services";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
-import { ProfileView } from "@/modules/profile/server";
+import { ProfileView } from "@/modules/profile/types";
 import { getProfileViewData } from "./getProfileViewData";
 import { transformProfile, IProfileViewProps } from "./transformProfile";
 import { useEditProfileButton, useServices } from "../../hooks";

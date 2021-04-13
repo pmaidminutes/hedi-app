@@ -4,10 +4,8 @@ import { IUserFeedbackView } from "../types";
 import { EntityFields } from "@/modules/model";
 import { getUIElementValue } from "@/modules/common/utils";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
-import {
-  getProfileDefinition,
-  ProfileDefinition,
-} from "@/modules/profile/query/getProfileDefinition";
+import { getProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
+import { ProfileDefinition } from "@/modules/profile/types";
 
 export async function getUserFeedbackStatic(
   lang: string
