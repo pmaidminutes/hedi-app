@@ -24,9 +24,12 @@ import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IAppPage } from "@/modules/common/types";
 
-export const TrySearch = (content: ITyped): JSX.Element | null =>
+export const TrySearch = ({
+  content,
+}: {
+  content: ITyped;
+}): JSX.Element | null =>
   content.type === "Search" ? <Search content={content as IAppPage} /> : null;
-
 interface ISearchProps {
   content: IAppPage;
 }
