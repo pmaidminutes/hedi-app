@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 
-export function globalSearchMenuFunctions() {
+export function useGlobalSearchMenu() {
   const router = useRouter();
   const [searchText, setSearchText] = useState("");
 

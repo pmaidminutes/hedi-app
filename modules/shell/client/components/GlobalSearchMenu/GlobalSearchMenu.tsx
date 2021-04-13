@@ -1,4 +1,4 @@
-import { globalSearchMenuFunctions } from "./globalSearchMenuFunctions";
+import { useGlobalSearchMenu } from "./useGlobalSearchMenu";
 import { useToggleVisibility } from "../../hooks";
 import { Search32, Close32 } from "@carbon/icons-react";
 import { Button, Form } from "carbon-components-react";
@@ -10,7 +10,7 @@ export const GlobalSearchMenu = () => {
     searchText,
     handleSearchInput,
     handleSearchSubmit,
-  } = globalSearchMenuFunctions();
+  } = useGlobalSearchMenu();
 
   return (
     <>
