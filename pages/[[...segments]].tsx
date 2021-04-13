@@ -35,7 +35,7 @@ import { getProfilePage } from "@/modules/profile/server/generators";
 // Components
 
 import { getShell } from "@/modules/shell/query";
-import { useShell } from "@/modules/shell/client/hooks";
+import { generateShellData } from "@/modules/shell/client/utils";
 import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
@@ -153,7 +153,7 @@ export const getStaticProps: GetStaticProps<
     userMenu: ["login", "logout", "viewprofile"],
   };
   const shellData = await getShell(locale, shellKey);
-  const shell = useShell(content, shellData);
+  const shell = generateShellData(content, shellData);
   return {
     props: { content, shell },
     revalidate: content.revalidate,

@@ -12,7 +12,11 @@ export interface IShellProps
   extends Partial<IAppStyled>,
     Pick<
       IPageConfig,
-      "redirectUnAuthorized" | "useHeader" | "useBreadCrumb" | "revalidate"
+      | "redirectUnAuthorized"
+      | "useHeader"
+      | "useBreadCrumb"
+      | "revalidate"
+      | "pageLayout"
     > {
   shellConfig: IUIElementTexts[];
   languageSwitchLinks: IEntity[];
@@ -30,6 +34,7 @@ export interface IPageConfig extends Partial<IAppStyled> {
   // TODO: Serverseitig
   useBreadCrumb?: boolean;
   revalidate?: boolean | number;
+  pageLayout?: PageLayout;
 }
 
 // export type shellRecords = "header" | "footer"
@@ -48,3 +53,5 @@ export interface IPageProps<T> {
   content: T;
   shell: Partial<IShellProps>;
 }
+
+export type PageLayout = "singleColumn" | "twoColumns";
