@@ -28,7 +28,9 @@ export function useSearch(
               "&location=" +
               location +
               "&distance=" +
-              distance
+              distance +
+              "&lang=" +
+              lang
           )
       : null,
     jsonFetcher

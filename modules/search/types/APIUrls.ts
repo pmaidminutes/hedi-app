@@ -1,2 +1,2 @@
 export const searchAPIUrl = "/api/search?searchText=";
-export const suggestAPIUrl = "/api/suggest/";
+export const suggestAPIUrl = "/api/suggest/?typeText=";

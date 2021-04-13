@@ -93,11 +93,7 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
   }
 
   return (
-    <SimplePageView
-      url={process.env.NEXT_PUBLIC_IMG_HEADER}
-      alt="Beschreibung des Bildes"
-      content={content}
-      rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
+    <SimplePageView content={content}>
       <Grid>
         <Row>
           <Column>
@@ -123,6 +119,7 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
             onChange={e => handleLocation(e.target.value)}
             //value={location}
           />
+
           <Slider
             ariaLabelInput="Slide for distance"
             id="slider"
@@ -202,15 +199,17 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
                     case "Institution":
                       {
                         //TODO if there will be too many locations due to state changes..
-                        locations.push({
-                          lat: entry.lat,
-                          long: entry.long,
-                          displayName: entry.displayName,
-                        } as Location);
+                        //TODO for now there is no latitude and longitude in the profiles
+                        if (entry.lat && entry.long)
+                          locations.push({
+                            lat: entry.lat,
+                            long: entry.long,
+                            displayName: entry.displayName,
+                          } as Location);
                       }
                       return (
                         <ProfileEntry
-                          {...entry} // HACK, just done to get it building, validate
+                          {...entry} // TODO, develop a result entry profile
                           key={entry.route + locale}
                         />
                       );
