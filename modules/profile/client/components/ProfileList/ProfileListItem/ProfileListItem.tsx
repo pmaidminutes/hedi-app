@@ -1,10 +1,12 @@
 import React from "react";
-import { transformProfileItem, IProfileItem } from "./transformProfileItem";
+import { transformProfileItem } from "./transformProfileItem";
 import { extractProfileEntry } from "./extractProfileEntry";
 import NextLink from "next/link";
 import { ClickableTile } from "carbon-components-react";
 import { ArrowRight24 } from "@carbon/icons-react";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
+import { IProfileItem } from ".";
+
 export const ProfileListItem = (props: IProfileItem) => {
   const {
     profile,

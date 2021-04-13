@@ -1,10 +1,8 @@
 import React from "react";
-import {
-  IRelatedProfilesProps,
-  transformRelatedProfiles,
-} from "./transformRelatedProfiles";
+import { transformRelatedProfiles } from "./transformRelatedProfiles";
 import { Grid, Row } from "carbon-components-react";
 import { RelatedProfile } from "./RelatedProfile";
+import { IRelatedProfilesProps } from ".";
 
 // TODO remove testdata
 const data = [

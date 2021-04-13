@@ -1,8 +1,5 @@
-import { ILanguageSkill } from "@/modules/model";
+import { ILanguageSkillProps } from ".";
 
-export interface ILanguageSkillProps {
-  languageSkill: ILanguageSkill;
-}
 export function transformLanguageSkill(props: ILanguageSkillProps) {
   const { languageSkill } = props;
 
