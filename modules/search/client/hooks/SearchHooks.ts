@@ -5,7 +5,8 @@ import { ICategory } from "@/modules/editorial/category/types";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types/glossary";
 import { IPage } from "@/modules/editorial/page/types";
 import useSWR from "swr";
-import { getSearchAPIUrl, getSuggestAPIUrl, ISuggestEntry } from "../../types";
+import { ISuggestEntry } from "../../types";
+import { searchAPIUrl, suggestAPIUrl } from "../../types";
 
 export function useSearch(
   searchText: string,
@@ -14,13 +15,12 @@ export function useSearch(
   distance: string,
   searchFilter?: string
 ) {
-  const apiPath = getSearchAPIUrl(lang) + "/";
+  const apiPath = searchAPIUrl;
   const swrResult = useSWR<
     IHTTPError | (IArticle | ICategory | IGlossaryTerm | IPage)[]
   >(
     searchText?.length > 3
       ? apiPath +
-          "?searchText=" +
           encodeURI(
             searchText +
               "&filter=" +
@@ -28,7 +28,9 @@ export function useSearch(
               "&location=" +
               location +
               "&distance=" +
-              distance
+              distance +
+              "&lang=" +
+              lang
           )
       : null,
     jsonFetcher
@@ -38,7 +40,7 @@ export function useSearch(
 
 export function useSuggest(suggestText?: string) {
   const swrResult = useSWR<IHTTPError | ISuggestEntry[]>(
-    suggestText ? getSuggestAPIUrl("en") + "/" + encodeURI(suggestText) : null,
+    suggestText ? suggestAPIUrl + encodeURI(suggestText) : null,
     url =>
       jsonFetcher<any>(url).then(
         response =>
