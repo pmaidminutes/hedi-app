@@ -19,13 +19,11 @@ import { useRouter } from "next/router";
 
 export const UserFeedbackView = ({
   content,
-  locale,
   leftColumnProps,
   rightColumnProps,
   centerProps,
 }: {
   content: IUserFeedbackView;
-  locale: string;
   leftColumnProps?: ColumnDefaultProps;
   rightColumnProps?: ColumnDefaultProps;
   centerProps?: ColumnDefaultProps;
@@ -33,7 +31,7 @@ export const UserFeedbackView = ({
   const [user, userIsLoading] = getUser();
   const [currentProfile, currentProfileIsLoading] = useCurrentProfile(
     user,
-    locale
+    content.lang
   );
   const router = useRouter();
   if (!currentProfileIsLoading && (!currentProfile || !currentProfile.route)) {
@@ -63,7 +61,7 @@ export const UserFeedbackView = ({
     <SimplePageView content={content}>
       <UserFeedbackForm
         content={content}
-        locale={locale}
+        locale={content.lang}
         profile={currentProfile}
         leftColumnProps={leftColumnProps}
         rightColumnProps={rightColumnProps}

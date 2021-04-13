@@ -1,15 +1,21 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
+import { IPageConfig } from "@/modules/shell/types";
 import { getEditProfile } from "../../query";
 
-// UNUSED
 export const getStaticProps = async (
   segments?: string[],
   locale = "de"
-): Promise<IAppPage | null> => {
+): Promise<(IAppPage & IPageConfig) | null> => {
   if (!segments) {
     return null;
   } else {
-    return getEditProfile(segmentsToRoute(segments, locale));
+    const content = await getEditProfile(segmentsToRoute(segments, locale));
+    if (!content) return null;
+    return {
+      ...content,
+      useHeader: "AUTHORIZED",
+      redirectUnAuthorized: "/" + locale,
+    };
   }
 };
