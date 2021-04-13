@@ -1,6 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
-import { getLandingPageView } from "@/modules/landingPage/query";
+import { getLandingPageView } from "@/modules/landingPage/client/request";
 import { IPageConfig } from "@/modules/shell/types";
 import { landingPagePaths } from "../../types";
 
