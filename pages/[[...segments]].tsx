@@ -37,6 +37,11 @@ import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
+
+import { UserFeedbackViewPathsGQL } from "@/modules/userFeedback/query";
+import { getUserFeedbackPage } from "@/modules/userFeedback/server/generators";
+import { TryUserFeedback } from "@/modules/userFeedback/client/components";
+
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
@@ -70,6 +75,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     LoginViewPathsGQL,
     RegistrationViewPathsGQL,
     EditProfilePathsGQL,
+    UserFeedbackViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
     SimplePageViewPathsGQL,
     SearchViewPathsGQL,
@@ -108,6 +114,7 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getEditProfilePage(params?.segments, locale);
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
+    if (!content) content = await getUserFeedbackPage(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksPage(params?.segments, locale);
     if (!content)
@@ -156,6 +163,7 @@ export default function segments(props: IPageProps<IEntity>) {
         <TryProfileList content={content} key="profileList" />
         <TryLogin content={content} key="login" />
         <TryEditProfile content={content} key="editProfile" />
+        <TryUserFeedback content={content} key="userfeedback" />
         <TryUserFeedbackThanks content={content} key="userfeedback" />
         <TrySimplePage content={content} key="simplepage" />
         <TryLandingPage content={content} key="landingpage" />
