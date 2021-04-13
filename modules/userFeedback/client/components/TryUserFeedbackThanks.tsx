@@ -1,4 +1,3 @@
-import { IAppPage } from "@/modules/common/types";
 import { ITyped } from "@/modules/model";
 import { IUserFeedbackThanksView } from "../../types";
 import { UserFeedbackThanksView } from "./UserFeedbackThanksView";

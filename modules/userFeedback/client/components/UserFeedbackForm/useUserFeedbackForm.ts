@@ -9,25 +9,15 @@ import {
 } from "@/modules/profile/client/components/Profile";
 import { getUIElementRedirectRoute } from "@/modules/common/utils";
 
-// types
-import { ColumnDefaultProps } from "carbon-components-react";
-import { IUserFeedbackView } from "@/modules/userFeedback/types";
-import { ProfileView } from "@/modules/profile/query";
 import { IAppPage } from "@/modules/common/types";
 
-import { headlineType } from "@/modules/profile/client/components/Services/transformServices";
-export interface IUserFeedbackFormProps {
-  content: IUserFeedbackView;
-  locale: string;
-  profile: ProfileView;
-  leftColumnProps?: ColumnDefaultProps;
-  rightColumnProps?: ColumnDefaultProps;
-  centerProps?: ColumnDefaultProps;
-}
 // Constants
 const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
 // utils
 import { getUIElement } from "@/modules/common/utils";
+// types
+import { IUserFeedbackFormProps } from "./IUserFeedbackFormProps";
+import { headlineType } from "@/modules/profile/client/components/Services/transformServices";
 
 export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   const {

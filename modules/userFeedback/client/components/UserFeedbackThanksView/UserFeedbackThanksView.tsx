@@ -1,15 +1,13 @@
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { Button } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
-import {
-  IUserFeedbackThanksProps,
-  useFeedbackThanksView,
-} from "./useFeedbackThanksView";
+import { useFeedbackThanksView } from "./useFeedbackThanksView";
 import { useRouter } from "next/router";
 import {
   getUIElement,
   getUIElementRedirectRoute,
 } from "@/modules/common/utils";
+import { IUserFeedbackThanksProps } from "./IUserFeedbackThanksProps";
 
 export const UserFeedbackThanksView = (props: IUserFeedbackThanksProps) => {
   const { content, elements, links } = useFeedbackThanksView(props);

@@ -1,15 +1,10 @@
 import { getUser } from "@/modules/auth/client";
-import { IAppPage } from "@/modules/common/types";
 import { getUIElementRedirectRoute } from "@/modules/common/utils";
 import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "@/modules/userFeedback/client/request/getCurrentUserHasFeedback";
-import { IUserFeedbackThanksView } from "@/modules/userFeedback/types/IUserFeedbackThanksView";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-
-export interface IUserFeedbackThanksProps {
-  content: IUserFeedbackThanksView;
-}
+import { IUserFeedbackThanksProps } from "./IUserFeedbackThanksProps";
 
 export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
   const { content } = props;
