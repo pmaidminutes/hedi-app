@@ -1,6 +1,6 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
-import { getLandingPageView } from "@/modules/landingPage/client/request";
+import { getLandingPageView } from "../../client/request";
 import { IPageConfig } from "@/modules/shell/types";
 import { landingPagePaths } from "../../types";
 
@@ -24,8 +24,13 @@ export const getStaticProps = async (
 
   if (!content) return null;
 
+  const shell: IPageConfig = {
+    useHeader: "AUTHORIZED",
+    pageLayout: "twoColumns",
+  };
+
   return {
     ...content,
-    useHeader: "AUTHORIZED",
+    ...shell,
   };
 };
