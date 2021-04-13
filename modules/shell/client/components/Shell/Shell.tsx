@@ -11,7 +11,7 @@ import { IPageProps } from "../../../types";
 export const Shell: React.FC<IPageProps<IEntity>> = props => {
   const { content, shell, children } = props;
   const { label } = transformShell(content);
-  const { hasPageAccess, hediStyle, hasHeader } = useShell(shell);
+  const { hasPageAccess, hediStyle, hasHeader, pageLayout } = useShell(shell);
 
   return (
     <div className={hediStyle}>
@@ -21,7 +21,13 @@ export const Shell: React.FC<IPageProps<IEntity>> = props => {
       {hasPageAccess ? (
         <>
           {hasHeader ? <Header {...shell} /> : null}
-          <Content>{children}</Content>
+          <Content>
+            {pageLayout ? (
+              <div className={pageLayout}>{children}</div>
+            ) : (
+              <>{children}</>
+            )}
+          </Content>
           <Footer {...shell} />
           <ScrollToTop />
         </>
