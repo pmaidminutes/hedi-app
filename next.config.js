@@ -13,4 +13,11 @@ module.exports = {
       'testassets.projekt-hedi.de',
     ],
   },
+  webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
+    if (!dev) {
+      // ignore all files in a playground folder (tsx and api/ts)
+      config.plugins.push(new webpack.IgnorePlugin(/\/playground\//));
+    }
+    return config;
+  },
 }

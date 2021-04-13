@@ -25,6 +25,10 @@ import { TryRegistration } from "@/modules/registration/client/components";
 import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 
+import { EditProfilePathsGQL } from "@/modules/editProfile/query";
+import { getStaticProps as getEditProfilePage } from "@/modules/editProfile/server/generators";
+import { TryEditProfile } from "@/modules/editProfile/client/components";
+
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 import { getProfilePage } from "@/modules/profile/server/generators";
 
@@ -38,12 +42,21 @@ import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
+
+import { UserFeedbackViewPathsGQL } from "@/modules/userFeedback/query";
+import { getUserFeedbackPage } from "@/modules/userFeedback/server/generators";
+import { TryUserFeedback } from "@/modules/userFeedback/client/components";
+
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
+import { SearchViewPathsGQL } from "@/modules/search/query";
+import { getStaticProps as getStaticSearchViewProps } from "@/modules/search/server/generators";
+
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { landingPagePaths } from "@/modules/landingPage/types";
+import { TrySearch } from "@/modules/search/client/components";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -66,9 +79,12 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     ProfileListPathsGQL,
     LoginViewPathsGQL,
     RegistrationViewPathsGQL,
+    EditProfilePathsGQL,
     ViewProfilePathsGQL,
+    UserFeedbackViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
     SimplePageViewPathsGQL,
+    SearchViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -101,13 +117,17 @@ export const getStaticProps: GetStaticProps<
     if (!content) content = await getLoginViewProps(params?.segments, locale);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
+    if (!content) content = await getEditProfilePage(params?.segments, locale);
     if (!content) content = await getViewProfilePage(params?.segments, locale);
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
+    if (!content) content = await getUserFeedbackPage(params?.segments, locale);
     if (!content)
       content = await getUserFeedbackThanksPage(params?.segments, locale);
     if (!content)
       content = await getStaticSimplePageViewProps(params?.segments, locale);
+    if (!content)
+      content = await getStaticSearchViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
@@ -122,7 +142,13 @@ export const getStaticProps: GetStaticProps<
   // ShellStuff
 
   const shellKey = {
-    header: ["editprofile", "viewprofile", "profiles", "userfeedback"],
+    header: [
+      "editprofile",
+      "viewprofile",
+      "profiles",
+      "userfeedback",
+      "search",
+    ],
     footer: ["imprint", "privacy"],
     userMenu: ["login", "logout", "viewprofile"],
   };
@@ -144,9 +170,12 @@ export default function segments(props: IPageProps<IEntity>) {
         <TryProfile content={content} key="profile" />
         <TryProfileList content={content} key="profileList" />
         <TryLogin content={content} key="login" />
+        <TryEditProfile content={content} key="editProfile" />
+        <TryUserFeedback content={content} key="userfeedback" />
         <TryUserFeedbackThanks content={content} key="userfeedback" />
         <TrySimplePage content={content} key="simplepage" />
         <TryLandingPage content={content} key="landingpage" />
+        <TrySearch content={content} key="search" />
       </>
     </Shell>
   );
