@@ -36,6 +36,9 @@ import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simple
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
+import { SearchViewPathsGQL } from "@/modules/search/query";
+import { getStaticProps as getStaticSearchViewProps } from "@/modules/search/server/generators";
+
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
 import { landingPagePaths } from "@/modules/landingPage/types";
@@ -64,6 +67,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     RegistrationViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
     SimplePageViewPathsGQL,
+    SearchViewPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -102,6 +106,8 @@ export const getStaticProps: GetStaticProps<
       content = await getUserFeedbackThanksPage(params?.segments, locale);
     if (!content)
       content = await getStaticSimplePageViewProps(params?.segments, locale);
+    if (!content)
+      content = await getStaticSearchViewProps(params?.segments, locale);
   }
   if (!content) {
     content = await getLandingPageViewProps(params?.segments, locale);
