@@ -63,7 +63,6 @@ export const UserFeedbackView = ({
     <SimplePageView content={content}>
       <UserFeedbackForm
         content={content}
-        locale={locale}
         profile={currentProfile}
         leftColumnProps={leftColumnProps}
         rightColumnProps={rightColumnProps}
