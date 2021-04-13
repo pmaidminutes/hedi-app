@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
+import { AssertClientSide } from "@/modules/common/utils";
 
 export interface IScroll {
   behavior?: ScrollBehavior;
@@ -11,12 +12,14 @@ export function useScrollToTop({
   top = 0,
   behavior = "smooth",
 }: IScroll) {
-  let [isVisible, setIsVisible] = useState<boolean>(false);
+  const router = useRouter();
+  const [isVisible, setIsVisible] = useState<boolean>(false);
+  // in %
   const [currenPosition, setCurrentPosition] = useState(0);
   const [isAtTheBottom, setIsAtTheBottom] = useState(false);
 
   const handleRouteChangeComplete = () => {
-    if (typeof window !== "undefined") {
+    if (AssertClientSide()) {
       window.scrollTo({ top, left, behavior });
     }
   };
@@ -26,13 +29,8 @@ export function useScrollToTop({
     if (isAtTheBottom && currenPosition < 99) setIsAtTheBottom(false);
   }, [currenPosition]);
 
-  const router = useRouter();
-  const { locale } = router;
-
-  const buttonText = locale === "de" ? "nach oben" : "back to top";
-
   const handleScroll = () => {
-    if (typeof window !== "undefined" && typeof document !== "undefined") {
+    if (AssertClientSide() && typeof document !== "undefined") {
       const totalheight = document.documentElement.scrollHeight;
       const scrollheight = window.pageYOffset + window.innerHeight;
       setCurrentPosition((scrollheight / totalheight) * 100);
@@ -41,7 +39,7 @@ export function useScrollToTop({
   };
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
+    if (AssertClientSide()) {
       window.addEventListener("scroll", handleScroll);
     }
 
@@ -53,7 +51,6 @@ export function useScrollToTop({
 
   return {
     isAtTheBottom,
-    buttonText,
     isVisible,
     handleRouteChangeComplete,
   };

@@ -1,6 +1,6 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
-import { ILandingPageView } from "../types/ILandingPageView";
+import { ILandingPageView } from "../../types/ILandingPageView";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
 

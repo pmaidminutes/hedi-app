@@ -1,6 +1,6 @@
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
 
-export function useLandingPage(content: ILandingPageView) {
+export function transformLandingPage(content: ILandingPageView) {
   const { linksIfLoggedIn, links } = content;
 
   const isLastElement = (count: number, array: any[]) => {
