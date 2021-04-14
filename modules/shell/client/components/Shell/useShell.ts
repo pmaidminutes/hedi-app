@@ -5,7 +5,13 @@ import { checkAccess } from "../../../utils";
 import { usePageAccess } from "./usePageAccess";
 
 export function useShell(shell: Partial<IShellProps>) {
-  const { useHeader, appstyle, redirectUnAuthorized, pageLayout } = shell;
+  const {
+    useHeader,
+    appstyle,
+    redirectUnAuthorized,
+    pageLayout,
+    layoutImg,
+  } = shell;
 
   const [hasHeader, setHasHeader] = useState(useHeader === true);
   const [hediStyle, setHediStyle] = useState("");
@@ -26,5 +32,6 @@ export function useShell(shell: Partial<IShellProps>) {
     hediStyle,
     hasHeader,
     pageLayout,
+    layoutImg,
   };
 }
