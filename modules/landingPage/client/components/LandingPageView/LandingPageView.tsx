@@ -1,7 +1,6 @@
 import { getUser } from "@/modules/auth/client";
 import { getUIElement } from "@/modules/common/utils";
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
-import { SimplePageView } from "@/modules/simplePage/client/components";
 import { Button, FormLabel, Row, Column } from "carbon-components-react";
 import { transformLandingPage } from "./transformLandingPage";
 
@@ -11,10 +10,7 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
     content
   );
   return (
-    <SimplePageView
-      url={process.env.NEXT_PUBLIC_IMG_HEADER}
-      alt="Beschreibung des Bildes"
-      content={content}>
+
       <Row>
         {user
           ? linksIfLoggedIn.map(link => (
@@ -52,6 +48,6 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
               </Column>
             ))}
       </Row>
-    </SimplePageView>
+
   );
 };

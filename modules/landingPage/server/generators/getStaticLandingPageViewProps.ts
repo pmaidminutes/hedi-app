@@ -23,10 +23,15 @@ export const getStaticProps = async (
   );
 
   if (!content) return null;
+  const layoutImg = {
+    alt: "Beschreibung",
+    src: "/svg/baby_simple_blue.svg",
+  };
 
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
-    pageLayout: "twoColumns",
+    pageLayout: "imageAndColumn",
+    layoutImg,
   };
 
   return {
