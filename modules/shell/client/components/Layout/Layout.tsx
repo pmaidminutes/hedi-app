@@ -1,8 +1,9 @@
 import Image from "next/image";
-import { transformLayout, ILayout } from "./transformLayout";
+import { transformLayout } from "./transformLayout";
+import {  ILayoutProps } from "./types";
 import { SingleColumn, ImageAndColumn } from "./templates";
 
-export const Layout: React.FC<ILayout> = props => {
+export const Layout: React.FC<ILayoutProps> = props => {
   const {
     left,
     layoutImg,
@@ -18,6 +19,7 @@ export const Layout: React.FC<ILayout> = props => {
     children,
     groupClass,
   } = transformLayout(props);
+  console.log({wrapperClass})
 
   return (
     <div className={wrapperClass}>

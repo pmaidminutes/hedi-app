@@ -1,44 +1,19 @@
-import { IAppPage } from "@/modules/common/types";
-import { ColumnDefaultProps } from "carbon-components-react";
-import React from "react";
-import { PageLayout, ILayoutImage } from "../../../types";
+import { ILayoutProps } from "./types";
 
-
-
-export interface ILayout {
-  content: IAppPage;
-  layoutImg?: ILayoutImage;
-  customKey?: string;
-  condensed?: boolean;
-  narrow?: boolean;
-  leftColumnProps?: ColumnDefaultProps;
-  rightColumnProps?: ColumnDefaultProps;
-  pageLayout: PageLayout;
-  children: React.ReactNode;
-}
-
-export interface ILayoutBasicTemplate {
-  headline: string;
-  body: string;
-  groupClass: string;
-  condensed?: boolean;
-  narrow?: boolean;
-}
-
-export function transformLayout(props: ILayout) {
+export function transformLayout(props: ILayoutProps) {
+  const { content, layout, children } = props;
+  const { posterImage, key, longTitle, label, body } = content;
   const {
-    content,
-    layoutImg,
-    customKey,
     leftColumnProps,
     rightColumnProps,
+    customKey,
     pageLayout,
     condensed,
     narrow,
-    children
-  } = props;
-  const { posterImage, key, longTitle, label, body } = content;
+    layoutImg,
+  } = layout;
 
+  console.log({ customKey }, { key });
   const posterImgSrc = process.env.NEXT_PUBLIC_ASSETS_URL + posterImage.route;
 
   const left = leftColumnProps ?? { sm: 0, md: 2, lg: 5, xlg: 4 };
@@ -64,6 +39,6 @@ export function transformLayout(props: ILayout) {
     body,
     headline: longTitle || label,
     children,
-    groupClass
+    groupClass,
   };
 }

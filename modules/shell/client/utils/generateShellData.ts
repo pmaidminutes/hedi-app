@@ -15,8 +15,7 @@ export function generateShellData(
     revalidate,
     useHeader,
     redirectUnAuthorized,
-    pageLayout,
-    layoutImg
+    layout,
   } = content;
   const { languages, shellConfig, ...links } = shellData;
 
@@ -37,8 +36,7 @@ export function generateShellData(
   if (appstyle) setProperty(shellProps, "appstyle", appstyle);
   if (revalidate) setProperty(shellProps, "revalidate", revalidate);
   if (useBreadCrumb) setProperty(shellProps, "useBreadCrumb", useBreadCrumb);
-  if (pageLayout) setProperty(shellProps, "pageLayout", pageLayout);
-  if (layoutImg) setProperty(shellProps, "layoutImg", layoutImg);
+  if (layout) setProperty(shellProps, "layout", layout);
 
   return shellProps;
 }

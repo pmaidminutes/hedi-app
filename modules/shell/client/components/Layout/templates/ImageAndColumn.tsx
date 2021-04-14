@@ -1,5 +1,4 @@
-import { ILayoutBasicTemplate } from "../transformLayout";
-import { ILayoutImage } from "../../../../types";
+import { ILayoutImage, ILayoutBasicTemplate } from "../types";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { Column, ColumnDefaultProps, Grid, Row } from "carbon-components-react";
 

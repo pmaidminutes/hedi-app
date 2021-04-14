@@ -10,15 +10,12 @@ import { IPageProps } from "../../../types";
 import { IAppPage } from "@/modules/common/types";
 
 export const Shell: React.FC<IPageProps<IAppPage>> = props => {
+  console.log({ props });
   const { content, shell, children } = props;
   const { label } = transformShell(content);
-  const {
-    hasPageAccess,
-    hediStyle,
-    hasHeader,
-    pageLayout,
-    layoutImg,
-  } = useShell(shell);
+  const { hasPageAccess, hediStyle, hasHeader, pageLayout, layout } = useShell(
+    shell
+  );
 
   return (
     <div className={hediStyle}>
@@ -29,11 +26,8 @@ export const Shell: React.FC<IPageProps<IAppPage>> = props => {
         <>
           {hasHeader ? <Header {...shell} /> : null}
           <Content>
-            {pageLayout ? (
-              <Layout
-                pageLayout={pageLayout}
-                layoutImg={layoutImg}
-                content={content}>
+            {pageLayout && layout ? (
+              <Layout layout={layout} content={content}>
                 {children}
               </Layout>
             ) : (
