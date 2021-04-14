@@ -11,12 +11,7 @@ export const LoginView = ({ content }: { content: ILoginView }) => {
   const { backButtonProps, redirectUrl } = useLoginView(content);
 
   return (
-    <SimplePageView
-      content={content}
-      url={process.env.NEXT_PUBLIC_IMG_HEADER}
-      alt="Beschreibung des Bildes"
-      customKey="login-form"
-      rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
+    <>
       <Row>
         <Column>
           <LoginForm {...content} redirectUrl={redirectUrl} />
@@ -43,6 +38,6 @@ export const LoginView = ({ content }: { content: ILoginView }) => {
           <Button kind="ghost" renderIcon={ArrowLeft16} {...backButtonProps} />
         </Column>
       </Row>
-    </SimplePageView>
+    </>
   );
 };
