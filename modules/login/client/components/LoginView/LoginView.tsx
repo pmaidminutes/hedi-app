@@ -1,5 +1,4 @@
 import { Button, Column, FormLabel, Row } from "carbon-components-react";
-import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
 import { hasElement, getUIElement } from "@/modules/common/utils";
 

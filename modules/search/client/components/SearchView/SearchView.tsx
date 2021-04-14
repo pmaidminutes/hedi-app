@@ -23,7 +23,6 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IAppPage } from "@/modules/common/types";
-import { SimplePageView } from "@/modules/simplePage/client/components";
 interface ISearchProps {
   content: IAppPage;
 }
