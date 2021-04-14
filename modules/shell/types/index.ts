@@ -6,7 +6,6 @@ import {
   ILanguage,
   IUIElementTexts,
 } from "@/modules/model";
-import { IAppPage } from "@/modules/common/types";
 
 export interface IShellProps
   extends Partial<IAppStyled>,
@@ -17,6 +16,7 @@ export interface IShellProps
       | "useBreadCrumb"
       | "revalidate"
       | "pageLayout"
+      | "layoutImg"
     > {
   shellConfig: IUIElementTexts[];
   languageSwitchLinks: IEntity[];
@@ -35,7 +35,14 @@ export interface IPageConfig extends Partial<IAppStyled> {
   useBreadCrumb?: boolean;
   revalidate?: boolean | number;
   pageLayout?: PageLayout;
+  layoutImg?: ILayoutImage;
 }
+
+export interface ILayoutImage {
+  src?: string;
+  alt?: string;
+}
+
 
 // export type shellRecords = "header" | "footer"
 
@@ -54,4 +61,4 @@ export interface IPageProps<T> {
   shell: Partial<IShellProps>;
 }
 
-export type PageLayout = "singleColumn" | "twoColumns";
+export type PageLayout = "singleColumn" | "imageAndColumn";
