@@ -3,6 +3,7 @@ import { segmentsToRoute } from "@/modules/common/utils";
 import { getLandingPageView } from "../../client/request";
 import { IPageConfig } from "@/modules/shell/types";
 import { landingPagePaths } from "../../types";
+import { ILayout, ILayoutProps } from "@/modules/shell/client/components/Layout/types";
 
 export const getStaticProps = async (
   segments?: string[],
@@ -28,10 +29,13 @@ export const getStaticProps = async (
     src: "/svg/baby_simple_blue.svg",
   };
 
-  const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
+  const layout: ILayout = {
     pageLayout: "imageAndColumn",
     layoutImg,
+  };
+  const shell: IPageConfig = {
+    useHeader: "AUTHORIZED",
+    layout
   };
 
   return {
