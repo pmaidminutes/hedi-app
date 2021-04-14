@@ -1,6 +1,6 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
-import { ISegmentParam } from "@/modules/common/types";
+import { IAppPage, ISegmentParam } from "@/modules/common/types";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
 import { LoginViewPathsGQL } from "@/modules/login/query";
@@ -160,7 +160,7 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default function segments(props: IPageProps<IEntity>) {
+export default function segments(props: IPageProps<IAppPage>) {
   const { content } = props;
   return (
     <Shell {...props}>
