@@ -14,12 +14,10 @@ export const EditProfileView = ({ content }: { content: IEditProfileView }) => {
     user?.name
   );
   return (
-    <SimplePageView content={content}>
-      <EditProfileForm
-        className="hedi--edit-profile"
-        config={config}
-        {...editFormProps}
-      />
-    </SimplePageView>
+    <EditProfileForm
+      className="hedi--edit-profile"
+      config={config}
+      {...editFormProps}
+    />
   );
 };

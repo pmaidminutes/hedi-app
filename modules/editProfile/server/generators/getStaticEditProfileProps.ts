@@ -12,10 +12,14 @@ export const getStaticProps = async (
   } else {
     const content = await getEditProfile(segmentsToRoute(segments, locale));
     if (!content) return null;
-    return {
-      ...content,
+    const shell: IPageConfig = {
       useHeader: "AUTHORIZED",
       redirectUnAuthorized: "/" + locale,
+      pageLayout: "singleColumn"
+    };
+    return {
+      ...content,
+      ...shell,
     };
   }
 };
