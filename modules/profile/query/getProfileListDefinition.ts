@@ -1,19 +1,13 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { Profile } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { IAppPage } from "@/modules/common/types";
 import { AppPagesGQL } from "@/modules/common/query";
-import { getProfileList } from "./getProfileList";
 import { WithUIElementsFields } from "@/modules/model";
-import { logAndFallback, logAndNull } from "@/modules/common/error";
+import { logAndFallback } from "@/modules/common/error";
 
-export type ProfileListView = IAppPage & {
-  profiles: Profile[];
-};
-
-export async function getProfileListView(
+export async function getProfileListDefinition(
   route: string
-): Promise<ProfileListView | null> {
+): Promise<IAppPage | null> {
   const lang = getLangByRoute(route);
 
   const query = gql`
@@ -42,14 +36,14 @@ export async function getProfileListView(
       elements:appPagesByKey(keys: ["viewprofile"], lang: $lang) { ${WithUIElementsFields} }
   }`;
 
-  const [profiles, { elements }] = await Promise.all([
-    getProfileList(lang ?? "de"),
-    serviceGQuery<{ elements: IAppPage[] }>(elementsQuery, {
+  const { elements } = await serviceGQuery<{ elements: IAppPage[] }>(
+    elementsQuery,
+    {
       lang,
-    }).then(data => logAndFallback(data, { elements: [] as IAppPage[] })),
-  ]);
+    }
+  ).then(data => logAndFallback(data, { elements: [] as IAppPage[] }));
 
   appPage.elements = elements?.[0].elements ?? [];
 
-  return { ...appPage, profiles };
+  return appPage;
 }

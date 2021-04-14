@@ -3,9 +3,8 @@ import {
   transformStringToUrl,
   getTextInputProps,
 } from "@/modules/common/utils";
-import { isICaregiver } from "../../../types";
+import { isICaregiver, ProfileView } from "../../../types";
 
-import { ProfileView } from "@/modules/profile/query";
 export interface IProfileViewProps {
   content: ProfileView;
 }
