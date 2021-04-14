@@ -22,7 +22,7 @@ export const Layout: React.FC<ILayoutProps> = props => {
 
   return (
     <div className={wrapperClass}>
-      {posterImage && (
+      {posterImage && posterImgSrc && (
         <Image
           className="hedi--hero-image"
           src={posterImgSrc}

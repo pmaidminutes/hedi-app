@@ -1,6 +1,6 @@
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { Column, Grid, Row } from "carbon-components-react";
-import { ILayoutBasicTemplate } from "../transformLayout";
+import { ILayoutBasicTemplate } from "../types";
 
 export const SingleColumn: React.FC<ILayoutBasicTemplate> = ({
   headline,
