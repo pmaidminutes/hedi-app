@@ -1,6 +1,6 @@
 import { segmentsToRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
-import { getLoginView } from "../../query";
+import { getLoginView } from "../../client/request";
 import { ILoginView } from "../../types";
 
 export const getStaticProps = async (

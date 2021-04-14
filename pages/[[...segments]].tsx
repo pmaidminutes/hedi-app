@@ -3,7 +3,7 @@ import { getSegmentsPaths } from "@/modules/common/query";
 import { IAppPage, ISegmentParam } from "@/modules/common/types";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
-import { LoginViewPathsGQL } from "@/modules/login/query";
+import { LoginViewPathsGQL } from "@/modules/login/client/request";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 import { IEntity } from "@/modules/model";
 import {

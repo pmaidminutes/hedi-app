@@ -2,7 +2,7 @@ import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
-import { ILoginView } from "../types";
+import { ILoginView } from "../../types";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
 
