@@ -38,8 +38,9 @@ export const Layout: React.FC<ILayout> = props => {
           groupClass={groupClass}
           left={left}
           right={right}
-          layoutImg={layoutImg}
-        />
+          layoutImg={layoutImg}>
+          {children}
+        </ImageAndColumn>
       ) : (
         <SingleColumn
           headline={headline}
