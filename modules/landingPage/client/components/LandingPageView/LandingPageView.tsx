@@ -9,6 +9,8 @@ export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   const { links, linksIfLoggedIn, isLastElement } = transformLandingPage(
     content
   );
+
+  console.log({user})
   return (
 
       <Row>

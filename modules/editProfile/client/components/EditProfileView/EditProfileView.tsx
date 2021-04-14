@@ -2,9 +2,9 @@ import { getUser } from "@/modules/auth/client";
 import { IEditProfileView } from "../../../types";
 import { EditProfileForm, useEditProfileForm } from "../EditProfileForm";
 import { SimplePageView } from "@/modules/simplePage/client/components";
-import { useConfig } from "./hooks";
+import { useConfig } from "./useConfig";
 
-export const EditProfile = ({ content }: { content: IEditProfileView }) => {
+export const EditProfileView = ({ content }: { content: IEditProfileView }) => {
   const [user, isLoading] = getUser();
   const config = useConfig(content);
 
