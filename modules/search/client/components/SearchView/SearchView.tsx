@@ -64,13 +64,11 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
     setLocation(typedAddress);
   };
 
-  // UNUSED
   //TODO not used at the moment
   const resetFilter = function () {
     setFilter("");
   };
 
-  // UNUSED
   //TODO not used at the moment
   const removeFilter = function (removedFilter: string) {};
   //TODO temporary feature
@@ -93,136 +91,134 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
   }
 
   return (
-    <SimplePageView content={content}>
-      <Grid>
-        <Row>
-          <Column>
-            <SearchInput
-              id={"search-results"}
-              size={"xl"}
-              onQueryChanged={e => setQueryText(e.trim())}
-              query={initialQueryText}
-            />
-          </Column>
-        </Row>
-        <div>
-          {
-            //TODO cannot have onchange need to use button to fetch location
-            //or to find once the typing is finished
-          }
-          <TextInput
-            helperText=" "
-            id="location"
-            invalidText="A valid value is required"
-            labelText="Address line"
-            placeholder="Enter address"
-            onChange={e => handleLocation(e.target.value)}
-            //value={location}
+    <Grid>
+      <Row>
+        <Column>
+          <SearchInput
+            id={"search-results"}
+            size={"xl"}
+            onQueryChanged={e => setQueryText(e.trim())}
+            query={initialQueryText}
           />
-
-          <Slider
-            ariaLabelInput="Slide for distance"
-            id="slider"
-            labelText="Control distance"
-            max={10}
-            min={0}
-            step={1}
-            stepMultiplier={2}
-            value={5}
-            hideTextInput={true}
-            onChange={({ value }) => setDistance(value.toString())}
-          />
-        </div>
-        <Button kind="primary" onClick={e => handleFilter("articles")}>
-          articles
-        </Button>
-        <Button kind="primary" onClick={e => handleFilter("profiles")}>
-          profiles
-        </Button>
-        <Button kind="primary" onClick={e => handleFilter("categories")}>
-          categories
-        </Button>
-        <Button kind="primary" onClick={e => handleFilter("articles")}>
-          articles
-        </Button>
-
-        <Seperator />
-        <h2>{content.elements.find(e => e.identifier === "results")?.value}</h2>
-        <div>{/* iterate article component */}</div>
+        </Column>
+      </Row>
+      <div>
         {
-          //TODO should check for  empty array - even if there is no result will get loading overlay
-          //data
+          //TODO cannot have onchange need to use button to fetch location
+          //or to find once the typing is finished
         }
-        {loading && !data ? (
-          <Loading withOverlay={true} className={"some-class"} />
-        ) : errorMessage ? (
-          <ToastNotification title="Error" kind="error">
-            {errorMessage}
-          </ToastNotification>
-        ) : (
-          <div>
-            {IsIHTTPError(data)
-              ? []
-              : data?.map((entry: any) => {
-                  if (!entry) return null;
-                  switch (entry.type) {
-                    case "Article":
-                      return (
-                        <ArticleEntry
-                          article={entry}
-                          key={entry.route + locale}
-                        />
-                      );
-                    case "Page":
-                      return (
-                        <PageEntry page={entry} key={entry.route + locale} />
-                      );
-                    case "Category":
-                      return (
-                        <CategoryEntry
-                          category={entry}
-                          key={entry.route + locale}
-                        />
-                      );
-                    case "GlossaryTerm":
-                      return (
-                        <GlossaryTerm
-                          glossaryTerm={entry}
-                          isSelected={true}
-                          translationLang={defaultLocale}
-                          key={entry.route + locale}
-                        />
-                      );
-                    case "Caregiver":
-                    case "Midwife":
-                    case "Organisation":
-                    case "Institution":
-                      {
-                        //TODO if there will be too many locations due to state changes..
-                        //TODO for now there is no latitude and longitude in the profiles
-                        if (entry.lat && entry.long)
-                          locations.push({
-                            lat: entry.lat,
-                            long: entry.long,
-                            displayName: entry.displayName,
-                          } as Location);
-                      }
-                      return (
-                        <ProfileEntry
-                          {...entry} // TODO, develop a result entry profile
-                          key={entry.route + locale}
-                        />
-                      );
-                  }
-                })}
-            {locations?.length > 0 ? (
-              <MapClient currentLocation={locations[0]} locations={locations} />
-            ) : (
-              ""
-            )}
-          </div>
-        )}
-      </Grid>
-    </SimplePageView>
+        <TextInput
+          helperText=" "
+          id="location"
+          invalidText="A valid value is required"
+          labelText="Address line"
+          placeholder="Enter address"
+          onChange={e => handleLocation(e.target.value)}
+          //value={location}
+        />
+
+        <Slider
+          ariaLabelInput="Slide for distance"
+          id="slider"
+          labelText="Control distance"
+          max={10}
+          min={0}
+          step={1}
+          stepMultiplier={2}
+          value={5}
+          hideTextInput={true}
+          onChange={({ value }) => setDistance(value.toString())}
+        />
+      </div>
+      <Button kind="primary" onClick={e => handleFilter("articles")}>
+        articles
+      </Button>
+      <Button kind="primary" onClick={e => handleFilter("profiles")}>
+        profiles
+      </Button>
+      <Button kind="primary" onClick={e => handleFilter("categories")}>
+        categories
+      </Button>
+      <Button kind="primary" onClick={e => handleFilter("articles")}>
+        articles
+      </Button>
+
+      <Seperator />
+      <h2>{content.elements.find(e => e.identifier === "results")?.value}</h2>
+      <div>{/* iterate article component */}</div>
+      {
+        //TODO should check for  empty array - even if there is no result will get loading overlay
+        //data
+      }
+      {loading && !data ? (
+        <Loading withOverlay={true} className={"some-class"} />
+      ) : errorMessage ? (
+        <ToastNotification title="Error" kind="error">
+          {errorMessage}
+        </ToastNotification>
+      ) : (
+        <div>
+          {IsIHTTPError(data)
+            ? []
+            : data?.map((entry: any) => {
+                if (!entry) return null;
+                switch (entry.type) {
+                  case "Article":
+                    return (
+                      <ArticleEntry
+                        article={entry}
+                        key={entry.route + locale}
+                      />
+                    );
+                  case "Page":
+                    return (
+                      <PageEntry page={entry} key={entry.route + locale} />
+                    );
+                  case "Category":
+                    return (
+                      <CategoryEntry
+                        category={entry}
+                        key={entry.route + locale}
+                      />
+                    );
+                  case "GlossaryTerm":
+                    return (
+                      <GlossaryTerm
+                        glossaryTerm={entry}
+                        isSelected={true}
+                        translationLang={defaultLocale}
+                        key={entry.route + locale}
+                      />
+                    );
+                  case "Caregiver":
+                  case "Midwife":
+                  case "Organisation":
+                  case "Institution":
+                    {
+                      //TODO if there will be too many locations due to state changes..
+                      //TODO for now there is no latitude and longitude in the profiles
+                      if (entry.lat && entry.long)
+                        locations.push({
+                          lat: entry.lat,
+                          long: entry.long,
+                          displayName: entry.displayName,
+                        } as Location);
+                    }
+                    return (
+                      <ProfileEntry
+                        {...entry} // TODO, develop a result entry profile
+                        key={entry.route + locale}
+                      />
+                    );
+                }
+              })}
+          {locations?.length > 0 ? (
+            <MapClient currentLocation={locations[0]} locations={locations} />
+          ) : (
+            ""
+          )}
+        </div>
+      )}
+    </Grid>
   );
 };
