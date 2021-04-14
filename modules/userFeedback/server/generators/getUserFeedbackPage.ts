@@ -10,7 +10,10 @@ export const getUserFeedbackPage = async (
 ): Promise<(IUserFeedbackView & IPageConfig) | null> => {
   if (!segments) return null;
 
-  const content = await getUserFeedbackView(segmentsToRoute(segments, locale));
+  const content = await getUserFeedbackView(
+    segmentsToRoute(segments, locale),
+    locale
+  );
   if (!content) return null;
 
   const layout: ILayout = {
