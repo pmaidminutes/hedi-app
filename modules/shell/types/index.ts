@@ -27,7 +27,7 @@ export interface IPageConfig extends Partial<IAppStyled> {
   // TODO: Serverseitig
   useBreadCrumb?: boolean;
   revalidate?: boolean | number;
-  layout: ILayout;
+  layout?: ILayout;
 }
 
 // export type shellRecords = "header" | "footer"
