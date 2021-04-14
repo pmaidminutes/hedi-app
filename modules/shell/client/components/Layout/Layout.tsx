@@ -19,7 +19,6 @@ export const Layout: React.FC<ILayoutProps> = props => {
     children,
     groupClass,
   } = transformLayout(props);
-  console.log({wrapperClass})
 
   return (
     <div className={wrapperClass}>

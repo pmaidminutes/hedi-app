@@ -13,7 +13,6 @@ export function transformLayout(props: ILayoutProps) {
     layoutImg,
   } = layout;
 
-  console.log({ customKey }, { key });
   const posterImgSrc = process.env.NEXT_PUBLIC_ASSETS_URL + posterImage.route;
 
   const left = leftColumnProps ?? { sm: 0, md: 2, lg: 5, xlg: 4 };
