@@ -8,3 +8,4 @@ export * from "./MidwifeWithParentsType";
 export * from "./OrganisationType";
 export * from "./ParentType";
 export * from "./APIUrls";
+export * from "./IViewProfileView";

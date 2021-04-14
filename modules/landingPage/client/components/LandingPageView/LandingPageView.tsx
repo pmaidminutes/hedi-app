@@ -3,11 +3,13 @@ import { getUIElement } from "@/modules/common/utils";
 import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
 import { SimplePageView } from "@/modules/simplePage/client/components";
 import { Button, FormLabel, Row, Column } from "carbon-components-react";
-import { useLandingPage } from "./useLandingPage";
+import { transformLandingPage } from "./transformLandingPage";
 
 export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
   const [user] = getUser();
-  const { links, linksIfLoggedIn, isLastElement } = useLandingPage(content);
+  const { links, linksIfLoggedIn, isLastElement } = transformLandingPage(
+    content
+  );
   return (
     <SimplePageView
       url={process.env.NEXT_PUBLIC_IMG_HEADER}

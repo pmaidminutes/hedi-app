@@ -1,10 +1,4 @@
-import { constructBreadCrumbPathData } from "../../../server";
-import {
-  IAppStyled,
-  IEntityLocalized,
-  IEntityTranslated,
-  IRouteLabeled,
-} from "@/modules/model";
+import { transformBreadCrumb, IBreadCrumbProps } from "./transformBreadCrumb";
 import {
   Grid,
   Row,
@@ -13,29 +7,17 @@ import {
   Column,
 } from "carbon-components-react";
 
-interface IBreadCrumbProps {
-  content?: IEntityTranslated<IEntityLocalized> &
-    Partial<IAppStyled> &
-    Partial<IRouteLabeled>;
-}
-
-// UNUSED
 export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   props: IBreadCrumbProps
 ): JSX.Element => {
-  const content = props.content ?? null;
-  const lang = content?.lang ?? "de";
-
-  const breadCrumbPath = constructBreadCrumbPathData(content, lang ?? "de");
+  const { breadCrumbPath, isCurrentPage, lang } = transformBreadCrumb(props);
 
   return (
     <Grid>
       <Row>
         <Column>
           <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
-            <BreadcrumbItem
-              href={`/${lang}`}
-              isCurrentPage={breadCrumbPath.length === 0}>
+            <BreadcrumbItem href={`/${lang}`} isCurrentPage={isCurrentPage}>
               Home
             </BreadcrumbItem>
 
