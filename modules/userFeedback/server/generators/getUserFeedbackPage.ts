@@ -1,4 +1,5 @@
 import { segmentsToRoute } from "@/modules/common/utils";
+import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getUserFeedbackView } from "../../query";
 import { IUserFeedbackView } from "../../types";
@@ -12,9 +13,17 @@ export const getUserFeedbackPage = async (
   const content = await getUserFeedbackView(segmentsToRoute(segments, locale));
   if (!content) return null;
 
-  return {
-    ...content,
+  const layout: ILayout = {
+    pageLayout: "singleColumn",
+  };
+  const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
     redirectUnAuthorized: "/" + locale,
+    layout,
+  };
+
+  return {
+    ...content,
+    ...shell,
   };
 };
