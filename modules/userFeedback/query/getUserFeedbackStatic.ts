@@ -4,6 +4,8 @@ import { IUserFeedbackView } from "../types";
 import { EntityFields } from "@/modules/model";
 import { getUIElementValue } from "@/modules/common/utils";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
+import { getProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
+import { IProfileDefinition } from "@/modules/profile/types";
 
 export async function getUserFeedbackStatic(
   lang: string
@@ -63,9 +65,17 @@ export async function getUserFeedbackStatic(
   ).then(data =>
     logAndFallback(data, { links: [] } as Pick<IUserFeedbackView, "links">)
   );
+  const profileDefinition = await getProfileDefinition(lang).then(def =>
+    logAndNull(def)
+  );
+
   return {
     ...appPage,
     subPages,
     ...linkResults,
+    profileDefinition: (profileDefinition ?? {
+      elements: [],
+      links: [],
+    }) as IProfileDefinition,
   };
 }

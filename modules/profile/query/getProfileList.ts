@@ -13,7 +13,7 @@ export async function getProfileList(
   lang: string,
   client?: GraphQLClient
 ): Promise<Profile[]> {
-  const subquery = gql`
+  const query = gql`
     query getProfiles($lang: String!, $includeSelf: Boolean){
       caregivers(lang: $lang) { ${CaregiverFields} }
       midwives(lang: $lang) { ${MidwifeFields} }
@@ -36,7 +36,7 @@ export async function getProfileList(
     midwives,
     organisations,
     institutions,
-  } = await serviceGQuery<subqueryType>(subquery, {
+  } = await serviceGQuery<subqueryType>(query, {
     lang,
   }).then(data =>
     logAndFallback(data, {

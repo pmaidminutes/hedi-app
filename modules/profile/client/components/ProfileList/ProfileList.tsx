@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import type { ProfileListView } from "@/modules/profile/query";
+import type { ProfileListView } from "../../../server";
 import { ProfileListItem } from "./ProfileListItem";
 import { useProfileList } from "./useProfileList";
 

@@ -1,18 +1,23 @@
-import { segmentsToRoute } from "@/modules/common/utils";
-import { IPageConfig } from "@/modules/shell/types";
-import { getProfile, ProfileView } from "../../query";
+import { getLangByRoute, segmentsToRoute } from "@/modules/common/utils";
+import { getProfile } from "../../query";
+import { getProfileDefinition } from "../../query/getProfileDefinition";
+import { ProfileView } from "../../types";
 
 export const getProfilePage = async (
   segments?: string[],
   locale = "de"
-): Promise<(ProfileView & IPageConfig) | null> => {
+): Promise<ProfileView | null> => {
   if (!segments) return null;
+  const route = segmentsToRoute(segments, locale);
+  const definition = await getProfileDefinition(
+    getLangByRoute(route) ?? locale
+  );
+  const content = await getProfile(route);
 
-  const content = await getProfile(segmentsToRoute(segments, locale));
-
-  if (!content) return null;
+  if (!content || !definition) return null;
 
   return {
+    ...definition,
     ...content,
     useHeader: "AUTHORIZED",
     redirectUnAuthorized: "/" + content.lang,

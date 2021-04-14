@@ -10,7 +10,7 @@ export * from "./getOrganisation";
 export * from "./getOrganisationPaths";
 export * from "./getProfile";
 export * from "./getProfileList";
-export * from "./getProfileListView";
+export * from "./getProfileListDefinition";
 export * from "./getProfileListPaths";
 export * from "./getCurrentProfile";
 export * from "./getCurrentProfileEntity";
