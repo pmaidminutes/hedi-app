@@ -23,9 +23,11 @@ export const ImageAndColumn: React.FC<
   <Grid>
     <Row>
       <Column {...left} className="hedi-app-page-image-wrapper">
-        <div className="hedi--app-page-image">
-          <img src={layoutImg?.src} alt={layoutImg?.alt ?? ""}></img>
-        </div>
+        {!!layoutImg ? (
+          <div className="hedi--app-page-image">
+            <img src={layoutImg.src} alt={layoutImg?.alt ?? ""}></img>
+          </div>
+        ) : null}
       </Column>
 
       <Column {...right} className="hedi--col--grid-nest">
