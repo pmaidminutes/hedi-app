@@ -5,7 +5,7 @@ import { EntityFields } from "@/modules/model";
 import { getUIElementValue } from "@/modules/common/utils";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
 import { getProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
-import { ProfileDefinition } from "@/modules/profile/types";
+import { IProfileDefinition } from "@/modules/profile/types";
 
 export async function getUserFeedbackStatic(
   lang: string
@@ -76,6 +76,6 @@ export async function getUserFeedbackStatic(
     profileDefinition: (profileDefinition ?? {
       elements: [],
       links: [],
-    }) as ProfileDefinition,
+    }) as IProfileDefinition,
   };
 }

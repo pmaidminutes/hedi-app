@@ -19,9 +19,9 @@ export const ProfileTypeNameArray = [
 
 export type Profile = ICaregiver | IMidwife | IOrganisation | IInstitution;
 
-export type ProfileView = ProfileDefinition & Profile & IPageConfig;
+export type ProfileView = IProfileDefinition & Profile & IPageConfig;
 
-export type ProfileDefinition = {
+export interface IProfileDefinition {
   elements: IUIElementTexts[];
   links: (IEntity & { key: string })[];
-};
+}

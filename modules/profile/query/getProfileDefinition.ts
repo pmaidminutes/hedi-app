@@ -3,11 +3,11 @@ import { getUIElementValue } from "@/modules/common/utils";
 import { EntityFields, WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 import { logAndFallback } from "@/modules/common/error";
-import { ProfileDefinition } from "../types";
+import { IProfileDefinition } from "../types";
 
 export async function getProfileDefinition(
   lang: string
-): Promise<ProfileDefinition | null> {
+): Promise<IProfileDefinition | null> {
   const query = gql`
     query getProfileElements($lang: String!){
       uiTexts: appPagesByKey(keys:["viewprofile"], lang:$lang){
@@ -32,14 +32,14 @@ export async function getProfileDefinition(
       }
     }
   `;
-  const linkResults = await serviceGQuery<Pick<ProfileDefinition, "links">>(
+  const linkResults = await serviceGQuery<Pick<IProfileDefinition, "links">>(
     queryForLinks,
     {
       lang,
       keys,
     }
   ).then(data =>
-    logAndFallback(data, { links: [] } as Pick<ProfileDefinition, "links">)
+    logAndFallback(data, { links: [] } as Pick<IProfileDefinition, "links">)
   );
   return { elements: uiTexts[0].elements, ...linkResults };
 }
