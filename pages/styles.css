@@ -17363,6 +17363,11 @@ pre {
   line-height: 1.5;
   margin: 0.25rem 0.5rem;
   padding: 0.25rem 0.75rem; }
+  .bx--tag:not(:first-child) {
+    -webkit-margin-start: 0;
+            margin-inline-start: 0;
+    -webkit-margin-end: 0.5rem;
+            margin-inline-end: 0.5rem; }
 
 .bx--tag--blue {
   color: #004B76; }
