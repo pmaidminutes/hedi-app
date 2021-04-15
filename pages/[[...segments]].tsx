@@ -42,6 +42,9 @@ import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { TrySimplePage } from "@/modules/simplePage/client/components";
 import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
 import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
+import { AppPageViewPathsGQL } from "@/modules/apppage/query";
+import { getStaticProps as getStaticAppPageViewProps } from "@/modules/apppage/server/generators";
+import { TryAppPage } from "@/modules/apppage/client/components";
 
 import { UserFeedbackViewPathsGQL } from "@/modules/userFeedback/query";
 import { getUserFeedbackPage } from "@/modules/userFeedback/server/generators";
@@ -83,8 +86,8 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     ViewProfilePathsGQL,
     UserFeedbackViewPathsGQL,
     UserFeedbackThanksViewPathsGQL,
-    SimplePageViewPathsGQL,
     SearchViewPathsGQL,
+    AppPageViewPathsGQL
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -125,12 +128,12 @@ export const getStaticProps: GetStaticProps<
     if (!content)
       content = await getUserFeedbackThanksPage(params?.segments, locale);
     if (!content)
-      content = await getStaticSimplePageViewProps(params?.segments, locale);
+      content = await getLandingPageViewProps(params?.segments, locale);
     if (!content)
       content = await getStaticSearchViewProps(params?.segments, locale);
   }
   if (!content) {
-    content = await getLandingPageViewProps(params?.segments, locale);
+    content = await getStaticAppPageViewProps(params?.segments, locale);
   }
   if (!content)
     return {
@@ -173,9 +176,9 @@ export default function segments(props: IPageProps<IAppPage>) {
         <TryEditProfile content={content} key="editProfile" />
         <TryUserFeedback content={content} key="userfeedback" />
         <TryUserFeedbackThanks content={content} key="userfeedback" />
-        <TrySimplePage content={content} key="simplepage" />
         <TryLandingPage content={content} key="landingpage" />
         <TrySearch content={content} key="search" />
+        <TryAppPage content={content} key="apppage" />
       </>
     </Shell>
   );
