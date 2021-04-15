@@ -11,8 +11,6 @@ export * from "./getOrganisationPaths";
 export * from "./getProfile";
 export * from "./getProfileList";
 export * from "./getProfileListDefinition";
-export * from "./getProfileListPaths";
 export * from "./getCurrentProfile";
 export * from "./getCurrentProfileEntity";
-export * from "./getViewProfilePaths";
 export * from "./getViewProfileView";
