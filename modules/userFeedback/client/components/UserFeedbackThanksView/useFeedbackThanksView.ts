@@ -7,7 +7,7 @@ import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "@/modules/userFeedback/client/request/getCurrentUserHasFeedback";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { IUserFeedbackThanksView } from "@/modules/userFeedback/types";
+import { IUserFeedbackThanksView } from "../../../types";
 
 export function useFeedbackThanksView({
   content,

@@ -2,7 +2,7 @@ import { Button } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
 import { useFeedbackThanksView } from "./useFeedbackThanksView";
 import { useRouter } from "next/router";
-import { IUserFeedbackThanksView } from "@/modules/userFeedback/types";
+import { IUserFeedbackThanksView } from "../../../types";
 
 export const UserFeedbackThanksView = (props: {
   content: IUserFeedbackThanksView;
