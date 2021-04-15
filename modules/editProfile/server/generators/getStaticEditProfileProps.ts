@@ -1,6 +1,9 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
-import { ILayout, ILayoutProps } from "@/modules/shell/client/components/Layout/types";
+import {
+  ILayout,
+  ILayoutProps,
+} from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getEditProfile } from "../../query";
 
@@ -21,7 +24,7 @@ export const getStaticProps = async (
     const shell: IPageConfig = {
       useHeader: "AUTHORIZED",
       redirectUnAuthorized: "/" + locale,
-      layout
+      layout,
     };
     return {
       ...content,

@@ -23,7 +23,7 @@ export const getViewProfilePage = async (
   const layout: ILayout = {
     pageLayout: "imageAndColumn",
     layoutImg,
-    rightColumnProps:{ md: 4, lg: 6, xlg: 6 }
+    rightColumnProps: { md: 4, lg: 6, xlg: 6 },
   };
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",

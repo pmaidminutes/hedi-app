@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
-import {  ILayoutProps } from "./types";
+import { ILayoutProps } from "./types";
 import { SingleColumn, ImageAndColumn } from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {

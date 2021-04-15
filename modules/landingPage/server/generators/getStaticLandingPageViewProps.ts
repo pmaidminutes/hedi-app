@@ -3,9 +3,7 @@ import { segmentsToRoute } from "@/modules/common/utils";
 import { getLandingPageView } from "../../client/request";
 import { IPageConfig } from "@/modules/shell/types";
 import { landingPagePaths } from "../../types";
-import {
-  ILayout,
-} from "@/modules/shell/client/components/Layout/types";
+import { ILayout } from "@/modules/shell/client/components/Layout/types";
 
 export const getStaticProps = async (
   segments?: string[],

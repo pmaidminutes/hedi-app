@@ -10,7 +10,7 @@ export function useShell(shell: Partial<IShellProps>) {
   const [hasHeader, setHasHeader] = useState(useHeader === true);
   const [hediStyle, setHediStyle] = useState("");
   const [user, isLoading] = getUser();
-  const  pageLayout = layout?.pageLayout ?? null;
+  const pageLayout = layout?.pageLayout ?? null;
 
   useEffect(() => {
     setHasHeader(checkAccess(!!user, useHeader));
@@ -27,6 +27,6 @@ export function useShell(shell: Partial<IShellProps>) {
     hediStyle,
     hasHeader,
     pageLayout,
-    layout
+    layout,
   };
 }

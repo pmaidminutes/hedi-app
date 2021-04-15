@@ -22,12 +22,12 @@ export const getStaticProps = async (
     layoutImg,
     customKey: "login-form",
     rightColumnProps: { md: 4, lg: 6, xlg: 6 },
-    pageLayout:"imageAndColumn"
+    pageLayout: "imageAndColumn",
   };
 
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
-    layout
+    layout,
   };
 
   return {

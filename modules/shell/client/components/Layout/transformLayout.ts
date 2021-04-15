@@ -13,7 +13,9 @@ export function transformLayout(props: ILayoutProps) {
     layoutImg,
   } = layout;
 
-  const posterImgSrc = posterImage ? process.env.NEXT_PUBLIC_ASSETS_URL + posterImage.route : undefined;
+  const posterImgSrc = posterImage
+    ? process.env.NEXT_PUBLIC_ASSETS_URL + posterImage.route
+    : undefined;
 
   const left = leftColumnProps ?? { sm: 0, md: 2, lg: 5, xlg: 4 };
   const right = rightColumnProps ?? { md: 4, lg: 8, xlg: 8 };

@@ -1,12 +1,12 @@
 import { Button } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
-import {
-  IUserFeedbackThanksProps,
-  useFeedbackThanksView,
-} from "./useFeedbackThanksView";
+import { useFeedbackThanksView } from "./useFeedbackThanksView";
 import { useRouter } from "next/router";
+import { IUserFeedbackThanksView } from "../../../types";
 
-export const UserFeedbackThanksView = (props: IUserFeedbackThanksProps) => {
+export const UserFeedbackThanksView = (props: {
+  content: IUserFeedbackThanksView;
+}) => {
   const { backRoute, key, tooltip, buttonValue } = useFeedbackThanksView(props);
   const router = useRouter();
 

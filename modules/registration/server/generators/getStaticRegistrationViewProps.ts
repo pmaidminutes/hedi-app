@@ -18,7 +18,7 @@ export const getStaticProps = async (
     alt: "Beschreibung",
     src: `${process.env.NEXT_PUBLIC_IMG_HEADER}`,
   };
-  
+
   const layout: ILayout = {
     pageLayout: "imageAndColumn",
     layoutImg,

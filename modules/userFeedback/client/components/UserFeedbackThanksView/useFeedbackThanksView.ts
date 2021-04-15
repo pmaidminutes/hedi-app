@@ -5,16 +5,15 @@ import {
 } from "@/modules/common/utils";
 import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "@/modules/userFeedback/client/request/getCurrentUserHasFeedback";
-import { IUserFeedbackThanksView } from "@/modules/userFeedback/types/IUserFeedbackThanksView";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { IUserFeedbackThanksView } from "../../../types";
 
-export interface IUserFeedbackThanksProps {
+export function useFeedbackThanksView({
+  content,
+}: {
   content: IUserFeedbackThanksView;
-}
-
-export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
-  const { content } = props;
+}) {
   const { elements, links } = content;
 
   const [user, isLoading] = getUser();

@@ -1,7 +1,4 @@
-import {
-  IUserFeedbackFormProps,
-  useUserFeedbackForm,
-} from "./useUserFeedbackForm";
+import { useUserFeedbackForm } from "./useUserFeedbackForm";
 import {
   MultipleUserFeedback,
   UserFeedbackSendbox,
@@ -14,6 +11,7 @@ import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
 import { Services } from "@/modules/profile/client/components/Services";
 import { LanguageSkills } from "@/modules/profile/client/components/LanguageSkills";
 import { Contact } from "@/modules/profile/client/components/Contact";
+import { IUserFeedbackFormProps } from "./IUserFeedbackFormProps";
 
 export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
   const {
