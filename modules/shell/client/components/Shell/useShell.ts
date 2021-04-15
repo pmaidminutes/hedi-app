@@ -5,11 +5,12 @@ import { checkAccess } from "../../../utils";
 import { usePageAccess } from "./usePageAccess";
 
 export function useShell(shell: Partial<IShellProps>) {
-  const { useHeader, appstyle, redirectUnAuthorized } = shell;
+  const { useHeader, appstyle, redirectUnAuthorized, layout } = shell;
 
   const [hasHeader, setHasHeader] = useState(useHeader === true);
   const [hediStyle, setHediStyle] = useState("");
   const [user, isLoading] = getUser();
+  const  pageLayout = layout?.pageLayout ?? null;
 
   useEffect(() => {
     setHasHeader(checkAccess(!!user, useHeader));
@@ -25,5 +26,7 @@ export function useShell(shell: Partial<IShellProps>) {
     hasPageAccess,
     hediStyle,
     hasHeader,
+    pageLayout,
+    layout
   };
 }

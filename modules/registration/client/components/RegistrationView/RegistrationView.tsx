@@ -3,7 +3,6 @@ import {
   getUIElementValue,
 } from "@/modules/common/utils";
 import { useAuthorizedRedirect } from "@/modules/react/hooks";
-import { SimplePageView } from "@/modules/simplePage/client/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
 import { Button, Column, Row } from "carbon-components-react";
 import { useRouter } from "next/router";
@@ -24,30 +23,24 @@ export const RegistrationView = ({ content }: RegisterInputProps) => {
   );
 
   return (
-    <SimplePageView
-      url={process.env.NEXT_PUBLIC_IMG_HEADER}
-      alt="Beschreibung des Bildes"
-      content={content}
-      rightColumnProps={{ md: 4, lg: 6, xlg: 6 }}>
-      <Row>
-        <Column>
-          <RegisterForm
-            elements={content.elements}
-            redirect={getUIElementRedirectRoute(
-              "success",
-              content.elements,
-              content.links
-            )}
-          />
-          <Button
-            tooltip={getUIElementValue("back", content.elements)}
-            renderIcon={ArrowLeft16}
-            kind="ghost"
-            onClick={() => router.back()}>
-            {getUIElementValue("back", content.elements)}
-          </Button>
-        </Column>
-      </Row>
-    </SimplePageView>
+    <Row>
+      <Column>
+        <RegisterForm
+          elements={content.elements}
+          redirect={getUIElementRedirectRoute(
+            "success",
+            content.elements,
+            content.links
+          )}
+        />
+        <Button
+          tooltip={getUIElementValue("back", content.elements)}
+          renderIcon={ArrowLeft16}
+          kind="ghost"
+          onClick={() => router.back()}>
+          {getUIElementValue("back", content.elements)}
+        </Button>
+      </Column>
+    </Row>
   );
 };

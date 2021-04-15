@@ -14,7 +14,6 @@ import {
   FormLabel,
   Row,
 } from "carbon-components-react";
-import { SimplePageView } from "@/modules/simplePage/client/components";
 import { useRouter } from "next/router";
 
 export const UserFeedbackView = ({
@@ -42,31 +41,27 @@ export const UserFeedbackView = ({
       content.links
     );
     return (
-      <SimplePageView content={content}>
-        <Row>
-          <Column>
-            <ButtonSet stacked>
-              <FormLabel>{noProfileElement?.description}</FormLabel>
-              <Button onClick={() => router.push(noProfileRedirect)}>
-                {noProfileElement?.value}
-              </Button>
-            </ButtonSet>
-          </Column>
-        </Row>
-      </SimplePageView>
+      <Row>
+        <Column>
+          <ButtonSet stacked>
+            <FormLabel>{noProfileElement?.description}</FormLabel>
+            <Button onClick={() => router.push(noProfileRedirect)}>
+              {noProfileElement?.value}
+            </Button>
+          </ButtonSet>
+        </Column>
+      </Row>
     );
   }
 
   return currentProfile ? (
-    <SimplePageView content={content}>
-      <UserFeedbackForm
-        content={content}
-        profile={{ ...currentProfile, ...content.profileDefinition }}
-        locale={content.lang}
-        leftColumnProps={leftColumnProps}
-        rightColumnProps={rightColumnProps}
-        centerProps={centerProps}
-      />
-    </SimplePageView>
+    <UserFeedbackForm
+      content={content}
+      profile={{ ...currentProfile, ...content.profileDefinition }}
+      locale={content.lang}
+      leftColumnProps={leftColumnProps}
+      rightColumnProps={rightColumnProps}
+      centerProps={centerProps}
+    />
   ) : null;
 };

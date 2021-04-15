@@ -1,3 +1,4 @@
+import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IAppPage } from "@/modules/common/types";
 import { getLangByRoute, segmentsToRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
@@ -17,11 +18,22 @@ export const getProfileListPage = async (
   const content = await getProfileList(getLangByRoute(route) ?? locale);
   if (!content || !definition) return null;
 
-  return {
-    ...definition,
-    profiles: content,
+  const layout: ILayout = {
+    pageLayout: "singleColumn",
+    customKey: "profile-list",
+  };
+
+  const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
     redirectUnAuthorized: "/" + definition.lang,
     revalidate: 1,
+    layout,
+  };
+
+  return {
+    profiles: content,
+    ...definition,
+    ...content,
+    ...shell,
   };
 };

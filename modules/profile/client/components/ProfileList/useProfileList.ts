@@ -1,6 +1,6 @@
 import useSWR from "swr";
 import { jsonFetcher } from "@/modules/common/utils";
-import { Profile, profileListAPIUrl } from "../../types";
+import { Profile, profileListAPIUrl } from "../../../types";
 
 export function useProfileList(initialData: Profile[], lang: string) {
   const response = useSWR<Profile[]>(

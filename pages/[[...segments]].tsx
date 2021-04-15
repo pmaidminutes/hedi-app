@@ -1,9 +1,9 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
-import { ISegmentParam } from "@/modules/common/types";
+import { IAppPage, ISegmentParam } from "@/modules/common/types";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
-import { LoginViewPathsGQL } from "@/modules/login/query";
+import { LoginViewPathsGQL } from "@/modules/login/client/request";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 import { IEntity } from "@/modules/model";
 import {
@@ -35,7 +35,7 @@ import { getProfilePage } from "@/modules/profile/server/generators";
 // Components
 
 import { getShell } from "@/modules/shell/query";
-import { useShell } from "@/modules/shell/client/hooks";
+import { generateShellData } from "@/modules/shell/client/utils";
 import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
@@ -153,14 +153,14 @@ export const getStaticProps: GetStaticProps<
     userMenu: ["login", "logout", "viewprofile"],
   };
   const shellData = await getShell(locale, shellKey);
-  const shell = useShell(content, shellData);
+  const shell = generateShellData(content, shellData);
   return {
     props: { content, shell },
     revalidate: content.revalidate,
   };
 };
 
-export default function segments(props: IPageProps<IEntity>) {
+export default function segments(props: IPageProps<IAppPage>) {
   const { content } = props;
   return (
     <Shell {...props}>

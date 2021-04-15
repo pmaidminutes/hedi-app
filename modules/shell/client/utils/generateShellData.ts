@@ -2,7 +2,7 @@ import { setProperty } from "@/modules/common/utils";
 import { IEntityLocalized, ILanguage } from "@/modules/model";
 import { IPageConfig, IShell, IShellProps } from "../../types";
 
-export function useShell(
+export function generateShellData(
   content: IPageConfig,
   shellData: IShell
   // languages: ILanguage[],
@@ -15,6 +15,7 @@ export function useShell(
     revalidate,
     useHeader,
     redirectUnAuthorized,
+    layout,
   } = content;
   const { languages, shellConfig, ...links } = shellData;
 
@@ -35,6 +36,7 @@ export function useShell(
   if (appstyle) setProperty(shellProps, "appstyle", appstyle);
   if (revalidate) setProperty(shellProps, "revalidate", revalidate);
   if (useBreadCrumb) setProperty(shellProps, "useBreadCrumb", useBreadCrumb);
+  if (layout) setProperty(shellProps, "layout", layout);
 
   return shellProps;
 }
