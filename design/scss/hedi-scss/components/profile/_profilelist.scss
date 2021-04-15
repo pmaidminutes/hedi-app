@@ -1,11 +1,6 @@
 .hedi--profile-list {
   .hedi--profile-entry {
     margin-bottom: $spacing-sm;
-    + svg {
-      position: absolute;
-      right: 1rem;
-      bottom: 1rem;
-    }
   }
 
   .bx--tile--clickable {
@@ -37,10 +32,20 @@
     }
   }
 
-  .hedi--profile-entry + svg {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
+  @include ltr-only() {
+    .hedi--profile-entry + svg {
+      position: absolute;
+      right: 1rem;
+      bottom: 1rem;
+    }
+  }
+  @include rtl-only() {
+    .hedi--profile-entry + svg {
+      position: absolute;
+      left: 1rem;
+      bottom: 1rem;
+      transform: rotate(180deg);
+    }
   }
 
   @media (max-width: 672px) {

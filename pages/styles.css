@@ -16731,6 +16731,9 @@ a.bx--navigation-link:focus {
   right: 0;
   transform: translateX(50%) rotate(45deg); }
 
+html {
+  direction: ltr; }
+
 html:lang(fa) {
   direction: rtl; }
 
@@ -16832,9 +16835,17 @@ pre {
       @media (min-width: 769px) {
         .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
           position: absolute;
-          right: 0;
           bottom: 0;
           transform: translateX(0); } }
+    @media (min-width: 769px) {
+      html:lang(de) .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
+        right: 0; } }
+    @media (min-width: 769px) {
+      html:lang(en) .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
+        right: 0; } }
+    @media (min-width: 769px) {
+      html:lang(fa) .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
+        left: 0; } }
     @media (max-width: 769px) {
       .hedi--bg-img-container .hedi--profile-entry-image svg {
         max-height: 200px; } }
@@ -17118,10 +17129,6 @@ pre {
 
 .hedi--profile-list .hedi--profile-entry {
   margin-bottom: 0.75rem; }
-  .hedi--profile-list .hedi--profile-entry + svg {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem; }
 
 .hedi--profile-list .bx--tile--clickable {
   background-color: white;
@@ -17136,10 +17143,21 @@ pre {
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry--with-services {
     background-color: transparent; }
 
-.hedi--profile-list .hedi--profile-entry + svg {
+html:lang(de) .hedi--profile-list .hedi--profile-entry + svg {
   position: absolute;
   right: 1rem;
   bottom: 1rem; }
+
+html:lang(en) .hedi--profile-list .hedi--profile-entry + svg {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem; }
+
+html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  transform: rotate(180deg); }
 
 @media (max-width: 672px) {
   .hedi--profile-list .hedi--profile-entry-image {
@@ -17192,8 +17210,17 @@ pre {
     margin: 1rem 0; }
     .hedi--related-profiles--profile svg {
       position: absolute;
-      bottom: 0.5rem;
-      right: 0.5rem; }
+      bottom: 0.5rem; }
+    @media (min-width: 769px) {
+      html:lang(de) .hedi--related-profiles--profile svg {
+        right: 0.5rem; } }
+    @media (min-width: 769px) {
+      html:lang(en) .hedi--related-profiles--profile svg {
+        right: 0.5rem; } }
+    @media (min-width: 769px) {
+      html:lang(fa) .hedi--related-profiles--profile svg {
+        left: 0.5rem;
+        transform: rotate(180deg); } }
 
 .hedi--profile-services svg .cls-1 {
   fill: #D36E3C; }
@@ -17287,7 +17314,10 @@ pre {
   .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger:hover {
     background: #2A84C6; }
 
-.hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger:not(:lang($rtl-languages)) {
+html:lang(de) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  bottom: 5rem; }
+
+html:lang(en) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
   bottom: 5rem; }
 
 .hedi--simple-page .hedi--hero-image {
