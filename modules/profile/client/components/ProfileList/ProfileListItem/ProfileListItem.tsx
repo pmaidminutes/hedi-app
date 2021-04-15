@@ -1,11 +1,13 @@
 import React from "react";
-import { transformProfileItem, IProfileItem } from "./transformProfileItem";
+import { transformProfileItem } from "./transformProfileItem";
 import { extractProfileEntry } from "./extractProfileEntry";
 import NextLink from "next/link";
 import { ClickableTile } from "carbon-components-react";
 import { ArrowRight24 } from "@carbon/icons-react";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
-export const ProfileListItem = (props: IProfileItem) => {
+import { IProfileEntry } from ".";
+
+export const ProfileListItem = (props: IProfileEntry) => {
   const {
     profile,
     midwifeLabel,

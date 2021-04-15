@@ -1,10 +1,11 @@
 import { TagList } from "@/modules/common/components";
 import { Tile } from "carbon-components-react";
-import { transformServices, IServicesProps } from "./transformServices";
+import { transformServiceGroup } from "./transformServiceGroup";
 import BabyOnHand from "./assets/baby.svg";
+import { IServiceGroupProps } from "./IServiceGroupProps";
 
-export const Services = (props: IServicesProps) => {
-  const { headline, services, tagType, headlineType } = transformServices(
+export const ServiceGroup = (props: IServiceGroupProps) => {
+  const { headline, services, tagType, headlineType } = transformServiceGroup(
     props
   );
   if (services) {

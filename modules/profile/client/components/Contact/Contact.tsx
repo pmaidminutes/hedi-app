@@ -1,8 +1,9 @@
-import { IContactProps, transformContact } from "./transformContact";
+import { transformContact } from "./transformContact";
 import { Tile, Link } from "carbon-components-react";
 import { Launch16 } from "@carbon/icons-react";
 import PregnantWoman from "./assets/pregnant.svg";
 import { Seperator } from "@/modules/common/components";
+import { IContactProps } from ".";
 
 export const Contact = (props: IContactProps): JSX.Element => {
   const {
