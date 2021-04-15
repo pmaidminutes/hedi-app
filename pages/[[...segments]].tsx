@@ -31,9 +31,6 @@ import { generateShellData } from "@/modules/shell/client/utils";
 import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
-import { TrySimplePage } from "@/modules/simplePage/client/components";
-import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
-import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
 import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getStaticProps as getStaticAppPageViewProps } from "@/modules/apppage/server/generators";
 import { TryAppPage } from "@/modules/apppage/client/components";
