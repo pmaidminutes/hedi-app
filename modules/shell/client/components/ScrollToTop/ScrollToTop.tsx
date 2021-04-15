@@ -1,14 +1,15 @@
 import { Button } from "carbon-components-react";
 import { ArrowUp32 } from "@carbon/icons-react";
 import { useScrollToTop, IScroll } from "./useScrollToTop";
+import { transformScrollToTop } from "./transformScrollToTop";
 
 export const ScrollToTop = (props: IScroll): JSX.Element => {
   const {
     handleRouteChangeComplete,
     isVisible,
-    buttonText,
     isAtTheBottom,
   } = useScrollToTop(props);
+  const { buttonText } = transformScrollToTop();
 
   return (
     <div

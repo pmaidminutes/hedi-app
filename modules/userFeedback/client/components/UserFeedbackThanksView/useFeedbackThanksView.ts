@@ -1,6 +1,8 @@
 import { getUser } from "@/modules/auth/client";
-import { IAppPage } from "@/modules/common/types";
-import { getUIElementRedirectRoute } from "@/modules/common/utils";
+import {
+  getUIElement,
+  getUIElementRedirectRoute,
+} from "@/modules/common/utils";
 import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "@/modules/userFeedback/client/request/getCurrentUserHasFeedback";
 import { IUserFeedbackThanksView } from "@/modules/userFeedback/types/IUserFeedbackThanksView";
@@ -33,6 +35,13 @@ export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
     elements,
     links
   );
+
+  const backRoute = getUIElementRedirectRoute("back_page", elements, links);
+  const element = getUIElement("back", elements);
+  const key = element?.identifier + content.lang;
+  const tooltip = element?.value;
+  const buttonValue = element?.value;
+
   useEffect(() => {
     if (!isLoading && !user) router.push("/" + content.lang);
     else if (
@@ -51,5 +60,5 @@ export function useFeedbackThanksView(props: IUserFeedbackThanksProps) {
     hasFeedbackLoading,
   ]);
 
-  return { content, elements, links };
+  return { backRoute, key, tooltip, buttonValue };
 }

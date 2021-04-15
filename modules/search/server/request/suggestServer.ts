@@ -1,7 +1,6 @@
 import { responseToIHTTPError, IHTTPError } from "@/modules/common/error";
 
 export async function suggestServer(
-  lang: string,
   typeText: string
 ): Promise<IHTTPError | []> {
   const params = {

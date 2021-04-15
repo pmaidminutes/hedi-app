@@ -1,10 +1,10 @@
 import { getUserAuthHeader } from "@/modules/auth/server";
 import { sendAPIResult } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
-import { ProfileView } from "../query";
 import { getCurrentProfile } from "../query";
+import { Profile } from "../types";
 
-export const getCurrentProfileAPI: NextApiHandler<ProfileView | null> = async (
+export const getCurrentProfileAPI: NextApiHandler<Profile | null> = async (
   req,
   res
 ) => {
