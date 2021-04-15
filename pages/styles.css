@@ -16835,9 +16835,17 @@ pre {
       @media (min-width: 769px) {
         .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
           position: absolute;
-          right: 0;
           bottom: 0;
           transform: translateX(0); } }
+    @media (min-width: 769px) {
+      html:lang(de) .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
+        right: 0; } }
+    @media (min-width: 769px) {
+      html:lang(en) .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
+        right: 0; } }
+    @media (min-width: 769px) {
+      html:lang(fa) .hedi--bg-img-container .hedi--profile-entry > .bx--btn--ghost {
+        left: 0; } }
     @media (max-width: 769px) {
       .hedi--bg-img-container .hedi--profile-entry-image svg {
         max-height: 200px; } }

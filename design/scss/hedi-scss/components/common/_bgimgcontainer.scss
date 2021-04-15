@@ -27,9 +27,22 @@
       transform: translateX(90%);
       @media (min-width: 769px) {
         position: absolute;
-        right: 0;
         bottom: 0;
         transform: translateX(0);
+      }
+    }
+    @include ltr-only() {
+      > .bx--btn--ghost {
+        @media (min-width: 769px) {
+          right: 0;
+        }
+      }
+    }
+    @include rtl-only() {
+      > .bx--btn--ghost {
+        @media (min-width: 769px) {
+          left: 0;
+        }
       }
     }
     &-image {
