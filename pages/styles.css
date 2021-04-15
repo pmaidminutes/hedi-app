@@ -17121,10 +17121,6 @@ pre {
 
 .hedi--profile-list .hedi--profile-entry {
   margin-bottom: 0.75rem; }
-  .hedi--profile-list .hedi--profile-entry + svg {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem; }
 
 .hedi--profile-list .bx--tile--clickable {
   background-color: white;
@@ -17139,10 +17135,21 @@ pre {
   .hedi--profile-list .bx--tile--clickable .hedi--profile-entry--with-services {
     background-color: transparent; }
 
-.hedi--profile-list .hedi--profile-entry + svg {
+html:lang(de) .hedi--profile-list .hedi--profile-entry + svg {
   position: absolute;
   right: 1rem;
   bottom: 1rem; }
+
+html:lang(en) .hedi--profile-list .hedi--profile-entry + svg {
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem; }
+
+html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  transform: rotate(180deg); }
 
 @media (max-width: 672px) {
   .hedi--profile-list .hedi--profile-entry-image {
