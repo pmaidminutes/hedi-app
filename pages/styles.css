@@ -17210,8 +17210,17 @@ html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
     margin: 1rem 0; }
     .hedi--related-profiles--profile svg {
       position: absolute;
-      bottom: 0.5rem;
-      right: 0.5rem; }
+      bottom: 0.5rem; }
+    @media (min-width: 769px) {
+      html:lang(de) .hedi--related-profiles--profile svg {
+        right: 0.5rem; } }
+    @media (min-width: 769px) {
+      html:lang(en) .hedi--related-profiles--profile svg {
+        right: 0.5rem; } }
+    @media (min-width: 769px) {
+      html:lang(fa) .hedi--related-profiles--profile svg {
+        left: 0.5rem;
+        transform: rotate(180deg); } }
 
 .hedi--profile-services svg .cls-1 {
   fill: #D36E3C; }

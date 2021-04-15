@@ -25,7 +25,21 @@
     svg {
       position: absolute;
       bottom: 0.5rem;
-      right: 0.5rem;
+    }
+    @include ltr-only() {
+      svg {
+        @media (min-width: 769px) {
+          right: 0.5rem;
+        }
+      }
+    }
+    @include rtl-only() {
+     svg {
+        @media (min-width: 769px) {
+          left: 0.5rem;
+          transform: rotate(180deg);
+        }
+      }
     }
   }
 }
