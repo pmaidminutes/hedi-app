@@ -1,13 +1,13 @@
-import { ProfileView } from "@/modules/profile/query";
 import { requestCurrentProfile } from "../request";
 import { User } from "next-auth";
 import { useEffect, useState } from "react";
+import { Profile } from "../../types";
 
 export function useCurrentProfile(
   user: User | undefined,
   lang: string
-): [ProfileView | null, boolean] {
-  const [profile, setProfile] = useState<ProfileView | null>(null);
+): [Profile | null, boolean] {
+  const [profile, setProfile] = useState<Profile | null>(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {

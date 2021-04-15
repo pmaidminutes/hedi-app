@@ -1,5 +1,8 @@
 import { getUser } from "@/modules/auth/client";
-import { getUIElementRedirectRoute } from "@/modules/common/utils";
+import {
+  getUIElement,
+  getUIElementRedirectRoute,
+} from "@/modules/common/utils";
 import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "@/modules/userFeedback/client/request/getCurrentUserHasFeedback";
 import { useRouter } from "next/router";
@@ -31,6 +34,13 @@ export function useFeedbackThanksView({
     elements,
     links
   );
+
+  const backRoute = getUIElementRedirectRoute("back_page", elements, links);
+  const element = getUIElement("back", elements);
+  const key = element?.identifier + content.lang;
+  const tooltip = element?.value;
+  const buttonValue = element?.value;
+
   useEffect(() => {
     if (!isLoading && !user) router.push("/" + content.lang);
     else if (
@@ -49,5 +59,5 @@ export function useFeedbackThanksView({
     hasFeedbackLoading,
   ]);
 
-  return { content, elements, links };
+  return { backRoute, key, tooltip, buttonValue };
 }

@@ -1,8 +1,9 @@
 import { IAppPage } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
-import { getLandingPageView } from "@/modules/landingPage/query";
+import { getLandingPageView } from "../../client/request";
 import { IPageConfig } from "@/modules/shell/types";
 import { landingPagePaths } from "../../types";
+import { ILayout } from "@/modules/shell/client/components/Layout/types";
 
 export const getStaticProps = async (
   segments?: string[],
@@ -23,9 +24,22 @@ export const getStaticProps = async (
   );
 
   if (!content) return null;
+  const layoutImg = {
+    alt: "Beschreibung",
+    src: `${process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}`,
+  };
+
+  const layout: ILayout = {
+    pageLayout: "imageAndColumn",
+    layoutImg,
+  };
+  const shell: IPageConfig = {
+    useHeader: "AUTHORIZED",
+    layout,
+  };
 
   return {
     ...content,
-    useHeader: "AUTHORIZED",
+    ...shell,
   };
 };

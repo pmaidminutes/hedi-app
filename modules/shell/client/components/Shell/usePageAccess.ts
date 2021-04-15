@@ -22,5 +22,5 @@ export const usePageAccess = (redirectUnAuthorized?: string) => {
       }
     }
   }, [redirectUnAuthorized, user, isLoading]);
-  return hasPageAccess;
+  return { hasPageAccess };
 };

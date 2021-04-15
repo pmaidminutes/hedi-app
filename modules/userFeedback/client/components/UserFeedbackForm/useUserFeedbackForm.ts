@@ -9,6 +9,9 @@ import {
 } from "@/modules/profile/client/components/Profile";
 import { getUIElementRedirectRoute } from "@/modules/common/utils";
 
+// types
+import { ColumnDefaultProps } from "carbon-components-react";
+import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { IAppPage } from "@/modules/common/types";
 
 // Constants

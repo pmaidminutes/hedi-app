@@ -1,20 +1,39 @@
-import { segmentsToRoute } from "@/modules/common/utils";
+import { ILayout } from "@/modules/shell/client/components/Layout/types";
+import { IAppPage } from "@/modules/common/types";
+import { getLangByRoute, segmentsToRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
-import { getProfileListView, ProfileListView } from "../../query";
+import { getProfileList, getProfileListDefinition } from "../../query";
+import { Profile } from "../../types";
+
+export type ProfileListView = IAppPage & { profiles: Profile[] } & IPageConfig;
 
 export const getProfileListPage = async (
   segments?: string[],
   locale = "de"
-): Promise<(ProfileListView & IPageConfig) | null> => {
+): Promise<ProfileListView | null> => {
   if (!segments) return null;
 
-  const content = await getProfileListView(segmentsToRoute(segments, locale));
-  if (!content) return null;
+  const route = segmentsToRoute(segments, locale);
+  const definition = await getProfileListDefinition(route);
+  const content = await getProfileList(getLangByRoute(route) ?? locale);
+  if (!content || !definition) return null;
+
+  const layout: ILayout = {
+    pageLayout: "singleColumn",
+    customKey: "profile-list",
+  };
+
+  const shell: IPageConfig = {
+    useHeader: "AUTHORIZED",
+    redirectUnAuthorized: "/" + definition.lang,
+    revalidate: 1,
+    layout,
+  };
 
   return {
+    profiles: content,
+    ...definition,
     ...content,
-    useHeader: "AUTHORIZED",
-    redirectUnAuthorized: "/" + content.lang,
-    revalidate: 1,
+    ...shell,
   };
 };

@@ -12,9 +12,9 @@ const solrSuggestAPI: NextApiHandler<any> = async (
   res: NextApiResponse
 ) => {
   const {
-    query: { lang, typeText },
+    query: { typeText },
   } = req;
-  const jsonResponse = await suggestServer(`${lang}`, `${typeText}`);
+  const jsonResponse = await suggestServer(`${typeText}`);
   res.send(jsonResponse);
 };
 export default solrSuggestAPI;

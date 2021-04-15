@@ -23,15 +23,11 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IAppPage } from "@/modules/common/types";
-
-export const TrySearch = (content: ITyped): JSX.Element | null =>
-  content.type === "Search" ? <Search content={content as IAppPage} /> : null;
-
 interface ISearchProps {
   content: IAppPage;
 }
 
-export const Search = ({ content }: ISearchProps): JSX.Element => {
+export const SearchView = ({ content }: ISearchProps): JSX.Element => {
   let loading = true;
 
   const router = useRouter();
@@ -67,13 +63,11 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
     setLocation(typedAddress);
   };
 
-  // UNUSED
   //TODO not used at the moment
   const resetFilter = function () {
     setFilter("");
   };
 
-  // UNUSED
   //TODO not used at the moment
   const removeFilter = function (removedFilter: string) {};
   //TODO temporary feature
@@ -121,6 +115,7 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
           onChange={e => handleLocation(e.target.value)}
           //value={location}
         />
+
         <Slider
           ariaLabelInput="Slide for distance"
           id="slider"
@@ -200,15 +195,17 @@ export const Search = ({ content }: ISearchProps): JSX.Element => {
                   case "Institution":
                     {
                       //TODO if there will be too many locations due to state changes..
-                      locations.push({
-                        lat: entry.lat,
-                        long: entry.long,
-                        displayName: entry.displayName,
-                      } as Location);
+                      //TODO for now there is no latitude and longitude in the profiles
+                      if (entry.lat && entry.long)
+                        locations.push({
+                          lat: entry.lat,
+                          long: entry.long,
+                          displayName: entry.displayName,
+                        } as Location);
                     }
                     return (
                       <ProfileEntry
-                        {...entry} // HACK, just done to get it building, validate
+                        {...entry} // TODO, develop a result entry profile
                         key={entry.route + locale}
                       />
                     );
