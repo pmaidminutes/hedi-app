@@ -1,6 +1,6 @@
 import { IUIElementTexts } from "@/modules/model";
 import { Profile } from "@/modules/profile/types";
-export interface IProfileItem {
+export interface IProfileEntry {
   profile: Profile;
   elements: IUIElementTexts[];
 }

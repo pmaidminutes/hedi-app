@@ -5,9 +5,9 @@ import NextLink from "next/link";
 import { ClickableTile } from "carbon-components-react";
 import { ArrowRight24 } from "@carbon/icons-react";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
-import { IProfileItem } from ".";
+import { IProfileEntry } from ".";
 
-export const ProfileListItem = (props: IProfileItem) => {
+export const ProfileListItem = (props: IProfileEntry) => {
   const {
     profile,
     midwifeLabel,

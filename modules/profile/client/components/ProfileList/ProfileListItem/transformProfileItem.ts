@@ -1,8 +1,8 @@
 import { isICaregiver, isIMidwife } from "@/modules/profile/types";
 import { getUIElementValue } from "@/modules/common/utils";
-import { IProfileItem } from ".";
+import { IProfileEntry } from ".";
 
-export function transformProfileItem(props: IProfileItem) {
+export function transformProfileItem(props: IProfileEntry) {
   const { profile, elements } = props;
   const { route } = profile;
 

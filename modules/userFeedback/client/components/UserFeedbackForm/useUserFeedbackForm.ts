@@ -14,8 +14,8 @@ import { ColumnDefaultProps } from "carbon-components-react";
 import { IUserFeedbackView } from "@/modules/userFeedback/types";
 import { ProfileView } from "@/modules/profile/types";
 import { IAppPage } from "@/modules/common/types";
+import { headlineType } from "@/modules/profile/client/components/ServiceGroup/IServiceGroupProps";
 
-import { headlineType } from "@/modules/profile/client/components/Services/transformServices";
 export interface IUserFeedbackFormProps {
   content: IUserFeedbackView;
   locale: string;

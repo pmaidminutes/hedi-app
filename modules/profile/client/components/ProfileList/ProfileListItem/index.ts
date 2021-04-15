@@ -1,2 +1,2 @@
 export * from "./ProfileListItem";
-export * from "./IProfileItem";
+export * from "./IProfileEntry";

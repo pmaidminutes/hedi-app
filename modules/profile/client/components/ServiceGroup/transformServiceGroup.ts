@@ -1,6 +1,6 @@
-import { IServicesProps } from ".";
+import { IServiceGroupProps } from "./IServiceGroupProps";
 
-export function transformServices(props: IServicesProps) {
+export function transformServiceGroup(props: IServiceGroupProps) {
   const { headline, services, tagType, headlineType = "h5" } = props;
 
   const { labelText } = headline;

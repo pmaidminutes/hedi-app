@@ -11,7 +11,7 @@ import { Column, Row } from "carbon-components-react";
 import { BgImgContainer, Seperator } from "@/modules/common/components";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
 
-import { Services } from "@/modules/profile/client/components/Services";
+import { ServiceGroup } from "@/modules/profile/client/components/ServiceGroup";
 import { LanguageSkills } from "@/modules/profile/client/components/LanguageSkills";
 import { Contact } from "@/modules/profile/client/components/Contact";
 
@@ -65,7 +65,7 @@ export default function UserFeedbackForm(props: IUserFeedbackFormProps) {
       </Row>
       <Row>
         <Column {...left}>
-          <Services headline={servicesHeadline} {...servicesData} />
+          <ServiceGroup headline={servicesHeadline} {...servicesData} />
         </Column>
         <Column {...right}>
           <UserFeedbackAppPageEntry

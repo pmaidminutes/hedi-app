@@ -5,7 +5,7 @@ import { Column, Grid, Row } from "carbon-components-react";
 import { Contact } from "../Contact";
 import { ProfileEntry } from "../ProfileEntry";
 import { BgImgContainer } from "@/modules/common/components";
-import { Services } from "../Services";
+import { ServiceGroup } from "../ServiceGroup";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
 import { ProfileView } from "../../../types";
@@ -74,7 +74,7 @@ export const Profile = (props: IProfileViewProps) => {
         <Row>
           {hasServices ? (
             <Column lg={6} md={4}>
-              <Services
+              <ServiceGroup
                 headline={servicesHeadline}
                 {...servicesData}
                 headlineType="h3"
