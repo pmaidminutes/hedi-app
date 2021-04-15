@@ -16731,6 +16731,9 @@ a.bx--navigation-link:focus {
   right: 0;
   transform: translateX(50%) rotate(45deg); }
 
+html {
+  direction: ltr; }
+
 html:lang(fa) {
   direction: rtl; }
 
@@ -17287,7 +17290,10 @@ pre {
   .hedi--scroll-to-top button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger:hover {
     background: #2A84C6; }
 
-.hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger:not(:lang($rtl-languages)) {
+html:lang(de) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
+  bottom: 5rem; }
+
+html:lang(en) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
   bottom: 5rem; }
 
 .hedi--simple-page .hedi--hero-image {

@@ -1,6 +1,11 @@
 // BASE
-html:lang(fa){
-  direction: rtl;
+html {
+  direction: ltr;
+}
+@each $rtl-lang in $rtl-languages {
+  html:lang(#{$rtl-lang}) {
+    direction: rtl;
+  }
 }
 .leaflet-container {
   height: 300px;
@@ -17,4 +22,3 @@ h1 {
 pre {
   white-space: pre-wrap;
 }
-
