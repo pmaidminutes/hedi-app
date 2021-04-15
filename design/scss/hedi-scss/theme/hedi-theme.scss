@@ -9,6 +9,7 @@
 @import "./tokens/colors.scss";
 @import "./tokens/spacings.scss";
 @import "./tokens/typography.scss";
+@import "./tokens/languages.scss";
 
 @mixin hedi-theme {
   @include theme-fonts;
@@ -16,4 +17,5 @@
   @include theme-colors;
   @include theme-spacings;
   @include theme-typography;
+  @include theme-languages;
 }
