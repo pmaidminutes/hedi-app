@@ -17,7 +17,9 @@
 
   &__bottom {
     button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
-      bottom: ($spacing-2xl * 2);
+      &:not(:lang($rtl-languages)) {
+        bottom: ($spacing-2xl * 2);
+      }
     }
   }
 }
