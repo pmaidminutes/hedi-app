@@ -16430,6 +16430,9 @@ a.bx--navigation-link:focus {
   right: 0;
   transform: translateX(50%) rotate(45deg); }
 
+html:lang(fa) {
+  direction: rtl; }
+
 .leaflet-container {
   height: 300px; }
 
