@@ -17070,7 +17070,7 @@ html:lang(fa) .hedi--group--language-skills .bx--data-table th:last-child {
 .hedi--edit-profile h4 {
   padding-bottom: 1rem; }
 
-.hedi--edit-profile input {
+.hedi--edit-profile input, .hedi--edit-profile textarea {
   direction: ltr !important; }
 
 .hedi--login-form .hedi--block-label {
@@ -17453,6 +17453,22 @@ html:lang(de) .bx--content-switcher-btn::before {
 html:lang(de) .bx--data-table .bx--table-header-label {
   text-align: left; }
 
+html:lang(de) .bx--btn .bx--btn__icon {
+  right: 1rem;
+  left: auto; }
+
+html:lang(de) .bx--tile__checkmark {
+  right: 1rem;
+  left: auto; }
+
+html:lang(de) .bx--list-box__menu-icon {
+  left: auto;
+  right: 1rem; }
+
+html:lang(de) .bx--list-box__menu-item__selected-icon {
+  right: 1rem;
+  left: auto; }
+
 html:lang(en) .bx--content-switcher-btn:first-child {
   border-left: 0.0625rem solid #161616;
   border-top-left-radius: 0.25rem;
@@ -17476,6 +17492,22 @@ html:lang(en) .bx--content-switcher-btn::before {
 html:lang(en) .bx--data-table .bx--table-header-label {
   text-align: left; }
 
+html:lang(en) .bx--btn .bx--btn__icon {
+  right: 1rem;
+  left: auto; }
+
+html:lang(en) .bx--tile__checkmark {
+  right: 1rem;
+  left: auto; }
+
+html:lang(en) .bx--list-box__menu-icon {
+  left: auto;
+  right: 1rem; }
+
+html:lang(en) .bx--list-box__menu-item__selected-icon {
+  right: 1rem;
+  left: auto; }
+
 html:lang(fa) .bx--content-switcher-btn:first-child {
   border-right: 0.0625rem solid #161616;
   border-top-right-radius: 0.25rem;
@@ -17498,6 +17530,40 @@ html:lang(fa) .bx--content-switcher-btn::before {
 
 html:lang(fa) .bx--data-table .bx--table-header-label {
   text-align: right; }
+
+html:lang(fa) .bx--btn:not(.bx--btn--icon-only) {
+  padding: calc(0.875rem - 3px) 15px calc(0.875rem - 3px) 63px; }
+
+html:lang(fa) .bx--btn .bx--btn__icon {
+  left: 1rem;
+  right: auto; }
+
+html:lang(fa) .bx--tile__checkmark {
+  left: 1rem;
+  right: auto; }
+
+html:lang(fa) .bx--list-box__menu-icon {
+  right: auto;
+  left: 1rem; }
+
+html:lang(fa) .bx--list-box__menu-item__option {
+  padding-left: 1.5rem;
+  text-align: right; }
+
+html:lang(fa) .bx--list-box__menu-item__selected-icon {
+  left: 1rem;
+  right: auto; }
+
+html:lang(fa) .bx--inline-notification--low-contrast.bx--inline-notification--success {
+  border-right: 3px solid #24a148;
+  border-left: unset; }
+
+html:lang(fa) .bx--inline-notification--low-contrast::before {
+  border-width: 1px 0 1px 1px; }
+
+html:lang(fa) .bx--btn--ghost .bx--btn__icon {
+  margin-left: 0;
+  margin-right: 0.5rem; }
 
 .hidden {
   display: none; }
