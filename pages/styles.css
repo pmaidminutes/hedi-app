@@ -16970,6 +16970,21 @@ pre {
       align-self: center;
       display: inline-block; } }
 
+.hedi--group--language-skills thead th:last-child button {
+  width: 100%; }
+
+.hedi--group--language-skills tbody tr td:last-child {
+  text-align: center; }
+
+html:lang(de) .hedi--group--language-skills .bx--data-table th:last-child {
+  padding-right: 0; }
+
+html:lang(en) .hedi--group--language-skills .bx--data-table th:last-child {
+  padding-right: 0; }
+
+html:lang(fa) .hedi--group--language-skills .bx--data-table th:last-child {
+  padding-left: 0; }
+
 .hedi--service-selection {
   background-color: #f4f4f4; }
   .hedi--service-selection:hover {
@@ -17428,6 +17443,9 @@ html:lang(de) .bx--content-switcher-btn::before {
   left: 0;
   right: auto; }
 
+html:lang(de) .bx--data-table .bx--table-header-label {
+  text-align: left; }
+
 html:lang(en) .bx--content-switcher-btn:first-child {
   border-left: 0.0625rem solid #161616;
   border-top-left-radius: 0.25rem;
@@ -17448,6 +17466,9 @@ html:lang(en) .bx--content-switcher-btn::before {
   left: 0;
   right: auto; }
 
+html:lang(en) .bx--data-table .bx--table-header-label {
+  text-align: left; }
+
 html:lang(fa) .bx--content-switcher-btn:first-child {
   border-right: 0.0625rem solid #161616;
   border-top-right-radius: 0.25rem;
@@ -17467,6 +17488,9 @@ html:lang(fa) .bx--content-switcher-btn:last-child {
 html:lang(fa) .bx--content-switcher-btn::before {
   right: 0;
   left: auto; }
+
+html:lang(fa) .bx--data-table .bx--table-header-label {
+  text-align: right; }
 
 .hidden {
   display: none; }
