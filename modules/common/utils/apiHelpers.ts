@@ -33,7 +33,7 @@ export function sendAPIServerError(
 
 export function sendAPISuccess(
   nextApiResponse: NextApiResponse,
-  result: object
+  result: object | string
 ) {
   nextApiResponse.status(200).json(result);
 }
@@ -72,7 +72,7 @@ export async function sendAPIErrorIfUnauthorised(
   return { isErrorSent: false, authHeader };
 }
 
-export function sendAPIErrorResponseIfEmpty(
+export function sendAPIErrorIfEmpty(
   req: NextApiRequest,
   res: NextApiResponse
 ): ErrorSentStatus {
@@ -84,11 +84,11 @@ export function sendAPIErrorResponseIfEmpty(
   return { isErrorSent: false };
 }
 
-export async function sendAPIErrorResponseIfEmptyOrUnauthorised(
+export async function sendAPIErrorIfEmptyOrUnauthorised(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<UnauthorizedErrorSentStatus> {
-  const emptyErrorStatus = sendAPIErrorResponseIfEmpty(req, res);
+  const emptyErrorStatus = sendAPIErrorIfEmpty(req, res);
   if (emptyErrorStatus.isErrorSent) {
     return emptyErrorStatus;
   }
