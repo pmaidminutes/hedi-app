@@ -1,3 +1,4 @@
+import { sendAPISuccess } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
 import { IRegisterResponse } from "../types";
 
@@ -10,5 +11,5 @@ export const validateRegisterAPI: NextApiHandler<IRegisterResponse> = async (
   const data = validPasccode
     ? { success: true }
     : { success: false, errors: { registrationcode: "invalid_passcode" } };
-  return res.send(data);
+  sendAPISuccess(res, data);
 };

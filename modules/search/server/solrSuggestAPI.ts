@@ -4,6 +4,7 @@
  *
  * nest language specific calls into this folder
  */
+import { sendAPIResult } from "@/modules/common/utils";
 import { NextApiHandler, NextApiRequest, NextApiResponse } from "next";
 import { suggestServer } from "./request";
 
@@ -15,6 +16,6 @@ const solrSuggestAPI: NextApiHandler<any> = async (
     query: { typeText },
   } = req;
   const jsonResponse = await suggestServer(`${typeText}`);
-  res.send(jsonResponse);
+  sendAPIResult(res, jsonResponse);
 };
 export default solrSuggestAPI;

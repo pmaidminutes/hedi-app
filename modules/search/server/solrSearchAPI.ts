@@ -23,6 +23,7 @@ import {
 } from "@/modules/profile/types";
 import { searchServer } from "./request";
 import { NextApiHandler } from "next";
+import { sendAPIHttpError, sendAPISuccess } from "@/modules/common/utils";
 
 export const solrSearchAPI: NextApiHandler<
   | IHTTPError
@@ -51,7 +52,7 @@ export const solrSearchAPI: NextApiHandler<
     true
   );
 
-  if (IsIHTTPError(data)) res.send(data);
+  if (IsIHTTPError(data)) sendAPIHttpError(res, data);
   else {
     const promises = [];
     for (const entry of data) {
@@ -169,7 +170,7 @@ export const solrSearchAPI: NextApiHandler<
       | IInstitution
       | IPage
     )[];
-    res.send(nonNull);
+    sendAPISuccess(res, nonNull);
   }
 };
 export default solrSearchAPI;

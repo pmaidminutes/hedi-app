@@ -1,6 +1,8 @@
 import { NextApiHandler } from "next";
-import { sendAPIResult } from "@/modules/common/utils";
-import { getUserAuthHeader } from "@/modules/auth/server";
+import {
+  sendAPIErrorIfUnauthorised,
+  sendAPIResult,
+} from "@/modules/common/utils";
 import { upsertProfileQuery } from "../query";
 import { EditProfileInput, IUpsertProfile } from "../types";
 
@@ -8,17 +10,19 @@ export const editProfileAPI: NextApiHandler<IUpsertProfile> = async (
   req,
   res
 ) => {
+  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorised(
+    req,
+    res
+  );
+  if (isErrorSent || !authHeader) return;
+
   const input = (req.body ? JSON.parse(req.body) : { lang: "de" }) as {
     profile?: EditProfileInput;
     lang: string;
   };
-  const authHeader = await getUserAuthHeader(req);
-  if (!authHeader) res.status(401).json({ success: false });
-  else {
-    const result = await upsertProfileQuery(input, authHeader).catch(err => {
-      console.warn(err);
-      return null;
-    });
-    sendAPIResult(res, result);
-  }
+  const result = await upsertProfileQuery(input, authHeader).catch(err => {
+    console.warn(err);
+    return null;
+  });
+  sendAPIResult(res, result);
 };
