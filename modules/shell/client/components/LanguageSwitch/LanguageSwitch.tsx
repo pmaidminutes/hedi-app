@@ -3,6 +3,7 @@ import {
   transformLanguageSwitch,
   ILanguageSwitchProps,
 } from "./transformLanguageSwitch";
+import { useLanguageSwitch } from "./useLanguageSwitch";
 import { OverflowMenu, OverflowMenuItem } from "carbon-components-react";
 import { Translate32 } from "@carbon/icons-react";
 
@@ -16,6 +17,8 @@ export const LanguageSwitch = (
   props: ILanguageSwitchProps
 ): JSX.Element | null => {
   const { direction, links, config, tooltip } = transformLanguageSwitch(props);
+  const { isFlipped } = useLanguageSwitch();
+  console.log({isFlipped})
 
   if (links) {
     return (
@@ -26,7 +29,7 @@ export const LanguageSwitch = (
         title={tooltip}
         size="xl"
         direction={direction}
-        flipped={true}>
+        flipped={isFlipped}>
         {links.map((item, index) => (
           <OverflowMenuItem
             key={index}
