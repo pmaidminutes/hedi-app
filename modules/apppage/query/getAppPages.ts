@@ -2,17 +2,15 @@ import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
-import { simplePageKeys } from "../types/simplePageKeys";
-import { capitalizeFirstLetter } from "../helper/NamingHelpers";
 import { logAndNull } from "@/modules/common/error";
 
-export async function getSimplePageView(
+export async function getAppPage(
   route: string
 ): Promise<IAppPage | null> {
   const lang = getLangByRoute(route);
 
   const query = gql`
-    query getSimpleAppPagesView(
+    query getAppPages(
       $routes: [String!]!
       $lang: String!
       $includeSelf: Boolean
@@ -25,8 +23,8 @@ export async function getSimplePageView(
     lang,
   }).then(data => {
     const view = logAndNull(data)?.appPages?.[0];
-    if (view && simplePageKeys.includes(view.key)) {
-      view.type = capitalizeFirstLetter(view.key);
+
+    if (view) {
       return view;
     }
     return null;

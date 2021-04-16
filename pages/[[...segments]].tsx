@@ -3,7 +3,6 @@ import { getSegmentsPaths } from "@/modules/common/query";
 import { IAppPage, ISegmentParam } from "@/modules/common/types";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
-import { LoginViewPathsGQL } from "@/modules/login/client/request";
 import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
 import { IEntity } from "@/modules/model";
 import {
@@ -11,21 +10,14 @@ import {
   TryProfile,
   TryProfileList,
 } from "@/modules/profile/client/components";
-import {
-  CaregiverPathsGQL,
-  MidwifePathsGQL,
-  ProfileListPathsGQL,
-  ViewProfilePathsGQL,
-} from "@/modules/profile/query";
+import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
 import {
   getProfileListPage,
   getViewProfilePage,
 } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/client/components";
-import { RegistrationViewPathsGQL } from "@/modules/registration/query";
 import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
 
-import { EditProfilePathsGQL } from "@/modules/editProfile/query";
 import { getStaticProps as getEditProfilePage } from "@/modules/editProfile/server/generators";
 import { TryEditProfile } from "@/modules/editProfile/client/components";
 
@@ -39,18 +31,15 @@ import { generateShellData } from "@/modules/shell/client/utils";
 import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
-import { TrySimplePage } from "@/modules/simplePage/client/components";
-import { SimplePageViewPathsGQL } from "@/modules/simplePage/query";
-import { getStaticProps as getStaticSimplePageViewProps } from "@/modules/simplePage/server/generators";
+import { AppPagePathsGQL } from "@/modules/apppage/query";
+import { getStaticProps as getStaticAppPage } from "@/modules/apppage/server/generators";
+import { TryAppPage } from "@/modules/apppage/client/components";
 
-import { UserFeedbackViewPathsGQL } from "@/modules/userFeedback/query";
 import { getUserFeedbackPage } from "@/modules/userFeedback/server/generators";
 import { TryUserFeedback } from "@/modules/userFeedback/client/components";
 
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
-import { UserFeedbackThanksViewPathsGQL } from "@/modules/userFeedback/query";
 import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
-import { SearchViewPathsGQL } from "@/modules/search/query";
 import { getStaticProps as getStaticSearchViewProps } from "@/modules/search/server/generators";
 
 // Components
@@ -73,19 +62,7 @@ const getDesignProps = async () => {
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
-  const pathQueries = [
-    CaregiverPathsGQL,
-    MidwifePathsGQL,
-    ProfileListPathsGQL,
-    LoginViewPathsGQL,
-    RegistrationViewPathsGQL,
-    EditProfilePathsGQL,
-    ViewProfilePathsGQL,
-    UserFeedbackViewPathsGQL,
-    UserFeedbackThanksViewPathsGQL,
-    SimplePageViewPathsGQL,
-    SearchViewPathsGQL,
-  ];
+  const pathQueries = [CaregiverPathsGQL, MidwifePathsGQL, AppPagePathsGQL];
   const locales = context?.locales ?? [];
   const paths = [];
   for (const lang of locales) {
@@ -125,12 +102,12 @@ export const getStaticProps: GetStaticProps<
     if (!content)
       content = await getUserFeedbackThanksPage(params?.segments, locale);
     if (!content)
-      content = await getStaticSimplePageViewProps(params?.segments, locale);
+      content = await getLandingPageViewProps(params?.segments, locale);
     if (!content)
       content = await getStaticSearchViewProps(params?.segments, locale);
   }
   if (!content) {
-    content = await getLandingPageViewProps(params?.segments, locale);
+    content = await getStaticAppPage(params?.segments, locale);
   }
   if (!content)
     return {
@@ -172,10 +149,10 @@ export default function segments(props: IPageProps<IAppPage>) {
         <TryLogin content={content} key="login" />
         <TryEditProfile content={content} key="editProfile" />
         <TryUserFeedback content={content} key="userfeedback" />
-        <TryUserFeedbackThanks content={content} key="userfeedback" />
-        <TrySimplePage content={content} key="simplepage" />
+        <TryUserFeedbackThanks content={content} key="userfeedbackThanks" />
         <TryLandingPage content={content} key="landingpage" />
         <TrySearch content={content} key="search" />
+        <TryAppPage content={content} key="apppage" />
       </>
     </Shell>
   );

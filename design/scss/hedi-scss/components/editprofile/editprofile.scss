@@ -73,4 +73,8 @@
   h4 {
     padding-bottom: $spacing-md;
   }
+// TODO check if needed global
+  input {
+    direction: ltr!important;
+  }
 }
