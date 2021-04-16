@@ -77,4 +77,25 @@
       }
     }
   }
+
+  thead {
+    th:last-child button {
+      width: 100%;
+    }
+  }
+  tbody tr td:last-child {
+    text-align: center;
+  }
+
+  // RTL
+  @include ltr-only() {
+    .bx--data-table th:last-child {
+      padding-right: 0;
+    }
+  }
+  @include rtl-only() {
+    .bx--data-table th:last-child {
+      padding-left: 0;
+    }
+  }
 }
