@@ -75,6 +75,10 @@
     left: auto;
     right: 1rem;
   }
+  .bx--list-box__menu-item__selected-icon {
+    right: 1rem;
+    left: auto;
+  }
 }
 @include rtl-only() {
   .bx--content-switcher-btn:first-child {
@@ -118,5 +122,13 @@
   .bx--list-box__menu-icon {
     right: auto;
     left: 1rem;
+  }
+  .bx--list-box__menu-item__option {
+    padding-left: 1.5rem;
+    text-align: right;
+  }
+  .bx--list-box__menu-item__selected-icon {
+    left: 1rem;
+    right: auto;
   }
 }

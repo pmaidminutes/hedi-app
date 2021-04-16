@@ -17070,7 +17070,7 @@ html:lang(fa) .hedi--group--language-skills .bx--data-table th:last-child {
 .hedi--edit-profile h4 {
   padding-bottom: 1rem; }
 
-.hedi--edit-profile input {
+.hedi--edit-profile input, .hedi--edit-profile textarea {
   direction: ltr !important; }
 
 .hedi--login-form .hedi--block-label {
@@ -17465,6 +17465,10 @@ html:lang(de) .bx--list-box__menu-icon {
   left: auto;
   right: 1rem; }
 
+html:lang(de) .bx--list-box__menu-item__selected-icon {
+  right: 1rem;
+  left: auto; }
+
 html:lang(en) .bx--content-switcher-btn:first-child {
   border-left: 0.0625rem solid #161616;
   border-top-left-radius: 0.25rem;
@@ -17499,6 +17503,10 @@ html:lang(en) .bx--tile__checkmark {
 html:lang(en) .bx--list-box__menu-icon {
   left: auto;
   right: 1rem; }
+
+html:lang(en) .bx--list-box__menu-item__selected-icon {
+  right: 1rem;
+  left: auto; }
 
 html:lang(fa) .bx--content-switcher-btn:first-child {
   border-right: 0.0625rem solid #161616;
@@ -17537,6 +17545,14 @@ html:lang(fa) .bx--tile__checkmark {
 html:lang(fa) .bx--list-box__menu-icon {
   right: auto;
   left: 1rem; }
+
+html:lang(fa) .bx--list-box__menu-item__option {
+  padding-left: 1.5rem;
+  text-align: right; }
+
+html:lang(fa) .bx--list-box__menu-item__selected-icon {
+  left: 1rem;
+  right: auto; }
 
 .hidden {
   display: none; }
