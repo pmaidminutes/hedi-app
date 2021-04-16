@@ -131,4 +131,12 @@
     left: 1rem;
     right: auto;
   }
+  // Inline Notification
+  .bx--inline-notification--low-contrast.bx--inline-notification--success {
+    border-right: 3px solid $support-02;
+    border-left: unset;
+  }
+  .bx--inline-notification--low-contrast::before {
+    border-width: 1px 0 1px 1px;
+}
 }
