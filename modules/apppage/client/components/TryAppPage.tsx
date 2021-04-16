@@ -6,4 +6,7 @@ export const TryAppPage = ({
   content,
 }: {
   content: ITyped;
-}): JSX.Element | null => <AppPageView content={content as IAppPage} />;
+}): JSX.Element | null =>
+  content.type === "AppPage" ? (
+    <AppPageView content={content as IAppPage} />
+  ) : null;
