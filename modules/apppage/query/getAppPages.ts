@@ -2,16 +2,15 @@ import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
 import { IAppPage } from "@/modules/common/types";
-import { capitalizeFirstLetter } from "../helper/NamingHelpers";
 import { logAndNull } from "@/modules/common/error";
 
-export async function getAppPageView(
+export async function getAppPage(
   route: string
 ): Promise<IAppPage | null> {
   const lang = getLangByRoute(route);
 
   const query = gql`
-    query getAppPagesView(
+    query getAppPages(
       $routes: [String!]!
       $lang: String!
       $includeSelf: Boolean

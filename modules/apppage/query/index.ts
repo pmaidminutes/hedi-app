@@ -1,2 +1,2 @@
-export * from "./getAppPagesView";
+export * from "./getAppPages";
 export * from "./getAppPagePaths";

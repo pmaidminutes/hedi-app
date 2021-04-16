@@ -1,1 +1,1 @@
-export * from "./getStaticAppPageViewProps";
+export * from "./getStaticAppPage";
