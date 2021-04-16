@@ -16742,7 +16742,11 @@ html:lang(fa) {
 
 address {
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  direction: ltr; }
+
+html:lang(fa) address {
+  text-align: right; }
 
 h1 {
   margin: 1.5rem 0; }

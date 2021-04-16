@@ -13,6 +13,12 @@ html {
 address {
   display: flex;
   flex-direction: column;
+  direction: ltr;
+}
+@include rtl-only(){
+  address {
+    text-align: right;
+  }
 }
 
 h1 {
