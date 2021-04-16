@@ -59,7 +59,7 @@ export function sendAPINoBody(nextApiResponse: NextApiResponse) {
     .json({ success: false, errors: { generic: "no entity to save" } }); // TODO: how to return error (raw / translated)
 }
 
-export async function sendAPIErrorIfUnauthorised(
+export async function sendAPIErrorIfUnauthorized(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<UnauthorizedErrorSentStatus> {
@@ -84,7 +84,7 @@ export function sendAPIErrorIfEmpty(
   return { isErrorSent: false };
 }
 
-export async function sendAPIErrorIfEmptyOrUnauthorised(
+export async function sendAPIErrorIfEmptyOrUnauthorized(
   req: NextApiRequest,
   res: NextApiResponse
 ): Promise<UnauthorizedErrorSentStatus> {
@@ -93,7 +93,7 @@ export async function sendAPIErrorIfEmptyOrUnauthorised(
     return emptyErrorStatus;
   }
 
-  const unauthorizedErrorStatus = await sendAPIErrorIfUnauthorised(req, res);
+  const unauthorizedErrorStatus = await sendAPIErrorIfUnauthorized(req, res);
   if (unauthorizedErrorStatus.isErrorSent) {
     return unauthorizedErrorStatus;
   }

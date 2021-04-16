@@ -1,5 +1,5 @@
 import {
-  sendAPIErrorIfEmptyOrUnauthorised,
+  sendAPIErrorIfEmptyOrUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
@@ -15,7 +15,7 @@ interface UserFeedbacksFetch {
 export const sendUserFeedbacksAPI: NextApiHandler<
   IMutationResponse[] | IMutationResponse
 > = async (req, res) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfEmptyOrUnauthorised(
+  const { isErrorSent, authHeader } = await sendAPIErrorIfEmptyOrUnauthorized(
     req,
     res
   );

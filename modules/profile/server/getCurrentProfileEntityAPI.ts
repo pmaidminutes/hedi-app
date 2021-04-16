@@ -1,5 +1,5 @@
 import {
-  sendAPIErrorIfEmptyOrUnauthorised,
+  sendAPIErrorIfEmptyOrUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
 import { IEntity } from "@/modules/model";
@@ -10,7 +10,7 @@ export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async 
   req,
   res
 ) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfEmptyOrUnauthorised(
+  const { isErrorSent, authHeader } = await sendAPIErrorIfEmptyOrUnauthorized(
     req,
     res
   );

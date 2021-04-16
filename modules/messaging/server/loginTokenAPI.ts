@@ -3,13 +3,13 @@ import { querySSOLoginToken } from "../query";
 import { userGQuery } from "@/modules/graphql";
 import { IsIHTTPError } from "@/modules/common/error";
 import {
-  sendAPIErrorIfUnauthorised,
+  sendAPIErrorIfUnauthorized,
   sendAPIHttpError,
   sendAPISuccess,
 } from "@/modules/common/utils";
 
 const loginTokenAPI: NextApiHandler<any> = async (req, res) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorised(
+  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorized(
     req,
     res
   );

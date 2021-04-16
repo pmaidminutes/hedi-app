@@ -1,6 +1,6 @@
 import { NextApiHandler } from "next";
 import {
-  sendAPIErrorIfUnauthorised,
+  sendAPIErrorIfUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
 import { upsertProfileQuery } from "../query";
@@ -10,7 +10,7 @@ export const editProfileAPI: NextApiHandler<IUpsertProfile> = async (
   req,
   res
 ) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorised(
+  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorized(
     req,
     res
   );

@@ -1,6 +1,5 @@
-import { getUserAuthHeader } from "@/modules/auth/server";
 import {
-  sendAPIErrorIfUnauthorised,
+  sendAPIErrorIfUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
@@ -11,7 +10,7 @@ export const getCurrentProfileAPI: NextApiHandler<Profile | null> = async (
   req,
   res
 ) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorised(
+  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorized(
     req,
     res
   );
