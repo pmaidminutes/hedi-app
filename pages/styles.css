@@ -17066,6 +17066,9 @@ html:lang(fa) .hedi--group--language-skills .bx--data-table th:last-child {
 .hedi--edit-profile h4 {
   padding-bottom: 1rem; }
 
+.hedi--edit-profile input {
+  direction: ltr !important; }
+
 .hedi--login-form .hedi--block-label {
   display: block; }
 
