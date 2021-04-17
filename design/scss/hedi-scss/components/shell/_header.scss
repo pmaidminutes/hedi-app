@@ -1,9 +1,14 @@
 .hedi--header {
   .bx--header__name {
+    button {
+      max-height: 100%;
+      margin-inline-start: 1rem;
+    }
     svg {
       height: 50px;
       width: auto;
       max-height: 100%;
+      padding: 5px;
     }
   }
 

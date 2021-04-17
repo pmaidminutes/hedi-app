@@ -11,6 +11,7 @@ import {
   SideNav,
   SideNavItems,
   HeaderSideNavItems,
+  TooltipIcon,
 } from "carbon-components-react";
 
 // import { GlobalSearchMenu } from "../GlobalSearchMenu";
@@ -25,6 +26,7 @@ export const Header = (props: IHeader) => {
     userMenuLinks,
     shellConfig,
     locale,
+    backToHome
   } = transformHeader(props);
 
   const { isExpanded, toggleSideNav } = useSideNav();
@@ -32,7 +34,9 @@ export const Header = (props: IHeader) => {
   return (
     <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
       <HeaderName prefix="" href={`/${locale}`}>
-        <Logo />
+        <TooltipIcon tooltipText={backToHome}>
+          <Logo />
+        </TooltipIcon>
       </HeaderName>
       <HeaderNavigation aria-label="Navigation" style={{ display: "block" }}>
         <HeaderMenuButton

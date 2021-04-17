@@ -1,3 +1,4 @@
+import { getUIElement } from "@/modules/common/utils";
 import { IAppStyled } from "@/modules/model";
 import { IShellProps } from "@/modules/shell/types";
 import { useRouter } from "next/router";
@@ -12,6 +13,9 @@ export function transformHeader({
 }: IHeader) {
   const router = useRouter();
   const { locale } = router;
+
+  const backToHome = getUIElement("menu_backToStart", shellConfig)?.value ?? "Zur Startseite";
+
   return {
     appstyle,
     languageSwitchLinks,
@@ -19,5 +23,6 @@ export function transformHeader({
     userMenuLinks: userMenu,
     shellConfig,
     locale,
+    backToHome
   };
 }
