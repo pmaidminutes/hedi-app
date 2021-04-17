@@ -17025,6 +17025,10 @@ html:lang(fa) .hedi--group--language-skills .bx--data-table th:last-child {
     line-height: 1.29;
     letter-spacing: 0; }
 
+.hedi--group--domains .bx--tile--selectable {
+  outline: 1px solid white;
+  outline-offset: -1px; }
+
 .hedi--edit-profile .hedi--group--language-skills .bx--data-table-content {
   overflow-x: visible !important; }
 
@@ -17274,10 +17278,16 @@ html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
     .hedi--footer a:not(:last-child), .hedi--footer .bx--link:not(:last-child) {
       margin-right: 2rem; }
 
+.hedi--header .bx--header__name button {
+  max-height: 100%;
+  -webkit-margin-start: 1rem;
+          margin-inline-start: 1rem; }
+
 .hedi--header .bx--header__name svg {
   height: 50px;
   width: auto;
-  max-height: 100%; }
+  max-height: 100%;
+  padding: 5px; }
 
 .hedi--header .bx--header__menu-item {
   color: #ffffff; }
