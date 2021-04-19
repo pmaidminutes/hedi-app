@@ -15,9 +15,9 @@ export const ValidatedTextInput = (
   const { onChange, ...rest } = props;
 
   const { hasErrors, handleChange } = useValidation(
-    props.value ?? "",
-    !props.isNotActive,
-    props.validateFn,
+    rest.value ?? "",
+    rest.isNotActive,
+    rest.validateFn,
     onChange
   );
   //TODO: notification error text: use current language
