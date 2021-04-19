@@ -1,11 +1,20 @@
 import { IShellProps } from "@/modules/shell/types";
-import { useEffect, useState } from "react";
+
+import { ShellContext } from "../../contexts";
+import { useEffect, useState, useContext } from "react";
 import { getUser } from "@/modules/auth/client";
 import { checkAccess } from "../../../utils";
 import { usePageAccess } from "./usePageAccess";
 
 export function useShell(shell: Partial<IShellProps>) {
-  const { useHeader, appstyle, redirectUnAuthorized, layout } = shell;
+  const {
+    useHeader,
+    appstyle,
+    redirectUnAuthorized,
+    layout,
+    langDirections,
+  } = shell;
+
 
   const [hasHeader, setHasHeader] = useState(useHeader === true);
   const [hediStyle, setHediStyle] = useState("");
@@ -28,5 +37,6 @@ export function useShell(shell: Partial<IShellProps>) {
     hasHeader,
     pageLayout,
     layout,
+    langDirections
   };
 }
