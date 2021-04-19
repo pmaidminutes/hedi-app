@@ -24,6 +24,7 @@ export function generateShellData(
   for (let key of Object.keys(links)) {
     setProperty(shellProps, key, links[key] as any);
   }
+  if (languages) setProperty(shellProps, "langDirections", generateLangDirections(languages));
   if (translations)
     setProperty(
       shellProps,
@@ -39,6 +40,16 @@ export function generateShellData(
   if (layout) setProperty(shellProps, "layout", layout);
 
   return shellProps;
+}
+
+function generateLangDirections(languages: ILanguage[]): Partial<ILanguage>[] {
+  if (!languages) return [];
+  return languages.map((language: ILanguage) => {
+    return {
+      code: language.code,
+      isRTL: language.isRTL,
+    };
+  });
 }
 
 function generateLanguageSwitchLinks(
