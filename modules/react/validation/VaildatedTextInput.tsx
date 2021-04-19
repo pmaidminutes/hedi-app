@@ -8,7 +8,6 @@ import { useValidation } from "../hooks/useValidation";
 
 export const ValidatedTextInput = (
   props: TextInputProps & {
-    isNotActive: boolean;
     validateFn: (T: any) => boolean;
   }
 ) => {
@@ -16,7 +15,7 @@ export const ValidatedTextInput = (
 
   const { hasErrors, handleChange } = useValidation(
     rest.value ?? "",
-    rest.isNotActive,
+    true, // TODO : as parameter (isActive)
     rest.validateFn,
     onChange
   );
