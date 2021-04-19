@@ -1,18 +1,21 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 
 export function useValidation<T>(
   value: T,
   isActive: boolean,
-  validateFn: (T: any) => boolean
+  validateFn: (T: any) => boolean,
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
 ) {
-  const [hasErrors, setHasErrors] = useState(false);
-  function handleChange(
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) {
-    const result = e.target.value as any;
+  const [hasErrors, setHasErrors] = useState(
+    isActive ? validateFn(value) : false
+  );
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    if (onChange) onChange(e);
     if (isActive) {
       setHasErrors(!validateFn(e.target.value));
     }
-  }
+  };
+
   return { hasErrors, handleChange };
 }

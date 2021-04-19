@@ -7,18 +7,23 @@ import React from "react";
 import { useValidation } from "../hooks/useValidation";
 
 export const ValidatedTextInput = (
-  props: TextInputProps & { validateFn: (T: any) => boolean }
+  props: TextInputProps & {
+    isNotActive: boolean;
+    validateFn: (T: any) => boolean;
+  }
 ) => {
+  const { onChange, ...rest } = props;
+
   const { hasErrors, handleChange } = useValidation(
-    props.value,
-    // TODO :Ich muss fragen, wie der Ischecksparameter nimmt
-    props.required ? true : false,
-    props.validateFn
+    props.value ?? "",
+    !props.isNotActive,
+    props.validateFn,
+    onChange
   );
+  //TODO: notification error text: use current language
   return (
     <>
-      <TextInput onChange={handleChange} {...props} />
-      //TODO: TextError
+      <TextInput onChange={handleChange} {...rest} />
       {hasErrors && (
         <InlineNotification kind="error" title="Error" subtitle={""} />
       )}
