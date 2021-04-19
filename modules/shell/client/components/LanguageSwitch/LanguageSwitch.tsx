@@ -18,7 +18,7 @@ export const LanguageSwitch = (
 ): JSX.Element | null => {
   const { direction, links, config, tooltip } = transformLanguageSwitch(props);
   const { isFlipped } = useLanguageSwitch();
-  console.log({isFlipped})
+
 
   if (links) {
     return (
