@@ -1,3 +1,4 @@
+import { getUserAuthHeader } from "@/modules/auth/server";
 import {
   sendAPIErrorIfEmptyOrUnauthorized,
   sendAPIResult,
@@ -10,9 +11,11 @@ export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async 
   req,
   res
 ) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfEmptyOrUnauthorized(
+  const authHeader = await getUserAuthHeader(req);
+  const { isErrorSent } = await sendAPIErrorIfEmptyOrUnauthorized(
     req,
-    res
+    res,
+    authHeader
   );
   if (isErrorSent || !authHeader) return;
 
