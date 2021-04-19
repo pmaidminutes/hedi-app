@@ -1,6 +1,7 @@
 import { NextApiHandler } from "next";
 import { querySSOLoginToken } from "../query";
 import { userGQuery } from "@/modules/graphql";
+import { getUserAuthHeader } from "@/modules/auth/server";
 import { IsIHTTPError } from "@/modules/common/error";
 import {
   sendAPIErrorIfUnauthorized,
@@ -9,9 +10,11 @@ import {
 } from "@/modules/common/utils";
 
 const loginTokenAPI: NextApiHandler<any> = async (req, res) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorized(
+  const authHeader = await getUserAuthHeader(req);
+  const { isErrorSent } = await sendAPIErrorIfUnauthorized(
     req,
-    res
+    res,
+    authHeader
   );
   if (isErrorSent || !authHeader) return;
 

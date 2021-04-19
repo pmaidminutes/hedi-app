@@ -1,14 +1,9 @@
 import { NextApiResponse, NextApiRequest } from "next";
 import { IsIHTTPError, IHTTPError } from "../error";
 import { IAuthHeader } from "@/modules/auth/types";
-import { getUserAuthHeader } from "@/modules/auth/server";
 
 interface ErrorSentStatus {
   isErrorSent: boolean;
-}
-
-interface UnauthorizedErrorSentStatus extends ErrorSentStatus {
-  authHeader?: IAuthHeader;
 }
 
 export const sendAPIResult = (
@@ -61,15 +56,15 @@ export function sendAPINoBody(nextApiResponse: NextApiResponse) {
 
 export async function sendAPIErrorIfUnauthorized(
   req: NextApiRequest,
-  res: NextApiResponse
-): Promise<UnauthorizedErrorSentStatus> {
-  const authHeader = await getUserAuthHeader(req);
+  res: NextApiResponse,
+  authHeader: IAuthHeader | null
+): Promise<ErrorSentStatus> {
   if (!authHeader) {
     sendAPIUnauthorized(res);
     return { isErrorSent: true };
   }
 
-  return { isErrorSent: false, authHeader };
+  return { isErrorSent: false };
 }
 
 export function sendAPIErrorIfEmpty(
@@ -86,17 +81,22 @@ export function sendAPIErrorIfEmpty(
 
 export async function sendAPIErrorIfEmptyOrUnauthorized(
   req: NextApiRequest,
-  res: NextApiResponse
-): Promise<UnauthorizedErrorSentStatus> {
+  res: NextApiResponse,
+  authHeader: IAuthHeader | null
+): Promise<ErrorSentStatus> {
   const emptyErrorStatus = sendAPIErrorIfEmpty(req, res);
   if (emptyErrorStatus.isErrorSent) {
     return emptyErrorStatus;
   }
 
-  const unauthorizedErrorStatus = await sendAPIErrorIfUnauthorized(req, res);
+  const unauthorizedErrorStatus = await sendAPIErrorIfUnauthorized(
+    req,
+    res,
+    authHeader
+  );
   if (unauthorizedErrorStatus.isErrorSent) {
     return unauthorizedErrorStatus;
   }
 
-  return { isErrorSent: false, authHeader: unauthorizedErrorStatus.authHeader };
+  return { isErrorSent: false };
 }

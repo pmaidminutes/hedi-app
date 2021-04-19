@@ -1,16 +1,19 @@
+import { NextApiHandler } from "next";
+import { getUserAuthHeader } from "@/modules/auth/server";
 import {
   sendAPIErrorIfUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
-import { NextApiHandler } from "next";
 import { hasCurrentUserUserFeedback } from "../query/hasCurrentUserUserFeedback";
 
 export const hasCurrentUserUserFeedbackAPI: NextApiHandler<
   boolean | null
 > = async (req, res) => {
-  const { isErrorSent, authHeader } = await sendAPIErrorIfUnauthorized(
+  const authHeader = await getUserAuthHeader(req);
+  const { isErrorSent } = await sendAPIErrorIfUnauthorized(
     req,
-    res
+    res,
+    authHeader
   );
   if (isErrorSent || !authHeader) return;
 
