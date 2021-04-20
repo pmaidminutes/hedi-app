@@ -1,9 +1,9 @@
-import { IHTTPError } from "@/modules/common/error";
+import { IHTTPErrorResponse } from "@/modules/common/error";
+import { IAppPage } from "@/modules/common/types";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IArticle } from "@/modules/editorial/article/types";
 import { ICategory } from "@/modules/editorial/category/types";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types/glossary";
-import { IPage } from "@/modules/editorial/page/types";
 import useSWR from "swr";
 import { ISuggestEntry } from "../../types";
 import { searchAPIUrl, suggestAPIUrl } from "../../types";
@@ -17,7 +17,7 @@ export function useSearch(
 ) {
   const apiPath = searchAPIUrl;
   const swrResult = useSWR<
-    IHTTPError | (IArticle | ICategory | IGlossaryTerm | IPage)[]
+    IHTTPErrorResponse | (IArticle | ICategory | IGlossaryTerm | IAppPage)[]
   >(
     searchText?.length > 3
       ? apiPath +
@@ -39,7 +39,7 @@ export function useSearch(
 }
 
 export function useSuggest(suggestText?: string) {
-  const swrResult = useSWR<IHTTPError | ISuggestEntry[]>(
+  const swrResult = useSWR<IHTTPErrorResponse | ISuggestEntry[]>(
     suggestText ? suggestAPIUrl + encodeURI(suggestText) : null,
     url =>
       jsonFetcher<any>(url).then(

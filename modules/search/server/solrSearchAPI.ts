@@ -5,8 +5,6 @@ import { getCategory } from "@/modules/editorial/category/query";
 import { ICategory } from "@/modules/editorial/category/types";
 import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
-import { getPage } from "@/modules/editorial/page/query";
-import { IPage } from "@/modules/editorial/page/types";
 import { parseJSONToLatLngCoordinates } from "@/modules/map/server/functions";
 import { requestCoordinates } from "@/modules/map/server/request";
 import {
@@ -24,6 +22,8 @@ import {
 import { searchServer } from "./request";
 import { NextApiHandler } from "next";
 import { sendAPIHttpError, sendAPISuccess } from "@/modules/common/utils";
+import { getAppPage } from "@/modules/apppage/query";
+import { IAppPage } from "@/modules/common/types";
 
 export const solrSearchAPI: NextApiHandler<
   | IHTTPError
@@ -35,7 +35,7 @@ export const solrSearchAPI: NextApiHandler<
       | IMidwife
       | IOrganisation
       | IInstitution
-      | IPage
+      | IAppPage
     )[]
 > = async (req, res) => {
   const {
@@ -74,12 +74,12 @@ export const solrSearchAPI: NextApiHandler<
             })
           );
           break;
-        case "page":
+        case "app_page":
           promises.push(
-            getPage(route).then(page => {
+            getAppPage(route).then(page => {
               if (page) {
                 page.label = highlight.highlightedTitle ?? page.label;
-                page.summary = highlightedBody;
+                page.body = highlightedBody;
               }
               return page;
             })
@@ -157,7 +157,7 @@ export const solrSearchAPI: NextApiHandler<
       | IMidwife
       | IOrganisation
       | IInstitution
-      | IPage
+      | IAppPage
       | null
     >(promises);
     const nonNull = entries.filter(entry => entry) as (
@@ -168,7 +168,7 @@ export const solrSearchAPI: NextApiHandler<
       | IMidwife
       | IOrganisation
       | IInstitution
-      | IPage
+      | IAppPage
     )[];
     sendAPISuccess(res, nonNull);
   }
