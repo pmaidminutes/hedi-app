@@ -3,7 +3,7 @@
 }
 
 .hedi--profile-entry {
-  margin-bottom: $spacing-sm;
+  margin-bottom: $spacing-04;
   overflow-wrap: break-word;
   word-wrap: break-word;
 
@@ -15,17 +15,17 @@
   }
 
   .hedi--spacing {
-    padding-top: $spacing-2xl;
+    padding-top: $spacing-08;
   }
 
   .hedi--profile-entry-content {
-    padding: $spacing-md;
+    padding: $spacing-05;
   }
 
   h2,
   h3,
   h5 {
-    padding-bottom: $spacing-2xs;
+    padding-bottom: $spacing-02;
   }
 
   h3 {
@@ -43,7 +43,7 @@
     background-color: white;
 
     .hedi__tag-list {
-      padding-top: $spacing-sm;
+      padding-top: $spacing-04;
     }
   }
 }

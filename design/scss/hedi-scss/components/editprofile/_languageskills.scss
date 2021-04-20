@@ -2,10 +2,10 @@
   tr {
     display: flex;
     align-items: center;
-    padding: $spacing-md;
+    padding: $spacing-05;
     background-color: #fff;
     &:not(:last-child) {
-      margin-bottom: $spacing-xs;
+      margin-bottom: $spacing-03;
     }
     td:first-child {
       min-width: 100px;
@@ -47,7 +47,7 @@
         "left right"
         "left2 right";
       height: 100%;
-      padding: $spacing-md;
+      padding: $spacing-05;
       grid-template-columns: 79% 1fr;
     }
     td {

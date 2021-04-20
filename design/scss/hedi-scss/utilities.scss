@@ -1,31 +1,31 @@
 //
 // generates helper classes for margin, padding and border-radius
 // tailwind like, but with units derived from the system
-// e.g. '.mb-l-xl' = margin-bottom: $layout-xl;
+// e.g. '.mb-l-xl' = margin-bottom: $spacing-12;
 //
 
 @mixin utilities {
   $units: (
     s: (
       4xs: $spacing-4xs,
-      3xs: $spacing-3xs,
-      2xs: $spacing-2xs,
-      xs: $spacing-xs,
-      sm: $spacing-sm,
-      md: $spacing-md,
-      lg: $spacing-lg,
-      xl: $spacing-xl,
-      2xl: $spacing-2xl,
-      3xl: $spacing-3xl,
+      3xs: $spacing-01,
+      2xs: $spacing-02,
+      xs: $spacing-03,
+      sm: $spacing-04,
+      md: $spacing-05,
+      lg: $spacing-06,
+      xl: $spacing-07,
+      2xl: $spacing-08,
+      3xl: $spacing-09,
     ),
     l: (
-      2xs: $layout-2xs,
-      xs: $layout-xs,
-      sm: $layout-sm,
-      md: $layout-md,
-      lg: $layout-lg,
-      xl: $layout-xl,
-      2xl: $layout-2xl,
+      2xs: $spacing-05,
+      xs: $spacing-06,
+      sm: $spacing-07,
+      md: $spacing-09,
+      lg: $spacing-10,
+      xl: $spacing-12,
+      2xl: $spacing-13,
     )
   );
   

@@ -1,6 +1,6 @@
 .hedi--bg-img-container {
-  padding: $spacing-xl 0;
-  margin-bottom: $layout-sm;
+  padding: $spacing-07 0;
+  margin-bottom: $spacing-07;
   position: relative;
   &::before {
     content: "";
@@ -60,6 +60,6 @@
   }
 
   @media (max-width: 769px) {
-    padding: $spacing-md;
+    padding: $spacing-05;
   }
 }
