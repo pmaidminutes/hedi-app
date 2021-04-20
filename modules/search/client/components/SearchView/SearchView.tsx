@@ -153,9 +153,11 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
       ) : (
         <div>
           {IsIHTTPErrorResponse(data) ? (
-            <ToastNotification title="Error" kind="error">
-              {errorMessage}
-            </ToastNotification>
+            <ToastNotification
+              title="No Results"
+              kind="warning"
+              caption={errorMessage}
+              lowContrast></ToastNotification>
           ) : (
             data?.map((entry: any) => {
               if (!entry) return null;

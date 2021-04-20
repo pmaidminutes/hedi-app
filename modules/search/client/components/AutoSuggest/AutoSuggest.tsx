@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { IsIHTTPError } from "@/modules/common/error";
+import { IsIHTTPError, IsIHTTPErrorResponse } from "@/modules/common/error";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { ISuggestEntry } from "../../../types";
 import { useSuggest } from "../../hooks";
@@ -34,7 +34,7 @@ export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
   return (
     <>
       <UnorderedList role="listbox" id="suggestion-list">
-        {data && !IsIHTTPError(data)
+        {data && !IsIHTTPErrorResponse(data)
           ? data.map((suggestedResult: ISuggestEntry, index) => (
               <ListItem
                 key={index}
