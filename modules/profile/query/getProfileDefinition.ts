@@ -4,6 +4,7 @@ import { EntityFields, WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 import { logAndFallback } from "@/modules/common/error";
 import { IProfileDefinition } from "../types";
+import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getProfileDefinition(
   lang: string
@@ -27,7 +28,7 @@ export async function getProfileDefinition(
       $lang: String!
     ) {
       links: appPagesByKey(keys: $keys, lang: $lang) {
-        key
+        ${WithKeyFields}
         ${EntityFields}
       }
     }

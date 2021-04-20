@@ -3,6 +3,7 @@ import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { ILandingPageView } from "../../types/ILandingPageView";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
+import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getLandingPageView(
   route: string,
@@ -35,12 +36,12 @@ export async function getLandingPageView(
       $lang: String!
     ) {
       links: appPagesByKey(keys: ["registration","login"], lang: $lang) {
-        key
+        ${WithKeyFields}
         ${EntityFields}
         longTitle
       }
       linksIfLoggedIn: appPagesByKey(keys: ["editProfile"], lang: $lang) {
-        key
+        ${WithKeyFields}
         ${EntityFields}
         longTitle
       }

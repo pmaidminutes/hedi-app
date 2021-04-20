@@ -10,13 +10,14 @@ import {
   RouteLabelFields,
   WithUIElementsFields,
 } from "@/modules/model";
+import { IWithKey, WithKeyFields } from "@/modules/model/IWithKey";
 
 export interface IAppPage
   extends IEntityTranslated<IEntityLocalized>,
     IWithUIElements,
-    IBody {
+    IBody,
+    IWithKey {
   routelabel: IRouteLabeled;
-  key: string;
   longTitle?: string;
   posterImage: IImage;
 }
@@ -28,7 +29,7 @@ export function isIAppPage(obj: any): obj is IAppPage {
 
 export const AppPageFields = `${EntityTranslatedFields}
 ${RouteLabelFields}
-key
+${WithKeyFields}
 longTitle
 ${WithUIElementsFields}
 ${BodyFields}

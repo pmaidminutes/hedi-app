@@ -5,6 +5,7 @@ import { IAppPage } from "@/modules/common/types";
 import { ILoginView } from "../../types";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
+import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getLoginView(route: string): Promise<ILoginView | null> {
   const lang = getLangByRoute(route);
@@ -36,7 +37,7 @@ export async function getLoginView(route: string): Promise<ILoginView | null> {
       $lang: String!
     ) {
       links: appPagesByKey(keys: $keys, lang: $lang) {
-        key
+        ${WithKeyFields}
         ${EntityFields}
       }
     }

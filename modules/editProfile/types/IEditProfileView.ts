@@ -5,6 +5,7 @@ import {
   IServiceGroup,
   IUIElementTexts,
 } from "@/modules/model";
+import { IWithKey } from "@/modules/model/IWithKey";
 import { ProfileType } from "@/modules/profile/types";
 
 export interface IEditProfileFormConfig {
@@ -18,7 +19,7 @@ export interface IEditProfileFormConfig {
 }
 
 export interface IEditProfileView extends IAppPage, IEditProfileFormConfig {
-  links: (IEntity & { key: string })[];
+  links: (IEntity & IWithKey)[];
 }
 
 export const extractConfig = (

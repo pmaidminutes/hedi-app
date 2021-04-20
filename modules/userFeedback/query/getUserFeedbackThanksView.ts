@@ -5,6 +5,7 @@ import { IAppPage } from "@/modules/common/types";
 import { IUserFeedbackThanksView } from "../types/IUserFeedbackThanksView";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback } from "@/modules/common/error";
+import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getUserFeedbackThanksView(
   route: string
@@ -41,7 +42,7 @@ export async function getUserFeedbackThanksView(
         $lang: String!
       ) {
         links: appPagesByKey(keys: $keys, lang: $lang) {
-          key
+          ${WithKeyFields}
           ${EntityFields}
         }
       }

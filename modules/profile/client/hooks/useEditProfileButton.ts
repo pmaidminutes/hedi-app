@@ -6,14 +6,13 @@ import {
 import { useCurrentProfileEntity } from "./useCurrentProfileEntity";
 import { getUser } from "@/modules/auth/client";
 import { IEntity, IUIElementTexts } from "@/modules/model";
+import { IWithKey } from "@/modules/model/IWithKey";
 
 export function useEditProfileButton(
   lang: string,
   route: string,
   elements: IUIElementTexts[],
-  links: (IEntity & {
-    key: string;
-  })[]
+  links: (IEntity & IWithKey)[]
 ) {
   const [hasEditProfileBtn, setHasEditProfileBtn] = useState(false);
 
