@@ -9,13 +9,14 @@ import { useValidation } from "../hooks/useValidation";
 export const ValidatedTextInput = (
   props: TextInputProps & {
     validateFn: (T: any) => boolean;
+    enableValidation: true;
   }
 ) => {
   const { onChange, ...rest } = props;
 
   const { hasErrors, handleChange } = useValidation(
     rest.value ?? "",
-    true, // TODO : as parameter (isActive)
+    rest.enableValidation,
     rest.validateFn,
     onChange
   );
