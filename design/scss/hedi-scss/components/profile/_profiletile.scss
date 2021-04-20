@@ -1,7 +1,7 @@
 .hedi--profile--tile {
   .bx--tile {
     width: 100%;
-    margin-bottom: $spacing-md;
+    margin-bottom: $spacing-05;
   }
 
   img,
@@ -14,7 +14,7 @@
   h3,
   h4,
   h5 {
-    padding-bottom: $spacing-sm;
+    padding-bottom: $spacing-04;
   }
   @media (max-width: 769px) {
     img {

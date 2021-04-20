@@ -1,11 +1,11 @@
 .hedi--profile-list {
   .hedi--profile-entry {
-    margin-bottom: $spacing-sm;
+    margin-bottom: $spacing-04;
   }
 
   .bx--tile--clickable {
     background-color: white;
-    margin: $spacing-md 0;
+    margin: $spacing-05 0;
     &.hedi--profile-list__item {
       &--midwife {
         $midwifeColor: $pink-60;

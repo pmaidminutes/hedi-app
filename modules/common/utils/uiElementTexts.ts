@@ -1,4 +1,5 @@
 import { IEntity, IUIElementTexts } from "@/modules/model";
+import { IWithKey } from "@/modules/model/IWithKey";
 import { IShellLink } from "@/modules/shell/types/shellLinks";
 import { TextInputProps } from "carbon-components-react";
 
@@ -23,7 +24,7 @@ export const getUIElementValue = (
 export const getUIElementRedirectRoute = (
   identifier: string,
   elements?: IUIElementTexts[],
-  links?: (IEntity & { key: string })[],
+  links?: (IEntity & IWithKey)[],
   fallback?: string
 ): string =>
   links?.find(item => item.key === getUIElementValue(identifier, elements))

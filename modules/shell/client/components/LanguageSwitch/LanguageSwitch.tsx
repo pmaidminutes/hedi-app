@@ -19,7 +19,6 @@ export const LanguageSwitch = (
 ): JSX.Element | null => {
   const { direction, links, config, tooltip } = transformLanguageSwitch(props);
   const { isRTL } = useContext(ShellContext);
-  console.log({isRTL})
 
   if (links) {
     return (

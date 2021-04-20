@@ -15,6 +15,7 @@ import {
 } from "@/modules/model";
 import { ProfileType } from "@/modules/profile/types";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
+import { IWithKey, WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getEditProfile(
   route: string
@@ -61,7 +62,7 @@ export async function getEditProfile(
         ${WithUIElementsFields}
       }
       links: appPagesByKey(keys: $keys, lang: $lang) {
-        key
+        ${WithKeyFields}
         ${EntityFields}
       }
     }
@@ -73,7 +74,7 @@ export async function getEditProfile(
     languageOptions: ILanguage[];
     serviceGroups: IServiceGroup[];
     languageLevels: { elements: IUIElementTexts[] }[];
-    links: (IEntity & { key: string })[];
+    links: (IEntity & IWithKey)[];
   };
 
   const {

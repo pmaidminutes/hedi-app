@@ -3,8 +3,8 @@
   background-color: transparent;
   display: flex;
   justify-content: flex-end;
-  margin: $spacing-md 0;
-  padding: 0 $spacing-xl;
+  margin: $spacing-05 0;
+  padding: 0 $spacing-07;
 
   svg {
     fill: $cool-gray-60;
@@ -21,7 +21,7 @@
     }
     
     &:not(:last-child){
-      margin-right: $spacing-xl;
+      margin-right: $spacing-07;
     }
   }
 }

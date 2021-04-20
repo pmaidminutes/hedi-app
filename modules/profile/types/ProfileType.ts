@@ -1,4 +1,5 @@
 import { IEntity, IUIElementTexts } from "@/modules/model";
+import { IWithKey } from "@/modules/model/IWithKey";
 import { IPageConfig } from "@/modules/shell/types";
 import { ICaregiver, IInstitution, IMidwife, IOrganisation } from ".";
 
@@ -23,5 +24,5 @@ export type ProfileView = IProfileDefinition & Profile & IPageConfig;
 
 export interface IProfileDefinition {
   elements: IUIElementTexts[];
-  links: (IEntity & { key: string })[];
+  links: (IEntity & IWithKey)[];
 }

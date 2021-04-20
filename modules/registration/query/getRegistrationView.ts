@@ -4,6 +4,7 @@ import { IAppPage } from "@/modules/common/types";
 import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { EntityFields } from "@/modules/model";
+import { WithKeyFields } from "@/modules/model/IWithKey";
 import { IRegistrationView } from "../types";
 
 export async function getRegistrationView(
@@ -37,7 +38,7 @@ export async function getRegistrationView(
       $lang: String!
     ) {
       links: appPagesByKey(keys: $keys, lang: $lang) {
-        key
+        ${WithKeyFields}
         ${EntityFields}
       }
     }

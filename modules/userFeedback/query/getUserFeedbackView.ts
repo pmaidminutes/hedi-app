@@ -7,6 +7,7 @@ import { logAndFallback, logAndNull } from "@/modules/common/error";
 import { AppPagesGQL } from "@/modules/common/query";
 import { getProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
 import { IProfileDefinition } from "@/modules/profile/types";
+import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getUserFeedbackView(
   route: string,
@@ -55,7 +56,7 @@ export async function getUserFeedbackView(
       $lang: String!
     ) {
       links: appPagesByKey(keys: $keys, lang: $lang) {
-        key
+        ${WithKeyFields}
         ${EntityFields}
       }
     }
