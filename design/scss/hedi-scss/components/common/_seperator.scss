@@ -2,6 +2,7 @@
 .hedi-separator {
   display: block;
   width: 100%;
-  border-bottom: 2px solid $cool-gray-20;
+  border: 0;
+  border-top: 2px solid $cool-gray-20;
   margin: $spacing-06 0;
 }

@@ -21,10 +21,45 @@ address {
   }
 }
 
-h1 {
-  margin: $spacing-06 0;
-}
-
 pre {
   white-space: pre-wrap;
 }
+
+p, 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+        hyphens: auto;
+}
+
+// class to add vertical margin to columns, rows and other elements
+.hedi--default--margin {
+margin-top: $spacing-03;
+margin-bottom: $spacing-03;
+}
+
+
+ h1 {
+    margin-bottom: $spacing-03;
+    margin-top: $spacing-03;
+  }
+
+ h2 {
+    margin-bottom: $spacing-03;
+    margin-top: $spacing-02;
+  }
+
+  h3 {
+    margin-bottom: $spacing-03;
+    margin-top: $spacing-02;
+  }
+
+  h4 {
+    margin-bottom: $spacing-02;
+    margin-top: $spacing-01;
+  }
