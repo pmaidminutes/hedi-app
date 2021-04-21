@@ -1,4 +1,4 @@
-import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
+import { IErrorResponse, IsIHTTPError } from "@/modules/common/error";
 import { getArticle } from "@/modules/editorial/article/query";
 import { IArticle } from "@/modules/editorial/article/types";
 import { getCategory } from "@/modules/editorial/category/query";
@@ -26,7 +26,7 @@ import { getAppPage } from "@/modules/apppage/query";
 import { IAppPage } from "@/modules/common/types";
 
 export const solrSearchAPI: NextApiHandler<
-  | IHTTPError
+  | IErrorResponse
   | (
       | IArticle
       | ICategory

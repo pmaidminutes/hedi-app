@@ -1,4 +1,4 @@
-import { IHTTPErrorResponse } from "@/modules/common/error";
+import { IErrorResponse } from "@/modules/common/error";
 import { IAppPage } from "@/modules/common/types";
 import { jsonFetcher } from "@/modules/common/utils";
 import { IArticle } from "@/modules/editorial/article/types";
@@ -17,7 +17,7 @@ export function useSearch(
 ) {
   const apiPath = searchAPIUrl;
   const swrResult = useSWR<
-    IHTTPErrorResponse | (IArticle | ICategory | IGlossaryTerm | IAppPage)[]
+    IErrorResponse | (IArticle | ICategory | IGlossaryTerm | IAppPage)[]
   >(
     searchText?.length > 3
       ? apiPath +
@@ -39,7 +39,7 @@ export function useSearch(
 }
 
 export function useSuggest(suggestText?: string) {
-  const swrResult = useSWR<IHTTPErrorResponse | ISuggestEntry[]>(
+  const swrResult = useSWR<IErrorResponse | ISuggestEntry[]>(
     suggestText ? suggestAPIUrl + encodeURI(suggestText) : null,
     url =>
       jsonFetcher<any>(url).then(

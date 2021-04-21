@@ -1,4 +1,4 @@
-import { IsIHTTPErrorResponse } from "@/modules/common/error";
+import { IsIErrorResponse } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
@@ -82,7 +82,7 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";
-  } else if (IsIHTTPErrorResponse(data)) {
+  } else if (IsIErrorResponse(data)) {
     errorMessage = data.errors.http ?? `Try again`;
   } else {
     loading = false;
@@ -152,7 +152,7 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
         <Loading withOverlay={true} className={"some-class"} />
       ) : (
         <div>
-          {IsIHTTPErrorResponse(data) ? (
+          {IsIErrorResponse(data) ? (
             <ToastNotification
               title="No Results"
               kind="warning"

@@ -5,7 +5,7 @@ export interface IHTTPError {
   message?: string;
 }
 
-export interface IHTTPErrorResponse {
+export interface IErrorResponse {
   success: boolean;
   errors: ErrorMap;
 }
@@ -15,7 +15,7 @@ export function IsIHTTPError(arg: any): arg is IHTTPError {
   return "status" in arg;
 }
 
-export function IsIHTTPErrorResponse(arg: any): arg is IHTTPErrorResponse {
+export function IsIErrorResponse(arg: any): arg is IErrorResponse {
   if (arg == null || typeof arg !== "object") return false;
   return "success" in arg;
 }
