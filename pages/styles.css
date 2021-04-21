@@ -1,40 +1,40 @@
 @font-face {
-  font-family: "noto";
+  font-family: "Noto Arabic";
   font-weight: 300;
   src: url("../public/fonts/noto/NotoSansArabic-Light.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "noto";
+  font-family: "Noto Arabic";
   font-weight: 400;
   src: url("../public/fonts/noto/NotoSansArabic-Regular.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "noto";
+  font-family: "Noto Arabic";
   font-weight: 500;
   src: url("../public/fonts/noto/NotoSansArabic-Medium.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_sans";
+  font-family: "Roboto";
   font-weight: 300;
   src: url("../public/fonts/roboto/Roboto-Light.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_sans";
+  font-family: "Roboto";
   font-weight: 400;
   src: url("../public/fonts/roboto/Roboto-Regular.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_sans";
+  font-family: "Roboto";
   font-weight: 500;
   src: url("../public/fonts/roboto/Roboto-Medium.ttf") format("truetype"); }
 
 @font-face {
   font-weight: 300 500;
-  font-family: "robot_mono";
+  font-family: "Roboto Mono";
   src: url("../public/fonts/robotomono/RobotoMono-VariableFont_wght.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab";
   src: url("../public/fonts/robotoslab/RobotoSlab-VariableFont_wght.ttf") format("truetype");
   font-weight: 300 400;
   font-style: normal; }
@@ -190,13 +190,13 @@ html {
 
 body {
   font-weight: 400;
-  font-family: "roboto_sans";
+  font-family: "Roboto", "Noto Arabic", sans;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
 code {
-  font-family: "robot_mono"; }
+  font-family: "Roboto Mono", monospace; }
 
 strong {
   font-weight: 600; }
@@ -206,42 +206,42 @@ strong {
     fill: ButtonText; } }
 
 h1 {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 2.625rem;
   font-weight: 300;
   line-height: 1.199;
   letter-spacing: 0; }
 
 h2 {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 2rem;
   font-weight: 400;
   line-height: 1.25;
   letter-spacing: 0; }
 
 h3 {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 1.75rem;
   font-weight: 400;
   line-height: 1.29;
   letter-spacing: 0; }
 
 h4 {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.4;
   letter-spacing: 0; }
 
 h5 {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 1rem;
   font-weight: 400;
   line-height: 1.375;
   letter-spacing: 0; }
 
 h6 {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -3513,7 +3513,7 @@ body {
                 animation: none; } }
 
 input[type='number'] {
-  font-family: "robot_mono"; }
+  font-family: "Roboto Mono", monospace; }
 
 input[data-invalid]:not(:focus),
 .bx--number[data-invalid] input[type='number']:not(:focus),
@@ -3761,7 +3761,7 @@ fieldset[disabled] .bx--form__helper-text {
   fill: #da1e28; }
 
 .bx--file--label {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -6249,7 +6249,7 @@ fieldset[disabled] .bx--form__helper-text {
   padding-left: 1rem;
   color: #161616;
   font-weight: 300;
-  font-family: "robot_mono";
+  font-family: "Roboto Mono", monospace;
   background-color: #f4f4f4;
   border: 0;
   border-bottom: 0.0625rem solid #8d8d8d;
@@ -7089,7 +7089,7 @@ fieldset[disabled] .bx--form__helper-text {
   background: #f4f4f4; }
 
 .bx--data-table-header__title {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.4;
@@ -7109,7 +7109,7 @@ fieldset[disabled] .bx--form__helper-text {
   border-spacing: 0; }
 
 .bx--data-table thead {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -8141,7 +8141,7 @@ th .bx--table-sort__flex {
 
 .bx--structured-list-th {
   padding: 1rem 1rem 0.5rem 1rem;
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -8538,7 +8538,7 @@ th .bx--table-sort__flex {
   font-weight: 400;
   line-height: 1.29;
   letter-spacing: 0.16px;
-  font-family: "roboto_sans";
+  font-family: "Roboto", "Noto Arabic", sans;
   top: 0.75rem;
   right: 1.25rem;
   left: inherit;
@@ -8555,14 +8555,14 @@ th .bx--table-sort__flex {
   position: absolute;
   top: 0;
   right: 0;
-  font-family: "roboto_sans"; }
+  font-family: "Roboto", "Noto Arabic", sans; }
 
 .bx--snippet-btn--expand {
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
   letter-spacing: 0.16px;
-  font-family: "roboto_sans";
+  font-family: "Roboto", "Noto Arabic", sans;
   position: absolute;
   right: 0;
   bottom: 0;
@@ -9314,7 +9314,7 @@ a.bx--overflow-menu-options__btn::before {
   width: 100%; }
 
 .flatpickr-month {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -9365,7 +9365,7 @@ a.bx--overflow-menu-options__btn::before {
   fill: #161616; }
 
 .flatpickr-current-month {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -10471,7 +10471,7 @@ button.bx--dropdown-text {
   color: #525252; }
 
 .bx--modal-header__heading {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 1.25rem;
   font-weight: 400;
   line-height: 1.4;
@@ -10813,7 +10813,7 @@ button.bx--dropdown-text {
   padding: 0.9375rem 0; }
 
 .bx--inline-notification__title {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -11061,7 +11061,7 @@ button.bx--dropdown-text {
   fill: #161616; }
 
 .bx--toast-notification__title {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -11243,7 +11243,7 @@ button.bx--dropdown-text {
     transform: rotate(270deg) translate(50%, -50%); }
 
 .bx--tooltip__heading {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -13011,7 +13011,7 @@ button.bx--dropdown-text {
       .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link,
       .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:focus,
       .bx--tabs__nav-item--selected:not(.bx--tabs__nav-item--disabled) .bx--tabs__nav-link:active {
-        font-family: "roboto_slab";
+        font-family: "Roboto Slab", "Noto Arabic", serif;
         font-size: 0.875rem;
         font-weight: 400;
         line-height: 1.29;
@@ -13309,7 +13309,7 @@ a.bx--tabs__nav-link {
   .bx--tabs--scrollable .bx--tabs--scrollable__nav-item--selected .bx--tabs--scrollable__nav-link,
   .bx--tabs--scrollable .bx--tabs--scrollable__nav-item--selected .bx--tabs--scrollable__nav-link:focus,
   .bx--tabs--scrollable .bx--tabs--scrollable__nav-item--selected .bx--tabs--scrollable__nav-link:active {
-    font-family: "roboto_slab";
+    font-family: "Roboto Slab", "Noto Arabic", serif;
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.29;
@@ -15905,7 +15905,7 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
   border: none; }
 
 .bx--switcher__item-link {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -16166,7 +16166,7 @@ a.bx--header__menu-item.bx--header__menu-item--current:focus {
      -moz-appearance: none;
           appearance: none;
   width: 100%;
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -16273,7 +16273,7 @@ a.bx--side-nav__link,
 .bx--side-nav .bx--header__menu-title[aria-expanded='true'] + .bx--header__menu {
   outline: 2px solid transparent;
   outline-offset: -2px;
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab", "Noto Arabic", serif;
   font-size: 0.875rem;
   font-weight: 400;
   line-height: 1.29;
@@ -16882,42 +16882,42 @@ pre {
     color: red; }
 
 @font-face {
-  font-family: "noto";
+  font-family: "Noto Arabic";
   font-weight: 300;
   src: url("../public/fonts/noto/NotoSansArabic-Light.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "noto";
+  font-family: "Noto Arabic";
   font-weight: 400;
   src: url("../public/fonts/noto/NotoSansArabic-Regular.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "noto";
+  font-family: "Noto Arabic";
   font-weight: 500;
   src: url("../public/fonts/noto/NotoSansArabic-Medium.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_sans";
+  font-family: "Roboto";
   font-weight: 300;
   src: url("../public/fonts/roboto/Roboto-Light.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_sans";
+  font-family: "Roboto";
   font-weight: 400;
   src: url("../public/fonts/roboto/Roboto-Regular.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_sans";
+  font-family: "Roboto";
   font-weight: 500;
   src: url("../public/fonts/roboto/Roboto-Medium.ttf") format("truetype"); }
 
 @font-face {
   font-weight: 300 500;
-  font-family: "robot_mono";
+  font-family: "Roboto Mono";
   src: url("../public/fonts/robotomono/RobotoMono-VariableFont_wght.ttf") format("truetype"); }
 
 @font-face {
-  font-family: "roboto_slab";
+  font-family: "Roboto Slab";
   src: url("../public/fonts/robotoslab/RobotoSlab-VariableFont_wght.ttf") format("truetype");
   font-weight: 300 400;
   font-style: normal; }
@@ -17027,7 +17027,7 @@ html:lang(fa) .hedi--group--language-skills .bx--data-table th:last-child {
   .hedi--service-selection .bx--accordion__content {
     padding-right: 0; }
   .hedi--service-selection .bx--accordion__title {
-    font-family: "roboto_slab";
+    font-family: "Roboto Slab", "Noto Arabic", serif;
     font-size: 1.75rem;
     font-weight: 400;
     line-height: 1.29;
