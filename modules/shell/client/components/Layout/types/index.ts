@@ -30,4 +30,4 @@ export interface ILayoutBasicTemplate {
   narrow?: boolean;
 }
 
-export type PageLayout = "singleColumn" | "imageAndColumn";
+export type PageLayout = "singleColumn" | "imageAndColumn" | "editorial";
