@@ -6,6 +6,11 @@ import { Generic, GenericKind } from "./Generic";
 import { Group, GroupKind } from "./Group";
 import { Label, LabelKind } from "./Label";
 import { Link, LinkKind } from "./Link";
+import { Audio, AudioKind } from "./Audio";
+import { File, FileKind } from "./File";
+import { Image, ImageKind } from "./Image";
+import { Svg, SvgKind } from "./Svg";
+import { Video, VideoKind } from "./Video";
 
 export type HTML = string;
 
@@ -18,7 +23,12 @@ export type ComponentKind =
   | GenericKind
   | GroupKind
   | LabelKind
-  | LinkKind;
+  | LinkKind
+  | AudioKind
+  | FileKind
+  | ImageKind
+  | SvgKind
+  | VideoKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -33,4 +43,9 @@ export type Component =
   | Generic
   | Group
   | Label
-  | Link;
+  | Link
+  | Audio
+  | File
+  | Image
+  | Svg
+  | Video;

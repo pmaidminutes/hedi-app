@@ -8,3 +8,8 @@ export * from "./Generic";
 export * from "./Group";
 export * from "./Label";
 export * from "./Link";
+export * from "./Audio";
+export * from "./File";
+export * from "./Image";
+export * from "./Svg";
+export * from "./Video";
