@@ -1,7 +1,6 @@
 import { IShellProps } from "@/modules/shell/types";
 
-import { ShellContext } from "../../contexts";
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState } from "react";
 import { getUser } from "@/modules/auth/client";
 import { checkAccess } from "../../../utils";
 import { usePageAccess } from "./usePageAccess";
@@ -15,7 +14,6 @@ export function useShell(shell: Partial<IShellProps>) {
     langDirections,
   } = shell;
 
-
   const [hasHeader, setHasHeader] = useState(useHeader === true);
   const [hediStyle, setHediStyle] = useState("");
   const [user, isLoading] = getUser();
@@ -26,7 +24,8 @@ export function useShell(shell: Partial<IShellProps>) {
   }, [useHeader, user?.name, isLoading]);
 
   useEffect(() => {
-    setHediStyle(appstyle ?? "");
+    // HACK use later on
+    // setHediStyle(appstyle ?? "");
   }, [appstyle]);
 
   const { hasPageAccess } = usePageAccess(redirectUnAuthorized);
@@ -37,6 +36,6 @@ export function useShell(shell: Partial<IShellProps>) {
     hasHeader,
     pageLayout,
     layout,
-    langDirections
+    langDirections,
   };
 }
