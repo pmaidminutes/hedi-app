@@ -15,6 +15,7 @@ import { Notification, NotificationKind } from "./Notification";
 import { NumberInput, NumberInputKind } from "./NumberInput";
 import { Slider, SliderKind } from "./Slider";
 import { TextArea, TextAreaKind } from "./TextArea";
+import { TextInput, TextInputKind } from "./TextInput";
 
 export type HTML = string;
 
@@ -36,7 +37,8 @@ export type ComponentKind =
   | NotificationKind
   | NumberInputKind
   | SliderKind
-  | TextAreaKind;
+  | TextAreaKind
+  | TextInputKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -60,4 +62,5 @@ export type Component =
   | Notification
   | NumberInput
   | Slider
-  | TextArea;
+  | TextArea
+  | TextInput;

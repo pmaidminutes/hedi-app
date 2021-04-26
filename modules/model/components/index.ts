@@ -17,3 +17,4 @@ export * from "./Notification";
 export * from "./NumberInput";
 export * from "./Slider";
 export * from "./TextArea";
+export * from "./TextInput";
