@@ -14,3 +14,4 @@ export * from "./Image";
 export * from "./Svg";
 export * from "./Video";
 export * from "./Notification";
+export * from "./NumberInput";

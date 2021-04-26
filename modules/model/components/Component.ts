@@ -12,6 +12,7 @@ import { Image, ImageKind } from "./Image";
 import { Svg, SvgKind } from "./Svg";
 import { Video, VideoKind } from "./Video";
 import { Notification, NotificationKind } from "./Notification";
+import { NumberInput, NumberInputKind } from "./NumberInput";
 
 export type HTML = string;
 
@@ -30,7 +31,8 @@ export type ComponentKind =
   | ImageKind
   | SvgKind
   | VideoKind
-  | NotificationKind;
+  | NotificationKind
+  | NumberInputKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -51,4 +53,5 @@ export type Component =
   | Image
   | Svg
   | Video
-  | Notification;
+  | Notification
+  | NumberInput;
