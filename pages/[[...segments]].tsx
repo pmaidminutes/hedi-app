@@ -47,6 +47,10 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { landingPagePaths } from "@/modules/landingPage/types";
 import { TrySearch } from "@/modules/search/client/components";
 
+import { ArticlePathsGQL } from "@/modules/editorial/article/query";
+import { getStaticProps as getStaticArticle } from "@/modules/editorial/article/server/generators";
+import { TryArticle } from "@/modules/editorial/article/client/components";
+
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
 
@@ -62,7 +66,12 @@ const getDesignProps = async () => {
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
-  const pathQueries = [CaregiverPathsGQL, MidwifePathsGQL, AppPagePathsGQL];
+  const pathQueries = [
+    CaregiverPathsGQL,
+    MidwifePathsGQL,
+    AppPagePathsGQL,
+    ArticlePathsGQL,
+  ];
   const locales = context?.locales ?? [];
   const paths = [];
   for (const lang of locales) {
@@ -95,6 +104,7 @@ export const getStaticProps: GetStaticProps<
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getEditProfilePage(params?.segments, locale);
+    if (!content) content = await getStaticArticle(params?.segments, locale);
     if (!content) content = await getViewProfilePage(params?.segments, locale);
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
@@ -148,6 +158,7 @@ export default function segments(props: IPageProps<IAppPage>) {
         <TryProfileList content={content} key="profileList" />
         <TryLogin content={content} key="login" />
         <TryEditProfile content={content} key="editProfile" />
+        <TryArticle content={content} key="article" />
         <TryUserFeedback content={content} key="userfeedback" />
         <TryUserFeedbackThanks content={content} key="userfeedbackThanks" />
         <TryLandingPage content={content} key="landingpage" />
