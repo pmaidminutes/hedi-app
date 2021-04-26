@@ -13,6 +13,7 @@ import { Svg, SvgKind } from "./Svg";
 import { Video, VideoKind } from "./Video";
 import { Notification, NotificationKind } from "./Notification";
 import { NumberInput, NumberInputKind } from "./NumberInput";
+import { Slider, SliderKind } from "./Slider";
 
 export type HTML = string;
 
@@ -32,7 +33,8 @@ export type ComponentKind =
   | SvgKind
   | VideoKind
   | NotificationKind
-  | NumberInputKind;
+  | NumberInputKind
+  | SliderKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -54,4 +56,5 @@ export type Component =
   | Svg
   | Video
   | Notification
-  | NumberInput;
+  | NumberInput
+  | Slider;
