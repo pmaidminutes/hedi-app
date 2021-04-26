@@ -1,65 +1,18 @@
-import { AudioPlayer, TagList, Seperator } from "@/modules/common/components";
-import { buildAssetUrl } from "@/modules/common/utils";
-import { ITyped } from "@/modules/model";
+import { AudioPlayer } from "@/modules/common/components";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import { IArticle } from "../../../types";
-import { Grid, Row, Column, AspectRatio } from "carbon-components-react";
+import { useArticle, IArticleProps } from "./useArticle";
 
-interface IArticleProps {
-  content: IArticle;
-}
-
-// UNUSED
-export const TryArticle = (content: ITyped): JSX.Element | null =>
-  content.type === "Article" ? <Article content={content as IArticle} /> : null;
-
-export const Article = ({ content }: IArticleProps): JSX.Element => {
-  const { label, body, audio, tags } = content;
+export const Article = (props: IArticleProps): JSX.Element => {
+  const { headline, body, audioSrc, tags, hasAudio, hasTags } = useArticle(
+    props
+  );
 
   return (
-    <>
-      <AspectRatio ratio="2x1">
-        <img
-          src={process.env.NEXT_PUBLIC_ARTICLE_HEADER_TMP}
-          alt="illustration of sleeping family"
-          className="hedi-header-image"
-          style={{ maxWidth: "100%" }}
-        />
-      </AspectRatio>
+    <article>
+      <h1>{headline}</h1>
+      {hasAudio ? <AudioPlayer src={audioSrc ?? ""} /> : null}
 
-      <Grid>
-        <Row>
-          <Column
-            sm={4}
-            md={{ span: 6, offset: 1 }}
-            lg={{ span: 8, offset: 4 }}>
-            <article>
-              <h1>{label}</h1>
-              <h4>Subheadline Placeholder</h4>
-              {
-                //TODO style needs to be updated in Audio
-                //TODO url needs to be updated in Audio
-                // TODO on switch of translation audio is not changing in refresh
-                //TODO fix static url hard code and fix in safari for audio
-              }
-              {audio !== null ? (
-                <AudioPlayer src={buildAssetUrl(audio?.route)} />
-              ) : null}
-              <div>
-                <HTMLWithNextImage data={body} />
-              </div>
-            </article>
-          </Column>
-        </Row>
-      </Grid>
-      {/* TODO: add semantic corretc html */}
-      {tags.length > 0 ? (
-        <>
-          {" "}
-          <Seperator />
-          {/* <TagList tags={tags} />{" "} //TODO currently broken due to work in IService */}
-        </>
-      ) : null}
-    </>
+      <HTMLWithNextImage data={body} />
+    </article>
   );
 };
