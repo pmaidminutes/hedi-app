@@ -11,6 +11,7 @@ import { File, FileKind } from "./File";
 import { Image, ImageKind } from "./Image";
 import { Svg, SvgKind } from "./Svg";
 import { Video, VideoKind } from "./Video";
+import { Notification, NotificationKind } from "./Notification";
 
 export type HTML = string;
 
@@ -28,7 +29,8 @@ export type ComponentKind =
   | FileKind
   | ImageKind
   | SvgKind
-  | VideoKind;
+  | VideoKind
+  | NotificationKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -48,4 +50,5 @@ export type Component =
   | File
   | Image
   | Svg
-  | Video;
+  | Video
+  | Notification;
