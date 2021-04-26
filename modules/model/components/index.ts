@@ -6,3 +6,4 @@ export * from "./Checkbox";
 export * from "./DatePicker";
 export * from "./Generic";
 export * from "./Group";
+export * from "./Label";

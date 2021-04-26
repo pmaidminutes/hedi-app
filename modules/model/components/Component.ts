@@ -4,6 +4,7 @@ import { Checkbox, CheckboxKind } from "./Checkbox";
 import { DatePicker, DatePickerKind } from "./DatePicker";
 import { Generic, GenericKind } from "./Generic";
 import { Group, GroupKind } from "./Group";
+import { Label, LabelKind } from "./Label";
 
 export type HTML = string;
 
@@ -14,11 +15,19 @@ export type ComponentKind =
   | CheckboxKind
   | DatePickerKind
   | GenericKind
-  | GroupKind;
+  | GroupKind
+  | LabelKind;
 
 export interface IComponent {
   kind: ComponentKind;
   id: string;
 }
 
-export type Component = Body | Button | Checkbox | DatePicker | Generic | Group;
+export type Component =
+  | Body
+  | Button
+  | Checkbox
+  | DatePicker
+  | Generic
+  | Group
+  | Label;
