@@ -16,3 +16,4 @@ export * from "./Video";
 export * from "./Notification";
 export * from "./NumberInput";
 export * from "./Slider";
+export * from "./TextArea";

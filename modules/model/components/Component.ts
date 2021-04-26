@@ -14,6 +14,7 @@ import { Video, VideoKind } from "./Video";
 import { Notification, NotificationKind } from "./Notification";
 import { NumberInput, NumberInputKind } from "./NumberInput";
 import { Slider, SliderKind } from "./Slider";
+import { TextArea, TextAreaKind } from "./TextArea";
 
 export type HTML = string;
 
@@ -34,7 +35,8 @@ export type ComponentKind =
   | VideoKind
   | NotificationKind
   | NumberInputKind
-  | SliderKind;
+  | SliderKind
+  | TextAreaKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -57,4 +59,5 @@ export type Component =
   | Video
   | Notification
   | NumberInput
-  | Slider;
+  | Slider
+  | TextArea;
