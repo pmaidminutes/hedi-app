@@ -16,6 +16,7 @@ import { NumberInput, NumberInputKind } from "./NumberInput";
 import { Slider, SliderKind } from "./Slider";
 import { TextArea, TextAreaKind } from "./TextArea";
 import { TextInput, TextInputKind } from "./TextInput";
+import { Toggle, ToggleKind } from "./Toggle";
 
 export type HTML = string;
 
@@ -38,7 +39,8 @@ export type ComponentKind =
   | NumberInputKind
   | SliderKind
   | TextAreaKind
-  | TextInputKind;
+  | TextInputKind
+  | ToggleKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -63,4 +65,5 @@ export type Component =
   | NumberInput
   | Slider
   | TextArea
-  | TextInput;
+  | TextInput
+  | Toggle;
