@@ -5,6 +5,7 @@ import { DatePicker, DatePickerKind } from "./DatePicker";
 import { Generic, GenericKind } from "./Generic";
 import { Group, GroupKind } from "./Group";
 import { Label, LabelKind } from "./Label";
+import { Link, LinkKind } from "./Link";
 
 export type HTML = string;
 
@@ -16,7 +17,8 @@ export type ComponentKind =
   | DatePickerKind
   | GenericKind
   | GroupKind
-  | LabelKind;
+  | LabelKind
+  | LinkKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -30,4 +32,5 @@ export type Component =
   | DatePicker
   | Generic
   | Group
-  | Label;
+  | Label
+  | Link;
