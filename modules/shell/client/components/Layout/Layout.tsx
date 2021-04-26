@@ -1,7 +1,12 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
-import { SingleColumn, ImageAndColumn, Editorial } from "./templates";
+import {
+  SingleColumn,
+  ImageAndColumn,
+  Editorial,
+  Categories,
+} from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
   const {
@@ -51,10 +56,14 @@ export const Layout: React.FC<ILayoutProps> = props => {
           condensed={condensed}>
           {children}
         </SingleColumn>
-      ) : (
+      ) : pageLayout === "editorial" ? (
         <Editorial headline={headline} body={body} groupClass={groupClass}>
           {children}
         </Editorial>
+      ) : (
+        <Categories headline={headline} groupClass={groupClass}>
+          {children}
+        </Categories>
       )}
     </div>
   );
