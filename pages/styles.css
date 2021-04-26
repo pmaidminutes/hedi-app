@@ -17448,7 +17448,7 @@ html:lang(en) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx-
 
 .bx--content {
   padding: 0;
-  min-height: 95vh; }
+  min-height: 90vh; }
 
 @media (max-width: 769px) {
   .bx--row {
