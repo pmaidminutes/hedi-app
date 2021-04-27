@@ -14,7 +14,7 @@ import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
 import {
   getProfileListPage,
   getViewProfilePage,
-} from "@/modules/profile/server/generators";
+} from "@/modules/profile/server/pages";
 import { TryRegistration } from "@/modules/registration/client/components";
 import { getRegistrationViewPage } from "@/modules/registration/server/page";
 
@@ -22,7 +22,7 @@ import { getEditProfilePage } from "@/modules/editProfile/server/page";
 import { TryEditProfile } from "@/modules/editProfile/client/components";
 
 import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getProfilePage } from "@/modules/profile/server/generators";
+import { getProfilePage } from "@/modules/profile/server/pages";
 
 // Components
 
@@ -114,8 +114,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getEditProfilePage(route);
       if (!content) content = await getArticlePage(route);
       if (!content) content = await getCategoryPage(route);
-      if (!content)
-        content = await getViewProfilePage(params?.segments, locale);
+      if (!content) content = await getViewProfilePage(route);
       if (!content) content = await getProfilePage(params?.segments, locale);
       if (!content)
         content = await getProfileListPage(params?.segments, locale);

@@ -1,16 +1,12 @@
-import { segmentsToRoute } from "@/modules/common/utils";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getViewProfileView } from "../../query";
 import { IViewProfileView } from "../../types";
 
 export const getViewProfilePage = async (
-  segments?: string[],
-  locale = "de"
+  route: string
 ): Promise<(IViewProfileView & IPageConfig) | null> => {
-  if (!segments) return null;
-
-  const content = await getViewProfileView(segmentsToRoute(segments, locale));
+  const content = await getViewProfileView(route);
 
   if (!content) return null;
 
