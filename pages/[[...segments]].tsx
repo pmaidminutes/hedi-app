@@ -35,11 +35,11 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getStaticProps as getStaticAppPage } from "@/modules/apppage/server/generators";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
-import { getUserFeedbackPage } from "@/modules/userFeedback/server/generators";
+import { getUserFeedbackPage } from "@/modules/userFeedback/server/pages";
 import { TryUserFeedback } from "@/modules/userFeedback/client/components";
 
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
-import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
+import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/pages";
 import { getStaticProps as getStaticSearchViewProps } from "@/modules/search/server/generators";
 
 // Components
@@ -117,8 +117,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getViewProfilePage(route);
       if (!content) content = await getProfilePage(route);
       if (!content) content = await getProfileListPage(route);
-      if (!content)
-        content = await getUserFeedbackPage(params?.segments, locale);
+      if (!content) content = await getUserFeedbackPage(route);
       if (!content)
         content = await getUserFeedbackThanksPage(params?.segments, locale);
       if (!content)
