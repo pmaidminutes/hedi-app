@@ -9,6 +9,7 @@ export interface ILayout {
   narrow?: boolean;
   leftColumnProps?: ColumnDefaultProps;
   rightColumnProps?: ColumnDefaultProps;
+  singleColumnProps?: ColumnDefaultProps;
   pageLayout?: PageLayout;
 }
 
@@ -30,8 +31,4 @@ export interface ILayoutBasicTemplate {
   narrow?: boolean;
 }
 
-export type PageLayout =
-  | "singleColumn"
-  | "imageAndColumn"
-  | "editorial"
-  | "categories";
+export type PageLayout = "singleColumn" | "imageAndColumn" | "categories";
