@@ -32,7 +32,7 @@ import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { AppPagePathsGQL } from "@/modules/apppage/query";
-import { getStaticProps as getStaticAppPage } from "@/modules/apppage/server/generators";
+import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
 import { getUserFeedbackPage } from "@/modules/userFeedback/server/pages";
@@ -124,7 +124,7 @@ export const getStaticProps: GetStaticProps<
     }
   }
   if (!content) {
-    content = await getStaticAppPage(params?.segments, locale);
+    content = await getAppPagePage(route);
   }
   if (!content)
     return {
