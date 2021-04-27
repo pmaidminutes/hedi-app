@@ -18,7 +18,7 @@ import {
 import { TryRegistration } from "@/modules/registration/client/components";
 import { getRegistrationViewPage } from "@/modules/registration/server/page";
 
-import { getStaticProps as getEditProfilePage } from "@/modules/editProfile/server/generators";
+import { getEditProfilePage } from "@/modules/editProfile/server/page";
 import { TryEditProfile } from "@/modules/editProfile/client/components";
 
 import { TryLandingPage } from "@/modules/landingPage/client/components";
@@ -111,8 +111,7 @@ export const getStaticProps: GetStaticProps<
     if (route) {
       if (!content) content = await getLoginViewPage(route);
       if (!content) content = await getRegistrationViewPage(route);
-      if (!content)
-        content = await getEditProfilePage(params?.segments, locale);
+      if (!content) content = await getEditProfilePage(route);
       if (!content) content = await getStaticArticle(params?.segments, locale);
       if (!content) content = await getStaticCategory(params?.segments, locale);
       if (!content)
