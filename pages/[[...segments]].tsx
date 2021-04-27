@@ -51,6 +51,10 @@ import { ArticlePathsGQL } from "@/modules/editorial/article/query";
 import { getArticlePage } from "@/modules/editorial/article/server/page";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 
+import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
+import { getGlossaryPage } from "@/modules/editorial/glossary/server";
+import { TryGlossary } from "@/modules/editorial/glossary/client/components";
+
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
 import { getCategoryPage } from "@/modules/editorial/category/server/page";
 import { TryCategory } from "@/modules/editorial/category/client/components";
@@ -77,6 +81,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
+    GlossaryPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -121,6 +126,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getUserFeedbackThanksPage(route);
       if (!content) content = await getLandingPage(route);
       if (!content) content = await getSearchViewPage(route);
+      if (!content) content = await getGlossaryPage(route);
     }
   }
   if (!content && route) {
@@ -167,6 +173,7 @@ export default function segments(props: IPageProps<IAppPage>) {
         <TryEditProfile content={content} key="editProfile" />
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
+        <TryGlossary content={content} key="glossary" />
         <TryUserFeedback content={content} key="userfeedback" />
         <TryUserFeedbackThanks content={content} key="userfeedbackThanks" />
         <TryLandingPage content={content} key="landingpage" />
