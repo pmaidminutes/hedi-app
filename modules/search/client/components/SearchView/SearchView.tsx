@@ -1,11 +1,9 @@
-import { IsIHTTPError } from "@/modules/common/error";
+import { IsIErrorResponse } from "@/modules/common/error";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
-import { PageEntry } from "@/modules/editorial/page/client/components";
 import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { MapClient } from "@/modules/map/client/components";
 import { Location } from "@/modules/map/types";
-import { ITyped } from "@/modules/model";
 import { ProfileEntry } from "@/modules/profile/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { Seperator } from "@/modules/common/components";
@@ -23,6 +21,7 @@ import {
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { IAppPage } from "@/modules/common/types";
+import { AppPageEntryView } from "@/modules/apppage/client/components";
 interface ISearchProps {
   content: IAppPage;
 }
@@ -83,8 +82,8 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
   if (error) {
     console.log("for now error");
     errorMessage = "No search Results";
-  } else if (IsIHTTPError(data)) {
-    errorMessage = data.message ?? `HTTP ${data.status} Error`;
+  } else if (IsIErrorResponse(data)) {
+    errorMessage = data.errors.http ?? `Try again`;
   } else {
     loading = false;
   }
@@ -151,66 +150,68 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
       }
       {loading && !data ? (
         <Loading withOverlay={true} className={"some-class"} />
-      ) : errorMessage ? (
-        <ToastNotification title="Error" kind="error">
-          {errorMessage}
-        </ToastNotification>
       ) : (
         <div>
-          {IsIHTTPError(data)
-            ? []
-            : data?.map((entry: any) => {
-                if (!entry) return null;
-                switch (entry.type) {
-                  case "Article":
-                    return (
-                      <ArticleEntry
-                        article={entry}
-                        key={entry.route + locale}
-                      />
-                    );
-                  case "Page":
-                    return (
-                      <PageEntry page={entry} key={entry.route + locale} />
-                    );
-                  case "Category":
-                    return (
-                      <CategoryEntry
-                        category={entry}
-                        key={entry.route + locale}
-                      />
-                    );
-                  case "GlossaryTerm":
-                    return (
-                      <GlossaryTerm
-                        glossaryTerm={entry}
-                        isSelected={true}
-                        translationLang={defaultLocale}
-                        key={entry.route + locale}
-                      />
-                    );
-                  case "Caregiver":
-                  case "Midwife":
-                  case "Organisation":
-                  case "Institution":
-                    {
-                      //TODO if there will be too many locations due to state changes..
-                      //TODO for now there is no latitude and longitude in the profiles
-                      if (entry.lat && entry.long)
-                        locations.push({
-                          lat: entry.lat,
-                          long: entry.long,
-                          displayName: entry.displayName,
-                        } as Location);
-                    }
-                    return (
-                      <ProfileEntry
-                        {...entry} // TODO, develop a result entry profile
-                        key={entry.route + locale}
-                      />
-                    );
-                }
-              })}
+          {IsIErrorResponse(data) ? (
+            <ToastNotification
+              title="No Results"
+              kind="warning"
+              caption={errorMessage}
+              lowContrast></ToastNotification>
+          ) : (
+            data?.map((entry: any) => {
+              if (!entry) return null;
+              switch (entry.type) {
+                case "Article":
+                  return (
+                    <ArticleEntry article={entry} key={entry.route + locale} />
+                  );
+                case "AppPage":
+                  return (
+                    <AppPageEntryView
+                      appPageEntry={entry}
+                      key={entry.route + locale}
+                    />
+                  );
+                case "Category":
+                  return (
+                    <CategoryEntry
+                      category={entry}
+                      key={entry.route + locale}
+                    />
+                  );
+                case "GlossaryTerm":
+                  return (
+                    <GlossaryTerm
+                      glossaryTerm={entry}
+                      isSelected={true}
+                      translationLang={defaultLocale}
+                      key={entry.route + locale}
+                    />
+                  );
+                case "Caregiver":
+                case "Midwife":
+                case "Organisation":
+                case "Institution":
+                  {
+                    //TODO if there will be too many locations due to state changes..
+                    //TODO for now there is no latitude and longitude in the profiles
+                    if (entry.lat && entry.long)
+                      locations.push({
+                        lat: entry.lat,
+                        long: entry.long,
+                        displayName: entry.displayName,
+                      } as Location);
+                  }
+                  return (
+                    <ProfileEntry
+                      {...entry} // TODO, develop a result entry profile
+                      key={entry.route + locale}
+                    />
+                  );
+              }
+            })
+          )}
           {locations?.length > 0 ? (
             <MapClient currentLocation={locations[0]} locations={locations} />
           ) : (

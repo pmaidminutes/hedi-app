@@ -1,10 +1,14 @@
+import { IAppPage } from "@/modules/common/types";
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
-import { IPageEntry } from "../../../types";
 
-export const PageEntry = ({ page }: { page: IPageEntry }): JSX.Element => {
-  const { label, summary, route } = page;
+export const AppPageEntryView = ({
+  appPageEntry,
+}: {
+  appPageEntry: IAppPage;
+}): JSX.Element => {
+  const { label, body, route } = appPageEntry;
   return (
     <Link href={route} passHref>
       <ClickableTile href={route}>
@@ -13,7 +17,7 @@ export const PageEntry = ({ page }: { page: IPageEntry }): JSX.Element => {
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTMLWithNextImage data={summary} />
+        <HTMLWithNextImage data={body} />
       </ClickableTile>
     </Link>
   );
