@@ -1,6 +1,6 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IAppPage } from "@/modules/common/types";
-import { getLangByRoute, segmentsToRoute } from "@/modules/common/utils";
+import { getLangByRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
 import { getProfileList, getProfileListDefinition } from "../../query";
 import { Profile } from "../../types";
@@ -8,14 +8,10 @@ import { Profile } from "../../types";
 export type ProfileListView = IAppPage & { profiles: Profile[] } & IPageConfig;
 
 export const getProfileListPage = async (
-  segments?: string[],
-  locale = "de"
+  route: string
 ): Promise<ProfileListView | null> => {
-  if (!segments) return null;
-
-  const route = segmentsToRoute(segments, locale);
   const definition = await getProfileListDefinition(route);
-  const content = await getProfileList(getLangByRoute(route) ?? locale);
+  const content = await getProfileList(getLangByRoute(route) ?? "de");
   if (!content || !definition) return null;
 
   const layout: ILayout = {
