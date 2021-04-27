@@ -1,7 +1,7 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
 import { IAppPage, ISegmentParam } from "@/modules/common/types";
-import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
+import { getLandingPage } from "@/modules/landingPage/server/page";
 import { TryLogin } from "@/modules/login/client/components";
 import { getLoginViewPage } from "@/modules/login/server/page";
 import { IEntity } from "@/modules/model";
@@ -119,8 +119,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getProfileListPage(route);
       if (!content) content = await getUserFeedbackPage(route);
       if (!content) content = await getUserFeedbackThanksPage(route);
-      if (!content)
-        content = await getLandingPageViewProps(params?.segments, locale);
+      if (!content) content = await getLandingPage(route);
       if (!content)
         content = await getStaticSearchViewProps(params?.segments, locale);
     }
