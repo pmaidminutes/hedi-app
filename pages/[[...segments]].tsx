@@ -16,7 +16,7 @@ import {
   getViewProfilePage,
 } from "@/modules/profile/server/generators";
 import { TryRegistration } from "@/modules/registration/client/components";
-import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
+import { getRegistrationViewPage } from "@/modules/registration/server/page";
 
 import { getStaticProps as getEditProfilePage } from "@/modules/editProfile/server/generators";
 import { TryEditProfile } from "@/modules/editProfile/client/components";
@@ -107,23 +107,28 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
-    if (!route) return null;
-    if (!content) content = await getLoginViewPage(route);
-    if (!content)
-      content = await getRegistrationViewProps(params?.segments, locale);
-    if (!content) content = await getEditProfilePage(params?.segments, locale);
-    if (!content) content = await getStaticArticle(params?.segments, locale);
-    if (!content) content = await getStaticCategory(params?.segments, locale);
-    if (!content) content = await getViewProfilePage(params?.segments, locale);
-    if (!content) content = await getProfilePage(params?.segments, locale);
-    if (!content) content = await getProfileListPage(params?.segments, locale);
-    if (!content) content = await getUserFeedbackPage(params?.segments, locale);
-    if (!content)
-      content = await getUserFeedbackThanksPage(params?.segments, locale);
-    if (!content)
-      content = await getLandingPageViewProps(params?.segments, locale);
-    if (!content)
-      content = await getStaticSearchViewProps(params?.segments, locale);
+    // TODO check if right place for this query
+    if (route) {
+      if (!content) content = await getLoginViewPage(route);
+      if (!content) content = await getRegistrationViewPage(route);
+      if (!content)
+        content = await getEditProfilePage(params?.segments, locale);
+      if (!content) content = await getStaticArticle(params?.segments, locale);
+      if (!content) content = await getStaticCategory(params?.segments, locale);
+      if (!content)
+        content = await getViewProfilePage(params?.segments, locale);
+      if (!content) content = await getProfilePage(params?.segments, locale);
+      if (!content)
+        content = await getProfileListPage(params?.segments, locale);
+      if (!content)
+        content = await getUserFeedbackPage(params?.segments, locale);
+      if (!content)
+        content = await getUserFeedbackThanksPage(params?.segments, locale);
+      if (!content)
+        content = await getLandingPageViewProps(params?.segments, locale);
+      if (!content)
+        content = await getStaticSearchViewProps(params?.segments, locale);
+    }
   }
   if (!content) {
     content = await getStaticAppPage(params?.segments, locale);
