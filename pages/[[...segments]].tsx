@@ -52,7 +52,7 @@ import { getArticlePage } from "@/modules/editorial/article/server/page";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
-import { getStaticProps as getStaticCategory } from "@/modules/editorial/category/server/generators";
+import { getCategoryPage } from "@/modules/editorial/category/server/page";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 import { segmentsToRoute } from "@/modules/common/utils";
 
@@ -113,7 +113,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getRegistrationViewPage(route);
       if (!content) content = await getEditProfilePage(route);
       if (!content) content = await getArticlePage(route);
-      if (!content) content = await getStaticCategory(params?.segments, locale);
+      if (!content) content = await getCategoryPage(route);
       if (!content)
         content = await getViewProfilePage(params?.segments, locale);
       if (!content) content = await getProfilePage(params?.segments, locale);
