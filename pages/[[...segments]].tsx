@@ -48,7 +48,7 @@ import { landingPagePaths } from "@/modules/landingPage/types";
 import { TrySearch } from "@/modules/search/client/components";
 
 import { ArticlePathsGQL } from "@/modules/editorial/article/query";
-import { getStaticProps as getStaticArticle } from "@/modules/editorial/article/server/generators";
+import { getArticlePage } from "@/modules/editorial/article/server/page";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
@@ -112,7 +112,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getLoginViewPage(route);
       if (!content) content = await getRegistrationViewPage(route);
       if (!content) content = await getEditProfilePage(route);
-      if (!content) content = await getStaticArticle(params?.segments, locale);
+      if (!content) content = await getArticlePage(route);
       if (!content) content = await getStaticCategory(params?.segments, locale);
       if (!content)
         content = await getViewProfilePage(params?.segments, locale);
