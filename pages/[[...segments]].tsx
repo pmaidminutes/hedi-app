@@ -40,7 +40,7 @@ import { TryUserFeedback } from "@/modules/userFeedback/client/components";
 
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/pages";
-import { getStaticProps as getStaticSearchViewProps } from "@/modules/search/server/generators";
+import { getSearchViewPage } from "@/modules/search/server/page";
 
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
@@ -120,8 +120,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getUserFeedbackPage(route);
       if (!content) content = await getUserFeedbackThanksPage(route);
       if (!content) content = await getLandingPage(route);
-      if (!content)
-        content = await getStaticSearchViewProps(params?.segments, locale);
+      if (!content) content = await getSearchViewPage(route);
     }
   }
   if (!content) {
