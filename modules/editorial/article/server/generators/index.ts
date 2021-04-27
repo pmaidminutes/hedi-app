@@ -1,1 +1,1 @@
-export * from "./getStaticArticleProps";
+export * from "./getStaticArticle";
