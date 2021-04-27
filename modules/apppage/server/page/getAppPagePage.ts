@@ -1,15 +1,11 @@
 import { IAppPage } from "@/modules/common/types";
-import { segmentsToRoute } from "@/modules/common/utils";
 import { IPageConfig } from "@/modules/shell/types";
 import { getAppPage } from "../../query";
 
-export const getStaticProps = async (
-  segments?: string[],
-  locale = "de"
+export const getAppPagePage = async (
+  route: string
 ): Promise<(IAppPage & IPageConfig) | null> => {
-  if (!segments) return null;
-
-  const content = await getAppPage(segmentsToRoute(segments, locale));
+  const content = await getAppPage(route);
 
   if (!content) return null;
 
