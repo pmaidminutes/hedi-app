@@ -115,7 +115,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getArticlePage(route);
       if (!content) content = await getCategoryPage(route);
       if (!content) content = await getViewProfilePage(route);
-      if (!content) content = await getProfilePage(params?.segments, locale);
+      if (!content) content = await getProfilePage(route);
       if (!content) content = await getProfileListPage(route);
       if (!content)
         content = await getUserFeedbackPage(params?.segments, locale);
