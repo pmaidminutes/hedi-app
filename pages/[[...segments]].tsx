@@ -51,6 +51,10 @@ import { ArticlePathsGQL } from "@/modules/editorial/article/query";
 import { getStaticProps as getStaticArticle } from "@/modules/editorial/article/server/generators";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 
+import { CategoryPathsGQL } from "@/modules/editorial/category/query";
+import { getStaticProps as getStaticCategory } from "@/modules/editorial/category/server/generators";
+import { TryCategory } from "@/modules/editorial/category/client/components";
+
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
 
@@ -71,6 +75,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     MidwifePathsGQL,
     AppPagePathsGQL,
     ArticlePathsGQL,
+    CategoryPathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -105,6 +110,7 @@ export const getStaticProps: GetStaticProps<
       content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getEditProfilePage(params?.segments, locale);
     if (!content) content = await getStaticArticle(params?.segments, locale);
+    if (!content) content = await getStaticCategory(params?.segments, locale);
     if (!content) content = await getViewProfilePage(params?.segments, locale);
     if (!content) content = await getProfilePage(params?.segments, locale);
     if (!content) content = await getProfileListPage(params?.segments, locale);
@@ -159,6 +165,7 @@ export default function segments(props: IPageProps<IAppPage>) {
         <TryLogin content={content} key="login" />
         <TryEditProfile content={content} key="editProfile" />
         <TryArticle content={content} key="article" />
+        <TryCategory content={content} key="category" />
         <TryUserFeedback content={content} key="userfeedback" />
         <TryUserFeedbackThanks content={content} key="userfeedbackThanks" />
         <TryLandingPage content={content} key="landingpage" />

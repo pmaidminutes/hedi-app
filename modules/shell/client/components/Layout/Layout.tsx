@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
-import { SingleColumn, ImageAndColumn } from "./templates";
+import { SingleColumn, ImageAndColumn, Categories } from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
   const {
@@ -53,6 +53,10 @@ export const Layout: React.FC<ILayoutProps> = props => {
           condensed={condensed}>
           {children}
         </SingleColumn>
+      ) : pageLayout === "categories" ? (
+        <Categories headline={headline} groupClass={groupClass}>
+          {children}
+        </Categories>
       ) : null}
     </div>
   );
