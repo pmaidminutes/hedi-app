@@ -123,7 +123,7 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getSearchViewPage(route);
     }
   }
-  if (!content) {
+  if (!content && route) {
     content = await getAppPagePage(route);
   }
   if (!content)
