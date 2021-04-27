@@ -39,7 +39,7 @@ export function transformLayout(props: ILayoutProps) {
     content,
     condensed,
     narrow,
-    body,
+    body: body ?? null,
     headline: longTitle || label,
     children,
     groupClass,

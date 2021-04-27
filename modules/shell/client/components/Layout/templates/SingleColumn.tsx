@@ -19,7 +19,7 @@ export const SingleColumn: React.FC<
     <Row condensed={condensed} narrow={narrow}>
       <Column {...columnProps} className="hedi--titlegroup">
         <h1>{headline}</h1>
-        <HTMLWithNextImage data={body} />
+        {body ? <HTMLWithNextImage data={body} /> : null}
       </Column>
     </Row>
     {children && <div className={groupClass}>{children}</div>}
