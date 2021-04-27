@@ -4,13 +4,10 @@ import { IPageConfig } from "@/modules/shell/types";
 import { getRegistrationView } from "../../query";
 import { IRegistrationView } from "../../types";
 
-export const getStaticProps = async (
-  segments?: string[],
-  locale = "de"
+export const getRegistrationViewPage = async (
+  route: string
 ): Promise<(IRegistrationView & IPageConfig) | null> => {
-  if (!segments) return null;
-
-  const content = await getRegistrationView(segmentsToRoute(segments, locale));
+  const content = await getRegistrationView(route);
 
   if (!content) return null;
 
