@@ -3,7 +3,7 @@ import { getSegmentsPaths } from "@/modules/common/query";
 import { IAppPage, ISegmentParam } from "@/modules/common/types";
 import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
 import { TryLogin } from "@/modules/login/client/components";
-import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
+import { getLoginViewPage } from "@/modules/login/server/page";
 import { IEntity } from "@/modules/model";
 import {
   TryViewProfile,
@@ -54,6 +54,7 @@ import { TryArticle } from "@/modules/editorial/article/client/components";
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
 import { getStaticProps as getStaticCategory } from "@/modules/editorial/category/server/generators";
 import { TryCategory } from "@/modules/editorial/category/client/components";
+import { segmentsToRoute } from "@/modules/common/utils";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -93,6 +94,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
   let content: (IEntity & IPageConfig) | null = null;
+  const route = segmentsToRoute(segments, locale ?? "de");
 
   if (isDesignContext) {
     const data = dynamicProps?.find(
@@ -105,7 +107,8 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
-    if (!content) content = await getLoginViewProps(params?.segments, locale);
+    if (!route) return null;
+    if (!content) content = await getLoginViewPage(route);
     if (!content)
       content = await getRegistrationViewProps(params?.segments, locale);
     if (!content) content = await getEditProfilePage(params?.segments, locale);
