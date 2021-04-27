@@ -18,7 +18,7 @@ export const getCategoryPage = async (
   };
 
   const shell: IPageConfig = {
-    useHeader: true,
+    useHeader: "AUTHORIZED",
     layout,
   };
 

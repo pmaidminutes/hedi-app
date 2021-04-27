@@ -20,7 +20,7 @@ export const getArticlePage = async (
   };
 
   const shell: IPageConfig = {
-    useHeader: true,
+    useHeader: "AUTHORIZED",
     layout,
   };
   return {
