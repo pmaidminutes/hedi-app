@@ -2,7 +2,7 @@ import { gql, serviceGQuery } from "@/modules/graphql";
 import { AppPageFields, IAppPage } from "@/modules/common/types";
 import { IUserFeedbackView } from "../types";
 import { EntityFields } from "@/modules/model";
-import { getUIElementValue } from "@/modules/common/utils";
+import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
 import { AppPagesGQL } from "@/modules/common/query";
 import { getProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
@@ -10,9 +10,10 @@ import { IProfileDefinition } from "@/modules/profile/types";
 import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getUserFeedbackView(
-  route: string,
-  lang: string
+  route: string
 ): Promise<IUserFeedbackView | null> {
+  const lang = getLangByRoute(route) ?? "de";
+
   const query = gql`
     query getUserFeedback(
       $routes: [String!]!

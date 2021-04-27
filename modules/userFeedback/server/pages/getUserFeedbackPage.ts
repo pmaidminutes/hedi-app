@@ -1,19 +1,12 @@
-import { segmentsToRoute } from "@/modules/common/utils";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getUserFeedbackView } from "../../query";
 import { IUserFeedbackView } from "../../types";
 
 export const getUserFeedbackPage = async (
-  segments?: string[],
-  locale = "de"
+  route: string
 ): Promise<(IUserFeedbackView & IPageConfig) | null> => {
-  if (!segments) return null;
-
-  const content = await getUserFeedbackView(
-    segmentsToRoute(segments, locale),
-    locale
-  );
+  const content = await getUserFeedbackView(route);
   if (!content) return null;
 
   const layout: ILayout = {
@@ -21,7 +14,7 @@ export const getUserFeedbackPage = async (
   };
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
-    redirectUnAuthorized: "/" + locale,
+    redirectUnAuthorized: "/" + content.lang,
     layout,
   };
 
