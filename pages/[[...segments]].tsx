@@ -1,9 +1,9 @@
 import { getSegmentsPaths } from "@/modules/common/query";
 // Types
 import { IAppPage, ISegmentParam } from "@/modules/common/types";
-import { getStaticProps as getLandingPageViewProps } from "@/modules/landingPage/server/generators";
+import { getLandingPage } from "@/modules/landingPage/server/page";
 import { TryLogin } from "@/modules/login/client/components";
-import { getStaticProps as getLoginViewProps } from "@/modules/login/server/generators";
+import { getLoginViewPage } from "@/modules/login/server/page";
 import { IEntity } from "@/modules/model";
 import {
   TryViewProfile,
@@ -14,15 +14,15 @@ import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
 import {
   getProfileListPage,
   getViewProfilePage,
-} from "@/modules/profile/server/generators";
+} from "@/modules/profile/server/pages";
 import { TryRegistration } from "@/modules/registration/client/components";
-import { getStaticProps as getRegistrationViewProps } from "@/modules/registration/server/generators";
+import { getRegistrationViewPage } from "@/modules/registration/server/page";
 
-import { getStaticProps as getEditProfilePage } from "@/modules/editProfile/server/generators";
+import { getEditProfilePage } from "@/modules/editProfile/server/page";
 import { TryEditProfile } from "@/modules/editProfile/client/components";
 
 import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getProfilePage } from "@/modules/profile/server/generators";
+import { getProfilePage } from "@/modules/profile/server/pages";
 
 // Components
 
@@ -32,15 +32,15 @@ import { Shell } from "@/modules/shell/client/components";
 
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
 import { AppPagePathsGQL } from "@/modules/apppage/query";
-import { getStaticProps as getStaticAppPage } from "@/modules/apppage/server/generators";
+import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
-import { getUserFeedbackPage } from "@/modules/userFeedback/server/generators";
+import { getUserFeedbackPage } from "@/modules/userFeedback/server/pages";
 import { TryUserFeedback } from "@/modules/userFeedback/client/components";
 
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
-import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/generators";
-import { getStaticProps as getStaticSearchViewProps } from "@/modules/search/server/generators";
+import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/pages";
+import { getSearchViewPage } from "@/modules/search/server/page";
 
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
@@ -48,12 +48,13 @@ import { landingPagePaths } from "@/modules/landingPage/types";
 import { TrySearch } from "@/modules/search/client/components";
 
 import { ArticlePathsGQL } from "@/modules/editorial/article/query";
-import { getStaticProps as getStaticArticle } from "@/modules/editorial/article/server/generators";
+import { getArticlePage } from "@/modules/editorial/article/server/page";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
-import { getStaticProps as getStaticCategory } from "@/modules/editorial/category/server/generators";
+import { getCategoryPage } from "@/modules/editorial/category/server/page";
 import { TryCategory } from "@/modules/editorial/category/client/components";
+import { segmentsToRoute } from "@/modules/common/utils";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -93,6 +94,7 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale }) => {
   const segments = params?.segments ?? [];
   let content: (IEntity & IPageConfig) | null = null;
+  const route = segmentsToRoute(segments, locale ?? "de");
 
   if (isDesignContext) {
     const data = dynamicProps?.find(
@@ -105,25 +107,24 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
-    if (!content) content = await getLoginViewProps(params?.segments, locale);
-    if (!content)
-      content = await getRegistrationViewProps(params?.segments, locale);
-    if (!content) content = await getEditProfilePage(params?.segments, locale);
-    if (!content) content = await getStaticArticle(params?.segments, locale);
-    if (!content) content = await getStaticCategory(params?.segments, locale);
-    if (!content) content = await getViewProfilePage(params?.segments, locale);
-    if (!content) content = await getProfilePage(params?.segments, locale);
-    if (!content) content = await getProfileListPage(params?.segments, locale);
-    if (!content) content = await getUserFeedbackPage(params?.segments, locale);
-    if (!content)
-      content = await getUserFeedbackThanksPage(params?.segments, locale);
-    if (!content)
-      content = await getLandingPageViewProps(params?.segments, locale);
-    if (!content)
-      content = await getStaticSearchViewProps(params?.segments, locale);
+    // TODO check if right place for this query
+    if (route) {
+      if (!content) content = await getLoginViewPage(route);
+      if (!content) content = await getRegistrationViewPage(route);
+      if (!content) content = await getEditProfilePage(route);
+      if (!content) content = await getArticlePage(route);
+      if (!content) content = await getCategoryPage(route);
+      if (!content) content = await getViewProfilePage(route);
+      if (!content) content = await getProfilePage(route);
+      if (!content) content = await getProfileListPage(route);
+      if (!content) content = await getUserFeedbackPage(route);
+      if (!content) content = await getUserFeedbackThanksPage(route);
+      if (!content) content = await getLandingPage(route);
+      if (!content) content = await getSearchViewPage(route);
+    }
   }
-  if (!content) {
-    content = await getStaticAppPage(params?.segments, locale);
+  if (!content && route) {
+    content = await getAppPagePage(route);
   }
   if (!content)
     return {

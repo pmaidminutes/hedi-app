@@ -4,12 +4,15 @@ import { ILandingPageView } from "../../types/ILandingPageView";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
 import { WithKeyFields } from "@/modules/model/IWithKey";
+import { getLangByRoute } from "@/modules/common/utils";
 
 export async function getLandingPageView(
-  route: string,
-  lang: string = "de"
+  route: string
 ): Promise<ILandingPageView | null> {
   // TODO log the route to know possible paths with no content
+
+  const lang = getLangByRoute(route) ?? "de";
+
   const query = gql`
     query getLandingPageView(
       $lang: String!     
