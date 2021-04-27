@@ -5,23 +5,17 @@ import { IPageConfig } from "@/modules/shell/types";
 import { landingPagePaths } from "../../types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 
-export const getStaticProps = async (
-  segments?: string[],
-  locale = "de"
+export const getLandingPage = async (
+  route: string
 ): Promise<(IAppPage & IPageConfig) | null> => {
   if (
     !landingPagePaths.find(
-      path =>
-        segmentsToRoute(segments || [], locale) ==
-        segmentsToRoute(path.params?.segments || [], path.locale)
+      path => route == segmentsToRoute(path.params?.segments || [], path.locale)
     )
   )
     return null;
 
-  const content = await getLandingPageView(
-    segmentsToRoute(segments || [], locale),
-    locale
-  );
+  const content = await getLandingPageView(route);
 
   if (!content) return null;
   const layoutImg = {
