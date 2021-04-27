@@ -1,5 +1,4 @@
 import { GlossaryGroup } from "../GlossaryGroup";
-import { Grid } from "carbon-components-react";
 import { transformGlossary, IGlossaryProps } from "./transformGlossary";
 
 export const Glossary = (props: IGlossaryProps): JSX.Element => {
