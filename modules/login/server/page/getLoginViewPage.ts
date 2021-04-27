@@ -1,16 +1,12 @@
-import { segmentsToRoute } from "@/modules/common/utils";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getLoginView } from "../../client/request";
 import { ILoginView } from "../../types";
 
-export const getStaticProps = async (
-  segments?: string[],
-  locale = "de"
+export const getLoginViewPage = async (
+  route: string
 ): Promise<(ILoginView & IPageConfig) | null> => {
-  if (!segments) return null;
-
-  const content = await getLoginView(segmentsToRoute(segments, locale));
+  const content = await getLoginView(route);
 
   if (!content) return null;
 
