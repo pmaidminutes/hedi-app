@@ -3,7 +3,7 @@ import React from "react";
 import { useValidation } from "../hooks/useValidation";
 
 interface IValidatedTextInputProps extends TextInputProps {
-  validateFn: (T: any) => boolean | Array<(T: any) => boolean>; // TODO array does not work
+  validateFn: ((T: any) => boolean) | Array<(T: any) => boolean>;
   enableValidation?: true;
   onValidation?: (textError: string) => void;
 }
