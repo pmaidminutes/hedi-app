@@ -30,9 +30,16 @@ import {
 import { ServiceSelection } from "../ServiceSelection";
 import { useProfileTypeSwitch, useValidationErrors } from "./hooks";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
-import { IUIElementTexts, ErrorMap } from "@/modules/model";
+import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
-import { ChangeEvent, useRef, RefObject } from "react";
+import React, { ChangeEvent, useRef, RefObject } from "react";
+import {
+  minLengthValidationFn,
+  requiredValidationFn,
+  ValidatedTextInput,
+  useValidationSummary,
+  ValidationSummary,
+} from "@/modules/react/validation";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -75,7 +82,6 @@ export const EditProfileForm = ({
   const { profileType, handleContentSwitcherChange } = useProfileTypeSwitch(
     profile?.type
   );
-
   const getError = (key: string) => errors?.[key] ?? validationErrors?.[key];
   const hasError = () =>
     (errors && Object.keys(errors).length != 0) ||
@@ -98,6 +104,10 @@ export const EditProfileForm = ({
     handleSubmit,
   } = useValidationErrors(elements, refs, onSubmit);
 
+  const {
+    validationErrors: validationErrorsForSummary,
+    setValidationError,
+  } = useValidationSummary();
   return (
     <Form {...formPropsRest} onSubmit={handleSubmit}>
       {errors?.generic && (
@@ -161,7 +171,7 @@ export const EditProfileForm = ({
               />
             </Column>
             <Column lg={6} md={6}>
-              <TextInput
+              <ValidatedTextInput
                 {...getRequiredTextInputProps(
                   handleRequiredFieldChange,
                   "forename",
@@ -172,12 +182,17 @@ export const EditProfileForm = ({
                 invalidText={getError("forename")}
                 defaultValue={profile?.forename}
                 ref={refs.forename}
+                validateFn={minLengthValidationFn(5)}
+                enableValidation
+                onValidation={texterror =>
+                  setValidationError("forename", texterror)
+                }
               />
             </Column>
           </Row>
           <Row>
             <Column lg={6} md={6}>
-              <TextInput
+              <ValidatedTextInput
                 {...getRequiredTextInputProps(
                   handleRequiredFieldChange,
                   "surname",
@@ -188,6 +203,11 @@ export const EditProfileForm = ({
                 invalidText={getError("surname")}
                 defaultValue={profile?.surname}
                 ref={refs.surname}
+                validateFn={minLengthValidationFn(3)}
+                enableValidation
+                onValidation={texterror =>
+                  setValidationError("surname", texterror)
+                }
               />
             </Column>
           </Row>
@@ -203,7 +223,7 @@ export const EditProfileForm = ({
           }>
           <Row>
             <Column lg={6} md={6}>
-              <TextInput
+              <ValidatedTextInput
                 {...getRequiredTextInputProps(
                   handleRequiredFieldChange,
                   "city",
@@ -212,8 +232,13 @@ export const EditProfileForm = ({
                 name="city"
                 invalid={typeof getError("city") === "string"}
                 invalidText={getError("city")}
+                enableValidation
                 defaultValue={profile?.city}
                 ref={refs.city}
+                validateFn={requiredValidationFn()}
+                onValidation={texterror =>
+                  setValidationError("city", texterror)
+                }
               />
             </Column>
             <Column lg={2} md={2}>
@@ -273,7 +298,7 @@ export const EditProfileForm = ({
           }>
           <Row>
             <Column lg={6} md={6}>
-              <TextInput
+              <ValidatedTextInput
                 {...getRequiredTextInputProps(
                   handleRequiredFieldChange,
                   "phone",
@@ -284,6 +309,11 @@ export const EditProfileForm = ({
                 invalidText={getError("phone")}
                 defaultValue={profile?.phone}
                 ref={refs.phone}
+                validateFn={requiredValidationFn()}
+                enableValidation
+                onValidation={texterror =>
+                  setValidationError("phone", texterror)
+                }
               />
             </Column>
             {hasElement("phone_private", conditionalElements[profileType]) && (
@@ -303,7 +333,7 @@ export const EditProfileForm = ({
           </Row>
           <Row>
             <Column lg={6} md={6}>
-              <TextInput
+              <ValidatedTextInput
                 {...getRequiredTextInputProps(
                   handleRequiredFieldChange,
                   "mail",
@@ -314,6 +344,11 @@ export const EditProfileForm = ({
                 invalidText={getError("mail")}
                 defaultValue={profile?.mail}
                 ref={refs.mail}
+                validateFn={requiredValidationFn()}
+                enableValidation
+                onValidation={texterror =>
+                  setValidationError("mail", texterror)
+                }
               />
             </Column>
             {hasElement("website", conditionalElements[profileType]) && (
@@ -482,6 +517,8 @@ export const EditProfileForm = ({
             </Button>
           )}
         </Column>
+
+        <ValidationSummary validationErrors={validationErrorsForSummary} />
       </Row>
     </Form>
   );
