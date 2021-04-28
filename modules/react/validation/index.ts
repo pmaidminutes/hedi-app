@@ -1,2 +1,3 @@
 export * from "./VaildatedTextInput";
-export * from "./validationFn";
+export * from "./ValidationFn";
+export * from "./ValidationSummary";

@@ -1,33 +1,27 @@
-import {
-  TextInputProps,
-  TextInput,
-  InlineNotification,
-} from "carbon-components-react";
+import { TextInputProps, TextInput } from "carbon-components-react";
 import React from "react";
 import { useValidation } from "../hooks/useValidation";
 
-export const ValidatedTextInput = (
-  props: TextInputProps & {
-    validateFn: (T: any) => boolean;
-    enableValidation: true;
-  }
-) => {
-  const { onChange, ...rest } = props;
+interface IValidatedTextInputProps extends TextInputProps {
+  validateFn: (T: any) => boolean | Array<(T: any) => boolean>; // TODO array does not work
+  enableValidation?: true;
+  onValidation?: (textError: string) => void;
+}
 
-  const { hasErrors, handleChange } = useValidation(
+export const ValidatedTextInput = React.forwardRef<
+  HTMLInputElement,
+  IValidatedTextInputProps
+>((props, ref) => {
+  const { onChange, onValidation, enableValidation, ...rest } = props;
+
+  const { handleChange } = useValidation(
     rest.value ?? "",
-    rest.enableValidation,
     rest.validateFn,
-    onChange
+    enableValidation,
+    onChange,
+    onValidation
   );
-  //TODO: notification error text: use current language
-  return (
-    <>
-      <TextInput onChange={handleChange} {...rest} />
-      {hasErrors && (
-        <InlineNotification kind="error" title="Error" subtitle={""} />
-      )}
-    </>
-  );
-};
+
+  return <TextInput onChange={handleChange} ref={ref} {...rest} />;
+});
 export default ValidatedTextInput;
