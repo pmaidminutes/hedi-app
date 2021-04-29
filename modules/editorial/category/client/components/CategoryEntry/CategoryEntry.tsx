@@ -1,15 +1,13 @@
-import { buildAssetUrl } from "@/modules/common/utils";
 import Image from "next/image";
 import Link from "next/link";
-import { ICategoryEntry } from "../../../types";
 import { AspectRatio } from "carbon-components-react";
+import {
+  transformCategoryEntry,
+  ICategoryEntryProps,
+} from "./transformCategoryEntry";
 
-export const CategoryEntry = ({
-  category,
-}: {
-  category: ICategoryEntry;
-}): JSX.Element => {
-  const { image, label, route } = category;
+export const CategoryEntry = (props: ICategoryEntryProps): JSX.Element => {
+  const { route, image, label, imageSrc } = transformCategoryEntry(props);
   return (
     <div className="hedi__categoryentry">
       <Link href={route} passHref>
@@ -24,10 +22,10 @@ export const CategoryEntry = ({
           ) : (
             <AspectRatio ratio="2x1">
               <Image
-                src={buildAssetUrl(image?.route)}
-                width={image?.width ?? 0}
-                height={image?.height ?? 0}
-                alt={image?.alt}
+                src={imageSrc}
+                width={image.width ?? 0}
+                height={image.height ?? 0}
+                alt={image.alt}
               />
             </AspectRatio>
           )}
