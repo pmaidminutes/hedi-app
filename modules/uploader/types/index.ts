@@ -1,3 +1,4 @@
 export * from "./APIUrls";
 export * from "./IUploadPayload";
-export * from "./IUploadResult";
+export * from "./MediaMutation";
+export * from "./MediaInput";

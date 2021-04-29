@@ -49,9 +49,14 @@ export const uploadAPI: NextApiHandler<IMediaMutationResult[]> = async (
       });
     }
   }
-
-  // TODO save uploaded files (uploadedItems) as drupal-media using gql-mutation
-  const result: IUploadResult[] = []; // the result of gql-mutation
+  const succeededItems = uploadedItems.filter(item => !item.error);
+  const mediaInput = succeededItems.map(item => ({
+    filename: userFoldername + "/" + item.savedAsFilename,
+    label,
+    description,
+    mediatype: getMediaType(item.savedAsFilename as string),
+  }));
+  const result = await insertMedia(authHeader, mediaInput, lang);
 
   sendAPIResult(res, result);
 };
