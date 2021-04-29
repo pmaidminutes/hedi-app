@@ -1,50 +1,50 @@
 import {
-  sendAPIErrorIfEmptyOrUnauthorized,
+  sendAPIErrorIfUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
-import { IUploadResult } from "../types";
-import { getUserAuthHeader } from "@/modules/auth/server";
-import {
-  extractPostedData,
-  ISavedFileInfo,
-  IUploadedFileInfo,
-} from "./extractPostedData";
-import { saveBufferToDisk } from "./saveTools";
-import { getGuid } from "./helpers";
+import { IMediaMutationResult } from "../types";
+import { getUserAuthHeader, getUserInfo } from "@/modules/auth/server";
+import { extractPostedData, ISavedFileInfo } from "./extractPostedData";
+import { getSafeFilename, saveBufferToDisk } from "./saveTools";
+import { getMediaType } from "./helpers";
+import { insertMedia } from "../query/insertMedia";
+import pathUtils from "path";
 
 // TODO under development
-export const uploadAPI: NextApiHandler<IUploadResult[]> = async (req, res) => {
+export const uploadAPI: NextApiHandler<IMediaMutationResult[]> = async (
+  req,
+  res
+) => {
   const authHeader = await getUserAuthHeader(req);
-  const { isErrorSent } = await sendAPIErrorIfEmptyOrUnauthorized(
+  const { isErrorSent } = await sendAPIErrorIfUnauthorized(
     req,
     res,
     authHeader
   );
-  if (isErrorSent) return;
+  if (isErrorSent || !authHeader) return;
 
-  const { files, ...rest } = await extractPostedData(req);
+  const userInfo = await getUserInfo(req);
+  if (!userInfo) return;
+
+  const { files, lang, label, description, ...rest } = await extractPostedData(
+    req
+  );
   const uploadedItems = [] as ISavedFileInfo[];
+  const userFoldername = getSafeFilename(userInfo.email ?? userInfo.name);
   if (files?.length) {
-    for (let index = 0; index < files.length; index++) {
-      const fileItem = files[index];
-
+    for (let fileItem of files) {
       const { fieldname, originalname } = fileItem;
-      const uuid = getGuid();
-      const extension = originalname.split(".")[
-        originalname.split(".").length - 1
-      ];
       const saveResult = saveBufferToDisk(
         fileItem.content,
-        `${process.env.CMS_UPLOAD_PATH}`,
-        `${uuid}.${extension}`
+        pathUtils.join(`${process.env.CMS_UPLOAD_PATH}`, userFoldername),
+        `${originalname}`
       );
 
       uploadedItems.push({
         fieldname,
         originalname,
-        uuid,
-        extension,
+        savedAsFilename: saveResult.savedAsFilename,
         error: saveResult.error,
       });
     }

@@ -8,8 +8,7 @@ export interface IUploadedFileInfo {
 }
 
 export interface ISavedFileInfo extends Omit<IUploadedFileInfo, "content"> {
-  uuid: string;
-  extension: string;
+  savedAsFilename?: string;
   error?: string;
 }
 
