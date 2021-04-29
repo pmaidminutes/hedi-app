@@ -1,36 +1,15 @@
-import { Search, SearchProps } from "carbon-components-react";
-import { useEffect, useState } from "react";
+import { Search } from "carbon-components-react";
 import { AutoSuggest } from "../AutoSuggest";
+import { ISearchInputProps, useSearchInput } from "./useSearchInput";
 
-interface SearchInputProps extends Partial<SearchProps> {
-  onQueryChanged: (text: string) => void;
-  query?: string;
-}
-export const SearchInput: React.FunctionComponent<SearchInputProps> = ({
-  onQueryChanged,
-  query,
-  ...searchProps
-}) => {
-  const queryText = query ?? "";
-  const [searchQuery, setSearchQuery] = useState(queryText);
-  useEffect(() => {
-    if (queryText) setSearchQuery(queryText);
-  }, [queryText]);
-
-  const [suggestQuery, setSuggestQuery] = useState("");
-
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const query = e.target.value;
-    setSuggestQuery(query);
-    setSearchQuery(query);
-    onQueryChanged(query);
-  };
-
-  const handleSuggestSelected = (text: string) => {
-    setSearchQuery(text);
-    setSuggestQuery("");
-    onQueryChanged(text);
-  };
+export const SearchInput: React.FunctionComponent<ISearchInputProps> = props => {
+  const {
+    searchQuery,
+    suggestQuery,
+    handleSearch,
+    handleSuggestSelected,
+    ...searchProps
+  } = useSearchInput(props);
 
   return (
     <>
