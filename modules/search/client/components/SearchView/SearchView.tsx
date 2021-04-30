@@ -1,13 +1,6 @@
-import { IsIErrorResponse } from "@/modules/common/error";
-import { ArticleEntry } from "@/modules/editorial/article/client/components";
-import { CategoryEntry } from "@/modules/editorial/category/client/components";
-import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";
 import { MapClient } from "@/modules/map/client/components";
-import { Location } from "@/modules/map/types";
-import { ProfileEntry } from "@/modules/profile/client/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { Seperator } from "@/modules/common/components";
-import { useSearch } from "@/modules/search/client/hooks";
 import {
   Column,
   Grid,
@@ -15,78 +8,28 @@ import {
   Row,
   Slider,
   TextInput,
-  Button,
-  ToastNotification,
 } from "carbon-components-react";
-import { useRouter } from "next/router";
-import React, { useEffect, useState } from "react";
-import { IAppPage } from "@/modules/common/types";
-import { AppPageEntryView } from "@/modules/apppage/client/components";
-interface ISearchProps {
-  content: IAppPage;
-}
+import React from "react";
+import { useSearchView, ISearchProps } from "./useSearchView";
+import { Filter } from "../Filter";
+import { SearchResults } from "../SearchResults";
 
-export const SearchView = ({ content }: ISearchProps): JSX.Element => {
-  let loading = true;
-
-  const router = useRouter();
-
-  let initialQueryText = "";
-  const segments = router.query.segments;
-  if (Array.isArray(segments) && segments.length > 1) {
-    const path = [...segments];
-    path.shift(); // discard 'search' or 'suche' etc
-    initialQueryText = path.join(" ");
-  }
-
-  const [queryText, setQueryText] = useState(initialQueryText);
-  useEffect(() => {
-    setQueryText(initialQueryText);
-  }, [initialQueryText]);
-
-  const locale = router.locale ?? "de";
-  const { defaultLocale } = router;
-  // TODO implement other possible filter options
-  const [filter, setFilter] = useState("");
-  //TODO pick it up from env file for now 5kms around
-  const [distance, setDistance] = useState("5");
-  const [location, setLocation] = useState("");
-  const handleFilter = function (selectedFilter: string) {
-    filter
-      ? setFilter(filter + " OR " + selectedFilter)
-      : setFilter(selectedFilter);
-  };
-  const locations: Location[] = [];
-  const handleLocation = async function (typedLocation: string) {
-    const typedAddress = typedLocation.replace(/\s/g, "+");
-    setLocation(typedAddress);
-  };
-
-  //TODO not used at the moment
-  const resetFilter = function () {
-    setFilter("");
-  };
-
-  //TODO not used at the moment
-  const removeFilter = function (removedFilter: string) {};
-  //TODO temporary feature
-  let errorMessage: string = "";
-
-  const { data, error } = useSearch(
-    queryText,
+export const SearchView = (props: ISearchProps): JSX.Element => {
+  const {
+    handleLocation,
+    handleQueryChanged,
+    initialQueryText,
+    loading,
+    data,
+    errorMessage,
     locale,
-    location,
-    distance,
-    filter
-  );
-  if (error) {
-    console.log("for now error");
-    errorMessage = "No search Results";
-  } else if (IsIErrorResponse(data)) {
-    errorMessage = data.errors.http ?? `Try again`;
-  } else {
-    loading = false;
-  }
+    defaultLocale,
+    locations,
+    handleDistanceChange,
+    handleFilter,
+    filterTypes,
+    resultsHeadline,
+  } = useSearchView(props);
 
   return (
     <Grid>
@@ -95,7 +38,7 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
           <SearchInput
             id={"search-results"}
             size={"xl"}
-            onQueryChanged={e => setQueryText(e.trim())}
+            onQueryChanged={e => handleQueryChanged(e)}
             query={initialQueryText}
           />
         </Column>
@@ -125,24 +68,12 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
           stepMultiplier={2}
           value={5}
           hideTextInput={true}
-          onChange={({ value }) => setDistance(value.toString())}
+          onChange={({ value }) => handleDistanceChange(value)}
         />
       </div>
-      <Button kind="primary" onClick={e => handleFilter("articles")}>
-        articles
-      </Button>
-      <Button kind="primary" onClick={e => handleFilter("profiles")}>
-        profiles
-      </Button>
-      <Button kind="primary" onClick={e => handleFilter("categories")}>
-        categories
-      </Button>
-      <Button kind="primary" onClick={e => handleFilter("articles")}>
-        articles
-      </Button>
-
+      <Filter types={filterTypes} handleFilter={handleFilter} />
       <Seperator />
-      <h2>{content.elements.find(e => e.identifier === "results")?.value}</h2>
+
       <div>{/* iterate article component */}</div>
       {
         //TODO should check for  empty array - even if there is no result will get loading overlay
@@ -152,66 +83,7 @@ export const SearchView = ({ content }: ISearchProps): JSX.Element => {
         <Loading withOverlay={true} className={"some-class"} />
       ) : (
         <div>
-          {IsIErrorResponse(data) ? (
-            <ToastNotification
-              title="No Results"
-              kind="warning"
-              caption={errorMessage}
-              lowContrast></ToastNotification>
-          ) : (
-            data?.map((entry: any) => {
-              if (!entry) return null;
-              switch (entry.type) {
-                case "Article":
-                  return (
-                    <ArticleEntry article={entry} key={entry.route + locale} />
-                  );
-                case "AppPage":
-                  return (
-                    <AppPageEntryView
-                      appPageEntry={entry}
-                      key={entry.route + locale}
-                    />
-                  );
-                case "Category":
-                  return (
-                    <CategoryEntry
-                      category={entry}
-                      key={entry.route + locale}
-                    />
-                  );
-                case "GlossaryTerm":
-                  return (
-                    <GlossaryTerm
-                      glossaryTerm={entry}
-                      isSelected={true}
-                      translationLang={defaultLocale}
-                      key={entry.route + locale}
-                    />
-                  );
-                case "Caregiver":
-                case "Midwife":
-                case "Organisation":
-                case "Institution":
-                  {
-                    //TODO if there will be too many locations due to state changes..
-                    //TODO for now there is no latitude and longitude in the profiles
-                    if (entry.lat && entry.long)
-                      locations.push({
-                        lat: entry.lat,
-                        long: entry.long,
-                        displayName: entry.displayName,
-                      } as Location);
-                  }
-                  return (
-                    <ProfileEntry
-                      {...entry} // TODO, develop a result entry profile
-                      key={entry.route + locale}
-                    />
-                  );
-              }
-            })
-          )}
+          <SearchResults results={data} headline={resultsHeadline} />
           {locations?.length > 0 ? (
             <MapClient currentLocation={locations[0]} locations={locations} />
           ) : (

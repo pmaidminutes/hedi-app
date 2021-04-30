@@ -15,6 +15,7 @@ export function useSearch(
   distance: string,
   searchFilter?: string
 ) {
+  console.log({searchText}, {lang}, {location}, {searchFilter})
   const apiPath = searchAPIUrl;
   const swrResult = useSWR<
     IErrorResponse | (IArticle | ICategory | IGlossaryTerm | IAppPage)[]
