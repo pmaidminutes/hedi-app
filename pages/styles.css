@@ -17291,6 +17291,19 @@ html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
 .hedi--group--registration label[for="registrationcode"] {
   font-size: 1rem; }
 
+.hedi--search__filter {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center; }
+  .hedi--search__filter .bx--form-item.bx--checkbox-wrapper:first-of-type {
+    margin-top: 0; }
+  .hedi--search__filter fieldset {
+    height: 100%; }
+    .hedi--search__filter fieldset > div {
+      float: left;
+      -webkit-margin-end: 2rem;
+              margin-inline-end: 2rem; }
+
 .hedi--footer {
   align-items: center;
   background-color: transparent;
