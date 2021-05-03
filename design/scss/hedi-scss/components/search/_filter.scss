@@ -1,0 +1,16 @@
+.hedi--search__filter {
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  .bx--form-item.bx--checkbox-wrapper:first-of-type {
+    margin-top: 0;
+  }
+  fieldset{
+    height: 100%;
+    > div {
+      float: left;
+      margin-inline-end: 2rem;
+    }
+
+  }
+}

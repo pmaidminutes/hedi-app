@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import {
   OverflowMenu,
   OverflowMenuItem,
@@ -10,6 +10,7 @@ import {
   transformUserProfileMenu,
   IUserMenuProps,
 } from "./transformUserProfileMenu";
+import { ShellContext } from "../../contexts";
 
 export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
   const {
@@ -23,6 +24,7 @@ export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
 
   const [hasMounted, setHasMounted] = useState(false);
   const [user, isLoading] = getUser();
+  const { isRTL } = useContext(ShellContext);
   useEffect(() => {
     setHasMounted(true);
   }, []);
@@ -42,7 +44,7 @@ export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
           renderIcon={UserProfile32}
           ariaLabel="User Profile Menu"
           size="xl"
-          flipped={true}>
+          flipped={!isRTL}>
           <OverflowMenuItem
             aria-label={"Profile Component"}
             itemText={viewprofileText + ` ${user.name}`}

@@ -1,7 +1,7 @@
 import { NextApiRequest } from "next";
 import { getToken } from "next-auth/jwt";
 import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
-import { IAuthHeader, IUserAuth } from "../types";
+import { IAuthHeader, IUserAuth, IUserInfoResponse } from "../types";
 import { toAuthHeader } from "./oauth";
 
 const getUserAuth = async (
@@ -24,4 +24,16 @@ export const getUserAuthHeader = async (
     return null;
   }
   return toAuthHeader(auth);
+};
+
+export const getUserInfo = async (
+  req: NextApiRequest
+): Promise<Pick<IUserInfoResponse, "name" | "email"> | null> => {
+  const auth = await getUserAuth(req);
+  if (IsIHTTPError(auth)) {
+    console.error(auth);
+    return null;
+  }
+  const { name, email } = auth;
+  return { name, email };
 };

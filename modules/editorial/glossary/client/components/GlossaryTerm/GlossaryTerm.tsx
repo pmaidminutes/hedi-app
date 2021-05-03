@@ -4,23 +4,21 @@ import {
   TileBelowTheFoldContent,
 } from "carbon-components-react";
 import { HTMLWithNextImage } from "@/modules/react/html";
-import { IGlossaryTerm } from "../../../types";
+import {
+  transformGlossaryTerm,
+  IGlossaryTermProps,
+} from "./transformGlossaryTerm";
 
-interface GlossaryProps {
-  glossaryTerm: IGlossaryTerm;
-  translationLang?: string;
-  isSelected?: boolean;
-}
+export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
+  const {
+    label,
+    entryId,
+    isSelected,
+    termClass,
+    translation,
+    body,
+  } = transformGlossaryTerm(props);
 
-export const GlossaryTerm = (props: GlossaryProps): JSX.Element => {
-  const { glossaryTerm, translationLang, isSelected } = props;
-  const { label, body } = glossaryTerm;
-  const entryId = glossaryTerm.route.substring(
-    glossaryTerm.route.lastIndexOf("/") + 1
-  );
-  const translation = glossaryTerm.translations.find(
-    g => g.lang === translationLang
-  )?.label;
   return (
     <ExpandableTile
       title={label}
@@ -29,7 +27,7 @@ export const GlossaryTerm = (props: GlossaryProps): JSX.Element => {
       expanded={isSelected}>
       <TileAboveTheFoldContent>
         <h2
-          className={isSelected ? "hedi-marked-word" : ""}
+          className={termClass}
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h2>

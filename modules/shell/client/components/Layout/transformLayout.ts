@@ -11,6 +11,7 @@ export function transformLayout(props: ILayoutProps) {
     condensed,
     narrow,
     layoutImg,
+    singleColumnProps,
   } = layout;
 
   const posterImgSrc = posterImage
@@ -19,6 +20,7 @@ export function transformLayout(props: ILayoutProps) {
 
   const left = leftColumnProps ?? { sm: 0, md: 2, lg: 5, xlg: 4 };
   const right = rightColumnProps ?? { md: 4, lg: 8, xlg: 8 };
+  const single = singleColumnProps ?? {};
 
   const wrapperClass = `hedi--simple-page ${
     key !== undefined ? `hedi--${key}-page` : ""
@@ -37,9 +39,10 @@ export function transformLayout(props: ILayoutProps) {
     content,
     condensed,
     narrow,
-    body,
+    body: body ?? null,
     headline: longTitle || label,
     children,
     groupClass,
+    single,
   };
 }

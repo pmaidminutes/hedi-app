@@ -56,10 +56,10 @@
   // $modal-border-top: $brand-01 4px solid !default !global;
   // $modal-footer-background-color: $ui-03 !default !global;
   // // Notification
-  // $notification-info-background-color: $ibm-color__blue-10 !default !global;
-  // $notification-error-background-color: $ibm-color__red-10 !default !global;
-  // $notification-warning-background-color: rgba(#fdd13a, 0.15) !default !global;
-  // $notification-success-background-color: $ibm-color__green-10 !default !global;
+  $notification-info-background-color: $blue-10 !default !global;
+  $notification-error-background-color: $pink-10 !default !global;
+  $notification-warning-background-color: $orange-10 !default !global;
+  $notification-success-background-color: $green-10 !default !global;
   // // Progress Indicator
   // $progress-indicator-bar-width: 1px inset transparent !default !global;
   // $progress-indicator-stroke-width: 5 !default !global;

@@ -21,18 +21,5 @@ export async function getCategory(route: string): Promise<ICategory | null> {
   return serviceGQuery<{ categories: ICategory[] }>(query, {
     routes: [route],
     lang,
-  }).then(data => filterUntranslatedArticles(logAndNull(data)?.categories[0]));
-}
-
-function filterUntranslatedArticles(
-  category: ICategory | undefined
-): ICategory | null {
-  if (
-    !category ||
-    category.articles === null ||
-    category.articles?.length === 0
-  )
-    return null;
-  category.articles = category.articles.filter(a => a.lang === category.lang);
-  return category;
+  }).then(data => logAndNull(data)?.categories[0] ?? null);
 }

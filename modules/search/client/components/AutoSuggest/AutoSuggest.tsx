@@ -1,48 +1,24 @@
-import { useState } from "react";
-import { IsIHTTPError } from "@/modules/common/error";
-import { HTMLWithNextImage } from "@/modules/react/html";
+import { useAutoSuggest, ISuggestProps } from "./useAutoSuggest";
 import { ISuggestEntry } from "../../../types";
-import { useSuggest } from "../../hooks";
+import { HTMLWithNextImage } from "@/modules/react/html";
 import { UnorderedList, ListItem } from "carbon-components-react";
-interface SuggestProps {
-  query: string;
-  onSuggestSelect: (text: string) => void;
-}
-export const AutoSuggest: React.FunctionComponent<SuggestProps> = (
-  props: SuggestProps
+
+export const AutoSuggest: React.FunctionComponent<ISuggestProps> = (
+  props: ISuggestProps
 ) => {
-  const [selectedSuggestion, setSelectedSuggestion] = useState("");
+  const { data, handleSuggestSelected } = useAutoSuggest(props);
 
-  const { data, error } = useSuggest(
-    props.query !== selectedSuggestion ? props.query : undefined
-  );
-  if (error) {
-    //throw new Error(error);
-    console.log("err");
-  }
-
-  const stripHtml = (taggedText: string): string => {
-    let divNode = document.createElement("DIV");
-    divNode.innerHTML = taggedText;
-    return divNode.textContent || divNode.innerText || "";
-  };
-  const handleSuggestSelected = (text: string) => {
-    const plainText = stripHtml(text);
-    setSelectedSuggestion(plainText);
-    props.onSuggestSelect(plainText);
-  };
   return (
     <>
       <UnorderedList role="listbox" id="suggestion-list">
-        {data && !IsIHTTPError(data)
-          ? data.map((suggestedResult: ISuggestEntry, index) => (
-              <ListItem
-                key={index}
-                onClick={e => handleSuggestSelected(suggestedResult.term)}>
-                <HTMLWithNextImage data={suggestedResult.term} />
-              </ListItem>
-            ))
-          : null}
+        {data &&
+          data.map((suggestedResult: ISuggestEntry, index: any) => (
+            <ListItem
+              key={index}
+              onClick={() => handleSuggestSelected(suggestedResult.term)}>
+              <HTMLWithNextImage data={suggestedResult.term} />
+            </ListItem>
+          ))}
       </UnorderedList>
     </>
   );
