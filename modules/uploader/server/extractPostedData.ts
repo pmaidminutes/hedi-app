@@ -1,5 +1,5 @@
 import { IncomingMessage } from "http";
-import { convertBufferToString, rawStringToBuffer } from "./helpers";
+import { getEncodingName, getCharset } from "./helpers";
 
 export interface IUploadedFileInfo {
   content: Uint8Array;
@@ -35,7 +35,8 @@ export const extractPostedData = async (
       if (contentType.indexOf("multipart/form-data") != -1) {
         resolve(extractMultipart(buf, contentType));
       } else if (contentType.indexOf("www-x-form-urlencoded") != -1) {
-        resolve(extractWwwForm(buf));
+        const encoding = getEncodingName(getCharset(contentType));
+        resolve(extractWwwForm(buf.toString(encoding)));
       } else {
         reject("not supported content-type");
       }
@@ -45,61 +46,96 @@ export const extractPostedData = async (
 };
 
 const extractMultipart = (
-  bodyBuffer: Buffer,
+  buffer: Buffer,
   contentType: string
 ): ExtractedContent => {
   const result: ExtractedContent = {};
-
+  const encoding = getEncodingName(getCharset(contentType));
   const boundaryMatch = contentType.match(/boundary=(?:"([^"]+)"|([^;]+))/i);
 
   if (!boundaryMatch) {
     throw new Error("Bad content-type header, no multipart boundary");
   }
 
-  const boundary = "\r\n--" + (boundaryMatch[1] || boundaryMatch[2]);
-  const contentAsString = "\r\n" + convertBufferToString(bodyBuffer);
+  const boundary = "--" + (boundaryMatch[1] || boundaryMatch[2]); // [1]: boundary is within `""`, [2]: without `""`
+  const parts = splitMultipartBuffer(buffer, boundary, encoding);
 
-  const parts = contentAsString.split(new RegExp(boundary));
-
-  for (let i = 1; i < parts.length - 1; i++) {
-    const contentStartPos = parts[i].indexOf("\r\n\r\n") + 4;
-    const partHeaders = parts[i].substr(0, contentStartPos - 4).split("\r\n");
-    const partContent = parts[i].substr(contentStartPos);
-
-    let fieldname = "",
-      filename = "";
-    for (let j = 1; j < partHeaders.length; j++) {
-      var headerFields = extractPartHeader(partHeaders[j]);
-      if (headerFields.name) fieldname = headerFields.name;
-      if (headerFields.filename) filename = headerFields.filename;
-    }
-
-    if (filename) {
+  for (const part of parts) {
+    if (part.header.filename) {
       if (!result.files) result.files = [];
       result.files.push({
-        fieldname,
-        originalname: filename,
-        content: rawStringToBuffer(partContent),
+        fieldname: part.header.name,
+        originalname: part.header.filename,
+        content: part.content,
       });
-    } else result[fieldname] = partContent;
+    } else
+      result[part.header.name] = decodeURIComponent(
+        Buffer.from(part.content).toString(encoding)
+      );
   }
 
   return result;
 };
 
-function extractPartHeader(header: string): IPartHeader {
-  const headerFields = {} as IPartHeader;
-  let matchResult = header.match(/[;| ]name="([^"]*)"/);
-  if (matchResult) headerFields.name = matchResult[1];
-  matchResult = header.match(/^.*filename="([^"]*)"$/);
-  if (matchResult) headerFields.filename = matchResult[1];
-  return headerFields;
-}
+const splitMultipartBuffer = (
+  buffer: Buffer,
+  boundary: string,
+  encoding: BufferEncoding
+) => {
+  const parts: { header: IPartHeader; content: Uint8Array }[] = [];
+  let indexOfBoundary = buffer.indexOf(boundary, 0);
+  const headerSplitter = "\r\n\r\n"; // in HTTP header and body are separeted using \r\n\r\n
+  const newlineLength = 2; // in HTTP newline is always \r\n
+  while (indexOfBoundary != -1) {
+    let nextBoundaryPos = buffer.indexOf(
+      boundary,
+      indexOfBoundary + boundary.length
+    );
+    if (nextBoundaryPos == -1) break;
+    const partBodyBeginIndex =
+      buffer.indexOf(headerSplitter, indexOfBoundary) + headerSplitter.length;
+    if (partBodyBeginIndex > nextBoundaryPos) break;
+    const partHeaderBuffer = Buffer.alloc(partBodyBeginIndex - indexOfBoundary);
+    buffer.copy(partHeaderBuffer, 0, indexOfBoundary, partBodyBeginIndex);
+    // header-bytes are always string
+    const partHeader = extractDisposition(
+      partHeaderBuffer.toString(encoding).replace(boundary, "")
+    );
+    const partBodyBuffer = Buffer.alloc(
+      nextBoundaryPos - partBodyBeginIndex - newlineLength
+    );
+    buffer.copy(
+      partBodyBuffer,
+      0,
+      partBodyBeginIndex,
+      nextBoundaryPos - newlineLength
+    );
 
-const extractWwwForm = (bodyBuffer: Buffer): ExtractedContent => {
+    parts.push({
+      header: partHeader,
+      content: partBodyBuffer,
+    });
+
+    indexOfBoundary = nextBoundaryPos;
+  }
+  return parts;
+};
+
+const extractDisposition = (header: string): IPartHeader => {
+  const headerFields = {} as IPartHeader;
+  const partHeaders = header.split("\r\n");
+  for (const header of partHeaders) {
+    let matchResult = header.match(/[;| ]name="([^"]*)"/);
+    if (matchResult) headerFields.name = matchResult[1];
+    matchResult = header.match(/^.*filename="([^"]*)"$/);
+    if (matchResult) headerFields.filename = matchResult[1];
+  }
+  return headerFields;
+};
+
+const extractWwwForm = (body: string): ExtractedContent => {
   const result: ExtractedContent = {};
-  const content = convertBufferToString(bodyBuffer);
-  const keyValues = content.split("&");
+  const keyValues = body.split("&");
   for (const kv of keyValues) {
     const [key, value] = kv.split("=");
     result[decodeURIComponent(key)] = decodeURIComponent(value);

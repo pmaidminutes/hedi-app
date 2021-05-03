@@ -11,7 +11,6 @@ import { getMediaType } from "./helpers";
 import { insertMedia } from "../query/insertMedia";
 import pathUtils from "path";
 
-// TODO under development
 export const uploadAPI: NextApiHandler<IMediaMutationResult[]> = async (
   req,
   res
