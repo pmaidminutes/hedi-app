@@ -22,10 +22,10 @@ export const isIPageEntry = (obj: any): obj is IPageEntry =>
   obj != null && obj?.type === "Page";
 
 export enum PageVisibility {
-  Public,
-  LoggedIn,
-  User,
-  Internal,
+  Public = 0,
+  LoggedIn = 1,
+  User = 2,
+  Internal = 3,
 }
 
 export interface IPage extends IEntityTranslated<IEntityLocalized> {
