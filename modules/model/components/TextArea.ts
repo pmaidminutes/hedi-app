@@ -11,9 +11,14 @@ export interface TextArea extends IComponent {
 }
 
 export const isTextArea = (obj: IComponent): obj is TextArea =>
-  obj?.id === typeof "string" && obj?.kind === "TextArea";
+  typeof obj?.id === "string" && obj?.kind === "TextArea";
 
 export const isTextAreaInstance = (
   obj: IComponent,
   id: string
 ): obj is TextArea => isTextArea(obj) && obj.id === id;
+
+export const findTextAreaInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isTextArea).find(item => item.id === id);
+  return element;
+};

@@ -13,7 +13,12 @@ export interface Button extends IComponent {
 }
 
 export const isButton = (obj: IComponent): obj is Button =>
-  obj?.id === typeof "string" && obj?.kind === "Button";
+  typeof obj?.id === "string" && obj?.kind === "Button";
 
 export const isButtonInstance = (obj: IComponent, id: string): obj is Button =>
   isButton(obj) && obj.id === id;
+
+export const findButtonInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isButton).find(item => item.id === id);
+  return element;
+};

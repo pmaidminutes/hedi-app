@@ -12,9 +12,14 @@ export interface TextInput extends IComponent {
 }
 
 export const isTextInput = (obj: IComponent): obj is TextInput =>
-  obj?.id === typeof "string" && obj?.kind === "TextInput";
+  typeof obj?.id === "string" && obj?.kind === "TextInput";
 
 export const isTextInputInstance = (
   obj: IComponent,
   id: string
 ): obj is TextInput => isTextInput(obj) && obj.id === id;
+
+export const findTextInputInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isTextInput).find(item => item.id === id);
+  return element;
+};

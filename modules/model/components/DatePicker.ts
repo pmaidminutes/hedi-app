@@ -14,9 +14,14 @@ export interface DatePicker extends IComponent {
 }
 
 export const isDatePicker = (obj: IComponent): obj is DatePicker =>
-  obj?.id === typeof "string" && obj?.kind === "DatePicker";
+  typeof obj?.id === "string" && obj?.kind === "DatePicker";
 
 export const isDatePickerInstance = (
   obj: IComponent,
   id: string
 ): obj is DatePicker => isDatePicker(obj) && obj.id === id;
+
+export const findDatePickerInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isDatePicker).find(item => item.id === id);
+  return element;
+};

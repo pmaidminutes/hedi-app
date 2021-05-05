@@ -10,7 +10,12 @@ export interface Group extends IComponent {
 }
 
 export const isGroup = (obj: IComponent): obj is Group =>
-  obj?.id === typeof "string" && obj?.kind === "Group";
+  typeof obj?.id === "string" && obj?.kind === "Group";
 
 export const isGroupInstance = (obj: IComponent, id: string): obj is Group =>
   isGroup(obj) && obj.id === id;
+
+export const findGroupInstance = (array: IComponent[], id: string) => {
+  const group = array.filter(isGroup).find(item => item.id === id);
+  return group;
+};

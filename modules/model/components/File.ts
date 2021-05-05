@@ -10,7 +10,12 @@ export interface File extends IComponent {
 }
 
 export const isFile = (obj: IComponent): obj is File =>
-  obj?.id === typeof "string" && obj?.kind === "File";
+  typeof obj?.id === "string" && obj?.kind === "File";
 
 export const isFileInstance = (obj: IComponent, id: string): obj is File =>
   isFile(obj) && obj.id === id;
+
+export const findFileInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isFile).find(item => item.id === id);
+  return element;
+};

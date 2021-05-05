@@ -14,9 +14,14 @@ export interface NumberInput extends IComponent {
 }
 
 export const isNumberInput = (obj: IComponent): obj is NumberInput =>
-  obj?.id === typeof "string" && obj?.kind === "NumberInput";
+  typeof obj?.id === "string" && obj?.kind === "NumberInput";
 
 export const isNumberInputInstance = (
   obj: IComponent,
   id: string
 ): obj is NumberInput => isNumberInput(obj) && obj.id === id;
+
+export const findNumberInputInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isNumberInput).find(item => item.id === id);
+  return element;
+};

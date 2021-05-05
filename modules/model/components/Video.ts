@@ -10,7 +10,12 @@ export interface Video extends IComponent {
 }
 
 export const isVideo = (obj: IComponent): obj is Video =>
-  obj?.id === typeof "string" && obj?.kind === "Video";
+  typeof obj?.id === "string" && obj?.kind === "Video";
 
 export const isVideoInstance = (obj: IComponent, id: string): obj is Video =>
   isVideo(obj) && obj.id === id;
+
+export const findVideoInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isVideo).find(item => item.id === id);
+  return element;
+};
