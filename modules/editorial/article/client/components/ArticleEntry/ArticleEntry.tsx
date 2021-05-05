@@ -1,7 +1,10 @@
 import { HTMLWithNextImage } from "@/modules/react/html";
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
-import { transformArticleEntry, IArticleEntryProps} from "./transformArticleEntry";
+import {
+  transformArticleEntry,
+  IArticleEntryProps,
+} from "./transformArticleEntry";
 
 export const ArticleEntry = (props: IArticleEntryProps): JSX.Element => {
   const { label, summary, route } = transformArticleEntry(props);

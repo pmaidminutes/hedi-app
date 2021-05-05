@@ -1,10 +1,7 @@
 import React from "react";
 import { ToastNotification } from "carbon-components-react";
 
-import {
-  useSearchResults,
-  ISearchResultProps,
-} from "./useSearchResults";
+import { useSearchResults, ISearchResultProps } from "./useSearchResults";
 import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { IArticleEntry } from "@/modules/editorial/article/types";
 import { GlossaryTerm } from "@/modules/editorial/glossary/client/components";

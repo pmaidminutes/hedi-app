@@ -6,6 +6,5 @@ export interface IArticleEntryProps {
 export function transformArticleEntry({ article }: IArticleEntryProps) {
   const { label, summary, route } = article;
 
-
-  return {label, summary, route}
- }
+  return { label, summary, route };
+}
