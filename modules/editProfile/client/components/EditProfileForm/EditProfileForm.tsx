@@ -23,6 +23,7 @@ import {
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
 import {
+  IConsultationHoursEntry,
   IEditProfileFormConfig,
   IUpsertProfile,
   orderedRequiredFields,
@@ -33,6 +34,8 @@ import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { IUIElementTexts, ErrorMap } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
 import { ChangeEvent, useRef, RefObject } from "react";
+import { ConsultationHoursSelection } from "../ConsultationHours";
+import { days, timeRanges } from "../ConsultationHours/ConfigConsultationHours";
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
@@ -337,7 +340,7 @@ export const EditProfileForm = ({
           ) && (
             <Row>
               <Column lg={6} md={6}>
-                <TextArea
+                {/* <TextArea
                   {...getTextInputProps(
                     "consultation_hours",
                     conditionalElements[profileType]
@@ -347,10 +350,36 @@ export const EditProfileForm = ({
                   invalidText={errors?.consultation_hours}
                   defaultValue={profile?.consultation_hours}
                   placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
-                />
+                />  */}
               </Column>
             </Row>
           )}
+        </FormGroup>
+      </div>
+      <Seperator />
+
+      <div className="hedi--group hedi--group--language-skills">
+        <FormGroup
+          legendText={
+            <h2>
+              {getUIElementValue(
+                "consultation_hours",
+                conditionalElements[profileType],
+                "consultation_hours"
+              )}
+            </h2>
+          }>
+          <Row>
+            <ConsultationHoursSelection
+              config={{
+                elements,
+                consultationDays: days,
+                consultationTimeStart: timeRanges,
+                consultationTimeEnd: timeRanges,
+              }}
+              data={JSON.parse(profile?.consultation_hours ?? "[]")}
+            />
+          </Row>
         </FormGroup>
       </div>
 
