@@ -3,12 +3,19 @@
 @import "./languageskills";
 @import "./serviceselection";
 @import "./domains";
+@import "./consultationhours";
 
 .hedi--edit-profile {
   // required to make the dropdowns visible tables
   // cannot be set directly on the table, since the overflow is defined on a wrapping node
   .hedi--group {
     &--language-skills {
+      .bx--data-table-content {
+        overflow-x: visible !important;
+      }
+    }
+
+    &--consultation-hours {
       .bx--data-table-content {
         overflow-x: visible !important;
       }
@@ -74,8 +81,9 @@
   h4 {
     padding-bottom: $spacing-05;
   }
-// TODO check if needed global
-  input, textarea {
-    direction: ltr!important;
+  // TODO check if needed global
+  input,
+  textarea {
+    direction: ltr !important;
   }
 }
