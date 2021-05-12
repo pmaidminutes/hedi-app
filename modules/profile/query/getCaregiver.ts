@@ -1,5 +1,5 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { CaregiverFields, ICaregiver } from "../types";
+import { CaregiverGQL, ICaregiver } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
 
@@ -13,7 +13,7 @@ export async function getCaregiver(route: string): Promise<ICaregiver | null> {
         $includeSelf: Boolean
     ) {
       caregivers(routes: $routes, lang: $lang) {
-        ${CaregiverFields}
+        ${CaregiverGQL}
       }
     }
   `;

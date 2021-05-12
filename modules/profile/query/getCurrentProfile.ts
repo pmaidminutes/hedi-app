@@ -1,5 +1,5 @@
 import { gql, userGQuery } from "@/modules/graphql";
-import { CaregiverFields, MidwifeFields, Profile } from "../types";
+import { CaregiverGQL, MidwifeFields, Profile } from "../types";
 import { IAuthHeader } from "@/modules/auth/types";
 import { logAndFallback } from "@/modules/common/error";
 
@@ -13,7 +13,7 @@ export async function getCurrentProfile(
       $includeSelf: Boolean
     ) {
       profile: currentProfile (lang: $lang) {
-        ...on Caregiver {${CaregiverFields}}
+        ${CaregiverGQL}
         ...on Midwife {${MidwifeFields}}
       }
     }

@@ -35,7 +35,8 @@ export function isICaregiver(obj: any): obj is ICaregiver {
   return obj && obj.type === "Caregiver";
 }
 
-export const CaregiverFields = `${EntityTranslatedFields}
+export const CaregiverGQL = `... on Caregiver {
+${EntityTranslatedFields}
 ${DetailedNameFields}
 ${AddressFields}
 ${ContactFields}
@@ -43,4 +44,4 @@ ${WithLanguageSkillsFields}
 ${WithServiceFields}
 ${AssociationsFields}
 domains { ${EntityFields} }
-`;
+}`;
