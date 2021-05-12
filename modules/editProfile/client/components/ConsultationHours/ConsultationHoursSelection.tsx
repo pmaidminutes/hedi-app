@@ -43,7 +43,7 @@ export const ConsultationHoursSelection = ({
                 {getUIElementValue(
                   "consultation_hours",
                   config.elements,
-                  "Sprechzeiten"
+                  "Wochentag"
                 )}
               </TableHeader>
               <TableHeader>
