@@ -34,7 +34,8 @@ export function isIMidwife(obj: any): obj is IMidwife {
   return obj && obj.type === "Midwife";
 }
 
-export const MidwifeFields = `${EntityTranslatedFields}
+export const MidwifeGQL = `... on Midwife {
+  ${EntityTranslatedFields}
   ${DetailedNameFields}
   ${AddressFields}
   ${ContactFields}
@@ -43,4 +44,4 @@ export const MidwifeFields = `${EntityTranslatedFields}
   verified
   service_area
   ${AssociationsFields}
-  `;
+}`;

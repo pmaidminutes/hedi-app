@@ -1,7 +1,7 @@
 import { logAndNull } from "@/modules/common/error";
 import { getLangByRoute } from "@/modules/common/utils";
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { IMidwife, MidwifeFields } from "../types";
+import { IMidwife, MidwifeGQL } from "../types";
 
 export async function getMidwife(route: string): Promise<IMidwife | null> {
   const lang = getLangByRoute(route);
@@ -13,7 +13,7 @@ export async function getMidwife(route: string): Promise<IMidwife | null> {
         $includeSelf: Boolean
       ) {
         midwives(routes: $routes, lang: $lang) {
-          ${MidwifeFields}
+          ${MidwifeGQL}
         }
       }
     `;

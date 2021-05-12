@@ -1,7 +1,7 @@
 import { logAndFallback } from "@/modules/common/error";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { GraphQLClient } from "graphql-request";
-import { CaregiverGQL, MidwifeFields, Profile } from "../types";
+import { CaregiverGQL, MidwifeGQL, Profile } from "../types";
 
 export async function getProfileList(
   lang: string,
@@ -10,7 +10,7 @@ export async function getProfileList(
   const query = gql`
     query getProfiles($lang: String!, $includeSelf: Boolean){
       caregivers(lang: $lang) { ${CaregiverGQL} }
-      midwives(lang: $lang) { ${MidwifeFields} }
+      midwives(lang: $lang) { ${MidwifeGQL} }
     }
   `;
 
