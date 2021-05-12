@@ -16,14 +16,10 @@ import { AudioFields, IAudio } from "@/modules/editorial/types/audio";
 import { IImage, ImageFields } from "@/modules/editorial/types/image";
 export interface IArticleEntry extends IEntityLocalized, ISummary {}
 
-export const ArticleEntryFields = `${EntityLocalizedFields}
-${SummaryFields}`;
-
-export const ArticleEntryFrag = gql`
-fragment ArticleEntryFrag on Article {
-  ${ArticleEntryFields}
-}
-`;
+export const ArticleEntryGQL = gql`... on Article {
+${EntityLocalizedFields}
+${SummaryFields}
+}`;
 
 export interface IArticle
   extends IArticleEntry,
@@ -41,16 +37,11 @@ export function isIArticle(obj: any): obj is IArticle {
   return obj && obj.typeName === "Article";
 }
 
-export const ArticleFields = `${EditorialFields}
+export const ArticleGQL = gql`... on Article {
+${EditorialFields}
 category { ${EntityFields} }
 image { ${ImageFields} }
 audio { ${AudioFields} }
 appstyle
 ${RouteLabelFields}
-`;
-
-export const ArticleFrag = gql`
-fragment ArticleFrag on Article {
-  ${ArticleFields} 
-}
-`;
+}`;

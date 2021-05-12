@@ -1,5 +1,5 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { ArticleFields, IArticle } from "../types";
+import { ArticleGQL, IArticle } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { logAndNull } from "@/modules/common/error";
 
@@ -13,7 +13,7 @@ export async function getArticle(route: string): Promise<IArticle | null> {
       $includeSelf: Boolean
     ) {
       articles(routes: $routes, lang: $lang) {
-        ${ArticleFields}
+        ${ArticleGQL}
       }
     }
   `;

@@ -9,7 +9,7 @@ import {
   RouteLabelFields,
 } from "@/modules/model";
 import {
-  ArticleEntryFields,
+  ArticleEntryGQL,
   IArticleEntry,
 } from "@/modules/editorial/article/types";
 import { ImageFields, IImage } from "@/modules/editorial/types";
@@ -51,5 +51,5 @@ image { ${ImageFields} }
 parent
 appstyle
 categories { ${CategoryEntryGQL} }
-articles { ${ArticleEntryFields} }
+articles { ${ArticleEntryGQL} }
 }`;
