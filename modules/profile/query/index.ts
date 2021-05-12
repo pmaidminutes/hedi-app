@@ -4,7 +4,6 @@ export * from "./getInstitution";
 export * from "./getInstitutionPaths";
 export * from "./getMidwife";
 export * from "./getMidwifePaths";
-export * from "./getMidwifeWithParents";
 export * from "./getOrganisation";
 export * from "./getOrganisationPaths";
 export * from "./getProfile";
