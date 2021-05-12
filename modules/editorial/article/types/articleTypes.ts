@@ -12,8 +12,7 @@ import {
   IRouteLabeled,
   RouteLabelFields,
 } from "@/modules/model";
-import { AudioGQL, IAudio } from "@/modules/editorial/types";
-import { IImage, ImageFields } from "@/modules/editorial/types/image";
+import { AudioGQL, IAudio, IImage, ImageGQL } from "@/modules/editorial/types";
 export interface IArticleEntry extends IEntityLocalized, ISummary {}
 
 export const ArticleEntryGQL = gql`... on Article {
@@ -40,8 +39,8 @@ export function isIArticle(obj: any): obj is IArticle {
 export const ArticleGQL = gql`... on Article {
 ${EditorialFields}
 category { ${EntityFields} }
-image { ${ImageFields} }
-audio { ${AudioFields} }
+image { ${ImageGQL} }
+audio { ${AudioGQL} }
 appstyle
 ${RouteLabelFields}
 }`;

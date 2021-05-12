@@ -6,9 +6,9 @@ export interface IImage extends IFile {
   height: number;
 }
 
-export const ImageFields = `
+export const ImageGQL = `... on Image {
   ${FileFields}
   alt
   width
   height
-`;
+}`;

@@ -1,4 +1,4 @@
-import { IImage, ImageFields } from "@/modules/editorial/types";
+import { IImage, ImageGQL } from "@/modules/editorial/types";
 import {
   BodyFields,
   EntityTranslatedFields,
@@ -33,5 +33,5 @@ ${WithKeyFields}
 longTitle
 ${WithUIElementsFields}
 ${BodyFields}
-posterImage {${ImageFields}}
+posterImage {${ImageGQL}}
 `;

@@ -12,7 +12,7 @@ import {
   ArticleEntryGQL,
   IArticleEntry,
 } from "@/modules/editorial/article/types";
-import { ImageFields, IImage } from "@/modules/editorial/types";
+import { ImageGQL, IImage } from "@/modules/editorial/types";
 
 export interface ICategoryEntry extends IEntityLocalized {
   image?: IImage;
@@ -20,7 +20,7 @@ export interface ICategoryEntry extends IEntityLocalized {
 
 export const CategoryEntryGQL = gql`... on Category {
 ${EntityLocalizedFields}
-image { ${ImageFields} }
+image { ${ImageGQL} }
 }`;
 
 export interface ICategoryRoot extends IEntityTranslated<IEntityLocalized> {
@@ -47,7 +47,7 @@ export function isICategory(obj: any): obj is ICategory {
 export const CategoryGQL = gql`... on Category {
 ${EntityTranslatedFields}
 ${RouteLabelFields}
-image { ${ImageFields} }
+image { ${ImageGQL} }
 parent
 appstyle
 categories { ${CategoryEntryGQL} }
