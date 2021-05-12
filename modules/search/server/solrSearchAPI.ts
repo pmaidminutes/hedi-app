@@ -9,16 +9,10 @@ import { parseJSONToLatLngCoordinates } from "@/modules/map/server/functions";
 import { requestCoordinates } from "@/modules/map/server/request";
 import {
   getCaregiver,
-  getInstitution,
   getMidwife,
   getOrganisation,
 } from "@/modules/profile/query";
-import {
-  ICaregiver,
-  IInstitution,
-  IMidwife,
-  IOrganisation,
-} from "@/modules/profile/types";
+import { ICaregiver, IMidwife, IOrganisation } from "@/modules/profile/types";
 import { searchServer } from "./request";
 import { NextApiHandler } from "next";
 import { sendAPIHttpError, sendAPISuccess } from "@/modules/common/utils";
@@ -34,7 +28,6 @@ export const solrSearchAPI: NextApiHandler<
       | ICaregiver
       | IMidwife
       | IOrganisation
-      | IInstitution
       | IAppPage
     )[]
 > = async (req, res) => {
@@ -136,17 +129,6 @@ export const solrSearchAPI: NextApiHandler<
             })
           );
           break;
-        case "institution_tmp":
-          promises.push(
-            getInstitution(route).then(institution => {
-              if (institution) {
-                institution.label =
-                  highlight.highlightedTitle ?? institution.label;
-              }
-              return institution;
-            })
-          );
-          break;
       }
     }
     const entries = await Promise.all<
@@ -156,7 +138,6 @@ export const solrSearchAPI: NextApiHandler<
       | ICaregiver
       | IMidwife
       | IOrganisation
-      | IInstitution
       | IAppPage
       | null
     >(promises);
@@ -167,7 +148,6 @@ export const solrSearchAPI: NextApiHandler<
       | ICaregiver
       | IMidwife
       | IOrganisation
-      | IInstitution
       | IAppPage
     )[];
     sendAPISuccess(res, nonNull);

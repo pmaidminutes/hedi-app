@@ -2,7 +2,6 @@ import { gql, userGQuery } from "@/modules/graphql";
 import {
   CaregiverFields,
   MidwifeFields,
-  InstitutionFields,
   OrganisationFields,
   Profile,
 } from "../types";
@@ -21,7 +20,6 @@ export async function getCurrentProfile(
       profile: currentProfile (lang: $lang) {
         ...on Caregiver {${CaregiverFields}}
         ...on Midwife {${MidwifeFields}}
-        ...on Institution {${InstitutionFields}}
         ...on Organisation {${OrganisationFields}}
       }
     }
