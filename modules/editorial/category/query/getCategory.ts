@@ -1,5 +1,5 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { ICategory, CategoryFields } from "../types";
+import { ICategory, CategoryGQL } from "../types";
 import { getLangByRoute } from "@/modules/common/utils";
 import { logAndNull } from "@/modules/common/error";
 
@@ -13,7 +13,7 @@ export async function getCategory(route: string): Promise<ICategory | null> {
       $includeSelf: Boolean
     ) {
       categories(routes: $routes, lang: $lang) {
-        ${CategoryFields}
+        ${CategoryGQL}
       }
     }
   `;

@@ -1,6 +1,6 @@
 import { logAndNull } from "@/modules/common/error";
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { ICategoryRoot, CategoryRootFields } from "../types";
+import { ICategoryRoot, CategoryRootGQL } from "../types";
 
 export async function getCategoryRoot(
   lang = "de"
@@ -8,7 +8,7 @@ export async function getCategoryRoot(
   const query = gql`
     query getCategoryRoot($lang: String, $includeSelf: Boolean) {
       categoryroot(lang: $lang) {
-        ${CategoryRootFields}
+        ${CategoryRootGQL}
       }
     }
   `;

@@ -18,21 +18,19 @@ export interface ICategoryEntry extends IEntityLocalized {
   image?: IImage;
 }
 
-export const CategoryEntryFields = `${EntityLocalizedFields}
-image { ${ImageFields} }`;
-
-export const CategoryEntryFrag = gql`
-fragment CategoryEntryFrag on Category {
-  ${CategoryEntryFields}
-}
-`;
+export const CategoryEntryGQL = gql`... on Category {
+${EntityLocalizedFields}
+image { ${ImageFields} }
+}`;
 
 export interface ICategoryRoot extends IEntityTranslated<IEntityLocalized> {
   categories: ICategoryEntry[];
 }
 
-export const CategoryRootFields = `${EntityTranslatedFields}
-categories { ${CategoryEntryFields} }`;
+export const CategoryRootGQL = gql`... on CategoryRoot {
+${EntityTranslatedFields}
+categories { ${CategoryEntryGQL} }
+}`;
 
 export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled {
   parent: number;
@@ -46,18 +44,12 @@ export function isICategory(obj: any): obj is ICategory {
   return obj && obj.typeName === "Category";
 }
 
-export const CategoryFields = `
-${CategoryRootFields}
-parent
-articles { ${ArticleEntryFields} }
-appstyle
-image { ${ImageFields} }
+export const CategoryGQL = gql`... on Category {
+${EntityTranslatedFields}
 ${RouteLabelFields}
-`;
-
-// UNUSED
-export const CategoryFrag = gql`
-fragment CategoryFrag on Category {
-  ${CategoryFields}
-}
-`;
+image { ${ImageFields} }
+parent
+appstyle
+categories { ${CategoryEntryGQL} }
+articles { ${ArticleEntryFields} }
+}`;
