@@ -12,7 +12,7 @@ import {
   IRouteLabeled,
   RouteLabelFields,
 } from "@/modules/model";
-import { AudioFields, IAudio } from "@/modules/editorial/types/audio";
+import { AudioGQL, IAudio } from "@/modules/editorial/types";
 import { IImage, ImageFields } from "@/modules/editorial/types/image";
 export interface IArticleEntry extends IEntityLocalized, ISummary {}
 
