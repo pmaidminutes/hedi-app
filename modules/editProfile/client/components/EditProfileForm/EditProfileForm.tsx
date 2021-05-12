@@ -358,7 +358,7 @@ export const EditProfileForm = ({
       </div>
       <Seperator />
 
-      <div className="hedi--group hedi--group--language-skills">
+      <div className="hedi--group hedi--group--consultation-hours">
         <FormGroup
           legendText={
             <h2>
@@ -377,7 +377,7 @@ export const EditProfileForm = ({
                 consultationTimeStart: timeRanges,
                 consultationTimeEnd: timeRanges,
               }}
-              data={JSON.parse(profile?.consultation_hours ?? "[]")}
+              data={profile?.consultationHours}
             />
           </Row>
         </FormGroup>

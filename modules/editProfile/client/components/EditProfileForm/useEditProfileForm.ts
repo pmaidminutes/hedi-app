@@ -36,7 +36,6 @@ export function useEditProfileForm(
       if (key === "domains" || key === "services")
         value = form.getAll(key)?.valueOf();
       if (key === "languageSkills") {
-        console.log("key languageSkills", key);
         value = (form.getAll(key)?.valueOf() as string[])
           .map(v => JSON.parse(v))
           .sort((a, b) => b.level - a.level);
