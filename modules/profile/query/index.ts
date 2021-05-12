@@ -1,6 +1,5 @@
 export * from "./getCaregiver";
 export * from "./getCaregiverPaths";
-export * from "./getCaregiverWithParents";
 export * from "./getInstitution";
 export * from "./getInstitutionPaths";
 export * from "./getMidwife";
