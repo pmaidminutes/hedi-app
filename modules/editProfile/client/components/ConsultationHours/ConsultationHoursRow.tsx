@@ -37,19 +37,14 @@ export const ConsultationHoursRow = ({
   } = useConsultationHoursRow(data, handleChange);
   return (
     <TableRow>
-      <TableCell
-        data-th={getUIElementValue(
-          "consultation_hours",
-          elements,
-          "consultation_hours"
-        )}>
+      <TableCell data-th={getUIElementValue("weekday", elements, "wochenTag")}>
         <Dropdown
           id="day"
           label={
             consultationDays.find(element => parseInt(element.identifier) === 0)
               ?.value ?? "Please Select"
           }
-          ariaLabel={getUIElementValue("day", elements, "Tag")}
+          ariaLabel={getUIElementValue("weekday", elements, "wochenTag")}
           titleText=""
           light
           selectedItem={
