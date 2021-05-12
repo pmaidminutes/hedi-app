@@ -1,6 +1,6 @@
-import { getSegmentsPaths } from "@/modules/common/query";
+import { getSegmentsContent, getSegmentsPaths } from "@/modules/common/query";
 // Types
-import { IAppPage, ISegmentParam } from "@/modules/common/types";
+import { AppPageGQL, IAppPage, ISegmentParam } from "@/modules/common/types";
 import { getLandingPage } from "@/modules/landingPage/server/page";
 import { TryLogin } from "@/modules/login/client/components";
 import { getLoginViewPage } from "@/modules/login/server/page";
@@ -59,6 +59,9 @@ import { CategoryPathsGQL } from "@/modules/editorial/category/query";
 import { getCategoryPage } from "@/modules/editorial/category/server/page";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 import { segmentsToRoute } from "@/modules/common/utils";
+import { CaregiverGQL, MidwifeGQL } from "@/modules/profile/types";
+import { ArticleGQL } from "@/modules/editorial/article/types";
+import { CategoryGQL } from "@/modules/editorial/category/types";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -112,8 +115,18 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else {
+    const gqlTypes = [
+      AppPageGQL,
+      ArticleGQL,
+      CategoryGQL,
+      CaregiverGQL,
+      MidwifeGQL,
+    ];
     // TODO check if right place for this query
     if (route) {
+      if (!content) {
+        content = await getSegmentsContent(route, gqlTypes);
+      }
       if (!content) content = await getLoginViewPage(route);
       if (!content) content = await getRegistrationViewPage(route);
       if (!content) content = await getEditProfilePage(route);
