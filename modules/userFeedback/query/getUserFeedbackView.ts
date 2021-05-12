@@ -1,5 +1,5 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { AppPageFields, IAppPage } from "@/modules/common/types";
+import { AppPageGQL, IAppPage } from "@/modules/common/types";
 import { IUserFeedbackView } from "../types";
 import { EntityFields } from "@/modules/model";
 import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
@@ -38,7 +38,7 @@ export async function getUserFeedbackView(
       $includeSelf: Boolean
     ) {
       subPages: appPagesByKey(keys: ["userfeedback_languages","userfeedback_contact_freetimes","userfeedback_usage","userfeedback_profile","userfeedback_activities","userfeedback_summary"], lang: $lang) {
-        ${AppPageFields}
+        ${AppPageGQL}
       }
     }
   `;

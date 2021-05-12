@@ -1,5 +1,5 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { AppPageFields, IAppPage } from "@/modules/common/types";
+import { AppPageGQL, IAppPage } from "@/modules/common/types";
 import { ILandingPageView } from "../../types/ILandingPageView";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
@@ -19,7 +19,7 @@ export async function getLandingPageView(
       $includeSelf: Boolean
     ) { 
       appPages: appPagesByKey(keys: ["landingPage"], lang: $lang) {
-        ${AppPageFields} 
+        ${AppPageGQL} 
       }
     }`;
   const appPage = await serviceGQuery<{ appPages: IAppPage[] }>(query, {

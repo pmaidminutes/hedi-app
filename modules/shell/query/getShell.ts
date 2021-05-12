@@ -1,5 +1,5 @@
 import { logAndFallback, logAndNull } from "@/modules/common/error";
-import { AppPageFields, IAppPage } from "@/modules/common/types";
+import { IAppPage } from "@/modules/common/types";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { WithUIElementsFields } from "@/modules/model";
 import { IShell } from "../types";

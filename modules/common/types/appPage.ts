@@ -1,3 +1,4 @@
+import { gql } from "@/modules/graphql";
 import { IImage, ImageGQL } from "@/modules/editorial/types";
 import {
   BodyFields,
@@ -27,11 +28,12 @@ export function isIAppPage(obj: any): obj is IAppPage {
   return obj && obj.typeName === "AppPage" && obj.key;
 }
 
-export const AppPageFields = `${EntityTranslatedFields}
+export const AppPageGQL = gql`... on AppPage {
+${EntityTranslatedFields}
 ${RouteLabelFields}
 ${WithKeyFields}
 longTitle
 ${WithUIElementsFields}
 ${BodyFields}
 posterImage {${ImageGQL}}
-`;
+}`;

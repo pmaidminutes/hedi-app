@@ -1,7 +1,7 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
 import { AppPagesGQL } from "@/modules/common/query";
-import { AppPageFields, IAppPage } from "@/modules/common/types";
+import { AppPageGQL, IAppPage } from "@/modules/common/types";
 import { IEditProfileView } from "../types";
 import {
   EntityFields,
@@ -47,7 +47,7 @@ export async function getEditProfile(
       $includeSelf: Boolean
     ) {
       subPages: appPagesByKey(keys: ["editprofile_Parent","editprofile_Caregiver","editprofile_Midwife"], lang: $lang) {
-        ${AppPageFields}
+        ${AppPageGQL}
       }
       domainOptions: domains(lang: $lang) {
         ${EntityFields}
