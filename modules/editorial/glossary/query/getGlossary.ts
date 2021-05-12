@@ -1,5 +1,5 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { GlossaryFields, IGlossary, IGlossaryGrouped } from "../types";
+import { GlossaryGQL, IGlossary, IGlossaryGrouped } from "../types";
 import { glossaryToGroupedGlossary } from "./functions";
 import { getLangByRoute } from "@/modules/common/utils";
 import { logAndNull } from "@/modules/common/error";
@@ -15,7 +15,7 @@ export async function getGlossary(
       $includeSelf: Boolean
     ) {
       glossary(route: $route, lang: $lang) {
-        ${GlossaryFields}
+        ${GlossaryGQL}
       }
     }
   `;
