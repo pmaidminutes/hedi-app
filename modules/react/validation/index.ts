@@ -1,3 +1,4 @@
 export * from "./ValidatedTextInput";
-export * from "./validationFn";
+export * from "./ValidationFn";
 export * from "./ValidationSummary";
+export * from "./preDefinedValidationRegexes";

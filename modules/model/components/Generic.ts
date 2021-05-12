@@ -11,9 +11,14 @@ export interface Generic extends IComponent {
 }
 
 export const isGeneric = (obj: IComponent): obj is Generic =>
-  obj?.id === typeof "string" && obj?.kind === "Generic";
+  typeof obj?.id === "string" && obj?.kind === "Generic";
 
 export const isGenericInstance = (
   obj: IComponent,
   id: string
 ): obj is Generic => isGeneric(obj) && obj.id === id;
+
+export const findGenericInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isGeneric).find(item => item.id === id);
+  return element;
+};

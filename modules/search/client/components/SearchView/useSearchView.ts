@@ -51,8 +51,8 @@ export function useSearchView(props: ISearchProps) {
 
   const { content } = props;
 
-  const resultsHeadline = content.elements.find(e => e.identifier === "results")?.value;
-
+  const resultsHeadline = content.elements.find(e => e.identifier === "results")
+    ?.value;
 
   let loading = true;
 
@@ -95,6 +95,6 @@ export function useSearchView(props: ISearchProps) {
     locations,
     handleDistanceChange,
     filterTypes,
-    resultsHeadline
+    resultsHeadline,
   };
 }

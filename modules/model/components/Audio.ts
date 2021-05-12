@@ -10,7 +10,12 @@ export interface Audio extends IComponent {
 }
 
 export const isAudio = (obj: IComponent): obj is Audio =>
-  obj?.id === typeof "string" && obj?.kind === "Audio";
+  typeof obj?.id === "string" && obj?.kind === "Audio";
 
 export const isAudioInstance = (obj: IComponent, id: string): obj is Audio =>
   isAudio(obj) && obj.id === id;
+
+export const findAudioInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isAudio).find(item => item.id === id);
+  return element;
+};

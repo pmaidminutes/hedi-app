@@ -9,6 +9,5 @@ export function transformCategoryEntry({ category }: ICategoryEntryProps) {
 
   const imageSrc = image ? buildAssetUrl(image.route) : "";
 
-
-  return{route, image: image ?? null, label, imageSrc}
+  return { route, image: image ?? null, label, imageSrc };
 }

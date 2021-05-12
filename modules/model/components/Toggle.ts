@@ -11,7 +11,12 @@ export interface Toggle extends IComponent {
 }
 
 export const isToggle = (obj: IComponent): obj is Toggle =>
-  obj?.id === typeof "string" && obj?.kind === "Toggle";
+  typeof obj?.id === "string" && obj?.kind === "Toggle";
 
 export const isToggleInstance = (obj: IComponent, id: string): obj is Toggle =>
   isToggle(obj) && obj.id === id;
+
+export const findToggleInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isToggle).find(item => item.id === id);
+  return element;
+};

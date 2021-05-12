@@ -13,7 +13,12 @@ export interface Image extends IComponent {
 }
 
 export const isImage = (obj: IComponent): obj is Image =>
-  obj?.id === typeof "string" && obj?.kind === "Image";
+  typeof obj?.id === "string" && obj?.kind === "Image";
 
 export const isImageInstance = (obj: IComponent, id: string): obj is Image =>
   isImage(obj) && obj.id === id;
+
+export const findImageInstance = (array: IComponent[], id: string) => {
+  const image = array.filter(isImage).find(item => item.id === id);
+  return image;
+};

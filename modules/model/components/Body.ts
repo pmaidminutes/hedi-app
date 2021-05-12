@@ -8,7 +8,12 @@ export interface Body extends IComponent {
 }
 
 export const isBody = (obj: IComponent): obj is Body =>
-  obj?.id === typeof "string" && obj.kind === "Body";
+  typeof obj?.id === "string" && obj.kind === "Body";
 
 export const isBodyInstance = (obj: IComponent, id: string): obj is Body =>
   isBody(obj) && obj.id === id;
+
+export const findBodyInstance = (array: IComponent[], id: string) => {
+  const element = array.filter(isBody).find(item => item.id === id);
+  return element;
+};
