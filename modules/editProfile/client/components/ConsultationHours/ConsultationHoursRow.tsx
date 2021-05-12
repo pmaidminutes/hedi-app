@@ -79,14 +79,13 @@ export const ConsultationHoursRow = ({
           light
           selectedItem={
             consultationTimeStart.find(
-              l => l.identifier === consultationHours.timeStart
+              item => item.identifier === consultationHours.timeStart
             )?.identifier
           }
-          items={consultationTimeStart.map(level => level.identifier)}
+          items={consultationTimeStart.map(item => item.identifier)}
           itemToString={i =>
-            consultationTimeStart.find(
-              level => level.identifier == i.toString()
-            )?.value || i.toString()
+            consultationTimeStart.find(item => item.identifier == i.toString())
+              ?.value || i.toString()
           }
           onChange={handleTimeStartChange}
         />
@@ -105,12 +104,12 @@ export const ConsultationHoursRow = ({
           light
           selectedItem={
             consultationTimeEnd.find(
-              l => l.identifier === consultationHours.timeEnd
+              item => item.identifier === consultationHours.timeEnd
             )?.identifier
           }
-          items={consultationTimeEnd.map(level => level.identifier)}
+          items={consultationTimeEnd.map(item => item.identifier)}
           itemToString={i =>
-            consultationTimeEnd.find(level => level.identifier == i.toString())
+            consultationTimeEnd.find(item => item.identifier == i.toString())
               ?.value || i.toString()
           }
           onChange={handleTimeEndChange}

@@ -33,7 +33,6 @@ export const ConsultationHoursSelection = ({
     handleRemoveClick,
     handleItemChange,
   } = useConsultationHoursSelection(data);
-
   return (
     <>
       <Column>
@@ -44,7 +43,7 @@ export const ConsultationHoursSelection = ({
                 {getUIElementValue(
                   "consultation_hours",
                   config.elements,
-                  "Bürozeiten beginnen"
+                  "Sprechzeiten"
                 )}
               </TableHeader>
               <TableHeader>
@@ -75,7 +74,7 @@ export const ConsultationHoursSelection = ({
           <TableBody>
             {consultationHoursEntries?.map((ls, i) => (
               <ConsultationHoursRow
-                key={i}
+                key={ls.day + ls.timeStart + ls.timeStart + i}
                 config={config}
                 data={ls}
                 handleDeleteClick={() => {

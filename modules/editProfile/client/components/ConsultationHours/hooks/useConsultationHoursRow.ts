@@ -14,7 +14,6 @@ export const useConsultationHoursRow = (
 
   const handleDaysChange = (e: OnChangeData<string>) => {
     const day = e.selectedItem;
-    console.log("selected day: ", day);
     if (day) {
       setConsultationHours(p => {
         const newValue = { ...p, day: day };
