@@ -13,10 +13,12 @@ export interface IUserFeedback extends IEntity {
 export const implementsIUserFeedback = (obj: any) =>
   obj.body != null && obj.metadata != null;
 
-export const UserFeedbackFields = `${EntityFields}
+export const UserFeedbackGQL = gql`... on UserFeedback {
+${EntityFields}
 body
 metadata
-created`;
+created
+}`;
 
 export const insertUserFeedbacksMutation = gql`
 mutation sendUserFeedbacks($input: [UserFeedbackInput!]!, $lang: String) {
