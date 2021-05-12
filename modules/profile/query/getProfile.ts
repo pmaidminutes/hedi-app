@@ -2,7 +2,6 @@ import { gql, serviceGQuery } from "@/modules/graphql";
 import {
   CaregiverFields,
   MidwifeFields,
-  OrganisationFields,
   Profile,
   ProfileTypeNameArray,
 } from "../types";
@@ -21,7 +20,6 @@ export async function getProfile(route: string): Promise<Profile | null> {
       profiles: entitiesTranslated (routes: $routes, lang: $lang) {
         ...on Caregiver {${CaregiverFields}}
         ...on Midwife {${MidwifeFields}}
-        ...on Organisation {${OrganisationFields}}
       }
     }
   `;

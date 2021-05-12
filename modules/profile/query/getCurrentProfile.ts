@@ -1,10 +1,5 @@
 import { gql, userGQuery } from "@/modules/graphql";
-import {
-  CaregiverFields,
-  MidwifeFields,
-  OrganisationFields,
-  Profile,
-} from "../types";
+import { CaregiverFields, MidwifeFields, Profile } from "../types";
 import { IAuthHeader } from "@/modules/auth/types";
 import { logAndFallback } from "@/modules/common/error";
 
@@ -20,7 +15,6 @@ export async function getCurrentProfile(
       profile: currentProfile (lang: $lang) {
         ...on Caregiver {${CaregiverFields}}
         ...on Midwife {${MidwifeFields}}
-        ...on Organisation {${OrganisationFields}}
       }
     }
   `;

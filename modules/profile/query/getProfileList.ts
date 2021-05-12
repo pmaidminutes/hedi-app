@@ -1,12 +1,7 @@
 import { logAndFallback } from "@/modules/common/error";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { GraphQLClient } from "graphql-request";
-import {
-  CaregiverFields,
-  MidwifeFields,
-  OrganisationFields,
-  Profile,
-} from "../types";
+import { CaregiverFields, MidwifeFields, Profile } from "../types";
 
 export async function getProfileList(
   lang: string,
@@ -16,7 +11,6 @@ export async function getProfileList(
     query getProfiles($lang: String!, $includeSelf: Boolean){
       caregivers(lang: $lang) { ${CaregiverFields} }
       midwives(lang: $lang) { ${MidwifeFields} }
-      organisations(lang: $lang) { ${OrganisationFields} }
     }
   `;
 
@@ -26,13 +20,8 @@ export async function getProfileList(
   type subqueryType = {
     caregivers: Profile[];
     midwives: Profile[];
-    organisations: Profile[];
   };
-  const {
-    caregivers,
-    midwives,
-    organisations,
-  } = await serviceGQuery<subqueryType>(query, {
+  const { caregivers, midwives } = await serviceGQuery<subqueryType>(query, {
     lang,
   }).then(data =>
     logAndFallback(data, {
@@ -45,7 +34,6 @@ export async function getProfileList(
 
   const profiles: Profile[] = caregivers
     .concat(midwives)
-    .concat(organisations)
     .sort((a, b) =>
       a.surname.localeCompare(b.surname, lang, { ignorePunctuation: true })
     );

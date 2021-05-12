@@ -7,12 +7,8 @@ import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
 import { parseJSONToLatLngCoordinates } from "@/modules/map/server/functions";
 import { requestCoordinates } from "@/modules/map/server/request";
-import {
-  getCaregiver,
-  getMidwife,
-  getOrganisation,
-} from "@/modules/profile/query";
-import { ICaregiver, IMidwife, IOrganisation } from "@/modules/profile/types";
+import { getCaregiver, getMidwife } from "@/modules/profile/query";
+import { ICaregiver, IMidwife } from "@/modules/profile/types";
 import { searchServer } from "./request";
 import { NextApiHandler } from "next";
 import { sendAPIHttpError, sendAPISuccess } from "@/modules/common/utils";
@@ -21,15 +17,7 @@ import { IAppPage } from "@/modules/common/types";
 
 export const solrSearchAPI: NextApiHandler<
   | IErrorResponse
-  | (
-      | IArticle
-      | ICategory
-      | IGlossaryTerm
-      | ICaregiver
-      | IMidwife
-      | IOrganisation
-      | IAppPage
-    )[]
+  | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | IAppPage)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter, location, distance },
@@ -118,17 +106,6 @@ export const solrSearchAPI: NextApiHandler<
             })
           );
           break;
-        case "organisation_tmp":
-          promises.push(
-            getOrganisation(route).then(organisation => {
-              if (organisation) {
-                organisation.label =
-                  highlight.highlightedTitle ?? organisation.label;
-              }
-              return organisation;
-            })
-          );
-          break;
       }
     }
     const entries = await Promise.all<
@@ -137,7 +114,6 @@ export const solrSearchAPI: NextApiHandler<
       | IGlossaryTerm
       | ICaregiver
       | IMidwife
-      | IOrganisation
       | IAppPage
       | null
     >(promises);
@@ -147,7 +123,6 @@ export const solrSearchAPI: NextApiHandler<
       | IGlossaryTerm
       | ICaregiver
       | IMidwife
-      | IOrganisation
       | IAppPage
     )[];
     sendAPISuccess(res, nonNull);

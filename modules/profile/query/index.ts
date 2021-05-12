@@ -2,8 +2,6 @@ export * from "./getCaregiver";
 export * from "./getCaregiverPaths";
 export * from "./getMidwife";
 export * from "./getMidwifePaths";
-export * from "./getOrganisation";
-export * from "./getOrganisationPaths";
 export * from "./getProfile";
 export * from "./getProfileList";
 export * from "./getProfileListDefinition";
