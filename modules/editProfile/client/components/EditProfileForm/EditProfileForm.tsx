@@ -440,7 +440,7 @@ export const EditProfileForm = ({
         </FormGroup>
       </div>
 
-      {profileType !== "Parent" && profileType !== "Midwife" && (
+      {profileType !== "Midwife" && (
         <div className="hedi--group hedi--group--domains">
           <FormGroup
             legendText={
@@ -497,23 +497,6 @@ export const EditProfileForm = ({
         </div>
       )}
 
-      {hasElement("first_pregnancy", conditionalElements[profileType]) && (
-        <div className="hedi--group">
-          <FormGroup legendText="Parent">
-            <Toggle
-              id="first_pregnancy"
-              name="first_pregnancy"
-              labelText={
-                getTextInputProps(
-                  "first_pregnancy",
-                  conditionalElements.Parent
-                )?.labelText.toString() ?? ""
-              }
-              defaultToggled={profile?.first_pregnancy ?? false}
-            />
-          </FormGroup>
-        </div>
-      )}
       <Row>
         <Column lg={8} md={8}>
           {isValidating ? (

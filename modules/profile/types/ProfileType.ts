@@ -4,14 +4,12 @@ import { IPageConfig } from "@/modules/shell/types";
 import { ICaregiver, IInstitution, IMidwife, IOrganisation } from ".";
 
 export type ProfileType =
-  | "Parent"
   | "Caregiver"
   | "Midwife"
   | "Organisation"
   | "Institution";
 
 export const ProfileTypeNameArray = [
-  "Parent",
   "Caregiver",
   "Midwife",
   "Organisation",
