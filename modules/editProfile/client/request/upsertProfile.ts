@@ -1,4 +1,4 @@
-import { EditProfileInput, IUpsertProfile } from "../../types";
+import { EditProfileInput, IUpsertProfileResponse } from "../../types";
 
 export function upsertProfile(
   url: string,
@@ -6,7 +6,7 @@ export function upsertProfile(
     profile?: EditProfileInput;
     lang: string;
   }
-): Promise<IUpsertProfile> {
+): Promise<IUpsertProfileResponse> {
   return fetch(url, {
     method: "POST",
     body: JSON.stringify(data),

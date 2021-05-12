@@ -1,16 +1,17 @@
+import { gql } from "@/modules/graphql";
 import { ErrorMap } from "@/modules/model";
-import { EditProfileFields, IEditProfile } from "./IEditProfile";
+import { UpsertProfileGQL, IEditProfile } from "./IEditProfile";
 
-export interface IUpsertProfile {
+export interface IUpsertProfileResponse {
   success: boolean;
   errors?: ErrorMap;
   profile?: IEditProfile;
   route?: string;
 }
 
-export const UpsertProfileFields = `
+export const UpsertProfileResponseGQL = gql`... on UpsertProfileResponse {
 success 
 errors
-profile { ${EditProfileFields} }
+profile { ${UpsertProfileGQL} }
 route
-`;
+}`;

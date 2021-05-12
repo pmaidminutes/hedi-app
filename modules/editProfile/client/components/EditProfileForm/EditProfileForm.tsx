@@ -25,7 +25,7 @@ import { Seperator } from "@/modules/common/components";
 import {
   IConsultationHoursEntry,
   IEditProfileFormConfig,
-  IUpsertProfile,
+  IUpsertProfileResponse,
   orderedRequiredFields,
 } from "../../../types";
 import { ServiceSelection } from "../ServiceSelection";
@@ -46,7 +46,7 @@ import {
 
 type EditProfileInputProps = FormProps & {
   config: IEditProfileFormConfig;
-  data: IUpsertProfile;
+  data: IUpsertProfileResponse;
   isValidating?: boolean;
   isSuccessfullySaved?: boolean;
 };

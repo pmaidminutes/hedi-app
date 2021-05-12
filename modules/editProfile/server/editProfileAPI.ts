@@ -5,9 +5,9 @@ import {
   sendAPIResult,
 } from "@/modules/common/utils";
 import { upsertProfileQuery } from "../query";
-import { EditProfileInput, IUpsertProfile } from "../types";
+import { EditProfileInput, IUpsertProfileResponse } from "../types";
 
-export const editProfileAPI: NextApiHandler<IUpsertProfile> = async (
+export const editProfileAPI: NextApiHandler<IUpsertProfileResponse> = async (
   req,
   res
 ) => {

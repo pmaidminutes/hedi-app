@@ -1,3 +1,4 @@
+import { gql } from "@/modules/graphql";
 import { IProfile } from "@/modules/model/IProfile";
 import { ProfileType } from "@/modules/profile/types";
 import { ILanguageSkillEntry } from "./ILanguageSkillEntry";
@@ -56,9 +57,11 @@ export const EditProfileFieldArray: (keyof IEditProfile)[] = [
   "services",
 ];
 
-export const EditProfileFields = `${EditProfileFieldArray.join(" ").replace(
-  "languageSkills",
-  "languageSkills { langcode level }"
-)}`;
+export const UpsertProfileGQL = gql`... on UpsertProfile {
+  ${EditProfileFieldArray.join(" ").replace(
+    "languageSkills",
+    "languageSkills { langcode level }"
+  )}
+}`;
 
 export type EditProfileInput = Partial<IEditProfile>;

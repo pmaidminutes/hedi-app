@@ -3,8 +3,8 @@ import { IHTTPError, IsIHTTPError } from "@/modules/common/error";
 import { gql, userGQuery } from "@/modules/graphql";
 import {
   EditProfileInput,
-  IUpsertProfile,
-  UpsertProfileFields,
+  IUpsertProfileResponse,
+  UpsertProfileResponseGQL,
 } from "../types";
 
 export async function upsertProfileQuery(
@@ -13,18 +13,18 @@ export async function upsertProfileQuery(
     lang: string;
   },
   authHeader: IAuthHeader
-): Promise<IUpsertProfile | IHTTPError> {
+): Promise<IUpsertProfileResponse | IHTTPError> {
   const mutation = gql`
     mutation editProfile(
       $profile: UpsertProfileInput 
       $lang: String
       ) {
       upsertProfile(input: $profile, lang: $lang) {
-        ${UpsertProfileFields}
+        ${UpsertProfileResponseGQL}
       }
     }`;
 
-  return userGQuery<{ upsertProfile: IUpsertProfile }>(
+  return userGQuery<{ upsertProfile: IUpsertProfileResponse }>(
     authHeader,
     mutation,
     input
