@@ -49,7 +49,7 @@
         "left3 right";
       height: 100%;
       padding: $spacing-05;
-      grid-template-columns: 100%% 1fr;
+      grid-template-columns: 79% 1fr;
     }
     td {
       padding-left: 0;
@@ -72,7 +72,7 @@
     }
     td[data-th] {
       display: grid;
-      grid-template-columns: 100%;
+      grid-template-columns: 30% 70%;
       &:before {
         content: attr(data-th);
         font-weight: bold;
