@@ -66,7 +66,7 @@ import { TryCategory } from "@/modules/editorial/category/client/components";
 import { segmentsToRoute } from "@/modules/common/utils";
 import { CaregiverGQL, MidwifeGQL } from "@/modules/profile/types";
 import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
-import { CategoryGQL } from "@/modules/editorial/category/types";
+import { CategoryGQL, isICategory } from "@/modules/editorial/category/types";
 
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
@@ -133,6 +133,7 @@ export const getStaticProps: GetStaticProps<
         let generic = await getSegmentsContent(route, gqlTypes);
 
         if (isIArticle(generic)) generic = await getArticlePage(generic);
+        if (isICategory(generic)) generic = await getCategoryPage(generic);
 
         if (isIAppPage(generic)) {
           switch (generic.key) {
@@ -165,7 +166,6 @@ export const getStaticProps: GetStaticProps<
         // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
         content = generic;
       }
-      if (!content) content = await getCategoryPage(route);
       if (!content) content = await getProfilePage(route);
       if (!content) content = await getLandingPage(route);
       if (!content) content = await getGlossaryPage(route);

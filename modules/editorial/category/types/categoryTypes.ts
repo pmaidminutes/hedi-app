@@ -39,9 +39,8 @@ export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled {
   routelabel: IRouteLabeled;
 }
 
-// UNUSED
 export function isICategory(obj: any): obj is ICategory {
-  return obj && obj.typeName === "Category";
+  return obj && obj.type === "Category";
 }
 
 export const CategoryGQL = gql`... on Category {
