@@ -1,15 +1,10 @@
 import { IArticle } from "../../types";
-import { getArticle } from "../../query";
 import { IPageConfig } from "@/modules/shell/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 
 export const getArticlePage = async (
-  route: string
-): Promise<(IArticle & IPageConfig) | null> => {
-  const content = await getArticle(route);
-
-  if (!content) return null;
-
+  content: IArticle
+): Promise<IArticle & IPageConfig> => {
   const layout: ILayout = {
     pageLayout: "singleColumn",
     singleColumnProps: {
