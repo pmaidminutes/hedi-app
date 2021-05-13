@@ -1,37 +1,16 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { AppPageGQL, IAppPage } from "@/modules/common/types";
-import { IUserFeedbackView } from "../types";
+import { IUserFeedbackView } from "../../types";
 import { EntityFields } from "@/modules/model";
-import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
+import { getUIElementValue } from "@/modules/common/utils";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
-import { AppPagesGQL } from "@/modules/common/query";
 import { getProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
 import { IProfileDefinition } from "@/modules/profile/types";
 import { WithKeyFields } from "@/modules/model/IWithKey";
 
-export async function getUserFeedbackView(
-  route: string
-): Promise<IUserFeedbackView | null> {
-  const lang = getLangByRoute(route) ?? "de";
-
-  const query = gql`
-    query getUserFeedback(
-      $routes: [String!]!
-      $lang: String!
-      $includeSelf: Boolean
-    ) {
-      ${AppPagesGQL}
-    }
-  `;
-  const appPage = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
-    routes: [route],
-    lang,
-  }).then(data => logAndNull(data)?.appPages?.[0]);
-
-  if (!(appPage && appPage.key === "userfeedback")) return null;
-
-  appPage.type = "UserFeedback";
-
+export async function getUserFeedbackDefinition(
+  appPage: IAppPage
+): Promise<Omit<IUserFeedbackView, keyof IAppPage>> {
   const subquery = gql`
     query getUserFeedbackChildren(
       $lang: String!
@@ -45,7 +24,7 @@ export async function getUserFeedbackView(
   const { subPages } = await serviceGQuery<{
     subPages: IAppPage[];
   }>(subquery, {
-    lang,
+    lang: appPage.lang,
   }).then(data => logAndFallback(data, { subPages: [] as IAppPage[] }));
   const keys = [
     getUIElementValue("no_profile_redirect", appPage.elements),
@@ -65,18 +44,17 @@ export async function getUserFeedbackView(
   const linkResults = await serviceGQuery<Pick<IUserFeedbackView, "links">>(
     queryForLinks,
     {
-      lang,
+      lang: appPage.lang,
       keys,
     }
   ).then(data =>
     logAndFallback(data, { links: [] } as Pick<IUserFeedbackView, "links">)
   );
-  const profileDefinition = await getProfileDefinition(lang).then(def =>
+  const profileDefinition = await getProfileDefinition(appPage.lang).then(def =>
     logAndNull(def)
   );
 
   return {
-    ...appPage,
     subPages,
     ...linkResults,
     profileDefinition: (profileDefinition ?? {

@@ -1,13 +1,15 @@
+import { IAppPage } from "@/modules/common/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getUserFeedbackView } from "../../query";
+import { getUserFeedbackDefinition } from "../query";
 import { IUserFeedbackView } from "../../types";
 
 export const getUserFeedbackPage = async (
-  route: string
-): Promise<(IUserFeedbackView & IPageConfig) | null> => {
-  const content = await getUserFeedbackView(route);
-  if (!content) return null;
+  content: IAppPage
+): Promise<IUserFeedbackView & IPageConfig> => {
+  content.type = "UserFeedback";
+
+  const definition = await getUserFeedbackDefinition(content);
 
   const layout: ILayout = {
     pageLayout: "singleColumn",
@@ -20,6 +22,7 @@ export const getUserFeedbackPage = async (
 
   return {
     ...content,
+    ...definition,
     ...shell,
   };
 };
