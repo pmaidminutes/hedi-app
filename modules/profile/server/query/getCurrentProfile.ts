@@ -1,5 +1,5 @@
 import { gql, userGQuery } from "@/modules/graphql";
-import { CaregiverGQL, MidwifeGQL, Profile } from "../types";
+import { CaregiverGQL, MidwifeGQL, Profile } from "../../types";
 import { IAuthHeader } from "@/modules/auth/types";
 import { logAndFallback } from "@/modules/common/error";
 

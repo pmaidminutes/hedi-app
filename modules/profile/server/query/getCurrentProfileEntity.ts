@@ -1,7 +1,7 @@
 import { gql, userGQuery } from "@/modules/graphql";
 import { EntityFields, IEntity } from "@/modules/model";
 import { IAuthHeader } from "@/modules/auth/types";
-import { IsIHTTPError, logAndFallback } from "@/modules/common/error";
+import { logAndFallback } from "@/modules/common/error";
 
 export async function getCurrentProfileEntity(
   lang: string,

@@ -15,7 +15,10 @@ import {
   TryProfile,
   TryProfileList,
 } from "@/modules/profile/client/components";
-import { CaregiverPathsGQL, MidwifePathsGQL } from "@/modules/profile/query";
+import {
+  CaregiverPathsGQL,
+  MidwifePathsGQL,
+} from "@/modules/profile/server/query";
 import {
   getProfileListPage,
   getViewProfilePage,

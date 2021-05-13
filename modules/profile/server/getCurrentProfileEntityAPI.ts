@@ -5,7 +5,7 @@ import {
 } from "@/modules/common/utils";
 import { IEntity } from "@/modules/model";
 import { NextApiHandler } from "next";
-import { getCurrentProfileEntity } from "../query";
+import { getCurrentProfileEntity } from "./query";
 
 export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async (
   req,

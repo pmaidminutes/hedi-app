@@ -4,7 +4,7 @@ import {
   sendAPIResult,
 } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
-import { getCurrentProfile } from "../query";
+import { getCurrentProfile } from "./query";
 import { Profile } from "../types";
 
 export const getCurrentProfileAPI: NextApiHandler<Profile | null> = async (
