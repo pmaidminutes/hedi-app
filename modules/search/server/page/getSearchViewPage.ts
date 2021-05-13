@@ -1,14 +1,11 @@
 import { IAppPage } from "@/modules/common/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getSearchView } from "../../query";
 
-export const getSearchViewPage = async (
-  route: string
-): Promise<(IAppPage & IPageConfig) | null> => {
-  const content = await getSearchView(route);
-
-  if (!content) return null;
+export const getSearchPage = async (
+  content: IAppPage
+): Promise<IAppPage & IPageConfig> => {
+  content.type = "Search";
 
   const layout: ILayout = {
     pageLayout: "singleColumn",

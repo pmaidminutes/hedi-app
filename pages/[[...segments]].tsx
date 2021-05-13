@@ -45,7 +45,7 @@ import { TryUserFeedback } from "@/modules/userFeedback/client/components";
 
 import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
 import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/pages";
-import { getSearchViewPage } from "@/modules/search/server/page";
+import { getSearchPage } from "@/modules/search/server/page";
 
 // Components
 import { GetStaticPaths, GetStaticProps } from "next/types";
@@ -155,6 +155,9 @@ export const getStaticProps: GetStaticProps<
             case "userfeedbackThanks":
               generic = await getUserFeedbackThanksPage(generic);
               break;
+            case "search":
+              generic = await getSearchPage(generic);
+              break;
           }
         }
         // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
@@ -164,7 +167,6 @@ export const getStaticProps: GetStaticProps<
       if (!content) content = await getCategoryPage(route);
       if (!content) content = await getProfilePage(route);
       if (!content) content = await getLandingPage(route);
-      if (!content) content = await getSearchViewPage(route);
       if (!content) content = await getGlossaryPage(route);
     }
   }
