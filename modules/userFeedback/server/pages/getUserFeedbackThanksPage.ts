@@ -1,15 +1,15 @@
-import { segmentsToRoute } from "@/modules/common/utils";
+import { IAppPage } from "@/modules/common/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getUserFeedbackThanksView } from "../../query";
+import { getUserFeedbackThanksDefinition } from "../query";
 import { IUserFeedbackThanksView } from "../../types/IUserFeedbackThanksView";
 
 export const getUserFeedbackThanksPage = async (
-  route: string
-): Promise<(IUserFeedbackThanksView & IPageConfig) | null> => {
-  const content = await getUserFeedbackThanksView(route);
+  content: IAppPage
+): Promise<IUserFeedbackThanksView & IPageConfig> => {
+  content.type = "UserFeedbackThanks";
 
-  if (!content) return null;
+  const definition = await getUserFeedbackThanksDefinition(content);
 
   const layoutImg = {
     src: `${process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}`,
@@ -28,6 +28,7 @@ export const getUserFeedbackThanksPage = async (
 
   return {
     ...content,
+    ...definition,
     ...shell,
   };
 };
