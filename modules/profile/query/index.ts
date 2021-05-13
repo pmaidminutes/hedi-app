@@ -7,4 +7,3 @@ export * from "./getProfileList";
 export * from "./getProfileListDefinition";
 export * from "./getCurrentProfile";
 export * from "./getCurrentProfileEntity";
-export * from "./getViewProfileView";

@@ -1,16 +1,16 @@
+import { IAppPage } from "@/modules/common/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getViewProfileView } from "../../query";
+import { getViewProfileDefinition } from "../query";
 import { IViewProfileView } from "../../types";
 
 export const getViewProfilePage = async (
-  route: string
-): Promise<(IViewProfileView & IPageConfig) | null> => {
-  const content = await getViewProfileView(route);
+  content: IAppPage
+): Promise<IViewProfileView & IPageConfig> => {
+  content.type = "ViewProfile";
 
-  if (!content) return null;
+  const definition = await getViewProfileDefinition(content);
 
-  if (!content) return null;
   const layoutImg = {
     src: `${process.env.NEXT_PUBLIC_IMG_HEADER_PROFILE}`,
     alt: "Some description",
@@ -29,6 +29,7 @@ export const getViewProfilePage = async (
 
   return {
     ...content,
+    ...definition,
     ...shell,
   };
 };

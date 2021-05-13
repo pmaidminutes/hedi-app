@@ -143,6 +143,9 @@ export const getStaticProps: GetStaticProps<
             case "editprofile":
               generic = await getEditProfilePage(generic);
               break;
+            case "viewprofile":
+              generic = await getViewProfilePage(generic);
+              break;
           }
         }
         // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
@@ -150,7 +153,6 @@ export const getStaticProps: GetStaticProps<
       }
       if (!content) content = await getArticlePage(route);
       if (!content) content = await getCategoryPage(route);
-      if (!content) content = await getViewProfilePage(route);
       if (!content) content = await getProfilePage(route);
       if (!content) content = await getProfileListPage(route);
       if (!content) content = await getUserFeedbackPage(route);
