@@ -1,21 +1,21 @@
-import { getLangByRoute } from "@/modules/common/utils";
-import { getProfile } from "../../query";
-import { getProfileDefinition } from "../../query/getProfileDefinition";
-import { ProfileView } from "../../types";
+import { getProfileDefinition } from "../query/getProfileDefinition";
+import { Profile, ProfileView } from "../../types";
+import { IPageConfig } from "@/modules/shell/types";
 
 export const getProfilePage = async (
-  route: string
-): Promise<ProfileView | null> => {
-  const definition = await getProfileDefinition(getLangByRoute(route) ?? "de");
-  const content = await getProfile(route);
+  content: Profile
+): Promise<ProfileView> => {
+  const definition = await getProfileDefinition(content.lang);
 
-  if (!content || !definition) return null;
-
-  return {
-    ...definition,
-    ...content,
+  const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
     redirectUnAuthorized: "/" + content.lang,
     revalidate: 1,
+  };
+
+  return {
+    ...content,
+    ...definition,
+    ...shell,
   };
 };

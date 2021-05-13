@@ -3,9 +3,8 @@ import { AppPageGQL, IAppPage } from "@/modules/common/types";
 import { IUserFeedbackView } from "../../types";
 import { EntityFields } from "@/modules/model";
 import { getUIElementValue } from "@/modules/common/utils";
-import { logAndFallback, logAndNull } from "@/modules/common/error";
-import { getProfileDefinition } from "@/modules/profile/query/getProfileDefinition";
-import { IProfileDefinition } from "@/modules/profile/types";
+import { logAndFallback } from "@/modules/common/error";
+import { getProfileDefinition } from "@/modules/profile/server/query/getProfileDefinition";
 import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getUserFeedbackDefinition(
@@ -50,16 +49,11 @@ export async function getUserFeedbackDefinition(
   ).then(data =>
     logAndFallback(data, { links: [] } as Pick<IUserFeedbackView, "links">)
   );
-  const profileDefinition = await getProfileDefinition(appPage.lang).then(def =>
-    logAndNull(def)
-  );
+  const profileDefinition = await getProfileDefinition(appPage.lang);
 
   return {
     subPages,
     ...linkResults,
-    profileDefinition: (profileDefinition ?? {
-      elements: [],
-      links: [],
-    }) as IProfileDefinition,
+    profileDefinition,
   };
 }

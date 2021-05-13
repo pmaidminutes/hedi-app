@@ -3,12 +3,12 @@ import { getUIElementValue } from "@/modules/common/utils";
 import { EntityFields, WithUIElementsFields } from "@/modules/model";
 import { IAppPage } from "@/modules/common/types";
 import { logAndFallback } from "@/modules/common/error";
-import { IProfileDefinition } from "../types";
+import { IProfileDefinition } from "../../types";
 import { WithKeyFields } from "@/modules/model/IWithKey";
 
 export async function getProfileDefinition(
   lang: string
-): Promise<IProfileDefinition | null> {
+): Promise<IProfileDefinition> {
   const query = gql`
     query getProfileElements($lang: String!){
       uiTexts: appPagesByKey(keys:["viewprofile"], lang:$lang){
