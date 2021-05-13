@@ -4,7 +4,7 @@ import {
   sendAPIErrorIfUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
-import { hasCurrentUserUserFeedback } from "../query/hasCurrentUserUserFeedback";
+import { hasCurrentUserUserFeedback } from "./query";
 
 export const hasCurrentUserUserFeedbackAPI: NextApiHandler<
   boolean | null

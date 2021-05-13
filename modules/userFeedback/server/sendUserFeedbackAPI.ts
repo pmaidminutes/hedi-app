@@ -5,7 +5,7 @@ import {
   sendAPIResult,
 } from "@/modules/common/utils";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { insertUserFeedbacks } from "../query";
+import { insertUserFeedbacks } from "./query";
 import { UserFeedbackInput } from "../types";
 
 interface UserFeedbacksFetch {

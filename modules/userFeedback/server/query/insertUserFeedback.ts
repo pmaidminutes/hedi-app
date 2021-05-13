@@ -2,7 +2,7 @@ import { IAuthHeader } from "@/modules/auth/types";
 import { logAndNull } from "@/modules/common/error";
 import { userGQuery } from "@/modules/graphql";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { insertUserFeedbacksMutation, UserFeedbackInput } from "../types";
+import { insertUserFeedbacksMutation, UserFeedbackInput } from "../../types";
 
 export async function insertUserFeedbacks(
   authHeader: IAuthHeader,
