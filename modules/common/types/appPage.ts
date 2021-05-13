@@ -23,9 +23,8 @@ export interface IAppPage
   posterImage: IImage;
 }
 
-// UNUSED
 export function isIAppPage(obj: any): obj is IAppPage {
-  return obj && obj.typeName === "AppPage" && obj.key;
+  return obj && obj?.type === "AppPage" && obj?.key;
 }
 
 export const AppPageGQL = gql`... on AppPage {
