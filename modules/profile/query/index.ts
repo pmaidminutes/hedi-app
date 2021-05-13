@@ -3,7 +3,5 @@ export * from "./getCaregiverPaths";
 export * from "./getMidwife";
 export * from "./getMidwifePaths";
 export * from "./getProfile";
-export * from "./getProfileList";
-export * from "./getProfileListDefinition";
 export * from "./getCurrentProfile";
 export * from "./getCurrentProfileEntity";

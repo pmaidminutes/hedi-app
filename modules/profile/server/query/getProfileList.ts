@@ -1,7 +1,7 @@
 import { logAndFallback } from "@/modules/common/error";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { GraphQLClient } from "graphql-request";
-import { CaregiverGQL, MidwifeGQL, Profile } from "../types";
+import { CaregiverGQL, MidwifeGQL, Profile } from "../../types";
 
 export async function getProfileList(
   lang: string,
