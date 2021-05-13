@@ -4,15 +4,10 @@ import { ILandingPageView } from "../../types/ILandingPageView";
 import { EntityFields } from "@/modules/model";
 import { logAndFallback, logAndNull } from "@/modules/common/error";
 import { WithKeyFields } from "@/modules/model/IWithKey";
-import { getLangByRoute } from "@/modules/common/utils";
 
 export async function getLandingPageView(
-  route: string
+  lang: string
 ): Promise<ILandingPageView | null> {
-  // TODO log the route to know possible paths with no content
-
-  const lang = getLangByRoute(route) ?? "de";
-
   const query = gql`
     query getLandingPageView(
       $lang: String!     
@@ -27,12 +22,6 @@ export async function getLandingPageView(
   }).then(data => logAndNull(data)?.appPages?.[0] ?? null);
 
   if (!(appPage && appPage.key === "landingPage")) return null;
-
-  appPage.type = "LandingPage";
-  appPage.translations.forEach(translation => {
-    translation.route = "/" + translation.lang;
-  });
-  appPage.route = "/" + lang; // TODO should I write this line too?
 
   const subquery = gql`
     query getLandingPageUIElements(

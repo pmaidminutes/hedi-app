@@ -6,7 +6,10 @@ import {
   IAppPage,
   ISegmentParam,
 } from "@/modules/common/types";
-import { getLandingPage } from "@/modules/landingPage/server/page";
+import {
+  getLandingPage,
+  isLandingPageRoute,
+} from "@/modules/landingPage/server";
 import { TryLogin } from "@/modules/login/client/components";
 import { getLoginPage } from "@/modules/login/server/page";
 import { IEntity } from "@/modules/model";
@@ -122,6 +125,8 @@ export const getStaticProps: GetStaticProps<
   // query types with dynamic paths first
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
+  } else if (isLandingPageRoute(route)) {
+    content = await getLandingPage(locale ?? "de");
   } else {
     const gqlTypes = [
       AppPageGQL,
@@ -172,7 +177,6 @@ export const getStaticProps: GetStaticProps<
         // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
         content = generic;
       }
-      if (!content) content = await getLandingPage(route);
       if (!content) content = await getGlossaryPage(route);
     }
   }

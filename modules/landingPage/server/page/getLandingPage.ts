@@ -1,23 +1,19 @@
 import { IAppPage } from "@/modules/common/types";
-import { segmentsToRoute } from "@/modules/common/utils";
-import { getLandingPageView } from "../../client/request";
+import { getLandingPageView } from "../query";
 import { IPageConfig } from "@/modules/shell/types";
-import { landingPagePaths } from "../../types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
+import { fixupRoutes } from "../utils";
 
 export const getLandingPage = async (
-  route: string
+  lang: string
 ): Promise<(IAppPage & IPageConfig) | null> => {
-  if (
-    !landingPagePaths.find(
-      path => route == segmentsToRoute(path.params?.segments || [], path.locale)
-    )
-  )
-    return null;
-
-  const content = await getLandingPageView(route);
+  let content = await getLandingPageView(lang);
 
   if (!content) return null;
+
+  content.type = "LandingPage";
+  content = fixupRoutes(content);
+
   const layoutImg = {
     alt: "Beschreibung",
     src: `${process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}`,
