@@ -1,14 +1,15 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getLoginView } from "../../client/request";
+import { getLoginDefinition } from "../query";
 import { ILoginView } from "../../types";
+import { IAppPage } from "@/modules/common/types";
 
-export const getLoginViewPage = async (
-  route: string
-): Promise<(ILoginView & IPageConfig) | null> => {
-  const content = await getLoginView(route);
+export const getLoginPage = async (
+  content: IAppPage
+): Promise<ILoginView & IPageConfig> => {
+  content.type = "Login";
 
-  if (!content) return null;
+  const definition = await getLoginDefinition(content);
 
   const layoutImg = {
     alt: "Beschreibung des Bildes",
@@ -28,6 +29,7 @@ export const getLoginViewPage = async (
 
   return {
     ...content,
+    ...definition,
     ...shell,
   };
 };

@@ -1,9 +1,14 @@
 import { getSegmentsContent, getSegmentsPaths } from "@/modules/common/query";
 // Types
-import { AppPageGQL, IAppPage, ISegmentParam } from "@/modules/common/types";
+import {
+  AppPageGQL,
+  isIAppPage,
+  IAppPage,
+  ISegmentParam,
+} from "@/modules/common/types";
 import { getLandingPage } from "@/modules/landingPage/server/page";
 import { TryLogin } from "@/modules/login/client/components";
-import { getLoginViewPage } from "@/modules/login/server/page";
+import { getLoginPage } from "@/modules/login/server/page";
 import { IEntity } from "@/modules/model";
 import {
   TryViewProfile,
@@ -125,9 +130,18 @@ export const getStaticProps: GetStaticProps<
     // TODO check if right place for this query
     if (route) {
       if (!content) {
-        content = await getSegmentsContent(route, gqlTypes);
+        let generic = await getSegmentsContent(route, gqlTypes);
+
+        if (isIAppPage(generic)) {
+          switch (generic.key) {
+            case "login":
+              generic = await getLoginPage(generic);
+              break;
+          }
+        }
+        // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
+        content = generic;
       }
-      if (!content) content = await getLoginViewPage(route);
       if (!content) content = await getRegistrationViewPage(route);
       if (!content) content = await getEditProfilePage(route);
       if (!content) content = await getArticlePage(route);
