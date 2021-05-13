@@ -1,6 +1,6 @@
 import { sendAPIResult } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
-import { registerQuery } from "../query";
+import { registerQuery } from "./query";
 import { IRegisterResponse } from "../types";
 
 export const registerAPI: NextApiHandler<IRegisterResponse> = async (

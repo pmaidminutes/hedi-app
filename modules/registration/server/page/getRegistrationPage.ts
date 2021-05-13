@@ -1,15 +1,15 @@
-import { segmentsToRoute } from "@/modules/common/utils";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getRegistrationView } from "../../query";
+import { getRegistrationDefinition } from "../query";
 import { IRegistrationView } from "../../types";
+import { IAppPage } from "@/modules/common/types";
 
-export const getRegistrationViewPage = async (
-  route: string
-): Promise<(IRegistrationView & IPageConfig) | null> => {
-  const content = await getRegistrationView(route);
+export const getRegistrationPage = async (
+  content: IAppPage
+): Promise<IRegistrationView & IPageConfig> => {
+  content.type = "Registration";
 
-  if (!content) return null;
+  const definition = await getRegistrationDefinition(content);
 
   const layoutImg = {
     alt: "Beschreibung",
@@ -29,6 +29,7 @@ export const getRegistrationViewPage = async (
 
   return {
     ...content,
+    ...definition,
     ...shell,
   };
 };

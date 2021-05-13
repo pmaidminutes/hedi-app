@@ -21,7 +21,7 @@ import {
   getViewProfilePage,
 } from "@/modules/profile/server/pages";
 import { TryRegistration } from "@/modules/registration/client/components";
-import { getRegistrationViewPage } from "@/modules/registration/server/page";
+import { getRegistrationPage } from "@/modules/registration/server/page";
 
 import { getEditProfilePage } from "@/modules/editProfile/server/page";
 import { TryEditProfile } from "@/modules/editProfile/client/components";
@@ -137,12 +137,14 @@ export const getStaticProps: GetStaticProps<
             case "login":
               generic = await getLoginPage(generic);
               break;
+            case "registration":
+              generic = await getRegistrationPage(generic);
+              break;
           }
         }
         // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
         content = generic;
       }
-      if (!content) content = await getRegistrationViewPage(route);
       if (!content) content = await getEditProfilePage(route);
       if (!content) content = await getArticlePage(route);
       if (!content) content = await getCategoryPage(route);

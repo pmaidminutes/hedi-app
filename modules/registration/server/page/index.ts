@@ -1,1 +1,1 @@
-export * from "./getRegistrationViewPage";
+export * from "./getRegistrationPage";

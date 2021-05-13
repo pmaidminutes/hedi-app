@@ -4,7 +4,7 @@ import {
   IRegisterRequest,
   IRegisterResponse,
   RegisterResponseFields,
-} from "../types";
+} from "../../types";
 
 export async function registerQuery(
   registerData: IRegisterRequest
