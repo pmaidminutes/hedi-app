@@ -1,13 +1,14 @@
 import { IAppPage } from "@/modules/common/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getEditProfile } from "../../query";
+import { getEditProfileDefinition } from "../query";
 
 export const getEditProfilePage = async (
-  route: string
-): Promise<(IAppPage & IPageConfig) | null> => {
-  const content = await getEditProfile(route);
-  if (!content) return null;
+  content: IAppPage
+): Promise<IAppPage & IPageConfig> => {
+  content.type = "EditProfile";
+
+  const definition = await getEditProfileDefinition(content);
 
   const layout: ILayout = {
     pageLayout: "singleColumn",
@@ -20,6 +21,7 @@ export const getEditProfilePage = async (
   };
   return {
     ...content,
+    ...definition,
     ...shell,
   };
 };

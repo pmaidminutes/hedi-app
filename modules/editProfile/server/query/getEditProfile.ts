@@ -1,8 +1,7 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { getLangByRoute, getUIElementValue } from "@/modules/common/utils";
-import { AppPagesGQL } from "@/modules/common/query";
+import { getUIElementValue } from "@/modules/common/utils";
 import { AppPageGQL, IAppPage } from "@/modules/common/types";
-import { IEditProfileView } from "../types";
+import { IEditProfileView } from "../../types";
 import {
   EntityFields,
   IEntity,
@@ -14,31 +13,12 @@ import {
   WithUIElementsFields,
 } from "@/modules/model";
 import { ProfileType } from "@/modules/profile/types";
-import { logAndFallback, logAndNull } from "@/modules/common/error";
+import { logAndFallback } from "@/modules/common/error";
 import { IWithKey, WithKeyFields } from "@/modules/model/IWithKey";
 
-export async function getEditProfile(
-  route: string
-): Promise<IEditProfileView | null> {
-  const lang = getLangByRoute(route);
-
-  const query = gql`
-    query getEditProfile(
-      $routes: [String!]!
-      $lang: String!
-      $includeSelf: Boolean
-    ) {
-      ${AppPagesGQL}
-    }
-  `;
-  const appPage = await serviceGQuery<{ appPages: IAppPage[] }>(query, {
-    routes: [route],
-    lang,
-  }).then(data => logAndNull(data)?.appPages?.[0]);
-
-  if (!(appPage && appPage.key === "editprofile")) return null;
-
-  appPage.type = "EditProfile";
+export async function getEditProfileDefinition(
+  appPage: IAppPage
+): Promise<Omit<IEditProfileView, keyof IAppPage>> {
   const keys = [getUIElementValue("redirect", appPage.elements)];
   const subquery = gql`
     query getEditProfileChildren(
@@ -85,7 +65,7 @@ export async function getEditProfile(
     languageLevels,
     links,
   } = await serviceGQuery<subqueryType>(subquery, {
-    lang,
+    lang: appPage.lang,
     keys,
   }).then(data =>
     logAndFallback(data, {
@@ -115,7 +95,6 @@ export async function getEditProfile(
   }
 
   return {
-    ...appPage,
     conditionalElements,
     languageOptions,
     domainOptions,

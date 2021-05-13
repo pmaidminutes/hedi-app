@@ -5,7 +5,7 @@ import {
   EditProfileInput,
   IUpsertProfileResponse,
   UpsertProfileResponseGQL,
-} from "../types";
+} from "../../types";
 
 export async function upsertProfileQuery(
   input: {

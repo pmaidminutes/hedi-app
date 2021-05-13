@@ -4,7 +4,7 @@ import {
   sendAPIErrorIfUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
-import { upsertProfileQuery } from "../query";
+import { upsertProfileQuery } from "./query";
 import { EditProfileInput, IUpsertProfileResponse } from "../types";
 
 export const editProfileAPI: NextApiHandler<IUpsertProfileResponse> = async (
