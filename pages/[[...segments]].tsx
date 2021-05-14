@@ -1,23 +1,63 @@
-import { getSegmentsContent, getSegmentsPaths } from "@/modules/common/query";
-// Types
+import { GetStaticPaths, GetStaticProps } from "next/types";
+
+import { IEntity } from "@/modules/model";
+
+// common
 import {
   AppPageGQL,
   isIAppPage,
   IAppPage,
   ISegmentParam,
 } from "@/modules/common/types";
+import { segmentsToRoute } from "@/modules/common/utils";
+import { getSegmentsContent, getSegmentsPaths } from "@/modules/common/query";
+
+// Shell
+import { getShell } from "@/modules/shell/query";
+import { generateShellData } from "@/modules/shell/client/utils";
+import { Shell } from "@/modules/shell/client/components";
+import { IPageConfig, IPageProps } from "@/modules/shell/types";
+
+// AppPage
+import { AppPagePathsGQL } from "@/modules/apppage/query";
+import { getAppPagePage } from "@/modules/apppage/server/page";
+import { TryAppPage } from "@/modules/apppage/client/components";
+
+// LandingPage
+import { landingPagePaths } from "@/modules/landingPage/types";
 import {
   getLandingPage,
   isLandingPageRoute,
 } from "@/modules/landingPage/server";
-import { TryLogin } from "@/modules/login/client/components";
+import { TryLandingPage } from "@/modules/landingPage/client/components";
+
+// Login
 import { getLoginPage } from "@/modules/login/server/page";
-import { IEntity } from "@/modules/model";
+import { TryLogin } from "@/modules/login/client/components";
+// Registration
+import { getRegistrationPage } from "@/modules/registration/server/page";
+import { TryRegistration } from "@/modules/registration/client/components";
+
+// editProfile
+import { getEditProfilePage } from "@/modules/editProfile/server/page";
+import { TryEditProfile } from "@/modules/editProfile/client/components";
+
+// userFeedback
 import {
-  TryViewProfile,
-  TryProfile,
-  TryProfileList,
-} from "@/modules/profile/client/components";
+  getUserFeedbackPage,
+  getUserFeedbackThanksPage,
+} from "@/modules/userFeedback/server/pages";
+import {
+  TryUserFeedback,
+  TryUserFeedbackThanks,
+} from "@/modules/userFeedback/client/components";
+
+// Search
+import { getSearchPage } from "@/modules/search/server/page";
+import { TrySearch } from "@/modules/search/client/components";
+
+// Profile
+import { CaregiverGQL, isProfile, MidwifeGQL } from "@/modules/profile/types";
 import {
   CaregiverPathsGQL,
   MidwifePathsGQL,
@@ -25,55 +65,30 @@ import {
 import {
   getProfileListPage,
   getViewProfilePage,
-} from "@/modules/profile/server/pages";
-import { TryRegistration } from "@/modules/registration/client/components";
-import { getRegistrationPage } from "@/modules/registration/server/page";
+  getProfilePage,
+} from "@/modules/profile/server";
+import {
+  TryViewProfile,
+  TryProfile,
+  TryProfileList,
+} from "@/modules/profile/client/components";
 
-import { getEditProfilePage } from "@/modules/editProfile/server/page";
-import { TryEditProfile } from "@/modules/editProfile/client/components";
-
-import { TryLandingPage } from "@/modules/landingPage/client/components";
-import { getProfilePage } from "@/modules/profile/server/pages";
-
-// Components
-
-import { getShell } from "@/modules/shell/query";
-import { generateShellData } from "@/modules/shell/client/utils";
-import { Shell } from "@/modules/shell/client/components";
-
-import { IPageConfig, IPageProps } from "@/modules/shell/types";
-import { AppPagePathsGQL } from "@/modules/apppage/query";
-import { getAppPagePage } from "@/modules/apppage/server/page";
-import { TryAppPage } from "@/modules/apppage/client/components";
-
-import { getUserFeedbackPage } from "@/modules/userFeedback/server/pages";
-import { TryUserFeedback } from "@/modules/userFeedback/client/components";
-
-import { TryUserFeedbackThanks } from "@/modules/userFeedback/client/components";
-import { getUserFeedbackThanksPage } from "@/modules/userFeedback/server/pages";
-import { getSearchPage } from "@/modules/search/server/page";
-
-// Components
-import { GetStaticPaths, GetStaticProps } from "next/types";
-import { landingPagePaths } from "@/modules/landingPage/types";
-import { TrySearch } from "@/modules/search/client/components";
-
+// Article
+import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
 import { ArticlePathsGQL } from "@/modules/editorial/article/query";
 import { getArticlePage } from "@/modules/editorial/article/server/page";
 import { TryArticle } from "@/modules/editorial/article/client/components";
-
+// Category
+import { CategoryGQL, isICategory } from "@/modules/editorial/category/types";
+import { CategoryPathsGQL } from "@/modules/editorial/category/query";
+import { getCategoryPage } from "@/modules/editorial/category/server/page";
+import { TryCategory } from "@/modules/editorial/category/client/components";
+// Glossary
 import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
 import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 
-import { CategoryPathsGQL } from "@/modules/editorial/category/query";
-import { getCategoryPage } from "@/modules/editorial/category/server/page";
-import { TryCategory } from "@/modules/editorial/category/client/components";
-import { segmentsToRoute } from "@/modules/common/utils";
-import { CaregiverGQL, isProfile, MidwifeGQL } from "@/modules/profile/types";
-import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
-import { CategoryGQL, isICategory } from "@/modules/editorial/category/types";
-
+// TODO should we remove the design stuff again?
 let dynamicProps: any;
 const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
 
@@ -111,9 +126,11 @@ export const getStaticProps: GetStaticProps<
   IPageProps<IEntity>,
   ISegmentParam
 > = async ({ params, locale }) => {
+  const lang = locale ?? "de";
   const segments = params?.segments ?? [];
+  const route = segmentsToRoute(segments, lang);
+
   let content: (IEntity & IPageConfig) | null = null;
-  const route = segmentsToRoute(segments, locale ?? "de");
 
   if (isDesignContext) {
     const data = dynamicProps?.find(
@@ -126,8 +143,8 @@ export const getStaticProps: GetStaticProps<
   if (isDesignContext && content) {
     //we have a exported content for designing, skip backend fetches
   } else if (isLandingPageRoute(route)) {
-    content = await getLandingPage(locale ?? "de");
-  } else {
+    content = await getLandingPage(lang);
+  } else if (!content) {
     const gqlTypes = [
       AppPageGQL,
       ArticleGQL,
@@ -135,60 +152,60 @@ export const getStaticProps: GetStaticProps<
       CaregiverGQL,
       MidwifeGQL,
     ];
-    // TODO check if right place for this query
-    if (route) {
-      if (!content) {
-        let generic = await getSegmentsContent(route, gqlTypes);
+    let generic = await getSegmentsContent(route, gqlTypes);
 
-        if (isIArticle(generic)) generic = await getArticlePage(generic);
-        if (isICategory(generic)) generic = await getCategoryPage(generic);
-        if (isProfile(generic)) generic = await getProfilePage(generic);
+    if (isIArticle(generic)) generic = await getArticlePage(generic);
+    if (isICategory(generic)) generic = await getCategoryPage(generic);
+    if (isProfile(generic)) generic = await getProfilePage(generic);
 
-        if (isIAppPage(generic)) {
-          switch (generic.key) {
-            case "login":
-              generic = await getLoginPage(generic);
-              break;
-            case "registration":
-              generic = await getRegistrationPage(generic);
-              break;
-            case "editprofile":
-              generic = await getEditProfilePage(generic);
-              break;
-            case "viewprofile":
-              generic = await getViewProfilePage(generic);
-              break;
-            case "profiles":
-              generic = await getProfileListPage(generic);
-              break;
-            case "userfeedback":
-              generic = await getUserFeedbackPage(generic);
-              break;
-            case "userfeedbackThanks":
-              generic = await getUserFeedbackThanksPage(generic);
-              break;
-            case "search":
-              generic = await getSearchPage(generic);
-              break;
-            default:
-              generic = await getAppPagePage(generic);
-          }
-        }
-        // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
-        content = generic;
+    if (isIAppPage(generic)) {
+      switch (
+        generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
+      ) {
+        case "login":
+          generic = await getLoginPage(generic);
+          break;
+        case "registration":
+          generic = await getRegistrationPage(generic);
+          break;
+        case "editprofile":
+          generic = await getEditProfilePage(generic);
+          break;
+        case "viewprofile":
+          generic = await getViewProfilePage(generic);
+          break;
+        case "profiles":
+          generic = await getProfileListPage(generic);
+          break;
+        case "userfeedback":
+          generic = await getUserFeedbackPage(generic);
+          break;
+        case "userfeedbackThanks":
+          generic = await getUserFeedbackThanksPage(generic);
+          break;
+        case "search":
+          generic = await getSearchPage(generic);
+          break;
+        default:
+          generic = await getAppPagePage(generic);
       }
-      if (!content) content = await getGlossaryPage(route);
+      // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
+      content = generic;
     }
+
+    // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
+    // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
+    if (!content) content = await getGlossaryPage(route);
   }
   if (!content)
     return {
       redirect: {
-        destination: "/" + (locale ?? ""),
+        destination: `/${lang}/`,
         permanent: false,
       },
     };
-  // ShellStuff
 
+  // ShellStuff
   const shellKey = {
     header: [
       "editprofile",
@@ -200,6 +217,7 @@ export const getStaticProps: GetStaticProps<
     footer: ["imprint", "privacy"],
     userMenu: ["login", "logout", "viewprofile"],
   };
+  // TODO we should probably cache this, especially if shellKey are static most of the time
   const shellData = await getShell(locale, shellKey);
   const shell = generateShellData(content, shellData);
   return {
