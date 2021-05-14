@@ -10,7 +10,10 @@ import {
   ISegmentParam,
 } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
-import { getSegmentsContent, getSegmentsPaths } from "@/modules/common/query";
+import {
+  getIEntitiesTranslated,
+  getSegmentsPaths,
+} from "@/modules/common/query";
 
 // Shell
 import { getShell } from "@/modules/shell/query";
@@ -152,7 +155,8 @@ export const getStaticProps: GetStaticProps<
       CaregiverGQL,
       MidwifeGQL,
     ];
-    let generic = await getSegmentsContent(route, gqlTypes);
+    const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
+    let generic = entities?.[0] ?? null;
 
     if (isIArticle(generic)) generic = await getArticlePage(generic);
     if (isICategory(generic)) generic = await getCategoryPage(generic);
