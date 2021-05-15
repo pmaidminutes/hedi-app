@@ -4,7 +4,7 @@ export type DatePickerKind = "DatePicker";
 
 export interface DatePicker extends IComponent {
   kind: DatePickerKind;
-  datePickerType: string;
+  datePickerType: "simple" | "single" | "range";
   dateFormat: string;
   labelText?: HTML;
   isRequired?: boolean;
