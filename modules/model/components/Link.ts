@@ -4,7 +4,7 @@ export type LinkKind = "Link";
 
 export interface Link extends IComponent {
   kind: LinkKind;
-  route: string;
+  href: string;
   labelText: HTML;
   ariaLabel?: string;
 }
