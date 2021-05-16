@@ -6,6 +6,7 @@ export interface Label extends IComponent {
   kind: LabelKind;
   labelKind: string;
   text?: HTML;
+  className?: string;
 }
 
 export const isLabel = (obj: IComponent): obj is Label =>
