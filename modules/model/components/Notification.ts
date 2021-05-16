@@ -4,7 +4,13 @@ export type NotificationKind = "Notification";
 
 export interface Notification extends IComponent {
   kind: NotificationKind;
-  notificationKind: string;
+  notificationKind:
+    | "error"
+    | "info"
+    | "info-square"
+    | "success"
+    | "warning"
+    | "warning-alt";
   title: string;
   subtitle?: HTML;
   caption?: string;
