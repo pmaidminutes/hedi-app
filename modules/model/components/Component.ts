@@ -1,5 +1,6 @@
 import { Body, BodyKind } from "./Body";
 import { Button, ButtonKind } from "./Button";
+import { Column, ColumnKind } from "./Column";
 import { Checkbox, CheckboxKind } from "./Checkbox";
 import { DatePicker, DatePickerKind } from "./DatePicker";
 import { Generic, GenericKind } from "./Generic";
@@ -24,6 +25,7 @@ export type ComponentKind =
   | never
   | BodyKind
   | ButtonKind
+  | ColumnKind
   | CheckboxKind
   | DatePickerKind
   | GenericKind
@@ -50,6 +52,7 @@ export interface IComponent {
 export type Component =
   | Body
   | Button
+  | Column
   | Checkbox
   | DatePicker
   | Generic
