@@ -5,6 +5,10 @@ import { Checkbox, CheckboxKind } from "./Checkbox";
 import { DatePicker, DatePickerKind } from "./DatePicker";
 import { Generic, GenericKind } from "./Generic";
 import { Group, GroupKind } from "./Group";
+import {
+  InlineNotification,
+  InlineNotificationKind,
+} from "./InlineNotification";
 import { Label, LabelKind } from "./Label";
 import { Link, LinkKind } from "./Link";
 import { Audio, AudioKind } from "./Audio";
@@ -12,11 +16,11 @@ import { File, FileKind } from "./File";
 import { Image, ImageKind } from "./Image";
 import { Svg, SvgKind } from "./Svg";
 import { Video, VideoKind } from "./Video";
-import { Notification, NotificationKind } from "./Notification";
 import { NumberInput, NumberInputKind } from "./NumberInput";
 import { Slider, SliderKind } from "./Slider";
 import { TextArea, TextAreaKind } from "./TextArea";
 import { TextInput, TextInputKind } from "./TextInput";
+import { ToastNotification, ToastNotificationKind } from "./ToastNotification";
 import { Toggle, ToggleKind } from "./Toggle";
 
 export type HTML = string;
@@ -30,6 +34,7 @@ export type ComponentKind =
   | DatePickerKind
   | GenericKind
   | GroupKind
+  | InlineNotificationKind
   | LabelKind
   | LinkKind
   | AudioKind
@@ -37,11 +42,11 @@ export type ComponentKind =
   | ImageKind
   | SvgKind
   | VideoKind
-  | NotificationKind
   | NumberInputKind
   | SliderKind
   | TextAreaKind
   | TextInputKind
+  | ToastNotificationKind
   | ToggleKind;
 
 export interface IComponent {
@@ -57,6 +62,7 @@ export type Component =
   | DatePicker
   | Generic
   | Group
+  | InlineNotification
   | Label
   | Link
   | Audio
@@ -64,9 +70,9 @@ export type Component =
   | Image
   | Svg
   | Video
-  | Notification
   | NumberInput
   | Slider
   | TextArea
   | TextInput
+  | ToastNotification
   | Toggle;
