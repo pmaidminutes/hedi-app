@@ -14,7 +14,7 @@ export function upsertProfile(
     .then(res => res.json())
     .then(res => {
       //HACK temp code. after changing consultationHours from string to object, this code should be deleted
-      const result = res as IUpsertProfile;
+      const result = res as IUpsertProfileResponse;
       if (result.success && result.profile) {
         result.profile.consultationHours = JSON.parse(
           result.profile?.consultation_hours ?? "[]"
