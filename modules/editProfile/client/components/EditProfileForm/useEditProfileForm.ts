@@ -35,10 +35,19 @@ export function useEditProfileForm(
       if (value === "on") value = true;
       if (key === "domains" || key === "services")
         value = form.getAll(key)?.valueOf();
-      if (key === "languageSkills")
+      if (key === "languageSkills") {
         value = (form.getAll(key)?.valueOf() as string[])
           .map(v => JSON.parse(v))
           .sort((a, b) => b.level - a.level);
+      }
+      if (key === "consultation_hours") {
+        value = JSON.stringify(
+          (form.getAll(key)?.valueOf() as string[])
+            .map(v => JSON.parse(v))
+            .sort((a, b) => b.day - a.day)
+            .sort((a, b) => b.timeStart - a.timeStart)
+        );
+      }
       if (typeof value !== "undefined" && value !== null)
         if (
           (typeof value === "string" && value !== (profileData?.[key] ?? "")) ||

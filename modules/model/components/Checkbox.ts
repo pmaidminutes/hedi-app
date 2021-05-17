@@ -10,13 +10,12 @@ export interface Checkbox extends IComponent {
 }
 
 export const isCheckbox = (obj: IComponent): obj is Checkbox =>
- typeof  obj?.id === "string" && obj?.kind === "Checkbox";
+  typeof obj?.id === "string" && obj?.kind === "Checkbox";
 
 export const isCheckboxInstance = (
   obj: IComponent,
   id: string
 ): obj is Checkbox => isCheckbox(obj) && obj.id === id;
-
 
 export const findCheckboxInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isCheckbox).find(item => item.id === id);

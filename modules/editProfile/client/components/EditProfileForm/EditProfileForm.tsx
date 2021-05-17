@@ -23,6 +23,7 @@ import {
 } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
 import {
+  IConsultationHoursEntry,
   IEditProfileFormConfig,
   IUpsertProfile,
   orderedRequiredFields,
@@ -32,6 +33,8 @@ import { useProfileTypeSwitch, useValidationErrors } from "./hooks";
 import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { IUIElementTexts } from "@/modules/model";
 import { TextInputProps } from "carbon-components-react";
+import { ConsultationHoursSelection } from "../ConsultationHours";
+import { days, timeRanges } from "../ConsultationHours/ConfigConsultationHours";
 import React, { ChangeEvent, useRef, RefObject } from "react";
 import {
   minLengthValidationFn,
@@ -372,7 +375,7 @@ export const EditProfileForm = ({
           ) && (
             <Row>
               <Column lg={6} md={6}>
-                <TextArea
+                {/* <TextArea
                   {...getTextInputProps(
                     "consultation_hours",
                     conditionalElements[profileType]
@@ -382,10 +385,36 @@ export const EditProfileForm = ({
                   invalidText={errors?.consultation_hours}
                   defaultValue={profile?.consultation_hours}
                   placeholder="Mo-Di, Do-Fr 09:00 - 15:00"
-                />
+                />  */}
               </Column>
             </Row>
           )}
+        </FormGroup>
+      </div>
+      <Seperator />
+
+      <div className="hedi--group hedi--group--consultation-hours">
+        <FormGroup
+          legendText={
+            <h2>
+              {getUIElementValue(
+                "consultation_hours",
+                conditionalElements[profileType],
+                "consultation_hours"
+              )}
+            </h2>
+          }>
+          <Row>
+            <ConsultationHoursSelection
+              config={{
+                elements,
+                consultationDays: days,
+                consultationTimeStart: timeRanges,
+                consultationTimeEnd: timeRanges,
+              }}
+              data={profile?.consultationHours}
+            />
+          </Row>
         </FormGroup>
       </div>
 
