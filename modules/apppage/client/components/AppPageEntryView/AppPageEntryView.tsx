@@ -1,5 +1,5 @@
 import { IAppPage } from "@/modules/common/types";
-import { HTMLWithNextImage } from "@/modules/react/html";
+import { HTML } from "@/modules/react/html";
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
 
@@ -17,7 +17,7 @@ export const AppPageEntryView = ({
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTMLWithNextImage data={body} />
+        <HTML data={body} />
       </ClickableTile>
     </Link>
   );

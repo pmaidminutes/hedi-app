@@ -1,5 +1,5 @@
 import { ILayoutImage, ILayoutBasicTemplate } from "../types";
-import { HTMLWithNextImage } from "@/modules/react/html";
+import { HTML } from "@/modules/react/html";
 import { Column, ColumnDefaultProps, Grid, Row } from "carbon-components-react";
 
 export const ImageAndColumn: React.FC<
@@ -34,7 +34,7 @@ export const ImageAndColumn: React.FC<
           <Row condensed={condensed} narrow={narrow}>
             <Column className="hedi--titlegroup">
               <h1>{headline}</h1>
-              <HTMLWithNextImage data={body} />
+              <HTML data={body} />
             </Column>
           </Row>
 
