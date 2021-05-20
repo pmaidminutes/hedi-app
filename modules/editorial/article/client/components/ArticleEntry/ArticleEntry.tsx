@@ -1,4 +1,4 @@
-import { HTMLWithNextImage } from "@/modules/react/html";
+import { HTML } from "@/modules/react/html";
 import { ClickableTile } from "carbon-components-react";
 import Link from "next/link";
 import {
@@ -16,7 +16,7 @@ export const ArticleEntry = (props: IArticleEntryProps): JSX.Element => {
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTMLWithNextImage data={summary} />
+        <HTML data={summary} />
       </ClickableTile>
     </Link>
   );
