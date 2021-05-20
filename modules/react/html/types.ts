@@ -1,5 +1,10 @@
 import { HTMLAttributes, ReactNode } from "react";
 
+export type HTMLProps = {
+  data?: string | null;
+  callbacks?: ITransformCallbackMap;
+};
+
 export interface ITransformCallbackMap {
   [name: string]: ParseInfoTransformFn;
 }

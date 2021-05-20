@@ -1,17 +1,13 @@
-import { AssertServerSide } from "@/modules/common/utils";
 import { Parser } from "htmlparser2";
+import { AssertServerSide } from "@/modules/common/utils";
 
-import { IParserElementInfo, ITransformCallbackMap } from "./types";
+import { HTMLProps, IParserElementInfo } from "./types";
 import { defaultTransform } from "./defaultTransform";
 import { attributesToProps } from "./utils";
 
-export const HTML = ({
-  data,
-  callbacks,
-}: {
-  data: string;
-  callbacks?: ITransformCallbackMap;
-}) => {
+export const HTML = ({ data, callbacks }: HTMLProps) => {
+  if (!data) return null;
+
   const root: IParserElementInfo = {
     name: "root",
     start: 0,
