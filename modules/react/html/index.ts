@@ -1,4 +1,4 @@
 export * from "./defaultTransform";
-export * from "./HTML";
+export { HTMLWithNextImage as HTML } from "./HTMLWithNextImage";
 export * from "./HTMLWithNextImage";
 export * from "./types";

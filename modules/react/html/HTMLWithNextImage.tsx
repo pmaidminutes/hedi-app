@@ -1,10 +1,6 @@
 import Image from "next/image";
-import {
-  HTML,
-  ITransformCallbackMap,
-  ParseInfoTransformFn,
-  defaultTransform,
-} from ".";
+import { HTML } from "./HTML";
+import { ITransformCallbackMap, ParseInfoTransformFn } from "./types";
 
 export const HTMLWithNextImage = ({
   data,
