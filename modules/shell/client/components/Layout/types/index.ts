@@ -1,4 +1,5 @@
 import { IAppPage } from "@/modules/common/types";
+import { Image } from "@/modules/model/components";
 import { ColumnDefaultProps } from "carbon-components-react";
 import React from "react";
 
@@ -11,6 +12,8 @@ export interface ILayout {
   rightColumnProps?: ColumnDefaultProps;
   singleColumnProps?: ColumnDefaultProps;
   pageLayout?: PageLayout;
+  posterImage?: Image | null;
+  pageId?: string;
 }
 
 export interface ILayoutImage {
