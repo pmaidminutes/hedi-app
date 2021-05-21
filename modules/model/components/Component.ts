@@ -1,6 +1,7 @@
 import { Body, BodyKind } from "./Body";
 import { Button, ButtonKind } from "./Button";
 import { Checkbox, CheckboxKind } from "./Checkbox";
+import { Column, ColumnKind } from "./Column";
 import { DatePicker, DatePickerKind } from "./DatePicker";
 import { Generic, GenericKind } from "./Generic";
 import { Group, GroupKind } from "./Group";
@@ -28,6 +29,7 @@ export type ComponentKind =
   | DatePickerKind
   | GenericKind
   | GroupKind
+  | ColumnKind
   | LabelKind
   | LinkKind
   | AudioKind
@@ -51,6 +53,7 @@ export type Component =
   | Body
   | Button
   | Checkbox
+  | Column
   | DatePicker
   | Generic
   | Group
