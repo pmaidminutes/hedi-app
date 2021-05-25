@@ -12,14 +12,14 @@ export const getPageType = async (
     case "test":
       result = await getTestPage(content);
       break;
-      case "login":
-        result = await getLoginPage(content);
-        break;
-        
-        default:
-          result = await getPagePage(content);
-        }
-        const shell = getLayout(result);
+    case "login":
+      result = await getLoginPage(content);
+      break;
+
+    default:
+      result = await getPagePage(content);
+  }
+  const shell = getLayout(result);
   // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
   return { ...shell, ...result };
 };

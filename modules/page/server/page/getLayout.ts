@@ -14,7 +14,9 @@ export function getLayout(content: IPage & IPageConfig) {
   const { id, components } = content;
 
   const sideColumn = findColumnInstance(components, "side");
-  const posterImage = findImageInstance(components, "poster") || null;
+  if (sideColumn) components.splice(components.indexOf(sideColumn), 1);
+  const posterImage = findImageInstance(components, "poster");
+  if (posterImage) components.splice(components.indexOf(posterImage), 1);
 
   let layout: ILayout = content.layout || {};
 
