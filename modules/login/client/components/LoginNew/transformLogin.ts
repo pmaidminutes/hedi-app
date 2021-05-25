@@ -18,6 +18,5 @@ export function transformLogin(props: ILogin) {
   const register = findLinkInstance(components, "register");
   const back = findButtonInstance(components, "back");
 
-  console.log({ props });
   return { username, password, success, invalid, submit, register, back };
 }

@@ -4,7 +4,7 @@ import { TextInputProps } from "carbon-components-react";
 import { TextInput as CarbonTextInput } from "carbon-components-react";
 
 export const TextInput = (props: ITextInput & TextInputProps) => {
-  console.log({ props });
+  // console.log({ props });
   const {
     kind,
     labelText,
