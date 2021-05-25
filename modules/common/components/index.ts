@@ -16,4 +16,5 @@ export * from "./Slider";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./TextArea";
+export * from "./Toggle";
 export * from "./VideoPlayer";
