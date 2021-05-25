@@ -6,22 +6,6 @@ import {
 import { InlineNotification as CarbonInlieNotification } from "carbon-components-react";
 
 export const InlineNotification = (props: IInlineNotificationProps) => {
-  const {
-    title,
-    subtitle,
-    kind,
-    lowContrast,
-    hideCloseButton,
-     ariaRole
-  } = transformInlineNotification(props);
-  return (
-    <CarbonInlieNotification
-      title={title}
-      subtitle={subtitle}
-      kind={kind}
-      lowContrast={lowContrast}
-      hideCloseButton={hideCloseButton}
-      aria-role={ariaRole}
-    />
-  );
+  const data = transformInlineNotification(props);
+  return <CarbonInlieNotification {...data} />;
 };

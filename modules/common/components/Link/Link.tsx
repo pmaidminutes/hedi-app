@@ -1,13 +1,9 @@
-import { Link as ILink } from "@/modules/model/components";
 import React from "react";
-
 import { Link as CarbonLink } from "carbon-components-react";
-import { LinkPropsBase } from "carbon-components-react/lib/components/UIShell/Link";
-
-export interface ILinkProps extends ILink, Omit<LinkPropsBase, "id"> {}
+import { ILinkProps, transformLink } from "./transformLink";
 
 export const Link = (props: ILinkProps) => {
-  const { labelText } = props;
+  const { labelText, ...rest } = transformLink(props);
 
-  return <CarbonLink {...props}>{labelText}</CarbonLink>;
+  return <CarbonLink {...rest}>{labelText}</CarbonLink>;
 };
