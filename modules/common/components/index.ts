@@ -12,6 +12,7 @@ export * from "./NumberInput";
 export * from "./Seperator";
 export * from "./TextInput";
 export * from "./Rating";
+export * from "./Slider";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./VideoPlayer";
