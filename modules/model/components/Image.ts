@@ -8,8 +8,8 @@ export interface Image extends IComponent {
   labelText: HTML;
   usage?: string;
   alt?: string;
-  width?: number;
-  height?: number;
+  width: number;
+  height: number;
 }
 
 export const isImage = (obj: IComponent): obj is Image =>

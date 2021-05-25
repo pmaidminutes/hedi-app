@@ -1,10 +1,10 @@
 import { HTML, IComponent } from "./Component";
-
+import { NotificationKind as CarbonNotificationType } from "carbon-components-react";
 export type NotificationKind = "Notification";
 
 export interface Notification extends IComponent {
   kind: NotificationKind;
-  notificationKind: string;
+  notificationKind: CarbonNotificationType;
   title: string;
   subtitle?: HTML;
   caption?: string;

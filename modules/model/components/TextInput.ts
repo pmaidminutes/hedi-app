@@ -4,7 +4,7 @@ export type TextInputKind = "TextInput";
 
 export interface TextInput extends IComponent {
   kind: TextInputKind;
-  labelText?: HTML;
+  labelText: HTML;
   isRequired?: boolean;
   placeholder?: string;
   helperText?: HTML;
