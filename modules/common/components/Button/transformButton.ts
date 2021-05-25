@@ -14,8 +14,6 @@ export function transformButton(props: IButtonProps):ButtonDefaultProps {
   } = props;
 
   return {
-    // TODO usage maybe not meant for this?
-    type: usage,
     value: text ? text : labelText ? labelText : "",
     "aria-label": ariaLabel,
     ...rest,
