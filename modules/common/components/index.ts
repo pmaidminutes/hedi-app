@@ -8,6 +8,7 @@ export * from "./Checkbox";
 export * from "./Label";
 export * from "./Link";
 export * from "./Notification";
+export * from "./NumberInput";
 export * from "./Seperator";
 export * from "./TextInput";
 export * from "./Rating";
