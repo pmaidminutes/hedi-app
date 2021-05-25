@@ -93,7 +93,7 @@ import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 // Page
 import { PagePathsGQL, getPageType } from "@/modules/page/server";
 import { TryPage, TryTest } from "@/modules/page/client/components";
-import { PageGQL, isIPage } from "@/modules/page/types";
+import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 
 // TODO should we remove the design stuff again?
 let dynamicProps: any;
@@ -237,7 +237,7 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default function segments(props: IPageProps<IAppPage>) {
+export default function segments(props: IPageProps<IAppPage & IPage>) {
   const { content } = props;
   return (
     <Shell {...props}>
