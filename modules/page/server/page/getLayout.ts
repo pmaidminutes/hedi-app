@@ -18,21 +18,22 @@ export function getLayout(content: IPage & IPageConfig) {
 
   let layout: ILayout = content.layout || {};
 
-  layout['posterImage'] = posterImage;
-  layout['pageId'] = id;
-
-  if (sideColumn) {
-    const sideImage = sideColumn.components?.find(isImage) || null;
-    if (sideImage) {
-      const layoutImg: ILayoutImage = {
-        alt: sideImage?.alt ?? "",
-        src: `${process.env.NEXT_PUBLIC_ASSETS_URL}${sideImage?.route ?? ""}`,
-      };
-      layout["layoutImg"] = layoutImg;
+  layout["posterImage"] = posterImage;
+  layout["pageId"] = id;
+  if (!layout.pageLayout) {
+    if (sideColumn) {
+      const sideImage = sideColumn.components?.find(isImage) || null;
+      if (sideImage) {
+        const layoutImg: ILayoutImage = {
+          alt: sideImage?.alt ?? "",
+          src: `${process.env.NEXT_PUBLIC_ASSETS_URL}${sideImage?.route ?? ""}`,
+        };
+        layout["layoutImg"] = layoutImg;
+      }
+      layout["pageLayout"] = "imageAndColumn";
+    } else {
+      layout["pageLayout"] = "singleColumn";
     }
-    layout["pageLayout"] = "imageAndColumn";
-  } else {
-    layout["pageLayout"] = "singleColumn";
   }
 
   const shell: IPageConfig = {

@@ -15,7 +15,7 @@ export const getLoginPage = async (
     layoutImg,
     customKey: "login-form",
     rightColumnProps: { md: 4, lg: 6, xlg: 6 },
-    pageLayout: "imageAndColumn",
+
   };
 
   const shell: IPageConfig = {
