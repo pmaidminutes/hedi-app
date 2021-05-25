@@ -1,18 +1,8 @@
 import Image from "next/image";
-import {
-  HTML,
-  ITransformCallbackMap,
-  ParseInfoTransformFn,
-  defaultTransform,
-} from ".";
+import { HTML } from "./HTML";
+import { HTMLProps, ParseInfoTransformFn } from "./types";
 
-export const HTMLWithNextImage = ({
-  data,
-  callbacks,
-}: {
-  data: string;
-  callbacks?: ITransformCallbackMap;
-}) => {
+export const HTMLWithNextImage = ({ data, callbacks }: HTMLProps) => {
   const img: ParseInfoTransformFn = (_, __, props) => {
     if (props) {
       let { src, width, height, layout, ...rest } = props as any;

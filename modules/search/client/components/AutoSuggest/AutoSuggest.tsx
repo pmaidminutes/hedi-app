@@ -1,6 +1,6 @@
 import { useAutoSuggest, ISuggestProps } from "./useAutoSuggest";
 import { ISuggestEntry } from "../../../types";
-import { HTMLWithNextImage } from "@/modules/react/html";
+import { HTML } from "@/modules/react/html";
 import { UnorderedList, ListItem } from "carbon-components-react";
 
 export const AutoSuggest: React.FunctionComponent<ISuggestProps> = (
@@ -16,7 +16,7 @@ export const AutoSuggest: React.FunctionComponent<ISuggestProps> = (
             <ListItem
               key={index}
               onClick={() => handleSuggestSelected(suggestedResult.term)}>
-              <HTMLWithNextImage data={suggestedResult.term} />
+              <HTML data={suggestedResult.term} />
             </ListItem>
           ))}
       </UnorderedList>
