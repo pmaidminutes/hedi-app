@@ -34,7 +34,7 @@ export const ImageAndColumn: React.FC<
           <Row condensed={condensed} narrow={narrow}>
             <Column className="hedi--titlegroup">
               <h1>{headline}</h1>
-              <HTMLWithNextImage data={body} />
+              {body && <HTMLWithNextImage data={body} />}
             </Column>
           </Row>
 
