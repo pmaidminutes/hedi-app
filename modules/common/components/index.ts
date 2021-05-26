@@ -5,6 +5,7 @@ export * from "./Button";
 export * from "./ButtonContainer";
 export * from "./ButtonHintText";
 export * from "./Checkbox";
+export * from "./DatePicker";
 export * from "./Label";
 export * from "./Link";
 export * from "./Notification";
