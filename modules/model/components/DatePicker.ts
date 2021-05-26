@@ -2,9 +2,10 @@ import { HTML, IComponent } from "./Component";
 
 export type DatePickerKind = "DatePicker";
 
+type DatePickerType = "range" | "single" | "simple";
 export interface DatePicker extends IComponent {
   kind: DatePickerKind;
-  datePickerType: string;
+  datePickerType?: DatePickerType;
   dateFormat: string;
   labelText?: HTML;
   isRequired?: boolean;
