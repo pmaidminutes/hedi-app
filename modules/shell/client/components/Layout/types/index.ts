@@ -1,10 +1,11 @@
 import { IAppPage } from "@/modules/common/types";
-import { Image } from "@/modules/model/components";
+import { IComponent, Image } from "@/modules/model/components";
 import { IPage } from "@/modules/page/types";
 import { ColumnDefaultProps } from "carbon-components-react";
 import React from "react";
 
 export interface ILayout {
+  sideComponents?: IComponent[];
   layoutImg?: ILayoutImage;
   customKey?: string;
   condensed?: boolean;
@@ -35,4 +36,4 @@ export interface ILayoutBasicTemplate {
   narrow?: boolean;
 }
 
-export type PageLayout = "singleColumn" | "imageAndColumn" | "categories";
+export type PageLayout = "singleColumn" | "imageAndColumn" | "categories" | "twoColumns";

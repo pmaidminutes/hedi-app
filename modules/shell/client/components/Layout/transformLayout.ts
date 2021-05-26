@@ -13,6 +13,7 @@ export function transformLayout(props: ILayoutProps) {
     layoutImg,
     singleColumnProps,
     posterImage,
+    sideComponents
   } = layout;
 
   const posterImgSrc = posterImage
@@ -45,5 +46,6 @@ export function transformLayout(props: ILayoutProps) {
     children,
     groupClass,
     single,
+    sideComponents
   };
 }

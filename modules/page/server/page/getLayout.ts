@@ -25,6 +25,7 @@ export function getLayout(content: IPage & IPageConfig) {
   if (!layout.pageLayout) {
     if (sideColumn) {
       const sideImage = sideColumn.components?.find(isImage) || null;
+      layout["sideComponents"] = sideColumn.components;
       if (sideImage) {
         const layoutImg: ILayoutImage = {
           alt: sideImage?.alt ?? "",
@@ -32,7 +33,8 @@ export function getLayout(content: IPage & IPageConfig) {
         };
         layout["layoutImg"] = layoutImg;
       }
-      layout["pageLayout"] = "imageAndColumn";
+      // layout["pageLayout"] = "imageAndColumn";
+      layout["pageLayout"] = "twoColumns";
     } else {
       layout["pageLayout"] = "singleColumn";
     }
