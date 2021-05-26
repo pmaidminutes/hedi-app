@@ -7,5 +7,9 @@ export interface ISliderProps
 
 export function transformSlider(props: ISliderProps): SliderProps {
   const { kind, ariaLabel, ...rest } = props;
-  return { "aria-label": ariaLabel, ...rest };
+  // TODO muss das anders?
+  return {
+    "aria-label": ariaLabel,
+    ...rest,
+  };
 }
