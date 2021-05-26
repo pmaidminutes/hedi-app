@@ -6,6 +6,6 @@ export interface ISliderProps
     Omit<SliderProps, "labelText" | "id"> {}
 
 export function transformSlider(props: ISliderProps): SliderProps {
-  const { kind, ...rest } = props;
-  return { ...rest };
+  const { kind, ariaLabel, ...rest } = props;
+  return { "aria-label": ariaLabel, ...rest };
 }

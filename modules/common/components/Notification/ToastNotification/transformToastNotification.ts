@@ -25,14 +25,13 @@ export function transformToastNotification(props: IToastNotificationProps):Toast
 
 
   // TODO what todo with aria-role?
-  // TODO subtitle as html
   return {
     kind: notificationKind,
     caption,
     lowContrast: lowContrast || true,
     hideCloseButton: hideCloseButton || true,
     title,
-    subtitle: subtitle,
+    subtitle: HTML({ data: subtitle }),
     ...rest,
   };
 }
