@@ -41,16 +41,6 @@ import { TryLogin } from "@/modules/login/client/components";
 import { getRegistrationPage } from "@/modules/registration/server/page";
 import { TryRegistration } from "@/modules/registration/client/components";
 
-// userFeedback
-import {
-  getUserFeedbackPage,
-  getUserFeedbackThanksPage,
-} from "@/modules/userFeedback/server/pages";
-import {
-  TryUserFeedback,
-  TryUserFeedbackThanks,
-} from "@/modules/userFeedback/client/components";
-
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
 import { TrySearch } from "@/modules/search/client/components";
@@ -143,12 +133,6 @@ export const getStaticProps: GetStaticProps<
         case "registration":
           generic = await getRegistrationPage(generic);
           break;
-        case "userfeedback":
-          generic = await getUserFeedbackPage(generic);
-          break;
-        case "userfeedbackThanks":
-          generic = await getUserFeedbackThanksPage(generic);
-          break;
         case "search":
           generic = await getSearchPage(generic);
           break;
@@ -206,8 +190,8 @@ export default function segments(props: IPageProps<IAppPage>) {
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
         <TryGlossary content={content} key="glossary" />
-        <TryUserFeedback content={content} key="userfeedback" />
-        <TryUserFeedbackThanks content={content} key="userfeedbackThanks" />
+        {/* <TryUserFeedback content={content} key="userfeedback" /> */}
+        {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
         <TryLandingPage content={content} key="landingpage" />
         <TrySearch content={content} key="search" />
         <TryAppPage content={content} key="apppage" />

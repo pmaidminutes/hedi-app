@@ -6,7 +6,5 @@ export const AppPagePathsGQL = generateAppPagePathsGQL([
   "privacy",
   "login",
   "registration",
-  "userfeedback",
-  "userfeedbackThanks",
   "search",
 ]);
