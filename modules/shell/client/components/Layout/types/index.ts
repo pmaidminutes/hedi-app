@@ -1,5 +1,5 @@
 import { IAppPage } from "@/modules/common/types";
-import { IComponent, Image } from "@/modules/model/components";
+import { IComponent, Image, HTML } from "@/modules/model/components";
 import { IPage } from "@/modules/page/types";
 import { ColumnDefaultProps } from "carbon-components-react";
 import React from "react";
@@ -16,6 +16,7 @@ export interface ILayout {
   pageLayout?: PageLayout;
   posterImage?: Image | null;
   pageId?: string;
+  headline?: HTML | null;
 }
 
 export interface ILayoutImage {
@@ -36,4 +37,8 @@ export interface ILayoutBasicTemplate {
   narrow?: boolean;
 }
 
-export type PageLayout = "singleColumn" | "imageAndColumn" | "categories" | "twoColumns";
+export type PageLayout =
+  | "singleColumn"
+  | "imageAndColumn"
+  | "categories"
+  | "twoColumns";

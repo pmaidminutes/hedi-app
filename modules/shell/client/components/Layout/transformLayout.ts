@@ -13,7 +13,8 @@ export function transformLayout(props: ILayoutProps) {
     layoutImg,
     singleColumnProps,
     posterImage,
-    sideComponents
+    sideComponents,
+    headline,
   } = layout;
 
   const posterImgSrc = posterImage
@@ -42,10 +43,10 @@ export function transformLayout(props: ILayoutProps) {
     condensed,
     narrow,
     body: body ?? null,
-    headline: longTitle || label,
+    headline: headline || longTitle || label,
     children,
     groupClass,
     single,
-    sideComponents
+    sideComponents,
   };
 }

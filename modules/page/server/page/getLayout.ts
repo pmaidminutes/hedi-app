@@ -1,5 +1,6 @@
 import {
   findColumnInstance,
+  findHeadlineLabel,
   findImageInstance,
   isImage,
 } from "@/modules/model/components";
@@ -12,15 +13,21 @@ import { IPage } from "../../types";
 
 export function getLayout(content: IPage & IPageConfig) {
   const { id, components } = content;
+  let layout: ILayout = content.layout || {};
 
   const sideColumn = findColumnInstance(components, "side");
   if (sideColumn) components.splice(components.indexOf(sideColumn), 1);
   const posterImage = findImageInstance(components, "poster");
-  if (posterImage) components.splice(components.indexOf(posterImage), 1);
+  if (posterImage) {
+    components.splice(components.indexOf(posterImage), 1);
+    layout["posterImage"] = posterImage;
+  }
+  const headline = findHeadlineLabel(components);
+  if (headline) {
+    components.splice(components.indexOf(headline), 1);
+    layout["headline"] = headline?.text;
+  }
 
-  let layout: ILayout = content.layout || {};
-
-  layout["posterImage"] = posterImage;
   layout["pageId"] = id;
   if (!layout.pageLayout) {
     if (sideColumn) {
