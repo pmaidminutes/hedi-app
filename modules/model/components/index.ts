@@ -1,5 +1,6 @@
 export * from "./Component";
 
+export * from "./Audio";
 export * from "./Body";
 export * from "./Button";
 export * from "./Checkbox";
@@ -9,14 +10,14 @@ export * from "./Generic";
 export * from "./Group";
 export * from "./Label";
 export * from "./Link";
-export * from "./Audio";
 export * from "./File";
 export * from "./Image";
-export * from "./Svg";
-export * from "./Video";
-export * from "./Notification";
+export * from "./InlineNotification";
 export * from "./NumberInput";
 export * from "./Slider";
+export * from "./Svg";
 export * from "./TextArea";
 export * from "./TextInput";
+export * from "./ToastNotification";
 export * from "./Toggle";
+export * from "./Video";

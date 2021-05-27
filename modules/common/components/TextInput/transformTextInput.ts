@@ -3,7 +3,7 @@ import { TextInputProps } from "carbon-components-react";
 
 export interface ITextInputProps
   extends ITextInput,
-    Omit<TextInputProps, "helperText" | "labelText"> {}
+    Omit<TextInputProps, "helperText" | "labelText" | "type"> {}
 
 export function transformTextInput(props: ITextInputProps): TextInputProps {
   const {

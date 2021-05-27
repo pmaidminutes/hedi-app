@@ -1,8 +1,8 @@
-import { Notification as INotification } from "@/modules/model/components";
+import { InlineNotification as IInlineNotification } from "@/modules/model/components";
 import { InlineNotificationProps } from "carbon-components-react";
 
 export interface IInlineNotificationProps
-  extends INotification,
+  extends IInlineNotification,
     Omit<
       InlineNotificationProps,
       "id" | "subtitle" | "title" | "kind" 

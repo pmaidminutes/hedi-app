@@ -4,7 +4,7 @@ export type NumberInputKind = "NumberInput";
 
 export interface NumberInput extends IComponent {
   kind: NumberInputKind;
-  labelText?: HTML;
+  label?: HTML;
   isRequired?: boolean;
   helperText?: HTML;
   value?: number;

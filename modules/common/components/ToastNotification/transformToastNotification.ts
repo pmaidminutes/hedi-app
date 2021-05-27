@@ -1,9 +1,9 @@
-import { Notification as INotification } from "@/modules/model/components";
+import { ToastNotification as IToastNotification } from "@/modules/model/components";
 import { ToastNotificationProps } from "carbon-components-react";
 import { HTML } from "@/modules/react/html"
 
 export interface IToastNotificationProps
-  extends INotification,
+  extends IToastNotification,
     Omit<
       ToastNotificationProps,
       "id" | "subtitle" | "title" | "kind" | "caption"

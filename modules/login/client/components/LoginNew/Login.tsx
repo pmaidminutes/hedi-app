@@ -3,8 +3,9 @@ import { ILogin, transformLogin } from "./transformLogin";
 import {
   TextInput,
   ButtonHintLink,
-  Notification,
   Button,
+  InlineNotification,
+  ToastNotification,
 } from "@/modules/common/components";
 import { Column, Form, Row } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
@@ -32,8 +33,8 @@ export const Login = ({ content }: { content: ILogin }) => {
           <Form onSubmit={handleSubmit}>
             {username && <TextInput {...username} />}
             {password && <TextInput {...password} />}
-            {invalid && <Notification {...invalid} />}
-            {success && <Notification {...success} />}
+            {invalid && <ToastNotification {...invalid} />}
+            {success && <InlineNotification {...success} />}
             <div className="hedi--login-buttoncontainer">
               {submit && register && (
                 <ButtonHintLink

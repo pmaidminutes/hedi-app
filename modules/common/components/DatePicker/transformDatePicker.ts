@@ -3,7 +3,7 @@ import { DatePickerProps, DatePickerInputProps } from "carbon-components-react";
 
 export interface IDatePickerProps
   extends DatePicker,
-    Omit<DatePickerProps, "id" | "dateFormat" | "minDate" | "maxDate"> {}
+    Omit<DatePickerProps, "id" | "dateFormat" | "minDate" | "maxDate"|"datePickerType"> {}
 
 interface IDatePickerAndInputProps extends DatePickerProps {
   datePickerInput: DatePickerInputProps[];

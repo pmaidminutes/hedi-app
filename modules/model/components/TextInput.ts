@@ -4,6 +4,7 @@ export type TextInputKind = "TextInput";
 
 export interface TextInput extends IComponent {
   kind: TextInputKind;
+  type: "text" | "email" | "password";
   labelText: HTML;
   isRequired?: boolean;
   placeholder?: string;

@@ -12,7 +12,11 @@ import { File, FileKind } from "./File";
 import { Image, ImageKind } from "./Image";
 import { Svg, SvgKind } from "./Svg";
 import { Video, VideoKind } from "./Video";
-import { Notification, NotificationKind } from "./Notification";
+import {
+  InlineNotification,
+  InlineNotificationKind,
+} from "./InlineNotification";
+import { ToastNotification, ToastNotificationKind } from "./ToastNotification";
 import { NumberInput, NumberInputKind } from "./NumberInput";
 import { Slider, SliderKind } from "./Slider";
 import { TextArea, TextAreaKind } from "./TextArea";
@@ -37,12 +41,13 @@ export type ComponentKind =
   | ImageKind
   | SvgKind
   | VideoKind
-  | NotificationKind
   | NumberInputKind
   | SliderKind
   | TextAreaKind
   | TextInputKind
-  | ToggleKind;
+  | ToggleKind
+  | InlineNotificationKind
+  | ToastNotificationKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -64,9 +69,10 @@ export type Component =
   | Image
   | Svg
   | Video
-  | Notification
   | NumberInput
   | Slider
   | TextArea
   | TextInput
-  | Toggle;
+  | Toggle
+  | InlineNotification
+  | ToastNotification;

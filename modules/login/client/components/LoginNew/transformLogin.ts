@@ -1,8 +1,9 @@
 import {
   findButtonInstance,
   findLinkInstance,
-  findNotificationInstance,
   findTextInputInstance,
+  findInlineNotificationInstance,
+  findToastNotificationInstance,
 } from "@/modules/model/components";
 import { IPage } from "@/modules/page/types";
 
@@ -12,8 +13,8 @@ export function transformLogin(props: ILogin) {
 
   const username = findTextInputInstance(components, "username");
   const password = findTextInputInstance(components, "password");
-  const success = findNotificationInstance(components, "success");
-  const invalid = findNotificationInstance(components, "invalid");
+  const success = findInlineNotificationInstance(components, "success");
+  const invalid = findToastNotificationInstance(components, "invalid");
   const submit = findButtonInstance(components, "submit");
   const register = findLinkInstance(components, "register");
   const back = findButtonInstance(components, "back");

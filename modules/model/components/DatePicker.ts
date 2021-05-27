@@ -2,12 +2,12 @@ import { HTML, IComponent } from "./Component";
 
 export type DatePickerKind = "DatePicker";
 
-type DatePickerType = "range" | "single" | "simple";
 export interface DatePicker extends IComponent {
   kind: DatePickerKind;
-  datePickerType?: DatePickerType;
+  datePickerType: "simple" | "single" | "range";
   dateFormat: string;
   labelText?: HTML;
+  labelTextEnd?: HTML;
   isRequired?: boolean;
   placeholder?: string;
   minDate?: string;
