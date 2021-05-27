@@ -1,16 +1,15 @@
 import { logAndFallback } from "@/modules/common/error";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { GraphQLClient } from "graphql-request";
-import { CaregiverGQL, MidwifeGQL, Profile } from "../../types";
 
 export async function getProfileList(
   lang: string,
   client?: GraphQLClient
-): Promise<Profile[]> {
+): Promise<any[]> {
   const query = gql`
-    query getProfiles($lang: String!, $includeSelf: Boolean){
-      caregivers(lang: $lang) { ${CaregiverGQL} }
-      midwives(lang: $lang) { ${MidwifeGQL} }
+    query getProfiles($lang: String!, $includeSelf: Boolean) {
+      #caregivers(lang: $lang)
+      #midwives(lang: $lang)
     }
   `;
 
@@ -18,8 +17,8 @@ export async function getProfileList(
   // if (!client) client = await getServiceClient(GQLEndpoint.Internal);
 
   type subqueryType = {
-    caregivers: Profile[];
-    midwives: Profile[];
+    caregivers: any[];
+    midwives: any[];
   };
   const { caregivers, midwives } = await serviceGQuery<subqueryType>(query, {
     lang,
@@ -32,7 +31,7 @@ export async function getProfileList(
     } as subqueryType)
   );
 
-  const profiles: Profile[] = caregivers
+  const profiles: any[] = caregivers
     .concat(midwives)
     .sort((a, b) =>
       a.surname.localeCompare(b.surname, lang, { ignorePunctuation: true })

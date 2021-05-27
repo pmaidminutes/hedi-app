@@ -41,10 +41,6 @@ import { TryLogin } from "@/modules/login/client/components";
 import { getRegistrationPage } from "@/modules/registration/server/page";
 import { TryRegistration } from "@/modules/registration/client/components";
 
-// editProfile
-import { getEditProfilePage } from "@/modules/editProfile/server/page";
-import { TryEditProfile } from "@/modules/editProfile/client/components";
-
 // userFeedback
 import {
   getUserFeedbackPage,
@@ -58,23 +54,6 @@ import {
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
 import { TrySearch } from "@/modules/search/client/components";
-
-// Profile
-import { CaregiverGQL, isProfile, MidwifeGQL } from "@/modules/profile/types";
-import {
-  CaregiverPathsGQL,
-  MidwifePathsGQL,
-} from "@/modules/profile/server/query";
-import {
-  getProfileListPage,
-  getViewProfilePage,
-  getProfilePage,
-} from "@/modules/profile/server";
-import {
-  TryViewProfile,
-  TryProfile,
-  TryProfileList,
-} from "@/modules/profile/client/components";
 
 // Article
 import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
@@ -108,8 +87,6 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
   const pathQueries = [
-    CaregiverPathsGQL,
-    MidwifePathsGQL,
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
@@ -148,19 +125,13 @@ export const getStaticProps: GetStaticProps<
   } else if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
-    const gqlTypes = [
-      AppPageGQL,
-      ArticleGQL,
-      CategoryGQL,
-      CaregiverGQL,
-      MidwifeGQL,
-    ];
+    const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL];
     const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
     let generic = entities?.[0] ?? null;
 
     if (isIArticle(generic)) generic = await getArticlePage(generic);
     if (isICategory(generic)) generic = await getCategoryPage(generic);
-    if (isProfile(generic)) generic = await getProfilePage(generic);
+    // if (isProfile(generic)) generic = await getProfilePage(generic);
 
     if (isIAppPage(generic)) {
       switch (
@@ -171,15 +142,6 @@ export const getStaticProps: GetStaticProps<
           break;
         case "registration":
           generic = await getRegistrationPage(generic);
-          break;
-        case "editprofile":
-          generic = await getEditProfilePage(generic);
-          break;
-        case "viewprofile":
-          generic = await getViewProfilePage(generic);
-          break;
-        case "profiles":
-          generic = await getProfileListPage(generic);
           break;
         case "userfeedback":
           generic = await getUserFeedbackPage(generic);
@@ -236,11 +198,11 @@ export default function segments(props: IPageProps<IAppPage>) {
     <Shell {...props}>
       <>
         <TryRegistration content={content} key="registration" />
-        <TryViewProfile content={content} key="viewprofile" />
-        <TryProfile content={content} key="profile" />
-        <TryProfileList content={content} key="profileList" />
+        {/* <TryViewProfile content={content} key="viewprofile" /> */}
+        {/* <TryProfile content={content} key="profile" /> */}
+        {/* <TryProfileList content={content} key="profileList" /> */}
         <TryLogin content={content} key="login" />
-        <TryEditProfile content={content} key="editProfile" />
+        {/* <TryEditProfile content={content} key="editProfile" /> */}
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
         <TryGlossary content={content} key="glossary" />

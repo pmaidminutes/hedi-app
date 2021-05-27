@@ -1,10 +1,8 @@
-import { getUIElement } from "@/modules/common/utils";
 import { orderedRequiredFields } from "@/modules/editProfile/types";
-import { IUIElementTexts } from "@/modules/model";
 import { ChangeEvent, FormEvent, RefObject, useState } from "react";
 
 export function useValidationErrors(
-  elements: IUIElementTexts[],
+  elements: any[],
   refs: { [key: string]: RefObject<HTMLInputElement> },
   onSubmit: ((event: FormEvent<HTMLFormElement>) => void) | undefined
 ) {
@@ -16,7 +14,7 @@ export function useValidationErrors(
   const handleRequiredFieldChange = (e: ChangeEvent<HTMLInputElement>) => {
     const key = e.target.name;
     if (!e.target.value) {
-      const message = getUIElement(e.target.name, elements)?.help ?? "x";
+      const message = "x";
       setValidationErrors(previous => ({ ...previous, [key]: message }));
     } else {
       setValidationErrors(previous => {
@@ -33,7 +31,7 @@ export function useValidationErrors(
     const currentErrors: { [key: string]: string } = {};
     orderedRequiredFields.forEach(field => {
       if (!form.get(field)) {
-        const message = getUIElement(field, elements)?.help || "";
+        const message = "";
         currentErrors[field] = message;
       }
     });

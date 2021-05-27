@@ -7,8 +7,6 @@ import { getGlossaryTerm } from "@/modules/editorial/glossary/query";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
 import { parseJSONToLatLngCoordinates } from "@/modules/map/server/functions";
 import { requestCoordinates } from "@/modules/map/server/request";
-import { getCaregiver, getMidwife } from "@/modules/profile/query";
-import { ICaregiver, IMidwife } from "@/modules/profile/types";
 import { searchServer } from "./request";
 import { NextApiHandler } from "next";
 import { sendAPIHttpError, sendAPISuccess } from "@/modules/common/utils";
@@ -16,8 +14,7 @@ import { getAppPage } from "@/modules/apppage/query";
 import { IAppPage } from "@/modules/common/types";
 
 export const solrSearchAPI: NextApiHandler<
-  | IErrorResponse
-  | (IArticle | ICategory | IGlossaryTerm | ICaregiver | IMidwife | IAppPage)[]
+  IErrorResponse | (IArticle | ICategory | IGlossaryTerm | IAppPage)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter, location, distance },
@@ -86,43 +83,15 @@ export const solrSearchAPI: NextApiHandler<
             })
           );
           break;
-        case "caregiver_tmp":
-          promises.push(
-            getCaregiver(route).then(caregiver => {
-              if (caregiver) {
-                caregiver.label = highlight.highlightedTitle ?? caregiver.label;
-              }
-              return caregiver;
-            })
-          );
-          break;
-        case "midwife_tmp":
-          promises.push(
-            getMidwife(route).then(midwife => {
-              if (midwife) {
-                midwife.label = highlight.highlightedTitle ?? midwife.label;
-              }
-              return midwife;
-            })
-          );
-          break;
       }
     }
     const entries = await Promise.all<
-      | IArticle
-      | ICategory
-      | IGlossaryTerm
-      | ICaregiver
-      | IMidwife
-      | IAppPage
-      | null
+      IArticle | ICategory | IGlossaryTerm | IAppPage | null
     >(promises);
     const nonNull = entries.filter(entry => entry) as (
       | IArticle
       | ICategory
       | IGlossaryTerm
-      | ICaregiver
-      | IMidwife
       | IAppPage
     )[];
     sendAPISuccess(res, nonNull);

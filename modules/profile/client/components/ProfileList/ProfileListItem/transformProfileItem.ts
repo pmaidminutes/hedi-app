@@ -1,23 +1,11 @@
-import { isICaregiver, isIMidwife } from "@/modules/profile/types";
-import { getUIElementValue } from "@/modules/common/utils";
-import { IProfileEntry } from ".";
-
-export function transformProfileItem(props: IProfileEntry) {
-  const { profile, elements } = props;
+export function transformProfileItem(props: any) {
+  const { profile } = props;
   const { route } = profile;
 
-  const midwifeLabel = getUIElementValue("domain_midwife", elements, "Hebamme");
-  const servicesHeadline = getUIElementValue(
-    "services",
-    elements,
-    "Tätigkeiten"
-  );
+  const midwifeLabel = "Hebamme";
+  const servicesHeadline = "Tätigkeiten";
 
-  const profileType = isICaregiver(profile)
-    ? "hedi--profile-list__item--caregiver"
-    : isIMidwife(profile)
-    ? "hedi--profile-list__item--midwife"
-    : null;
+  const profileType = "hedi--profile-list__item--midwife";
 
   return {
     midwifeLabel,

@@ -1,13 +1,10 @@
 import { Row, Column, Link, Button } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
-import {
-  transformProfileEntry,
-  IProfileEntryProps,
-} from "./transformProfileEntry";
+import { transformProfileEntry } from "./transformProfileEntry";
 import { Launch16, Edit24 } from "@carbon/icons-react";
 import HediPerson from "./assets/hedi_person.svg";
 
-export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
+export const ProfileEntry = (props: any): JSX.Element => {
   const {
     displayName,
     domains,
@@ -37,21 +34,7 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
             <div className="hedi--profile-entry-content">
               {/* TODO reuse contact */}
               <h2>{displayName}</h2>
-              <h3>
-                {domains?.map((domain, index) => (
-                  <>
-                    <span key={domain.label + index}>{domain.label}</span>
-                    {domains.length > index + 1 ? (
-                      <span
-                        className="hedi--ampersand"
-                        key={"domain-amp" + index}>
-                        {" "}
-                        & <br />
-                      </span>
-                    ) : null}
-                  </>
-                ))}
-              </h3>
+              <h3>{"domain"}</h3>
               <address>
                 {postal_code} {city}
                 {/* TODO right number for phone linking */}
@@ -111,4 +94,3 @@ export const ProfileEntry = (props: IProfileEntryProps): JSX.Element => {
     </>
   );
 };
-[];

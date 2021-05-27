@@ -1,9 +1,8 @@
 import {
-  getUIElementValue,
   transformStringToUrl,
   getTextInputProps,
 } from "@/modules/common/utils";
-import { isICaregiver, ProfileView } from "../../../types";
+import { ProfileView } from "../../../types";
 
 export interface IProfileViewProps {
   content: ProfileView;
@@ -36,14 +35,10 @@ export function transformProfile(props: IProfileViewProps) {
   ];
 
   // HACK proper domain impl
-  const domainMidwife = getUIElementValue(
-    "domain_midwife",
-    elements,
-    "Hebamme"
-  );
-  const domains = isICaregiver(content)
-    ? content.domains
-    : [{ type: "Domain", label: domainMidwife, route: "/" + domainMidwife }];
+  const domainMidwife = "Hebamme";
+  const domains = [
+    { type: "Domain", label: domainMidwife, route: "/" + domainMidwife },
+  ];
 
   return {
     languagesData: {

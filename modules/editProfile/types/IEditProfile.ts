@@ -1,67 +1,7 @@
 import { gql } from "@/modules/graphql";
-import { IProfile } from "@/modules/model/IProfile";
-import { ProfileType } from "@/modules/profile/types";
-import { ILanguageSkillEntry } from "./ILanguageSkillEntry";
-
-export interface IEditProfile
-  extends Omit<
-    IProfile,
-    | "county"
-    | "district"
-    | "lat"
-    | "lat_approx"
-    | "long"
-    | "long_approx"
-    | "state"
-    | "translations"
-    | "route"
-    | "label"
-    | "type"
-    | "lang"
-    | "county"
-    | "country"
-  > {
-  type: ProfileType;
-  languageSkills: ILanguageSkillEntry[];
-  first_pregnancy: boolean;
-  domains: string[];
-  services: string[];
-}
-
-export const EditProfileFieldArray: (keyof IEditProfile)[] = [
-  "type",
-
-  "displayName",
-  "prefix",
-  "forename",
-  "surname",
-  "suffix",
-
-  "displayAddress",
-  "city",
-  "postal_code",
-  "street",
-  "house_number",
-  "room",
-
-  "phone",
-  "phone_private",
-  "mail",
-  "website",
-  "consultation_hours",
-
-  "languageSkills",
-
-  "first_pregnancy",
-  "domains",
-  "services",
-];
 
 export const UpsertProfileGQL = gql`... on UpsertProfile {
-  ${EditProfileFieldArray.join(" ").replace(
-    "languageSkills",
-    "languageSkills { langcode level }"
-  )}
+
 }`;
 
-export type EditProfileInput = Partial<IEditProfile>;
+export type EditProfileInput = any;
