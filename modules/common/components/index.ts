@@ -17,6 +17,7 @@ export * from "./Seperator";
 export * from "./TextInput";
 export * from "./Rating";
 export * from "./Slider";
+export * from "./Svg";
 export * from "./Tag";
 export * from "./TagList";
 export * from "./TextArea";

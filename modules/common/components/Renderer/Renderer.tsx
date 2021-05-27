@@ -6,6 +6,7 @@ import {
   isFile,
   isImage,
   isLabel,
+  isSvg,
   isTextArea,
   isTextInput,
   isVideo,
@@ -20,6 +21,7 @@ import {
   Image,
   DownloadFile,
   VideoPlayer,
+  Svg,
 } from "@/modules/common/components";
 import React from "react";
 interface IRendererProps {
@@ -50,7 +52,8 @@ export const Renderer = (props: IRendererProps) => {
             return <DownloadFile key={component.id + index} {...component} />;
           if (isVideo(component))
             return <VideoPlayer key={component.id + index} video={component} />;
-        
+          if (isSvg(component))
+            return <Svg key={component.id + index} {...component} />;
         })}
     </>
   );
