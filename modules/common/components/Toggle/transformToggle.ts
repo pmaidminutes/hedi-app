@@ -6,13 +6,13 @@ export interface IToggleProps
   extends Toggle,
     Omit<ToggleProps, "labelText" | "labelA" | "labelB"> {}
 
-export function transformToggle(props: IToggleProps) {
+export function transformToggle(props: IToggleProps): ToggleProps {
   const { kind, ariaLabel, labelA, labelText, labelB, ...rest } = props;
 
   return {
-    labelText: HTML({ data: labelText }),
-    labelA: HTML({ data: labelA }),
-    labelB: HTML({ data: labelB }),
+    labelText,
+    labelA,
+    labelB,
     "aria-label": ariaLabel,
     ...rest,
   };
