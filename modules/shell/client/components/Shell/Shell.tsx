@@ -11,7 +11,6 @@ import { IPageProps } from "../../../types";
 import { IAppPage } from "@/modules/common/types";
 import { IPage } from "@/modules/page/types";
 
-
 export const Shell: React.FC<IPageProps<IAppPage & IPage>> = props => {
   const { content, shell, children } = props;
   const { label } = transformShell(content);
@@ -22,13 +21,21 @@ export const Shell: React.FC<IPageProps<IAppPage & IPage>> = props => {
     pageLayout,
     layout,
     langDirections,
+    layoutHeadline,
   } = useShell(shell);
 
   return (
     <ShellProvider languages={langDirections ?? []}>
       <div className={hediStyle}>
         <Head>
-          <title>HEDI{label ? ` - ${label}` : null}</title>
+          <title>
+            HEDI
+            {layoutHeadline
+              ? ` - ${layoutHeadline}`
+              : label
+              ? ` - ${label}`
+              : null}
+          </title>
         </Head>
         {hasPageAccess ? (
           <>

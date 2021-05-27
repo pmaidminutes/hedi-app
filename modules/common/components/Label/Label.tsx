@@ -6,6 +6,6 @@ import { HTML } from "@/modules/react/html";
 export const Label = (props: ILabel) => {
   const { text, labelKind, className } = props;
   if (!text) return null;
-  // TODO add className
+
   return createElement(labelKind, { className }, HTML({ data: text }));
 };
