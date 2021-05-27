@@ -2,20 +2,19 @@ import { getLoginPage } from "./getLoginPage";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
-import { getTestPage, ITest } from "./getTestPage";
 import { getLayout } from "./getLayout";
+import { getTemplate } from "@/modules/template/server";
 export const getPageType = async (
   content: IPage
-): Promise<(IPage | ITest) & IPageConfig> => {
+): Promise<IPage & IPageConfig> => {
   let result;
   switch (content.id) {
-    case "test":
-      result = await getTestPage(content);
-      break;
     case "login":
       result = await getLoginPage(content);
       break;
-
+    case "template":
+      result = await getTemplate(content);
+      break;
     default:
       result = await getPagePage(content);
   }

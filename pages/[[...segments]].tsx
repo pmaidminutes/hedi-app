@@ -92,8 +92,9 @@ import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 // Page
 import { PagePathsGQL, getPageType } from "@/modules/page/server";
-import { TryPage, TryTest } from "@/modules/page/client/components";
+import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
+import { TryTemplate } from "@/modules/template/client";
 
 // TODO should we remove the design stuff again?
 let dynamicProps: any;
@@ -242,8 +243,8 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
   return (
     <Shell {...props}>
       <>
-        <TryTest content={content} key="test" />
         <TryLoginNew content={content} key="loginNew" />
+        <TryTemplate content={content} key="template" />
         <TryRegistration content={content} key="registration" />
         <TryViewProfile content={content} key="viewprofile" />
         <TryProfile content={content} key="profile" />

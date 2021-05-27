@@ -1,16 +1,15 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "@/modules/page/types";
-import { ILoginNew } from "@/modules/login/client";
-export const getLoginPage = async (
+import { ITemplatePage } from "@/modules/template/types";
+export const getTemplate = async (
   content: IPage
-): Promise<ILoginNew & IPageConfig> => {
-  content.type = "LoginNew";
- 
-  const layout: ILayout = {
-    customKey: "login-form",
-    rightColumnProps: { md: 4, lg: 6, xlg: 6 },
+): Promise<ITemplatePage & IPageConfig> => {
+  content.type = "Template";
 
+  const layout: ILayout = {
+    customKey: "template",
+    rightColumnProps: { md: 4, lg: 6, xlg: 6 },
   };
 
   const shell: IPageConfig = {
