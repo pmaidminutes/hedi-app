@@ -1,4 +1,5 @@
 import { NumberInput } from "@/modules/model/components";
+import { HTML } from "@/modules/react/html/HTML";
 import { NumberInputProps } from "carbon-components-react";
 
 export interface INumberInputProps
@@ -8,6 +9,11 @@ export interface INumberInputProps
 export function transformNumberInput(
   props: INumberInputProps
 ): NumberInputProps {
-  const { kind, value, ...rest } = props;
-  return { value: value || "", ...rest };
+  const { helperText, label, kind, value, ...rest } = props;
+  return {
+    helperText: HTML({ data: helperText }),
+    label: HTML({ data: label }),
+    value: value || "",
+    ...rest,
+  };
 }

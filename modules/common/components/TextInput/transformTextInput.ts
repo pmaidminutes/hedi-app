@@ -1,4 +1,5 @@
 import { TextInput as ITextInput } from "@/modules/model/components";
+import { HTML } from "@/modules/react/html/HTML";
 import { TextInputProps } from "carbon-components-react";
 
 export interface ITextInputProps
@@ -18,10 +19,10 @@ export function transformTextInput(props: ITextInputProps): TextInputProps {
   } = props;
 
   return {
-    labelText: labelText || "",
+    labelText: HTML({ data: labelText }) || "",
     placeholder,
     id,
-    helperText,
+    helperText: HTML({ data: helperText }),
     type,
     "aria-label": ariaLabel || "",
     ...rest,

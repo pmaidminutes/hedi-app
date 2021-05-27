@@ -1,14 +1,14 @@
 import { InlineNotification as IInlineNotification } from "@/modules/model/components";
+import { HTML } from "@/modules/react/html/HTML";
 import { InlineNotificationProps } from "carbon-components-react";
 
 export interface IInlineNotificationProps
   extends IInlineNotification,
-    Omit<
-      InlineNotificationProps,
-      "id" | "subtitle" | "title" | "kind" 
-    > {}
+    Omit<InlineNotificationProps, "id" | "subtitle" | "title" | "kind"> {}
 
-export function transformInlineNotification(props: IInlineNotificationProps):InlineNotificationProps {
+export function transformInlineNotification(
+  props: IInlineNotificationProps
+): InlineNotificationProps {
   const {
     title,
     subtitle,
@@ -21,7 +21,7 @@ export function transformInlineNotification(props: IInlineNotificationProps):Inl
   return {
     kind: notificationKind,
     title,
-    subtitle,
+    subtitle: HTML({ data: subtitle }),
     lowContrast: lowContrast || true,
     hideCloseButton: hideCloseButton || true,
   };
