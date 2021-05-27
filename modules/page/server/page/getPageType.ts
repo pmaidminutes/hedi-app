@@ -2,7 +2,7 @@ import { getLoginPage } from "./getLoginPage";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
-import { getLayout } from "./getLayout";
+import { getLayout } from "@/modules/shell/server";
 import { getTemplate } from "@/modules/template/server";
 export const getPageType = async (
   content: IPage

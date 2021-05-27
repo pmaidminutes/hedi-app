@@ -9,7 +9,7 @@ import {
   ILayoutImage,
 } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { IPage } from "../../types";
+import { IPage } from "../../../page/types";
 
 export function getLayout(content: IPage & IPageConfig) {
   const { id, components } = content;
