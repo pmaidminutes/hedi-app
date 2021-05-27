@@ -34,13 +34,6 @@ import {
 } from "@/modules/landingPage/server";
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 
-// Login
-import { getLoginPage } from "@/modules/login/server/page";
-import { TryLogin } from "@/modules/login/client/components";
-// Registration
-import { getRegistrationPage } from "@/modules/registration/server/page";
-import { TryRegistration } from "@/modules/registration/client/components";
-
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
 import { TrySearch } from "@/modules/search/client/components";
@@ -127,12 +120,6 @@ export const getStaticProps: GetStaticProps<
       switch (
         generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
       ) {
-        case "login":
-          generic = await getLoginPage(generic);
-          break;
-        case "registration":
-          generic = await getRegistrationPage(generic);
-          break;
         case "search":
           generic = await getSearchPage(generic);
           break;
@@ -181,11 +168,11 @@ export default function segments(props: IPageProps<IAppPage>) {
   return (
     <Shell {...props}>
       <>
-        <TryRegistration content={content} key="registration" />
+        {/* <TryRegistration content={content} key="registration" /> */}
+        {/* <TryLogin content={content} key="login" /> */}
         {/* <TryViewProfile content={content} key="viewprofile" /> */}
         {/* <TryProfile content={content} key="profile" /> */}
         {/* <TryProfileList content={content} key="profileList" /> */}
-        <TryLogin content={content} key="login" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />

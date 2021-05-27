@@ -4,7 +4,5 @@ import { generateAppPagePathsGQL } from "@/modules/common/query";
 export const AppPagePathsGQL = generateAppPagePathsGQL([
   "imprint",
   "privacy",
-  "login",
-  "registration",
   "search",
 ]);
