@@ -17,7 +17,7 @@ const data = {
 export default function ChatIndex() {
   return (
     <div>
-      <VideoPlayer data={data} />
+      {/* <VideoPlayer data={data} /> */}
     </div>
   );
 }
