@@ -1,7 +1,7 @@
 import React from "react";
 import { transformTemplate } from "./transformTemplate";
 import { ITemplatePage } from "../../../types";
-import { Body, Label } from "@/modules/common/components";
+import { Body, Label } from "@/modules/components";
 import { Column, Row } from "carbon-components-react";
 
 export const Template = ({ content }: { content: ITemplatePage }) => {

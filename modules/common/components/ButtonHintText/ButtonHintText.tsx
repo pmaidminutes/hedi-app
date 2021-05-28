@@ -1,5 +1,5 @@
 import React from "react";
-import { IButtonProps, ILinkProps, Button, Link } from "../index";
+import { IButtonProps, ILinkProps, Button, Link } from "@/modules/components";
 
 export interface IButtonHintLinkProps {
   button: IButtonProps;

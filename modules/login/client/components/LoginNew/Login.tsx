@@ -2,11 +2,11 @@ import React from "react";
 import { ILogin, transformLogin } from "./transformLogin";
 import {
   TextInput,
-  ButtonHintLink,
   Button,
   InlineNotification,
   ToastNotification,
-} from "@/modules/common/components";
+} from "@/modules/components";
+import { ButtonHintLink } from "@/modules/common/components";
 import { Column, Form, Row } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
 

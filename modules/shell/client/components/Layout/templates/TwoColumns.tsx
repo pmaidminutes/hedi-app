@@ -2,7 +2,7 @@ import { ILayoutBasicTemplate } from "../types";
 import { HTML } from "@/modules/react/html";
 import { Column, ColumnDefaultProps, Grid, Row } from "carbon-components-react";
 import { IComponent } from "@/modules/model/components";
-import { Renderer } from "@/modules/common/components";
+import { ComponentRenderer } from "@/modules/components";
 
 export const TwoColumns: React.FC<
   ILayoutBasicTemplate & {
@@ -24,7 +24,7 @@ export const TwoColumns: React.FC<
   <Grid>
     <Row>
       <Column {...left} className="hedi-app-page-image-wrapper">
-        {sideComponents && <Renderer components={sideComponents} />}
+        {sideComponents && <ComponentRenderer components={sideComponents} />}
       </Column>
 
       <Column {...right} className="hedi--col--grid-nest">

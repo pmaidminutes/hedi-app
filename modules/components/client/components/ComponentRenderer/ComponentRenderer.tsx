@@ -22,13 +22,13 @@ import {
   DownloadFile,
   VideoPlayer,
   Svg,
-} from "@/modules/common/components";
+} from "../index";
 import React from "react";
 interface IRendererProps {
   components: IComponent[];
 }
 
-export const Renderer = (props: IRendererProps) => {
+export const ComponentRenderer = (props: IRendererProps) => {
   const { components } = props;
   return (
     <>

@@ -1,4 +1,4 @@
-import { VideoPlayer } from "@/modules/common/components";
+import { VideoPlayer } from "@/modules/components";
 
 const data = {
   subtitles: [
