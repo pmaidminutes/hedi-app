@@ -7,6 +7,7 @@ export interface File extends IComponent {
   route: string;
   labelText: HTML;
   usage?: string;
+  mimeType?: string;
 }
 
 export const isFile = (obj: IComponent): obj is File =>

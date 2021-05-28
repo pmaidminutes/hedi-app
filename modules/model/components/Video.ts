@@ -7,6 +7,7 @@ export interface Video extends IComponent {
   route: string;
   labelText: HTML;
   usage?: string;
+  mimeType?: string;
 }
 
 export const isVideo = (obj: IComponent): obj is Video =>

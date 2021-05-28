@@ -36,7 +36,7 @@ import { TryLandingPage } from "@/modules/landingPage/client/components";
 
 // Login
 import { getLoginPage } from "@/modules/login/server/page";
-import { TryLogin } from "@/modules/login/client/components";
+import { TryLogin, TryLoginNew } from "@/modules/login/client/components";
 // Registration
 import { getRegistrationPage } from "@/modules/registration/server/page";
 import { TryRegistration } from "@/modules/registration/client/components";
@@ -90,6 +90,11 @@ import { TryCategory } from "@/modules/editorial/category/client/components";
 import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
 import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
+// Page
+import { PagePathsGQL, getPageType } from "@/modules/page/server";
+import { TryPage } from "@/modules/page/client/components";
+import { PageGQL, isIPage, IPage } from "@/modules/page/types";
+import { TryTemplate } from "@/modules/template/client";
 
 // TODO should we remove the design stuff again?
 let dynamicProps: any;
@@ -114,6 +119,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     ArticlePathsGQL,
     CategoryPathsGQL,
     GlossaryPathsGQL,
+    PagePathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -154,10 +160,12 @@ export const getStaticProps: GetStaticProps<
       CategoryGQL,
       CaregiverGQL,
       MidwifeGQL,
+      PageGQL,
     ];
     const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
     let generic = entities?.[0] ?? null;
 
+    if (isIPage(generic)) generic = await getPageType(generic);
     if (isIArticle(generic)) generic = await getArticlePage(generic);
     if (isICategory(generic)) generic = await getCategoryPage(generic);
     if (isProfile(generic)) generic = await getProfilePage(generic);
@@ -194,8 +202,8 @@ export const getStaticProps: GetStaticProps<
           generic = await getAppPagePage(generic);
       }
       // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
-      content = generic;
     }
+    content = generic;
 
     // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
     // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
@@ -230,11 +238,13 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default function segments(props: IPageProps<IAppPage>) {
+export default function segments(props: IPageProps<IAppPage & IPage>) {
   const { content } = props;
   return (
     <Shell {...props}>
       <>
+        <TryLoginNew content={content} key="loginNew" />
+        <TryTemplate content={content} key="template" />
         <TryRegistration content={content} key="registration" />
         <TryViewProfile content={content} key="viewprofile" />
         <TryProfile content={content} key="profile" />
@@ -249,6 +259,7 @@ export default function segments(props: IPageProps<IAppPage>) {
         <TryLandingPage content={content} key="landingpage" />
         <TrySearch content={content} key="search" />
         <TryAppPage content={content} key="apppage" />
+        <TryPage content={content} key="page" />
       </>
     </Shell>
   );

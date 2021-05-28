@@ -16,6 +16,6 @@ export const isColumnInstance = (obj: IComponent, id: string): obj is Column =>
   isColumn(obj) && obj.id === id;
 
 export const findColumnInstance = (array: IComponent[], id: string) => {
-  const group = array.filter(isColumn).find(item => item.id === id);
-  return group;
+  const column = array.filter(isColumn).find(item => item.id === id);
+  return column || null;
 };

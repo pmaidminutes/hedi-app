@@ -18,6 +18,7 @@ export function useShell(shell: Partial<IShellProps>) {
   const [hediStyle, setHediStyle] = useState("");
   const [user, isLoading] = getUser();
   const pageLayout = layout?.pageLayout ?? null;
+  const layoutHeadline = layout?.headline || null;
 
   useEffect(() => {
     setHasHeader(checkAccess(!!user, useHeader));
@@ -37,5 +38,6 @@ export function useShell(shell: Partial<IShellProps>) {
     pageLayout,
     layout,
     langDirections,
+    layoutHeadline
   };
 }
