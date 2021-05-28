@@ -12,6 +12,7 @@ export interface DatePicker extends IComponent {
   placeholder?: string;
   minDate?: string;
   maxDate?: string;
+  labelTextEnd?: HTML;
 }
 
 export const isDatePicker = (obj: IComponent): obj is DatePicker =>

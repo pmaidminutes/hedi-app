@@ -6,10 +6,10 @@ export interface Image extends IComponent {
   kind: ImageKind;
   route: string;
   labelText: HTML;
-  usage?: string;
-  alt?: string;
   width: number;
   height: number;
+  usage?: string;
+  alt?: string;
 }
 
 export const isImage = (obj: IComponent): obj is Image =>

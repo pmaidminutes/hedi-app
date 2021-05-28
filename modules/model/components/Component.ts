@@ -5,6 +5,10 @@ import { Column, ColumnKind } from "./Column";
 import { DatePicker, DatePickerKind } from "./DatePicker";
 import { Generic, GenericKind } from "./Generic";
 import { Group, GroupKind } from "./Group";
+import {
+  InlineNotification,
+  InlineNotificationKind,
+} from "./InlineNotification";
 import { Label, LabelKind } from "./Label";
 import { Link, LinkKind } from "./Link";
 import { Audio, AudioKind } from "./Audio";
@@ -12,15 +16,11 @@ import { File, FileKind } from "./File";
 import { Image, ImageKind } from "./Image";
 import { Svg, SvgKind } from "./Svg";
 import { Video, VideoKind } from "./Video";
-import {
-  InlineNotification,
-  InlineNotificationKind,
-} from "./InlineNotification";
 import { ToastNotification, ToastNotificationKind } from "./ToastNotification";
+import { TextInput, TextInputKind } from "./TextInput";
 import { NumberInput, NumberInputKind } from "./NumberInput";
 import { Slider, SliderKind } from "./Slider";
 import { TextArea, TextAreaKind } from "./TextArea";
-import { TextInput, TextInputKind } from "./TextInput";
 import { Toggle, ToggleKind } from "./Toggle";
 
 export type HTML = string;
@@ -29,6 +29,7 @@ export type ComponentKind =
   | never
   | BodyKind
   | ButtonKind
+  | ColumnKind
   | CheckboxKind
   | DatePickerKind
   | GenericKind
@@ -57,11 +58,13 @@ export interface IComponent {
 export type Component =
   | Body
   | Button
+  | Column
   | Checkbox
   | Column
   | DatePicker
   | Generic
   | Group
+  | InlineNotification
   | Label
   | Link
   | Audio
