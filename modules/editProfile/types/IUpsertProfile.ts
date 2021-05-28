@@ -1,11 +1,11 @@
 import { gql } from "@/modules/graphql";
 import { ErrorMap } from "@/modules/model";
-import { UpsertProfileGQL, IEditProfile } from "./IEditProfile";
+import { UpsertProfileGQL } from "./IEditProfile";
 
 export interface IUpsertProfileResponse {
   success: boolean;
   errors?: ErrorMap;
-  profile?: IEditProfile;
+  profile?: any;
   route?: string;
 }
 

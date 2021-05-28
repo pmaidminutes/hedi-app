@@ -5,9 +5,8 @@ import NextLink from "next/link";
 import { ClickableTile } from "carbon-components-react";
 import { ArrowRight24 } from "@carbon/icons-react";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
-import { IProfileEntry } from ".";
 
-export const ProfileListItem = (props: IProfileEntry) => {
+export const ProfileListItem = (props: any) => {
   const {
     profile,
     midwifeLabel,
@@ -19,7 +18,7 @@ export const ProfileListItem = (props: IProfileEntry) => {
     <NextLink href={route ?? "#"} passHref>
       <ClickableTile href={route} className={profileType ?? ""}>
         <ProfileEntry
-          {...extractProfileEntry(profile, midwifeLabel, servicesHeadline)}
+          {...extractProfileEntry(profile, servicesHeadline)}
           // isTitleAsLink={true}
           isNarrow={false}
           key={route}

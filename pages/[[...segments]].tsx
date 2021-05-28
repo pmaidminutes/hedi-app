@@ -26,6 +26,8 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
+import { TryLoginNew } from "@/modules/login/client/components";
+
 // LandingPage
 import { landingPagePaths } from "@/modules/landingPage/types";
 import {
@@ -34,47 +36,9 @@ import {
 } from "@/modules/landingPage/server";
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 
-// Login
-import { getLoginPage } from "@/modules/login/server/page";
-import { TryLogin, TryLoginNew } from "@/modules/login/client/components";
-// Registration
-import { getRegistrationPage } from "@/modules/registration/server/page";
-import { TryRegistration } from "@/modules/registration/client/components";
-
-// editProfile
-import { getEditProfilePage } from "@/modules/editProfile/server/page";
-import { TryEditProfile } from "@/modules/editProfile/client/components";
-
-// userFeedback
-import {
-  getUserFeedbackPage,
-  getUserFeedbackThanksPage,
-} from "@/modules/userFeedback/server/pages";
-import {
-  TryUserFeedback,
-  TryUserFeedbackThanks,
-} from "@/modules/userFeedback/client/components";
-
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
 import { TrySearch } from "@/modules/search/client/components";
-
-// Profile
-import { CaregiverGQL, isProfile, MidwifeGQL } from "@/modules/profile/types";
-import {
-  CaregiverPathsGQL,
-  MidwifePathsGQL,
-} from "@/modules/profile/server/query";
-import {
-  getProfileListPage,
-  getViewProfilePage,
-  getProfilePage,
-} from "@/modules/profile/server";
-import {
-  TryViewProfile,
-  TryProfile,
-  TryProfileList,
-} from "@/modules/profile/client/components";
 
 // Article
 import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
@@ -113,8 +77,6 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   if (isDesignContext) dynamicProps = await getDesignProps();
 
   const pathQueries = [
-    CaregiverPathsGQL,
-    MidwifePathsGQL,
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
@@ -154,47 +116,19 @@ export const getStaticProps: GetStaticProps<
   } else if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
-    const gqlTypes = [
-      AppPageGQL,
-      ArticleGQL,
-      CategoryGQL,
-      CaregiverGQL,
-      MidwifeGQL,
-      PageGQL,
-    ];
+    const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
     const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
     let generic = entities?.[0] ?? null;
 
     if (isIPage(generic)) generic = await getPageType(generic);
     if (isIArticle(generic)) generic = await getArticlePage(generic);
     if (isICategory(generic)) generic = await getCategoryPage(generic);
-    if (isProfile(generic)) generic = await getProfilePage(generic);
+    // if (isProfile(generic)) generic = await getProfilePage(generic);
 
     if (isIAppPage(generic)) {
       switch (
         generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
       ) {
-        case "login":
-          generic = await getLoginPage(generic);
-          break;
-        case "registration":
-          generic = await getRegistrationPage(generic);
-          break;
-        case "editprofile":
-          generic = await getEditProfilePage(generic);
-          break;
-        case "viewprofile":
-          generic = await getViewProfilePage(generic);
-          break;
-        case "profiles":
-          generic = await getProfileListPage(generic);
-          break;
-        case "userfeedback":
-          generic = await getUserFeedbackPage(generic);
-          break;
-        case "userfeedbackThanks":
-          generic = await getUserFeedbackThanksPage(generic);
-          break;
         case "search":
           generic = await getSearchPage(generic);
           break;
@@ -243,20 +177,23 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
   return (
     <Shell {...props}>
       <>
-        <TryLoginNew content={content} key="loginNew" />
         <TryTemplate content={content} key="template" />
-        <TryRegistration content={content} key="registration" />
-        <TryViewProfile content={content} key="viewprofile" />
-        <TryProfile content={content} key="profile" />
-        <TryProfileList content={content} key="profileList" />
-        <TryLogin content={content} key="login" />
-        <TryEditProfile content={content} key="editProfile" />
+        <TryLoginNew content={content} key="loginNew" />
+
+        {/* <TryRegistration content={content} key="registration" /> */}
+        {/* <TryLogin content={content} key="login" /> */}
+        {/* <TryViewProfile content={content} key="viewprofile" /> */}
+        {/* <TryProfile content={content} key="profile" /> */}
+        {/* <TryProfileList content={content} key="profileList" /> */}
+        {/* <TryEditProfile content={content} key="editProfile" /> */}
+        {/* <TryUserFeedback content={content} key="userfeedback" /> */}
+        {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
+        <TryLandingPage content={content} key="landingpage" />
+
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
         <TryGlossary content={content} key="glossary" />
-        <TryUserFeedback content={content} key="userfeedback" />
-        <TryUserFeedbackThanks content={content} key="userfeedbackThanks" />
-        <TryLandingPage content={content} key="landingpage" />
+
         <TrySearch content={content} key="search" />
         <TryAppPage content={content} key="apppage" />
         <TryPage content={content} key="page" />

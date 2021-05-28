@@ -1,21 +1,11 @@
 import { FormEventHandler, useState } from "react";
 import useSWR from "swr";
 import { setProperty } from "@/modules/common/utils";
-import {
-  IEditProfile,
-  EditProfileFieldArray,
-  EditProfileInput,
-  editProfileAPIUrl,
-} from "../../../types";
+import { EditProfileInput, editProfileAPIUrl } from "../../../types";
 import { upsertProfile } from "../../request";
 import { useRouter } from "next/router";
-import { IUIElementTexts } from "@/modules/model";
 
-export function useEditProfileForm(
-  lang: string,
-  elements: IUIElementTexts[],
-  username?: string | null
-) {
+export function useEditProfileForm(lang: string, username?: string | null) {
   const { data, error, isValidating, mutate } = useSWR(
     [editProfileAPIUrl, username],
     url => upsertProfile(url, { lang })
@@ -28,9 +18,9 @@ export function useEditProfileForm(
     e.preventDefault();
     const form = new FormData(e.target as HTMLFormElement);
     const delta = {} as EditProfileInput;
-    const profileData = data?.profile ?? ({} as IEditProfile);
+    const profileData = data?.profile;
 
-    EditProfileFieldArray.forEach(key => {
+    [].forEach(key => {
       let value = form.get(key)?.valueOf();
       if (value === "on") value = true;
       if (key === "domains" || key === "services")
