@@ -26,6 +26,8 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
+import { TryLoginNew } from "@/modules/login/client/components";
+
 // LandingPage
 import { landingPagePaths } from "@/modules/landingPage/types";
 import {
@@ -114,12 +116,7 @@ export const getStaticProps: GetStaticProps<
   } else if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
-    const gqlTypes = [
-      AppPageGQL, 
-      ArticleGQL, 
-      CategoryGQL, 
-      PageGQL
-    ];
+    const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
     const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
     let generic = entities?.[0] ?? null;
 
@@ -192,11 +189,11 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         {/* <TryUserFeedback content={content} key="userfeedback" /> */}
         {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
         <TryLandingPage content={content} key="landingpage" />
-        
+
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
         <TryGlossary content={content} key="glossary" />
-        
+
         <TrySearch content={content} key="search" />
         <TryAppPage content={content} key="apppage" />
         <TryPage content={content} key="page" />
