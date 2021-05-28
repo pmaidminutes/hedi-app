@@ -19,3 +19,8 @@ export const findLabelInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isLabel).find(item => item.id === id);
   return element;
 };
+
+export const findHeadlineLabel = (array: IComponent[]) => {
+  const element = array.filter(isLabel).find(item => item.labelKind == "h1");
+  return element;
+};

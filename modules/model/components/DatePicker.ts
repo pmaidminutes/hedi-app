@@ -7,11 +7,11 @@ export interface DatePicker extends IComponent {
   datePickerType: "simple" | "single" | "range";
   dateFormat: string;
   labelText?: HTML;
+  labelTextEnd?: HTML;
   isRequired?: boolean;
   placeholder?: string;
   minDate?: string;
   maxDate?: string;
-  labelTextEnd?: HTML;
 }
 
 export const isDatePicker = (obj: IComponent): obj is DatePicker =>

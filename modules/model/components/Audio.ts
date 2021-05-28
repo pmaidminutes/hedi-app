@@ -7,6 +7,7 @@ export interface Audio extends IComponent {
   route: string;
   labelText: HTML;
   usage?: string;
+  mimeType?: string;
 }
 
 export const isAudio = (obj: IComponent): obj is Audio =>

@@ -1,7 +1,12 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
-import { SingleColumn, ImageAndColumn, Categories } from "./templates";
+import {
+  SingleColumn,
+  ImageAndColumn,
+  Categories,
+  TwoColumns,
+} from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
   const {
@@ -19,6 +24,7 @@ export const Layout: React.FC<ILayoutProps> = props => {
     children,
     groupClass,
     single,
+    sideComponents,
   } = transformLayout(props);
 
   return (
@@ -57,6 +63,16 @@ export const Layout: React.FC<ILayoutProps> = props => {
         <Categories headline={headline} groupClass={groupClass}>
           {children}
         </Categories>
+      ) : pageLayout === "twoColumns" ? (
+        <TwoColumns
+          headline={headline}
+          body={body}
+          groupClass={groupClass}
+          left={left}
+          right={right}
+          sideComponents={sideComponents}>
+          {children}
+        </TwoColumns>
       ) : null}
     </div>
   );

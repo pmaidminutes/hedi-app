@@ -52,6 +52,11 @@ import { TryCategory } from "@/modules/editorial/category/client/components";
 import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
 import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
+// Page
+import { PagePathsGQL, getPageType } from "@/modules/page/server";
+import { TryPage } from "@/modules/page/client/components";
+import { PageGQL, isIPage, IPage } from "@/modules/page/types";
+import { TryTemplate } from "@/modules/template/client";
 
 // TODO should we remove the design stuff again?
 let dynamicProps: any;
@@ -74,6 +79,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     ArticlePathsGQL,
     CategoryPathsGQL,
     GlossaryPathsGQL,
+    PagePathsGQL,
   ];
   const locales = context?.locales ?? [];
   const paths = [];
@@ -108,10 +114,16 @@ export const getStaticProps: GetStaticProps<
   } else if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
-    const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL];
+    const gqlTypes = [
+      AppPageGQL, 
+      ArticleGQL, 
+      CategoryGQL, 
+      PageGQL
+    ];
     const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
     let generic = entities?.[0] ?? null;
 
+    if (isIPage(generic)) generic = await getPageType(generic);
     if (isIArticle(generic)) generic = await getArticlePage(generic);
     if (isICategory(generic)) generic = await getCategoryPage(generic);
     // if (isProfile(generic)) generic = await getProfilePage(generic);
@@ -127,8 +139,8 @@ export const getStaticProps: GetStaticProps<
           generic = await getAppPagePage(generic);
       }
       // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
-      content = generic;
     }
+    content = generic;
 
     // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
     // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
@@ -163,25 +175,31 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default function segments(props: IPageProps<IAppPage>) {
+export default function segments(props: IPageProps<IAppPage & IPage>) {
   const { content } = props;
   return (
     <Shell {...props}>
       <>
+        <TryTemplate content={content} key="template" />
+        <TryLoginNew content={content} key="loginNew" />
+
         {/* <TryRegistration content={content} key="registration" /> */}
         {/* <TryLogin content={content} key="login" /> */}
         {/* <TryViewProfile content={content} key="viewprofile" /> */}
         {/* <TryProfile content={content} key="profile" /> */}
         {/* <TryProfileList content={content} key="profileList" /> */}
         {/* <TryEditProfile content={content} key="editProfile" /> */}
-        <TryArticle content={content} key="article" />
-        <TryCategory content={content} key="category" />
-        <TryGlossary content={content} key="glossary" />
         {/* <TryUserFeedback content={content} key="userfeedback" /> */}
         {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
         <TryLandingPage content={content} key="landingpage" />
+        
+        <TryArticle content={content} key="article" />
+        <TryCategory content={content} key="category" />
+        <TryGlossary content={content} key="glossary" />
+        
         <TrySearch content={content} key="search" />
         <TryAppPage content={content} key="apppage" />
+        <TryPage content={content} key="page" />
       </>
     </Shell>
   );

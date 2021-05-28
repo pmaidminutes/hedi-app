@@ -1,7 +1,7 @@
 import { Body, BodyKind } from "./Body";
 import { Button, ButtonKind } from "./Button";
-import { Column, ColumnKind } from "./Column";
 import { Checkbox, CheckboxKind } from "./Checkbox";
+import { Column, ColumnKind } from "./Column";
 import { DatePicker, DatePickerKind } from "./DatePicker";
 import { Generic, GenericKind } from "./Generic";
 import { Group, GroupKind } from "./Group";
@@ -16,11 +16,11 @@ import { File, FileKind } from "./File";
 import { Image, ImageKind } from "./Image";
 import { Svg, SvgKind } from "./Svg";
 import { Video, VideoKind } from "./Video";
+import { ToastNotification, ToastNotificationKind } from "./ToastNotification";
+import { TextInput, TextInputKind } from "./TextInput";
 import { NumberInput, NumberInputKind } from "./NumberInput";
 import { Slider, SliderKind } from "./Slider";
 import { TextArea, TextAreaKind } from "./TextArea";
-import { TextInput, TextInputKind } from "./TextInput";
-import { ToastNotification, ToastNotificationKind } from "./ToastNotification";
 import { Toggle, ToggleKind } from "./Toggle";
 
 export type HTML = string;
@@ -34,7 +34,7 @@ export type ComponentKind =
   | DatePickerKind
   | GenericKind
   | GroupKind
-  | InlineNotificationKind
+  | ColumnKind
   | LabelKind
   | LinkKind
   | AudioKind
@@ -46,8 +46,9 @@ export type ComponentKind =
   | SliderKind
   | TextAreaKind
   | TextInputKind
-  | ToastNotificationKind
-  | ToggleKind;
+  | ToggleKind
+  | InlineNotificationKind
+  | ToastNotificationKind;
 
 export interface IComponent {
   kind: ComponentKind;
@@ -59,6 +60,7 @@ export type Component =
   | Button
   | Column
   | Checkbox
+  | Column
   | DatePicker
   | Generic
   | Group
@@ -74,5 +76,6 @@ export type Component =
   | Slider
   | TextArea
   | TextInput
-  | ToastNotification
-  | Toggle;
+  | Toggle
+  | InlineNotification
+  | ToastNotification;
