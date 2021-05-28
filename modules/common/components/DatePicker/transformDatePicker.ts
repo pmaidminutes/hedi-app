@@ -16,7 +16,6 @@ interface IDatePickerAndInputProps extends DatePickerProps {
 export function transformDatePicker(
   props: IDatePickerProps
 ): IDatePickerAndInputProps {
-  console.log({ props });
   const {
     id,
     kind,
