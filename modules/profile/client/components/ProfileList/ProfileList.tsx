@@ -1,6 +1,6 @@
 import { ITyped } from "@/modules/model";
 import type { ProfileListView } from "../../../server";
-import { ProfileListItem } from "./ProfileListItem";
+import { ProfileEntryLink } from "../ProfileEntry";
 import { useProfileList } from "./useProfileList";
 
 export const TryProfileList = ({
@@ -13,16 +13,18 @@ export const TryProfileList = ({
 };
 
 export const ProfileList = ({ content }: { content: ProfileListView }) => {
-  const { data: profiles } = useProfileList(content.profiles, content.lang);
+  const { data: profileEntries } = useProfileList(
+    content.profileEntries,
+    content.lang
+  );
 
-  const { elements } = content;
+  const { components } = content;
   return (
     <>
-      {(profiles ?? content.profiles).map(profile => (
-        <ProfileListItem
-          profile={profile}
-          elements={elements}
-          key={profile.route}
+      {(profileEntries ?? content.profileEntries).map(profileEntry => (
+        <ProfileEntryLink
+          {...profileEntry} //append title components
+          key={profileEntry.route}
         />
       ))}
     </>

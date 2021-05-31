@@ -1,41 +1,48 @@
 import { logAndFallback } from "@/modules/common/error";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { GraphQLClient } from "graphql-request";
+import {
+  BusinessProfileFields,
+  IBusinessProfile,
+  IProfileEntry,
+} from "../../types";
+import { transformProfileToEntry } from "../../utils/transformProfileToEntry";
+
+type BusinessProfilesResponse = {
+  professionals: IBusinessProfile[];
+  associations: IBusinessProfile[];
+};
 
 export async function getProfileList(
   lang: string,
   client?: GraphQLClient
-): Promise<any[]> {
+): Promise<IProfileEntry[]> {
   const query = gql`
-    query getProfiles($lang: String!, $includeSelf: Boolean) {
-      #caregivers(lang: $lang)
-      #midwives(lang: $lang)
+    query getBusinessProfiles($lang: String!, $includeSelf: Boolean) {
+      professionals(lang: $lang) { ${BusinessProfileFields} }
+      associations(lang: $lang) { ${BusinessProfileFields} }
     }
   `;
 
   // gql endpoint should probably be user later, to respect
   // if (!client) client = await getServiceClient(GQLEndpoint.Internal);
 
-  type subqueryType = {
-    caregivers: any[];
-    midwives: any[];
-  };
-  const { caregivers, midwives } = await serviceGQuery<subqueryType>(query, {
+  const {
+    professionals,
+    associations,
+  } = await serviceGQuery<BusinessProfilesResponse>(query, {
     lang,
   }).then(data =>
     logAndFallback(data, {
-      caregivers: [],
-      midwives: [],
-      organisations: [],
-      institutions: [],
-    } as subqueryType)
+      professionals: [],
+      associations: [],
+    } as BusinessProfilesResponse)
   );
 
-  const profiles: any[] = caregivers
-    .concat(midwives)
+  const profiles = professionals
+    .concat(associations)
     .sort((a, b) =>
-      a.surname.localeCompare(b.surname, lang, { ignorePunctuation: true })
+      a.label.localeCompare(b.label, lang, { ignorePunctuation: true })
     );
-
-  return profiles;
+  return profiles.map(profile => transformProfileToEntry(profile));
 }

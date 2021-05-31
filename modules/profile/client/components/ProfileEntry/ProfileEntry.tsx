@@ -1,96 +1,81 @@
-import { Row, Column, Link, Button } from "carbon-components-react";
+import { Row, Column } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
-import { transformProfileEntry } from "./transformProfileEntry";
-import { Launch16, Edit24 } from "@carbon/icons-react";
+
 import HediPerson from "./assets/hedi_person.svg";
+import { IProfileEntry } from "@/modules/profile/types";
+import { Address, EmailLink, PhoneLink, WebLink } from "..";
 
-export const ProfileEntry = (props: any): JSX.Element => {
+export type IProfileEntryProps = IProfileEntry &
+  IProfileEntryDefinition &
+  IProfileEntryConfig;
+
+export interface IProfileEntryDefinition {
+  phoneTitle?: string;
+  emailTitle?: string;
+  websiteTitle?: string;
+  servicesTitle?: string;
+}
+
+export interface IProfileEntryConfig {
+  isNarrow?: boolean;
+}
+
+export const ProfileEntry: React.FC<IProfileEntryProps> = (
+  props
+): JSX.Element => {
+  const { label, profession, address, phone, email, website, services } = props;
   const {
-    displayName,
-    domains,
-    postal_code,
-    city,
-    mail,
-    website,
-    phone,
-    services,
-    servicesHeadline,
-    route,
+    phoneTitle,
+    emailTitle,
+    websiteTitle,
+    servicesTitle,
     isNarrow,
-    className,
-    prettyUrl,
-    phoneLink,
-    editButtonProps,
-  } = transformProfileEntry(props);
-
+  } = props;
+  const className =
+    "hedi--profile-entry" +
+    (services ? " hedi--profile-entry--with-services" : "");
   return (
-    <>
-      <section className={className}>
-        <Row narrow={isNarrow}>
-          <Column sm={4} md={2} lg={3} className="hedi--profile-entry-image">
-            <HediPerson />
-          </Column>
-          <Column sm={4} md={6} lg={13}>
-            <div className="hedi--profile-entry-content">
-              {/* TODO reuse contact */}
-              <h2>{displayName}</h2>
-              <h3>{"domain"}</h3>
-              <address>
-                {postal_code} {city}
-                {/* TODO right number for phone linking */}
-              </address>
+    <section className={className}>
+      <Row narrow={isNarrow}>
+        <Column sm={4} md={2} lg={3} className="hedi--profile-entry-image">
+          <HediPerson />
+        </Column>
+        <Column sm={4} md={6} lg={13}>
+          <div className="hedi--profile-entry-content">
+            <h2>{label}</h2>
+            <h3>{profession}</h3>
+            <Address {...address} />
 
-              <div className="hedi--spacing">
+            <div className="hedi--spacing">
+              {phone && (
                 <p>
-                  <Link
-                    href={`tel:${phoneLink}`}
-                    target="_blank"
-                    title="Telefonnummer"
-                    className="bx--link--lg">
-                    {phone}
-                  </Link>
+                  <PhoneLink title={phoneTitle ?? "Telephone"} {...phone} />
                 </p>
+              )}
+              {email && (
                 <p>
-                  <Link
-                    href={`mailto:${mail}`}
-                    target="_blank"
-                    title="E-Mail Address"
-                    className="bx--link--lg"
-                    inline>
-                    {mail}
-                  </Link>
+                  <EmailLink
+                    title={emailTitle ?? "E-Mail Address"}
+                    {...email}
+                  />
                 </p>
+              )}
+              {website && (
                 <p>
-                  {website ? (
-                    <Link
-                      href={website}
-                      target="_blank"
-                      title="Webseite"
-                      className="bx--link--lg">
-                      {prettyUrl} <Launch16 />
-                    </Link>
-                  ) : null}
+                  <WebLink title={websiteTitle ?? "Webseite"} {...website} />
                 </p>
-              </div>
-              {services && services.length > 0 && (
-                <TagList
-                  tagType="blue"
-                  tags={services}
-                  headline={servicesHeadline ?? "Tätigkeiten"}></TagList>
               )}
             </div>
-          </Column>
-        </Row>
-        {editButtonProps?.isShowing ? (
-          <Button
-            kind="ghost"
-            size="sm"
-            renderIcon={Edit24}
-            href={editButtonProps.link}>
-            {editButtonProps.text}
-          </Button>
-        ) : null}
-      </section>
-    </>
+            {services && services.length > 0 && (
+              <TagList
+                tagType="blue"
+                //tags={services}
+                headline={servicesTitle ?? "Tätigkeiten"}></TagList>
+            )}
+          </div>
+        </Column>
+      </Row>
+      {props.children}
+    </section>
   );
 };

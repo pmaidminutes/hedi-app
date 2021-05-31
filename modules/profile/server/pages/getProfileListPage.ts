@@ -1,17 +1,19 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
-import { IAppPage } from "@/modules/common/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getProfileList } from "../query";
-import { Profile } from "../../types";
+import { IProfileEntry } from "../../types";
+import { IPage } from "@/modules/page/types";
 
-export type ProfileListView = IAppPage & { profiles: Profile[] } & IPageConfig;
+export type ProfileListView = IPage & {
+  profileEntries: IProfileEntry[];
+} & IPageConfig;
 
 export const getProfileListPage = async (
-  content: IAppPage
+  content: IPage
 ): Promise<ProfileListView> => {
   content.type = "ProfileList";
 
-  const profiles = await getProfileList(content.lang);
+  const profileEntries = await getProfileList(content.lang);
 
   const layout: ILayout = {
     pageLayout: "singleColumn",
@@ -27,7 +29,7 @@ export const getProfileListPage = async (
 
   return {
     ...content,
-    profiles,
+    profileEntries,
     ...shell,
   };
 };
