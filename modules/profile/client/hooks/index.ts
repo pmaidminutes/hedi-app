@@ -1,4 +1,4 @@
 export * from "./useCurrentProfile";
-export * from "./useCurrentProfileEntity";
+export * from "./useCurrentProfileRoute";
 export * from "./useEditProfileButton";
 export * from "./useServices";

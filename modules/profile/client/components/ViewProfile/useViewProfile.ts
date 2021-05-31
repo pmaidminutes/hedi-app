@@ -1,24 +1,24 @@
 import { useEffect } from "react";
 import { useRouter } from "next/router";
 import { getUser } from "@/modules/auth/client";
-import { useCurrentProfileEntity } from "../../hooks";
+import { useCurrentProfileRoute } from "../../hooks";
 
 export const useViewProfile = (lang: string) => {
   const router = useRouter();
   const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileIsLoading] = useCurrentProfileEntity(
-    user,
-    lang
-  );
+  const [
+    currentProfileRoute,
+    currentProfileRouteIsLoading,
+  ] = useCurrentProfileRoute(user, lang);
   useEffect(() => {
-    if (!currentProfileIsLoading && currentProfile)
-      router.push(currentProfile.route);
+    if (!currentProfileRouteIsLoading && currentProfileRoute)
+      router.push(currentProfileRoute);
   }, [
     user?.name,
     userIsLoading,
-    currentProfile?.route,
-    currentProfileIsLoading,
+    currentProfileRoute,
+    currentProfileRouteIsLoading,
   ]);
 
-  return { currentProfileIsLoading };
+  return { currentProfileRouteIsLoading };
 };

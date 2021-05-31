@@ -17,11 +17,11 @@ export const TryViewProfile = ({
   ) : null;
 
 export const ViewProfileView = ({ content }: { content: IViewProfileView }) => {
-  const { currentProfileIsLoading } = useViewProfile(content.lang);
+  const { currentProfileRouteIsLoading } = useViewProfile(content.lang);
   const editProfile = getEditProfileLink(content);
   return (
     <>
-      {currentProfileIsLoading ? (
+      {currentProfileRouteIsLoading ? (
         <Loading />
       ) : (
         <Row>

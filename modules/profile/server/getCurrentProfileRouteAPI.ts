@@ -3,11 +3,10 @@ import {
   sendAPIErrorIfEmptyOrUnauthorized,
   sendAPIResult,
 } from "@/modules/common/utils";
-import { IEntity } from "@/modules/model";
 import { NextApiHandler } from "next";
-import { getCurrentProfileEntity } from "./query";
+import { getCurrentProfileRoute } from "./query";
 
-export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async (
+export const getCurrentProfileRouteAPI: NextApiHandler<string | null> = async (
   req,
   res
 ) => {
@@ -20,6 +19,6 @@ export const getCurrentProfileEntityAPI: NextApiHandler<IEntity | null> = async 
   if (isErrorSent || !authHeader) return;
 
   const { lang } = JSON.parse(req.body) as { lang: string };
-  const profile = await getCurrentProfileEntity(lang, authHeader);
-  sendAPIResult(res, profile);
+  const route = await getCurrentProfileRoute(lang, authHeader);
+  sendAPIResult(res, route);
 };

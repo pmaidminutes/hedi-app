@@ -1,3 +1,3 @@
 export const profileListAPIUrl = "/api/profiles";
 export const userProfileAPIUrl = "/api/user/profile";
-export const userProfileEntityAPIUrl = "/api/user/profile/entity";
+export const userProfileRouteAPIUrl = "/api/user/profile/route";

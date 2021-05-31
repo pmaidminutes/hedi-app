@@ -3,7 +3,7 @@ import {
   getUIElementRedirectRoute,
   getUIElementValue,
 } from "@/modules/common/utils";
-import { useCurrentProfileEntity } from "./useCurrentProfileEntity";
+import { useCurrentProfileRoute } from "./useCurrentProfileRoute";
 import { getUser } from "@/modules/auth/client";
 import { IEntity, IUIElementTexts } from "@/modules/model";
 import { IWithKey } from "@/modules/model/IWithKey";
@@ -20,21 +20,20 @@ export function useEditProfileButton(
   const link = getUIElementRedirectRoute("edit_redirect", elements, links);
 
   const [user, userIsLoading] = getUser();
-  const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
-    user,
-    lang
-  );
+  const [
+    currentProfileRoute,
+    currentProfileRouteIsLoading,
+  ] = useCurrentProfileRoute(user, lang);
 
   useEffect(() => {
     setHasEditProfileBtn(
-      !currentProfileLoading &&
+      !currentProfileRouteIsLoading &&
         !userIsLoading &&
-        currentProfile &&
-        currentProfile.route === route
+        currentProfileRoute === route
         ? true
         : false
     );
-  }, [currentProfile, currentProfileLoading, userIsLoading, route]);
+  }, [currentProfileRoute, currentProfileRouteIsLoading, userIsLoading, route]);
 
   return {
     editButtonProps: {
