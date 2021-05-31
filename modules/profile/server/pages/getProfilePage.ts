@@ -1,11 +1,11 @@
-import { getProfileDefinition } from "../query/getProfileDefinition";
-import { Profile, ProfileView } from "../../types";
+import { IProfile, ProfileView } from "../../types";
 import { IPageConfig } from "@/modules/shell/types";
+import { IPage } from "@/modules/page/types";
 
 export const getProfilePage = async (
-  content: Profile
+  content: IProfile
 ): Promise<ProfileView> => {
-  const definition = await getProfileDefinition(content.lang);
+  const definition: IPage = ({} as unknown) as IPage;
 
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",

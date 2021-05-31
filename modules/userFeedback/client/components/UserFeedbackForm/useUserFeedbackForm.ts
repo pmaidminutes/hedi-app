@@ -2,11 +2,6 @@
 import { useState } from "react";
 // Next
 import { useRouter } from "next/router";
-// hooks
-import {
-  transformProfile,
-  getProfileViewData,
-} from "@/modules/profile/client/components/Profile";
 import { getUIElementRedirectRoute } from "@/modules/common/utils";
 
 // Constants
@@ -33,32 +28,7 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
   const getSubPage = (key: string, subPages: IAppPage[]) =>
     subPages?.find(page => page.key == key) || ({} as IAppPage);
 
-  const {
-    languagesData,
-    profileEntryData,
-    servicesData,
-    contactData,
-    relatedProfilesData,
-    lang,
-    elements: profileElements,
-    // mapData, HACK currently incompatible
-  } = transformProfile({ content: profile });
-
   const { subPages, elements, links } = content;
-  const {
-    servicesHeadline,
-    languagesHeadline,
-    contactHeadline,
-    relatedHeadline,
-    officeHrsHeadline,
-  } = getProfileViewData(profileElements, links, lang);
-
-  // TODO improve
-  const serviceHeadlineType: headlineType = "h3";
-  const servicesDataWithHeadlineType = {
-    ...servicesData,
-    headlineType: serviceHeadlineType,
-  };
 
   const onSuccess = () => {
     const thanksPageRoute = getUIElementRedirectRoute(
@@ -97,19 +67,10 @@ export function useUserFeedbackForm(props: IUserFeedbackFormProps) {
     left,
     right,
     center,
-    profileEntryData,
-    servicesData: servicesDataWithHeadlineType,
-    contactData,
-    languagesData,
     errorMessage,
     successMessage,
     subPages,
     elements,
-    servicesHeadline,
-    languagesHeadline,
-    contactHeadline,
-    relatedHeadline,
-    officeHrsHeadline,
     getSubPage,
   };
 }

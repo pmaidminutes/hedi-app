@@ -2,16 +2,15 @@
 // import { Location } from "@/modules/map/types";
 import { ITyped } from "@/modules/model";
 import { Column, Grid, Row } from "carbon-components-react";
-import { Contact } from "../Contact";
+import { Edit24 } from "@carbon/icons-react";
+import { Contact, parseFromProfile } from "../Contact";
 import { ProfileEntry } from "../ProfileEntry";
 import { BgImgContainer } from "@/modules/common/components";
 import { ServiceGroup } from "../ServiceGroup";
 import { LanguageSkills } from "../LanguageSkills";
 import { RelatedProfiles } from "../RelatedProfiles";
-import { ProfileView } from "../../../types";
-import { getProfileViewData } from "./getProfileViewData";
-import { transformProfile, IProfileViewProps } from "./transformProfile";
-import { useEditProfileButton, useServices } from "../../hooks";
+import { isIProfile, ProfileView } from "../../../types";
+import { transformProfileToEntry } from "@/modules/profile/utils";
 
 // const locations: Location[] = [];
 
@@ -20,59 +19,38 @@ export const TryProfile = ({
 }: {
   content: ITyped;
 }): JSX.Element | null => {
-  if (
-    ["Midwife", "Caregiver", "Organisation", "Institution"].includes(
-      content.type
-    )
-  )
-    return <Profile content={content as ProfileView} />;
-  else return null;
+  return isIProfile(content) ? (
+    <Profile content={content as ProfileView} />
+  ) : null;
 };
 
-export const Profile = (props: IProfileViewProps) => {
-  const {
-    languagesData,
-    profileEntryData,
-    servicesData,
-    contactData,
-    relatedProfilesData,
-    lang,
-    route,
-    elements,
-    links,
-    services,
-  } = transformProfile(props);
+export const Profile = ({ content }: { content: ProfileView }) => {
+  const profileEntry = transformProfileToEntry(content);
+  // const profileEntry definition from components
+  // TODO components->editButton
+  /* {editButtonProps?.isShowing ? (
+        <Button
+          kind="ghost"
+          size="sm"
+          renderIcon={Edit24}
+          href={editButtonProps.link}>
+          {editButtonProps.text}
+        </Button>
+      ) : null} */
 
-  const {
-    servicesHeadline,
-    languagesHeadline,
-    contactHeadline,
-    relatedHeadline,
-    officeHrsHeadline,
-  } = getProfileViewData(elements, links, lang);
-
-  const { editButtonProps } = useEditProfileButton(
-    lang,
-    route,
-    elements,
-    links
-  );
-  const { hasServices } = useServices(services);
+  const contacts = parseFromProfile(content);
+  // contactDefinition from components;
 
   return (
     <>
       <BgImgContainer>
         <Grid>
-          <ProfileEntry
-            isNarrow={false}
-            editButtonProps={editButtonProps}
-            {...profileEntryData}
-          />
+          <ProfileEntry {...profileEntry}>{/*editbutton*/}</ProfileEntry>
         </Grid>
       </BgImgContainer>
       <Grid className="hedi--profile">
         <Row>
-          {hasServices ? (
+          {/*hasServices && (
             <Column lg={6} md={4}>
               <ServiceGroup
                 headline={servicesHeadline}
@@ -80,20 +58,19 @@ export const Profile = (props: IProfileViewProps) => {
                 headlineType="h3"
               />
             </Column>
-          ) : null}
+          )*/}
           <Column lg={6} md={4}>
-            <Contact
-              officeHrsHeadline={officeHrsHeadline}
-              headline={contactHeadline}
-              {...contactData}
-            />
+            {/* */}
+            {contacts.map(contact => (
+              <Contact {...contact} key={contact.dataKind.label} />
+            ))}
           </Column>
           <Column lg={4} md={4}>
-            <LanguageSkills headline={languagesHeadline} {...languagesData} />
+            {/* <LanguageSkills headline={languagesHeadline} {...languagesData} /> */}
           </Column>
         </Row>
       </Grid>
-      <RelatedProfiles headline={relatedHeadline} {...relatedProfilesData} />
+      {/* <RelatedProfiles headline={relatedHeadline} {...relatedProfilesData} /> */}
       {/* {hasMap)
           ? content.associations.map((entry: IProfile) => {
               return <ProfileEntry profile={entry} key={entry.route} />;

@@ -49,7 +49,8 @@ export async function getUserFeedbackDefinition(
   ).then(data =>
     logAndFallback(data, { links: [] } as Pick<IUserFeedbackView, "links">)
   );
-  const profileDefinition = await getProfileDefinition(appPage.lang);
+  const profileDefinition =
+    (await getProfileDefinition(appPage.lang)) ?? undefined;
 
   return {
     subPages,
