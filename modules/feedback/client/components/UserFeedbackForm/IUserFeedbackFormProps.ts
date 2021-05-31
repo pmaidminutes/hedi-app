@@ -1,6 +1,6 @@
 // types
 import { ColumnDefaultProps } from "carbon-components-react";
-import { IUserFeedbackView } from "@/modules/userFeedback/types";
+import { IUserFeedbackView } from "@/modules/feedback/types";
 import { ProfileView } from "@/modules/profile/types";
 export interface IUserFeedbackFormProps {
   content: IUserFeedbackView;

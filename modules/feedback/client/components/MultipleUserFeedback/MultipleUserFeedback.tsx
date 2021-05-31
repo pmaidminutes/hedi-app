@@ -1,5 +1,5 @@
-import { sendUserFeedbacks } from "@/modules/userFeedback/client/request/sendUserFeedback";
-import { UserFeedbackInput } from "@/modules/userFeedback/types";
+import { sendUserFeedbacks } from "@/modules/feedback/client/request/sendUserFeedback";
+import { UserFeedbackInput } from "@/modules/feedback/types";
 import { Form } from "carbon-components-react";
 import { FormEvent } from "react";
 import { clientInformationCollector } from "../../helper/ClientInformationCollector";

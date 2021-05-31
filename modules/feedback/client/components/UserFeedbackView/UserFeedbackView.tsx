@@ -1,6 +1,6 @@
 import { getUser } from "@/modules/auth/client";
-import { IUserFeedbackView } from "@/modules/userFeedback/types";
-import UserFeedbackForm from "@/modules/userFeedback/client/components/UserFeedbackForm/UserFeedbackForm";
+import { IUserFeedbackView } from "@/modules/feedback/types";
+import UserFeedbackForm from "@/modules/feedback/client/components/UserFeedbackForm/UserFeedbackForm";
 import { useCurrentProfile } from "@/modules/profile/client/hooks";
 import {
   getUIElement,

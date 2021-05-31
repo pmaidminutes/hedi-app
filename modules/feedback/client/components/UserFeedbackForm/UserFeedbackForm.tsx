@@ -2,8 +2,8 @@ import { useUserFeedbackForm } from "./useUserFeedbackForm";
 import {
   MultipleUserFeedback,
   UserFeedbackSendbox,
-} from "@/modules/userFeedback/client/components";
-import { UserFeedbackAppPageEntry } from "@/modules/userFeedback/client/components/UserFeedbackEntry/UserFeedbackAppPageEntry";
+} from "@/modules/feedback/client/components";
+import { UserFeedbackAppPageEntry } from "@/modules/feedback/client/components/UserFeedbackEntry/UserFeedbackAppPageEntry";
 import { Column, Row } from "carbon-components-react";
 import { BgImgContainer, Seperator } from "@/modules/common/components";
 import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
