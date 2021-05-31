@@ -1,2 +1,2 @@
 export * from "./Contact";
-export * from "./IContactProps";
+export * from "./parseFromProfile";
