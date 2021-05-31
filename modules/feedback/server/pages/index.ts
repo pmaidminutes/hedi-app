@@ -1,2 +1,2 @@
-export * from "./getUserFeedbackPage";
-export * from "./getUserFeedbackThanksPage";
+export * from "./getFeedbackPage";
+export * from "./getFeedbackThanksPage";

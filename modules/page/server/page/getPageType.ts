@@ -12,6 +12,9 @@ export const getPageType = async (
     case "login":
       result = await getLoginPage(content);
       break;
+    case "feedback":
+      result = await getLoginPage(content);
+      break;
     case "template":
       result = await getTemplate(content);
       break;

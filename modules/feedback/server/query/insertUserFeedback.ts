@@ -2,18 +2,18 @@ import { IAuthHeader } from "@/modules/auth/types";
 import { logAndNull } from "@/modules/common/error";
 import { userGQuery } from "@/modules/graphql";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
-import { insertUserFeedbacksMutation, UserFeedbackInput } from "../../types";
+import { insertFeedbacksMutation, FeedbackInput } from "../../types";
 
-export async function insertUserFeedbacks(
+export async function insertFeedbacks(
   authHeader: IAuthHeader,
-  userfeedbacks: UserFeedbackInput[],
+  feedbacks: FeedbackInput[],
   lang?: string
 ): Promise<IMutationResponse[] | null> {
   return userGQuery<{ insertUserFeedbacks: IMutationResponse[] }>(
     authHeader,
-    insertUserFeedbacksMutation,
+    insertFeedbacksMutation,
     {
-      input: userfeedbacks,
+      input: feedbacks,
       lang,
     }
   ).then(data => logAndNull(data)?.insertUserFeedbacks ?? null);

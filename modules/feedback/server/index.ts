@@ -1,1 +1,1 @@
-export * from "./sendUserFeedbackAPI";
+export * from "./sendFeedbackAPI";

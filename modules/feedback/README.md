@@ -1,4 +1,4 @@
-# HEDI userFeedback module (under Developement)
+# HEDI Feedback module
 
 implements user feedback module, in which enables the logged-in user to send his/her feedback about the app.
 

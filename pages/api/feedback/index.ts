@@ -1,3 +1,3 @@
-import { sendUserFeedbacksAPI } from "@/modules/feedback/server/sendUserFeedbackAPI";
+import { sendFeedbacksAPI } from "@/modules/feedback/server/sendFeedbackAPI";
 
-export default sendUserFeedbacksAPI;
+export default sendFeedbacksAPI;

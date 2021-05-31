@@ -1,3 +1,3 @@
-import { hasCurrentUserUserFeedbackAPI } from "@/modules/feedback/server/hasCurrentUserUserFeedbackAPI";
+import { hasCurrentUserFeedbackAPI } from "@/modules/feedback/server/hasCurrentUserFeedbackAPI";
 
-export default hasCurrentUserUserFeedbackAPI;
+export default hasCurrentUserFeedbackAPI;
