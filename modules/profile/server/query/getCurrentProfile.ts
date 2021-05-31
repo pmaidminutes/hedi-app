@@ -1,30 +1,32 @@
 import { gql, userGQuery } from "@/modules/graphql";
 import { IAuthHeader } from "@/modules/auth/types";
 import { logAndFallback } from "@/modules/common/error";
+import { IUserProfile, UserProfileGQL } from "../../types";
+
+type CurrentProfileResponse = { profile: IUserProfile | null };
 
 export async function getCurrentProfile(
   lang: string,
   authHeader: IAuthHeader
-): Promise<any | null> {
+): Promise<IUserProfile | null> {
   const query = gql`
     query getCurrentProfile(
       $lang: String!
       $includeSelf: Boolean
     ) {
       profile: currentProfile (lang: $lang) {
-        #CaregiverGQL
-        #MidwifeGQL
+        ${UserProfileGQL}
       }
     }
   `;
 
-  const { profile } = await userGQuery<{ profile: any | {} }>(
+  const { profile } = await userGQuery<CurrentProfileResponse>(
     authHeader,
     query,
     { lang }
-  ).then(data => logAndFallback(data, { profile: {} }));
+  ).then(data =>
+    logAndFallback(data, { profile: null } as CurrentProfileResponse)
+  );
 
-  if (!profile || Object.keys(profile).length === 0) return null; // {} case is, profile available but not of any of the queried types
-
-  return profile as any;
+  return profile;
 }
