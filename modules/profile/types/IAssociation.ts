@@ -8,6 +8,12 @@ export interface IAssociation extends IBusinessProfile {
   professionals: IProfessional[];
 }
 
+export const AssociationTypeName = "Association";
+
+export function isIAssociation(obj: any): obj is IAssociation {
+  return obj && obj?.type === AssociationTypeName;
+}
+
 export const AssociationGQL: string = gql`... on Association {
   ${BusinessProfileFields}
   name

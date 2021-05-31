@@ -11,12 +11,22 @@ import {
   ServiceFields,
 } from "./taxonomyTypes";
 import { IProfile, ProfileFields } from "./IProfile";
+import { AssociationTypeName, ProfessionalTypeName } from ".";
 
 export interface IBusinessProfile extends IProfile {
   websites: IWebsite[];
   consultationHours: IConsultationHour[];
   profession: IProfession;
   services: IService[];
+}
+
+export const BusinessProfileTypeNames = [
+  ProfessionalTypeName,
+  AssociationTypeName,
+];
+
+export function isIBusinessProfile(obj: any): obj is IBusinessProfile {
+  return obj && !!obj.type && BusinessProfileTypeNames.includes(obj.type);
 }
 
 export const BusinessProfileFields = `${ProfileFields}
