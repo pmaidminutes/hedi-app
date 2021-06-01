@@ -3,7 +3,6 @@ import {
   findLinkInstance,
   findTextInputInstance,
   findInlineNotificationInstance,
-  findToastNotificationInstance,
   findLabelInstance,
 } from "@/modules/model/components";
 import { IPage } from "@/modules/page/types";
@@ -20,6 +19,18 @@ export function transformLogin(props: ILogin) {
   const register = findLinkInstance(components, "register");
   const back = findButtonInstance(components, "back");
   const hint = findLabelInstance(components, "hint");
+  const redirect = findLinkInstance(components, "editprofile");
+  const redirectUrl = redirect?.href || "";
 
-  return { username, password, success, invalid, submit, register, back, hint };
+  return {
+    username,
+    password,
+    success,
+    invalid,
+    submit,
+    register,
+    back,
+    hint,
+    redirectUrl,
+  };
 }
