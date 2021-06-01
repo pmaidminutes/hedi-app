@@ -4,6 +4,7 @@ import { HTML } from "@/modules/react/html";
 export interface IButtonProps extends Omit<ButtonDefaultProps, "id">, Button {}
 
 export function transformButton(props: IButtonProps) {
+  console.log({props})
   const {
     kind,
     buttonKind,
@@ -15,6 +16,7 @@ export function transformButton(props: IButtonProps) {
   } = props;
 
   return {
+    kind:buttonKind,
     text: text
       ? HTML({ data: text })
       : labelText
