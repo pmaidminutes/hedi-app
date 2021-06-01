@@ -1,13 +1,9 @@
-import React from "react";
+import React, { SyntheticEvent } from "react";
 import { ILogin, transformLogin } from "./transformLogin";
-import {
-  TextInput,
-  Button,
-  InlineNotification,
-
-} from "@/modules/components";
+import { useLogin } from "./useLogin";
+import { TextInput, Button, InlineNotification } from "@/modules/components";
 import { ButtonHintLink } from "@/modules/common/components";
-import { Column, Form, Row } from "carbon-components-react";
+import { Column, Form, Row, Loading } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
 
 export const Login = ({ content }: { content: ILogin }) => {
@@ -20,33 +16,50 @@ export const Login = ({ content }: { content: ILogin }) => {
     register,
     back,
     hint,
+    redirectUrl,
   } = transformLogin(content);
 
-  const handleSubmit = (e: React.SyntheticEvent) => {
-    e.preventDefault();
-    console.log("Submit");
-  };
+  const {
+    handleBackButtonClick,
+    handleLogin,
+    isLoading,
+    hasError,
+    isSuccess,
+    isLoggedIn,
+  } = useLogin(redirectUrl);
 
-  return (
+  return !isLoading ? (
     <>
       <Row>
         <Column>
-          <Form onSubmit={handleSubmit}>
-            {username && <TextInput {...username} />}
-            {password && <TextInput {...password} />}
-            {invalid && <InlineNotification {...invalid} />}
-            {success && <InlineNotification {...success} />}
-            <div className="hedi--login-buttoncontainer">
-              {submit && register && hint && (
-                <ButtonHintLink button={submit} link={register} hint={hint} />
-              )}
-            </div>
+          <Form onSubmit={(e: any) => handleLogin(e)}>
+            {username && !isLoggedIn && <TextInput {...username} />}
+            {password && !isLoggedIn && <TextInput {...password} />}
+            {invalid && hasError && <InlineNotification {...invalid} />}
+            {success && isSuccess && <InlineNotification {...success} />}
+            {!isLoggedIn ? (
+              <div className="hedi--login-buttoncontainer">
+                {submit && register && hint && !isLoading && (
+                  <ButtonHintLink button={submit} link={register} hint={hint} />
+                )}
+              </div>
+            ) : null}
           </Form>
         </Column>
       </Row>
       <Row>
-        <Column>{back && <Button renderIcon={ArrowLeft16} {...back} />}</Column>
+        <Column>
+          {back && (
+            <Button
+              onClick={(e: SyntheticEvent) => handleBackButtonClick(e)}
+              renderIcon={ArrowLeft16}
+              {...back}
+            />
+          )}
+        </Column>
       </Row>
     </>
+  ) : (
+    <Loading />
   );
 };
