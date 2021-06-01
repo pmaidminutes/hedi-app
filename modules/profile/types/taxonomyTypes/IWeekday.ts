@@ -1,9 +1,12 @@
-import { IProfileTaxonomy, ProfileTaxonomyFields } from "./IProfileTaxonomy";
+import {
+  IIndexedProfileTaxonomy,
+  IndexedProfileTaxonomyFields,
+} from "./IIndexedProfileTaxonomy";
 
-export interface IWeekday extends IProfileTaxonomy {
+export interface IWeekday extends IIndexedProfileTaxonomy {
   abbreviation: string;
 }
 
-export const WeekdayFields = `${ProfileTaxonomyFields}
+export const WeekdayFields = `${IndexedProfileTaxonomyFields}
 abbreviation
 `;

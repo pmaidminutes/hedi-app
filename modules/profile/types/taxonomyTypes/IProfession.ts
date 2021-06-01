@@ -1,5 +1,8 @@
-import { IProfileTaxonomy, ProfileTaxonomyFields } from "./IProfileTaxonomy";
+import {
+  IIndexedProfileTaxonomy,
+  IndexedProfileTaxonomyFields,
+} from "./IIndexedProfileTaxonomy";
 
-export interface IProfession extends IProfileTaxonomy {}
+export interface IProfession extends IIndexedProfileTaxonomy {}
 
-export const ProfessionFields = ProfileTaxonomyFields;
+export const ProfessionFields = IndexedProfileTaxonomyFields;

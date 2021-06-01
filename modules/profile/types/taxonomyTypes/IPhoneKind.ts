@@ -1,5 +1,8 @@
-import { IProfileTaxonomy, ProfileTaxonomyFields } from "./IProfileTaxonomy";
+import {
+  IIndexedProfileTaxonomy,
+  IndexedProfileTaxonomyFields,
+} from "./IIndexedProfileTaxonomy";
 
-export interface IPhoneKind extends IProfileTaxonomy {}
+export interface IPhoneKind extends IIndexedProfileTaxonomy {}
 
-export const PhoneKindFields = ProfileTaxonomyFields;
+export const PhoneKindFields = IndexedProfileTaxonomyFields;
