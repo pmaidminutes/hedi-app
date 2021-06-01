@@ -4,7 +4,7 @@ import {
   TextInput,
   Button,
   InlineNotification,
-  ToastNotification,
+
 } from "@/modules/components";
 import { ButtonHintLink } from "@/modules/common/components";
 import { Column, Form, Row } from "carbon-components-react";
@@ -19,6 +19,7 @@ export const Login = ({ content }: { content: ILogin }) => {
     submit,
     register,
     back,
+    hint,
   } = transformLogin(content);
 
   const handleSubmit = (e: React.SyntheticEvent) => {
@@ -33,15 +34,11 @@ export const Login = ({ content }: { content: ILogin }) => {
           <Form onSubmit={handleSubmit}>
             {username && <TextInput {...username} />}
             {password && <TextInput {...password} />}
-            {invalid && <ToastNotification {...invalid} />}
+            {invalid && <InlineNotification {...invalid} />}
             {success && <InlineNotification {...success} />}
             <div className="hedi--login-buttoncontainer">
-              {submit && register && (
-                <ButtonHintLink
-                  button={submit}
-                  link={register}
-                  text="No account yet?"
-                />
+              {submit && register && hint && (
+                <ButtonHintLink button={submit} link={register} hint={hint} />
               )}
             </div>
           </Form>
