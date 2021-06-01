@@ -1,5 +1,5 @@
-import { IProfileTerm, ProfileTermFields } from "./IProfileTerm";
+import { IProfileTaxonomy, ProfileTaxonomyFields } from "./IProfileTaxonomy";
 
-export interface IProfession extends IProfileTerm {}
+export interface IProfession extends IProfileTaxonomy {}
 
-export const ProfessionFields = ProfileTermFields;
+export const ProfessionFields = ProfileTaxonomyFields;
