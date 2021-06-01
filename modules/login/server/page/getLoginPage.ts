@@ -1,35 +1,28 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getLoginDefinition } from "../query";
-import { ILoginView } from "../../types";
-import { IAppPage } from "@/modules/common/types";
-
+import { IPage } from "@/modules/page/types";
+import { ILogin } from "@/modules/login/client";
 export const getLoginPage = async (
-  content: IAppPage
-): Promise<ILoginView & IPageConfig> => {
+  content: IPage
+): Promise<ILogin & IPageConfig> => {
   content.type = "Login";
-
-  const definition = await getLoginDefinition(content);
-
-  const layoutImg = {
-    alt: "Beschreibung des Bildes",
-    src: `${process.env.NEXT_PUBLIC_IMG_HEADER}`,
-  };
+ 
   const layout: ILayout = {
-    layoutImg,
     customKey: "login-form",
     rightColumnProps: { md: 4, lg: 6, xlg: 6 },
-    pageLayout: "imageAndColumn",
+
   };
 
   const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
+    useHeader: true,
     layout,
   };
 
   return {
     ...content,
-    ...definition,
     ...shell,
   };
 };
+
+
+// TODO move to Login

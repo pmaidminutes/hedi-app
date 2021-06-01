@@ -26,7 +26,7 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
-import { TryLoginNew } from "@/modules/login/client/components";
+import { TryLogin } from "@/modules/login/client/components";
 
 // LandingPage
 import { landingPagePaths } from "@/modules/landingPage/types";
@@ -178,7 +178,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
     <Shell {...props}>
       <>
         <TryTemplate content={content} key="template" />
-        <TryLoginNew content={content} key="loginNew" />
+        <TryLogin content={content} key="login" />
 
         {/* <TryRegistration content={content} key="registration" /> */}
         {/* <TryLogin content={content} key="login" /> */}
