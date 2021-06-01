@@ -11,25 +11,21 @@ export const transformConsultationHours = (
 ) => {
   const days: (IWorkDay | null)[] = Array(8).fill(null);
   consultationHours.forEach(cHour => {
-    const rank = cHour.weekday.route.match("/d+$/")?.[0];
-    if (rank) {
-      const i = parseInt(rank);
-      let day = days[i];
-      const times = cHour.startTime
-        ? `${cHour.startTime} – ${cHour.endTime}`
-        : "";
-      if (!day) {
-        day = {
-          day: cHour.weekday.abbreviation,
-          times,
-          availability: cHour.availability.label,
-        };
-      } else {
-        day.times += "/n" + times;
-        day.availability += "/n" + cHour.availability.label;
-      }
-      days[i] = day;
+    let day = days[cHour.weekday.index];
+    const times = cHour.startTime
+      ? `${cHour.startTime} – ${cHour.endTime}`
+      : "";
+    if (!day) {
+      day = {
+        day: cHour.weekday.abbreviation,
+        times,
+        availability: cHour.availability.label,
+      };
+    } else {
+      day.times += "/n" + times;
+      day.availability += "/n" + cHour.availability.label;
     }
+    days[cHour.weekday.index] = day;
   });
   return days;
 };

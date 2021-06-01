@@ -7,13 +7,9 @@ function selectPrimaryData<T extends { dataKind: IDataKind }>(
   let match: T | undefined = undefined;
   let weight = 1000;
   set.forEach(item => {
-    const itemWeightString = item.dataKind.route.match("/d+$/")?.[0];
-    if (itemWeightString) {
-      const itemWeight = parseInt(itemWeightString);
-      if (itemWeight < weight) {
-        weight = itemWeight;
-        match = item;
-      }
+    if (item.dataKind.index < weight) {
+      weight = item.dataKind.index;
+      match = item;
     }
   });
   return match;
