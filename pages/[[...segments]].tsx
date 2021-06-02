@@ -37,7 +37,19 @@ import {
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 
 // Profile
-import { TryProfileList } from "@/modules/profile/client/components";
+import {
+  AssociationGQL,
+  isIProfile,
+  ProfessionalGQL,
+} from "@/modules/profile/types";
+import {
+  getProfilePage,
+  BusinessProfilePathsGQL,
+} from "@/modules/profile/server";
+import {
+  TryProfile,
+  TryProfileList,
+} from "@/modules/profile/client/components";
 
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
@@ -84,6 +96,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     ArticlePathsGQL,
     CategoryPathsGQL,
     GlossaryPathsGQL,
+    BusinessProfilePathsGQL,
     PagePathsGQL,
   ];
   const locales = context?.locales ?? [];
@@ -119,14 +132,21 @@ export const getStaticProps: GetStaticProps<
   } else if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
-    const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
+    const gqlTypes = [
+      AppPageGQL,
+      ArticleGQL,
+      CategoryGQL,
+      PageGQL,
+      ProfessionalGQL,
+      AssociationGQL,
+    ];
     const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
     let generic = entities?.[0] ?? null;
 
     if (isIPage(generic)) generic = await getPageType(generic);
     if (isIArticle(generic)) generic = await getArticlePage(generic);
     if (isICategory(generic)) generic = await getCategoryPage(generic);
-    // if (isProfile(generic)) generic = await getProfilePage(generic);
+    if (isIProfile(generic)) generic = await getProfilePage(generic);
 
     if (isIAppPage(generic)) {
       switch (
@@ -186,6 +206,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         {/* <TryRegistration content={content} key="registration" /> */}
         {/* <TryLogin content={content} key="login" /> */}
         {/* <TryViewProfile content={content} key="viewprofile" /> */}
+        <TryProfile content={content} key="profile" />
         <TryProfileList content={content} key="profileList" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
         {/* <TryUserFeedback content={content} key="userfeedback" /> */}

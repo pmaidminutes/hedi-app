@@ -1,2 +1,4 @@
-export * from "./Profile";
-export * from "./getProfileViewData";
+export * from "./ProfileView";
+export * from "./getProfileViewContent";
+export * from "./getProfileViewDefinition";
+export * from "./useShowProfileEditButton";

@@ -2,20 +2,20 @@ import { gql, serviceGQuery } from "@/modules/graphql";
 import { logAndFallback } from "@/modules/common/error";
 import { IPage, PageGQL } from "@/modules/page/types";
 
-export async function getProfileDefinition(
-  lang: string
-): Promise<IPage | null> {
+export async function getProfileDefinition(lang: string): Promise<IPage> {
   const query = gql`
-    query getProfileElements($lang: String!){
-      pages: pagesByKey(keys:["viewprofile"], lang:$lang){
+    query getProfileDefinition($lang: String!, $includeSelf: Boolean){
+      pagesById(ids:["profile"], lang:$lang){
         ${PageGQL}
       }
     }
   `;
 
-  const { pagesByKey } = await serviceGQuery<{ pagesByKey: IPage[] }>(query, {
+  const { pagesById } = await serviceGQuery<{ pagesById: IPage[] }>(query, {
     lang,
-  }).then(data => logAndFallback(data, { pagesByKey: [] as IPage[] }));
+  }).then(data => logAndFallback(data, { pagesById: [] as IPage[] }));
 
-  return pagesByKey.length > 0 ? pagesByKey[0] : null;
+  if (pagesById.length < 1)
+    throw new Error("Error while fetching Profile Page data");
+  return pagesById[0];
 }
