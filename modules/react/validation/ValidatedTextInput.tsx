@@ -1,10 +1,9 @@
+import { TextInputProps, TextInput } from "carbon-components-react";
 import React from "react";
-import { TextInput } from "@/modules/components";
 import { IValidationFunction } from ".";
 import { useValidation } from "../hooks/useValidation";
-import { ITextInputProps } from "@/modules/components/client/components/TextInput/transformTextInput";
 
-interface IValidatedTextInputProps extends ITextInputProps {
+interface IValidatedTextInputProps extends TextInputProps {
   validateFn: IValidationFunction | IValidationFunction[];
   enableValidation?: true;
   onValidation?: (textError: string) => void;
@@ -14,11 +13,11 @@ export const ValidatedTextInput = React.forwardRef<
   HTMLInputElement,
   IValidatedTextInputProps
 >((props, ref) => {
-  const { onChange, onValidation, enableValidation,validateFn, ...rest } = props;
+  const { onChange, onValidation, enableValidation, ...rest } = props;
 
   const { handleChange } = useValidation(
     rest.value ?? "",
-    validateFn,
+    rest.validateFn,
     enableValidation,
     onChange,
     onValidation

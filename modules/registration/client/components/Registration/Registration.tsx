@@ -9,10 +9,6 @@ import {
   TextInput,
   Body,
 } from "@/modules/components";
-import {
-  ValidatedTextInput,
-  ValidationSummary,
-} from "@/modules/react/validation";
 import { useRegistration } from "./useRegistration";
 export const Registration = ({ content }: { content: ILogin }) => {
   const {
@@ -41,9 +37,6 @@ export const Registration = ({ content }: { content: ILogin }) => {
     isSuccess,
     hasPasswordError,
     hasUsernameError,
-    validationErrors,
-    setValidationError,
-    requiredValidationFn,
   } = useRegistration(redirectUrl);
 
   return isLoading ? (
@@ -72,28 +65,20 @@ export const Registration = ({ content }: { content: ILogin }) => {
             )}
 
             {!!registrationcode && username && (
-              <ValidatedTextInput
+              <TextInput
                 {...username}
                 onChange={setName}
                 invalid={isCheckCredentialError && hasUsernameError}
-                validateFn={requiredValidationFn()}
-                onValidation={texterror =>
-                  setValidationError("name", texterror)
-                }
               />
             )}
             {!!registrationcode && password && (
-              <ValidatedTextInput
+              <TextInput
                 {...password}
                 onChange={setPass}
                 invalid={isCheckCredentialError && hasPasswordError}
-                validateFn={requiredValidationFn()}
-                onValidation={texterror =>
-                  setValidationError("pass", texterror)
-                }
               />
             )}
-            <ValidationSummary validationErrors={validationErrors} />
+
             {!!registrationcode && submit && (
               <Button {...submit} size="field" />
             )}
