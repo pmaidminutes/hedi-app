@@ -23,14 +23,13 @@ export interface IProfile extends IEntityTranslated<IEntityLocalized> {
   emails: IEmail[];
 }
 
-export const ProfileTypeNames = [
-  PersonalTypeName,
-  ProfessionalTypeName,
-  AssociationTypeName,
-];
-
 export function isIProfile(obj: any): obj is IProfile {
-  return obj && !!obj.type && ProfileTypeNames.includes(obj.type);
+  const profileTypeNames = [
+    PersonalTypeName,
+    ProfessionalTypeName,
+    AssociationTypeName,
+  ];
+  return obj && !!obj.type && profileTypeNames.includes(obj.type);
 }
 
 export const ProfileFields = `${EntityTranslatedFields}

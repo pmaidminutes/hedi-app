@@ -22,13 +22,9 @@ export interface IBusinessProfile extends IProfile {
   services: IService[];
 }
 
-export const BusinessProfileTypeNames = [
-  ProfessionalTypeName,
-  AssociationTypeName,
-];
-
 export function isIBusinessProfile(obj: any): obj is IBusinessProfile {
-  return obj && !!obj.type && BusinessProfileTypeNames.includes(obj.type);
+  const businessProfileTypeNames = [ProfessionalTypeName, AssociationTypeName];
+  return obj && !!obj.type && businessProfileTypeNames.includes(obj.type);
 }
 
 export const BusinessProfileFields = `${ProfileFields}
