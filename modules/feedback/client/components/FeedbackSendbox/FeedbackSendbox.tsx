@@ -42,7 +42,7 @@ export const FeedbackSendbox = ({
           lowContrast
         />
       )}
-      {submitButton && <Button size="field" {...submitButton} />}
+      {submitButton && <Button type="submit" size="field" {...submitButton} />}
     </div>
   );
 };

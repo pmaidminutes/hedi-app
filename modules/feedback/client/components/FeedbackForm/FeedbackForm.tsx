@@ -56,7 +56,6 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...right}>
           <FeedbackInput
             body={findBodyInstance(components, "feedback_profile_description")}
-            label={findLabelInstance(components, "feedback_profile_label")}
             input={findTextAreaInstance(components, "feedback_profile_body")}
           />
         </Column>
@@ -76,7 +75,6 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
               components,
               "feedback_activities_description"
             )}
-            label={findLabelInstance(components, "feedback_activities_label")}
             input={findTextAreaInstance(components, "feedback_activities_body")}
           />
         </Column>
@@ -100,7 +98,6 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
               components,
               "feedback_consultation_description"
             )}
-            label={findLabelInstance(components, "feedback_consultation_label")}
             input={findTextAreaInstance(
               components,
               "feedback_consultation_body"
@@ -123,7 +120,6 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
               components,
               "feedback_languages_description"
             )}
-            label={findLabelInstance(components, "feedback_languages_label")}
             input={findTextAreaInstance(components, "feedback_languages_body")}
           />
         </Column>
@@ -137,7 +133,6 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...center}>
           <FeedbackInput
             body={findBodyInstance(components, "feedback_usage_description")}
-            label={findLabelInstance(components, "feedback_usage_label")}
             input={findTextAreaInstance(components, "feedback_usage_body")}
           />
         </Column>
@@ -151,7 +146,6 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...center}>
           <FeedbackInput
             body={findBodyInstance(components, "feedback_summary_description")}
-            label={findLabelInstance(components, "feedback_summary_label")}
             input={findTextAreaInstance(components, "feedback_summary_body")}
           />
         </Column>

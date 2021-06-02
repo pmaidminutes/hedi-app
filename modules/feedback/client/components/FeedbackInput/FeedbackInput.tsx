@@ -20,11 +20,9 @@ export interface IUserFeedbackEntryProps {
 
 export const FeedbackInput = ({
   body,
-  label,
   input,
 }: {
   body: IBody | undefined;
-  label: ILabel | undefined;
   input: ITextArea | undefined;
 }) => {
   return (
@@ -33,12 +31,6 @@ export const FeedbackInput = ({
         <div className="hedi--userfeedback-text">
           <Body {...body}></Body>
         </div>
-      )}
-      {label && (
-        <>
-          <input type="hidden" name={label.id} value={label.text} />
-          <Label {...label} /*TODO hidden={true}*/ />
-        </>
       )}
       {input && <TextArea {...input} name={input.id} />}
     </div>
