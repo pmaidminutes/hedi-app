@@ -25,7 +25,7 @@ export interface IContactDefinition {
   phoneTitle?: string;
   emailTitle?: string;
   websiteTitle?: string;
-  consultationHoursTitle?: string;
+  consultationHoursHeadline?: string;
 }
 
 export type IContactProps = IContact & IContactDefinition;
@@ -36,7 +36,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
     phoneTitle,
     emailTitle,
     websiteTitle,
-    consultationHoursTitle,
+    consultationHoursHeadline,
   } = props;
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
@@ -63,7 +63,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
             <Seperator />
 
             <ConsultationHours
-              title={consultationHoursTitle ?? "Consultation Hours Title"}
+              headline={consultationHoursHeadline}
               consultationHours={consultationHours}
             />
           </>

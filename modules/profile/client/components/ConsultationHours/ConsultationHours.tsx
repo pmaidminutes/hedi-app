@@ -7,19 +7,25 @@ import {
 import { IConsultationHour } from "../../../types/dataTypes";
 import { transformConsultationHours } from "./transformConsultationHours";
 
-export interface ConsultationHoursProps {
-  title: string;
+export type IConsultationHoursProps = IConsultationHours &
+  IConsultationHoursDefinition;
+
+export interface IConsultationHours {
   consultationHours: IConsultationHour[];
 }
 
+export interface IConsultationHoursDefinition {
+  headline?: string;
+}
+
 export const ConsultationHours = ({
-  title,
+  headline,
   consultationHours,
-}: ConsultationHoursProps) => {
+}: IConsultationHoursProps) => {
   const days = transformConsultationHours(consultationHours);
   return (
     <div className="hedi--consultation-hours-wrapper">
-      <h3>{title}</h3>
+      <h3>{headline}</h3>
       <StructuredListWrapper>
         <StructuredListBody>
           {days.map(day => (
