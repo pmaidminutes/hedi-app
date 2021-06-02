@@ -1,11 +1,15 @@
 import { gql } from "@/modules/graphql";
-import { BusinessProfileFields, IBusinessProfile } from "./IBusinessProfile";
-import { IProfessional, ProfessionalGQL } from "./IProfessional";
+import {
+  IBusinessProfile,
+  BusinessProfileFields,
+  IBusinessProfileLink,
+  BusinessProfileLinkFields,
+} from "./IBusinessProfile";
 
 export interface IAssociation extends IBusinessProfile {
   name: string;
 
-  professionals: IProfessional[];
+  professionals: IBusinessProfileLink[];
 }
 
 export const AssociationTypeName = "Association";
@@ -17,5 +21,5 @@ export function isIAssociation(obj: any): obj is IAssociation {
 export const AssociationGQL: string = gql`... on Association {
   ${BusinessProfileFields}
   name
-  professionals { ${ProfessionalGQL} }
+  professionals { ${BusinessProfileLinkFields} }
 }`;

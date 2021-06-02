@@ -1,8 +1,10 @@
+import { EntityFields, IEntity } from "@/modules/model";
 import {
   IWebsite,
   WebsiteFields,
   IConsultationHour,
   ConsultationHourFields,
+  AddressFields,
 } from "./dataTypes";
 import {
   IProfession,
@@ -34,4 +36,13 @@ websites { ${WebsiteFields} }
 consultationHours { ${ConsultationHourFields} }
 profession { ${ProfessionFields} }
 services { ${ServiceFields} }
+`;
+
+export interface IBusinessProfileLink
+  extends IEntity,
+    Pick<IBusinessProfile, "profession" | "addresses"> {}
+
+export const BusinessProfileLinkFields = `${EntityFields} 
+addresses { ${AddressFields} }
+profession { ${ProfessionFields} }
 `;
