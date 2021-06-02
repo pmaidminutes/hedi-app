@@ -30,17 +30,29 @@ export function transformProfileToEntry(
     ...profileRest
   } = profile;
   const { websites, profession, services } = profileRest as IBusinessProfile;
-  return {
+  const profileEntry = {
     type,
     route,
     label,
     lang,
     translations,
-    profession,
-    services,
-    address: selectPrimaryData(addresses),
-    phone: selectPrimaryData(phones),
-    email: selectPrimaryData(emails),
-    website: websites ? selectPrimaryData(websites) : undefined,
-  };
+  } as IProfileEntry;
+
+  // NOTE undefined properties must not be set as [key]:undefined due to nextjs prerendering
+  if (profession) profileEntry.profession = profession;
+  if (services) profileEntry.services = services;
+
+  const address = selectPrimaryData(addresses);
+  if (address) profileEntry.address = address;
+
+  const phone = selectPrimaryData(phones);
+  if (phone) profileEntry.phone = phone;
+
+  const email = selectPrimaryData(emails);
+  if (email) profileEntry.email = email;
+
+  const website = websites ? selectPrimaryData(websites) : undefined;
+  if (website) profileEntry.website = website;
+
+  return profileEntry;
 }
