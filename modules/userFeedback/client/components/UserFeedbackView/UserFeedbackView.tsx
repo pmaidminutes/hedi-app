@@ -57,7 +57,7 @@ export const UserFeedbackView = ({
   return currentProfile ? (
     <UserFeedbackForm
       content={content}
-      profile={{ ...currentProfile, ...content.profileDefinition }}
+      profile={currentProfile}
       leftColumnProps={leftColumnProps}
       rightColumnProps={rightColumnProps}
       centerProps={centerProps}
