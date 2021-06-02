@@ -1,9 +1,10 @@
-import { TextInputProps, TextInput } from "carbon-components-react";
 import React from "react";
+import { TextInput } from "@/modules/components";
 import { IValidationFunction } from ".";
 import { useValidation } from "../hooks/useValidation";
+import { ITextInputProps } from "@/modules/components/client/components/TextInput/transformTextInput";
 
-interface IValidatedTextInputProps extends TextInputProps {
+interface IValidatedTextInputProps extends ITextInputProps {
   validateFn: IValidationFunction | IValidationFunction[];
   enableValidation?: true;
   onValidation?: (textError: string) => void;

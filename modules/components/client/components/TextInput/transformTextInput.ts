@@ -1,10 +1,13 @@
 import { TextInput as ITextInput } from "@/modules/model/components";
 import { HTML } from "@/modules/react/html/HTML";
 import { TextInputProps } from "carbon-components-react";
+import { ForwardedRef } from "react";
 
 export interface ITextInputProps
   extends ITextInput,
-    Omit<TextInputProps, "helperText" | "labelText" | "type"> {}
+    Omit<TextInputProps, "helperText" | "labelText" | "type"> {
+  ref?: ForwardedRef<HTMLInputElement>;
+}
 
 export function transformTextInput(props: ITextInputProps): TextInputProps {
   const {
@@ -21,7 +24,7 @@ export function transformTextInput(props: ITextInputProps): TextInputProps {
 
   return {
     labelText: HTML({ data: labelText }) || "",
-    required:isRequired,
+    required: isRequired,
     placeholder,
     id,
     helperText: HTML({ data: helperText }),

@@ -5,11 +5,16 @@ import { useTextInput } from "@/modules/react/hooks";
 import { useRegister } from "../../request";
 import { useRegistrationError, useCredentialChange } from "../../hooks";
 import { IRegisterInfo } from "@/modules/registration/types";
+import {
+  useValidationSummary,
+  requiredValidationFn,
+} from "@/modules/react/validation";
 
 export function useRegistration(redirectUrl: string) {
   const router = useRouter();
 
   const [registrationcode, setRegistrationcode] = useTextInput();
+  const { validationErrors, setValidationError } = useValidationSummary();
   const [name, setName] = useTextInput();
   const [pass, setPass] = useTextInput();
   const [isLoading, setIsLoading] = useState(false);
@@ -85,5 +90,8 @@ export function useRegistration(redirectUrl: string) {
     hasRegistrationCodeError,
     hasPasswordError,
     hasUsernameError,
+    validationErrors,
+    setValidationError,
+    requiredValidationFn,
   };
 }
