@@ -63,7 +63,6 @@ export function useRegistration(redirectUrl: string) {
     setInfo
   );
 
-  console.log({ response });
 
   if (isSuccess) {
     autoSignIn({ ...info }, redirectUrl);

@@ -45,7 +45,6 @@ export const Registration = ({ content }: { content: ILogin }) => {
     setValidationError,
     requiredValidationFn,
   } = useRegistration(redirectUrl);
-  console.log({ content });
 
   return isLoading ? (
     <Loading />
@@ -78,6 +77,9 @@ export const Registration = ({ content }: { content: ILogin }) => {
                 onChange={setName}
                 invalid={isCheckCredentialError && hasUsernameError}
                 validateFn={requiredValidationFn()}
+                onValidation={texterror =>
+                  setValidationError("name", texterror)
+                }
               />
             )}
             {!!registrationcode && password && (
@@ -86,6 +88,9 @@ export const Registration = ({ content }: { content: ILogin }) => {
                 onChange={setPass}
                 invalid={isCheckCredentialError && hasPasswordError}
                 validateFn={requiredValidationFn()}
+                onValidation={texterror =>
+                  setValidationError("pass", texterror)
+                }
               />
             )}
             <ValidationSummary validationErrors={validationErrors} />

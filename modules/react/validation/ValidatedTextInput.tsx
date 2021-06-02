@@ -14,11 +14,11 @@ export const ValidatedTextInput = React.forwardRef<
   HTMLInputElement,
   IValidatedTextInputProps
 >((props, ref) => {
-  const { onChange, onValidation, enableValidation, ...rest } = props;
+  const { onChange, onValidation, enableValidation,validateFn, ...rest } = props;
 
   const { handleChange } = useValidation(
     rest.value ?? "",
-    rest.validateFn,
+    validateFn,
     enableValidation,
     onChange,
     onValidation
