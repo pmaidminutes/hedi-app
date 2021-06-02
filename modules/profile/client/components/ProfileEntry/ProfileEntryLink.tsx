@@ -8,8 +8,8 @@ import { IProfileEntryProps } from "..";
 export const ProfileEntryLink: React.FC<IProfileEntryProps> = props => {
   const route = props.route;
   const profileType =
-    "hedi--profile-list__item" + props.profession
-      ? " --" + props.profession
+    "hedi--profile-list__item" + (props.profession?.index === 0)
+      ? " --midwife"
       : "";
   return (
     <NextLink href={route ?? "#"} passHref>

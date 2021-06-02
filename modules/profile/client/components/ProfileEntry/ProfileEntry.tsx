@@ -43,7 +43,7 @@ export const ProfileEntry: React.FC<IProfileEntryProps> = (
         <Column sm={4} md={6} lg={13}>
           <div className="hedi--profile-entry-content">
             <h2>{label}</h2>
-            <h3>{profession}</h3>
+            {profession && <h3>{profession?.label}</h3>}
             <Address {...address} />
 
             <div className="hedi--spacing">
