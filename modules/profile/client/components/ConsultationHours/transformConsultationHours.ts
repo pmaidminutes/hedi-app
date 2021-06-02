@@ -17,7 +17,7 @@ export const transformConsultationHours = (
       : "";
     if (!day) {
       day = {
-        day: cHour.weekday.abbreviation,
+        day: cHour.weekday.abbreviation ?? cHour.weekday.label,
         times,
         availability: cHour.availability.label,
       };

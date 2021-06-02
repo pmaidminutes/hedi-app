@@ -4,7 +4,7 @@ import {
 } from "./IIndexedProfileTaxonomy";
 
 export interface IWeekday extends IIndexedProfileTaxonomy {
-  abbreviation: string;
+  abbreviation?: string;
 }
 
 export const WeekdayFields = `${IndexedProfileTaxonomyFields}
