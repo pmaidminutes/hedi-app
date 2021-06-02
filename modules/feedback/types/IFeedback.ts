@@ -20,9 +20,11 @@ metadata
 created
 }`;
 
+export type FeedbackType = "ProfileTest";
+
 export const insertFeedbacksMutation = gql`
-mutation sendUserFeedbacks($input: [UserFeedbackInput!]!, $lang: String) {
-  insertUserFeedbacks(input: $input, lang: $lang) {
+mutation insertFeedback($type: String!, $texts: [String!]!) {
+  insertFeedback(type: $type, texts: $texts) {
     ${MutationResponseFields}
   }
 }

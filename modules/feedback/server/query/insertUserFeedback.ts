@@ -6,15 +6,15 @@ import { insertFeedbacksMutation, FeedbackInput } from "../../types";
 
 export async function insertFeedbacks(
   authHeader: IAuthHeader,
-  feedbacks: FeedbackInput[],
-  lang?: string
-): Promise<IMutationResponse[] | null> {
-  return userGQuery<{ insertUserFeedbacks: IMutationResponse[] }>(
+  type: string,
+  texts: string[]
+): Promise<IMutationResponse | null> {
+  return userGQuery<{ insertFeedback: IMutationResponse }>(
     authHeader,
     insertFeedbacksMutation,
     {
-      input: feedbacks,
-      lang,
+      texts,
+      type,
     }
-  ).then(data => logAndNull(data)?.insertUserFeedbacks ?? null);
+  ).then(data => logAndNull(data)?.insertFeedback ?? null);
 }

@@ -6,16 +6,17 @@ import {
 } from "@/modules/common/utils";
 import { IMutationResponse } from "@/modules/model/IMutationResponse";
 import { insertFeedbacks } from "./query";
-import { FeedbackInput } from "../types";
+import { FeedbackInput, FeedbackType } from "../types";
 
 interface FeedbacksFetch {
-  lang: string;
-  userfeedbacks: FeedbackInput[];
+  type: FeedbackType;
+  texts: string[];
 }
 
-export const sendFeedbacksAPI: NextApiHandler<
-  IMutationResponse[] | IMutationResponse
-> = async (req, res) => {
+export const sendFeedbacksAPI: NextApiHandler<IMutationResponse> = async (
+  req,
+  res
+) => {
   const authHeader = await getUserAuthHeader(req);
   const { isErrorSent } = await sendAPIErrorIfEmptyOrUnauthorized(
     req,
@@ -24,7 +25,7 @@ export const sendFeedbacksAPI: NextApiHandler<
   );
   if (isErrorSent || !authHeader) return;
 
-  const { lang, userfeedbacks } = JSON.parse(req.body) as FeedbacksFetch;
-  const mutationResult = await insertFeedbacks(authHeader, userfeedbacks, lang);
+  const { type, texts } = JSON.parse(req.body) as FeedbacksFetch;
+  const mutationResult = await insertFeedbacks(authHeader, type, texts);
   sendAPIResult(res, mutationResult);
 };
