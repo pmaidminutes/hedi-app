@@ -2,7 +2,6 @@ import { sendFeedbacks } from "@/modules/feedback/client/request/sendFeedback";
 import { FeedbackInput } from "@/modules/feedback/types";
 import { Form } from "carbon-components-react";
 import { FormEvent } from "react";
-import { clientInformationCollector } from "../../helper/ClientInformationCollector";
 
 export const MultipleFeedback: React.FC<{
   lang: string;
@@ -13,7 +12,6 @@ export const MultipleFeedback: React.FC<{
   const onSubmitHandler = (e: FormEvent) => {
     e.preventDefault();
     const formData = new FormData(e.target as HTMLFormElement);
-    const metadata = clientInformationCollector();
     const entryGroups: { [key: string]: FeedbackInput } = {};
     // TODO if some items are succeeded before, do not send them again
     formData.forEach((value, key) => {
@@ -27,8 +25,7 @@ export const MultipleFeedback: React.FC<{
     const entriesToSend: FeedbackInput[] = [];
     for (const key in entryGroups) {
       if (Object.prototype.hasOwnProperty.call(entryGroups, key)) {
-        if (entryGroups[key].body)
-          entriesToSend.push({ metadata, ...entryGroups[key] });
+        if (entryGroups[key].body) entriesToSend.push({ ...entryGroups[key] });
       }
     }
     if (entriesToSend.length) {
