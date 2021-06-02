@@ -55,8 +55,8 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         </Column>
         <Column {...right}>
           <FeedbackInput
-            body={findBodyInstance(components, "feedback_profile_description")}
-            input={findTextAreaInstance(components, "feedback_profile_body")}
+            body={findBodyInstance(components, "profile_description")}
+            input={findTextAreaInstance(components, "profile_input")}
           />
         </Column>
       </Row>
@@ -71,11 +71,8 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         </Column>
         <Column {...right}>
           <FeedbackInput
-            body={findBodyInstance(
-              components,
-              "feedback_activities_description"
-            )}
-            input={findTextAreaInstance(components, "feedback_activities_body")}
+            body={findBodyInstance(components, "activities_description")}
+            input={findTextAreaInstance(components, "activities_input")}
           />
         </Column>
       </Row>
@@ -94,14 +91,8 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         </Column>
         <Column {...right}>
           <FeedbackInput
-            body={findBodyInstance(
-              components,
-              "feedback_consultation_description"
-            )}
-            input={findTextAreaInstance(
-              components,
-              "feedback_consultation_body"
-            )}
+            body={findBodyInstance(components, "consultation_description")}
+            input={findTextAreaInstance(components, "consultation_input")}
           />
         </Column>
       </Row>
@@ -116,11 +107,8 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         </Column>
         <Column {...right}>
           <FeedbackInput
-            body={findBodyInstance(
-              components,
-              "feedback_languages_description"
-            )}
-            input={findTextAreaInstance(components, "feedback_languages_body")}
+            body={findBodyInstance(components, "languages_description")}
+            input={findTextAreaInstance(components, "languages_input")}
           />
         </Column>
       </Row>
@@ -132,8 +120,8 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
       <Row>
         <Column {...center}>
           <FeedbackInput
-            body={findBodyInstance(components, "feedback_usage_description")}
-            input={findTextAreaInstance(components, "feedback_usage_body")}
+            body={findBodyInstance(components, "usage_description")}
+            input={findTextAreaInstance(components, "usage_input")}
           />
         </Column>
       </Row>
@@ -145,8 +133,8 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
       <Row>
         <Column {...center}>
           <FeedbackInput
-            body={findBodyInstance(components, "feedback_summary_description")}
-            input={findTextAreaInstance(components, "feedback_summary_body")}
+            body={findBodyInstance(components, "summary_description")}
+            input={findTextAreaInstance(components, "summary_input")}
           />
         </Column>
       </Row>
