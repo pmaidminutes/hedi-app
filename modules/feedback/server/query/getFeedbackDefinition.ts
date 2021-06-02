@@ -6,54 +6,12 @@ import { getUIElementValue } from "@/modules/common/utils";
 import { logAndFallback } from "@/modules/common/error";
 import { getProfileDefinition } from "@/modules/profile/server/query/getProfileDefinition";
 import { WithKeyFields } from "@/modules/model/IWithKey";
+import { IPage } from "@/modules/page/types";
 
-export async function getFeedbackDefinition(
-  appPage: IAppPage
-): Promise<Omit<IFeedbackView, keyof IAppPage>> {
-  const subquery = gql`
-    query getUserFeedbackChildren(
-      $lang: String!
-      $includeSelf: Boolean
-    ) {
-      subPages: appPagesByKey(keys: ["userfeedback_languages","userfeedback_contact_freetimes","userfeedback_usage","userfeedback_profile","userfeedback_activities","userfeedback_summary"], lang: $lang) {
-        ${AppPageGQL}
-      }
-    }
-  `;
-  const { subPages } = await serviceGQuery<{
-    subPages: IAppPage[];
-  }>(subquery, {
-    lang: appPage.lang,
-  }).then(data => logAndFallback(data, { subPages: [] as IAppPage[] }));
-  const keys = [
-    getUIElementValue("no_profile_redirect", appPage.elements),
-    getUIElementValue("success_redirect", appPage.elements),
-  ];
-  const queryForLinks = gql`
-    query getFeedbackViewOtherLinks(
-      $keys: [String!]!
-      $lang: String!
-    ) {
-      links: appPagesByKey(keys: $keys, lang: $lang) {
-        ${WithKeyFields}
-        ${EntityFields}
-      }
-    }
-  `;
-  const linkResults = await serviceGQuery<Pick<IFeedbackView, "links">>(
-    queryForLinks,
-    {
-      lang: appPage.lang,
-      keys,
-    }
-  ).then(data =>
-    logAndFallback(data, { links: [] } as Pick<IFeedbackView, "links">)
+export async function getFeedbackDefinition(appPage: IPage): Promise<IPage> {
+  // const profileDefinition = await getProfileDefinition(appPage.lang);
+  // return profileDefinition;
+  throw new Error(
+    "NOT IMPLEMENTED. call it after Profile page is made. this returns Profile Page"
   );
-  const profileDefinition = await getProfileDefinition(appPage.lang);
-
-  return {
-    subPages,
-    ...linkResults,
-    profileDefinition,
-  };
 }

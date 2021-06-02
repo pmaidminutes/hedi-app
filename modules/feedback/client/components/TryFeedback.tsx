@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { IFeedbackView } from "../../types";
+import { IPage } from "@/modules/page/types";
 import { FeedbackView } from "./FeedbackView";
 
 export const TryFeedback = ({
@@ -8,5 +8,5 @@ export const TryFeedback = ({
   content: ITyped;
 }): JSX.Element | null =>
   content.type === "Feedback" ? (
-    <FeedbackView content={content as IFeedbackView} />
+    <FeedbackView content={content as IPage} />
   ) : null;

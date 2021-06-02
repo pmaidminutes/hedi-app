@@ -11,12 +11,13 @@ import { getUIElementRedirectRoute } from "@/modules/common/utils";
 
 // Constants
 const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
-// utils
-import { getUIElement } from "@/modules/common/utils";
 // types
 import { IFeedbackFormProps } from "./IFeedbackFormProps";
-import { IAppPage } from "@/modules/common/types";
 import { headlineType } from "@/modules/profile/client/components/ServiceGroup/IServiceGroupProps";
+import {
+  findLinkInstance,
+  findToastNotificationInstance,
+} from "@/modules/model/components";
 
 export function useFeedbackForm(props: IFeedbackFormProps) {
   const {
@@ -30,9 +31,6 @@ export function useFeedbackForm(props: IFeedbackFormProps) {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const getSubPage = (key: string, subPages: IAppPage[]) =>
-    subPages?.find(page => page.key == key) || ({} as IAppPage);
-
   const {
     languagesData,
     profileEntryData,
@@ -44,14 +42,14 @@ export function useFeedbackForm(props: IFeedbackFormProps) {
     // mapData, HACK currently incompatible
   } = transformProfile({ content: profile });
 
-  const { subPages, elements, links } = content;
-  const {
-    servicesHeadline,
-    languagesHeadline,
-    contactHeadline,
-    relatedHeadline,
-    officeHrsHeadline,
-  } = getProfileViewData(profileElements, links, lang);
+  const { components } = content;
+  // const {
+  //   servicesHeadline,
+  //   languagesHeadline,
+  //   contactHeadline,
+  //   relatedHeadline,
+  //   officeHrsHeadline,
+  // } = getProfileViewData(profileElements, links, lang);
 
   // TODO improve
   const serviceHeadlineType: headlineType = "h3";
@@ -61,27 +59,27 @@ export function useFeedbackForm(props: IFeedbackFormProps) {
   };
 
   const onSuccess = () => {
-    const thanksPageRoute = getUIElementRedirectRoute(
-      "success_redirect",
-      elements,
-      links
-    );
+    const thanksPageRoute =
+      findLinkInstance(components, "success_redirect")?.href || "/";
     setErrorMessage(null);
     setSuccessMessage(
-      getUIElement("success_message", content.elements)?.description || null
+      findToastNotificationInstance(components, "success_message")?.subtitle ||
+        null
     );
     setTimeout(() => router.push(thanksPageRoute), REDIRECT_DELAY);
   };
   const onError = () => {
     setSuccessMessage(null);
     setErrorMessage(
-      getUIElement("error_message", content.elements)?.description || null
+      findToastNotificationInstance(components, "error_message")?.subtitle ||
+        null
     );
   };
   const onEmptyError = () => {
     setSuccessMessage(null);
     setErrorMessage(
-      getUIElement("empty_error_message", content.elements)?.description || null
+      findToastNotificationInstance(components, "empty_error_message")
+        ?.subtitle || null
     );
   };
 
@@ -103,13 +101,11 @@ export function useFeedbackForm(props: IFeedbackFormProps) {
     languagesData,
     errorMessage,
     successMessage,
-    subPages,
-    elements,
-    servicesHeadline,
-    languagesHeadline,
-    contactHeadline,
-    relatedHeadline,
-    officeHrsHeadline,
-    getSubPage,
+    components,
+    // servicesHeadline,
+    // languagesHeadline,
+    // contactHeadline,
+    // relatedHeadline,
+    // officeHrsHeadline,
   };
 }

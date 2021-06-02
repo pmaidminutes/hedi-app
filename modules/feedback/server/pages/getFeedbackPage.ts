@@ -3,16 +3,19 @@ import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getFeedbackDefinition } from "../query";
 import { IFeedbackView } from "../../types";
+import { IPage } from "@/modules/page/types";
 
 export const getFeedbackPage = async (
-  content: IAppPage
-): Promise<IFeedbackView & IPageConfig> => {
+  content: IPage
+): Promise<IPage & IPageConfig> => {
   content.type = "Feedback";
 
-  const definition = await getFeedbackDefinition(content);
+  // const definition = await getFeedbackDefinition(content);
 
   const layout: ILayout = {
     pageLayout: "singleColumn",
+    customKey: "feedback-form",
+    rightColumnProps: { md: 4, lg: 6, xlg: 6 },
   };
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
@@ -22,7 +25,7 @@ export const getFeedbackPage = async (
 
   return {
     ...content,
-    ...definition,
+    // ...definition,
     ...shell,
   };
 };

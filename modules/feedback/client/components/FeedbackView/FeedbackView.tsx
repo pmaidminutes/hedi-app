@@ -3,11 +3,6 @@ import { IFeedbackView } from "@/modules/feedback/types";
 import FeedbackForm from "@/modules/feedback/client/components/FeedbackForm/FeedbackForm";
 import { useCurrentProfile } from "@/modules/profile/client/hooks";
 import {
-  getUIElement,
-  getUIElementRedirectRoute,
-} from "@/modules/common/utils";
-import {
-  Button,
   ButtonSet,
   Column,
   ColumnDefaultProps,
@@ -15,6 +10,12 @@ import {
   Row,
 } from "carbon-components-react";
 import { useRouter } from "next/router";
+import { IPage } from "@/modules/page/types";
+import {
+  findButtonInstance,
+  findLinkInstance,
+} from "@/modules/model/components";
+import { Button } from "@/modules/components";
 
 export const FeedbackView = ({
   content,
@@ -22,7 +23,7 @@ export const FeedbackView = ({
   rightColumnProps,
   centerProps,
 }: {
-  content: IFeedbackView;
+  content: IPage;
   leftColumnProps?: ColumnDefaultProps;
   rightColumnProps?: ColumnDefaultProps;
   centerProps?: ColumnDefaultProps;
@@ -34,21 +35,26 @@ export const FeedbackView = ({
   );
   const router = useRouter();
   if (!currentProfileIsLoading && (!currentProfile || !currentProfile.route)) {
-    const noProfileElement = getUIElement("no_profile", content.elements);
-    const noProfileRedirect = getUIElementRedirectRoute(
-      "no_profile_redirect",
-      content.elements,
-      content.links
+    const noProfileButton = findButtonInstance(
+      content.components,
+      "no_profile"
+    );
+    const noProfileRedirect = findLinkInstance(
+      content.components,
+      "no_profile_redirect"
     );
     return (
       <Row>
         <Column>
-          <ButtonSet stacked>
-            <FormLabel>{noProfileElement?.description}</FormLabel>
-            <Button onClick={() => router.push(noProfileRedirect)}>
-              {noProfileElement?.value}
-            </Button>
-          </ButtonSet>
+          {noProfileButton && (
+            <ButtonSet stacked>
+              <FormLabel>{noProfileButton?.labelText}</FormLabel>
+              <Button
+                {...noProfileButton}
+                onClick={() => router.push(noProfileRedirect?.href || "/")}
+              />
+            </ButtonSet>
+          )}
         </Column>
       </Row>
     );
@@ -57,7 +63,7 @@ export const FeedbackView = ({
   return currentProfile ? (
     <FeedbackForm
       content={content}
-      profile={{ ...currentProfile, ...content.profileDefinition }}
+      profile={{ ...currentProfile /*, ...content.profileDefinition */ }}
       leftColumnProps={leftColumnProps}
       rightColumnProps={rightColumnProps}
       centerProps={centerProps}

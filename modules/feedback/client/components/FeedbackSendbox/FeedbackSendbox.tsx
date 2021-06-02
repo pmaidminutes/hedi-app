@@ -1,39 +1,48 @@
-import { getUIElement } from "@/modules/common/utils";
-import { IUIElementTexts } from "@/modules/model";
-import { Button, InlineNotification } from "carbon-components-react";
+import { ToastNotification, Button } from "@/modules/components";
+import {
+  Component,
+  findButtonInstance,
+  findToastNotificationInstance,
+} from "@/modules/model/components";
 
 export interface IFeedbackSendboxProps {
-  elements: IUIElementTexts[];
+  components: Component[];
   errorMessage?: string | null;
   successMessage?: string | null;
 }
 
 export const FeedbackSendbox = ({
-  elements,
+  components,
   errorMessage,
   successMessage,
 }: IFeedbackSendboxProps) => {
+  const errorMessageNotification = findToastNotificationInstance(
+    components,
+    "error_message"
+  );
+  const successMessageNotification = findToastNotificationInstance(
+    components,
+    "success_message"
+  );
+  const submitButton = findButtonInstance(components, "submit");
+
   return (
     <div className="hedi--userfeedback-sendbox">
-      {errorMessage && (
-        <InlineNotification
-          kind="error"
-          title={getUIElement("error_message", elements)?.value || "Error"}
+      {errorMessage && errorMessageNotification && (
+        <ToastNotification
+          {...errorMessageNotification}
           subtitle={errorMessage}
           lowContrast
         />
       )}
-      {successMessage && (
-        <InlineNotification
-          kind="success"
-          title={getUIElement("success_message", elements)?.value || "Success"}
+      {successMessage && successMessageNotification && (
+        <ToastNotification
+          {...successMessageNotification}
           subtitle={successMessage}
           lowContrast
         />
       )}
-      <Button type="submit" size="field">
-        {getUIElement("submit", elements)?.value || "Submit"}
-      </Button>
+      {submitButton && <Button size="field" {...submitButton} />}
     </div>
   );
 };
