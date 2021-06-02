@@ -18,7 +18,7 @@ export const MultipleFeedback: React.FC<{
     // TODO if some items are succeeded before, do not send them again
     formData.forEach((value, key) => {
       // naming pattern: feedback-KEY-ELEMENT: feedback-search-label, feedback-search-body
-      const nameParts = key.split("-");
+      const nameParts = key.split("_");
       if (nameParts.length != 3 || nameParts[0] != "feedback") return;
       const [_, group, field] = nameParts;
       if (!entryGroups[group]) entryGroups[group] = {};
