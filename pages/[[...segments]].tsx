@@ -59,6 +59,8 @@ import { PagePathsGQL, getPageType } from "@/modules/page/server";
 import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
+// Registration
+import { TryRegistration } from "@/modules/registration/client";
 
 // TODO should we remove the design stuff again?
 let dynamicProps: any;
@@ -179,8 +181,8 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
       <>
         <TryTemplate content={content} key="template" />
         <TryLogin content={content} key="login" />
+        <TryRegistration content={content} key="registration" />
 
-        {/* <TryRegistration content={content} key="registration" /> */}
         {/* <TryLogin content={content} key="login" /> */}
         {/* <TryViewProfile content={content} key="viewprofile" /> */}
         {/* <TryProfile content={content} key="profile" /> */}

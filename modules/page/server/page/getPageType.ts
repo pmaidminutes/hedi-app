@@ -1,4 +1,5 @@
 import { getLoginPage } from "@/modules/login/server";
+import { getRegistrationPage } from "@/modules/registration/server";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
@@ -11,6 +12,9 @@ export const getPageType = async (
   switch (content.id) {
     case "login":
       result = await getLoginPage(content);
+      break;
+    case "register":
+      result = await getRegistrationPage(content);
       break;
     case "template":
       result = await getTemplate(content);
