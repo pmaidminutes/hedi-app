@@ -1,7 +1,12 @@
 import { ITyped } from "@/modules/model";
-import type { ProfileListView } from "../../../server";
-import { ProfileEntryLink } from "../ProfileEntry";
+import { IPage } from "@/modules/page/types";
+import { IProfileEntry } from "../../../types";
+import { getProfileEntryDefinition, ProfileEntryLink } from "../ProfileEntry";
 import { useProfileList } from "./useProfileList";
+
+export type ProfileListView = IPage & {
+  profileEntries: IProfileEntry[];
+};
 
 export const TryProfileList = ({
   content,
@@ -18,12 +23,13 @@ export const ProfileList = ({ content }: { content: ProfileListView }) => {
     content.lang
   );
 
-  const { components } = content;
+  const profileEntryDefinition = getProfileEntryDefinition(content.components);
   return (
     <>
       {(profileEntries ?? content.profileEntries).map(profileEntry => (
         <ProfileEntryLink
-          {...profileEntry} //append title components
+          {...profileEntry}
+          {...profileEntryDefinition}
           key={profileEntry.route}
         />
       ))}

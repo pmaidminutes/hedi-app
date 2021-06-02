@@ -36,6 +36,9 @@ import {
 } from "@/modules/landingPage/server";
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 
+// Profile
+import { TryProfileList } from "@/modules/profile/client/components";
+
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
 import { TrySearch } from "@/modules/search/client/components";
@@ -183,8 +186,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         {/* <TryRegistration content={content} key="registration" /> */}
         {/* <TryLogin content={content} key="login" /> */}
         {/* <TryViewProfile content={content} key="viewprofile" /> */}
-        {/* <TryProfile content={content} key="profile" /> */}
-        {/* <TryProfileList content={content} key="profileList" /> */}
+        <TryProfileList content={content} key="profileList" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
         {/* <TryUserFeedback content={content} key="userfeedback" /> */}
         {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
