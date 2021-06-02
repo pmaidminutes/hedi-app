@@ -25,6 +25,6 @@ latLongApprox
 cityVisibility { ${DataVisibilityFields} }
 street streetNumber
 latLong
-streetVisibility: { ${DataVisibilityFields} }
+streetVisibility { ${DataVisibilityFields} }
 additionalInfo
 `;
