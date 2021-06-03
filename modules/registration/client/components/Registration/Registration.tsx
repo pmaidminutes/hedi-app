@@ -1,4 +1,4 @@
-import { ILogin } from "@/modules/login/client";
+import {IRegistration} from "../../../types"
 import React, { SyntheticEvent } from "react";
 import { transformRegistration } from "./transformRegistration";
 import { ArrowLeft16 } from "@carbon/icons-react";
@@ -10,7 +10,7 @@ import {
   Body,
 } from "@/modules/components";
 import { useRegistration } from "./useRegistration";
-export const Registration = ({ content }: { content: ILogin }) => {
+export const Registration = ({ content }: { content: IRegistration }) => {
   const {
     username,
     password,
