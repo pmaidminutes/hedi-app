@@ -9,7 +9,6 @@
     "build": "node ./design/fileExists.js &&  next build",
     "start": "next start",
     "pretty": "prettier --write './**/*.ts*'",
-    "export": "node exporter.js",
     "compileTS": "tsc --version && tsc --pretty --noEmit --noErrorTruncation"
   },
   "dependencies": {
