@@ -6,11 +6,6 @@ import {
 import { FeedbackInput } from "@/modules/feedback/client/components/FeedbackInput/FeedbackInput";
 import { Column, Row } from "carbon-components-react";
 import { BgImgContainer, Seperator } from "@/modules/common/components";
-import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
-
-import { ServiceGroup } from "@/modules/profile/client/components/ServiceGroup";
-import { LanguageSkills } from "@/modules/profile/client/components/LanguageSkills";
-import { Contact } from "@/modules/profile/client/components/Contact";
 import { IProfileTestFeedbackFormProps } from "./IProfileTestFeedbackFormProps";
 import {
   findBodyInstance,
@@ -30,17 +25,8 @@ export default function ProfileTestFeedbackForm(
     left,
     right,
     center,
-    // profileEntryData,
-    // servicesData,
-    // contactData,
-    // languagesData,
     errorMessage,
     successMessage,
-    // servicesHeadline,
-    // languagesHeadline,
-    // contactHeadline,
-    // relatedHeadline,
-    // officeHrsHeadline,
     components,
   } = useProfileTestFeedbackForm(props);
 

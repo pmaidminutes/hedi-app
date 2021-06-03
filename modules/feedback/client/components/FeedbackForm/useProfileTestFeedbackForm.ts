@@ -2,18 +2,11 @@
 import { useState } from "react";
 // Next
 import { useRouter } from "next/router";
-// hooks
-import {
-  transformProfile,
-  getProfileViewData,
-} from "@/modules/profile/client/components/Profile";
-import { getUIElementRedirectRoute } from "@/modules/common/utils";
 
 // Constants
 const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
 // types
 import { IProfileTestFeedbackFormProps } from "./IProfileTestFeedbackFormProps";
-import { headlineType } from "@/modules/profile/client/components/ServiceGroup/IServiceGroupProps";
 import {
   findLinkInstance,
   findToastNotificationInstance,
@@ -22,43 +15,12 @@ import {
 export function useProfileTestFeedbackForm(
   props: IProfileTestFeedbackFormProps
 ) {
-  const {
-    content,
-    profile,
-    leftColumnProps,
-    rightColumnProps,
-    centerProps,
-  } = props;
+  const { content, leftColumnProps, rightColumnProps, centerProps } = props;
   const router = useRouter();
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
-  const {
-    languagesData,
-    profileEntryData,
-    servicesData,
-    contactData,
-    relatedProfilesData,
-    lang,
-    elements: profileElements,
-    // mapData, HACK currently incompatible
-  } = transformProfile({ content: profile });
-
   const { components } = content;
-  // const {
-  //   servicesHeadline,
-  //   languagesHeadline,
-  //   contactHeadline,
-  //   relatedHeadline,
-  //   officeHrsHeadline,
-  // } = getProfileViewData(profileElements, links, lang);
-
-  // TODO improve
-  const serviceHeadlineType: headlineType = "h3";
-  const servicesDataWithHeadlineType = {
-    ...servicesData,
-    headlineType: serviceHeadlineType,
-  };
 
   const onSuccess = () => {
     const thanksPageRoute =
@@ -97,17 +59,8 @@ export function useProfileTestFeedbackForm(
     left,
     right,
     center,
-    profileEntryData,
-    servicesData: servicesDataWithHeadlineType,
-    contactData,
-    languagesData,
     errorMessage,
     successMessage,
     components,
-    // servicesHeadline,
-    // languagesHeadline,
-    // contactHeadline,
-    // relatedHeadline,
-    // officeHrsHeadline,
   };
 }

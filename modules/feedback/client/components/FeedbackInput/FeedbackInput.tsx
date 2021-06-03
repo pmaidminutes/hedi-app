@@ -1,15 +1,6 @@
-import { IAppPage } from "@/modules/common/types";
-import {
-  Body,
-  IBodyProps,
-  ITextAreaProps,
-  Label,
-  TextArea,
-  TextInput,
-} from "@/modules/components";
+import { Body, TextArea } from "@/modules/components";
 import {
   Body as IBody,
-  Label as ILabel,
   TextArea as ITextArea,
 } from "@/modules/model/components";
 
