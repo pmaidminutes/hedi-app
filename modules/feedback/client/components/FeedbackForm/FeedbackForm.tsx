@@ -57,7 +57,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...right}>
           <FeedbackInput
             body={findBodyInstance(components, "profile_description")}
-            input={findTextAreaInstance(components, "profile_input")}
+            textArea={findTextAreaInstance(components, "profile_input")}
           />
         </Column>
       </Row>
@@ -73,7 +73,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...right}>
           <FeedbackInput
             body={findBodyInstance(components, "activities_description")}
-            input={findTextAreaInstance(components, "activities_input")}
+            textArea={findTextAreaInstance(components, "activities_input")}
           />
         </Column>
       </Row>
@@ -93,7 +93,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...right}>
           <FeedbackInput
             body={findBodyInstance(components, "consultation_description")}
-            input={findTextAreaInstance(components, "consultation_input")}
+            textArea={findTextAreaInstance(components, "consultation_input")}
           />
         </Column>
       </Row>
@@ -109,7 +109,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...right}>
           <FeedbackInput
             body={findBodyInstance(components, "languages_description")}
-            input={findTextAreaInstance(components, "languages_input")}
+            textArea={findTextAreaInstance(components, "languages_input")}
           />
         </Column>
       </Row>
@@ -122,7 +122,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...center}>
           <FeedbackInput
             body={findBodyInstance(components, "usage_description")}
-            input={findTextAreaInstance(components, "usage_input")}
+            textArea={findTextAreaInstance(components, "usage_input")}
           />
         </Column>
       </Row>
@@ -135,7 +135,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
         <Column {...center}>
           <FeedbackInput
             body={findBodyInstance(components, "summary_description")}
-            input={findTextAreaInstance(components, "summary_input")}
+            textArea={findTextAreaInstance(components, "summary_input")}
           />
         </Column>
       </Row>
