@@ -21,7 +21,7 @@ export function transformTextInput(props: ITextInputProps): TextInputProps {
 
   return {
     labelText: HTML({ data: labelText }) || "",
-    required:isRequired,
+    required: isRequired,
     placeholder,
     id,
     helperText: HTML({ data: helperText }),
