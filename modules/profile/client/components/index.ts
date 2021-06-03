@@ -7,4 +7,4 @@ export * from "./WebLink";
 export * from "./ConsultationHours";
 export * from "./ProfileEntry";
 export * from "./ProfileList";
-export * from "./ViewProfile";
+export * from "./ProfilePreview";

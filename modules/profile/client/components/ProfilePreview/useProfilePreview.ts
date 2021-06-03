@@ -3,7 +3,7 @@ import { useRouter } from "next/router";
 import { getUser } from "@/modules/auth/client";
 import { useCurrentProfileRoute } from "../../hooks";
 
-export const useViewProfile = (lang: string) => {
+export const useProfilePreview = (lang: string) => {
   const router = useRouter();
   const [user, userIsLoading] = getUser();
   const [
@@ -11,6 +11,7 @@ export const useViewProfile = (lang: string) => {
     currentProfileRouteIsLoading,
   ] = useCurrentProfileRoute(user, lang);
   useEffect(() => {
+    console.log(currentProfileRoute);
     if (!currentProfileRouteIsLoading && currentProfileRoute)
       router.push(currentProfileRoute);
   }, [

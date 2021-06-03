@@ -4,7 +4,10 @@ import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
 import { getLayout } from "@/modules/shell/server";
 import { getTemplate } from "@/modules/template/server";
-import { getProfileListPage } from "@/modules/profile/server";
+import {
+  getProfileListPage,
+  getProfilePreviewPage,
+} from "@/modules/profile/server";
 
 export const getPageType = async (
   content: IPage
@@ -13,6 +16,9 @@ export const getPageType = async (
   switch (content.id) {
     case "login":
       result = await getLoginPage(content);
+      break;
+    case "profilePreview":
+      result = await getProfilePreviewPage(content);
       break;
     case "profileList":
       result = await getProfileListPage(content);

@@ -49,6 +49,7 @@ import {
 import {
   TryProfile,
   TryProfileList,
+  TryProfilePreview,
 } from "@/modules/profile/client/components";
 
 // Search
@@ -205,7 +206,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
 
         {/* <TryRegistration content={content} key="registration" /> */}
         {/* <TryLogin content={content} key="login" /> */}
-        {/* <TryViewProfile content={content} key="viewprofile" /> */}
+        <TryProfilePreview content={content} key="profilePreview" />
         <TryProfile content={content} key="profile" />
         <TryProfileList content={content} key="profileList" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
