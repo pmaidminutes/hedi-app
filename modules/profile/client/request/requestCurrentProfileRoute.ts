@@ -4,6 +4,4 @@ import { userProfileRouteAPIUrl } from "../../types";
 export const requestCurrentProfileRoute = (
   lang: string
 ): Promise<string | null> =>
-  jsonPost<string>(userProfileRouteAPIUrl, {
-    lang,
-  });
+  jsonPost<string>(userProfileRouteAPIUrl, { lang }, true);
