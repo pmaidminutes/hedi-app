@@ -6,11 +6,13 @@ export interface ITextAreaProps
   extends TextArea,
     Omit<TextAreaProps, "helperText" | "id" | "labelText"> {}
 export function transformTextArea(props: ITextAreaProps): TextAreaProps {
-  const { kind, isRequired, labelText, helperText, ...rest } = props;
+  const { id, name, kind, isRequired, labelText, helperText, ...rest } = props;
 
   return {
     ...rest,
+    name: name || id,
     labelText: HTML({ data: labelText }) || "",
     helperText: HTML({ data: helperText }),
+    id,
   };
 }

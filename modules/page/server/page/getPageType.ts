@@ -1,4 +1,5 @@
-import { getLoginPage } from "./getLoginPage";
+import { getLoginPage } from "@/modules/login/server";
+import { getRegistrationPage } from "@/modules/registration/server";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
@@ -8,6 +9,7 @@ import {
   getProfileListPage,
   getProfilePreviewPage,
 } from "@/modules/profile/server";
+import { getFeedbackPage } from "@/modules/feedback/server/pages";
 
 export const getPageType = async (
   content: IPage
@@ -17,11 +19,17 @@ export const getPageType = async (
     case "login":
       result = await getLoginPage(content);
       break;
+    case "register":
+      result = await getRegistrationPage(content);
+      break;
     case "profilePreview":
       result = await getProfilePreviewPage(content);
       break;
     case "profileList":
       result = await getProfileListPage(content);
+      break;
+    case "feedback":
+      result = await getFeedbackPage(content);
       break;
     case "template":
       result = await getTemplate(content);

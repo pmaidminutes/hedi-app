@@ -26,7 +26,8 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
-import { TryLoginNew } from "@/modules/login/client/components";
+import { TryFeedback } from "@/modules/feedback/client/components";
+import { TryLogin } from "@/modules/login/client/components";
 
 // LandingPage
 import { landingPagePaths } from "@/modules/landingPage/types";
@@ -75,23 +76,10 @@ import { PagePathsGQL, getPageType } from "@/modules/page/server";
 import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
-
-// TODO should we remove the design stuff again?
-let dynamicProps: any;
-const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
-
-const getDesignProps = async () => {
-  const { existsSync } = await import("fs");
-  const { join } = await import("path");
-  if (existsSync(join(__dirname, "../design/imports")))
-    //@ts-ignore
-    return import("../design/imports").then(({ propsMap }) => propsMap);
-  else return null;
-};
+// Registration
+import { TryRegistration } from "@/modules/registration/client";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
-  if (isDesignContext) dynamicProps = await getDesignProps();
-
   const pathQueries = [
     AppPagePathsGQL,
     ArticlePathsGQL,
@@ -120,17 +108,7 @@ export const getStaticProps: GetStaticProps<
 
   let content: (IEntity & IPageConfig) | null = null;
 
-  if (isDesignContext) {
-    const data = dynamicProps?.find(
-      (element: any) => element[0] === segments.join("/")
-    );
-    content = data?.[1]?.content;
-  }
-
-  // query types with dynamic paths first
-  if (isDesignContext && content) {
-    //we have a exported content for designing, skip backend fetches
-  } else if (isLandingPageRoute(route)) {
+  if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
     const gqlTypes = [
@@ -202,15 +180,15 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
     <Shell {...props}>
       <>
         <TryTemplate content={content} key="template" />
-        <TryLoginNew content={content} key="loginNew" />
+        <TryLogin content={content} key="login" />
+        <TryRegistration content={content} key="registration" />
 
-        {/* <TryRegistration content={content} key="registration" /> */}
         {/* <TryLogin content={content} key="login" /> */}
         <TryProfilePreview content={content} key="profilePreview" />
         <TryProfile content={content} key="profile" />
         <TryProfileList content={content} key="profileList" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
-        {/* <TryUserFeedback content={content} key="userfeedback" /> */}
+        <TryFeedback content={content} key="feedback" />
         {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
         <TryLandingPage content={content} key="landingpage" />
 
