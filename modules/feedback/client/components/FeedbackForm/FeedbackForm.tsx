@@ -1,7 +1,7 @@
 import { useFeedbackForm } from "./useFeedbackForm";
 import {
   MultipleFeedback,
-  FeedbackSendbox,
+  FeedbackSubmit,
 } from "@/modules/feedback/client/components";
 import { FeedbackInput } from "@/modules/feedback/client/components/FeedbackInput/FeedbackInput";
 import { Column, Row } from "carbon-components-react";
@@ -140,7 +140,7 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
       </Row>
       <Row>
         <Column {...center}>
-          <FeedbackSendbox
+          <FeedbackSubmit
             components={components}
             errorMessage={errorMessage}
             successMessage={successMessage}

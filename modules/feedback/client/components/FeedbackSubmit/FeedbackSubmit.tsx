@@ -5,17 +5,17 @@ import {
   findToastNotificationInstance,
 } from "@/modules/model/components";
 
-export interface IFeedbackSendboxProps {
+export interface IFeedbackSubmitProps {
   components: Component[];
   errorMessage?: string | null;
   successMessage?: string | null;
 }
 
-export const FeedbackSendbox = ({
+export const FeedbackSubmit = ({
   components,
   errorMessage,
   successMessage,
-}: IFeedbackSendboxProps) => {
+}: IFeedbackSubmitProps) => {
   const errorMessageNotification = findToastNotificationInstance(
     components,
     "error_message"
@@ -27,7 +27,7 @@ export const FeedbackSendbox = ({
   const submitButton = findButtonInstance(components, "submit");
 
   return (
-    <div className="hedi--userfeedback-sendbox">
+    <div className="hedi--feedback-submit">
       {errorMessage && errorMessageNotification && (
         <ToastNotification
           {...errorMessageNotification}
