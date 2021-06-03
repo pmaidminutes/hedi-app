@@ -15,11 +15,13 @@ export function transformTextInput(props: ITextInputProps): TextInputProps {
     helperText,
     type,
     ariaLabel,
+    isRequired,
     ...rest
   } = props;
 
   return {
     labelText: HTML({ data: labelText }) || "",
+    required: isRequired,
     placeholder,
     id,
     helperText: HTML({ data: helperText }),

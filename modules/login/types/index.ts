@@ -1,1 +1,1 @@
-export * from "./ILoginView";
+export * from "./ILogin";
