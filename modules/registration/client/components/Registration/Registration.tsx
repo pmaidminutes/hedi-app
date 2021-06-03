@@ -49,7 +49,7 @@ export const Registration = ({ content }: { content: ILogin }) => {
       <Row>
         <Column>
           <Form onSubmit={handleSubmit}>
-            {isCheckRegisterCodeError && error && (
+            {isCheckRegisterCodeError && error && !isSuccess &&(
               <InlineNotification {...error} lowContrast={true} />
             )}
             {isSuccess && success && (
