@@ -128,21 +128,9 @@ export const getStaticProps: GetStaticProps<
       },
     };
 
-  // ShellStuff
-  const shellKey = {
-    header: [
-      "editprofile",
-      "viewprofile",
-      "profiles",
-      "userfeedback",
-      "search",
-    ],
-    footer: ["imprint", "privacy"],
-    userMenu: ["login", "logout", "viewprofile"],
-  };
   // TODO we should probably cache this, especially if shellKey are static most of the time
-  const shellData = await getShell(locale, shellKey);
-  const shell = generateShellData(content, shellData);
+  const shellDataNew = await getShell(locale);
+  const shell = generateShellData(content, shellDataNew);
   return {
     props: { content, shell },
     revalidate: content.revalidate,
@@ -158,7 +146,6 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         <TryLogin content={content} key="login" />
         <TryRegistration content={content} key="registration" />
 
-        {/* <TryLogin content={content} key="login" /> */}
         {/* <TryViewProfile content={content} key="viewprofile" /> */}
         {/* <TryProfile content={content} key="profile" /> */}
         {/* <TryProfileList content={content} key="profileList" /> */}
