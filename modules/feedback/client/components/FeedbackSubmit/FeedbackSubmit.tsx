@@ -1,43 +1,36 @@
 import { ToastNotification, Button } from "@/modules/components";
 import {
-  Component,
-  findButtonInstance,
-  findToastNotificationInstance,
+  ToastNotification as IToastNotification,
+  Button as IButton,
 } from "@/modules/model/components";
 
 export interface IFeedbackSubmitProps {
-  components: Component[];
+  errorNotification: IToastNotification | undefined;
+  successNotification: IToastNotification | undefined;
+  submitButton: IButton | undefined;
   errorMessage?: string | null;
   successMessage?: string | null;
 }
 
 export const FeedbackSubmit = ({
-  components,
+  errorNotification,
+  successNotification,
+  submitButton,
   errorMessage,
   successMessage,
 }: IFeedbackSubmitProps) => {
-  const errorMessageNotification = findToastNotificationInstance(
-    components,
-    "error_message"
-  );
-  const successMessageNotification = findToastNotificationInstance(
-    components,
-    "success_message"
-  );
-  const submitButton = findButtonInstance(components, "submit");
-
   return (
     <div className="hedi--feedback-submit">
-      {errorMessage && errorMessageNotification && (
+      {errorMessage && errorNotification && (
         <ToastNotification
-          {...errorMessageNotification}
+          {...errorNotification}
           subtitle={errorMessage}
           lowContrast
         />
       )}
-      {successMessage && successMessageNotification && (
+      {successMessage && successNotification && (
         <ToastNotification
-          {...successMessageNotification}
+          {...successNotification}
           subtitle={successMessage}
           lowContrast
         />

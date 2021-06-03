@@ -14,8 +14,9 @@ import { Contact } from "@/modules/profile/client/components/Contact";
 import { IFeedbackFormProps } from "./IFeedbackFormProps";
 import {
   findBodyInstance,
-  findLabelInstance,
   findTextAreaInstance,
+  findToastNotificationInstance,
+  findButtonInstance,
 } from "@/modules/model/components";
 
 export default function FeedbackForm(props: IFeedbackFormProps) {
@@ -141,7 +142,15 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
       <Row>
         <Column {...center}>
           <FeedbackSubmit
-            components={components}
+            errorNotification={findToastNotificationInstance(
+              components,
+              "error_message"
+            )}
+            successNotification={findToastNotificationInstance(
+              components,
+              "success_message"
+            )}
+            submitButton={findButtonInstance(components, "submit")}
             errorMessage={errorMessage}
             successMessage={successMessage}
           />
