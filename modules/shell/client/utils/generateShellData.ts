@@ -18,13 +18,18 @@ export function generateShellData(
     layout,
   } = content;
   const { languages, shellConfig, ...links } = shellData;
-
   // TODO type?
   let shellProps = { shellConfig } as any;
+  // TODO check if there is a better way to set the props
   for (let key of Object.keys(links)) {
     setProperty(shellProps, key, links[key] as any);
   }
-  if (languages) setProperty(shellProps, "langDirections", generateLangDirections(languages));
+  if (languages)
+    setProperty(
+      shellProps,
+      "langDirections",
+      generateLangDirections(languages)
+    );
   if (translations)
     setProperty(
       shellProps,
