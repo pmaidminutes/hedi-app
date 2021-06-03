@@ -26,6 +26,7 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
+import { TryFeedback } from "@/modules/feedback/client/components";
 import { TryLogin } from "@/modules/login/client/components";
 
 // LandingPage
@@ -163,7 +164,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         {/* <TryProfile content={content} key="profile" /> */}
         {/* <TryProfileList content={content} key="profileList" /> */}
         {/* <TryEditProfile content={content} key="editProfile" /> */}
-        {/* <TryUserFeedback content={content} key="userfeedback" /> */}
+        <TryFeedback content={content} key="feedback" />
         {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
         <TryLandingPage content={content} key="landingpage" />
 

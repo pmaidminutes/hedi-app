@@ -1,4 +1,4 @@
-import {IRegistration} from "../../../types"
+import { IRegistration } from "../../../types";
 import React, { SyntheticEvent } from "react";
 import { transformRegistration } from "./transformRegistration";
 import { ArrowLeft16 } from "@carbon/icons-react";
@@ -49,7 +49,7 @@ export const Registration = ({ content }: { content: IRegistration }) => {
       <Row>
         <Column>
           <Form onSubmit={handleSubmit}>
-            {isCheckRegisterCodeError && error && !isSuccess &&(
+            {isCheckRegisterCodeError && error && !isSuccess && (
               <InlineNotification {...error} lowContrast={true} />
             )}
             {isSuccess && success && (

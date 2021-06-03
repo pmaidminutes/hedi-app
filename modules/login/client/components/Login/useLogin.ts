@@ -39,7 +39,14 @@ export function useLogin(redirectUrl: string) {
     });
   };
 
-  return { handleBackButtonClick, handleLogin, isLoading, hasError, isSuccess, isLoggedIn };
+  return {
+    handleBackButtonClick,
+    handleLogin,
+    isLoading,
+    hasError,
+    isSuccess,
+    isLoggedIn,
+  };
 }
 
 function submitLogin(event: FormEvent<HTMLFormElement>, redirectUrl?: string) {

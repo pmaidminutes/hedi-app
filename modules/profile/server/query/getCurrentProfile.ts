@@ -7,11 +7,12 @@ export async function getCurrentProfile(
   authHeader: IAuthHeader
 ): Promise<any | null> {
   const query = gql`
-    query getCurrentProfile(
-      $lang: String!
-      $includeSelf: Boolean
-    ) {
-      profile: currentProfile (lang: $lang) {
+    query getCurrentProfile($lang: String!) # $includeSelf: Boolean
+    {
+      profile: currentProfile(lang: $lang) {
+        label
+        lang
+        route
         #CaregiverGQL
         #MidwifeGQL
       }
