@@ -5,9 +5,9 @@ import {
   findInlineNotificationInstance,
   findLabelInstance,
 } from "@/modules/model/components";
-import { IPage } from "@/modules/page/types";
 
-export interface ILogin extends IPage {}
+import { ILogin } from "../../../types";
+
 export function transformLogin(props: ILogin) {
   const { components } = props;
 

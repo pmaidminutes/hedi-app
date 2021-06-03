@@ -1,5 +1,6 @@
 import React, { SyntheticEvent } from "react";
-import { ILogin, transformLogin } from "./transformLogin";
+import { transformLogin } from "./transformLogin";
+import { ILogin } from "../../../types";
 import { useLogin } from "./useLogin";
 import { TextInput, Button, InlineNotification } from "@/modules/components";
 import { ButtonHintLink } from "@/modules/common/components";
