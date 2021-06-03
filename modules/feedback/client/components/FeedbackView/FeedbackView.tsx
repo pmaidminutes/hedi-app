@@ -1,6 +1,6 @@
 import { getUser } from "@/modules/auth/client";
 import { IFeedbackView } from "@/modules/feedback/types";
-import FeedbackForm from "@/modules/feedback/client/components/FeedbackForm/FeedbackForm";
+import ProfileTestFeedbackForm from "../FeedbackForm/ProfileTestFeedbackForm";
 import { useCurrentProfile } from "@/modules/profile/client/hooks";
 import {
   ButtonSet,
@@ -61,7 +61,7 @@ export const FeedbackView = ({
   }
 
   return currentProfile ? (
-    <FeedbackForm
+    <ProfileTestFeedbackForm
       content={content}
       profile={{ ...currentProfile /*, ...content.profileDefinition */ }}
       leftColumnProps={leftColumnProps}

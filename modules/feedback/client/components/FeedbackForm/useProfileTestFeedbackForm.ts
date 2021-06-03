@@ -12,14 +12,16 @@ import { getUIElementRedirectRoute } from "@/modules/common/utils";
 // Constants
 const REDIRECT_DELAY = 1500; // ms wait before redirect (in sucess cases)
 // types
-import { IFeedbackFormProps } from "./IFeedbackFormProps";
+import { IProfileTestFeedbackFormProps } from "./IProfileTestFeedbackFormProps";
 import { headlineType } from "@/modules/profile/client/components/ServiceGroup/IServiceGroupProps";
 import {
   findLinkInstance,
   findToastNotificationInstance,
 } from "@/modules/model/components";
 
-export function useFeedbackForm(props: IFeedbackFormProps) {
+export function useProfileTestFeedbackForm(
+  props: IProfileTestFeedbackFormProps
+) {
   const {
     content,
     profile,

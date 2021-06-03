@@ -1,4 +1,4 @@
-import { useFeedbackForm } from "./useFeedbackForm";
+import { useProfileTestFeedbackForm } from "./useProfileTestFeedbackForm";
 import {
   MultipleFeedback,
   FeedbackSubmit,
@@ -11,7 +11,7 @@ import { ProfileEntry } from "@/modules/profile/client/components/ProfileEntry";
 import { ServiceGroup } from "@/modules/profile/client/components/ServiceGroup";
 import { LanguageSkills } from "@/modules/profile/client/components/LanguageSkills";
 import { Contact } from "@/modules/profile/client/components/Contact";
-import { IFeedbackFormProps } from "./IFeedbackFormProps";
+import { IProfileTestFeedbackFormProps } from "./IProfileTestFeedbackFormProps";
 import {
   findBodyInstance,
   findTextAreaInstance,
@@ -19,7 +19,9 @@ import {
   findButtonInstance,
 } from "@/modules/model/components";
 
-export default function FeedbackForm(props: IFeedbackFormProps) {
+export default function ProfileTestFeedbackForm(
+  props: IProfileTestFeedbackFormProps
+) {
   const {
     locale,
     onSuccess,
@@ -40,10 +42,11 @@ export default function FeedbackForm(props: IFeedbackFormProps) {
     // relatedHeadline,
     // officeHrsHeadline,
     components,
-  } = useFeedbackForm(props);
+  } = useProfileTestFeedbackForm(props);
 
   return (
     <MultipleFeedback
+      type="ProfileTest"
       lang={locale}
       onSuccess={onSuccess}
       onError={onError}
