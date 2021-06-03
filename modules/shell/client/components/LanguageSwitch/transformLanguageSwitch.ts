@@ -1,22 +1,22 @@
-import { IEntity, IUIElementTexts } from "@/modules/model";
+import { IEntity } from "@/modules/model";
 import { VerticalDirection } from "carbon-components-react/typings/shared";
-import { getUIElement } from "@/modules/common/utils";
+import { findLabelInstance, IComponent } from "@/modules/model/components";
 
 export interface ILanguageSwitchProps {
   direction?: VerticalDirection;
   links: IEntity[];
-  config?: IUIElementTexts[];
+  config?: IComponent[];
 }
 export function transformLanguageSwitch({
   links,
   config,
   direction = "bottom",
 }: ILanguageSwitchProps) {
-  const tooltip = getUIElement("menu_language", config)?.value;
+  const tooltip = config ? findLabelInstance(config, "menu_language") : null;
   return {
     links,
     direction,
     config,
-    tooltip,
+    tooltip: tooltip?.text || "MISSING TOOOLTIP",
   };
 }
