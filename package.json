@@ -5,8 +5,8 @@
   "author": "aidminutes GmBH",
   "license": "MIT",
   "scripts": {
-    "dev": "node ./design/fileExists.js && NODE_OPTIONS='--inspect' next dev",
-    "build": "node ./design/fileExists.js &&  next build",
+    "dev": "NODE_OPTIONS='--inspect' next dev",
+    "build": "next build",
     "start": "next start",
     "pretty": "prettier --write './**/*.ts*'",
     "compileTS": "tsc --version && tsc --pretty --noEmit --noErrorTruncation"
