@@ -60,22 +60,7 @@ import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
 
-// TODO should we remove the design stuff again?
-let dynamicProps: any;
-const isDesignContext = process.env.HEDI_ENV !== undefined ? true : false;
-
-const getDesignProps = async () => {
-  const { existsSync } = await import("fs");
-  const { join } = await import("path");
-  if (existsSync(join(__dirname, "../design/imports")))
-    //@ts-ignore
-    return import("../design/imports").then(({ propsMap }) => propsMap);
-  else return null;
-};
-
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
-  if (isDesignContext) dynamicProps = await getDesignProps();
-
   const pathQueries = [
     AppPagePathsGQL,
     ArticlePathsGQL,
@@ -103,17 +88,7 @@ export const getStaticProps: GetStaticProps<
 
   let content: (IEntity & IPageConfig) | null = null;
 
-  if (isDesignContext) {
-    const data = dynamicProps?.find(
-      (element: any) => element[0] === segments.join("/")
-    );
-    content = data?.[1]?.content;
-  }
-
-  // query types with dynamic paths first
-  if (isDesignContext && content) {
-    //we have a exported content for designing, skip backend fetches
-  } else if (isLandingPageRoute(route)) {
+  if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
     const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
