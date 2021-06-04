@@ -12,12 +12,11 @@ export const getFeedbackThanksPage = async (
   };
 
   const layout: ILayout = {
-    customKey: "FeedbackThanksPage-form",
     rightColumnProps: { md: 4, lg: 6, xlg: 6 },
     layoutImg,
   };
   const shell: IPageConfig = {
-    useHeader: true,
+    useHeader: "AUTHORIZED",
     redirectUnAuthorized: "/" + content.lang,
     layout,
   };
