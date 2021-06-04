@@ -1,16 +1,11 @@
-import { IAppPage } from "@/modules/common/types";
-import { getLandingPageView } from "../query";
-import { IPageConfig } from "@/modules/shell/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
-import { fixupRoutes } from "../utils";
+import { IPageConfig } from "@/modules/shell/types";
+import { IPage } from "@/modules/page/types";
+import { fixupRoutes } from "..";
 
 export const getLandingPage = async (
-  lang: string
-): Promise<(IAppPage & IPageConfig) | null> => {
-  let content = await getLandingPageView(lang);
-
-  if (!content) return null;
-
+  content: IPage
+): Promise<IPage & IPageConfig> => {
   content.type = "LandingPage";
   content = fixupRoutes(content);
 
@@ -20,11 +15,13 @@ export const getLandingPage = async (
   };
 
   const layout: ILayout = {
-    pageLayout: "imageAndColumn",
+    customKey: "landingPage-form",
+    rightColumnProps: { md: 4, lg: 6, xlg: 6 },
     layoutImg,
   };
+
   const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
+    useHeader: true,
     layout,
   };
 

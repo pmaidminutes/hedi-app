@@ -1,49 +1,69 @@
 import { getUser } from "@/modules/auth/client";
-import { getUIElement } from "@/modules/common/utils";
-import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
-import { Button, FormLabel, Row, Column } from "carbon-components-react";
+import { Button, Body, Label } from "@/modules/components";
+import { IPage } from "@/modules/page/types";
+import { Row, Column } from "carbon-components-react";
+import { useRouter } from "next/router";
+import React from "react";
 import { transformLandingPage } from "./transformLandingPage";
 
-export const LandingPageView = ({ content }: { content: ILandingPageView }) => {
+export const LandingPageView = ({ content }: { content: IPage }) => {
   const [user] = getUser();
-  const { links, linksIfLoggedIn, isLastElement } = transformLandingPage(
-    content
-  );
+  const {
+    body,
+    aboveLogin,
+    login,
+    loginHref,
+    aboveRegister,
+    register,
+    registerHref,
+    editProfile,
+    editProfileHref,
+  } = transformLandingPage(content);
+  const router = useRouter();
   return (
-    <Row>
-      {user
-        ? linksIfLoggedIn.map(link => (
-            <Column key={link.route}>
-              <div>
-                <FormLabel>
-                  {getUIElement(link.key, content.elements)?.help}
-                </FormLabel>
-              </div>
-              <Button href={link.route}>{link.longTitle}</Button>
-            </Column>
-          ))
-        : links.map((link, index) => (
-            <Column
-              key={index}
-              lg={
-                isLastElement(index + 1, links)
-                  ? { span: 5, offset: 1 }
-                  : { span: 5 }
-              }
-              md={4}
-              sm={2}>
-              <div key={link.label + index}>
-                <FormLabel>
-                  {getUIElement(link.key, content.elements)?.help}
-                </FormLabel>
-              </div>
+    <>
+      <div className="hedi--titlegroup bx--col">
+        <Row>{body && <Body {...body} />}</Row>
+      </div>
+      <Row>
+        {user ? (
+          <Column>
+            {editProfile && (
               <Button
-                kind={isLastElement(index + 1, links) ? "secondary" : "primary"}
-                href={link.route}>
-                {link.label}
-              </Button>
+                {...editProfile}
+                onClick={() => router.push(editProfileHref || "/")}
+              />
+            )}
+          </Column>
+        ) : (
+          <>
+            <Column lg={{ span: 5 }} md={4} sm={2}>
+              <div>
+                {aboveRegister && (
+                  <Label className="bx--label" {...aboveRegister} />
+                )}
+              </div>
+              {register && (
+                <Button
+                  {...register}
+                  onClick={() => router.push(registerHref || "/")}
+                />
+              )}
             </Column>
-          ))}
-    </Row>
+            <Column lg={{ span: 5, offset: 1 }} md={4} sm={2}>
+              <div>
+                {aboveLogin && <Label className="bx--label" {...aboveLogin} />}
+              </div>
+              {login && (
+                <Button
+                  {...login}
+                  onClick={() => router.push(loginHref || "/")}
+                />
+              )}
+            </Column>
+          </>
+        )}
+      </Row>
+    </>
   );
 };

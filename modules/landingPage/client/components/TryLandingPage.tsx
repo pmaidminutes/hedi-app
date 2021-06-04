@@ -1,6 +1,6 @@
 import { ITyped } from "@/modules/model";
+import { IPage } from "@/modules/page/types";
 import { LandingPageView } from ".";
-import { ILandingPageView } from "../../types/ILandingPageView";
 
 export const TryLandingPage = ({
   content,
@@ -8,5 +8,5 @@ export const TryLandingPage = ({
   content: ITyped;
 }): JSX.Element | null =>
   content.type === "LandingPage" ? (
-    <LandingPageView content={content as ILandingPageView} />
+    <LandingPageView content={content as IPage} />
   ) : null;

@@ -85,42 +85,47 @@ export const getStaticProps: GetStaticProps<
   IPageProps<IEntity>,
   ISegmentParam
 > = async ({ params, locale }) => {
-  const lang = locale ?? "de";
+  let lang = locale ?? "de";
   const segments = params?.segments ?? [];
-  const route = segmentsToRoute(segments, lang);
+  let route = segmentsToRoute(segments, lang);
 
   let content: (IEntity & IPageConfig) | null = null;
 
   if (isLandingPageRoute(route)) {
-    content = await getLandingPage(lang);
-  } else if (!content) {
-    const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
-    const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
-    let generic = entities?.[0] ?? null;
-
-    if (isIPage(generic)) generic = await getPageType(generic);
-    if (isIArticle(generic)) generic = await getArticlePage(generic);
-    if (isICategory(generic)) generic = await getCategoryPage(generic);
-    // if (isProfile(generic)) generic = await getProfilePage(generic);
-
-    if (isIAppPage(generic)) {
-      switch (
-        generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
-      ) {
-        case "search":
-          generic = await getSearchPage(generic);
-          break;
-        default:
-          generic = await getAppPagePage(generic);
-      }
-      // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
-    }
-    content = generic;
-
-    // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
-    // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
-    if (!content) content = await getGlossaryPage(route);
+    route = "/landingPage";
   }
+
+  const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
+  const entities = await getIEntitiesTranslated<IEntity>(
+    gqlTypes,
+    [route],
+    lang
+  );
+  let generic = entities?.[0] ?? null;
+
+  if (isIPage(generic)) generic = await getPageType(generic);
+  if (isIArticle(generic)) generic = await getArticlePage(generic);
+  if (isICategory(generic)) generic = await getCategoryPage(generic);
+  // if (isProfile(generic)) generic = await getProfilePage(generic);
+
+  if (isIAppPage(generic)) {
+    switch (
+      generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
+    ) {
+      case "search":
+        generic = await getSearchPage(generic);
+        break;
+      default:
+        generic = await getAppPagePage(generic);
+    }
+    // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
+  }
+  content = generic;
+
+  // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
+  // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
+  if (!content) content = await getGlossaryPage(route);
+  // }
   if (!content)
     return {
       redirect: {

@@ -1,11 +1,23 @@
-import { ILandingPageView } from "@/modules/landingPage/types/ILandingPageView";
+import {
+  findBodyInstance,
+  findButtonInstance,
+  findLabelInstance,
+  findLinkInstance,
+} from "@/modules/model/components";
+import { IPage } from "@/modules/page/types";
 
-export function transformLandingPage(content: ILandingPageView) {
-  const { linksIfLoggedIn, links } = content;
+export function transformLandingPage(content: IPage) {
+  const { components } = content;
 
-  const isLastElement = (count: number, array: any[]) => {
-    return count === array.length ? true : false;
+  return {
+    body: findBodyInstance(components, "text"),
+    aboveRegister: findLabelInstance(components, "aboveRegister"),
+    register: findButtonInstance(components, "register"),
+    registerHref: findLinkInstance(components, "registerLink")?.href,
+    aboveLogin: findLabelInstance(components, "aboveLogin"),
+    login: findButtonInstance(components, "login"),
+    loginHref: findLinkInstance(components, "loginLink")?.href,
+    editProfile: findButtonInstance(components, "editProfile"),
+    editProfileHref: findLinkInstance(components, "editProfileLink")?.href,
   };
-
-  return { links, linksIfLoggedIn, isLastElement };
 }
