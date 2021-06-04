@@ -168,7 +168,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         {/* <TryProfileList content={content} key="profileList" /> */}
         {/* <TryEditProfile content={content} key="editProfile" /> */}
         <TryFeedback content={content} key="feedback" />
-        <TryFeedbackThanks content={content} key="userfeedbackThanks" />
+        <TryFeedbackThanks content={content} key="feedbackThanks" />
         <TryLandingPage content={content} key="landingpage" />
 
         <TryArticle content={content} key="article" />
