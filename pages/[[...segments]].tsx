@@ -30,12 +30,12 @@ import { TryFeedback } from "@/modules/feedback/client/components";
 import { TryLogin } from "@/modules/login/client/components";
 
 // LandingPage
-import { landingPagePaths } from "@/modules/landingPage/types";
+import { landingPagePaths } from "@/modules/profileTestLanding/types";
 import {
-  getLandingPage,
-  isLandingPageRoute,
-} from "@/modules/landingPage/server";
-import { TryLandingPage } from "@/modules/landingPage/client/components";
+  getProfileTestLandingPage,
+  isProfileTestLandingPageRoute,
+} from "@/modules/profileTestLanding/server";
+import { TryProfileTestLandingPage } from "@/modules/profileTestLanding/client/components";
 
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps<
 
   let content: (IEntity & IPageConfig) | null = null;
 
-  if (isLandingPageRoute(route)) {
+  if (isProfileTestLandingPageRoute(route)) {
     route = "/landingPage";
   }
 
@@ -171,7 +171,10 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         {/* <TryEditProfile content={content} key="editProfile" /> */}
         <TryFeedback content={content} key="feedback" />
         {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
-        <TryLandingPage content={content} key="landingpage" />
+        <TryProfileTestLandingPage
+          content={content}
+          key="profileTestLandingPage"
+        />
 
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
