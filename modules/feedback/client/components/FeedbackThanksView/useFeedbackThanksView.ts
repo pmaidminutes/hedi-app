@@ -22,13 +22,13 @@ export function useFeedbackThanksView({ content }: { content: IPage }) {
 
   const router = useRouter();
   const noProfileRoute =
-    findLinkInstance(components, "no_profile_redirect")?.href || "/";
+    findLinkInstance(components, "noProfileRoute")?.href || "/";
   const noFeedbackRoute =
-    findLinkInstance(components, "no_feedback_redirect")?.href || "/";
+    findLinkInstance(components, "noFeedbackRoute")?.href || "/";
 
-  const backRoute = findLinkInstance(components, "back_page")?.href || "/";
-  const backButton = findButtonInstance(components, "back");
-  const body = findBodyInstance(components, "text");
+  const backRoute = findLinkInstance(components, "backRoute")?.href || "/";
+  const backButton = findButtonInstance(components, "backButton");
+  const body = findBodyInstance(components, "body");
 
   useEffect(() => {
     if (!isLoading && !user) router.push("/" + content.lang);
