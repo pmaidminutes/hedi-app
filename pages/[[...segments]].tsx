@@ -85,7 +85,7 @@ export const getStaticProps: GetStaticProps<
   IPageProps<IEntity>,
   ISegmentParam
 > = async ({ params, locale }) => {
-  let lang = locale ?? "de";
+  const lang = locale ?? "de";
   const segments = params?.segments ?? [];
   let route = segmentsToRoute(segments, lang);
 
