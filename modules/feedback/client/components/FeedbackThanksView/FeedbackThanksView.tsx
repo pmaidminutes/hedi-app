@@ -1,25 +1,25 @@
-import { Button } from "carbon-components-react";
+import { Button, Body } from "@/modules/components";
 import { ArrowLeft16 } from "@carbon/icons-react";
 import { useFeedbackThanksView } from "./useFeedbackThanksView";
 import { useRouter } from "next/router";
-import { IFeedbackThanksView } from "../../../types";
+import { IPage } from "@/modules/page/types";
 
-export const FeedbackThanksView = (props: { content: IFeedbackThanksView }) => {
-  const { backRoute, key, tooltip, buttonValue } = useFeedbackThanksView(props);
+export const FeedbackThanksView = (props: { content: IPage }) => {
+  const { backRoute, backButton, body } = useFeedbackThanksView(props);
   const router = useRouter();
 
   return (
-    <div className="hedi-app-page-link-buttons">
-      {
-        <Button
-          key={key}
-          tooltip={tooltip}
-          renderIcon={ArrowLeft16}
-          kind="ghost"
-          onClick={() => router.push(backRoute)}>
-          {buttonValue}
-        </Button>
-      }
-    </div>
+    <>
+      {body && <Body {...body} />}
+      <div className="hedi-app-page-link-buttons">
+        {backButton && (
+          <Button
+            {...backButton}
+            renderIcon={ArrowLeft16}
+            onClick={() => router.push(backRoute)}
+          />
+        )}
+      </div>
+    </>
   );
 };

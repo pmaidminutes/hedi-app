@@ -5,7 +5,10 @@ import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
 import { getLayout } from "@/modules/shell/server";
 import { getTemplate } from "@/modules/template/server";
-import { getFeedbackPage } from "@/modules/feedback/server/pages";
+import {
+  getFeedbackPage,
+  getFeedbackThanksPage,
+} from "@/modules/feedback/server/pages";
 export const getPageType = async (
   content: IPage
 ): Promise<IPage & IPageConfig> => {
@@ -16,6 +19,9 @@ export const getPageType = async (
       break;
     case "feedback":
       result = await getFeedbackPage(content);
+      break;
+    case "feedbackThanks":
+      result = await getFeedbackThanksPage(content);
       break;
     case "register":
       result = await getRegistrationPage(content);
