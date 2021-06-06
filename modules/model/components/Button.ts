@@ -4,6 +4,7 @@ export type ButtonKind = "Button";
 
 export interface Button extends IComponent {
   kind: ButtonKind;
+  type?: "button" | "submit" | "reset";
   buttonKind: string;
   usage: string;
   text?: HTML;
