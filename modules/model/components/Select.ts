@@ -8,6 +8,7 @@ export interface SelectOptions extends Omit<IEntity, "type"> {
 }
 
 export interface Select extends IComponent {
+  id: string;
   kind: SelectKind;
   items: SelectOptions[];
   defaultItem?: number;
@@ -17,7 +18,7 @@ export interface Select extends IComponent {
 }
 
 export const isSelect = (obj: IComponent): obj is Select =>
-  typeof obj?.id === "string" && obj?.kind === "Select";
+  obj?.kind === "Select";
 
 export const isSelectInstance = (obj: IComponent, id: string): obj is Select =>
   isSelect(obj) && obj.id === id;

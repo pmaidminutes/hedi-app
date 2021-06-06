@@ -54,7 +54,7 @@ export type ComponentKind =
 
 export interface IComponent {
   kind: ComponentKind;
-  id: string;
+  id?: string;
 }
 
 export type Component =
