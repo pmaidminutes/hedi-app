@@ -6,6 +6,7 @@ export interface Button extends IComponent {
   kind: ButtonKind;
   type?: "button" | "submit" | "reset";
   buttonKind: string;
+  href?: string;
   usage: string;
   text?: HTML;
   iconDescription?: string;
