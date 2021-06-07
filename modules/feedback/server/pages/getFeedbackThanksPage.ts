@@ -1,15 +1,11 @@
-import { IAppPage } from "@/modules/common/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getFeedbackThanksDefinition } from "../query";
-import { IFeedbackThanksView } from "../../types/IFeedbackThanksView";
+import { IPage } from "@/modules/page/types";
 
 export const getFeedbackThanksPage = async (
-  content: IAppPage
-): Promise<IFeedbackThanksView & IPageConfig> => {
+  content: IPage
+): Promise<IPage & IPageConfig> => {
   content.type = "FeedbackThanks";
-
-  const definition = await getFeedbackThanksDefinition(content);
 
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
@@ -18,7 +14,6 @@ export const getFeedbackThanksPage = async (
 
   return {
     ...content,
-    ...definition,
     ...shell,
   };
 };

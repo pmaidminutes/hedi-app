@@ -1,20 +1,17 @@
 import { getUser } from "@/modules/auth/client";
-import {
-  getUIElement,
-  getUIElementRedirectRoute,
-} from "@/modules/common/utils";
 import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "../../request/getCurrentUserHasFeedback";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
-import { IFeedbackThanksView } from "../../../types";
+import { IPage } from "@/modules/page/types";
+import {
+  findButtonInstance,
+  findLinkInstance,
+  findBodyInstance,
+} from "@/modules/model/components";
 
-export function useFeedbackThanksView({
-  content,
-}: {
-  content: IFeedbackThanksView;
-}) {
-  const { elements, links } = content;
+export function useFeedbackThanksView({ content }: { content: IPage }) {
+  const { components } = content;
 
   const [user, isLoading] = getUser();
   const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
@@ -24,22 +21,14 @@ export function useFeedbackThanksView({
   const [hasFeedback, hasFeedbackLoading] = getCurrentUserHasFeedback(user);
 
   const router = useRouter();
-  const noProfileRoute = getUIElementRedirectRoute(
-    "no_profile_redirect",
-    elements,
-    links
-  );
-  const noFeedbackRoute = getUIElementRedirectRoute(
-    "no_feedback_redirect",
-    elements,
-    links
-  );
+  const noProfileRoute =
+    findLinkInstance(components, "noProfileRoute")?.href || "/";
+  const noFeedbackRoute =
+    findLinkInstance(components, "noFeedbackRoute")?.href || "/";
 
-  const backRoute = getUIElementRedirectRoute("back_page", elements, links);
-  const element = getUIElement("back", elements);
-  const key = element?.identifier + content.lang;
-  const tooltip = element?.value;
-  const buttonValue = element?.value;
+  const backRoute = findLinkInstance(components, "backRoute")?.href || "/";
+  const backButton = findButtonInstance(components, "backButton");
+  const body = findBodyInstance(components, "body");
 
   useEffect(() => {
     if (!isLoading && !user) router.push("/" + content.lang);
@@ -59,5 +48,5 @@ export function useFeedbackThanksView({
     hasFeedbackLoading,
   ]);
 
-  return { backRoute, key, tooltip, buttonValue };
+  return { backRoute, backButton, body };
 }
