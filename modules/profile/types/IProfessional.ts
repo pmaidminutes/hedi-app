@@ -4,6 +4,7 @@ import {
   BusinessProfileFields,
   IBusinessProfileLink,
   BusinessProfileLinkFields,
+  IBusinessProfileInput,
 } from "./IBusinessProfile";
 
 export interface IProfessional extends IBusinessProfile {
@@ -25,3 +26,9 @@ export const ProfessionalGQL: string = gql`... on Professional {
   prefix givenName familyName
   associations { ${BusinessProfileLinkFields} }
 }`;
+
+export interface IProfessionalInput extends IBusinessProfileInput {
+  prefix?: string;
+  givenName: string;
+  familyName?: string;
+}
