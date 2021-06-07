@@ -1,3 +1,3 @@
-import { registerAPI } from "@/modules/registration/server";
+import { registerAPI } from "@/modules/auth/server";
 
 export default registerAPI;
