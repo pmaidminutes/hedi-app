@@ -30,12 +30,12 @@ import { TryFeedback } from "@/modules/feedback/client/components";
 import { TryLogin } from "@/modules/login/client/components";
 
 // LandingPage
-import { landingPagePaths } from "@/modules/profileTestLanding/types";
+import { landingPagePaths } from "@/modules/landingpage/types";
 import {
   getProfileTestLandingPage,
   isProfileTestLandingPageRoute,
-} from "@/modules/profileTestLanding/server";
-import { TryProfileTestLandingPage } from "@/modules/profileTestLanding/client/components";
+} from "@/modules/landingpage/server";
+import { TryProfileTestLandingPage } from "@/modules/landingpage/client/components";
 
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
