@@ -10,8 +10,7 @@ export interface ToastNotification extends INotification {
 
 export const isToastNotification = (
   obj: IComponent
-): obj is ToastNotification =>
-  typeof obj?.id === "string" && obj?.kind === "ToastNotification";
+): obj is ToastNotification => obj?.kind === "ToastNotification";
 
 export const isToastNotificationInstance = (
   obj: IComponent,

@@ -17,6 +17,7 @@ import {
 // import { GlobalSearchMenu } from "../GlobalSearchMenu";
 import { UserProfileMenu } from "../UserProfileMenu";
 import Logo from "./assets/hedi_logo_single_new.svg";
+import { isLink } from "@/modules/model/components";
 
 export const Header = (props: IHeader) => {
   const {
@@ -26,7 +27,7 @@ export const Header = (props: IHeader) => {
     userMenuLinks,
     shellConfig,
     locale,
-    backToHome
+    backToHome,
   } = transformHeader(props);
 
   const { isExpanded, toggleSideNav } = useSideNav();
@@ -44,25 +45,29 @@ export const Header = (props: IHeader) => {
           onClick={toggleSideNav}
           isActive={isExpanded}
         />
-        {headerLinks
-          ? headerLinks.map((link, index) => {
+        {headerLinks &&
+          headerLinks.map((link, index) => {
+            if (isLink(link)) {
               return (
                 <HeaderMenuItem
-                  key={link.label + index}
-                  href={link.route}
-                  title={link.longTitle ?? link.label}>
-                  {link.longTitle ?? link.label}
+                  key={link.labelText + index}
+                  href={link.href}
+                  title={link.labelText}>
+                  {link.labelText}
                 </HeaderMenuItem>
               );
-            })
-          : null}
+            }
+          })}
       </HeaderNavigation>
       <HeaderGlobalBar>
         {/* <GlobalSearchMenu /> */}
         {languageSwitchLinks !== undefined ? (
           <LanguageSwitch links={languageSwitchLinks} config={shellConfig} />
         ) : null}
-        <UserProfileMenu userMenuLinks={userMenuLinks} config={shellConfig} />
+
+        {userMenuLinks && (
+          <UserProfileMenu userMenuLinks={userMenuLinks} config={shellConfig} />
+        )}
       </HeaderGlobalBar>
       <SideNav
         aria-label="Side navigation"
@@ -70,18 +75,19 @@ export const Header = (props: IHeader) => {
         isPersistent={false}>
         <SideNavItems>
           <HeaderSideNavItems>
-            {headerLinks
-              ? headerLinks.map((link, index) => {
+            {headerLinks &&
+              headerLinks.map((link, index) => {
+                if (isLink(link)) {
                   return (
                     <HeaderMenuItem
-                      key={link.label + index}
-                      href={link.route}
-                      title={link.longTitle ?? link.label}>
-                      {link.longTitle ?? link.label}
+                      key={link.labelText + index}
+                      href={link.href}
+                      title={link.labelText}>
+                      {link.labelText}
                     </HeaderMenuItem>
                   );
-                })
-              : null}
+                }
+              })}
           </HeaderSideNavItems>
         </SideNavItems>
       </SideNav>

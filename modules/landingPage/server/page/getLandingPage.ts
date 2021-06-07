@@ -14,18 +14,8 @@ export const getLandingPage = async (
   content.type = "LandingPage";
   content = fixupRoutes(content);
 
-  const layoutImg = {
-    alt: "Beschreibung",
-    src: `${process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}`,
-  };
-
-  const layout: ILayout = {
-    pageLayout: "imageAndColumn",
-    layoutImg,
-  };
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
-    layout,
   };
 
   return {

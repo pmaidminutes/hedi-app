@@ -3,6 +3,7 @@ import { HTML, IComponent } from "./Component";
 export type TextInputKind = "TextInput";
 
 export interface TextInput extends IComponent {
+  id: string;
   kind: TextInputKind;
   type: "text" | "email" | "password";
   labelText: HTML;
@@ -13,7 +14,7 @@ export interface TextInput extends IComponent {
 }
 
 export const isTextInput = (obj: IComponent): obj is TextInput =>
-  typeof obj?.id === "string" && obj?.kind === "TextInput";
+  obj?.kind === "TextInput";
 
 export const isTextInputInstance = (
   obj: IComponent,

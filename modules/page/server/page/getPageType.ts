@@ -9,7 +9,10 @@ import {
   getProfileListPage,
   getProfilePreviewPage,
 } from "@/modules/profile/server";
-import { getFeedbackPage } from "@/modules/feedback/server/pages";
+import {
+  getFeedbackPage,
+  getFeedbackThanksPage,
+} from "@/modules/feedback/server/pages";
 
 export const getPageType = async (
   content: IPage
@@ -30,6 +33,9 @@ export const getPageType = async (
       break;
     case "feedback":
       result = await getFeedbackPage(content);
+      break;
+    case "feedbackThanks":
+      result = await getFeedbackThanksPage(content);
       break;
     case "template":
       result = await getTemplate(content);

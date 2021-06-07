@@ -35,25 +35,27 @@ export const ComponentRenderer = (props: IRendererProps) => {
       {components &&
         components.map((component, index) => {
           if (isLabel(component))
-            return <Label key={component.id + index} {...component} />;
+            return <Label key={component.kind + index} {...component} />;
           if (isBody(component))
-            return <Body key={component.id + index} {...component} />;
+            return <Body key={component.kind + index} {...component} />;
           if (isButton(component))
-            return <Button key={component.id + index} {...component} />;
+            return <Button key={component.kind + index} {...component} />;
           if (isTextArea(component))
-            return <TextArea key={component.id + index} {...component} />;
+            return <TextArea key={component.kind + index} {...component} />;
           if (isTextInput(component))
-            return <TextInput key={component.id + index} {...component} />;
+            return <TextInput key={component.kind + index} {...component} />;
           if (isAudio(component))
-            return <AudioPlayer key={component.id + index} {...component} />;
+            return <AudioPlayer key={component.kind + index} {...component} />;
           if (isImage(component))
-            return <Image key={component.id + index} {...component} />;
+            return <Image key={component.kind + index} {...component} />;
           if (isFile(component))
-            return <DownloadFile key={component.id + index} {...component} />;
+            return <DownloadFile key={component.kind + index} {...component} />;
           if (isVideo(component))
-            return <VideoPlayer key={component.id + index} video={component} />;
+            return (
+              <VideoPlayer key={component.kind + index} video={component} />
+            );
           if (isSvg(component))
-            return <Svg key={component.id + index} {...component} />;
+            return <Svg key={component.kind + index} {...component} />;
         })}
     </>
   );

@@ -3,6 +3,7 @@ import { HTML, IComponent } from "./Component";
 export type ToggleKind = "Toggle";
 
 export interface Toggle extends IComponent {
+  id: string;
   kind: ToggleKind;
   labelText: HTML;
   labelA?: HTML;
@@ -11,7 +12,7 @@ export interface Toggle extends IComponent {
 }
 
 export const isToggle = (obj: IComponent): obj is Toggle =>
-  typeof obj?.id === "string" && obj?.kind === "Toggle";
+  obj?.kind === "Toggle";
 
 export const isToggleInstance = (obj: IComponent, id: string): obj is Toggle =>
   isToggle(obj) && obj.id === id;

@@ -26,7 +26,10 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
-import { TryFeedback } from "@/modules/feedback/client/components";
+import {
+  TryFeedback,
+  TryFeedbackThanks,
+} from "@/modules/feedback/client/components";
 import { TryLogin } from "@/modules/login/client/components";
 
 // LandingPage
@@ -88,6 +91,7 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     BusinessProfilePathsGQL,
     PagePathsGQL,
   ];
+  // GlossaryPathsGQL,
   const locales = context?.locales ?? [];
   const paths = [];
   for (const lang of locales) {
@@ -153,20 +157,8 @@ export const getStaticProps: GetStaticProps<
       },
     };
 
-  // ShellStuff
-  const shellKey = {
-    header: [
-      "editprofile",
-      "viewprofile",
-      "profiles",
-      "userfeedback",
-      "search",
-    ],
-    footer: ["imprint", "privacy"],
-    userMenu: ["login", "logout", "viewprofile"],
-  };
   // TODO we should probably cache this, especially if shellKey are static most of the time
-  const shellData = await getShell(locale, shellKey);
+  const shellData = await getShell(locale);
   const shell = generateShellData(content, shellData);
   return {
     props: { content, shell },
@@ -183,13 +175,13 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         <TryLogin content={content} key="login" />
         <TryRegistration content={content} key="registration" />
 
-        {/* <TryLogin content={content} key="login" /> */}
         <TryProfilePreview content={content} key="profilePreview" />
         <TryProfile content={content} key="profile" />
         <TryProfileList content={content} key="profileList" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
+
         <TryFeedback content={content} key="feedback" />
-        {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
+        <TryFeedbackThanks content={content} key="feedbackThanks" />
         <TryLandingPage content={content} key="landingpage" />
 
         <TryArticle content={content} key="article" />

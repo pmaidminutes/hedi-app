@@ -6,20 +6,11 @@ export const SingleColumn: React.FC<
   ILayoutBasicTemplate & {
     columnProps?: ColumnDefaultProps;
   }
-> = ({
-  headline,
-  condensed,
-  narrow,
-  children,
-  groupClass,
-  body,
-  columnProps,
-}) => (
+> = ({ headline, condensed, narrow, children, groupClass, columnProps }) => (
   <Grid>
     <Row condensed={condensed} narrow={narrow}>
       <Column {...columnProps} className="hedi--titlegroup">
         <h1>{headline}</h1>
-        {body && <HTML data={body} />}
       </Column>
     </Row>
     {children && <div className={groupClass}>{children}</div>}

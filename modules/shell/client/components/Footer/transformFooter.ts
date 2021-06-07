@@ -1,8 +1,17 @@
+import { findGroupInstance } from "@/modules/model/components";
 import { IShellProps } from "@/modules/shell/types";
 export interface IFooter extends Partial<IShellProps> {}
 
 export function transformFooter(props: IFooter) {
-  const { languageSwitchLinks, footer, shellConfig } = props;
+  const { languageSwitchLinks, shellConfig } = props;
 
-  return { languageSwitchLinks, footer, shellConfig };
+  const footerLinks = shellConfig
+    ? findGroupInstance(shellConfig, "footer")
+    : null;
+
+  return {
+    languageSwitchLinks,
+    footer: footerLinks?.components || null,
+    shellConfig,
+  };
 }

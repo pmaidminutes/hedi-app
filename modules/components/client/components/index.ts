@@ -10,6 +10,7 @@ export * from "./InlineNotification";
 export * from "./Label";
 export * from "./Link";
 export * from "./NumberInput";
+export * from "./Select";
 export * from "./Slider";
 export * from "./Svg";
 export * from "./TextArea";

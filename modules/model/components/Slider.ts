@@ -14,7 +14,7 @@ export interface Slider extends IComponent {
 }
 
 export const isSlider = (obj: IComponent): obj is Slider =>
-  typeof obj?.id === "string" && obj?.kind === "Slider";
+  obj?.kind === "Slider";
 
 export const isSliderInstance = (obj: IComponent, id: string): obj is Slider =>
   isSlider(obj) && obj.id === id;

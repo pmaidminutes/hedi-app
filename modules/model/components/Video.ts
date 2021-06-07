@@ -10,8 +10,7 @@ export interface Video extends IComponent {
   mimeType?: string;
 }
 
-export const isVideo = (obj: IComponent): obj is Video =>
-  typeof obj?.id === "string" && obj?.kind === "Video";
+export const isVideo = (obj: IComponent): obj is Video => obj?.kind === "Video";
 
 export const isVideoInstance = (obj: IComponent, id: string): obj is Video =>
   isVideo(obj) && obj.id === id;
