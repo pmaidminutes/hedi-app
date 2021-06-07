@@ -17,13 +17,10 @@ export function generateShellData(
     redirectUnAuthorized,
     layout,
   } = content;
-  const { languages, shellConfig, ...links } = shellData;
+  const { languages, shellConfig } = shellData;
   // TODO type?
   let shellProps = { shellConfig } as any;
-  // TODO check if there is a better way to set the props
-  for (let key of Object.keys(links)) {
-    setProperty(shellProps, key, links[key] as any);
-  }
+
   if (languages)
     setProperty(
       shellProps,
