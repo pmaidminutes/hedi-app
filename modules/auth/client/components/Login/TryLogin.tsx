@@ -1,6 +1,6 @@
 import { ITyped } from "@/modules/model";
-import { Login } from "./Login";
-import { ILogin } from "../../types";
+import { Login } from "./Login"
+import { ILogin } from "../../../types";
 
 export const TryLogin = ({
   content,

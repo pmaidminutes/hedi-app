@@ -30,7 +30,7 @@ import {
   TryFeedback,
   TryFeedbackThanks,
 } from "@/modules/feedback/client/components";
-import { TryLogin } from "@/modules/login/client/components";
+import { TryLogin } from "@/modules/auth/client";
 
 // LandingPage
 import { landingPagePaths } from "@/modules/landingPage/types";

@@ -1,4 +1,4 @@
-import { getLoginPage } from "@/modules/login/server";
+import { getLoginPage } from "@/modules/auth/server";
 import { getRegistrationPage } from "@/modules/registration/server";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../types";

@@ -1,7 +1,7 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "@/modules/page/types";
-import { ILogin } from "@/modules/login/types";
+import { ILogin } from "@/modules/auth/types";
 export const getLoginPage = async (
   content: IPage
 ): Promise<ILogin & IPageConfig> => {

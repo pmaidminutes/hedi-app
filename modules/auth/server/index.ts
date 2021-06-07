@@ -3,3 +3,4 @@
 // export { nextauthAPI } from "./nextauthAPI";
 export * from "./functions";
 export * from "./serviceSession";
+export * from "./page";
