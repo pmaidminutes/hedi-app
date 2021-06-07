@@ -9,14 +9,8 @@ export const getProfileTestLandingPage = async (
   content.type = "ProfileTestLandingPage";
   content = fixupRoutes(content);
 
-  const layoutImg = {
-    alt: "Beschreibung",
-    src: `${process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}`,
-  };
-
   const layout: ILayout = {
     rightColumnProps: { md: 4, lg: 6, xlg: 6 },
-    layoutImg,
   };
 
   const shell: IPageConfig = {
