@@ -23,7 +23,6 @@ export function transformRegistration(props: IRegistration) {
   const redirectUrl = redirect?.href || "";
   const invalidText = invalid?.title || "";
 
-
   return {
     username,
     password,

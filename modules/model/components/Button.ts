@@ -4,7 +4,9 @@ export type ButtonKind = "Button";
 
 export interface Button extends IComponent {
   kind: ButtonKind;
+  type?: "button" | "submit" | "reset";
   buttonKind: string;
+  href?: string;
   usage: string;
   text?: HTML;
   iconDescription?: string;
@@ -13,7 +15,7 @@ export interface Button extends IComponent {
 }
 
 export const isButton = (obj: IComponent): obj is Button =>
-  typeof obj?.id === "string" && obj?.kind === "Button";
+  obj?.kind === "Button";
 
 export const isButtonInstance = (obj: IComponent, id: string): obj is Button =>
   isButton(obj) && obj.id === id;

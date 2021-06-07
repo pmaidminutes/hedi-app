@@ -6,11 +6,10 @@ export const getLoginPage = async (
   content: IPage
 ): Promise<ILogin & IPageConfig> => {
   content.type = "Login";
- 
+
   const layout: ILayout = {
     customKey: "login-form",
     rightColumnProps: { md: 4, lg: 6, xlg: 6 },
-
   };
 
   const shell: IPageConfig = {
@@ -23,6 +22,5 @@ export const getLoginPage = async (
     ...shell,
   };
 };
-
 
 // TODO move to Login

@@ -10,7 +10,7 @@ export interface Column extends IComponent {
 }
 
 export const isColumn = (obj: IComponent): obj is Column =>
-  typeof obj?.id === "string" && obj?.kind === "Column";
+  obj?.kind === "Column";
 
 export const isColumnInstance = (obj: IComponent, id: string): obj is Column =>
   isColumn(obj) && obj.id === id;

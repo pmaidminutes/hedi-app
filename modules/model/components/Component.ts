@@ -19,6 +19,7 @@ import { Video, VideoKind } from "./Video";
 import { ToastNotification, ToastNotificationKind } from "./ToastNotification";
 import { TextInput, TextInputKind } from "./TextInput";
 import { NumberInput, NumberInputKind } from "./NumberInput";
+import { Select, SelectKind } from "./Select";
 import { Slider, SliderKind } from "./Slider";
 import { TextArea, TextAreaKind } from "./TextArea";
 import { Toggle, ToggleKind } from "./Toggle";
@@ -43,6 +44,7 @@ export type ComponentKind =
   | SvgKind
   | VideoKind
   | NumberInputKind
+  | SelectKind
   | SliderKind
   | TextAreaKind
   | TextInputKind
@@ -52,7 +54,7 @@ export type ComponentKind =
 
 export interface IComponent {
   kind: ComponentKind;
-  id: string;
+  id?: string;
 }
 
 export type Component =
@@ -73,6 +75,7 @@ export type Component =
   | Svg
   | Video
   | NumberInput
+  | Select
   | Slider
   | TextArea
   | TextInput

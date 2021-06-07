@@ -9,8 +9,7 @@ export interface Label extends IComponent {
   className?: string;
 }
 
-export const isLabel = (obj: IComponent): obj is Label =>
-  typeof obj?.id === "string" && obj?.kind === "Label";
+export const isLabel = (obj: IComponent): obj is Label => obj?.kind === "Label";
 
 export const isLabelInstance = (obj: IComponent, id: string): obj is Label =>
   isLabel(obj) && obj.id === id;

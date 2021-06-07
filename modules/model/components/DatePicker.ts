@@ -3,6 +3,7 @@ import { HTML, IComponent } from "./Component";
 export type DatePickerKind = "DatePicker";
 
 export interface DatePicker extends IComponent {
+  id: string;
   kind: DatePickerKind;
   datePickerType: "simple" | "single" | "range";
   dateFormat: string;
@@ -15,7 +16,7 @@ export interface DatePicker extends IComponent {
 }
 
 export const isDatePicker = (obj: IComponent): obj is DatePicker =>
-  typeof obj?.id === "string" && obj?.kind === "DatePicker";
+  obj?.kind === "DatePicker";
 
 export const isDatePickerInstance = (
   obj: IComponent,

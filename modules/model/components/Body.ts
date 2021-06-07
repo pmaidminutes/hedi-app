@@ -7,8 +7,7 @@ export interface Body extends IComponent {
   body?: HTML;
 }
 
-export const isBody = (obj: IComponent): obj is Body =>
-  typeof obj?.id === "string" && obj.kind === "Body";
+export const isBody = (obj: IComponent): obj is Body => obj.kind === "Body";
 
 export const isBodyInstance = (obj: IComponent, id: string): obj is Body =>
   isBody(obj) && obj.id === id;
