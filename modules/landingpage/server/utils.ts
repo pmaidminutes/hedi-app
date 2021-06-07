@@ -1,7 +1,7 @@
 import { IEntityLocalized, IEntityTranslated } from "@/modules/model";
 
 // matches any route with either 2 or 2-2 char locale
-export function isProfileTestLandingPageRoute(route: string) {
+export function isLandingPageRoute(route: string) {
   return route.match(/^\/[a-z]{2}(?:-[a-z]{2})?\/$/i);
 }
 

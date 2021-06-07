@@ -33,7 +33,7 @@ import { TryLogin } from "@/modules/login/client/components";
 import { landingPagePaths } from "@/modules/landingpage/types";
 import {
   getProfileTestLandingPage,
-  isProfileTestLandingPageRoute,
+  isLandingPageRoute,
 } from "@/modules/landingpage/server";
 import { TryProfileTestLandingPage } from "@/modules/landingpage/client/components";
 
@@ -91,7 +91,7 @@ export const getStaticProps: GetStaticProps<
 
   let content: (IEntity & IPageConfig) | null = null;
 
-  if (isProfileTestLandingPageRoute(route)) {
+  if (isLandingPageRoute(route)) {
     route = "/landingPage";
   }
 
