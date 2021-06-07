@@ -1,3 +1,3 @@
-import { validateRegisterAPI } from "@/modules/registration/server/validateRegisterAPI";
+import { validateRegisterAPI } from "@/modules/auth/server";
 
 export default validateRegisterAPI;

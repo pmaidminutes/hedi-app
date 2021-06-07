@@ -1,2 +1,2 @@
 export * from "./requestCurrentProfile";
-export * from "./requestCurrentProfileEntity";
+export * from "./requestCurrentProfileRoute";

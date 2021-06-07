@@ -9,8 +9,7 @@ export interface Svg extends IComponent {
   usage?: string;
 }
 
-export const isSvg = (obj: IComponent): obj is Svg =>
-  typeof obj?.id === "string" && obj?.kind === "Svg";
+export const isSvg = (obj: IComponent): obj is Svg => obj?.kind === "Svg";
 
 export const isSvgInstance = (obj: IComponent, id: string): obj is Svg =>
   isSvg(obj) && obj.id === id;

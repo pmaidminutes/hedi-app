@@ -10,8 +10,7 @@ export interface Audio extends IComponent {
   mimeType?: string;
 }
 
-export const isAudio = (obj: IComponent): obj is Audio =>
-  typeof obj?.id === "string" && obj?.kind === "Audio";
+export const isAudio = (obj: IComponent): obj is Audio => obj?.kind === "Audio";
 
 export const isAudioInstance = (obj: IComponent, id: string): obj is Audio =>
   isAudio(obj) && obj.id === id;

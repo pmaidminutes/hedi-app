@@ -1,2 +1,3 @@
 export * from "./Contact";
-export * from "./IContactProps";
+export * from "./getContactDefinition";
+export * from "./parseContactsFromProfile";

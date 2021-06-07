@@ -1,38 +1,29 @@
 import React from "react";
-import { transformRelatedProfiles } from "./transformRelatedProfiles";
 import { Grid, Row } from "carbon-components-react";
 import { RelatedProfile } from "./RelatedProfile";
-import { IRelatedProfilesProps } from ".";
+import { IBusinessProfileLink } from "@/modules/profile/types";
 
-// TODO remove testdata
-const data = [
-  {
-    longtitle: "Geburtshaus Sonnenschein",
-    description: "Hebammenpraxis",
-    city: "Hamburg",
-    route: "/",
-  },
-  {
-    longtitle: "Hebammenpraxis Eimsbüttel",
-    description: "Hebammenpraxis",
-    city: "Hamburg",
-    route: "/",
-  },
-];
-export const RelatedProfiles = (props: IRelatedProfilesProps) => {
-  const { headline, profiles } = transformRelatedProfiles(props);
+export type IRelatedProfilesProps = IRelatedProfiles &
+  IRelatedProfilesDefinition;
+
+export interface IRelatedProfiles {
+  profileLinks: Partial<IBusinessProfileLink>[];
+}
+
+export interface IRelatedProfilesDefinition {
+  headline?: string;
+}
+
+export const RelatedProfiles: React.FC<IRelatedProfilesProps> = props => {
+  const { headline, profileLinks } = props;
   return (
     <section className="hedi--related-profiles">
       <Grid>
         <h3>{headline}</h3>
         <Row>
-          {profiles
-            ? profiles.map((profile, index) => (
-                <RelatedProfile key={index} {...profile} />
-              ))
-            : data.map((profile, index) => (
-                <RelatedProfile key={index} {...profile} />
-              ))}
+          {profileLinks.map((profile, index) => (
+            <RelatedProfile key={index} {...profile} />
+          ))}
         </Row>
       </Grid>
     </section>

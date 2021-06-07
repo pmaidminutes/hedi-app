@@ -9,8 +9,7 @@ export interface InlineNotification extends INotification {
 
 export const isInlineNotification = (
   obj: IComponent
-): obj is InlineNotification =>
-  typeof obj?.id === "string" && obj?.kind === "InlineNotification";
+): obj is InlineNotification => obj?.kind === "InlineNotification";
 
 export const isInlineNotificationInstance = (
   obj: IComponent,

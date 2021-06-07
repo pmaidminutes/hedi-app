@@ -9,8 +9,7 @@ export interface Group extends IComponent {
   labelText?: HTML;
 }
 
-export const isGroup = (obj: IComponent): obj is Group =>
-  typeof obj?.id === "string" && obj?.kind === "Group";
+export const isGroup = (obj: IComponent): obj is Group => obj?.kind === "Group";
 
 export const isGroupInstance = (obj: IComponent, id: string): obj is Group =>
   isGroup(obj) && obj.id === id;

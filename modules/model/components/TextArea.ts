@@ -11,7 +11,7 @@ export interface TextArea extends IComponent {
 }
 
 export const isTextArea = (obj: IComponent): obj is TextArea =>
-  typeof obj?.id === "string" && obj?.kind === "TextArea";
+  obj?.kind === "TextArea";
 
 export const isTextAreaInstance = (
   obj: IComponent,

@@ -3,6 +3,7 @@ import { HTML, IComponent } from "./Component";
 export type NumberInputKind = "NumberInput";
 
 export interface NumberInput extends IComponent {
+  id: string;
   kind: NumberInputKind;
   label?: HTML;
   isRequired?: boolean;
@@ -14,7 +15,7 @@ export interface NumberInput extends IComponent {
 }
 
 export const isNumberInput = (obj: IComponent): obj is NumberInput =>
-  typeof obj?.id === "string" && obj?.kind === "NumberInput";
+  obj?.kind === "NumberInput";
 
 export const isNumberInputInstance = (
   obj: IComponent,

@@ -38,12 +38,18 @@ export function jsonFetcher<T>(url: RequestInfo) {
     .then(jsonResponse => jsonResponse as T); // TODO must be | null as well
 }
 
-export function jsonPost<T>(url: RequestInfo, data: object) {
+export function jsonPost<T>(
+  url: RequestInfo,
+  data: object,
+  returnAsText = false
+) {
   return fetch(url, {
     method: "POST",
     body: JSON.stringify(data),
   })
-    .then(response => response.json().catch(() => null))
+    .then(response =>
+      (returnAsText ? response.text() : response.json()).catch(() => null)
+    )
     .then(jsonResponse => jsonResponse as T | null);
 }
 
