@@ -1,5 +1,4 @@
 import { ILayoutBasicTemplate } from "../types";
-import { HTML } from "@/modules/react/html";
 import { Column, ColumnDefaultProps, Grid, Row } from "carbon-components-react";
 import { IComponent } from "@/modules/model/components";
 import { ComponentRenderer } from "@/modules/components";
@@ -12,7 +11,6 @@ export const TwoColumns: React.FC<
   }
 > = ({
   headline,
-  body,
   sideComponents,
   condensed,
   narrow,
@@ -32,7 +30,6 @@ export const TwoColumns: React.FC<
           <Row condensed={condensed} narrow={narrow}>
             <Column className="hedi--titlegroup">
               <h1>{headline}</h1>
-              <HTML data={body} />
             </Column>
           </Row>
           {children && <div className={groupClass}>{children}</div>}

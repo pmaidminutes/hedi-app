@@ -30,7 +30,6 @@ export const AppPageView: React.FC<IAppPageProps> = props => {
 
       <SingleColumn
         headline={headline}
-        body={body}
         groupClass={groupClass}
         narrow={narrow}
         condensed={condensed}>

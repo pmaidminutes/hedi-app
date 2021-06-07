@@ -11,19 +11,9 @@ export const getFeedbackThanksPage = async (
 
   const definition = await getFeedbackThanksDefinition(content);
 
-  const layoutImg = {
-    src: `${process.env.NEXT_PUBLIC_IMG_HEADER_SIMPLE}`,
-    alt: "Some description",
-  };
-
-  const layout: ILayout = {
-    pageLayout: "imageAndColumn",
-    layoutImg,
-  };
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
     redirectUnAuthorized: "/" + content.lang,
-    layout,
   };
 
   return {

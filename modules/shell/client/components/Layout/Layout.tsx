@@ -1,17 +1,11 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
-import {
-  SingleColumn,
-  ImageAndColumn,
-  Categories,
-  TwoColumns,
-} from "./templates";
+import { SingleColumn, TwoColumns } from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
   const {
     left,
-    layoutImg,
     right,
     posterImgSrc,
     posterImage,
@@ -19,7 +13,6 @@ export const Layout: React.FC<ILayoutProps> = props => {
     pageLayout,
     condensed,
     narrow,
-    body,
     headline,
     children,
     groupClass,
@@ -39,34 +32,18 @@ export const Layout: React.FC<ILayoutProps> = props => {
           layout="responsive"
         />
       )}
-      {pageLayout === "imageAndColumn" ? (
-        <ImageAndColumn
-          headline={headline}
-          body={body}
-          groupClass={groupClass}
-          left={left}
-          right={right}
-          layoutImg={layoutImg}>
-          {children}
-        </ImageAndColumn>
-      ) : pageLayout === "singleColumn" ? (
+      {pageLayout === "singleColumn" ? (
         <SingleColumn
           columnProps={single}
           headline={headline}
-          body={body}
           groupClass={groupClass}
           narrow={narrow}
           condensed={condensed}>
           {children}
         </SingleColumn>
-      ) : pageLayout === "categories" ? (
-        <Categories headline={headline} groupClass={groupClass}>
-          {children}
-        </Categories>
       ) : pageLayout === "twoColumns" ? (
         <TwoColumns
           headline={headline}
-          body={body}
           groupClass={groupClass}
           left={left}
           right={right}
