@@ -18,7 +18,6 @@ import {
 import { getTextInputProps } from "@/modules/common/utils";
 import { Seperator } from "@/modules/common/components";
 import {
-  IConsultationHoursEntry,
   IEditProfileFormConfig,
   IUpsertProfileResponse,
   orderedRequiredFields,
@@ -26,8 +25,6 @@ import {
 import { ServiceSelection } from "../ServiceSelection";
 import { useValidationErrors } from "./hooks";
 import { TextInputProps } from "carbon-components-react";
-import { ConsultationHoursSelection } from "../ConsultationHours";
-import { days, timeRanges } from "../ConsultationHours/ConfigConsultationHours";
 import React, { ChangeEvent, useRef, RefObject } from "react";
 import {
   minLengthValidationFn,

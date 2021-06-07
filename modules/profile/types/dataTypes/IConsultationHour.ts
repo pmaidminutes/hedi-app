@@ -24,3 +24,15 @@ export interface IConsultationHourInput {
   endTime?: string;
   availability: number;
 }
+
+export function consultationHourToInput(
+  consultationHour: IConsultationHour
+): IConsultationHourInput {
+  const { weekday, startTime, endTime, availability } = consultationHour;
+  return {
+    weekday: weekday.index,
+    startTime,
+    endTime,
+    availability: availability.index,
+  };
+}
