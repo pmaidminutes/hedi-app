@@ -1,6 +1,6 @@
 import { sendAPISuccess } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
-import { IRegisterResponse } from "../types";
+import { IRegisterResponse } from "@/modules/auth/types";
 
 export const validateRegisterAPI: NextApiHandler<IRegisterResponse> = async (
   { query },

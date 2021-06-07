@@ -2,9 +2,9 @@ import { useRouter } from "next/router";
 import { FormEvent, SyntheticEvent, useState, useEffect } from "react";
 import { useAuthorizedRedirect } from "@/modules/react/hooks";
 import { useTextInput } from "@/modules/react/hooks";
-import { useRegister } from "../../../../registration/client/request";
-import { useRegistrationError, useCredentialChange } from "../../../../registration/client/hooks";
-import { IRegisterInfo } from "@/modules/registration/types";
+import { useRegister } from "../../request";
+import { useRegistrationError, useCredentialChange } from "../../hooks";
+import { IRegisterInfo } from "@/modules/auth/types";
 
 export function useRegistration(redirectUrl: string) {
   const router = useRouter();

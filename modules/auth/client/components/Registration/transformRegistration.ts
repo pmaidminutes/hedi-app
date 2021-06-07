@@ -5,7 +5,7 @@ import {
   findLinkInstance,
   findTextInputInstance,
 } from "@/modules/model/components";
-import { IRegistration } from "@/modules/registration/types";
+import { IRegistration } from "@/modules/auth/types";
 
 export function transformRegistration(props: IRegistration) {
   const { components } = props;

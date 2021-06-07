@@ -4,7 +4,7 @@ import { getUIElementValue } from "@/modules/common/utils";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { EntityFields } from "@/modules/model";
 import { WithKeyFields } from "@/modules/model/IWithKey";
-import { IRegistrationView } from "../../types";
+import { IRegistrationView } from "@/modules/auth/types";
 
 export async function getRegistrationDefinition(
   appPage: IAppPage

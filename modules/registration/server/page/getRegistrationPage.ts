@@ -1,6 +1,6 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { IRegistration } from "../../types";
+import { IRegistration } from "@/modules/auth/types";
 import { IPage } from "@/modules/page/types";
 
 export const getRegistrationPage = async (
