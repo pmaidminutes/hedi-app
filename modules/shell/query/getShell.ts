@@ -19,7 +19,7 @@ export async function getShell(lang: string = "de"): Promise<IShell> {
     { lang }
   ).then(data => {
     const result = logAndNull(data);
-    if (!result) return { links: [], languages: [], shellConfig: [] };
+    if (!result) return { languages: [], shellConfig: [] };
     const { shellPage, ...rest } = result;
     return {
       shellConfig: shellPage?.[0].components ?? [],
