@@ -68,9 +68,9 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
-    GlossaryPathsGQL,
     PagePathsGQL,
   ];
+  // GlossaryPathsGQL,
   const locales = context?.locales ?? [];
   const paths = [];
   for (const lang of locales) {
