@@ -11,14 +11,7 @@ export const getViewProfilePage = async (
 
   const definition = await getViewProfileDefinition(content);
 
-  const layoutImg = {
-    src: `${process.env.NEXT_PUBLIC_IMG_HEADER_PROFILE}`,
-    alt: "Some description",
-  };
-
   const layout: ILayout = {
-    pageLayout: "imageAndColumn",
-    layoutImg,
     rightColumnProps: { md: 4, lg: 6, xlg: 6 },
   };
   const shell: IPageConfig = {

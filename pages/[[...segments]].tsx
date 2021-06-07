@@ -71,9 +71,9 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
-    GlossaryPathsGQL,
     PagePathsGQL,
   ];
+  // GlossaryPathsGQL,
   const locales = context?.locales ?? [];
   const paths = [];
   for (const lang of locales) {
@@ -132,20 +132,8 @@ export const getStaticProps: GetStaticProps<
       },
     };
 
-  // ShellStuff
-  const shellKey = {
-    header: [
-      "editprofile",
-      "viewprofile",
-      "profiles",
-      "userfeedback",
-      "search",
-    ],
-    footer: ["imprint", "privacy"],
-    userMenu: ["login", "logout", "viewprofile"],
-  };
   // TODO we should probably cache this, especially if shellKey are static most of the time
-  const shellData = await getShell(locale, shellKey);
+  const shellData = await getShell(locale);
   const shell = generateShellData(content, shellData);
   return {
     props: { content, shell },
@@ -162,7 +150,6 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         <TryLogin content={content} key="login" />
         <TryRegistration content={content} key="registration" />
 
-        {/* <TryLogin content={content} key="login" /> */}
         {/* <TryViewProfile content={content} key="viewprofile" /> */}
         {/* <TryProfile content={content} key="profile" /> */}
         {/* <TryProfileList content={content} key="profileList" /> */}

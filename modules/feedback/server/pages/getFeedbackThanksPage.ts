@@ -7,13 +7,9 @@ export const getFeedbackThanksPage = async (
 ): Promise<IPage & IPageConfig> => {
   content.type = "FeedbackThanks";
 
-  const layout: ILayout = {
-    rightColumnProps: { md: 4, lg: 6, xlg: 6 },
-  };
   const shell: IPageConfig = {
     useHeader: "AUTHORIZED",
     redirectUnAuthorized: "/" + content.lang,
-    layout,
   };
 
   return {

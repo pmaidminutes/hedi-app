@@ -1,5 +1,8 @@
-import { getUIElement } from "@/modules/common/utils";
 import { IAppStyled } from "@/modules/model";
+import {
+  findGroupInstance,
+  findLabelInstance,
+} from "@/modules/model/components";
 import { IShellProps } from "@/modules/shell/types";
 import { useRouter } from "next/router";
 
@@ -14,15 +17,24 @@ export function transformHeader({
   const router = useRouter();
   const { locale } = router;
 
-  const backToHome = getUIElement("menu_backToStart", shellConfig)?.value ?? "Zur Startseite";
+  const headerLinks = shellConfig
+    ? findGroupInstance(shellConfig, "header")
+    : null;
+
+  const userMenuLinks = shellConfig
+    ? findGroupInstance(shellConfig, "userMenu")
+    : null;
+  const backToHome = shellConfig
+    ? findLabelInstance(shellConfig, "menu_backToStart")
+    : null;
 
   return {
     appstyle,
     languageSwitchLinks,
-    headerLinks: header,
-    userMenuLinks: userMenu,
+    headerLinks: headerLinks?.components || null,
+    userMenuLinks: userMenuLinks?.components || null,
     shellConfig,
     locale,
-    backToHome
+    backToHome: backToHome?.text || "Zurück zur Startseite",
   };
 }
