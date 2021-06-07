@@ -129,8 +129,8 @@ export const getStaticProps: GetStaticProps<
     };
 
   // TODO we should probably cache this, especially if shellKey are static most of the time
-  const shellDataNew = await getShell(locale);
-  const shell = generateShellData(content, shellDataNew);
+  const shellData = await getShell(locale);
+  const shell = generateShellData(content, shellData);
   return {
     props: { content, shell },
     revalidate: content.revalidate,
