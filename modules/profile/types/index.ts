@@ -1,3 +1,5 @@
+export * from "./taxonomyTypes";
+export * from "./dataTypes";
 export * from "./APIUrls";
 export * from "./IProfile";
 export * from "./IPersonal";
