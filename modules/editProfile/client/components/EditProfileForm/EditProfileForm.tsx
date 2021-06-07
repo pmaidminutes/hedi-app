@@ -25,7 +25,6 @@ import {
 } from "../../../types";
 import { ServiceSelection } from "../ServiceSelection";
 import { useValidationErrors } from "./hooks";
-import { LanguageSkillsSelection } from "../LanguageSkillsSelection";
 import { TextInputProps } from "carbon-components-react";
 import { ConsultationHoursSelection } from "../ConsultationHours";
 import { days, timeRanges } from "../ConsultationHours/ConfigConsultationHours";
