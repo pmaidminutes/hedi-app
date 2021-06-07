@@ -7,6 +7,7 @@ export * from "./IEntityLocalized";
 export * from "./IEntityTranslated";
 export * from "./ILocalized";
 export * from "./ILanguage";
+export * from "./IMutationResponse";
 export * from "./IRouteLabeled";
 export * from "./IService";
 export * from "./IServiceGroup";
