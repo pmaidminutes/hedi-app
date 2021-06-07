@@ -16,7 +16,7 @@ export interface IShellProps
   header?: IShellLink[];
   footer?: IShellLink[];
   userMenu?: IShellLink[];
-  langDirections: Partial<ILanguage>[]
+  langDirections: Partial<ILanguage>[];
 }
 
 export type AccessRule = false | "AUTHORIZED" | true; // HACK definition for quick compatibility actual meaning: hidden, authorized user, always
@@ -37,7 +37,6 @@ export interface IPageConfig extends Partial<IAppStyled> {
 //   languages: ILanguage[];
 //   shellConfig:  IUIElementTexts[];
 // }
-
 
 export type IShell = Record<string, IEntity[]> & {
   languages: ILanguage[];

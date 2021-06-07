@@ -1,4 +1,4 @@
 export * from "./getCurrentProfile";
-export * from "./getCurrentProfileEntity";
+export * from "./getCurrentProfileRoute";
+export * from "./getBusinessProfilePaths";
 export * from "./getProfileList";
-export * from "./getViewProfileDefinition";

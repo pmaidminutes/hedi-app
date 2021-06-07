@@ -1,5 +1,7 @@
 import { jsonPost } from "@/modules/common/utils";
-import { Profile, userProfileAPIUrl } from "../../types";
+import { IUserProfile, userProfileAPIUrl } from "../../types";
 
-export const requestCurrentProfile = (lang: string): Promise<Profile | null> =>
-  jsonPost<Profile>(userProfileAPIUrl, { lang });
+export const requestCurrentProfile = (
+  lang: string
+): Promise<IUserProfile | null> =>
+  jsonPost<IUserProfile>(userProfileAPIUrl, { lang });

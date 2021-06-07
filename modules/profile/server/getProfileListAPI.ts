@@ -1,9 +1,9 @@
 import { sendAPIResult } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
 import { getProfileList } from "./query";
-import { Profile } from "../types";
+import { IProfileEntry } from "../types";
 
-export const getProfileListAPI: NextApiHandler<Profile[] | null> = async (
+export const getProfileListAPI: NextApiHandler<IProfileEntry[]> = async (
   req,
   res
 ) => {

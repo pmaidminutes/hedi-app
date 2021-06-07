@@ -6,9 +6,14 @@ import { getPagePage } from "./getPagePage";
 import { getLayout } from "@/modules/shell/server";
 import { getTemplate } from "@/modules/template/server";
 import {
+  getProfileListPage,
+  getProfilePreviewPage,
+} from "@/modules/profile/server";
+import {
   getFeedbackPage,
   getFeedbackThanksPage,
 } from "@/modules/feedback/server/pages";
+
 export const getPageType = async (
   content: IPage
 ): Promise<IPage & IPageConfig> => {
@@ -17,14 +22,20 @@ export const getPageType = async (
     case "login":
       result = await getLoginPage(content);
       break;
+    case "register":
+      result = await getRegistrationPage(content);
+      break;
+    case "profilePreview":
+      result = await getProfilePreviewPage(content);
+      break;
+    case "profileList":
+      result = await getProfileListPage(content);
+      break;
     case "feedback":
       result = await getFeedbackPage(content);
       break;
     case "feedbackThanks":
       result = await getFeedbackThanksPage(content);
-      break;
-    case "register":
-      result = await getRegistrationPage(content);
       break;
     case "template":
       result = await getTemplate(content);

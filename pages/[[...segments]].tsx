@@ -40,6 +40,22 @@ import {
 } from "@/modules/landingPage/server";
 import { TryLandingPage } from "@/modules/landingPage/client/components";
 
+// Profile
+import {
+  AssociationGQL,
+  isIProfile,
+  ProfessionalGQL,
+} from "@/modules/profile/types";
+import {
+  getProfilePage,
+  BusinessProfilePathsGQL,
+} from "@/modules/profile/server";
+import {
+  TryProfile,
+  TryProfileList,
+  TryProfilePreview,
+} from "@/modules/profile/client/components";
+
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
 import { TrySearch } from "@/modules/search/client/components";
@@ -71,6 +87,8 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
+    GlossaryPathsGQL,
+    BusinessProfilePathsGQL,
     PagePathsGQL,
   ];
   // GlossaryPathsGQL,
@@ -97,14 +115,21 @@ export const getStaticProps: GetStaticProps<
   if (isLandingPageRoute(route)) {
     content = await getLandingPage(lang);
   } else if (!content) {
-    const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
+    const gqlTypes = [
+      AppPageGQL,
+      ArticleGQL,
+      CategoryGQL,
+      PageGQL,
+      ProfessionalGQL,
+      AssociationGQL,
+    ];
     const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
     let generic = entities?.[0] ?? null;
 
     if (isIPage(generic)) generic = await getPageType(generic);
     if (isIArticle(generic)) generic = await getArticlePage(generic);
     if (isICategory(generic)) generic = await getCategoryPage(generic);
-    // if (isProfile(generic)) generic = await getProfilePage(generic);
+    if (isIProfile(generic)) generic = await getProfilePage(generic);
 
     if (isIAppPage(generic)) {
       switch (
@@ -150,10 +175,11 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         <TryLogin content={content} key="login" />
         <TryRegistration content={content} key="registration" />
 
-        {/* <TryViewProfile content={content} key="viewprofile" /> */}
-        {/* <TryProfile content={content} key="profile" /> */}
-        {/* <TryProfileList content={content} key="profileList" /> */}
+        <TryProfilePreview content={content} key="profilePreview" />
+        <TryProfile content={content} key="profile" />
+        <TryProfileList content={content} key="profileList" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
+
         <TryFeedback content={content} key="feedback" />
         <TryFeedbackThanks content={content} key="feedbackThanks" />
         <TryLandingPage content={content} key="landingpage" />

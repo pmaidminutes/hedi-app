@@ -3,25 +3,21 @@ import {
   findHeadlineLabel,
   findImageInstance,
 } from "@/modules/model/components";
-import {
-  ILayout,
-} from "@/modules/shell/client/components/Layout/types";
+import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../../page/types";
 
 // ************************************************
 // Predefined components:
-// Column with id "side": 
+// Column with id "side":
 //    - will trigger pageLayout "twoColumns"
-//    - anything inside this will just rendered 
+//    - anything inside this will just rendered
 // Image with id "poster":
 //    - will be used as posterImage
 // Label component of type "H1"
 //    - will be used for the main headline in the layout
 // ************************************************
 export function getLayout(content: IPage & IPageConfig) {
-
-
   const { id, components } = content;
   let layout: ILayout = content.layout || {};
 

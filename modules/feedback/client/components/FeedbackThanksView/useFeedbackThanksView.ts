@@ -1,5 +1,5 @@
 import { getUser } from "@/modules/auth/client";
-import { useCurrentProfileEntity } from "@/modules/profile/client/hooks";
+import { useCurrentProfileRoute } from "@/modules/profile/client/hooks";
 import { getCurrentUserHasFeedback } from "../../request/getCurrentUserHasFeedback";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
@@ -14,10 +14,10 @@ export function useFeedbackThanksView({ content }: { content: IPage }) {
   const { components } = content;
 
   const [user, isLoading] = getUser();
-  const [currentProfile, currentProfileLoading] = useCurrentProfileEntity(
-    user,
-    content.lang
-  );
+  const [
+    currentProfileRoute,
+    currentProfileRouteIsLoading,
+  ] = useCurrentProfileRoute(user, content.lang);
   const [hasFeedback, hasFeedbackLoading] = getCurrentUserHasFeedback(user);
 
   const router = useRouter();
@@ -32,18 +32,15 @@ export function useFeedbackThanksView({ content }: { content: IPage }) {
 
   useEffect(() => {
     if (!isLoading && !user) router.push("/" + content.lang);
-    else if (
-      !currentProfileLoading &&
-      (!currentProfile || !currentProfile.route)
-    ) {
+    else if (!currentProfileRouteIsLoading && !currentProfileRoute) {
       router.push(noProfileRoute);
     } else if (!hasFeedbackLoading && hasFeedback !== true)
       router.push(noFeedbackRoute);
   }, [
     user,
     isLoading,
-    currentProfile,
-    currentProfileLoading,
+    currentProfileRoute,
+    currentProfileRouteIsLoading,
     hasFeedback,
     hasFeedbackLoading,
   ]);

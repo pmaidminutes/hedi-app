@@ -21,7 +21,7 @@ export function logAndNull<T, E extends IHTTPError>(obj: WithIHTTPError<T, E>) {
   return obj as Exclude<T | E, E>;
 }
 
-export function logAndFallback<T, E extends IHTTPError, U>(
+export function logAndFallback<T, E extends IHTTPError>(
   obj: WithIHTTPError<T, E>,
   fallback: T
 ) {
