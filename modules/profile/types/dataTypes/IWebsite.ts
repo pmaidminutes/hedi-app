@@ -16,3 +16,9 @@ dataKind { ${DataKindFields} }
 website
 dataVisibility { ${DataVisibilityFields} }
 `;
+
+export interface IWebsiteInput {
+  dataKind: number;
+  website: string;
+  dataVisibility: number;
+}

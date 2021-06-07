@@ -28,3 +28,14 @@ latLong
 streetVisibility { ${DataVisibilityFields} }
 additionalInfo
 `;
+
+export interface IAddressInput {
+  dataKind: number;
+  city: string;
+  postalCode: number;
+  cityVisibility: number;
+  street?: string;
+  streetNumber?: string;
+  streetVisibility: number;
+  additionalInfo?: string;
+}

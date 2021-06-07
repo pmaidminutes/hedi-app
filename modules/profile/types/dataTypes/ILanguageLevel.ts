@@ -7,3 +7,8 @@ export const LanguageLevelFields = `
 langcode
 level
 `;
+
+export interface ILanguageLevelInput {
+  langcode: string;
+  level: number;
+}

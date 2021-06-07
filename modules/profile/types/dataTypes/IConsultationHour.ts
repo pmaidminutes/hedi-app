@@ -17,3 +17,10 @@ weekday { ${WeekdayFields} }
 startTime endTime
 availability { ${AvailabilityFields} }
 `;
+
+export interface IConsultationHourInput {
+  weekday: number;
+  startTime?: string;
+  endTime?: string;
+  availability: number;
+}

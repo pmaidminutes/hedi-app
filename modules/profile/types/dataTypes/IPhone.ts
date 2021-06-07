@@ -20,3 +20,10 @@ phone
 phoneKind { ${PhoneKindFields} }
 dataVisibility { ${DataVisibilityFields} }
 `;
+
+export interface IPhoneInput {
+  dataKind: number;
+  phone: string;
+  phoneKind: number;
+  dataVisibility: number;
+}

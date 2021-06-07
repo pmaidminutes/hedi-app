@@ -16,3 +16,9 @@ dataKind { ${DataKindFields} }
 email
 dataVisibility { ${DataVisibilityFields} }
 `;
+
+export interface IEmailInput {
+  dataKind: number;
+  email: string;
+  dataVisibility: number;
+}
