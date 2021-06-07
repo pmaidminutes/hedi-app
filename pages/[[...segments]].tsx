@@ -30,7 +30,7 @@ import {
   TryFeedback,
   TryFeedbackThanks,
 } from "@/modules/feedback/client/components";
-import { TryLogin } from "@/modules/auth/client";
+import { TryLogin, TryRegistration } from "@/modules/auth/client";
 
 // LandingPage
 import { landingPagePaths } from "@/modules/landingPage/types";
@@ -80,7 +80,6 @@ import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
 // Registration
-import { TryRegistration } from "@/modules/registration/client";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const pathQueries = [

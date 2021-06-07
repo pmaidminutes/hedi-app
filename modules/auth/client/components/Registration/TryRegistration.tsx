@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { IRegistration } from "../../types";
+import { IRegistration } from "../../../types";
 import { Registration } from "./Registration";
 
 export const TryRegistration = ({
