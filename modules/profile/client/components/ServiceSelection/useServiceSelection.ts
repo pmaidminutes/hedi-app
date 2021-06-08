@@ -7,7 +7,7 @@ export type ISelectableService = Pick<IService, "label" | "route"> & {
 
 export function useServiceSelection(
   group: IServiceGroup,
-  initialServices?: string[]
+  initialServices?: IService[]
 ) {
   const [services, setServices] = useState(
     group.services as ISelectableService[]
@@ -17,7 +17,11 @@ export function useServiceSelection(
   useEffect(() => {
     const initial = group.services.map(service => {
       const { label, route, ..._ } = service;
-      return { label, route, selected: initialServices?.includes(route) };
+      return {
+        label,
+        route,
+        selected: !!initialServices?.find(i => i.route === service.route),
+      };
     });
     setServices([...initial]);
   }, [group.label, initialServices]);

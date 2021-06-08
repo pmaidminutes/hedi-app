@@ -22,7 +22,6 @@ import {
   IUpsertProfileResponse,
   orderedRequiredFields,
 } from "../../../types";
-import { ServiceSelection } from "../ServiceSelection";
 import { useValidationErrors } from "./hooks";
 import { TextInputProps } from "carbon-components-react";
 import React, { ChangeEvent, useRef, RefObject } from "react";

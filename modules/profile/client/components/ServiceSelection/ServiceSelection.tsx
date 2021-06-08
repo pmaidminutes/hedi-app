@@ -1,29 +1,28 @@
 import React from "react";
-import { useServiceSelection } from "./hooks";
+import { useServiceSelection } from "./useServiceSelection";
 import { SelectableTile, Tile, Tag } from "carbon-components-react";
 import { ChevronDown16, ChevronUp16 } from "@carbon/icons-react";
-import { IServiceGroup, IUIElementTexts } from "@/modules/model";
-import { getUIElementValue } from "@/modules/common/utils";
+import { IService, IServiceGroup } from "@/modules/model";
 
-export type ServiceSelectionProps = {
-  config: {
-    elements?: IUIElementTexts[];
-    serviceGroup: IServiceGroup;
-  };
-  data?: string[];
-};
+// TODO just removed uiElement stuff, completely WIP until service content is redone
+export type IServiceSelectionProps = {
+  services?: IService[];
+} & IServiceSelectionDefinition;
 
-export const ServiceSelection = ({
-  config: { elements, serviceGroup },
-  data,
-}: ServiceSelectionProps) => {
+export interface IServiceSelectionDefinition {
+  serviceGroup: IServiceGroup;
+  addTitle?: string;
+}
+
+export const ServiceSelection = (props: IServiceSelectionProps) => {
+  const { services: initialServices, serviceGroup, addTitle } = props;
   const {
     isExpanded,
     services,
     handleComponentClick,
     handleServiceClick,
     handleTagClose,
-  } = useServiceSelection(serviceGroup, data);
+  } = useServiceSelection(serviceGroup, initialServices);
   return (
     <Tile
       aria-expanded={isExpanded}
@@ -49,9 +48,7 @@ export const ServiceSelection = ({
               )
           )
         ) : (
-          <Tag type={"warm-gray"}>
-            {getUIElementValue("add-service", elements, "Hinzufügen")}
-          </Tag>
+          <Tag type={"warm-gray"}>{addTitle ?? "Hinzufügen"}</Tag>
         )}
       </div>
 
