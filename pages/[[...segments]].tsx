@@ -23,9 +23,9 @@ import {
 import { TryLogin, TryRegistration } from "@/modules/auth/client";
 
 // LandingPage
-import { landingPagePaths } from "@/modules/landingPage/types";
-import { isLandingPageRoute } from "@/modules/landingPage/server";
-import { TryProfileTestLandingPage } from "@/modules/landingPage/client/components";
+import { landingPagePaths } from "@/modules/landingpage/types";
+import { isLandingPageRoute } from "@/modules/landingpage/server";
+import { TryProfileTestLandingPage } from "@/modules/landingpage/client/components";
 
 // Profile
 import {
