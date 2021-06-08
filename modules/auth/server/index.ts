@@ -3,7 +3,7 @@
 // export { nextauthAPI } from "./nextauthAPI";
 export * from "./functions";
 export * from "./page";
-export * from "./query"
+export * from "./query";
 export * from "./registerAPI";
 export * from "./serviceSession";
 export * from "./validateRegisterAPI";

@@ -33,12 +33,12 @@ import {
 import { TryLogin, TryRegistration } from "@/modules/auth/client";
 
 // LandingPage
-import { landingPagePaths } from "@/modules/landingPage/types";
+import { landingPagePaths } from "@/modules/landingpage/types";
 import {
-  getLandingPage,
+  getProfileTestLandingPage,
   isLandingPageRoute,
-} from "@/modules/landingPage/server";
-import { TryLandingPage } from "@/modules/landingPage/client/components";
+} from "@/modules/landingpage/server";
+import { TryProfileTestLandingPage } from "@/modules/landingpage/client/components";
 
 // Profile
 import {
@@ -107,47 +107,52 @@ export const getStaticProps: GetStaticProps<
 > = async ({ params, locale }) => {
   const lang = locale ?? "de";
   const segments = params?.segments ?? [];
-  const route = segmentsToRoute(segments, lang);
+  let route = segmentsToRoute(segments, lang);
 
   let content: (IEntity & IPageConfig) | null = null;
 
   if (isLandingPageRoute(route)) {
-    content = await getLandingPage(lang);
-  } else if (!content) {
-    const gqlTypes = [
-      AppPageGQL,
-      ArticleGQL,
-      CategoryGQL,
-      PageGQL,
-      ProfessionalGQL,
-      AssociationGQL,
-    ];
-    const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
-    let generic = entities?.[0] ?? null;
-
-    if (isIPage(generic)) generic = await getPageType(generic);
-    if (isIArticle(generic)) generic = await getArticlePage(generic);
-    if (isICategory(generic)) generic = await getCategoryPage(generic);
-    if (isIProfile(generic)) generic = await getProfilePage(generic);
-
-    if (isIAppPage(generic)) {
-      switch (
-        generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
-      ) {
-        case "search":
-          generic = await getSearchPage(generic);
-          break;
-        default:
-          generic = await getAppPagePage(generic);
-      }
-      // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
-    }
-    content = generic;
-
-    // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
-    // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
-    // if (!content) content = await getGlossaryPage(route);
+    route = "/landingPage";
   }
+
+  const gqlTypes = [
+    AppPageGQL,
+    ArticleGQL,
+    CategoryGQL,
+    PageGQL,
+    ProfessionalGQL,
+    AssociationGQL,
+  ];
+  const entities = await getIEntitiesTranslated<IEntity>(
+    gqlTypes,
+    [route],
+    lang
+  );
+  let generic = entities?.[0] ?? null;
+
+  if (isIPage(generic)) generic = await getPageType(generic);
+  if (isIArticle(generic)) generic = await getArticlePage(generic);
+  if (isICategory(generic)) generic = await getCategoryPage(generic);
+  if (isIProfile(generic)) generic = await getProfilePage(generic);
+
+  if (isIAppPage(generic)) {
+    switch (
+      generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
+    ) {
+      case "search":
+        generic = await getSearchPage(generic);
+        break;
+      default:
+        generic = await getAppPagePage(generic);
+    }
+    // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
+  }
+  content = generic;
+
+  // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
+  // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
+  // if (!content) content = await getGlossaryPage(route);
+  // }
   if (!content)
     return {
       redirect: {
@@ -180,12 +185,16 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         {/* <TryEditProfile content={content} key="editProfile" /> */}
 
         <TryFeedback content={content} key="feedback" />
+
         <TryFeedbackThanks content={content} key="feedbackThanks" />
-        <TryLandingPage content={content} key="landingpage" />
+        <TryProfileTestLandingPage
+          content={content}
+          key="profileTestLandingPage"
+        />
 
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
-        <TryGlossary content={content} key="glossary" />
+        {/* <TryGlossary content={content} key="glossary" /> */}
 
         <TrySearch content={content} key="search" />
         <TryAppPage content={content} key="apppage" />

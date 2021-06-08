@@ -1,19 +1,14 @@
 import { gql } from "@/modules/graphql";
 import {
-  BodyFields,
-  IBody,
   IEntityLocalized,
   IEntityTranslated,
   EntityTranslatedFields,
 } from "@/modules/model";
 
-export interface IGlossaryTerm
-  extends IEntityTranslated<IEntityLocalized>,
-    IBody {}
+export interface IGlossaryTerm extends IEntityTranslated<IEntityLocalized> {}
 
 export const GlossaryTermGQL = gql`... on GlossaryTerm {
 ${EntityTranslatedFields}
-${BodyFields}
 }`;
 
 export interface IGlossaryGroup {

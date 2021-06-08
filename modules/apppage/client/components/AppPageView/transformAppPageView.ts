@@ -6,14 +6,16 @@ export interface IAppPageProps {
   customKey?: string;
   condensed?: boolean;
   narrow?: boolean;
-  children?: React.ReactChild
+  children?: React.ReactChild;
 }
 
-export function transformAppPageView(props:IAppPageProps) {
-  const { content, customKey, condensed, narrow, children  } = props;
-  const { posterImage, key, longTitle, label, body } = content;
+export function transformAppPageView(props: IAppPageProps) {
+  const { content, customKey, condensed, narrow, children } = props;
+  const { posterImage, key, longTitle, label } = content;
 
-  const posterImgSrc = posterImage ? process.env.NEXT_PUBLIC_ASSETS_URL + posterImage.route : undefined;
+  const posterImgSrc = posterImage
+    ? process.env.NEXT_PUBLIC_ASSETS_URL + posterImage.route
+    : undefined;
 
   const wrapperClass = `hedi--simple-page ${
     key !== undefined ? `hedi--${key}-page` : ""
@@ -27,7 +29,6 @@ export function transformAppPageView(props:IAppPageProps) {
     wrapperClass,
     condensed,
     narrow,
-    body,
     headline: longTitle || label,
     children,
     groupClass,

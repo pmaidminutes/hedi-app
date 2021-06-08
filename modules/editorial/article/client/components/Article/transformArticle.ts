@@ -6,16 +6,9 @@ export interface IArticleProps {
 }
 export function transformArticle(props: IArticleProps) {
   const { content } = props;
-  const { label, body, audio, tags } = content;
-  const hasAudio = audio;
-
-  const audioSrc = hasAudio ? buildAssetUrl(audio.route) : null;
+  const { label } = content;
 
   return {
     headline: label,
-    body,
-    audioSrc,
-    tags: tags.length > 0 ? tags : null,
-    hasAudio,
   };
 }

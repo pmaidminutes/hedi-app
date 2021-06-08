@@ -9,7 +9,6 @@ export const AppPageView: React.FC<IAppPageProps> = props => {
     wrapperClass,
     condensed,
     narrow,
-    body,
     headline,
     children,
     groupClass,
