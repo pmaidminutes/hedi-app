@@ -16,7 +16,7 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
     isSelected,
     termClass,
     translation,
-    body,
+
   } = transformGlossaryTerm(props);
 
   return (
@@ -38,7 +38,6 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
         )}
       </TileAboveTheFoldContent>
       <TileBelowTheFoldContent>
-        <HTML data={body} />
       </TileBelowTheFoldContent>
     </ExpandableTile>
   );

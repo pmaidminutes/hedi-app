@@ -11,7 +11,7 @@ export interface IAppPageProps {
 
 export function transformAppPageView(props:IAppPageProps) {
   const { content, customKey, condensed, narrow, children  } = props;
-  const { posterImage, key, longTitle, label, body } = content;
+  const { posterImage, key, longTitle, label } = content;
 
   const posterImgSrc = posterImage ? process.env.NEXT_PUBLIC_ASSETS_URL + posterImage.route : undefined;
 
@@ -27,7 +27,6 @@ export function transformAppPageView(props:IAppPageProps) {
     wrapperClass,
     condensed,
     narrow,
-    body,
     headline: longTitle || label,
     children,
     groupClass,

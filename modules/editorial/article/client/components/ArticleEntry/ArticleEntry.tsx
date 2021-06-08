@@ -7,7 +7,7 @@ import {
 } from "./transformArticleEntry";
 
 export const ArticleEntry = (props: IArticleEntryProps): JSX.Element => {
-  const { label, summary, route } = transformArticleEntry(props);
+  const { label,  route } = transformArticleEntry(props);
   return (
     <Link href={route} passHref>
       <ClickableTile href={route}>
@@ -16,7 +16,6 @@ export const ArticleEntry = (props: IArticleEntryProps): JSX.Element => {
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTML data={summary} />
       </ClickableTile>
     </Link>
   );
