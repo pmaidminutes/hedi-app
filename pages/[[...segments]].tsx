@@ -123,7 +123,11 @@ export const getStaticProps: GetStaticProps<
     ProfessionalGQL,
     AssociationGQL,
   ];
-  const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
+  const entities = await getIEntitiesTranslated<IEntity>(
+    gqlTypes,
+    [route],
+    lang
+  );
   let generic = entities?.[0] ?? null;
 
   if (isIPage(generic)) generic = await getPageType(generic);
