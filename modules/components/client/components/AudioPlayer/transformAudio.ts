@@ -1,7 +1,7 @@
-import { Audio } from "@/modules/model/components";
+import { IAudioComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 
-export function transformAudio(props: Audio) {
+export function transformAudio(props: IAudioComponent) {
   const { route, mimeType, labelText } = props;
 
   return {

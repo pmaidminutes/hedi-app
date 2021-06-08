@@ -1,6 +1,4 @@
-export * from "./Component";
 
-export * from "./Audio";
 export * from "./Body";
 export * from "./Button";
 export * from "./Column";
