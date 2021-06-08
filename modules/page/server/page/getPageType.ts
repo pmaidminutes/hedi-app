@@ -9,7 +9,7 @@ import {
   getFeedbackPage,
   getFeedbackThanksPage,
 } from "@/modules/feedback/server/pages";
-import { getProfileTestLandingPage } from "@/modules/landingpage/server";
+import { getProfileTestLandingPage } from "@/modules/landingPage/server";
 import {
   getProfileListPage,
   getProfilePreviewPage,
