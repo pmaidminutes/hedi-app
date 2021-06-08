@@ -5,15 +5,12 @@ import {
   IEntityLocalized,
   IEntityTranslated,
   IRouteLabeled,
-  IWithUIElements,
   RouteLabelFields,
-  WithUIElementsFields,
 } from "@/modules/model";
 import { IWithKey, WithKeyFields } from "@/modules/model/IWithKey";
 
 export interface IAppPage
   extends IEntityTranslated<IEntityLocalized>,
-    IWithUIElements,
     IWithKey {
   routelabel: IRouteLabeled;
   longTitle?: string;
@@ -29,6 +26,5 @@ ${EntityTranslatedFields}
 ${RouteLabelFields}
 ${WithKeyFields}
 longTitle
-${WithUIElementsFields}
 posterImage {${ImageGQL}}
 }`;
