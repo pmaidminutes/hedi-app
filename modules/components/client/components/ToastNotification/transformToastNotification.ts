@@ -1,15 +1,17 @@
-import { ToastNotification as IToastNotification } from "@/modules/model/components";
+import { IToastNotificationComponent } from "../../../types";
 import { ToastNotificationProps } from "carbon-components-react";
-import { HTML } from "@/modules/react/html"
+import { HTML } from "@/modules/react/html";
 
 export interface IToastNotificationProps
-  extends IToastNotification,
+  extends IToastNotificationComponent,
     Omit<
       ToastNotificationProps,
       "id" | "subtitle" | "title" | "kind" | "caption"
     > {}
 
-export function transformToastNotification(props: IToastNotificationProps):ToastNotificationProps {
+export function transformToastNotification(
+  props: IToastNotificationProps
+): ToastNotificationProps {
   const {
     kind,
     notificationKind,
@@ -21,8 +23,6 @@ export function transformToastNotification(props: IToastNotificationProps):Toast
     ariaRole,
     ...rest
   } = props;
-
-
 
   // TODO what todo with aria-role?
   return {

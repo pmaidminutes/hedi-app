@@ -17,7 +17,7 @@ import {
 // import { GlobalSearchMenu } from "../GlobalSearchMenu";
 import { UserProfileMenu } from "../UserProfileMenu";
 import Logo from "./assets/hedi_logo_single_new.svg";
-import { isLink } from "@/modules/model/components";
+import { isLink } from "@/modules/components/types";
 
 export const Header = (props: IHeader) => {
   const {
@@ -46,7 +46,7 @@ export const Header = (props: IHeader) => {
           isActive={isExpanded}
         />
         {headerLinks &&
-          headerLinks.map((link, index) => {
+          headerLinks.map((link:any, index:number) => {
             if (isLink(link)) {
               return (
                 <HeaderMenuItem

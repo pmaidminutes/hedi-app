@@ -1,9 +1,9 @@
-import { Select } from "@/modules/model/components";
+import { ISelectComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { SelectProps, SelectItemProps } from "carbon-components-react";
 
 export interface ISelectProps
-  extends Select,
+  extends ISelectComponent,
     Omit<SelectProps, "labelText" | "helperText" | "size"> {
   useItemIndex?: boolean;
 }

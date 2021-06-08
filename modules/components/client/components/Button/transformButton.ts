@@ -1,9 +1,9 @@
-import { Button } from "@/modules/model/components";
+import { IButtonComponent } from "../../../types";
 import { ButtonDefaultProps } from "carbon-components-react";
 import { HTML } from "@/modules/react/html";
 export interface IButtonProps
   extends Omit<ButtonDefaultProps, "id" | "href">,
-    Button {}
+    IButtonComponent {}
 
 export function transformButton(props: IButtonProps) {
   const {

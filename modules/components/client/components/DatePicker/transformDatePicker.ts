@@ -1,9 +1,9 @@
-import { DatePicker } from "@/modules/model/components";
+import { IDatePickerComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { DatePickerProps, DatePickerInputProps } from "carbon-components-react";
 
 export interface IDatePickerProps
-  extends DatePicker,
+  extends IDatePickerComponent,
     Omit<
       DatePickerProps,
       "id" | "dateFormat" | "minDate" | "maxDate" | "datePickerType"

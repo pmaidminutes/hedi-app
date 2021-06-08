@@ -5,7 +5,7 @@ import {
   EntityTranslatedFields,
   IEntityTranslated,
 } from "@/modules/model";
-import { Component } from "@/modules/model/components";
+import { Component } from "@/modules/components/types";
 
 export interface IPageEntry extends IEntityLocalized {
   id: string;

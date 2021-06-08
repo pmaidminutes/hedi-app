@@ -1,7 +1,7 @@
-import { File } from "@/modules/model/components";
+import { IFileComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 
-export interface IDownloadFileProps extends File {}
+export interface IDownloadFileProps extends IFileComponent {}
 
 export function transformDownloadFile(props: IDownloadFileProps) {
   const { labelText, mimeType, route } = props;

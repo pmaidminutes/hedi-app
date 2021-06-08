@@ -1,5 +1,5 @@
 import { IAppPage } from "@/modules/common/types";
-import { IComponent, Image, HTML } from "@/modules/model/components";
+import { IComponent, IImageComponent, HTML } from "@/modules/components/types";
 import { IPage } from "@/modules/page/types";
 import { ColumnDefaultProps } from "carbon-components-react";
 import React from "react";
@@ -13,7 +13,7 @@ export interface ILayout {
   rightColumnProps?: ColumnDefaultProps;
   singleColumnProps?: ColumnDefaultProps;
   pageLayout?: PageLayout;
-  posterImage?: Image | null;
+  posterImage?: IImageComponent | null;
   pageId?: string;
   headline?: HTML | null;
 }

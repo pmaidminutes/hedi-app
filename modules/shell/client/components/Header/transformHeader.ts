@@ -2,7 +2,7 @@ import { IAppStyled } from "@/modules/model";
 import {
   findGroupInstance,
   findLabelInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IShellProps } from "@/modules/shell/types";
 import { useRouter } from "next/router";
 

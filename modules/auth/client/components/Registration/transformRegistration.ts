@@ -1,11 +1,11 @@
 import {
-  findBodyInstance,
   findButtonInstance,
   findInlineNotificationInstance,
   findLinkInstance,
   findTextInputInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IRegistration } from "@/modules/auth/types";
+import { findBodyInstance } from "@/modules/components/types";
 
 export function transformRegistration(props: IRegistration) {
   const { components } = props;

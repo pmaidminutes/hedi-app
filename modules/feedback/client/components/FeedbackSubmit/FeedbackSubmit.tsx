@@ -1,13 +1,13 @@
 import { ToastNotification, Button } from "@/modules/components";
 import {
-  ToastNotification as IToastNotification,
-  Button as IButton,
-} from "@/modules/model/components";
+  IToastNotificationComponent,
+  IButtonComponent,
+} from "@/modules/components/types";
 
 export interface IFeedbackSubmitProps {
-  errorNotification: IToastNotification | undefined;
-  successNotification: IToastNotification | undefined;
-  submitButton: IButton | undefined;
+  errorNotification: IToastNotificationComponent | undefined;
+  successNotification: IToastNotificationComponent | undefined;
+  submitButton: IButtonComponent | undefined;
   errorMessage?: string | null;
   successMessage?: string | null;
 }

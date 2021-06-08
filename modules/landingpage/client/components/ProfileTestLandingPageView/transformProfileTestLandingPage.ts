@@ -3,7 +3,7 @@ import {
   findButtonInstance,
   findLabelInstance,
   findLinkInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IPage } from "@/modules/page/types";
 
 export function transformProfileTestLandingPage(content: IPage) {

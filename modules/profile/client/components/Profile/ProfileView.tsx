@@ -23,7 +23,7 @@ import { ServiceGroup } from "../ServiceGroup";
 import { LanguageSkills } from "../LanguageSkills";
 
 import { Edit24 } from "@carbon/icons-react";
-import { Button as IButtonComponent } from "@/modules/model/components";
+import { IButtonComponent } from "@/modules/components/types";
 import { Button } from "@/modules/components";
 
 export type IProfileView = IProfile & Pick<IPage, "components">;

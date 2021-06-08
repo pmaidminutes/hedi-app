@@ -1,3 +1,4 @@
+import { IComponent } from "@/modules/components/types";
 import { gql } from "@/modules/graphql";
 import {
   EntityFields,
@@ -11,7 +12,7 @@ import {
   WithTagsFields,
   IEntityTranslated,
 } from "@/modules/model";
-import { IComponent } from "@/modules/model/components";
+
 export interface IArticleEntry extends IEntityLocalized {}
 
 export const ArticleEntryGQL = gql`... on Article {

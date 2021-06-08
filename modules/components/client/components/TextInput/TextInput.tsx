@@ -1,10 +1,10 @@
 import React from "react";
-import { TextInput as ITextInput } from "@/modules/model/components";
+import { ITextInputComponent } from "../../../types";
 import { TextInputProps } from "carbon-components-react";
 import { TextInput as CarbonTextInput } from "carbon-components-react";
 import { transformTextInput } from "./transformTextInput";
 
-export const TextInput = (props: ITextInput & TextInputProps) => {
+export const TextInput = (props: ITextInputComponent & TextInputProps) => {
   const data = transformTextInput(props);
   return <CarbonTextInput {...data} />;
 };

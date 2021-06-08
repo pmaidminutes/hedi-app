@@ -1,9 +1,9 @@
-import { NumberInput } from "@/modules/model/components";
+import { INumberInputComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { NumberInputProps } from "carbon-components-react";
 
 export interface INumberInputProps
-  extends NumberInput,
+  extends INumberInputComponent,
     Omit<NumberInputProps, "min" | "max" | "value" | "helperText" | "label"> {}
 
 export function transformNumberInput(

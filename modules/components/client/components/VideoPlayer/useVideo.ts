@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import{ useRef, useState, useEffect } from "react";
-import { Video } from "@/modules/model/components";
+import { IVideoComponent } from "../../../types";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
 
 export interface IVideoPlayerProps {
-    video: Video;
+    video: IVideoComponent;
     subtitles?: ISubtitles[];
 }
 

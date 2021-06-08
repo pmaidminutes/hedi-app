@@ -12,7 +12,7 @@ import {
   findTextAreaInstance,
   findToastNotificationInstance,
   findButtonInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 
 export default function ProfileTestFeedbackForm(
   props: IProfileTestFeedbackFormProps
