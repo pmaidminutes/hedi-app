@@ -5,6 +5,7 @@ export * from "./Checkbox";
 export * from "./ComponentRenderer";
 export * from "./DatePicker";
 export * from "./DownloadFile";
+export * from "./Headline";
 export * from "./Image";
 export * from "./InlineNotification";
 export * from "./Label";
