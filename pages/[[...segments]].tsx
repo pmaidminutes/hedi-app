@@ -86,10 +86,10 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
-    GlossaryPathsGQL,
     BusinessProfilePathsGQL,
     PagePathsGQL,
   ];
+
   // GlossaryPathsGQL,
   const locales = context?.locales ?? [];
   const paths = [];
@@ -146,7 +146,7 @@ export const getStaticProps: GetStaticProps<
 
     // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
     // if we don't find a way to include it in the generic query we should probably cache the possible routes on getPath and match the string
-    if (!content) content = await getGlossaryPage(route);
+    // if (!content) content = await getGlossaryPage(route);
   }
   if (!content)
     return {
