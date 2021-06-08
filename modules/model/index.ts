@@ -1,7 +1,4 @@
 export * from "./IAppStyled";
-export * from "./IBody";
-export * from "./IContent";
-export * from "./IEditorial";
 export * from "./IEntity";
 export * from "./IEntityLocalized";
 export * from "./IEntityTranslated";
@@ -10,7 +7,6 @@ export * from "./ILanguage";
 export * from "./IRouteLabeled";
 export * from "./IService";
 export * from "./IServiceGroup";
-export * from "./ISummary";
 export * from "./ITyped";
 export * from "./IUIElementTexts";
 export * from "./IWithLanguageSkills";

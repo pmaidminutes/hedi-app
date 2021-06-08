@@ -1,9 +1,7 @@
 import { gql } from "@/modules/graphql";
 import { IImage, ImageGQL } from "@/modules/editorial/types";
 import {
-  BodyFields,
   EntityTranslatedFields,
-  IBody,
   IEntityLocalized,
   IEntityTranslated,
   IRouteLabeled,
@@ -16,7 +14,6 @@ import { IWithKey, WithKeyFields } from "@/modules/model/IWithKey";
 export interface IAppPage
   extends IEntityTranslated<IEntityLocalized>,
     IWithUIElements,
-    IBody,
     IWithKey {
   routelabel: IRouteLabeled;
   longTitle?: string;
@@ -33,6 +30,5 @@ ${RouteLabelFields}
 ${WithKeyFields}
 longTitle
 ${WithUIElementsFields}
-${BodyFields}
 posterImage {${ImageGQL}}
 }`;
