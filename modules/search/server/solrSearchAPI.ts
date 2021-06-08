@@ -46,7 +46,7 @@ export const solrSearchAPI: NextApiHandler<
             getArticle(route).then(article => {
               if (article) {
                 article.label = highlight.highlightedTitle ?? article.label;
-                article.summary = highlightedBody;
+                // article.summary = highlightedBody;
               }
               return article;
             })
@@ -57,7 +57,7 @@ export const solrSearchAPI: NextApiHandler<
             getAppPage(route).then(page => {
               if (page) {
                 page.label = highlight.highlightedTitle ?? page.label;
-                page.body = highlightedBody;
+                // page.body = highlightedBody;
               }
               return page;
             })
@@ -77,7 +77,7 @@ export const solrSearchAPI: NextApiHandler<
             getGlossaryTerm(route).then(glossary => {
               if (glossary) {
                 glossary.label = highlight.highlightedTitle ?? glossary.label;
-                glossary.body = highlightedBody ?? glossary.body;
+                // glossary.body = highlightedBody ?? glossary.body;
               }
               return glossary;
             })

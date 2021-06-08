@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { Login } from "./Login"
+import { Login } from "./Login";
 import { ILogin } from "../../../types";
 
 export const TryLogin = ({
