@@ -8,7 +8,7 @@ export const AppPageEntryView = ({
 }: {
   appPageEntry: IAppPage;
 }): JSX.Element => {
-  const { label, body, route } = appPageEntry;
+  const { label, route } = appPageEntry;
   return (
     <Link href={route} passHref>
       <ClickableTile href={route}>
@@ -17,7 +17,6 @@ export const AppPageEntryView = ({
           dangerouslySetInnerHTML={{
             __html: label,
           }}></h4>
-        <HTML data={body} />
       </ClickableTile>
     </Link>
   );

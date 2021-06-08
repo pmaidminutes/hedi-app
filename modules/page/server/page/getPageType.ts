@@ -4,15 +4,16 @@ import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
 import { getLayout } from "@/modules/shell/server";
 import { getTemplate } from "@/modules/template/server";
+
+import {
+  getFeedbackPage,
+  getFeedbackThanksPage,
+} from "@/modules/feedback/server/pages";
 import { getProfileTestLandingPage } from "@/modules/landingpage/server";
 import {
   getProfileListPage,
   getProfilePreviewPage,
 } from "@/modules/profile/server";
-import {
-  getFeedbackPage,
-  getFeedbackThanksPage,
-} from "@/modules/feedback/server/pages";
 
 export const getPageType = async (
   content: IPage
