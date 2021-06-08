@@ -1,12 +1,12 @@
 import { IsIErrorResponse } from "@/modules/common/error";
-import { IAppPage } from "@/modules/common/types";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSearch } from "../../hooks";
 const filterTypes = ["articles", "profiles", "categories", "glossary"];
 
 export interface ISearchProps {
-  content: IAppPage;
+  // TODO type after removing app page
+  content: any;
 }
 export function useSearchView(props: ISearchProps) {
   //TODO pick it up from env file for now 5kms around
@@ -51,7 +51,8 @@ export function useSearchView(props: ISearchProps) {
 
   const { content } = props;
 
-  const resultsHeadline = content.elements.find(e => e.identifier === "results")
+  // TODO HACK added type to e, for preventing error
+  const resultsHeadline = content.elements.find((e:any) => e.identifier === "results")
     ?.value;
 
   let loading = true;
