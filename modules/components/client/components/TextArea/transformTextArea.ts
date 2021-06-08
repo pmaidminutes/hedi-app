@@ -13,6 +13,6 @@ export function transformTextArea(props: ITextAreaProps): TextAreaProps {
     name: name || id,
     labelText: HTML({ data: labelText }) || "",
     helperText: HTML({ data: helperText }),
-    id
+    id,
   };
 }

@@ -1,51 +1,40 @@
-import { IUIElementTexts } from "@/modules/model";
-import { IShellLink } from "@/modules/shell/types/shellLinks";
-import {
-  AssertClientSide,
-  getUIElement,
-  getLinkLabel,
-  getMenuLinkLabel,
-} from "@/modules/common/utils";
+import { AssertClientSide } from "@/modules/common/utils";
 import { useRouter } from "next/router";
 import { signOut } from "next-auth/client";
+import {
+  findLabelInstance,
+  findLinkInstance,
+  IComponent,
+} from "@/modules/model/components";
 
 export interface IUserMenuProps {
-  userMenuLinks?: IShellLink[];
-  config?: IUIElementTexts[];
+  userMenuLinks?: IComponent[];
+  config?: IComponent[];
 }
 export function transformUserProfileMenu(props: IUserMenuProps) {
   const { userMenuLinks, config } = props;
 
-  const menuTooltip = getUIElement("menu_userProfile", config)?.value;
-  const loginText = getMenuLinkLabel("login", userMenuLinks);
-  const logoutText = getMenuLinkLabel("logout", userMenuLinks);
-  const viewprofileText = getMenuLinkLabel("viewprofile", userMenuLinks);
+  const menuTooltip = config
+    ? findLabelInstance(config, "menu_userProfile")
+    : null;
+  const login = userMenuLinks ? findLinkInstance(userMenuLinks, "login") : null;
 
   const router = useRouter();
-  const navigateMenu = (routeKey: string) => {
+  const navigateMenu = (route: string) => {
     if (AssertClientSide()) {
-      const routePath =
-        userMenuLinks?.find(l => l.key === routeKey)?.route ??
-        "/" + router.locale;
-      router.push(routePath);
+      router.push(route);
     }
   };
 
   const logoutUser = () => {
-    const callbackRoute = getLinkLabel(
-      "logout",
-      userMenuLinks,
-      "/" + router.locale
-    );
-    signOut({ callbackUrl: callbackRoute });
+    // signOut({ callbackUrl: callbackRoute });
+    signOut();
   };
 
   return {
-    menuTooltip,
+    menuTooltip: menuTooltip?.text || "MISSING TOOLTIP",
     navigateMenu,
     logoutUser,
-    loginText,
-    logoutText,
-    viewprofileText,
+    login,
   };
 }

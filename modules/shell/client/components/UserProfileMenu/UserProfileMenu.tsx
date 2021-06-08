@@ -5,7 +5,7 @@ import {
   Loading,
 } from "carbon-components-react";
 import { Login32, UserProfile32 } from "@carbon/icons-react";
-import { getUser, logout } from "@/modules/auth/client/";
+import { getUser } from "@/modules/auth/client/";
 import {
   transformUserProfileMenu,
   IUserMenuProps,
@@ -15,11 +15,9 @@ import { ShellContext } from "../../contexts";
 export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
   const {
     menuTooltip,
+    login,
     navigateMenu,
     logoutUser,
-    loginText,
-    logoutText,
-    viewprofileText,
   } = transformUserProfileMenu(props);
 
   const [hasMounted, setHasMounted] = useState(false);
@@ -46,13 +44,8 @@ export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
           size="xl"
           flipped={!isRTL}>
           <OverflowMenuItem
-            aria-label={"Profile Component"}
-            itemText={viewprofileText + ` ${user.name}`}
-            hasDivider={false}
-            onClick={() => navigateMenu("viewprofile")}></OverflowMenuItem>
-          <OverflowMenuItem
             aria-label={"Logout Component"}
-            itemText={logoutText}
+            itemText={"Logout"}
             hasDivider={false}
             onClick={() => logoutUser()}></OverflowMenuItem>
         </OverflowMenu>
@@ -64,11 +57,13 @@ export const UserProfileMenu = (props: IUserMenuProps): JSX.Element | null => {
           ariaLabel="User Profile Menu"
           size="xl"
           flipped={true}>
-          <OverflowMenuItem
-            aria-label={"Login Component"}
-            onClick={() => navigateMenu("login")}
-            hasDivider={false}
-            itemText={loginText}></OverflowMenuItem>
+          {login && (
+            <OverflowMenuItem
+              aria-label={login.ariaLabel}
+              onClick={() => navigateMenu(login.href)}
+              hasDivider={false}
+              itemText={login.labelText}></OverflowMenuItem>
+          )}
         </OverflowMenu>
       )}
     </>

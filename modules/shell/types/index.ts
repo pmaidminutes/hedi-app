@@ -4,19 +4,19 @@ import {
   IEntity,
   IEntityLocalized,
   ILanguage,
-  IUIElementTexts,
 } from "@/modules/model";
 import { ILayout } from "../client/components/Layout/types";
+import { IComponent } from "@/modules/model/components";
 
 export interface IShellProps
   extends Partial<IAppStyled>,
     Omit<IPageConfig, "translations"> {
-  shellConfig: IUIElementTexts[];
+  shellConfig: IComponent[];
   languageSwitchLinks: IEntity[];
   header?: IShellLink[];
   footer?: IShellLink[];
   userMenu?: IShellLink[];
-  langDirections: Partial<ILanguage>[]
+  langDirections: Partial<ILanguage>[];
 }
 
 export type AccessRule = false | "AUTHORIZED" | true; // HACK definition for quick compatibility actual meaning: hidden, authorized user, always
@@ -40,7 +40,7 @@ export interface IPageConfig extends Partial<IAppStyled> {
 
 export type IShell = Record<string, IEntity[]> & {
   languages: ILanguage[];
-  shellConfig: IUIElementTexts[];
+  shellConfig: IComponent[];
 };
 
 export interface IPageProps<T> {

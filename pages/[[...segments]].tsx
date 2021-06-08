@@ -26,8 +26,11 @@ import { AppPagePathsGQL } from "@/modules/apppage/query";
 import { getAppPagePage } from "@/modules/apppage/server/page";
 import { TryAppPage } from "@/modules/apppage/client/components";
 
-import { TryFeedback } from "@/modules/feedback/client/components";
-import { TryLogin } from "@/modules/login/client/components";
+import {
+  TryFeedback,
+  TryFeedbackThanks,
+} from "@/modules/feedback/client/components";
+import { TryLogin, TryRegistration } from "@/modules/auth/client";
 
 // LandingPage
 import { landingPagePaths } from "@/modules/landingpage/types";
@@ -36,6 +39,22 @@ import {
   isLandingPageRoute,
 } from "@/modules/landingpage/server";
 import { TryProfileTestLandingPage } from "@/modules/landingpage/client/components";
+
+// Profile
+import {
+  AssociationGQL,
+  isIProfile,
+  ProfessionalGQL,
+} from "@/modules/profile/types";
+import {
+  getProfilePage,
+  BusinessProfilePathsGQL,
+} from "@/modules/profile/server";
+import {
+  TryProfile,
+  TryProfileList,
+  TryProfilePreview,
+} from "@/modules/profile/client/components";
 
 // Search
 import { getSearchPage } from "@/modules/search/server/page";
@@ -61,16 +80,17 @@ import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
 // Registration
-import { TryRegistration } from "@/modules/registration/client";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const pathQueries = [
     AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
-    GlossaryPathsGQL,
+    BusinessProfilePathsGQL,
     PagePathsGQL,
   ];
+
+  // GlossaryPathsGQL,
   const locales = context?.locales ?? [];
   const paths = [];
   for (const lang of locales) {
@@ -95,18 +115,21 @@ export const getStaticProps: GetStaticProps<
     route = "/landingPage";
   }
 
-  const gqlTypes = [AppPageGQL, ArticleGQL, CategoryGQL, PageGQL];
-  const entities = await getIEntitiesTranslated<IEntity>(
-    gqlTypes,
-    [route],
-    lang
-  );
+  const gqlTypes = [
+    AppPageGQL,
+    ArticleGQL,
+    CategoryGQL,
+    PageGQL,
+    ProfessionalGQL,
+    AssociationGQL,
+  ];
+  const entities = await getIEntitiesTranslated<IEntity>(gqlTypes, [route]);
   let generic = entities?.[0] ?? null;
 
   if (isIPage(generic)) generic = await getPageType(generic);
   if (isIArticle(generic)) generic = await getArticlePage(generic);
   if (isICategory(generic)) generic = await getCategoryPage(generic);
-  // if (isProfile(generic)) generic = await getProfilePage(generic);
+  if (isIProfile(generic)) generic = await getProfilePage(generic);
 
   if (isIAppPage(generic)) {
     switch (
@@ -134,20 +157,8 @@ export const getStaticProps: GetStaticProps<
       },
     };
 
-  // ShellStuff
-  const shellKey = {
-    header: [
-      "editprofile",
-      "viewprofile",
-      "profiles",
-      "userfeedback",
-      "search",
-    ],
-    footer: ["imprint", "privacy"],
-    userMenu: ["login", "logout", "viewprofile"],
-  };
   // TODO we should probably cache this, especially if shellKey are static most of the time
-  const shellData = await getShell(locale, shellKey);
+  const shellData = await getShell(locale);
   const shell = generateShellData(content, shellData);
   return {
     props: { content, shell },
@@ -164,13 +175,14 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         <TryLogin content={content} key="login" />
         <TryRegistration content={content} key="registration" />
 
-        {/* <TryLogin content={content} key="login" /> */}
-        {/* <TryViewProfile content={content} key="viewprofile" /> */}
-        {/* <TryProfile content={content} key="profile" /> */}
-        {/* <TryProfileList content={content} key="profileList" /> */}
+        <TryProfilePreview content={content} key="profilePreview" />
+        <TryProfile content={content} key="profile" />
+        <TryProfileList content={content} key="profileList" />
         {/* <TryEditProfile content={content} key="editProfile" /> */}
+
         <TryFeedback content={content} key="feedback" />
-        {/* <TryUserFeedbackThanks content={content} key="userfeedbackThanks" /> */}
+
+        <TryFeedbackThanks content={content} key="feedbackThanks" />
         <TryProfileTestLandingPage
           content={content}
           key="profileTestLandingPage"

@@ -2,7 +2,7 @@ import { ILayoutProps } from "./types";
 
 export function transformLayout(props: ILayoutProps) {
   const { content, layout, children } = props;
-  const { key, longTitle, label, body } = content;
+  const { key, longTitle, label } = content;
   const {
     leftColumnProps,
     rightColumnProps,
@@ -10,7 +10,6 @@ export function transformLayout(props: ILayoutProps) {
     pageLayout,
     condensed,
     narrow,
-    layoutImg,
     singleColumnProps,
     posterImage,
     sideComponents,
@@ -34,7 +33,6 @@ export function transformLayout(props: ILayoutProps) {
   return {
     right,
     left,
-    layoutImg,
     posterImgSrc,
     posterImage,
     wrapperClass,
@@ -42,7 +40,6 @@ export function transformLayout(props: ILayoutProps) {
     content,
     condensed,
     narrow,
-    body: body ?? null,
     headline: headline || longTitle || label,
     children,
     groupClass,

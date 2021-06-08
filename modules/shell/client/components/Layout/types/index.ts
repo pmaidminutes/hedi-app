@@ -6,7 +6,6 @@ import React from "react";
 
 export interface ILayout {
   sideComponents?: IComponent[];
-  layoutImg?: ILayoutImage;
   customKey?: string;
   condensed?: boolean;
   narrow?: boolean;
@@ -19,10 +18,6 @@ export interface ILayout {
   headline?: HTML | null;
 }
 
-export interface ILayoutImage {
-  src?: string;
-  alt?: string;
-}
 export interface ILayoutProps extends ILayout {
   content: IAppPage & IPage;
   children: React.ReactNode;
@@ -31,14 +26,9 @@ export interface ILayoutProps extends ILayout {
 
 export interface ILayoutBasicTemplate {
   headline: string;
-  body: string;
   groupClass: string;
   condensed?: boolean;
   narrow?: boolean;
 }
 
-export type PageLayout =
-  | "singleColumn"
-  | "imageAndColumn"
-  | "categories"
-  | "twoColumns";
+export type PageLayout = "singleColumn" | "twoColumns";

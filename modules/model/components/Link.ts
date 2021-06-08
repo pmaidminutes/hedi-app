@@ -9,8 +9,7 @@ export interface Link extends IComponent {
   ariaLabel?: string;
 }
 
-export const isLink = (obj: IComponent): obj is Link =>
-  typeof obj?.id === "string" && obj?.kind === "Link";
+export const isLink = (obj: IComponent): obj is Link => obj?.kind === "Link";
 
 export const isLinkInstance = (obj: IComponent, id: string): obj is Link =>
   isLink(obj) && obj.id === id;

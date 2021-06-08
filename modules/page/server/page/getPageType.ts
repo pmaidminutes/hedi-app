@@ -1,12 +1,20 @@
-import { getLoginPage } from "@/modules/login/server";
-import { getRegistrationPage } from "@/modules/registration/server";
+import { getLoginPage, getRegistrationPage } from "@/modules/auth/server";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../types";
 import { getPagePage } from "./getPagePage";
 import { getLayout } from "@/modules/shell/server";
 import { getTemplate } from "@/modules/template/server";
-import { getFeedbackPage } from "@/modules/feedback/server/pages";
+
+import {
+  getFeedbackPage,
+  getFeedbackThanksPage,
+} from "@/modules/feedback/server/pages";
 import { getProfileTestLandingPage } from "@/modules/landingpage/server";
+import {
+  getProfileListPage,
+  getProfilePreviewPage,
+} from "@/modules/profile/server";
+
 export const getPageType = async (
   content: IPage
 ): Promise<IPage & IPageConfig> => {
@@ -15,11 +23,20 @@ export const getPageType = async (
     case "login":
       result = await getLoginPage(content);
       break;
+    case "register":
+      result = await getRegistrationPage(content);
+      break;
+    case "profilePreview":
+      result = await getProfilePreviewPage(content);
+      break;
+    case "profileList":
+      result = await getProfileListPage(content);
+      break;
     case "feedback":
       result = await getFeedbackPage(content);
       break;
-    case "register":
-      result = await getRegistrationPage(content);
+    case "feedbackThanks":
+      result = await getFeedbackThanksPage(content);
       break;
     case "profileTestLandingPage":
       result = await getProfileTestLandingPage(content);

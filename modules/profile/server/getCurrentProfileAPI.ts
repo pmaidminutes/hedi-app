@@ -5,9 +5,9 @@ import {
 } from "@/modules/common/utils";
 import { NextApiHandler } from "next";
 import { getCurrentProfile } from "./query";
-import { Profile } from "../types";
+import { IUserProfile } from "../types";
 
-export const getCurrentProfileAPI: NextApiHandler<Profile | null> = async (
+export const getCurrentProfileAPI: NextApiHandler<IUserProfile | null> = async (
   req,
   res
 ) => {
