@@ -57,8 +57,8 @@ import {
 } from "@/modules/profile/client/components";
 
 // Search
-import { getSearchPage } from "@/modules/search/server/page";
-import { TrySearch } from "@/modules/search/client/components";
+// import { getSearchPage } from "@/modules/search/server/page";
+// import { TrySearch } from "@/modules/search/client/components";
 
 // Article
 import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
@@ -134,9 +134,9 @@ export const getStaticProps: GetStaticProps<
       switch (
         generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
       ) {
-        case "search":
-          generic = await getSearchPage(generic);
-          break;
+        // case "search":
+        //   generic = await getSearchPage(generic);
+        //   break;
         default:
           generic = await getAppPagePage(generic);
       }
@@ -187,7 +187,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         <TryCategory content={content} key="category" />
         <TryGlossary content={content} key="glossary" />
 
-        <TrySearch content={content} key="search" />
+        {/* <TrySearch content={content} key="search" /> */}
         <TryAppPage content={content} key="apppage" />
         <TryPage content={content} key="page" />
       </>
