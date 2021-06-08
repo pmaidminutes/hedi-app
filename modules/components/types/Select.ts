@@ -1,4 +1,4 @@
-import { IEntity } from "..";
+import { IEntity } from "../../model";
 import { HTML, IComponent } from "./Component";
 
 export type SelectKind = "Select";
@@ -7,7 +7,7 @@ export interface SelectOptions extends Omit<IEntity, "type"> {
   index?: number;
 }
 
-export interface Select extends IComponent {
+export interface ISelectComponent extends IComponent {
   id: string;
   kind: SelectKind;
   items: SelectOptions[];
@@ -17,10 +17,10 @@ export interface Select extends IComponent {
   size?: "sm" | "md" | "lg";
 }
 
-export const isSelect = (obj: IComponent): obj is Select =>
+export const isSelect = (obj: IComponent): obj is ISelectComponent =>
   obj?.kind === "Select";
 
-export const isSelectInstance = (obj: IComponent, id: string): obj is Select =>
+export const isSelectInstance = (obj: IComponent, id: string): obj is ISelectComponent =>
   isSelect(obj) && obj.id === id;
 
 export const findSelectInstance = (array: IComponent[], id: string) => {

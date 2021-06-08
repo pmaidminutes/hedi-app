@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type ToggleKind = "Toggle";
 
-export interface Toggle extends IComponent {
+export interface IToggleComponent extends IComponent {
   id: string;
   kind: ToggleKind;
   labelText: HTML;
@@ -11,10 +11,10 @@ export interface Toggle extends IComponent {
   ariaLabel?: string;
 }
 
-export const isToggle = (obj: IComponent): obj is Toggle =>
+export const isToggle = (obj: IComponent): obj is IToggleComponent =>
   obj?.kind === "Toggle";
 
-export const isToggleInstance = (obj: IComponent, id: string): obj is Toggle =>
+export const isToggleInstance = (obj: IComponent, id: string): obj is IToggleComponent =>
   isToggle(obj) && obj.id === id;
 
 export const findToggleInstance = (array: IComponent[], id: string) => {

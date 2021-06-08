@@ -3,19 +3,19 @@ import { INotification } from "./INotification";
 
 export type ToastNotificationKind = "ToastNotification";
 
-export interface ToastNotification extends INotification {
+export interface IToastNotificationComponent extends INotification {
   kind: ToastNotificationKind;
   caption?: string;
 }
 
 export const isToastNotification = (
   obj: IComponent
-): obj is ToastNotification => obj?.kind === "ToastNotification";
+): obj is IToastNotificationComponent => obj?.kind === "ToastNotification";
 
 export const isToastNotificationInstance = (
   obj: IComponent,
   id: string
-): obj is ToastNotification => isToastNotification(obj) && obj.id === id;
+): obj is IToastNotificationComponent => isToastNotification(obj) && obj.id === id;
 
 export const findToastNotificationInstance = (
   array: IComponent[],

@@ -2,16 +2,16 @@ import { HTML, IComponent } from "./Component";
 
 export type LabelKind = "Label";
 
-export interface Label extends IComponent {
+export interface ILabelComponent extends IComponent {
   kind: LabelKind;
   labelKind: string;
   text?: HTML;
   className?: string;
 }
 
-export const isLabel = (obj: IComponent): obj is Label => obj?.kind === "Label";
+export const isLabel = (obj: IComponent): obj is ILabelComponent => obj?.kind === "Label";
 
-export const isLabelInstance = (obj: IComponent, id: string): obj is Label =>
+export const isLabelInstance = (obj: IComponent, id: string): obj is ILabelComponent =>
   isLabel(obj) && obj.id === id;
 
 export const findLabelInstance = (array: IComponent[], id: string) => {

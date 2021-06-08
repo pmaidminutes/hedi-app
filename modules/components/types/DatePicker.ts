@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type DatePickerKind = "DatePicker";
 
-export interface DatePicker extends IComponent {
+export interface IDatePickerComponent extends IComponent {
   id: string;
   kind: DatePickerKind;
   datePickerType: "simple" | "single" | "range";
@@ -15,13 +15,13 @@ export interface DatePicker extends IComponent {
   maxDate?: string;
 }
 
-export const isDatePicker = (obj: IComponent): obj is DatePicker =>
+export const isDatePicker = (obj: IComponent): obj is IDatePickerComponent =>
   obj?.kind === "DatePicker";
 
 export const isDatePickerInstance = (
   obj: IComponent,
   id: string
-): obj is DatePicker => isDatePicker(obj) && obj.id === id;
+): obj is IDatePickerComponent => isDatePicker(obj) && obj.id === id;
 
 export const findDatePickerInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isDatePicker).find(item => item.id === id);
