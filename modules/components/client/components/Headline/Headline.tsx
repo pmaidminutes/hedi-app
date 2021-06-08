@@ -4,8 +4,10 @@ import { HTML } from "@/modules/react/html";
 
 // TODO combine with Label maybe
 export const Headline = (props: IHeadlineComponent) => {
-  const { text, labelKind } = props;
+  const { text, headline } = props;
+  const element = headline === "h1" ? "h2" : headline;
+
   if (!text) return null;
 
-  return createElement(labelKind, HTML({ data: text }));
+  return createElement(element, {}, HTML({ data: text }));
 };

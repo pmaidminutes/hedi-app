@@ -4,7 +4,7 @@ export type HeadlineKind = "Headline";
 
 export interface IHeadlineComponent extends IComponent {
   kind: HeadlineKind;
-  labelKind: string;
+  headline: "h1" | "h2" | "h3" | "h4" | "h5";
   text?: HTML;
 }
 
