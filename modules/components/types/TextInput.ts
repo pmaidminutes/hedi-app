@@ -12,6 +12,7 @@ export interface ITextInputComponent extends IComponent {
   placeholder?: string;
   helperText?: HTML;
   ariaLabel?: string;
+  ref?: React.ForwardedRef<HTMLInputElement>;
 }
 
 export const isTextInput = (obj: IComponent): obj is ITextInputComponent =>
