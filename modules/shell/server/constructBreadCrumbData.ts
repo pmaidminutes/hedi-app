@@ -3,27 +3,16 @@ import { routeToSegments } from "@/modules/common/utils";
 interface IBreadCrumbPath extends Omit<IEntity, "type"> {
   isCurrentPage: boolean;
 }
-
-import {
-  IAppStyled,
-  IEntityLocalized,
-  IEntityTranslated,
-  IRouteLabeled,
-} from "@/modules/model";
+import { IBreadCrumbProps } from "../client/components/BreadCrumb/transformBreadCrumb";
 
 export function constructBreadCrumbPathData(
-  content:
-    | (IEntityTranslated<IEntityLocalized> &
-        Partial<IAppStyled> &
-        Partial<IRouteLabeled>)
-    | null,
-  locale: string
+  props: IBreadCrumbProps
 ): IBreadCrumbPath[] {
   const composedPath: IBreadCrumbPath[] = [];
 
-  if (content !== null) {
-    const { route, routelabel, type, label } = content;
-    let basePath = "/" + locale;
+  if (props !== null) {
+    const { route, routelabel, type, label, lang } = props;
+    let basePath = "/" + lang;
 
     if (type === "Category" || type === "Article") {
       let pathArray = routeToSegments(route);

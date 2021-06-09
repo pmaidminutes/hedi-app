@@ -22,10 +22,10 @@ ${EntityLocalizedFields}
 export interface IArticle
   extends IArticleEntry,
     IEntityTranslated<IEntityLocalized>,
-    IAppStyled {
+    IAppStyled,
+    IRouteLabeled {
   category: IEntity;
   appstyle: string;
-  routelabel: IRouteLabeled;
   components: IComponent[];
 }
 
