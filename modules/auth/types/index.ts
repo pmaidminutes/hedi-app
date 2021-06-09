@@ -7,4 +7,3 @@ export * from "./IRegisterRequest";
 export * from "./IRegisterResponse";
 export * from "./IRegisterValidate";
 export * from "./IRegistration";
-export * from "./IRegistrationView";

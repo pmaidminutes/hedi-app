@@ -31,13 +31,6 @@ export interface IPageConfig extends Partial<IAppStyled> {
   layout?: ILayout;
 }
 
-// export type shellRecords = "header" | "footer"
-
-// interface IShell extends Record<string, IEntity[]> {
-//   languages: ILanguage[];
-//   shellConfig:  IUIElementTexts[];
-// }
-
 export type IShell = Record<string, IEntity[]> & {
   languages: ILanguage[];
   shellConfig: IComponent[];
