@@ -12,6 +12,7 @@ import {
   WithTagsFields,
   IEntityTranslated,
 } from "@/modules/model";
+import { CarbonIconType } from "@carbon/icons-react";
 
 export interface IArticleEntry extends IEntityLocalized {}
 
@@ -41,3 +42,10 @@ export const ArticleGQL = gql`... on Article {
   ${RouteLabelFields}
   components
 }`;
+
+
+export interface IArticleAction {
+  icon: CarbonIconType;
+  description: string;
+  handler: Function;
+}
