@@ -27,3 +27,12 @@ export interface IPhoneInput {
   phoneKind: number;
   dataVisibility: number;
 }
+
+export function phoneToInput(phone: IPhone): IPhoneInput {
+  return {
+    dataKind: phone.dataKind.index,
+    phone: phone.phone,
+    phoneKind: phone.phoneKind.index,
+    dataVisibility: phone.dataVisibility.index,
+  };
+}
