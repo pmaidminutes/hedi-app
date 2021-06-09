@@ -22,3 +22,11 @@ export interface IEmailInput {
   email: string;
   dataVisibility: number;
 }
+
+export function emailToInput(email: IEmail): IEmailInput {
+  return {
+    dataKind: email.dataKind.index,
+    email: email.email,
+    dataVisibility: email.dataVisibility.index,
+  };
+}
