@@ -20,3 +20,7 @@ export const findHeadlineInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isHeadline).find(item => item.id === id);
   return element;
 };
+
+export const findAllHeadlineInstances = (array: IComponent[]) => {
+  return array.filter(isHeadline);
+};
