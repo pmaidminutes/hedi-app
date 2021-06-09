@@ -1,6 +1,7 @@
 export * from "./Profile";
 export * from "./Contact";
 export * from "./Address";
+export * from "./AddressesInput";
 export * from "./PhoneLink";
 export * from "./EmailLink";
 export * from "./WebLink";
