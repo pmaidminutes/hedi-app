@@ -22,3 +22,11 @@ export interface IWebsiteInput {
   website: string;
   dataVisibility: number;
 }
+
+export function websiteToInput(website: IWebsite): IWebsiteInput {
+  return {
+    dataKind: website.dataKind.index,
+    website: website.website,
+    dataVisibility: website.dataVisibility.index,
+  };
+}
