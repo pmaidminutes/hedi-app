@@ -8,6 +8,8 @@ export * from "./EmailLink";
 export * from "./EmailsInput";
 export * from "./WebLink";
 export * from "./WebsitesInput";
+export * from "./LanguageSkills";
+export * from "./LanguageSkillsInput";
 export * from "./ConsultationHours";
 export * from "./ConsultationHoursInput";
 export * from "./ProfileEntry";

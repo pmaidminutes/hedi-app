@@ -1,5 +1,4 @@
 import {
-  findButtonInstance,
   findLabelInstance,
   findSelectInstance,
   IComponent,
@@ -9,9 +8,10 @@ import { ILanguageLevelInputDefinition } from ".";
 export const getLanguageLeveInputDefinition = (
   components: IComponent[]
 ): ILanguageLevelInputDefinition => ({
-  languageTitle: findLabelInstance(components, "languageTitle")?.text,
+  languageTitle:
+    findLabelInstance(components, "languageTitle")?.text ?? "Sprache",
   languageSelect: findSelectInstance(components, "languageSelect")!,
-  levelTitle: findLabelInstance(components, "levelTitle")?.text,
+  levelTitle:
+    findLabelInstance(components, "levelTitle")?.text ?? "Verständnis",
   levelSelect: findSelectInstance(components, "levelSelect")!,
-  removeButton: findButtonInstance(components, "removeButton")!,
 });

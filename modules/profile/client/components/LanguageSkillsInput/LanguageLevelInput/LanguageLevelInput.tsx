@@ -1,15 +1,11 @@
 import { TableCell, TableRow } from "carbon-components-react";
-import { TrashCan32 } from "@carbon/icons-react";
 import { ILanguageLevelInput } from "@/modules/profile/types";
-import {
-  Select as ISelect,
-  Button as IButton,
-} from "@/modules/model/components";
-import { Select, Button } from "@/modules/components";
+import { Select as ISelect } from "@/modules/model/components";
+import { Select } from "@/modules/components";
 import { useLanguageLevelInput } from "./useLanguageLevelInput";
 
 export type ILanguageLevelInputProps = {
-  languageLevelInput?: ILanguageLevelInput;
+  languageLevelInput?: Partial<ILanguageLevelInput>;
 } & ILanguageLevelInputDefinition &
   ILanguageLevelInputConfig;
 
@@ -18,59 +14,42 @@ export interface ILanguageLevelInputDefinition {
   languageSelect: ISelect;
   levelTitle?: string;
   levelSelect: ISelect;
-  removeButton: IButton;
 }
 
 interface ILanguageLevelInputConfig {
-  onRemoveClick?: () => void;
-  onChange?: (languageLevelInput: ILanguageLevelInput) => void;
+  onChange?: (languageLevelInput: Partial<ILanguageLevelInput>) => void;
 }
 
-export const LanguageLevelInput = (props: ILanguageLevelInputProps) => {
+export const LanguageLevelInput: React.FC<ILanguageLevelInputProps> = props => {
   const {
     languageLevelInput: initialLanguageLevelInput,
     languageTitle,
     languageSelect,
     levelTitle,
     levelSelect,
-    removeButton,
-    onRemoveClick,
+    children,
     onChange,
   } = props;
 
-  const {
-    languageLevelInput,
-    handleLangcodeChange,
-    handleLevelChange,
-  } = useLanguageLevelInput(initialLanguageLevelInput, onChange);
+  const { langcode, level, state } = useLanguageLevelInput(
+    initialLanguageLevelInput,
+    onChange
+  );
   return (
     <TableRow>
       <TableCell data-th={languageTitle}>
-        <Select
-          {...languageSelect}
-          value={languageLevelInput?.langcode}
-          onChange={handleLangcodeChange}
-        />
+        <Select {...langcode} {...languageSelect} />
       </TableCell>
       <TableCell data-th={levelTitle}>
-        <Select
-          {...levelSelect}
-          value={languageLevelInput?.level}
-          onChange={handleLevelChange}
-        />
+        <Select {...level} {...levelSelect} />
       </TableCell>
       <TableCell>
-        <Button
-          {...removeButton}
-          renderIcon={TrashCan32}
-          hasIconOnly
-          onClick={onRemoveClick}
-        />
+        {children}
         <input
           id="languageLevel"
           name="languageLevel"
           readOnly
-          value={JSON.stringify(languageLevelInput)}
+          value={JSON.stringify(state)}
           hidden
         />
       </TableCell>

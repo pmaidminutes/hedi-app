@@ -1,87 +1,103 @@
 import {
   Column,
+  FormGroup,
+  FormGroupProps,
+  Row,
   Table,
   TableBody,
   TableHead,
   TableHeader,
   TableRow,
 } from "carbon-components-react";
-import { Add32 } from "@carbon/icons-react";
+import { Add32, TrashCan32 } from "@carbon/icons-react";
 import {
   ILanguageLevelInputDefinition,
   LanguageLevelInput,
 } from "./LanguageLevelInput";
-import { useLanguageSkillsInput } from "./useLanguageSkillsInput";
 import { ILanguageLevel } from "@/modules/profile/types";
-import { Button as IButton } from "@/modules/model/components";
-import { Button } from "@/modules/components";
+import { Button as IButton, Label as ILabel } from "@/modules/model/components";
+import { Button, Label } from "@/modules/components";
+import { useInteractiveList } from "@/modules/react/hooks";
 
 export type ILanguageSkillsInputProps = {
-  languageLevels?: ILanguageLevel[];
-} & ILanguageSkillsInputDefinition;
+  languageLevels?: Partial<ILanguageLevel>[];
+} & ILanguageSkillsInputDefinition &
+  Partial<FormGroupProps>;
 
 export interface ILanguageSkillsInputDefinition {
+  languageSkillsLabel: ILabel;
   languageTitle?: string;
   levelTitle?: string;
   languageLevelInputDefinition: ILanguageLevelInputDefinition;
   addButton: IButton;
+  removeButton: IButton;
 }
 
 export const LanguageSkillsInput = (props: ILanguageSkillsInputProps) => {
   const {
+    languageSkillsLabel,
     languageLevels,
     languageTitle,
     levelTitle,
     languageLevelInputDefinition,
     addButton,
+    removeButton,
+    ...formGroupProps
   } = props;
   const {
-    languageLevelInputs,
+    list: languageLevelInputs,
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useLanguageSkillsInput(languageLevels);
+  } = useInteractiveList(languageLevels);
   return (
-    <>
-      <Column>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableHeader>{languageTitle ?? "Sprache"}</TableHeader>
-              <TableHeader>{levelTitle ?? "Verständnis"}</TableHeader>
-              <TableHeader>
-                <Button
-                  {...addButton}
-                  renderIcon={Add32}
-                  onClick={handleAddClick}
-                />
-              </TableHeader>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {languageLevelInputs?.map((lli, i) => (
-              <LanguageLevelInput
-                languageLevelInput={lli}
-                key={lli.langcode + i}
-                {...languageLevelInputDefinition}
-                onRemoveClick={() => {
-                  handleRemoveClick(i);
-                }}
-                onChange={changedData => handleItemChange(i, changedData)}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      </Column>
-      <Column>
-        <Button
-          {...addButton}
-          className="mobile-only"
-          hasIconOnly={true}
-          renderIcon={Add32}
-          onClick={handleAddClick}
-        />
-      </Column>
-    </>
+    <FormGroup
+      legendText={<Label {...languageSkillsLabel} />}
+      {...formGroupProps}>
+      <Row>
+        <Column>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableHeader>{languageTitle}</TableHeader>
+                <TableHeader>{levelTitle}</TableHeader>
+                <TableHeader>
+                  <Button
+                    {...addButton}
+                    renderIcon={Add32}
+                    onClick={handleAddClick}
+                  />
+                </TableHeader>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {languageLevelInputs?.map((lli, i) => (
+                <LanguageLevelInput
+                  languageLevelInput={lli}
+                  key={`${lli?.langcode}${i}`}
+                  {...languageLevelInputDefinition}
+                  onChange={item => handleItemChange(item, i)}>
+                  <Button
+                    {...removeButton}
+                    hasIconOnly
+                    renderIcon={TrashCan32}
+                    onClick={_ => handleRemoveClick(i)}
+                  />
+                </LanguageLevelInput>
+              ))}
+            </TableBody>
+          </Table>
+        </Column>
+        <Column>
+          <Button
+            {...addButton}
+            className="mobile-only"
+            hasIconOnly={true}
+            renderIcon={Add32}
+            onClick={handleAddClick}
+          />
+        </Column>
+      </Row>
+    </FormGroup>
   );
 };
