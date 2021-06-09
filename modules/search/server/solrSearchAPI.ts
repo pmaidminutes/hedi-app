@@ -10,11 +10,10 @@ import { requestCoordinates } from "@/modules/map/server/request";
 import { searchServer } from "./request";
 import { NextApiHandler } from "next";
 import { sendAPIHttpError, sendAPISuccess } from "@/modules/common/utils";
-import { getAppPage } from "@/modules/apppage/query";
-import { IAppPage } from "@/modules/common/types";
+import { IPage } from "@/modules/page/types";
 
 export const solrSearchAPI: NextApiHandler<
-  IErrorResponse | (IArticle | ICategory | IGlossaryTerm | IAppPage)[]
+  IErrorResponse | (IArticle | ICategory | IGlossaryTerm | IPage)[]
 > = async (req, res) => {
   const {
     query: { lang, searchText, filter, location, distance },
@@ -52,17 +51,17 @@ export const solrSearchAPI: NextApiHandler<
             })
           );
           break;
-        case "app_page":
-          promises.push(
-            getAppPage(route).then(page => {
-              if (page) {
-                page.label = highlight.highlightedTitle ?? page.label;
-                // page.body = highlightedBody;
-              }
-              return page;
-            })
-          );
-          break;
+        // case "page":
+        //   promises.push(
+        //     getAppPage(route).then(page => {
+        //       if (page) {
+        //         page.label = highlight.highlightedTitle ?? page.label;
+        //         // page.body = highlightedBody;
+        //       }
+        //       return page;
+        //     })
+        //   );
+        //   break;
         case "categories":
           promises.push(
             getCategory(route).then(category => {
@@ -86,13 +85,13 @@ export const solrSearchAPI: NextApiHandler<
       }
     }
     const entries = await Promise.all<
-      IArticle | ICategory | IGlossaryTerm | IAppPage | null
+      IArticle | ICategory | IGlossaryTerm | IPage | null
     >(promises);
     const nonNull = entries.filter(entry => entry) as (
       | IArticle
       | ICategory
       | IGlossaryTerm
-      | IAppPage
+      | IPage
     )[];
     sendAPISuccess(res, nonNull);
   }

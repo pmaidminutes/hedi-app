@@ -1,10 +1,10 @@
-import { IAppPage } from "@/modules/common/types";
+import { IPage } from "@/modules/page/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 
 export const getSearchPage = async (
-  content: IAppPage
-): Promise<IAppPage & IPageConfig> => {
+  content: IPage
+): Promise<IPage & IPageConfig> => {
   content.type = "Search";
 
   const layout: ILayout = {

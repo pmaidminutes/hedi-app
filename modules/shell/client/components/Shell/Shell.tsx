@@ -5,13 +5,11 @@ import { transformShell } from "./transformShell";
 import { useShell } from "./useShell";
 import { ScrollToTop } from "../ScrollToTop";
 import { Layout } from "../Layout";
-
 import { Header, Footer } from "..";
 import { IPageProps } from "../../../types";
-import { IAppPage } from "@/modules/common/types";
 import { IPage } from "@/modules/page/types";
 
-export const Shell: React.FC<IPageProps<IAppPage & IPage>> = props => {
+export const Shell: React.FC<IPageProps<IPage>> = props => {
   const { content, shell, children } = props;
   const { label } = transformShell(content);
   const {
