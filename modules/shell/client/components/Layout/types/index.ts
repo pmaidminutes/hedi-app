@@ -1,4 +1,3 @@
-import { IAppPage } from "@/modules/common/types";
 import { IComponent, Image, HTML } from "@/modules/model/components";
 import { IPage } from "@/modules/page/types";
 import { ColumnDefaultProps } from "carbon-components-react";
@@ -19,7 +18,7 @@ export interface ILayout {
 }
 
 export interface ILayoutProps extends ILayout {
-  content: IAppPage & IPage;
+  content:  IPage;
   children: React.ReactNode;
   layout: ILayout;
 }

@@ -2,7 +2,7 @@ import { ILayoutProps } from "./types";
 
 export function transformLayout(props: ILayoutProps) {
   const { content, layout, children } = props;
-  const { key, longTitle, label } = content;
+  const { id, label } = content;
   const {
     leftColumnProps,
     rightColumnProps,
@@ -25,10 +25,10 @@ export function transformLayout(props: ILayoutProps) {
   const single = singleColumnProps ?? {};
 
   const wrapperClass = `hedi--simple-page ${
-    key !== undefined ? `hedi--${key}-page` : ""
+    id !== undefined ? `hedi--${id}-page` : ""
   } ${customKey !== undefined ? `hedi--${customKey}` : ""}`;
 
-  const groupClass = `hedi--group hedi--group--${key}`;
+  const groupClass = `hedi--group hedi--group--${id}`;
 
   return {
     right,
@@ -40,7 +40,7 @@ export function transformLayout(props: ILayoutProps) {
     content,
     condensed,
     narrow,
-    headline: headline || longTitle || label,
+    headline: headline || label,
     children,
     groupClass,
     single,

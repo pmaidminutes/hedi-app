@@ -1,4 +1,3 @@
-import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "@/modules/page/types";
 

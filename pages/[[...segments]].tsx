@@ -3,12 +3,7 @@ import { GetStaticPaths, GetStaticProps } from "next/types";
 import { IEntity } from "@/modules/model";
 
 // common
-import {
-  AppPageGQL,
-  isIAppPage,
-  IAppPage,
-  ISegmentParam,
-} from "@/modules/common/types";
+import { ISegmentParam } from "@/modules/common/types";
 import { segmentsToRoute } from "@/modules/common/utils";
 import {
   getIEntitiesTranslated,
@@ -21,11 +16,6 @@ import { generateShellData } from "@/modules/shell/client/utils";
 import { Shell } from "@/modules/shell/client/components";
 import { IPageConfig, IPageProps } from "@/modules/shell/types";
 
-// AppPage
-import { AppPagePathsGQL } from "@/modules/apppage/query";
-import { getAppPagePage } from "@/modules/apppage/server/page";
-import { TryAppPage } from "@/modules/apppage/client/components";
-
 import {
   TryFeedback,
   TryFeedbackThanks,
@@ -34,10 +24,7 @@ import { TryLogin, TryRegistration } from "@/modules/auth/client";
 
 // LandingPage
 import { landingPagePaths } from "@/modules/landingpage/types";
-import {
-  getProfileTestLandingPage,
-  isLandingPageRoute,
-} from "@/modules/landingpage/server";
+import { isLandingPageRoute } from "@/modules/landingpage/server";
 import { TryProfileTestLandingPage } from "@/modules/landingpage/client/components";
 
 // Profile
@@ -57,8 +44,8 @@ import {
 } from "@/modules/profile/client/components";
 
 // Search
-import { getSearchPage } from "@/modules/search/server/page";
-import { TrySearch } from "@/modules/search/client/components";
+// import { getSearchPage } from "@/modules/search/server/page";
+// import { TrySearch } from "@/modules/search/client/components";
 
 // Article
 import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
@@ -83,7 +70,6 @@ import { TryTemplate } from "@/modules/template/client";
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
   const pathQueries = [
-    AppPagePathsGQL,
     ArticlePathsGQL,
     CategoryPathsGQL,
     BusinessProfilePathsGQL,
@@ -116,7 +102,6 @@ export const getStaticProps: GetStaticProps<
   }
 
   const gqlTypes = [
-    AppPageGQL,
     ArticleGQL,
     CategoryGQL,
     PageGQL,
@@ -135,18 +120,6 @@ export const getStaticProps: GetStaticProps<
   if (isICategory(generic)) generic = await getCategoryPage(generic);
   if (isIProfile(generic)) generic = await getProfilePage(generic);
 
-  if (isIAppPage(generic)) {
-    switch (
-      generic.key // should we handle this in the getAppPage, like the paths are handled in AppPagePaths?
-    ) {
-      case "search":
-        generic = await getSearchPage(generic);
-        break;
-      default:
-        generic = await getAppPagePage(generic);
-    }
-    // HACK TS: if getSegmentsContent is assigned to content directly, and in the isIAppPage guard applies, ts infers content could be an IAppPage...
-  }
   content = generic;
 
   // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
@@ -170,7 +143,7 @@ export const getStaticProps: GetStaticProps<
   };
 };
 
-export default function segments(props: IPageProps<IAppPage & IPage>) {
+export default function segments(props: IPageProps<IPage>) {
   const { content } = props;
   return (
     <Shell {...props}>
@@ -196,8 +169,7 @@ export default function segments(props: IPageProps<IAppPage & IPage>) {
         <TryCategory content={content} key="category" />
         {/* <TryGlossary content={content} key="glossary" /> */}
 
-        <TrySearch content={content} key="search" />
-        <TryAppPage content={content} key="apppage" />
+        {/* <TrySearch content={content} key="search" /> */}
         <TryPage content={content} key="page" />
       </>
     </Shell>
