@@ -3,6 +3,7 @@ export * from "./Contact";
 export * from "./Address";
 export * from "./AddressesInput";
 export * from "./PhoneLink";
+export * from "./PhonesInput";
 export * from "./EmailLink";
 export * from "./WebLink";
 export * from "./ConsultationHours";
