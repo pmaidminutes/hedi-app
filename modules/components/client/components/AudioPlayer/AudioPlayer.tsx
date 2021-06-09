@@ -1,7 +1,7 @@
-import { Audio } from "@/modules/model/components";
+import { IAudioComponent } from "../../../types";
 import { transformAudio } from "./transformAudio";
 
-export const AudioPlayer = (props: Audio) => {
+export const AudioPlayer = (props: IAudioComponent) => {
   const { src, mimeType } = transformAudio(props);
   return (
     <>

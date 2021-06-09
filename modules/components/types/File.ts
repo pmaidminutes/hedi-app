@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type FileKind = "File";
 
-export interface File extends IComponent {
+export interface IFileComponent extends IComponent {
   kind: FileKind;
   route: string;
   labelText: HTML;
@@ -10,9 +10,9 @@ export interface File extends IComponent {
   mimeType?: string;
 }
 
-export const isFile = (obj: IComponent): obj is File => obj?.kind === "File";
+export const isFile = (obj: IComponent): obj is IFileComponent => obj?.kind === "File";
 
-export const isFileInstance = (obj: IComponent, id: string): obj is File =>
+export const isFileInstance = (obj: IComponent, id: string): obj is IFileComponent =>
   isFile(obj) && obj.id === id;
 
 export const findFileInstance = (array: IComponent[], id: string) => {

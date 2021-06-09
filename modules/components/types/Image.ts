@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type ImageKind = "Image";
 
-export interface Image extends IComponent {
+export interface IImageComponent extends IComponent {
   kind: ImageKind;
   route: string;
   labelText: HTML;
@@ -12,9 +12,9 @@ export interface Image extends IComponent {
   alt?: string;
 }
 
-export const isImage = (obj: IComponent): obj is Image => obj?.kind === "Image";
+export const isImage = (obj: IComponent): obj is IImageComponent => obj?.kind === "Image";
 
-export const isImageInstance = (obj: IComponent, id: string): obj is Image =>
+export const isImageInstance = (obj: IComponent, id: string): obj is IImageComponent =>
   isImage(obj) && obj.id === id;
 
 export const findImageInstance = (array: IComponent[], id: string) => {

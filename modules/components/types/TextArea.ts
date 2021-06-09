@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type TextAreaKind = "TextArea";
 
-export interface TextArea extends IComponent {
+export interface ITextAreaComponent extends IComponent {
   kind: TextAreaKind;
   labelText?: HTML;
   isRequired?: boolean;
@@ -10,13 +10,13 @@ export interface TextArea extends IComponent {
   helperText?: HTML;
 }
 
-export const isTextArea = (obj: IComponent): obj is TextArea =>
+export const isTextArea = (obj: IComponent): obj is ITextAreaComponent =>
   obj?.kind === "TextArea";
 
 export const isTextAreaInstance = (
   obj: IComponent,
   id: string
-): obj is TextArea => isTextArea(obj) && obj.id === id;
+): obj is ITextAreaComponent => isTextArea(obj) && obj.id === id;
 
 export const findTextAreaInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isTextArea).find(item => item.id === id);

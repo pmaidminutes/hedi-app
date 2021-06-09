@@ -2,7 +2,7 @@ import {
   findColumnInstance,
   findHeadlineLabel,
   findImageInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { IPage } from "../../../page/types";

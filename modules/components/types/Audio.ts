@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type AudioKind = "Audio";
 
-export interface Audio extends IComponent {
+export interface IAudioComponent extends IComponent {
   kind: AudioKind;
   route: string;
   labelText: HTML;
@@ -10,9 +10,9 @@ export interface Audio extends IComponent {
   mimeType?: string;
 }
 
-export const isAudio = (obj: IComponent): obj is Audio => obj?.kind === "Audio";
+export const isAudio = (obj: IComponent): obj is IAudioComponent => obj?.kind === "Audio";
 
-export const isAudioInstance = (obj: IComponent, id: string): obj is Audio =>
+export const isAudioInstance = (obj: IComponent, id: string): obj is IAudioComponent =>
   isAudio(obj) && obj.id === id;
 
 export const findAudioInstance = (array: IComponent[], id: string) => {

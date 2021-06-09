@@ -1,8 +1,8 @@
-import { Checkbox } from "@/modules/model/components";
+import { ICheckboxComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { CheckboxProps } from "carbon-components-react";
 export interface ICheckboxProps
-  extends Checkbox,
+  extends ICheckboxComponent,
     Omit<CheckboxProps, "labelText"> {}
 
 export function transformCheckbox(props: ICheckboxProps): CheckboxProps {

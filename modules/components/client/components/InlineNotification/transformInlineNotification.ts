@@ -1,9 +1,9 @@
-import { InlineNotification as IInlineNotification } from "@/modules/model/components";
+import { IInlineNotificationComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { InlineNotificationProps } from "carbon-components-react";
 
 export interface IInlineNotificationProps
-  extends IInlineNotification,
+  extends IInlineNotificationComponent,
     Omit<InlineNotificationProps, "id" | "subtitle" | "title" | "kind"> {}
 
 export function transformInlineNotification(

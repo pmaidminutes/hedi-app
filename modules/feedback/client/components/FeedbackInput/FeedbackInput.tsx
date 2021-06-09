@@ -1,15 +1,12 @@
 import { Body, TextArea } from "@/modules/components";
-import {
-  Body as IBody,
-  TextArea as ITextArea,
-} from "@/modules/model/components";
+import { IBodyComponent, ITextAreaComponent } from "@/modules/components/types";
 
 export const FeedbackInput = ({
   body,
   textArea,
 }: {
-  body: IBody | undefined;
-  textArea: ITextArea | undefined;
+  body: IBodyComponent | undefined;
+  textArea: ITextAreaComponent | undefined;
 }) => {
   return (
     <div className="hedi--userfeedback-item">

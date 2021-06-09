@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type NumberInputKind = "NumberInput";
 
-export interface NumberInput extends IComponent {
+export interface INumberInputComponent extends IComponent {
   id: string;
   kind: NumberInputKind;
   label?: HTML;
@@ -14,13 +14,13 @@ export interface NumberInput extends IComponent {
   ariaLabel?: string;
 }
 
-export const isNumberInput = (obj: IComponent): obj is NumberInput =>
+export const isNumberInput = (obj: IComponent): obj is INumberInputComponent =>
   obj?.kind === "NumberInput";
 
 export const isNumberInputInstance = (
   obj: IComponent,
   id: string
-): obj is NumberInput => isNumberInput(obj) && obj.id === id;
+): obj is INumberInputComponent => isNumberInput(obj) && obj.id === id;
 
 export const findNumberInputInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isNumberInput).find(item => item.id === id);

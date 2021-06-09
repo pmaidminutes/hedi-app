@@ -6,7 +6,7 @@ import {
   ILanguage,
 } from "@/modules/model";
 import { ILayout } from "../client/components/Layout/types";
-import { IComponent } from "@/modules/model/components";
+import { IComponent } from "@/modules/components/types";
 
 export interface IShellProps
   extends Partial<IAppStyled>,

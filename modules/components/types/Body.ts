@@ -2,14 +2,14 @@ import { HTML, IComponent } from "./Component";
 
 export type BodyKind = "Body";
 
-export interface Body extends IComponent {
+export interface IBodyComponent extends IComponent {
   kind: BodyKind;
   body?: HTML;
 }
 
-export const isBody = (obj: IComponent): obj is Body => obj.kind === "Body";
+export const isBody = (obj: IComponent): obj is IBodyComponent => obj.kind === "Body";
 
-export const isBodyInstance = (obj: IComponent, id: string): obj is Body =>
+export const isBodyInstance = (obj: IComponent, id: string): obj is IBodyComponent =>
   isBody(obj) && obj.id === id;
 
 export const findBodyInstance = (array: IComponent[], id: string) => {

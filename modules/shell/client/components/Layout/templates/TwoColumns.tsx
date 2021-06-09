@@ -1,6 +1,6 @@
 import { ILayoutBasicTemplate } from "../types";
 import { Column, ColumnDefaultProps, Grid, Row } from "carbon-components-react";
-import { IComponent } from "@/modules/model/components";
+import { IComponent } from "@/modules/components/types";
 import { ComponentRenderer } from "@/modules/components";
 
 export const TwoColumns: React.FC<

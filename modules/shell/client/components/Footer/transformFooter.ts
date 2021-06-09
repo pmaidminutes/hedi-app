@@ -1,4 +1,4 @@
-import { findGroupInstance } from "@/modules/model/components";
+import { findGroupInstance } from "@/modules/components/types";
 import { IShellProps } from "@/modules/shell/types";
 export interface IFooter extends Partial<IShellProps> {}
 

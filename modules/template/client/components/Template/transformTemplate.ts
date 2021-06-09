@@ -1,7 +1,7 @@
 import {
   findBodyInstance,
   findLabelInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { ITemplatePage } from "../../../types";
 export function transformTemplate(props: ITemplatePage) {
   const { components } = props;

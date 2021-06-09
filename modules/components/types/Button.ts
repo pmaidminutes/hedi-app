@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type ButtonKind = "Button";
 
-export interface Button extends IComponent {
+export interface IButtonComponent extends IComponent {
   kind: ButtonKind;
   type?: "button" | "submit" | "reset";
   buttonKind: string;
@@ -14,10 +14,10 @@ export interface Button extends IComponent {
   ariaLabel?: string;
 }
 
-export const isButton = (obj: IComponent): obj is Button =>
+export const isButton = (obj: IComponent): obj is IButtonComponent =>
   obj?.kind === "Button";
 
-export const isButtonInstance = (obj: IComponent, id: string): obj is Button =>
+export const isButtonInstance = (obj: IComponent, id: string): obj is IButtonComponent =>
   isButton(obj) && obj.id === id;
 
 export const findButtonInstance = (array: IComponent[], id: string) => {

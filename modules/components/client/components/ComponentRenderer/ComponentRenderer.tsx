@@ -10,7 +10,7 @@ import {
   isTextArea,
   isTextInput,
   isVideo,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import {
   TextArea,
   TextInput,

@@ -1,9 +1,9 @@
 import { createElement } from "react";
-import { Label as ILabel } from "@/modules/model/components";
+import { ILabelComponent } from "../../../types";
 import { HTML } from "@/modules/react/html";
 
 // TODO labelKind vielleicht nur valid html Elemente
-export const Label = (props: ILabel) => {
+export const Label = (props: ILabelComponent) => {
   const { text, labelKind, className } = props;
   if (!text) return null;
 

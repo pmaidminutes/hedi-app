@@ -1,6 +1,6 @@
-import { Image } from "@/modules/model/components";
+import { IImageComponent } from "../../../types";
 
-export interface IImageProps extends Image {}
+export interface IImageProps extends IImageComponent {}
 
 export function transformImage(props: IImageProps) {
   const { labelText,route, ...rest } = props;

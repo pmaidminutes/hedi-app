@@ -1,17 +1,14 @@
-export * from "./Component";
-
 export * from "./Audio";
 export * from "./Body";
 export * from "./Button";
-export * from "./Column";
 export * from "./Checkbox";
 export * from "./Column";
 export * from "./DatePicker";
 export * from "./File";
 export * from "./Generic";
 export * from "./Group";
-export * from "./InlineNotification";
 export * from "./Image";
+export * from "./InlineNotification";
 export * from "./Label";
 export * from "./Link";
 export * from "./NumberInput";
@@ -23,3 +20,5 @@ export * from "./TextInput";
 export * from "./ToastNotification";
 export * from "./Toggle";
 export * from "./Video";
+// #### //
+export * from "./Component";

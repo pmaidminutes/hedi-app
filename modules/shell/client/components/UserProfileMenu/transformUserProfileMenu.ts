@@ -5,7 +5,7 @@ import {
   findLabelInstance,
   findLinkInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 
 export interface IUserMenuProps {
   userMenuLinks?: IComponent[];

@@ -4,7 +4,7 @@ import {
   findTextInputInstance,
   findInlineNotificationInstance,
   findLabelInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 
 import { ILogin } from "../../../types";
 

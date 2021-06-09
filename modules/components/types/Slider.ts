@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type SliderKind = "Slider";
 
-export interface Slider extends IComponent {
+export interface ISliderComponent extends IComponent {
   kind: SliderKind;
   value: number;
   min: number;
@@ -13,10 +13,10 @@ export interface Slider extends IComponent {
   ariaLabel?: string;
 }
 
-export const isSlider = (obj: IComponent): obj is Slider =>
+export const isSlider = (obj: IComponent): obj is ISliderComponent =>
   obj?.kind === "Slider";
 
-export const isSliderInstance = (obj: IComponent, id: string): obj is Slider =>
+export const isSliderInstance = (obj: IComponent, id: string): obj is ISliderComponent =>
   isSlider(obj) && obj.id === id;
 
 export const findSliderInstance = (array: IComponent[], id: string) => {

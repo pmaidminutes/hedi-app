@@ -2,7 +2,7 @@ import { HTML, IComponent } from "./Component";
 
 export type TextInputKind = "TextInput";
 
-export interface TextInput extends IComponent {
+export interface ITextInputComponent extends IComponent {
   id: string;
   kind: TextInputKind;
   type: "text" | "email" | "password";
@@ -13,13 +13,13 @@ export interface TextInput extends IComponent {
   ariaLabel?: string;
 }
 
-export const isTextInput = (obj: IComponent): obj is TextInput =>
+export const isTextInput = (obj: IComponent): obj is ITextInputComponent =>
   obj?.kind === "TextInput";
 
 export const isTextInputInstance = (
   obj: IComponent,
   id: string
-): obj is TextInput => isTextInput(obj) && obj.id === id;
+): obj is ITextInputComponent => isTextInput(obj) && obj.id === id;
 
 export const findTextInputInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isTextInput).find(item => item.id === id);
