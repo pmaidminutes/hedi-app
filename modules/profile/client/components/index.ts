@@ -5,6 +5,7 @@ export * from "./AddressesInput";
 export * from "./PhoneLink";
 export * from "./PhonesInput";
 export * from "./EmailLink";
+export * from "./EmailsInput";
 export * from "./WebLink";
 export * from "./ConsultationHours";
 export * from "./ProfileEntry";
