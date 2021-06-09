@@ -9,6 +9,7 @@ export * from "./EmailsInput";
 export * from "./WebLink";
 export * from "./WebsitesInput";
 export * from "./ConsultationHours";
+export * from "./ConsultationHoursInput";
 export * from "./ProfileEntry";
 export * from "./ProfileList";
 export * from "./ProfilePreview";

@@ -1,19 +1,28 @@
-import { findButtonInstance, IComponent } from "@/modules/model/components";
-import { IConsultationHourInputsDefinition } from ".";
+import {
+  findButtonInstance,
+  findLabelInstance,
+  IComponent,
+} from "@/modules/model/components";
+import { IConsultationHoursInputDefinition } from ".";
 import { getConsultationHourInputDefinition } from "./ConsultationHourInput";
 
-export const getConsultationHourInputsDefinition = (
+export const getConsultationHoursInputDefinition = (
   components: IComponent[]
-): IConsultationHourInputsDefinition => {
+): IConsultationHoursInputDefinition => {
   const consultationHourInputDefinition = getConsultationHourInputDefinition(
     components
   );
   return {
+    consultationHoursLabel: findLabelInstance(
+      components,
+      "consultationHoursLabel"
+    )!,
     weekdayTitle: consultationHourInputDefinition.weekdayTitle,
     startTimeTitle: consultationHourInputDefinition.startTimeTitle,
     endTimeTitle: consultationHourInputDefinition.endTimeTitle,
     availabilityTitle: consultationHourInputDefinition.availabilityTitle,
-    addButton: findButtonInstance(components, "addButton")!,
     consultationHourInputDefinition,
+    addButton: findButtonInstance(components, "addButton")!,
+    removeButton: findButtonInstance(components, "removeButton")!,
   };
 };
