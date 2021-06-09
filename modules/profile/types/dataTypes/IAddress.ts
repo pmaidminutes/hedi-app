@@ -39,3 +39,13 @@ export interface IAddressInput {
   streetVisibility: number;
   additionalInfo?: string;
 }
+
+export function addressToInput(address: IAddress): IAddressInput {
+  const { dataKind, cityVisibility, streetVisibility, ...rest } = address;
+  return {
+    dataKind: dataKind.index,
+    cityVisibility: cityVisibility.index,
+    streetVisibility: streetVisibility.index,
+    ...rest,
+  };
+}
