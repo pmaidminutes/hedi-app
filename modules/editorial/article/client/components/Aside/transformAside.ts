@@ -1,11 +1,8 @@
+import { ILinkComponent } from "@/modules/components/types";
 import { IArticleAction } from "../../../types";
-export interface IArticleAnchor {
-  link: string;
-  text: string;
-}
 export interface IAside {
   actions?: IArticleAction[]
-  anchors?:IArticleAnchor[]
+  anchors?:ILinkComponent[]
 }
 export function transformAside(props:IAside) {
 const {anchors, actions} = props

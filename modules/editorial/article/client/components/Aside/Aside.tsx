@@ -3,7 +3,7 @@ import React from "react";
 import { Translate24 } from "@carbon/icons-react";
 import { AsideAction } from "../AsideAction";
 import { Seperator } from "@/modules/common/components";
-import { Link } from "carbon-components-react";
+import { Link } from "@/modules/components/client";
 import { transformAside, IAside } from "./transformAside";
 
 export const Aside = (props: IAside) => {
@@ -17,12 +17,7 @@ export const Aside = (props: IAside) => {
           {/* TODO get title from apppage or something */}
           <h2>Abschnitte</h2>
           {anchors.map((anchor, index) => (
-            <Link
-              key={anchor.text + index}
-              href={anchor.link}
-              title={anchor.text}>
-              {anchor.text}
-            </Link>
+            <Link key={anchor.kind + index} {...anchor} />
           ))}
         </div>
       )}
