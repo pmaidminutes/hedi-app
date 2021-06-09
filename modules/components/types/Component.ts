@@ -13,6 +13,7 @@ import {
 import { ILabelComponent, LabelKind } from "./Label";
 import { ILinkComponent, LinkKind } from "./Link";
 import { IFileComponent, FileKind } from "./File";
+import { IHeadlineComponent, HeadlineKind } from "./Headline";
 import { IImageComponent, ImageKind } from "./Image";
 import { INumberInputComponent, NumberInputKind } from "./NumberInput";
 import { ISelectComponent, SelectKind } from "./Select";
@@ -38,6 +39,7 @@ export type ComponentKind =
   | DatePickerKind
   | GenericKind
   | GroupKind
+  | HeadlineKind
   | ColumnKind
   | LabelKind
   | LinkKind
@@ -70,6 +72,7 @@ export type Component =
   | IFileComponent
   | IGenericComponent
   | IGroupComponent
+  | IHeadlineComponent
   | IImageComponent
   | IInlineNotificationComponent
   | ILabelComponent

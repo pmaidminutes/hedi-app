@@ -7,6 +7,7 @@ export * from "./DatePicker";
 export * from "./File";
 export * from "./Generic";
 export * from "./Group";
+export * from "./Headline";
 export * from "./Image";
 export * from "./InlineNotification";
 export * from "./Label";
