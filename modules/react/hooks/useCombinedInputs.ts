@@ -26,7 +26,7 @@ export function useCombinedInputs<T>(
     setState(initial ?? {});
   }, [initial]);
 
-  const result = {} as IInputStateMap<T>;
+  const inputStateMap = {} as IInputStateMap<T>;
   for (const [key, func] of Object.entries<IElementValueFn<T>>(converters)) {
     const handleChange = (
       e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -38,11 +38,11 @@ export function useCombinedInputs<T>(
         return newState;
       });
     };
-    setProperty(result, key as keyof T, {
+    setProperty(inputStateMap, key as keyof T, {
       value: state[key as keyof T],
       onChange: handleChange,
     });
   }
 
-  return result;
+  return { ...inputStateMap, state };
 }
