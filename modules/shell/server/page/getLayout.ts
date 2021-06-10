@@ -17,6 +17,7 @@ import { IPage } from "../../../page/types";
 // Label component of type "H1"
 //    - will be used for the main headline in the layout
 // ************************************************
+// TODO checken, was man hier von IPage braucht
 export function getLayout(content: IPage & IPageConfig) {
   const { id, components } = content;
   let layout: ILayout = content.layout || {};
