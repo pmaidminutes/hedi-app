@@ -2,7 +2,6 @@ import { orderedRequiredFields } from "@/modules/editProfile/types";
 import { ChangeEvent, FormEvent, RefObject, useState } from "react";
 
 export function useValidationErrors(
-  elements: any[],
   refs: { [key: string]: RefObject<HTMLInputElement> },
   onSubmit: ((event: FormEvent<HTMLFormElement>) => void) | undefined
 ) {
