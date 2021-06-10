@@ -7,6 +7,6 @@ export const TryCategory = ({
 }: {
   content: ITyped;
 }): JSX.Element | null =>
-  content.type === "Category" || content.type === "CategoryRoot" ? (
+  content.type === "Category" ? (
     <Category content={content as ICategory} />
   ) : null;
