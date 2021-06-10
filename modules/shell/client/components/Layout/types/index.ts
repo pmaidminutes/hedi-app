@@ -14,7 +14,7 @@ export interface ILayout {
   rightColumnProps?: ColumnDefaultProps;
   singleColumnProps?: ColumnDefaultProps;
   pageLayout?: PageLayout;
-  posterImage?: IImageComponent | IImage | null;
+  posterImage?: IImageComponent | null;
   pageId?: string;
   headline?: HTML | null;
   breadcrumbs?: IBreadCrumbProps;
