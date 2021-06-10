@@ -53,10 +53,16 @@ import { ArticlePathsGQL } from "@/modules/editorial/article/query";
 import { getArticlePage } from "@/modules/editorial/article/server/page";
 import { TryArticle } from "@/modules/editorial/article/client/components";
 // Category
-import { CategoryGQL, isICategory } from "@/modules/editorial/category/types";
+import {
+  CategoryGQL,
+  isICategory,
+} from "@/modules/editorial/category/types";
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
 import { getCategoryPage } from "@/modules/editorial/category/server/page";
-import { TryCategory } from "@/modules/editorial/category/client/components";
+import {
+  TryCategory,
+  TryCategoryRoot,
+} from "@/modules/editorial/category/client/components";
 // Glossary
 import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
 import { getGlossaryPage } from "@/modules/editorial/glossary/server";
@@ -167,6 +173,7 @@ export default function segments(props: IPageProps<IPage>) {
 
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
+        <TryCategoryRoot content={content} key="categoryroot" />
         {/* <TryGlossary content={content} key="glossary" /> */}
 
         {/* <TrySearch content={content} key="search" /> */}
