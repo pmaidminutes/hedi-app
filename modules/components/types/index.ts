@@ -20,6 +20,7 @@ export * from "./TextArea";
 export * from "./TextInput";
 export * from "./ToastNotification";
 export * from "./Toggle";
+export * from "./ValidatedTextInput";
 export * from "./Video";
 // #### //
 export * from "./Component";

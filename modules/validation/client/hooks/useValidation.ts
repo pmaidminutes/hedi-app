@@ -1,12 +1,12 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
-import { IValidationFunction } from "..";
-import { getValidationErrorText } from "../ValidationErrorMessages";
+import { IValidationFunction } from "../../../react/validation";
+import { getValidationErrorText } from "../../../react/validation/ValidationErrorMessages";
 
 export function useValidation<T>(
   value: T,
   validateFn: IValidationFunction | IValidationFunction[],
-  enableValidation?: boolean,
+  enableValidation?: Boolean,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
   onValidation?: (textError: string) => void
 ) {

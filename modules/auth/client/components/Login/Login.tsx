@@ -3,18 +3,22 @@ import { transformLogin } from "./transformLogin";
 import { ILogin } from "../../../types";
 import { useLogin } from "./useLogin";
 import {
-  TextInput,
   Button,
   InlineNotification,
-  useValidationSummary,
-  requiredValidationFn,
-  minLengthValidationFn,
-  ValidationTextInput,
-  ValidationSummary,
+  ValidatedTextInput,
 } from "@/modules/components";
 import { ButtonHintLink } from "@/modules/common/components";
 import { Column, Form, Row, Loading } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
+import {
+  useValidationSummary,
+  ValidationSummary,
+} from "@/modules/validation/client";
+import {
+  requiredValidationFn,
+  minLengthValidationFn,
+} from "@/modules/react/validation";
+
 export const Login = ({ content }: { content: ILogin }) => {
   const {
     username,
@@ -43,7 +47,7 @@ export const Login = ({ content }: { content: ILogin }) => {
         <Column>
           <Form onSubmit={(e: any) => handleLogin(e)}>
             {username && !isLoggedIn && (
-              <ValidationTextInput
+              <ValidatedTextInput
                 validateFn={[requiredValidationFn()]}
                 enableValidation
                 onValidation={texterror =>
@@ -53,8 +57,8 @@ export const Login = ({ content }: { content: ILogin }) => {
               />
             )}
             {password && !isLoggedIn && (
-              <ValidationTextInput
-                validateFn={[requiredValidationFn(), minLengthValidationFn(3)]}
+              <ValidatedTextInput
+                validateFn={[minLengthValidationFn(3),requiredValidationFn()]}
                 enableValidation
                 onValidation={texterror =>
                   setValidationError("password", texterror)

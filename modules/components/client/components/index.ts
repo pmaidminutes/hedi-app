@@ -1,3 +1,5 @@
+import { formatPhoneNumber } from "@/modules/common/utils";
+
 export * from "./AudioPlayer";
 export * from "./Body";
 export * from "./Button";
@@ -18,4 +20,5 @@ export * from "./TextArea";
 export * from "./TextInput";
 export * from "./ToastNotification";
 export * from "./Toggle";
+export * from "./ValidatedTextInput";
 export * from "./VideoPlayer";
