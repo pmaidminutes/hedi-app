@@ -1,7 +1,7 @@
 import {
-  findLabelInstance,
-  findSelectInstance,
-  findTextInputInstance,
+  getLabelInstance,
+  getSelectInstance,
+  getTextInputInstance,
   IComponent,
 } from "@/modules/components";
 import { IWebsiteInputProps } from "./WebsiteInput";
@@ -9,8 +9,18 @@ import { IWebsiteInputProps } from "./WebsiteInput";
 export const getWebsiteInputDefinition = (
   components: IComponent[]
 ): IWebsiteInputProps => ({
-  websiteLabel: findLabelInstance(components, "websiteLabel")!,
-  dataKindSelect: findSelectInstance(components, "dataKindSelect")!,
-  websiteTextInput: findTextInputInstance(components, "websiteTextInput")!,
-  dataVisibilitySelect: findSelectInstance(components, "dataVisibilitySelect")!,
+  websiteLabel: getLabelInstance(components, "websiteLabel", {
+    labelKind: "span",
+    text: "Webseite",
+  }),
+  dataKindSelect: getSelectInstance(components, "dataKindSelect", {
+    items: [],
+  }),
+  websiteTextInput: getTextInputInstance(components, "websiteTextInput", {
+    type: "text",
+    labelText: "URL",
+  }),
+  dataVisibilitySelect: getSelectInstance(components, "dataVisibilitySelect", {
+    items: [],
+  }),
 });

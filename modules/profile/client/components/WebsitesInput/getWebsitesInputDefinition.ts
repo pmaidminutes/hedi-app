@@ -1,6 +1,6 @@
 import {
-  findButtonInstance,
-  findLabelInstance,
+  getButtonInstance,
+  getLabelInstance,
   IComponent,
 } from "@/modules/components";
 import { IWebsitesInputDefinition } from ".";
@@ -10,7 +10,18 @@ export const getWebsitesInputDefinition = (
   components: IComponent[]
 ): IWebsitesInputDefinition => ({
   websiteInputDefinition: getWebsiteInputDefinition(components),
-  websitesLabel: findLabelInstance(components, "websitesLabel")!,
-  addButton: findButtonInstance(components, "addButton")!,
-  removeButton: findButtonInstance(components, "removeButton")!,
+  websitesLabel: getLabelInstance(components, "websitesLabel", {
+    labelKind: "span",
+    text: "Webseiten",
+  }),
+  addButton: getButtonInstance(components, "addButton", {
+    buttonKind: "primary",
+    usage: "",
+    text: "Webseite hinzufügen",
+  }),
+  removeButton: getButtonInstance(components, "removeButton", {
+    buttonKind: "primary",
+    usage: "",
+    text: "Webseite entfernen",
+  }),
 });
