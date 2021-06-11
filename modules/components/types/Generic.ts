@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { getComponentInstance } from "./utils";
 
 export type GenericKind = "Generic";
 
@@ -22,3 +23,9 @@ export const findGenericInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isGeneric).find(item => item.id === id);
   return element;
 };
+
+export const getGenericInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<IGenericComponent, "kind" | "id">
+) => getComponentInstance("Generic", array, id, fallback);

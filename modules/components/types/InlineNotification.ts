@@ -1,5 +1,6 @@
 import { IComponent } from "./Component";
 import { INotification } from "./INotification";
+import { getComponentInstance } from "./utils";
 
 export type InlineNotificationKind = "InlineNotification";
 
@@ -14,7 +15,8 @@ export const isInlineNotification = (
 export const isInlineNotificationInstance = (
   obj: IComponent,
   id: string
-): obj is IInlineNotificationComponent => isInlineNotification(obj) && obj.id === id;
+): obj is IInlineNotificationComponent =>
+  isInlineNotification(obj) && obj.id === id;
 
 export const findInlineNotificationInstance = (
   array: IComponent[],
@@ -25,3 +27,9 @@ export const findInlineNotificationInstance = (
     .find(item => item.id === id);
   return element;
 };
+
+export const getInlineNotificationInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<IInlineNotificationComponent, "kind" | "id">
+) => getComponentInstance("InlineNotification", array, id, fallback);

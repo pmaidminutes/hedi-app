@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { getComponentInstance } from "./utils";
 
 export type NumberInputKind = "NumberInput";
 
@@ -26,3 +27,9 @@ export const findNumberInputInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isNumberInput).find(item => item.id === id);
   return element;
 };
+
+export const getNumberInputInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<INumberInputComponent, "kind" | "id">
+) => getComponentInstance("NumberInput", array, id, fallback);

@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { getComponentInstance } from "./utils";
 
 export type CheckboxKind = "Checkbox";
 
@@ -22,3 +23,9 @@ export const findCheckboxInstance = (array: IComponent[], id: string) => {
   const element = array.filter(isCheckbox).find(item => item.id === id);
   return element;
 };
+
+export const getCheckboxInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<ICheckboxComponent, "kind" | "id">
+) => getComponentInstance("Checkbox", array, id, fallback);
