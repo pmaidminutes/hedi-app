@@ -1,4 +1,4 @@
-import { ComponentKind, IComponent } from "./Component";
+import { Component, ComponentKind, IComponent } from "./Component";
 
 export function isComponentInstance<T extends IComponent>(
   kind: ComponentKind,
@@ -12,9 +12,9 @@ export function findComponentInstance<T extends IComponent>(
   kind: ComponentKind,
   array: IComponent[],
   id: string
-): T | undefined {
+): Extract<Component, T> | undefined {
   return array.find(item => isComponentInstance(kind, item, id)) as
-    | T
+    | Extract<Component, T>
     | undefined;
 }
 
@@ -23,15 +23,15 @@ export function getComponentInstance<T extends IComponent>(
   array: IComponent[],
   id: string,
   fallback: Omit<T, "kind" | "id">
-): T {
+): Extract<Component, T> {
   const element = findComponentInstance(kind, array, id);
-  if (element) return element as T;
+  if (element) return element as Extract<Component, T>;
   else {
     console.warn(`${kind}Component[${id}] not found, resorting to fallback`);
     return {
       kind,
       id,
       ...fallback,
-    } as T;
+    } as Extract<Component, T>;
   }
 }
