@@ -1,6 +1,6 @@
 import {
-  findButtonInstance,
-  findLabelInstance,
+  getButtonInstance,
+  getLabelInstance,
   IComponent,
 } from "@/modules/components";
 import { IEmailsInputDefinition } from ".";
@@ -10,7 +10,18 @@ export const getEmailsInputDefinition = (
   components: IComponent[]
 ): IEmailsInputDefinition => ({
   emailInputDefinition: getEmailInputDefinition(components),
-  emailsLabel: findLabelInstance(components, "emailsLabel")!,
-  addButton: findButtonInstance(components, "addButton")!,
-  removeButton: findButtonInstance(components, "removeButton")!,
+  emailsLabel: getLabelInstance(components, "emailsLabel", {
+    labelKind: "span",
+    text: "Emails",
+  }),
+  addButton: getButtonInstance(components, "addButton", {
+    buttonKind: "primary",
+    usage: "",
+    text: "Email hinzufügen",
+  }),
+  removeButton: getButtonInstance(components, "removeButton", {
+    buttonKind: "primary",
+    usage: "",
+    text: "Email entfernen",
+  }),
 });

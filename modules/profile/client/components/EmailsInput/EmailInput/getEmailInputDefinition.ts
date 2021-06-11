@@ -1,7 +1,7 @@
 import {
-  findLabelInstance,
-  findSelectInstance,
-  findTextInputInstance,
+  getLabelInstance,
+  getSelectInstance,
+  getTextInputInstance,
   IComponent,
 } from "@/modules/components";
 import { IEmailInputProps } from "./EmailInput";
@@ -9,8 +9,18 @@ import { IEmailInputProps } from "./EmailInput";
 export const getEmailInputDefinition = (
   components: IComponent[]
 ): IEmailInputProps => ({
-  emailLabel: findLabelInstance(components, "emailLabel")!,
-  dataKindSelect: findSelectInstance(components, "dataKindSelect")!,
-  emailTextInput: findTextInputInstance(components, "emailTextInput")!,
-  dataVisibilitySelect: findSelectInstance(components, "dataVisibilitySelect")!,
+  emailLabel: getLabelInstance(components, "emailLabel", {
+    labelKind: "span",
+    text: "Email",
+  }),
+  dataKindSelect: getSelectInstance(components, "dataKindSelect", {
+    items: [],
+  }),
+  emailTextInput: getTextInputInstance(components, "emailTextInput", {
+    type: "text",
+    labelText: "Email",
+  }),
+  dataVisibilitySelect: getSelectInstance(components, "dataVisibilitySelect", {
+    items: [],
+  }),
 });
