@@ -17,11 +17,12 @@ export const ValidatedTextInput = React.forwardRef<
   } = props;
 
   const validateFunction = validateFn || requiredValidationFn();
+  const enableValidationOrDefault = enableValidation ?? true;
 
   const { handleChange } = useValidation(
     rest.value ?? "",
     validateFunction,
-    enableValidation,
+    enableValidationOrDefault,
     onChange,
     onValidation
   );

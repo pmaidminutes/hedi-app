@@ -4,5 +4,5 @@ import { ITextInputProps } from "../client/components/TextInput/transformTextInp
 export interface IValidatedTextInputProps extends ITextInputProps {
   validateFn?: IValidationFunction | IValidationFunction[];
   enableValidation?: Boolean;
-  onValidation?: (textError: string) => void;
+  onValidation?: (textError: string | string[]) => void;
 }

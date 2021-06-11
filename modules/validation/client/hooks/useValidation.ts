@@ -8,9 +8,10 @@ export function useValidation<T>(
   validateFn: IValidationFunction | IValidationFunction[],
   enableValidation?: Boolean,
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void,
-  onValidation?: (textError: string) => void
+  onValidation?: (textError: string | string[]) => void
 ) {
   const router = useRouter();
+
   const isInvalid = (value: any) =>
     Array.isArray(validateFn)
       ? !!validateFn.filter(fn => !fn.fn(value)).length
@@ -26,13 +27,19 @@ export function useValidation<T>(
     if (enableValidation) {
       const hasValidationError = isInvalid(inputValue);
       setHasErrors(hasValidationError);
+
       const validateFnName = Array.isArray(validateFn)
-        ? validateFn.filter(fn => !fn.fn(value))[0].name
+        ? validateFn.filter(fn => !fn.fn(inputValue)).map(fn => fn.name)
         : validateFn.name;
+
       if (onValidation)
         onValidation(
           hasValidationError
-            ? getValidationErrorText(validateFnName, router.locale)
+            ? Array.isArray(validateFnName)
+              ? validateFnName.map(name =>
+                  getValidationErrorText(name, router.locale)
+                )
+              : getValidationErrorText(validateFnName, router.locale)
             : ""
         ); // TODO set real error text
     }

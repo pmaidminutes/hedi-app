@@ -2,8 +2,13 @@ import { ErrorMap } from "@/modules/model";
 import { useState } from "react";
 
 export const useValidationSummary = () => {
-  const [validationErrors, setValidationErrors] = useState<ErrorMap>({});
-  const setValidationError = (fieldName: string, errorText: string) => {
+  const [validationErrors, setValidationErrors] = useState<{
+    [key: string]: string | string[];
+  }>({});
+  const setValidationError = (
+    fieldName: string,
+    errorText: string | string[]
+  ) => {
     if (errorText)
       setValidationErrors(previous => ({
         ...previous,
