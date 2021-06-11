@@ -1,9 +1,10 @@
+import { PartialBy } from "@/modules/common/utils";
 import { IBodyComponent } from "../../../types";
 
-export interface IBodyProps extends IBodyComponent {}
+export type IBodyProps = PartialBy<IBodyComponent, "kind" | "id">;
 
 export function transformBody(props: IBodyProps) {
-  const { body, ...rest } = props;
+  const { kind, body, ...rest } = props;
 
   return { body, rest };
 }
