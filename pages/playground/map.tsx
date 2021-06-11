@@ -7,10 +7,10 @@ const nico = [53.57024, 9.983] as LatLngTuple;
 const nicolabel = "Nico";
 const label = "aidminutes";
 
-const nicoundnele = { label, nicolabel, latLong: nico };
+const nicoundnele = { label, nicolabel, latLong: nico, profession: "Hebamme" };
 const location = { label: label, latLong: latLong };
 
-const locations = [location];
+const locations = [location, nicoundnele];
 export default function MapPlayground() {
   return (
     <div>
