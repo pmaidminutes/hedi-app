@@ -6,9 +6,10 @@ import {
 } from "carbon-components-react";
 import {
   ILabelComponent,
+  Label,
   ITextInputComponent,
-} from "@/modules/components/types";
-import { Label, TextInput } from "@/modules/components";
+  TextInput,
+} from "@/modules/components";
 
 export type IDetailedNameInputProps = {
   prefix?: string;
