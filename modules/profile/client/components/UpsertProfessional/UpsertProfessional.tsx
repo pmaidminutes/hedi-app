@@ -12,8 +12,7 @@ import { Seperator } from "@/modules/common/components";
 
 import { IPage } from "@/modules/page/types";
 import { getUser } from "@/modules/auth/client";
-import { ISelectComponent } from "@/modules/components/types";
-import { Select } from "@/modules/components";
+import { ISelectComponent, Select } from "@/modules/components";
 import { useUpsertProfessional } from "./useUpsertProfessional";
 import { getUpsertProfessionalViewDefinition } from "./getUpsertProfessionalViewDefinition";
 import {
