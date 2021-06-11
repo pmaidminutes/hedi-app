@@ -6,10 +6,14 @@ import { Column, Row, Form, Loading } from "carbon-components-react";
 import {
   Button,
   InlineNotification,
-  TextInput,
   Body,
+  ValidatedTextInput,
 } from "@/modules/components";
 import { useRegistration } from "./useRegistration";
+import {
+  useValidationSummary,
+  ValidationSummary,
+} from "@/modules/validation/client";
 export const Registration = ({ content }: { content: IRegistration }) => {
   const {
     username,
@@ -39,6 +43,8 @@ export const Registration = ({ content }: { content: IRegistration }) => {
     hasUsernameError,
   } = useRegistration(redirectUrl);
 
+  const { validationErrors, setValidationError } = useValidationSummary();
+
   return isLoading ? (
     <Loading />
   ) : (
@@ -56,26 +62,35 @@ export const Registration = ({ content }: { content: IRegistration }) => {
               <InlineNotification {...success} lowContrast={true} />
             )}
             {code && (
-              <TextInput
+              <ValidatedTextInput
                 {...code}
                 onChange={setRegistrationcode}
                 invalidText={invalidText}
                 invalid={isCheckRegisterCodeError && hasRegistrationCodeError}
+                onValidation={texterror =>
+                  setValidationError("code", texterror)
+                }
               />
             )}
 
             {!!registrationcode && username && (
-              <TextInput
+              <ValidatedTextInput
                 {...username}
                 onChange={setName}
                 invalid={isCheckCredentialError && hasUsernameError}
+                onValidation={texterror =>
+                  setValidationError("username", texterror)
+                }
               />
             )}
             {!!registrationcode && password && (
-              <TextInput
+              <ValidatedTextInput
                 {...password}
                 onChange={setPass}
                 invalid={isCheckCredentialError && hasPasswordError}
+                onValidation={texterror =>
+                  setValidationError("password", texterror)
+                }
               />
             )}
 
@@ -92,6 +107,9 @@ export const Registration = ({ content }: { content: IRegistration }) => {
             />
           )}
         </Column>
+      </Row>
+      <Row>
+        <ValidationSummary validationErrors={validationErrors} />
       </Row>
     </>
   );
