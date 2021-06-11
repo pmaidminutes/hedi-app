@@ -1,7 +1,6 @@
 import { TableCell, TableRow } from "carbon-components-react";
-import { ILanguageLevelInput } from "@/modules/profile/types";
-import { ISelectComponent } from "@/modules/components/types";
-import { Select } from "@/modules/components";
+import { ISelectComponent, Select } from "@/modules/components";
+import { ILanguageLevelInput } from "../../../../types";
 import { useLanguageLevelInput } from "./useLanguageLevelInput";
 
 export type ILanguageLevelInputProps = {

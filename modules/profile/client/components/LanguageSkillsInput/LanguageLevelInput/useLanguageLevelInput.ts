@@ -1,5 +1,5 @@
-import { ILanguageLevelInput } from "@/modules/profile/types";
 import { IConverterMap, useCombinedInputs } from "@/modules/react/hooks";
+import { ILanguageLevelInput } from "../../../../types";
 
 export const useLanguageLevelInput = (
   initiallanguageLevelInput?: Partial<ILanguageLevelInput>,

@@ -11,12 +11,16 @@ import {
 } from "carbon-components-react";
 import { Add32, TrashCan32 } from "@carbon/icons-react";
 import {
+  IButtonComponent,
+  Button,
+  ILabelComponent,
+  Label,
+} from "@/modules/components";
+import { ILanguageLevel } from "../../../types";
+import {
   ILanguageLevelInputDefinition,
   LanguageLevelInput,
 } from "./LanguageLevelInput";
-import { ILanguageLevel } from "@/modules/profile/types";
-import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
-import { Button, Label } from "@/modules/components";
 import { useInteractiveList } from "@/modules/react/hooks";
 
 export type ILanguageSkillsInputProps = {
