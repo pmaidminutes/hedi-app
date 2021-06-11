@@ -5,7 +5,6 @@ export const ValidationSummary = ({
 }: {
   validationErrors: { [key: string]: string | string[] };
 }) => {
-  console.log({ validationErrors });
   return (
     <div className="">
       <ul>
