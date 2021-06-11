@@ -28,10 +28,10 @@ export default function MapClient({ locations, currentLocation }: coordinates) {
         />
         {locations?.map((location: Location) => (
           <Marker
-            position={convertToCoordinates("", "")} // (location.lat, location.long) HACK currently incompatible
+            position={location.latLong} // (location.lat, location.long) HACK currently incompatible
             icon={iconPerson}
-            key={location.displayName}>
-            <Popup>{location.displayName}</Popup>
+            key={location.label}>
+            <Popup>{location.label}</Popup>
           </Marker>
         ))}
       </MapContainer>
