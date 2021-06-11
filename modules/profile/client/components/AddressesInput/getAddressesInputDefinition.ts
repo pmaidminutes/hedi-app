@@ -2,7 +2,7 @@ import {
   findButtonInstance,
   findLabelInstance,
   IComponent,
-} from "@/modules/components/types";
+} from "@/modules/components";
 import { IAddressesInputDefinition } from ".";
 import { getAddressInputDefinition } from "./AddressInput";
 

@@ -1,12 +1,15 @@
 import { FormGroup, Column, Row } from "carbon-components-react";
-import { IAddressInput } from "@/modules/profile/types";
-import { Label, Select, TextInput, NumberInput } from "@/modules/components";
 import {
   ILabelComponent,
+  Label,
   ISelectComponent,
+  Select,
   ITextInputComponent,
+  TextInput,
   INumberInputComponent,
-} from "@/modules/components/types";
+  NumberInput,
+} from "@/modules/components";
+import { IAddressInput } from "../../../../types";
 import { useAddressInput } from "./useAddressInput";
 
 export type IAddressInputProps = {

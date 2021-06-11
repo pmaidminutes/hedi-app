@@ -1,9 +1,13 @@
 import { FormGroup, FormGroupProps, Row } from "carbon-components-react";
 import { Add32, TrashCan32 } from "@carbon/icons-react";
 import { useInteractiveList } from "@/modules/react/hooks";
-import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
-import { Button, Label } from "@/modules/components";
-import { IAddressInput } from "@/modules/profile/types";
+import {
+  IButtonComponent,
+  Button,
+  ILabelComponent,
+  Label,
+} from "@/modules/components";
+import { IAddressInput } from "../../../types";
 import { AddressInput, IAddressInputDefinition } from "./AddressInput";
 
 export type IAddressesInputProps = {

@@ -1,5 +1,5 @@
-import { IAddressInput } from "@/modules/profile/types";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
+import { IAddressInput } from "../../../../types";
 
 export const useAddressInput = (
   initialAddressInput?: Partial<IAddressInput>,
