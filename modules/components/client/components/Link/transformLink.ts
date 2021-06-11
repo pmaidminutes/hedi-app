@@ -1,9 +1,13 @@
 import { ILinkComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { LinkPropsBase } from "carbon-components-react/lib/components/UIShell/Link";
-export interface ILinkProps extends ILinkComponent, Omit<LinkPropsBase, "id"> {}
+import { PartialBy } from "@/modules/common/utils";
+
+export type ILinkProps = PartialBy<ILinkComponent, "kind"> &
+  Omit<LinkPropsBase, "id">;
+
 export function transformLink(props: ILinkProps) {
-  const { labelText, ariaLabel, ...rest } = props;
+  const { kind, labelText, ariaLabel, ...rest } = props;
   return {
     labelText: HTML({ data: labelText }),
     "aria-label": ariaLabel,
