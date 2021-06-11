@@ -1,6 +1,5 @@
 import { Location } from "./LocationType";
 
-export interface coordinates {
+export interface IMap {
   locations: Location[];
-  currentLocation: Location;
 }

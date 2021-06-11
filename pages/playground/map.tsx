@@ -1,18 +1,24 @@
 import Head from "next/head";
-import { Content } from "carbon-components-react";
-import { AuthDevOnly } from "@/modules/auth/client";
+import { Map } from "@/modules/map/client";
+import { LatLngTuple } from "leaflet";
 
-import { MessagingServiceProvider } from "@/modules/messaging/client/context";
-import { MessagingAllInOne } from "@/modules/messaging/client/components/MessagingAllInOne";
-import { MapClient } from "@/modules/map/client";
+const latLong = [53.56565, 9.97813] as LatLngTuple;
+const nico = [53.57024, 9.983] as LatLngTuple;
+const nicolabel = "Nico";
+const label = "aidminutes";
 
+const nicoundnele = { label, nicolabel, latLong: nico };
+const location = { label: label, latLong: latLong };
+
+const locations = [location];
 export default function MapPlayground() {
   return (
     <div>
       <Head>
         <title>Map</title>
       </Head>
-      <MapClient />
+      <h1>KARTE</h1>
+      <Map locations={locations} />
     </div>
   );
 }

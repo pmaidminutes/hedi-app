@@ -1,4 +1,4 @@
-import { MapClient } from "@/modules/map/client/components";
+import { Map } from "@/modules/map/client/components/Map";
 import { SearchInput } from "@/modules/search/client/components";
 import { Seperator } from "@/modules/common/components";
 import {
@@ -84,11 +84,11 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
       ) : (
         <div>
           <SearchResults results={data} headline={resultsHeadline} />
-          {locations?.length > 0 ? (
-            <MapClient currentLocation={locations[0]} locations={locations} />
+          {/* {locations?.length > 0 ? (
+            <Map currentLocation={locations[0]} locations={locations} />
           ) : (
             ""
-          )}
+          )} */}
         </div>
       )}
     </Grid>
