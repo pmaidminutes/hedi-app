@@ -16,14 +16,12 @@ export interface IGlossaryGroup {
   terms: IGlossaryTerm[];
 }
 
-export interface IGlossaryGrouped extends IEntityTranslated<IEntityLocalized> {
-  groups: IGlossaryGroup[];
-}
-
 export interface IGlossary extends IEntityTranslated<IEntityLocalized> {
   terms: IGlossaryTerm[];
 }
-
+export function isIGlossary(obj: any): obj is IGlossary {
+  return obj && obj.type === "Glossary";
+}
 export const GlossaryGQL = gql`... on Glossary {
 ${EntityTranslatedFields}
 terms { ${GlossaryTermGQL} }

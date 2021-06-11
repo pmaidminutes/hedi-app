@@ -1,13 +1,13 @@
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
-import { getGlossary } from "../../query";
-import { IGlossaryGrouped } from "../../types";
+import { getGlossaryDefinition } from "../../query";
+import { IGlossary, IGlossaryGrouped } from "../../types";
 
 export async function getGlossaryPage(
-  route: string
-): Promise<(IGlossaryGrouped & IPageConfig) | null> {
-  const content = await getGlossary(route);
-  if (!content) return null;
+  content: IGlossary
+): Promise<IGlossaryGrouped & IPageConfig> {
+  const components = await getGlossaryDefinition(content.route);
+  // if (!components) return null;
 
   const layout: ILayout = {
     pageLayout: "singleColumn",
@@ -19,7 +19,7 @@ export async function getGlossaryPage(
   };
 
   return {
-    ...content,
+    ...components,
     ...shell,
   };
 }

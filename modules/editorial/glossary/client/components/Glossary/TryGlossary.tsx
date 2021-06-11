@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { IGlossaryGrouped } from "../../../types";
+import { IGlossary } from "../../../types";
 import { Glossary } from "./Glossary";
 
 export const TryGlossary = ({
@@ -7,6 +7,6 @@ export const TryGlossary = ({
 }: {
   content: ITyped;
 }): JSX.Element | null =>
-  content.type === "Glossary" ? (
-    <Glossary content={content as IGlossaryGrouped} />
+  content.type === "glossary" ? (
+    <Glossary content={content as IGlossary} />
   ) : null;

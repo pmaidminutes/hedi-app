@@ -1,3 +1,3 @@
-export * from "./getGlossary";
-export * from "./getGlossaryPath";
+export * from "./getGlossaryDefinition";
+// export * from "./getGlossaryPath";
 export * from "./getGlossaryTerm";
