@@ -1,6 +1,6 @@
 import {
-  findButtonInstance,
-  findLabelInstance,
+  getButtonInstance,
+  getLabelInstance,
   IComponent,
 } from "@/modules/components";
 import { IAddressesInputDefinition } from ".";
@@ -10,7 +10,18 @@ export const getAddressesInputDefinition = (
   components: IComponent[]
 ): IAddressesInputDefinition => ({
   addressInputDefinition: getAddressInputDefinition(components),
-  addressesLabel: findLabelInstance(components, "addressLabel")!,
-  addButton: findButtonInstance(components, "addButton")!,
-  removeButton: findButtonInstance(components, "removeButton")!,
+  addressesLabel: getLabelInstance(components, "addressesLabel", {
+    labelKind: "span",
+    text: "Adressen",
+  }),
+  addButton: getButtonInstance(components, "addressAddButton", {
+    buttonKind: "button",
+    usage: "",
+    text: "Adresse Hinzufügen",
+  }),
+  removeButton: getButtonInstance(components, "addressRemoveButton", {
+    buttonKind: "button",
+    usage: "",
+    text: "Adresse Entfernen",
+  }),
 });

@@ -1,8 +1,8 @@
 import {
-  findLabelInstance,
-  findNumberInputInstance,
-  findSelectInstance,
-  findTextInputInstance,
+  getLabelInstance,
+  getNumberInputInstance,
+  getSelectInstance,
+  getTextInputInstance,
   IComponent,
 } from "@/modules/components";
 import { IAddressInputProps } from "./AddressInput";
@@ -10,25 +10,42 @@ import { IAddressInputProps } from "./AddressInput";
 export const getAddressInputDefinition = (
   components: IComponent[]
 ): IAddressInputProps => ({
-  addressLabel: findLabelInstance(components, "addressLabel")!,
-  dataKindSelect: findSelectInstance(components, "dataKindSelect")!,
-  cityTextInput: findTextInputInstance(components, "cityTextInput")!,
-  postalCodeNumberInput: findNumberInputInstance(
+  addressLabel: getLabelInstance(components, "addressLabel", {
+    labelKind: "span",
+    text: "Adresse",
+  }),
+  dataKindSelect: getSelectInstance(components, "dataKindSelect", {
+    items: [],
+  }),
+  cityTextInput: getTextInputInstance(components, "cityTextInput", {
+    type: "text",
+    labelText: "Ort",
+  }),
+  postalCodeNumberInput: getNumberInputInstance(
     components,
-    "postalCodeNumberInput"
-  )!,
-  cityVisibilitySelect: findSelectInstance(components, "cityVisibilitySelect")!,
-  streetTextInput: findTextInputInstance(components, "streetTextInput")!,
-  streetNumberTextInput: findTextInputInstance(
+    "postalCodeNumberInput",
+    {}
+  ),
+  cityVisibilitySelect: getSelectInstance(components, "cityVisibilitySelect", {
+    items: [],
+  }),
+  streetTextInput: getTextInputInstance(components, "streetTextInput", {
+    type: "text",
+    labelText: "Strasse",
+  })!,
+  streetNumberTextInput: getTextInputInstance(
     components,
-    "streetNumberTextInput"
-  )!,
-  additionalInfoTextInput: findTextInputInstance(
+    "streetNumberTextInput",
+    { type: "text", labelText: "Hausnummer" }
+  ),
+  additionalInfoTextInput: getTextInputInstance(
     components,
-    "additionalInfoTextInput"
-  )!,
-  streetVisibilitySelect: findSelectInstance(
+    "additionalInfoTextInput",
+    { type: "text", labelText: "Adresszusatz" }
+  ),
+  streetVisibilitySelect: getSelectInstance(
     components,
-    "streetVisibilitySelect"
-  )!,
+    "streetVisibilitySelect",
+    { items: [] }
+  ),
 });
