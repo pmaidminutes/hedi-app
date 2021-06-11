@@ -16,8 +16,9 @@ export async function upsertProfessionalMutation(
 ): Promise<IUpsertProfessionalResponse | IHTTPError> {
   const mutation = gql`
     mutation upsertProfessional(
-      $input: IProfessionalInput 
+      $input: ProfessionalInput 
       $lang: String
+      $includeSelf: Boolean
       ) {
       upsertProfessional(input: $input, lang: $lang) {
         ${UpsertProfessionalResponseGQL}
