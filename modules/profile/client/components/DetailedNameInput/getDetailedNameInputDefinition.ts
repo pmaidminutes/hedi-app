@@ -1,6 +1,6 @@
 import {
-  findLabelInstance,
-  findTextInputInstance,
+  getLabelInstance,
+  getTextInputInstance,
   IComponent,
 } from "@/modules/components";
 import { IDetailedNameInputDefinition } from ".";
@@ -8,11 +8,20 @@ import { IDetailedNameInputDefinition } from ".";
 export const getDetailedNameInputDefinition = (
   components: IComponent[]
 ): IDetailedNameInputDefinition => ({
-  detailedNameLabel: findLabelInstance(components, "detailedNameLabel")!,
-  prefixTextInput: findTextInputInstance(components, "prefixTextInput")!,
-  givenNameTextInput: findTextInputInstance(components, "givenNameTextInput")!,
-  familyNameTextInput: findTextInputInstance(
-    components,
-    "familyNameTextInput"
-  )!,
+  detailedNameLabel: getLabelInstance(components, "detailedNameLabel", {
+    labelKind: "span",
+    text: "Name",
+  }),
+  prefixTextInput: getTextInputInstance(components, "prefixTextInput", {
+    type: "text",
+    labelText: "Prefix",
+  }),
+  givenNameTextInput: getTextInputInstance(components, "givenNameTextInput", {
+    type: "text",
+    labelText: "Vorname",
+  }),
+  familyNameTextInput: getTextInputInstance(components, "familyNameTextInput", {
+    type: "text",
+    labelText: "Nachname",
+  }),
 });
