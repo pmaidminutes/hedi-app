@@ -1,19 +1,25 @@
-import { IMap } from "@/modules/map/types";
+import { Location } from "../../../../types";
 import L, { PointTuple } from "leaflet";
+import { useState, useEffect } from "react";
 
-export function transformMap(props: IMap) {
-  const { locations } = props;
-  const firstLocation = locations[0];
+export function useMarker(locations: Location[]) {
+  const [marker, setMarker] = useState(transformMarkerData(locations));
 
-  const markerValues = locations.map(location => {
+  useEffect(() => {
+    setMarker(transformMarkerData(locations));
+  }, [locations]);
+
+  return { marker };
+}
+
+function transformMarkerData(data: Location[]) {
+  return data.map(location => {
     return {
       position: location.latLong,
       icon: getIcon(location.profession),
       key: location.label,
     };
   });
-
-  return { firstLocation, locations, markerValues };
 }
 
 function getIcon(profession?: "Hebamme") {
@@ -26,7 +32,6 @@ function getIcon(profession?: "Hebamme") {
   return new L.Icon({
     //TODO to move thhe image to durpal
     iconUrl: url,
-    // iconUrl: process.env.NEXT_PUBLIC_MAP_MARKER_ICON,
     iconSize: iconSize,
     iconAnchor: [13, 0],
   });

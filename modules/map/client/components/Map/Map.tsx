@@ -1,28 +1,33 @@
 import "leaflet/dist/leaflet.css";
 import React from "react";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
-import { IMap } from "../../../types";
-import { useMap } from "./useMap";
-import {transformMap} from "./transformMap"
+import { IMapProps } from "../../../types";
+import { useMarker, usePositions, useLocations } from "./hooks/";
 
-
-export default function Map(props: IMap) {
-  const { hasLocations } = useMap(props);
+export default function Map(props: IMapProps) {
+  const { hasLocations, mapLocations } = useLocations(props);
   if (!hasLocations) return null;
-  const {firstLocation, markerValues} = transformMap(props)
+  const { marker } = useMarker(mapLocations);
+  const { firstPosition, totalBounds } = usePositions(mapLocations);
+
   return (
     <>
       <MapContainer
-        zoom={13}
+        bounds={totalBounds}
         scrollWheelZoom={false}
-        center={firstLocation.latLong}>
+        center={firstPosition}>
         <TileLayer
           attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
           url={process.env.NEXT_PUBLIC_MAP_OSM || ""}
         />
-        {markerValues.map(markerValue => (
-          <Marker {...markerValue}>{/* <Popup>{}</Popup> */}</Marker>
-        ))}
+        {marker.map(markerValue => {
+          console.log({ markerValue });
+          return (
+            <Marker {...markerValue}>
+              <Popup>{markerValue.key}</Popup>
+            </Marker>
+          );
+        })}
       </MapContainer>
     </>
   );

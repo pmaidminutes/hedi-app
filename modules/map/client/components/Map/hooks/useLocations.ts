@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
-import { IMap } from "@/modules/map/types";
+import { IMapProps } from "@/modules/map/types";
 
-export function useMap(props: IMap) {
+export function useLocations(props: IMapProps) {
   const { locations } = props;
+  const [mapLocations, setMapLocations] = useState(locations);
 
   const [hasLocations, setHasLocations] = useState<boolean>(
     locations && locations.length > 0
@@ -10,6 +11,8 @@ export function useMap(props: IMap) {
 
   useEffect(() => {
     setHasLocations(locations && locations.length > 0);
-  }, [locations])
-  return { hasLocations };
+    setMapLocations(locations)
+  }, [locations,props]);
+
+  return { hasLocations, mapLocations };
 }

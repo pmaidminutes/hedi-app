@@ -1,5 +1,5 @@
 import { Location } from "./LocationType";
 
-export interface IMap {
+export interface IMapProps {
   locations: Location[];
 }
