@@ -1,5 +1,5 @@
 import { HTML, IComponent } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type DatePickerKind = "DatePicker";
 
@@ -24,10 +24,8 @@ export const isDatePickerInstance = (
   id: string
 ): obj is IDatePickerComponent => isDatePicker(obj) && obj.id === id;
 
-export const findDatePickerInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isDatePicker).find(item => item.id === id);
-  return element;
-};
+export const findDatePickerInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IDatePickerComponent>("DatePicker", array, id);
 
 export const getDatePickerInstance = (
   array: IComponent[],

@@ -1,6 +1,6 @@
 import { IEntity } from "../../model";
 import { HTML, IComponent } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type SelectKind = "Select";
 
@@ -26,10 +26,8 @@ export const isSelectInstance = (
   id: string
 ): obj is ISelectComponent => isSelect(obj) && obj.id === id;
 
-export const findSelectInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isSelect).find(item => item.id === id);
-  return element;
-};
+export const findSelectInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<ISelectComponent>("Select", array, id);
 
 export const getSelectInstance = (
   array: IComponent[],

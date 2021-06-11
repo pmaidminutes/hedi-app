@@ -1,6 +1,6 @@
 import { IComponent } from "./Component";
 import { INotification } from "./INotification";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type ToastNotificationKind = "ToastNotification";
 
@@ -22,12 +22,12 @@ export const isToastNotificationInstance = (
 export const findToastNotificationInstance = (
   array: IComponent[],
   id: string
-) => {
-  const element = array
-    .filter(isToastNotification)
-    .find(item => item.id === id);
-  return element;
-};
+) =>
+  findComponentInstance<IToastNotificationComponent>(
+    "ToastNotification",
+    array,
+    id
+  );
 
 export const getToastNotificationInstance = (
   array: IComponent[],

@@ -1,5 +1,5 @@
 import { HTML, IComponent } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type ImageKind = "Image";
 
@@ -21,10 +21,8 @@ export const isImageInstance = (
   id: string
 ): obj is IImageComponent => isImage(obj) && obj.id === id;
 
-export const findImageInstance = (array: IComponent[], id: string) => {
-  const image = array.filter(isImage).find(item => item.id === id);
-  return image;
-};
+export const findImageInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IImageComponent>("Image", array, id);
 
 export const getImageInstance = (
   array: IComponent[],

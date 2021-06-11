@@ -1,5 +1,5 @@
 import { HTML, IComponent } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type BodyKind = "Body";
 
@@ -16,10 +16,8 @@ export const isBodyInstance = (
   id: string
 ): obj is IBodyComponent => isBody(obj) && obj.id === id;
 
-export const findBodyInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isBody).find(item => item.id === id);
-  return element;
-};
+export const findBodyInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IBodyComponent>("Body", array, id);
 
 export const getBodyInstance = (
   array: IComponent[],

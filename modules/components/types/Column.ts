@@ -1,5 +1,5 @@
 import { HTML, IComponent, Component } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type ColumnKind = "Column";
 
@@ -18,10 +18,8 @@ export const isColumnInstance = (
   id: string
 ): obj is IColumnComponent => isColumn(obj) && obj.id === id;
 
-export const findColumnInstance = (array: IComponent[], id: string) => {
-  const column = array.filter(isColumn).find(item => item.id === id);
-  return column || null;
-};
+export const findColumnInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IColumnComponent>("Column", array, id);
 
 export const getColumnInstance = (
   array: IComponent[],

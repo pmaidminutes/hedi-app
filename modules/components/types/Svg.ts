@@ -1,5 +1,5 @@
 import { HTML, IComponent } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type SvgKind = "Svg";
 
@@ -18,10 +18,8 @@ export const isSvgInstance = (
   id: string
 ): obj is ISvgComponent => isSvg(obj) && obj.id === id;
 
-export const findSvgInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isSvg).find(item => item.id === id);
-  return element;
-};
+export const findSvgInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<ISvgComponent>("Svg", array, id);
 
 export const getSvgInstance = (
   array: IComponent[],

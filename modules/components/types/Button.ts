@@ -1,5 +1,5 @@
 import { HTML, IComponent } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type ButtonKind = "Button";
 
@@ -23,10 +23,8 @@ export const isButtonInstance = (
   id: string
 ): obj is IButtonComponent => isButton(obj) && obj.id === id;
 
-export const findButtonInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isButton).find(item => item.id === id);
-  return element;
-};
+export const findButtonInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IButtonComponent>("Button", array, id);
 
 export const getButtonInstance = (
   array: IComponent[],

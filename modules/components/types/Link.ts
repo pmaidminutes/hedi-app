@@ -1,5 +1,5 @@
 import { HTML, IComponent } from "./Component";
-import { getComponentInstance } from "./utils";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type LinkKind = "Link";
 
@@ -18,10 +18,8 @@ export const isLinkInstance = (
   id: string
 ): obj is ILinkComponent => isLink(obj) && obj.id === id;
 
-export const findLinkInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isLink).find(item => item.id === id);
-  return element;
-};
+export const findLinkInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<ILinkComponent>("Link", array, id);
 
 export const getLinkInstance = (
   array: IComponent[],
