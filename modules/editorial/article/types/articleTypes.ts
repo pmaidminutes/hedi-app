@@ -1,34 +1,32 @@
+import { IComponent } from "@/modules/components/types";
 import { gql } from "@/modules/graphql";
 import {
-  EditorialFields,
   EntityFields,
-  IEditorial,
   IEntity,
   IEntityLocalized,
-  ISummary,
   EntityLocalizedFields,
-  SummaryFields,
   IAppStyled,
   IRouteLabeled,
   RouteLabelFields,
+  EntityTranslatedFields,
+  WithTagsFields,
+  IEntityTranslated,
 } from "@/modules/model";
-import { AudioGQL, IAudio, IImage, ImageGQL } from "@/modules/editorial/types";
-export interface IArticleEntry extends IEntityLocalized, ISummary {}
+
+export interface IArticleEntry extends IEntityLocalized {}
 
 export const ArticleEntryGQL = gql`... on Article {
 ${EntityLocalizedFields}
-${SummaryFields}
 }`;
 
 export interface IArticle
   extends IArticleEntry,
-    IEditorial<IEntityLocalized>,
+    IEntityTranslated<IEntityLocalized>,
     IAppStyled {
-  image: IImage;
-  audio: IAudio;
   category: IEntity;
   appstyle: string;
   routelabel: IRouteLabeled;
+  components: IComponent[];
 }
 
 export function isIArticle(obj: any): obj is IArticle {
@@ -36,10 +34,10 @@ export function isIArticle(obj: any): obj is IArticle {
 }
 
 export const ArticleGQL = gql`... on Article {
-${EditorialFields}
-category { ${EntityFields} }
-image { ${ImageGQL} }
-audio { ${AudioGQL} }
-appstyle
-${RouteLabelFields}
+  ${EntityTranslatedFields}
+  ${WithTagsFields}
+  category { ${EntityFields} }
+  appstyle
+  ${RouteLabelFields}
+  components
 }`;

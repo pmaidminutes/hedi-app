@@ -1,6 +1,6 @@
 import { IEntity } from "@/modules/model";
 import { VerticalDirection } from "carbon-components-react/typings/shared";
-import { findLabelInstance, IComponent } from "@/modules/model/components";
+import { findLabelInstance, IComponent } from "@/modules/components/types";
 
 export interface ILanguageSwitchProps {
   direction?: VerticalDirection;

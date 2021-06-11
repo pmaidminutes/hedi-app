@@ -1,4 +1,4 @@
-import { IComponent, findLabelInstance } from "@/modules/model/components";
+import { IComponent, findLabelInstance } from "@/modules/components/types";
 import { IRelatedProfilesDefinition } from "./RelatedProfiles";
 
 export const getRelatedProfilesDefinition = (

@@ -2,11 +2,11 @@ import { FormGroup, Column, Row } from "carbon-components-react";
 import { IAddressInput } from "@/modules/profile/types";
 import { Label, Select, TextInput, NumberInput } from "@/modules/components";
 import {
-  Label as ILabel,
-  Select as ISelect,
-  TextInput as ITextInput,
-  NumberInput as INumberInput,
-} from "@/modules/model/components";
+  ILabelComponent,
+  ISelectComponent,
+  ITextInputComponent,
+  INumberInputComponent,
+} from "@/modules/components/types";
 import { useAddressInput } from "./useAddressInput";
 
 export type IAddressInputProps = {
@@ -15,15 +15,15 @@ export type IAddressInputProps = {
   IAddressInputConfig;
 
 export interface IAddressInputDefinition {
-  addressLabel: ILabel;
-  dataKindSelect: ISelect;
-  cityTextInput: ITextInput;
-  postalCodeNumberInput: INumberInput;
-  cityVisibilitySelect: ISelect;
-  streetTextInput: ITextInput;
-  streetNumberTextInput: ITextInput;
-  additionalInfoTextInput: ITextInput;
-  streetVisibilitySelect: ISelect;
+  addressLabel: ILabelComponent;
+  dataKindSelect: ISelectComponent;
+  cityTextInput: ITextInputComponent;
+  postalCodeNumberInput: INumberInputComponent;
+  cityVisibilitySelect: ISelectComponent;
+  streetTextInput: ITextInputComponent;
+  streetNumberTextInput: ITextInputComponent;
+  additionalInfoTextInput: ITextInputComponent;
+  streetVisibilitySelect: ISelectComponent;
 }
 
 export interface IAddressInputConfig {

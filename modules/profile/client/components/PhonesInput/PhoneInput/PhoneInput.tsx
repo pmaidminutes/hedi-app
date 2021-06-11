@@ -2,10 +2,10 @@ import { FormGroup, Column, Row } from "carbon-components-react";
 import { IPhoneInput } from "@/modules/profile/types";
 import { Label, Select, TextInput } from "@/modules/components";
 import {
-  Label as ILabel,
-  Select as ISelect,
-  TextInput as ITextInput,
-} from "@/modules/model/components";
+  ILabelComponent,
+  ISelectComponent,
+  ITextInputComponent,
+} from "@/modules/components/types";
 import { usePhoneInput } from "./usePhoneInput";
 
 export type IPhoneInputProps = {
@@ -14,11 +14,11 @@ export type IPhoneInputProps = {
   IPhoneInputConfig;
 
 export interface IPhoneInputDefinition {
-  phoneLabel: ILabel;
-  dataKindSelect: ISelect;
-  phoneTextInput: ITextInput;
-  phoneKindSelect: ISelect;
-  dataVisibilitySelect: ISelect;
+  phoneLabel: ILabelComponent;
+  dataKindSelect: ISelectComponent;
+  phoneTextInput: ITextInputComponent;
+  phoneKindSelect: ISelectComponent;
+  dataVisibilitySelect: ISelectComponent;
 }
 
 export interface IPhoneInputConfig {

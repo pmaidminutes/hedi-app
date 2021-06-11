@@ -2,9 +2,9 @@ import { TableCell, TableRow } from "carbon-components-react";
 import { IConsultationHourInput } from "@/modules/profile/types";
 import { TextInput, Select } from "@/modules/components";
 import {
-  TextInput as ITextInput,
-  Select as ISelect,
-} from "@/modules/model/components";
+  ITextInputComponent,
+  ISelectComponent,
+} from "@/modules/components/types";
 import { useConsultationHourInput } from "./useConsultationHourInput";
 
 export type IConsultationHourInputProps = {
@@ -14,13 +14,13 @@ export type IConsultationHourInputProps = {
 
 export interface IConsultationHourInputDefinition {
   weekdayTitle?: string;
-  weekdaySelect: ISelect;
+  weekdaySelect: ISelectComponent;
   startTimeTitle?: string;
-  startTimeTextInput: ITextInput;
+  startTimeTextInput: ITextInputComponent;
   endTimeTitle?: string;
-  endTimeTextInput: ITextInput;
+  endTimeTextInput: ITextInputComponent;
   availabilityTitle?: string;
-  availabilitySelect: ISelect;
+  availabilitySelect: ISelectComponent;
 }
 
 interface IConsultationHourInputConfig {

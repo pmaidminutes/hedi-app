@@ -3,7 +3,7 @@ import {
   findSelectInstance,
   findTextInputInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IWebsiteInputProps } from "./WebsiteInput";
 
 export const getWebsiteInputDefinition = (

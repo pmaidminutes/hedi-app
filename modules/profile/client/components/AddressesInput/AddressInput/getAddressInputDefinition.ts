@@ -4,7 +4,7 @@ import {
   findSelectInstance,
   findTextInputInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IAddressInputProps } from "./AddressInput";
 
 export const getAddressInputDefinition = (

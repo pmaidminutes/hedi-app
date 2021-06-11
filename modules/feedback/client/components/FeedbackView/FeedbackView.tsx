@@ -13,7 +13,7 @@ import { IPage } from "@/modules/page/types";
 import {
   findButtonInstance,
   findLinkInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { Button } from "@/modules/components";
 
 export const FeedbackView = ({

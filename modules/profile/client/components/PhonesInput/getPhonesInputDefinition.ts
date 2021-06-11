@@ -2,7 +2,7 @@ import {
   findButtonInstance,
   findLabelInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IPhonesInputDefinition } from ".";
 import { getPhoneInputDefinition } from "./PhoneInput";
 

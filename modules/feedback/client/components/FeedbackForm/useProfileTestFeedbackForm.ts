@@ -10,7 +10,7 @@ import { IProfileTestFeedbackFormProps } from "./IProfileTestFeedbackFormProps";
 import {
   findLinkInstance,
   findToastNotificationInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 
 export function useProfileTestFeedbackForm(
   props: IProfileTestFeedbackFormProps

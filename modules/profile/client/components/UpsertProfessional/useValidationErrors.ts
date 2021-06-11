@@ -1,4 +1,3 @@
-import { orderedRequiredFields } from "@/modules/editProfile/types";
 import { ChangeEvent, FormEvent, RefObject, useState } from "react";
 
 export function useValidationErrors(
@@ -28,12 +27,12 @@ export function useValidationErrors(
     const form = new FormData(e.target as HTMLFormElement);
 
     const currentErrors: { [key: string]: string } = {};
-    orderedRequiredFields.forEach(field => {
-      if (!form.get(field)) {
-        const message = "";
-        currentErrors[field] = message;
-      }
-    });
+    // orderedRequiredFields.forEach(field => {
+    //   if (!form.get(field)) {
+    //     const message = "";
+    //     currentErrors[field] = message;
+    //   }
+    // });
     setValidationErrors(currentErrors);
 
     const scrollToErrors = (currentErrors: { [key: string]: string }) => {

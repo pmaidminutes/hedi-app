@@ -12,7 +12,7 @@ import { Seperator } from "@/modules/common/components";
 
 import { IPage } from "@/modules/page/types";
 import { getUser } from "@/modules/auth/client";
-import { Select as ISelect } from "@/modules/model/components";
+import { ISelectComponent } from "@/modules/components/types";
 import { Select } from "@/modules/components";
 import { useUpsertProfessional } from "./useUpsertProfessional";
 import { getUpsertProfessionalViewDefinition } from "./getUpsertProfessionalViewDefinition";
@@ -34,7 +34,7 @@ import {
 } from "..";
 
 export interface IUpsertProfessionalViewDefinition {
-  professionSelect: ISelect;
+  professionSelect: ISelectComponent;
   detailedNameInputDefinition: IDetailedNameInputDefinition;
   addressesInputDefinition: IAddressesInputDefinition;
   phonesInputDefinition: IPhonesInputDefinition;

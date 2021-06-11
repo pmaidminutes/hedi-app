@@ -2,7 +2,7 @@ import {
   findLabelInstance,
   findSelectInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { ILanguageLevelInputDefinition } from ".";
 
 export const getLanguageLeveInputDefinition = (

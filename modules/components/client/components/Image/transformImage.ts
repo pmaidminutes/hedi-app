@@ -1,9 +1,9 @@
-import { Image } from "@/modules/model/components";
+import { IImageComponent } from "../../../types";
 
-export interface IImageProps extends Image {}
+export interface IImageProps extends IImageComponent {}
 
 export function transformImage(props: IImageProps) {
-  const { labelText,route, ...rest } = props;
+  const { labelText, route, ...rest } = props;
   return {
     src: process.env.NEXT_PUBLIC_ASSETS_URL + route,
     ...rest,

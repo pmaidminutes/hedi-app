@@ -5,9 +5,9 @@ import {
   Row,
 } from "carbon-components-react";
 import {
-  Label as ILabel,
-  TextInput as ITextInput,
-} from "@/modules/model/components";
+  ILabelComponent,
+  ITextInputComponent,
+} from "@/modules/components/types";
 import { Label, TextInput } from "@/modules/components";
 
 export type IDetailedNameInputProps = {
@@ -18,10 +18,10 @@ export type IDetailedNameInputProps = {
   Partial<FormGroupProps>;
 
 export interface IDetailedNameInputDefinition {
-  detailedNameLabel: ILabel;
-  prefixTextInput: ITextInput;
-  givenNameTextInput: ITextInput;
-  familyNameTextInput: ITextInput;
+  detailedNameLabel: ILabelComponent;
+  prefixTextInput: ITextInputComponent;
+  givenNameTextInput: ITextInputComponent;
+  familyNameTextInput: ITextInputComponent;
 }
 
 export const DetailedNameInput: React.FC<IDetailedNameInputProps> = props => {

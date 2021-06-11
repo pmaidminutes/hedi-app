@@ -2,7 +2,7 @@ import {
   findLabelInstance,
   findTextInputInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IDetailedNameInputDefinition } from ".";
 
 export const getDetailedNameInputDefinition = (

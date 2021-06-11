@@ -1,9 +1,9 @@
-import { Slider } from "@/modules/model/components";
+import { ISliderComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { SliderProps } from "carbon-components-react";
 
 export interface ISliderProps
-  extends Slider,
+  extends ISliderComponent,
     Omit<SliderProps, "labelText" | "id"> {}
 
 export function transformSlider(props: ISliderProps): SliderProps {

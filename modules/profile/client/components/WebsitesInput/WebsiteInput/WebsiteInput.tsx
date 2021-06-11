@@ -2,10 +2,10 @@ import { FormGroup, Column, Row } from "carbon-components-react";
 import { IWebsiteInput } from "@/modules/profile/types";
 import { Label, Select, TextInput } from "@/modules/components";
 import {
-  Label as ILabel,
-  Select as ISelect,
-  TextInput as ITextInput,
-} from "@/modules/model/components";
+  ILabelComponent,
+  ISelectComponent,
+  ITextInputComponent,
+} from "@/modules/components/types";
 import { useWebsiteInput } from "./useWebsiteInput";
 
 export type IWebsiteInputProps = {
@@ -14,10 +14,10 @@ export type IWebsiteInputProps = {
   IWebsiteInputConfig;
 
 export interface IWebsiteInputDefinition {
-  websiteLabel: ILabel;
-  dataKindSelect: ISelect;
-  websiteTextInput: ITextInput;
-  dataVisibilitySelect: ISelect;
+  websiteLabel: ILabelComponent;
+  dataKindSelect: ISelectComponent;
+  websiteTextInput: ITextInputComponent;
+  dataVisibilitySelect: ISelectComponent;
 }
 
 export interface IWebsiteInputConfig {

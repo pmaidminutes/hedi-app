@@ -1,7 +1,7 @@
 import { FormGroup, FormGroupProps, Row } from "carbon-components-react";
 import { Add32, TrashCan32 } from "@carbon/icons-react";
 import { IPhoneInput } from "@/modules/profile/types";
-import { Button as IButton, Label as ILabel } from "@/modules/model/components";
+import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
 import { Button, Label } from "@/modules/components";
 import { useInteractiveList } from "@/modules/react/hooks";
 import { PhoneInput, IPhoneInputDefinition } from "./PhoneInput";
@@ -13,9 +13,9 @@ export type IPhonesInputProps = {
 
 export interface IPhonesInputDefinition {
   phoneInputDefinition: IPhoneInputDefinition;
-  phonesLabel: ILabel;
-  addButton: IButton;
-  removeButton: IButton;
+  phonesLabel: ILabelComponent;
+  addButton: IButtonComponent;
+  removeButton: IButtonComponent;
 }
 
 export const PhonesInput = (props: IPhonesInputProps) => {

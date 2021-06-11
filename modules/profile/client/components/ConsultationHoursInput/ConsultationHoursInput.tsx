@@ -11,7 +11,7 @@ import {
 } from "carbon-components-react";
 import { Add32, TrashCan32 } from "@carbon/icons-react";
 import { IConsultationHourInput } from "@/modules/profile/types";
-import { Button as IButton, Label as ILabel } from "@/modules/model/components";
+import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
 import { Button, Label } from "@/modules/components";
 import {
   ConsultationHourInput,
@@ -25,14 +25,14 @@ export type IConsultationHoursInputProps = {
   Partial<FormGroupProps>;
 
 export interface IConsultationHoursInputDefinition {
-  consultationHoursLabel: ILabel;
+  consultationHoursLabel: ILabelComponent;
   weekdayTitle?: string;
   startTimeTitle?: string;
   endTimeTitle?: string;
   availabilityTitle?: string;
   consultationHourInputDefinition: IConsultationHourInputDefinition;
-  addButton: IButton;
-  removeButton: IButton;
+  addButton: IButtonComponent;
+  removeButton: IButtonComponent;
 }
 
 export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {

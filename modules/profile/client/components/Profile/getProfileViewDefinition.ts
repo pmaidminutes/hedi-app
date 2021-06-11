@@ -1,4 +1,4 @@
-import { findButtonInstance, IComponent } from "@/modules/model/components";
+import { findButtonInstance, IComponent } from "@/modules/components/types";
 import { IProfileViewDefinition } from ".";
 import { getContactDefinition } from "../Contact";
 import { getProfileEntryDefinition } from "../ProfileEntry";

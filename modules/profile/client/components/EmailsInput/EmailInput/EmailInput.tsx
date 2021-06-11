@@ -2,10 +2,10 @@ import { FormGroup, Column, Row } from "carbon-components-react";
 import { IEmailInput } from "@/modules/profile/types";
 import { Label, Select, TextInput } from "@/modules/components";
 import {
-  Label as ILabel,
-  Select as ISelect,
-  TextInput as ITextInput,
-} from "@/modules/model/components";
+  ILabelComponent,
+  ISelectComponent,
+  ITextInputComponent,
+} from "@/modules/components/types";
 import { useEmailInput } from "./useEmailInput";
 
 export type IEmailInputProps = {
@@ -14,10 +14,10 @@ export type IEmailInputProps = {
   IEmailInputConfig;
 
 export interface IEmailInputDefinition {
-  emailLabel: ILabel;
-  dataKindSelect: ISelect;
-  emailTextInput: ITextInput;
-  dataVisibilitySelect: ISelect;
+  emailLabel: ILabelComponent;
+  dataKindSelect: ISelectComponent;
+  emailTextInput: ITextInputComponent;
+  dataVisibilitySelect: ISelectComponent;
 }
 
 export interface IEmailInputConfig {

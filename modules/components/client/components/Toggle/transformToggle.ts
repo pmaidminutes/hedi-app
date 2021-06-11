@@ -1,9 +1,8 @@
-import { Toggle } from "@/modules/model/components";
-import { HTML } from "@/modules/react/html/HTML";
+import { IToggleComponent } from "../../../types";
 import { ToggleProps } from "carbon-components-react";
 
 export interface IToggleProps
-  extends Toggle,
+  extends IToggleComponent,
     Omit<ToggleProps, "labelText" | "labelA" | "labelB"> {}
 
 export function transformToggle(props: IToggleProps): ToggleProps {

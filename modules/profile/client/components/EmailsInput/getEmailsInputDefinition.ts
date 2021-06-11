@@ -2,7 +2,7 @@ import {
   findButtonInstance,
   findLabelInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IEmailsInputDefinition } from ".";
 import { getEmailInputDefinition } from "./EmailInput";
 

@@ -6,7 +6,7 @@ import {
   ILanguage,
 } from "@/modules/model";
 import { ILayout } from "../client/components/Layout/types";
-import { IComponent } from "@/modules/model/components";
+import { IComponent } from "@/modules/components/types";
 
 export interface IShellProps
   extends Partial<IAppStyled>,
@@ -30,13 +30,6 @@ export interface IPageConfig extends Partial<IAppStyled> {
   revalidate?: boolean | number;
   layout?: ILayout;
 }
-
-// export type shellRecords = "header" | "footer"
-
-// interface IShell extends Record<string, IEntity[]> {
-//   languages: ILanguage[];
-//   shellConfig:  IUIElementTexts[];
-// }
 
 export type IShell = Record<string, IEntity[]> & {
   languages: ILanguage[];

@@ -1,13 +1,12 @@
 import { useRouter } from "next/router";
-import{ useRef, useState, useEffect } from "react";
-import { Video } from "@/modules/model/components";
+import { useRef, useState, useEffect } from "react";
+import { IVideoComponent } from "../../../types";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
 
-
 export interface IVideoPlayerProps {
-    video: Video;
-    subtitles?: ISubtitles[];
+  video: IVideoComponent;
+  subtitles?: ISubtitles[];
 }
 
 interface ISubtitles {
@@ -20,7 +19,7 @@ export function useVideo(props: IVideoPlayerProps) {
   const router = useRouter();
   const { locale } = router;
   const { video, subtitles } = props;
-  const { route, mimeType } = video
+  const { route, mimeType } = video;
 
   const videoPlayerRef = useRef(null); // Instead of ID
   const [currentTime, setCurrentTime] = useState(0);
@@ -54,6 +53,6 @@ export function useVideo(props: IVideoPlayerProps) {
     src: process.env.NEXT_PUBLIC_ASSETS_URL + route,
     mimeType,
     subtitles,
-    videoPlayerRef
-  }
+    videoPlayerRef,
+  };
 }

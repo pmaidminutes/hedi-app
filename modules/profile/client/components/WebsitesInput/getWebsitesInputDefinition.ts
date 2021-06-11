@@ -2,7 +2,7 @@ import {
   findButtonInstance,
   findLabelInstance,
   IComponent,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 import { IWebsitesInputDefinition } from ".";
 import { getWebsiteInputDefinition } from "./WebsiteInput";
 

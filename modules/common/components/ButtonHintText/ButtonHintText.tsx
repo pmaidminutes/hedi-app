@@ -6,11 +6,11 @@ import {
   Link,
   Label,
 } from "@/modules/components";
-import { Label as ILabel } from "@/modules/model/components";
+import { ILabelComponent } from "@/modules/components/types";
 export interface IButtonHintLinkProps {
   button: IButtonProps;
   link: ILinkProps;
-  hint: ILabel;
+  hint: ILabelComponent;
 }
 
 export const ButtonHintLink = (props: IButtonHintLinkProps) => {

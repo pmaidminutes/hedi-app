@@ -1,4 +1,4 @@
-import { findSelectInstance, IComponent } from "@/modules/model/components";
+import { findSelectInstance, IComponent } from "@/modules/components/types";
 import { IUpsertProfessionalViewDefinition } from "./UpsertProfessional";
 import {
   getAddressesInputDefinition,

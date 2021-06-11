@@ -8,7 +8,7 @@ import {
   findButtonInstance,
   findLinkInstance,
   findBodyInstance,
-} from "@/modules/model/components";
+} from "@/modules/components/types";
 
 export function useFeedbackThanksView({ content }: { content: IPage }) {
   const { components } = content;

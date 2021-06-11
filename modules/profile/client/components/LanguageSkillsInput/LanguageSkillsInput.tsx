@@ -15,7 +15,7 @@ import {
   LanguageLevelInput,
 } from "./LanguageLevelInput";
 import { ILanguageLevel } from "@/modules/profile/types";
-import { Button as IButton, Label as ILabel } from "@/modules/model/components";
+import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
 import { Button, Label } from "@/modules/components";
 import { useInteractiveList } from "@/modules/react/hooks";
 
@@ -25,12 +25,12 @@ export type ILanguageSkillsInputProps = {
   Partial<FormGroupProps>;
 
 export interface ILanguageSkillsInputDefinition {
-  languageSkillsLabel: ILabel;
+  languageSkillsLabel: ILabelComponent;
   languageTitle?: string;
   levelTitle?: string;
   languageLevelInputDefinition: ILanguageLevelInputDefinition;
-  addButton: IButton;
-  removeButton: IButton;
+  addButton: IButtonComponent;
+  removeButton: IButtonComponent;
 }
 
 export const LanguageSkillsInput = (props: ILanguageSkillsInputProps) => {
