@@ -1,7 +1,7 @@
 import {
   findLabelInstance,
-  findSelectInstance,
-  findTextInputInstance,
+  getSelectInstance,
+  getTextInputInstance,
   IComponent,
 } from "@/modules/components";
 import { IConsultationHourInputDefinition } from ".";
@@ -11,13 +11,21 @@ export const getConsultationHourInputDefinition = (
 ): IConsultationHourInputDefinition => ({
   weekdayTitle:
     findLabelInstance(components, "weekdayTitle")?.text ?? "Wochentag",
-  weekdaySelect: findSelectInstance(components, "weekdaySelect")!,
+  weekdaySelect: getSelectInstance(components, "weekdaySelect", { items: [] }),
   startTimeTitle:
     findLabelInstance(components, "startTimeTitle")?.text ?? "Von",
-  startTimeTextInput: findTextInputInstance(components, "startTimeTextInput")!,
+  startTimeTextInput: getTextInputInstance(components, "startTimeTextInput", {
+    type: "text",
+    labelText: "Von",
+  }),
   endTimeTitle: findLabelInstance(components, "endTimeTitle")?.text ?? "Bis",
-  endTimeTextInput: findTextInputInstance(components, "endTimeTextInput")!,
+  endTimeTextInput: getTextInputInstance(components, "endTimeTextInput", {
+    type: "text",
+    labelText: "Bis",
+  }),
   availabilityTitle:
     findLabelInstance(components, "availabilityTitle")?.text ?? "Verfügbarkeit",
-  availabilitySelect: findSelectInstance(components, "availabilitySelect")!,
+  availabilitySelect: getSelectInstance(components, "availabilitySelect", {
+    items: [],
+  }),
 });
