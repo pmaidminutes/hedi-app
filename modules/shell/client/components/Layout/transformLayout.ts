@@ -3,6 +3,7 @@ import { ILayoutProps } from "./types";
 export function transformLayout(props: ILayoutProps) {
   const { content, layout, children } = props;
   const { id, label } = content;
+
   const {
     leftColumnProps,
     rightColumnProps,
@@ -14,6 +15,7 @@ export function transformLayout(props: ILayoutProps) {
     posterImage,
     sideComponents,
     headline,
+    breadcrumbs
   } = layout;
 
   const posterImgSrc = posterImage
@@ -45,5 +47,6 @@ export function transformLayout(props: ILayoutProps) {
     groupClass,
     single,
     sideComponents,
+    breadcrumbs: breadcrumbs || null,
   };
 }

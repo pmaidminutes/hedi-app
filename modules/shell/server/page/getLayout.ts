@@ -26,8 +26,9 @@ export function getLayout(content: ILayoutProps & IPageConfig) {
   const { id, components, layout } = content;
   const transformedLayout: ILayout = layout || {};
 
-  let sideColumn: IColumnComponent | null = null;
-  let posterImage: IImageComponent | undefined = undefined;
+
+  let sideColumn: IColumnComponent | undefined;
+  let posterImage: IImageComponent | undefined;
   let headline: ILabelComponent | undefined;
 
   if (components) {

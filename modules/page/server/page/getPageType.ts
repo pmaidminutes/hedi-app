@@ -14,6 +14,7 @@ import {
   getProfileListPage,
   getProfilePreviewPage,
 } from "@/modules/profile/server";
+import { getCategoryRootPage } from "@/modules/editorial/category/server";
 
 export const getPageType = async (
   content: IPage
@@ -31,6 +32,9 @@ export const getPageType = async (
       break;
     case "profileList":
       result = await getProfileListPage(content);
+      break;
+    case "categoryroot":
+      result = await getCategoryRootPage(content);
       break;
     case "feedback":
       result = await getFeedbackPage(content);

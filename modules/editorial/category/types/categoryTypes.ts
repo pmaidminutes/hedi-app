@@ -32,11 +32,11 @@ ${EntityTranslatedFields}
 categories { ${CategoryEntryGQL} }
 }`;
 
-export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled {
+export interface ICategory extends ICategoryEntry, ICategoryRoot, IAppStyled, IRouteLabeled {
   parent: number;
   articles: IArticleEntry[];
   appstyle: string;
-  routelabel: IRouteLabeled;
+
 }
 
 export function isICategory(obj: any): obj is ICategory {

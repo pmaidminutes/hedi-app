@@ -1,3 +1,4 @@
+import { IImage } from "@/modules/editorial/types";
 import { HTML, IComponent } from "./Component";
 import { findComponentInstance, getComponentInstance } from "./utils";
 
@@ -29,3 +30,10 @@ export const getImageInstance = (
   id: string,
   fallback: Omit<IImageComponent, "kind" | "id">
 ) => getComponentInstance("Image", array, id, fallback);
+
+export const imageToImageComponent = (img?: IImage): IImageComponent | null => {
+  if (!img) return null;
+  const kind = "Image";
+  const labelText = img.label;
+  return { kind, labelText, ...img } as IImageComponent;
+};

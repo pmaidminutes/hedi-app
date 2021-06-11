@@ -20,8 +20,13 @@ export const isHeadlineInstance = (
 export const findHeadlineInstance = (array: IComponent[], id: string) =>
   findComponentInstance<IHeadlineComponent>("Headline", array, id);
 
+export const findAllHeadlineInstances = (array: IComponent[]) => {
+  return array.filter(isHeadline);
+};
+
 export const getHeadlineInstance = (
   array: IComponent[],
   id: string,
   fallback: Omit<IHeadlineComponent, "kind" | "id">
 ) => getComponentInstance("Headline", array, id, fallback);
+
