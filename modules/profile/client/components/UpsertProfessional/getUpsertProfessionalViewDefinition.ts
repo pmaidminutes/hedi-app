@@ -1,4 +1,4 @@
-import { findSelectInstance, IComponent } from "@/modules/components";
+import { getSelectInstance, IComponent } from "@/modules/components";
 import { IUpsertProfessionalViewDefinition } from "./UpsertProfessional";
 import {
   getAddressesInputDefinition,
@@ -13,7 +13,9 @@ import {
 export const getUpsertProfessionalViewDefinition = (
   components: IComponent[]
 ): IUpsertProfessionalViewDefinition => ({
-  professionSelect: findSelectInstance(components, "professionSelect")!,
+  professionSelect: getSelectInstance(components, "professionSelect", {
+    items: [],
+  }),
   detailedNameInputDefinition: getDetailedNameInputDefinition(components),
   addressesInputDefinition: getAddressesInputDefinition(components),
   phonesInputDefinition: getPhonesInputDefinition(components),
