@@ -1,10 +1,11 @@
 import { TableCell, TableRow } from "carbon-components-react";
-import { IConsultationHourInput } from "@/modules/profile/types";
-import { TextInput, Select } from "@/modules/components";
 import {
   ITextInputComponent,
+  TextInput,
   ISelectComponent,
-} from "@/modules/components/types";
+  Select,
+} from "@/modules/components";
+import { IConsultationHourInput } from "../../../../types";
 import { useConsultationHourInput } from "./useConsultationHourInput";
 
 export type IConsultationHourInputProps = {

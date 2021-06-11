@@ -10,9 +10,13 @@ import {
   TableRow,
 } from "carbon-components-react";
 import { Add32, TrashCan32 } from "@carbon/icons-react";
-import { IConsultationHourInput } from "@/modules/profile/types";
-import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
-import { Button, Label } from "@/modules/components";
+import {
+  IButtonComponent,
+  Button,
+  ILabelComponent,
+  Label,
+} from "@/modules/components";
+import { IConsultationHourInput } from "../../../types";
 import {
   ConsultationHourInput,
   IConsultationHourInputDefinition,

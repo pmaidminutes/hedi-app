@@ -2,7 +2,7 @@ import {
   findButtonInstance,
   findLabelInstance,
   IComponent,
-} from "@/modules/components/types";
+} from "@/modules/components";
 import { IConsultationHoursInputDefinition } from ".";
 import { getConsultationHourInputDefinition } from "./ConsultationHourInput";
 

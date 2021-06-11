@@ -1,5 +1,5 @@
-import { IConsultationHourInput } from "@/modules/profile/types";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
+import { IConsultationHourInput } from "../../../../types";
 
 export const useConsultationHourInput = (
   initialConsultationHourInput?: Partial<IConsultationHourInput>,

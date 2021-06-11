@@ -3,7 +3,7 @@ import {
   findSelectInstance,
   findTextInputInstance,
   IComponent,
-} from "@/modules/components/types";
+} from "@/modules/components";
 import { IConsultationHourInputDefinition } from ".";
 
 export const getConsultationHourInputDefinition = (
