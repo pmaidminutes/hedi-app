@@ -1,5 +1,5 @@
-import { IPhoneInput } from "@/modules/profile/types";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
+import { IPhoneInput } from "../../../../types";
 
 export const usePhoneInput = (
   initialPhoneInput?: Partial<IPhoneInput>,

@@ -1,11 +1,13 @@
 import { FormGroup, Column, Row } from "carbon-components-react";
-import { IPhoneInput } from "@/modules/profile/types";
-import { Label, Select, TextInput } from "@/modules/components";
 import {
   ILabelComponent,
+  Label,
   ISelectComponent,
+  Select,
   ITextInputComponent,
-} from "@/modules/components/types";
+  TextInput,
+} from "@/modules/components";
+import { IPhoneInput } from "../../../../types";
 import { usePhoneInput } from "./usePhoneInput";
 
 export type IPhoneInputProps = {
