@@ -1,4 +1,5 @@
 import { HTML, IComponent, Component } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type GroupKind = "Group";
 
@@ -17,7 +18,11 @@ export const isGroupInstance = (
   id: string
 ): obj is IGroupComponent => isGroup(obj) && obj.id === id;
 
-export const findGroupInstance = (array: IComponent[], id: string) => {
-  const group = array.filter(isGroup).find(item => item.id === id);
-  return group;
-};
+export const findGroupInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IGroupComponent>("Group", array, id);
+
+export const getGroupInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<IGroupComponent, "kind" | "id">
+) => getComponentInstance("Group", array, id, fallback);

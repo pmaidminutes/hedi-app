@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type VideoKind = "Video";
 
@@ -18,7 +19,11 @@ export const isVideoInstance = (
   id: string
 ): obj is IVideoComponent => isVideo(obj) && obj.id === id;
 
-export const findVideoInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isVideo).find(item => item.id === id);
-  return element;
-};
+export const findVideoInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IVideoComponent>("Video", array, id);
+
+export const getVideoInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<IVideoComponent, "kind" | "id">
+) => getComponentInstance("Video", array, id, fallback);

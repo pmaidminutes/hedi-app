@@ -1,6 +1,7 @@
+import { PartialBy } from "@/modules/common/utils";
 import { ISvgComponent } from "../../../types";
 
-export interface ISvgProps extends ISvgComponent {}
+export type ISvgProps = PartialBy<ISvgComponent, "kind" | "usage">;
 
 export function transformSvg(props: ISvgProps) {
   const { route, labelText } = props;

@@ -1,7 +1,10 @@
 import { IAudioComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
+import { PartialBy } from "@/modules/common/utils";
 
-export function transformAudio(props: IAudioComponent) {
+export function transformAudio(
+  props: PartialBy<IAudioComponent, "kind" | "usage">
+) {
   const { route, mimeType, labelText } = props;
 
   return {

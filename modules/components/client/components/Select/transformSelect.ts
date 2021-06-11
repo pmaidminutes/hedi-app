@@ -1,9 +1,10 @@
 import { ISelectComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { SelectProps, SelectItemProps } from "carbon-components-react";
+import { PartialBy } from "@/modules/common/utils";
 
 export interface ISelectProps
-  extends ISelectComponent,
+  extends PartialBy<ISelectComponent, "kind">,
     Omit<SelectProps, "labelText" | "helperText" | "size"> {
   useItemIndex?: boolean;
 }

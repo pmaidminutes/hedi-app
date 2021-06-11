@@ -3,9 +3,10 @@ import { useRef, useState, useEffect } from "react";
 import { IVideoComponent } from "../../../types";
 import videojs from "video.js";
 import "video.js/dist/video-js.css";
+import { PartialBy } from "@/modules/common/utils";
 
 export interface IVideoPlayerProps {
-  video: IVideoComponent;
+  video: PartialBy<IVideoComponent, "kind" | "usage">;
   subtitles?: ISubtitles[];
 }
 

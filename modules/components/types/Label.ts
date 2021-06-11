@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type LabelKind = "Label";
 
@@ -17,12 +18,14 @@ export const isLabelInstance = (
   id: string
 ): obj is ILabelComponent => isLabel(obj) && obj.id === id;
 
-export const findLabelInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isLabel).find(item => item.id === id);
-  return element;
-};
+export const findLabelInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<ILabelComponent>("Label", array, id);
 
-export const findHeadlineLabel = (array: IComponent[]) => {
-  const element = array.filter(isLabel).find(item => item.labelKind == "h1");
-  return element;
-};
+export const findHeadlineLabel = (array: IComponent[]) =>
+  array.filter(isLabel).find(item => item.labelKind == "h1");
+
+export const getLabelInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<ILabelComponent, "kind" | "id">
+) => getComponentInstance("Label", array, id, fallback);

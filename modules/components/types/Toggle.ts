@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type ToggleKind = "Toggle";
 
@@ -19,7 +20,11 @@ export const isToggleInstance = (
   id: string
 ): obj is IToggleComponent => isToggle(obj) && obj.id === id;
 
-export const findToggleInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isToggle).find(item => item.id === id);
-  return element;
-};
+export const findToggleInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IToggleComponent>("Toggle", array, id);
+
+export const getToggleInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<IToggleComponent, "kind" | "id">
+) => getComponentInstance("Toggle", array, id, fallback);

@@ -1,13 +1,13 @@
 import { IDatePickerComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { DatePickerProps, DatePickerInputProps } from "carbon-components-react";
+import { PartialBy } from "@/modules/common/utils";
 
-export interface IDatePickerProps
-  extends IDatePickerComponent,
-    Omit<
-      DatePickerProps,
-      "id" | "dateFormat" | "minDate" | "maxDate" | "datePickerType"
-    > {}
+export type IDatePickerProps = PartialBy<IDatePickerComponent, "kind"> &
+  Omit<
+    DatePickerProps,
+    "id" | "dateFormat" | "minDate" | "maxDate" | "datePickerType"
+  >;
 
 interface IDatePickerAndInputProps extends DatePickerProps {
   datePickerInput: DatePickerInputProps[];

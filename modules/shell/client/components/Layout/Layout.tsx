@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
-import { SingleColumn, TwoColumns } from "./templates";
+import { SingleColumn, TwoColumns, Editorial } from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
   const {
@@ -18,6 +18,7 @@ export const Layout: React.FC<ILayoutProps> = props => {
     groupClass,
     single,
     sideComponents,
+    breadcrumbs,
   } = transformLayout(props);
 
   return (
@@ -50,6 +51,16 @@ export const Layout: React.FC<ILayoutProps> = props => {
           sideComponents={sideComponents}>
           {children}
         </TwoColumns>
+      ) : pageLayout === "editorial" ? (
+        <Editorial
+          breadcrumbs={breadcrumbs}
+          columnProps={single}
+          headline={headline}
+          groupClass={groupClass}
+          narrow={narrow}
+          condensed={condensed}>
+          {children}
+        </Editorial>
       ) : null}
     </div>
   );

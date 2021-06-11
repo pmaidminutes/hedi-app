@@ -2,6 +2,9 @@ import {
   findColumnInstance,
   findHeadlineLabel,
   findImageInstance,
+  IColumnComponent,
+  IImageComponent,
+  ILabelComponent,
 } from "@/modules/components/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
@@ -16,38 +19,50 @@ import { IPage } from "../../../page/types";
 //    - will be used as posterImage
 // Label component of type "H1"
 //    - will be used for the main headline in the layout
+
 // ************************************************
-export function getLayout(content: IPage & IPageConfig) {
-  const { id, components } = content;
-  let layout: ILayout = content.layout || {};
+interface ILayoutProps extends Partial<Pick<IPage, "id" | "components">> {}
+export function getLayout(content: ILayoutProps & IPageConfig) {
+  const { id, components, layout } = content;
+  const transformedLayout: ILayout = layout || {};
 
-  const sideColumn = findColumnInstance(components, "side");
-  if (sideColumn) components.splice(components.indexOf(sideColumn), 1);
+  let sideColumn: IColumnComponent | undefined;
+  let posterImage: IImageComponent | undefined;
+  let headline: ILabelComponent | undefined;
 
-  const posterImage = findImageInstance(components, "poster");
-  if (posterImage) {
-    components.splice(components.indexOf(posterImage), 1);
-    layout["posterImage"] = posterImage;
+  if (components) {
+    sideColumn = findColumnInstance(components, "side");
+    if (sideColumn) components.splice(components.indexOf(sideColumn), 1);
+
+    posterImage = findImageInstance(components, "poster");
+    if (posterImage) {
+      components.splice(components.indexOf(posterImage), 1);
+      transformedLayout["posterImage"] = posterImage;
+    }
+
+    headline = findHeadlineLabel(components);
+    if (headline) {
+      components.splice(components.indexOf(headline), 1);
+      transformedLayout["headline"] = headline?.text;
+    }
   }
 
-  const headline = findHeadlineLabel(components);
-  if (headline) {
-    components.splice(components.indexOf(headline), 1);
-    layout["headline"] = headline?.text;
-  }
+  transformedLayout["pageId"] = id;
 
-  layout["pageId"] = id;
-  if (!layout.pageLayout) {
+  // set pageLayout, if not allready set
+  if (!transformedLayout.pageLayout) {
+    // if there is a sideColumn, pageLayout will set to "twoColumns"
+    // and components inside will be added to layout.sideComponents
     if (sideColumn) {
-      layout["sideComponents"] = sideColumn.components;
-      layout["pageLayout"] = "twoColumns";
+      transformedLayout["sideComponents"] = sideColumn.components;
+      transformedLayout["pageLayout"] = "twoColumns";
     } else {
-      layout["pageLayout"] = "singleColumn";
+      transformedLayout["pageLayout"] = "singleColumn";
     }
   }
 
   const shell: IPageConfig = {
-    layout,
+    layout: transformedLayout,
   };
 
   return { ...shell };
