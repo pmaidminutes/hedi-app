@@ -1,9 +1,13 @@
 import { FormGroup, FormGroupProps, Row } from "carbon-components-react";
 import { Add32, TrashCan32 } from "@carbon/icons-react";
-import { IWebsiteInput } from "@/modules/profile/types";
-import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
-import { Button, Label } from "@/modules/components";
+import {
+  IButtonComponent,
+  Button,
+  ILabelComponent,
+  Label,
+} from "@/modules/components";
 import { useInteractiveList } from "@/modules/react/hooks";
+import { IWebsiteInput } from "../../../types";
 import { WebsiteInput, IWebsiteInputDefinition } from "./WebsiteInput";
 
 export type IWebsitesInputProps = {

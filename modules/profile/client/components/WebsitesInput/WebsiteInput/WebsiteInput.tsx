@@ -1,11 +1,13 @@
 import { FormGroup, Column, Row } from "carbon-components-react";
-import { IWebsiteInput } from "@/modules/profile/types";
-import { Label, Select, TextInput } from "@/modules/components";
 import {
   ILabelComponent,
+  Label,
   ISelectComponent,
+  Select,
   ITextInputComponent,
-} from "@/modules/components/types";
+  TextInput,
+} from "@/modules/components";
+import { IWebsiteInput } from "../../../../types";
 import { useWebsiteInput } from "./useWebsiteInput";
 
 export type IWebsiteInputProps = {

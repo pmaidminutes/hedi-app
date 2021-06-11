@@ -1,5 +1,5 @@
-import { IWebsiteInput } from "@/modules/profile/types";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
+import { IWebsiteInput } from "../../../../types";
 
 export const useWebsiteInput = (
   initialWebsiteInput?: Partial<IWebsiteInput>,
