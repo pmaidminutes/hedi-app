@@ -9,10 +9,11 @@ export interface INumberInputComponent extends IComponent {
   label?: HTML;
   isRequired?: boolean;
   helperText?: HTML;
-  value?: number;
+  value: number;
   min?: number;
   max?: number;
   ariaLabel?: string;
+  ref?: React.ForwardedRef<HTMLInputElement>;
 }
 
 export const isNumberInput = (obj: IComponent): obj is INumberInputComponent =>

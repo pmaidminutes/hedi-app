@@ -21,4 +21,5 @@ export * from "./TextInput";
 export * from "./ToastNotification";
 export * from "./Toggle";
 export * from "./ValidatedTextInput";
+export * from "./ValidatedNumberInput ";
 export * from "./VideoPlayer";
