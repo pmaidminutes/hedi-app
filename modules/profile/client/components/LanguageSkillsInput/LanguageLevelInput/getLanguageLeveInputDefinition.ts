@@ -1,6 +1,6 @@
 import {
   findLabelInstance,
-  findSelectInstance,
+  getSelectInstance,
   IComponent,
 } from "@/modules/components";
 import { ILanguageLevelInputDefinition } from ".";
@@ -10,8 +10,10 @@ export const getLanguageLeveInputDefinition = (
 ): ILanguageLevelInputDefinition => ({
   languageTitle:
     findLabelInstance(components, "languageTitle")?.text ?? "Sprache",
-  languageSelect: findSelectInstance(components, "languageSelect")!,
+  languageSelect: getSelectInstance(components, "languageSelect", {
+    items: [],
+  }),
   levelTitle:
     findLabelInstance(components, "levelTitle")?.text ?? "Verständnis",
-  levelSelect: findSelectInstance(components, "levelSelect")!,
+  levelSelect: getSelectInstance(components, "levelSelect", { items: [] }),
 });

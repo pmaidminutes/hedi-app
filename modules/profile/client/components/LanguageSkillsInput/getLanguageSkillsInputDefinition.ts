@@ -1,6 +1,6 @@
 import {
-  findButtonInstance,
-  findLabelInstance,
+  getButtonInstance,
+  getLabelInstance,
   IComponent,
 } from "@/modules/components";
 import { ILanguageSkillsInputDefinition } from ".";
@@ -13,11 +13,22 @@ export const getLanguageSkillsInputDefinition = (
     components
   );
   return {
-    languageSkillsLabel: findLabelInstance(components, "languageSkillsLabel")!,
+    languageSkillsLabel: getLabelInstance(components, "languageSkillsLabel", {
+      labelKind: "span",
+      text: "Sprachverständnis",
+    }),
     languageTitle: languageLevelInputDefinition.languageTitle,
     levelTitle: languageLevelInputDefinition.levelTitle,
     languageLevelInputDefinition,
-    addButton: findButtonInstance(components, "addButton")!,
-    removeButton: findButtonInstance(components, "removeButton")!,
+    addButton: getButtonInstance(components, "addButton", {
+      buttonKind: "primary",
+      usage: "",
+      text: "Sprache hinzufügen",
+    }),
+    removeButton: getButtonInstance(components, "removeButton", {
+      buttonKind: "primary",
+      usage: "",
+      text: "Sprache entfernen",
+    }),
   };
 };
