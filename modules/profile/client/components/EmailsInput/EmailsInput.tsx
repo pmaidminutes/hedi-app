@@ -1,10 +1,14 @@
 import { FormGroup, FormGroupProps, Row } from "carbon-components-react";
 import { Add32, TrashCan32 } from "@carbon/icons-react";
-import { IEmailInput } from "@/modules/profile/types";
-import { IButtonComponent, ILabelComponent } from "@/modules/components/types";
-import { Button, Label } from "@/modules/components";
-import { useInteractiveList } from "@/modules/react/hooks";
+import {
+  IButtonComponent,
+  Button,
+  ILabelComponent,
+  Label,
+} from "@/modules/components";
+import { IEmailInput } from "../../../types";
 import { EmailInput, IEmailInputDefinition } from "./EmailInput";
+import { useInteractiveList } from "@/modules/react/hooks";
 
 export type IEmailsInputProps = {
   emails?: Partial<IEmailInput>[];

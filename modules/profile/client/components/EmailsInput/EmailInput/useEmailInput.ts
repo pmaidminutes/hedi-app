@@ -1,5 +1,5 @@
-import { IEmailInput } from "@/modules/profile/types";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
+import { IEmailInput } from "../../../../types";
 
 export const useEmailInput = (
   initialEmailInput?: Partial<IEmailInput>,

@@ -1,11 +1,13 @@
 import { FormGroup, Column, Row } from "carbon-components-react";
-import { IEmailInput } from "@/modules/profile/types";
-import { Label, Select, TextInput } from "@/modules/components";
 import {
   ILabelComponent,
+  Label,
   ISelectComponent,
+  Select,
   ITextInputComponent,
-} from "@/modules/components/types";
+  TextInput,
+} from "@/modules/components";
+import { IEmailInput } from "../../../../types";
 import { useEmailInput } from "./useEmailInput";
 
 export type IEmailInputProps = {
