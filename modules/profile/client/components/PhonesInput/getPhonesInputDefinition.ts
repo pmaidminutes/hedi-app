@@ -1,6 +1,6 @@
 import {
-  findButtonInstance,
-  findLabelInstance,
+  getButtonInstance,
+  getLabelInstance,
   IComponent,
 } from "@/modules/components";
 import { IPhonesInputDefinition } from ".";
@@ -10,7 +10,18 @@ export const getPhonesInputDefinition = (
   components: IComponent[]
 ): IPhonesInputDefinition => ({
   phoneInputDefinition: getPhoneInputDefinition(components),
-  phonesLabel: findLabelInstance(components, "phonesLabel")!,
-  addButton: findButtonInstance(components, "addButton")!,
-  removeButton: findButtonInstance(components, "removeButton")!,
+  phonesLabel: getLabelInstance(components, "phonesLabel", {
+    labelKind: "span",
+    text: "Telefonnummern",
+  }),
+  addButton: getButtonInstance(components, "addButton", {
+    buttonKind: "primary",
+    usage: "",
+    text: "Telefonnummer hinzufügen",
+  }),
+  removeButton: getButtonInstance(components, "removeButton", {
+    buttonKind: "primary",
+    usage: "",
+    text: "Telefonnummer entfernen",
+  }),
 });

@@ -1,7 +1,7 @@
 import {
-  findLabelInstance,
-  findSelectInstance,
-  findTextInputInstance,
+  getLabelInstance,
+  getSelectInstance,
+  getTextInputInstance,
   IComponent,
 } from "@/modules/components";
 import { IPhoneInputProps } from "./PhoneInput";
@@ -9,9 +9,21 @@ import { IPhoneInputProps } from "./PhoneInput";
 export const getPhoneInputDefinition = (
   components: IComponent[]
 ): IPhoneInputProps => ({
-  phoneLabel: findLabelInstance(components, "phoneLabel")!,
-  dataKindSelect: findSelectInstance(components, "dataKindSelect")!,
-  phoneTextInput: findTextInputInstance(components, "phoneTextInput")!,
-  phoneKindSelect: findSelectInstance(components, "phoneKindSelect")!,
-  dataVisibilitySelect: findSelectInstance(components, "dataVisibilitySelect")!,
+  phoneLabel: getLabelInstance(components, "phoneLabel", {
+    labelKind: "span",
+    text: "Telefonnummer",
+  }),
+  dataKindSelect: getSelectInstance(components, "dataKindSelect", {
+    items: [],
+  }),
+  phoneTextInput: getTextInputInstance(components, "phoneTextInput", {
+    type: "text",
+    labelText: "Telefonnummer",
+  }),
+  phoneKindSelect: getSelectInstance(components, "phoneKindSelect", {
+    items: [],
+  }),
+  dataVisibilitySelect: getSelectInstance(components, "dataVisibilitySelect", {
+    items: [],
+  }),
 });
