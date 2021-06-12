@@ -107,7 +107,7 @@ export const UpsertProfessionalView = ({
       <div className="hedi--group hedi--group--contact">
         <PhonesInput value={phones} {...phonesInputDefinition} />
         <EmailsInput value={emails} {...emailsInputDefinition} />
-        <WebsitesInput websites={websites} {...websitesInputDefinition} />
+        <WebsitesInput value={websites} {...websitesInputDefinition} />
       </div>
       <Seperator />
 

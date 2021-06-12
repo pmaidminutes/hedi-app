@@ -11,7 +11,7 @@ import { IWebsiteInput } from "../../../types";
 import { WebsiteInput, IWebsiteInputDefinition } from "./WebsiteInput";
 
 export type IWebsitesInputProps = {
-  websites?: Partial<IWebsiteInput>[];
+  value?: Partial<IWebsiteInput>[];
 } & IWebsitesInputDefinition &
   Partial<FormGroupProps>;
 
@@ -24,7 +24,7 @@ export interface IWebsitesInputDefinition {
 
 export const WebsitesInput = (props: IWebsitesInputProps) => {
   const {
-    websites,
+    value,
     websiteInputDefinition,
     websitesLabel,
     addButton,
@@ -37,13 +37,13 @@ export const WebsitesInput = (props: IWebsitesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(websites);
+  } = useInteractiveList(value);
 
   return (
     <FormGroup legendText={<Label {...websitesLabel} />} {...formGroupProps}>
-      {websiteInputs.map((a, i) => (
+      {websiteInputs.map((value, i) => (
         <WebsiteInput
-          websiteInput={a}
+          value={value}
           {...websiteInputDefinition}
           onChange={item => handleItemChange(item, i)}>
           <Button
