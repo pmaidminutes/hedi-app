@@ -2,7 +2,6 @@ export * from "./Profile";
 export * from "./Contact";
 export * from "./Address";
 export * from "./AddressesInput";
-export * from "./DetailedNameInput";
 export * from "./PhoneLink";
 export * from "./PhonesInput";
 export * from "./EmailLink";
