@@ -1,9 +1,13 @@
-import { getSelectInstance, IComponent } from "@/modules/components";
+import {
+  getLabelInstance,
+  getSelectInstance,
+  getTextInputInstance,
+  IComponent,
+} from "@/modules/components";
 import { IUpsertProfessionalViewDefinition } from "./UpsertProfessional";
 import {
   getAddressesInputDefinition,
   getConsultationHoursInputDefinition,
-  getDetailedNameInputDefinition,
   getEmailsInputDefinition,
   getLanguageSkillsInputDefinition,
   getPhonesInputDefinition,
@@ -16,7 +20,22 @@ export const getUpsertProfessionalViewDefinition = (
   professionSelect: getSelectInstance(components, "professionSelect", {
     items: [],
   }),
-  detailedNameInputDefinition: getDetailedNameInputDefinition(components),
+  nameLabel: getLabelInstance(components, "nameLabel", {
+    labelKind: "span",
+    text: "Name",
+  }),
+  prefixTextInput: getTextInputInstance(components, "prefixTextInput", {
+    type: "text",
+    labelText: "Prefix",
+  }),
+  givenNameTextInput: getTextInputInstance(components, "givenNameTextInput", {
+    type: "text",
+    labelText: "Vorname",
+  }),
+  familyNameTextInput: getTextInputInstance(components, "familyNameTextInput", {
+    type: "text",
+    labelText: "Nachname",
+  }),
   addressesInputDefinition: getAddressesInputDefinition(components),
   phonesInputDefinition: getPhonesInputDefinition(components),
   emailsInputDefinition: getEmailsInputDefinition(components),

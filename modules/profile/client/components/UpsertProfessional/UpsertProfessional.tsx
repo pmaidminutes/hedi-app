@@ -11,7 +11,14 @@ import {
 import { Seperator } from "@/modules/common/components";
 
 import { IPage } from "@/modules/page/types";
-import { ISelectComponent, Select } from "@/modules/components";
+import {
+  ILabelComponent,
+  Label,
+  ISelectComponent,
+  Select,
+  ITextInputComponent,
+  TextInput,
+} from "@/modules/components";
 import { useUpsertProfessional } from "./useUpsertProfessional";
 import { getUpsertProfessionalViewDefinition } from "./getUpsertProfessionalViewDefinition";
 import {
@@ -19,8 +26,6 @@ import {
   IAddressesInputDefinition,
   ConsultationHoursInput,
   IConsultationHoursInputDefinition,
-  DetailedNameInput,
-  IDetailedNameInputDefinition,
   EmailsInput,
   IEmailsInputDefinition,
   LanguageSkillsInput,
@@ -33,7 +38,10 @@ import {
 
 export interface IUpsertProfessionalViewDefinition {
   professionSelect: ISelectComponent;
-  detailedNameInputDefinition: IDetailedNameInputDefinition;
+  nameLabel: ILabelComponent;
+  prefixTextInput: ITextInputComponent;
+  givenNameTextInput: ITextInputComponent;
+  familyNameTextInput: ITextInputComponent;
   addressesInputDefinition: IAddressesInputDefinition;
   phonesInputDefinition: IPhonesInputDefinition;
   emailsInputDefinition: IEmailsInputDefinition;
@@ -70,7 +78,10 @@ export const UpsertProfessionalView = ({
 
   const {
     professionSelect,
-    detailedNameInputDefinition,
+    nameLabel,
+    prefixTextInput,
+    givenNameTextInput,
+    familyNameTextInput,
     addressesInputDefinition,
     phonesInputDefinition,
     emailsInputDefinition,
@@ -92,10 +103,21 @@ export const UpsertProfessionalView = ({
       </Row>
 
       <div className="hedi--group hedi--group--name">
-        <DetailedNameInput
-          {...{ prefix, givenName, familyName }}
-          {...detailedNameInputDefinition}
-        />
+        <FormGroup legendText={<Label {...nameLabel} />}>
+          <Row>
+            <Column lg={2} md={2}>
+              <TextInput value={prefix} {...prefixTextInput} />
+            </Column>
+            <Column lg={6} md={6}>
+              <TextInput value={givenName} {...givenNameTextInput} />
+            </Column>
+          </Row>
+          <Row>
+            <Column lg={6} md={6}>
+              <TextInput value={familyName} {...familyNameTextInput} />
+            </Column>
+          </Row>
+        </FormGroup>
       </div>
       <Seperator />
 
