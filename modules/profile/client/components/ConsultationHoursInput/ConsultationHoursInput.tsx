@@ -26,7 +26,8 @@ import { useInteractiveList } from "@/modules/react/hooks";
 export type IConsultationHoursInputProps = {
   value?: Partial<IConsultationHourInput>[];
 } & IConsultationHoursInputDefinition &
-  Partial<FormGroupProps>;
+  IConsultationHoursInputConfig &
+  Partial<Omit<FormGroupProps, "onChange">>;
 
 export interface IConsultationHoursInputDefinition {
   consultationHoursLabel: ILabelComponent;
@@ -37,6 +38,10 @@ export interface IConsultationHoursInputDefinition {
   consultationHourInputDefinition: IConsultationHourInputDefinition;
   addButton: IButtonComponent;
   removeButton: IButtonComponent;
+}
+
+interface IConsultationHoursInputConfig {
+  onChange?: (consultationHours: Partial<IConsultationHourInput>[]) => void;
 }
 
 export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
@@ -50,6 +55,7 @@ export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
     consultationHourInputDefinition,
     addButton,
     removeButton,
+    onChange,
     ...formGroupProps
   } = props;
   const {
@@ -57,7 +63,7 @@ export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value);
+  } = useInteractiveList(value, onChange);
   return (
     <FormGroup
       legendText={<Label {...consultationHoursLabel} />}
