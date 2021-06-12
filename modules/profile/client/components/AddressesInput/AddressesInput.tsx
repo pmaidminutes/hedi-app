@@ -11,7 +11,7 @@ import { IAddressInput } from "../../../types";
 import { AddressInput, IAddressInputDefinition } from "./AddressInput";
 
 export type IAddressesInputProps = {
-  addresses?: Partial<IAddressInput>[];
+  value?: Partial<IAddressInput>[];
 } & IAddressesInputDefinition &
   Partial<FormGroupProps>;
 
@@ -24,7 +24,7 @@ export interface IAddressesInputDefinition {
 
 export const AddressesInput = (props: IAddressesInputProps) => {
   const {
-    addresses,
+    value,
     addressInputDefinition,
     addressesLabel,
     addButton,
@@ -37,13 +37,13 @@ export const AddressesInput = (props: IAddressesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(addresses);
+  } = useInteractiveList(value);
 
   return (
     <FormGroup legendText={<Label {...addressesLabel} />} {...formGroupProps}>
-      {addressInputs.map((a, i) => (
+      {addressInputs.map((value, i) => (
         <AddressInput
-          addressInput={a}
+          value={value}
           {...addressInputDefinition}
           onChange={item => handleItemChange(item, i)}>
           <Button

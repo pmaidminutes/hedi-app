@@ -98,7 +98,7 @@ export const UpsertProfessionalView = ({ content }: { content: IPage }) => {
       <Seperator />
 
       <div className="hedi--group hedi--group--address">
-        <AddressesInput addresses={addresses} {...addressesInputDefinition} />
+        <AddressesInput value={addresses} {...addressesInputDefinition} />
       </div>
       <Seperator />
 
