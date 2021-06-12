@@ -13,13 +13,18 @@ import { useInteractiveList } from "@/modules/react/hooks";
 export type IEmailsInputProps = {
   value?: Partial<IEmailInput>[];
 } & IEmailsInputDefinition &
-  Partial<FormGroupProps>;
+  IEmailsInputConfig &
+  Partial<Omit<FormGroupProps, "onChange">>;
 
 export interface IEmailsInputDefinition {
   emailInputDefinition: IEmailInputDefinition;
   emailsLabel: ILabelComponent;
   addButton: IButtonComponent;
   removeButton: IButtonComponent;
+}
+
+interface IEmailsInputConfig {
+  onChange?: (emails: Partial<IEmailInput>[]) => void;
 }
 
 export const EmailsInput = (props: IEmailsInputProps) => {
@@ -29,6 +34,7 @@ export const EmailsInput = (props: IEmailsInputProps) => {
     emailsLabel,
     addButton,
     removeButton,
+    onChange,
     ...formGroupProps
   } = props;
 
@@ -37,7 +43,7 @@ export const EmailsInput = (props: IEmailsInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value);
+  } = useInteractiveList(value, onChange);
 
   return (
     <FormGroup legendText={<Label {...emailsLabel} />} {...formGroupProps}>
