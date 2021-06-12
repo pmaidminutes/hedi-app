@@ -11,7 +11,6 @@ import {
 import { Seperator } from "@/modules/common/components";
 
 import { IPage } from "@/modules/page/types";
-import { getUser } from "@/modules/auth/client";
 import { ISelectComponent, Select } from "@/modules/components";
 import { useUpsertProfessional } from "./useUpsertProfessional";
 import { getUpsertProfessionalViewDefinition } from "./getUpsertProfessionalViewDefinition";
@@ -43,28 +42,31 @@ export interface IUpsertProfessionalViewDefinition {
   consultationHoursInputDefinition: IConsultationHoursInputDefinition;
 }
 
-export const UpsertProfessionalView = ({ content }: { content: IPage }) => {
-  const [user, isLoading] = getUser();
+export const UpsertProfessionalView = ({
+  content,
+}: {
+  content: Pick<IPage, "lang" | "components">;
+}) => {
   const {
     data: { success, errors, profile, route },
     isValidating,
     isSuccessfullySaved,
     handleSubmit,
-  } = useUpsertProfessional(content.lang, user?.name);
+  } = useUpsertProfessional(content.lang);
 
   const {
     prefix,
-    givenName,
+    givenName = "",
     familyName,
-    addresses,
-    phones,
-    emails,
-    websites,
-    languageLevels,
-    consultationHours,
-    profession,
+    addresses = [],
+    phones = [],
+    emails = [],
+    websites = [],
+    languageLevels = [],
+    consultationHours = [],
+    profession = 0,
     services,
-  } = profile;
+  } = profile ?? {};
 
   const {
     professionSelect,
@@ -79,9 +81,9 @@ export const UpsertProfessionalView = ({ content }: { content: IPage }) => {
 
   return (
     <Form className="hedi--edit-profile" onSubmit={handleSubmit}>
-      {errors && (
+      {/* {errors && (
         <InlineNotification kind="error" title="Error" subtitle={errors} />
-      )}
+      )} */}
 
       <Row className="hedi--group hedi--group--profile-type">
         <FormGroup legendText={<h2>Tätigkeitsbereich</h2>}>
@@ -119,7 +121,7 @@ export const UpsertProfessionalView = ({ content }: { content: IPage }) => {
 
       <div className="hedi--group hedi--group--language-skills">
         <LanguageSkillsInput
-          languageLevels={languageLevels}
+          value={languageLevels}
           {...languageSkillsInputDefinition}
         />
       </div>
