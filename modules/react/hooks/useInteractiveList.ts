@@ -1,12 +1,8 @@
-import {
-  addressToInput,
-  IAddress,
-  IAddressInput,
-} from "@/modules/profile/types";
 import { useEffect, useState } from "react";
 
 export const useInteractiveList = <T>(
-  initialList?: Partial<T | undefined>[]
+  initialList?: Partial<T>[],
+  onChange?: (data: Partial<T>[]) => void
 ) => {
   const [list, setList] = useState(initialList ?? []);
 
@@ -15,20 +11,24 @@ export const useInteractiveList = <T>(
   }, [initialList]);
 
   const handleAddClick = () => {
-    setList(p => [...p, undefined]);
+    setList(prev => [...prev, {}]);
   };
 
   const handleRemoveClick = (i: number) => {
-    setList(p => {
-      p.splice(i, 1);
-      return [...p];
+    setList(prev => {
+      prev.splice(i, 1);
+      const newState = [...prev];
+      if (onChange) onChange(newState);
+      return newState;
     });
   };
 
   const handleItemChange = (item: Partial<T>, i: number) => {
-    setList(previous => {
-      previous[i] = item;
-      return [...previous];
+    setList(prev => {
+      prev[i] = item;
+      const newState = [...prev];
+      if (onChange) onChange(newState);
+      return newState;
     });
   };
 
