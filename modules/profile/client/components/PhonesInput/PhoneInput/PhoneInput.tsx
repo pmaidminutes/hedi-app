@@ -11,7 +11,7 @@ import { IPhoneInput } from "../../../../types";
 import { usePhoneInput } from "./usePhoneInput";
 
 export type IPhoneInputProps = {
-  phoneInput?: Partial<IPhoneInput>;
+  value?: Partial<IPhoneInput>;
 } & IPhoneInputDefinition &
   IPhoneInputConfig;
 
@@ -28,15 +28,10 @@ export interface IPhoneInputConfig {
 }
 
 export const PhoneInput: React.FC<IPhoneInputProps> = props => {
-  const {
-    phoneInput: initialPhoneInput,
-    onChange,
-    children,
-    ...definition
-  } = props;
+  const { value, onChange, children, ...definition } = props;
 
   const { dataKind, phone, phoneKind, dataVisibility } = usePhoneInput(
-    initialPhoneInput,
+    value,
     onChange
   );
 

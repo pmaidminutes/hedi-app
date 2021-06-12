@@ -11,7 +11,7 @@ import { IPhoneInput } from "../../../types";
 import { PhoneInput, IPhoneInputDefinition } from "./PhoneInput";
 
 export type IPhonesInputProps = {
-  phones?: Partial<IPhoneInput>[];
+  value?: Partial<IPhoneInput>[];
 } & IPhonesInputDefinition &
   Partial<FormGroupProps>;
 
@@ -24,7 +24,7 @@ export interface IPhonesInputDefinition {
 
 export const PhonesInput = (props: IPhonesInputProps) => {
   const {
-    phones,
+    value,
     phoneInputDefinition,
     phonesLabel,
     addButton,
@@ -37,13 +37,13 @@ export const PhonesInput = (props: IPhonesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(phones);
+  } = useInteractiveList(value);
 
   return (
     <FormGroup legendText={<Label {...phonesLabel} />} {...formGroupProps}>
-      {phoneInputs.map((a, i) => (
+      {phoneInputs.map((value, i) => (
         <PhoneInput
-          phoneInput={a}
+          value={value}
           {...phoneInputDefinition}
           onChange={item => handleItemChange(item, i)}>
           <Button
