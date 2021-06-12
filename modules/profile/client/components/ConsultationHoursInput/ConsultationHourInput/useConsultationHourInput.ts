@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IConsultationHourInput } from "../../../../types";
 
@@ -6,10 +7,12 @@ export const useConsultationHourInput = (
   onChange?: (consultationHourInput: Partial<IConsultationHourInput>) => void
 ) => {
   const parsers: IConverterMap<IConsultationHourInput> = {
-    weekday: e => (e.value ? parseInt(e.value) : undefined),
+    weekday: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
     startTime: null,
     endTime: null,
-    availability: e => (e.value ? parseInt(e.value) : undefined),
+    availability: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
   };
 
   return useCombinedInputs(parsers, initialConsultationHourInput, onChange);

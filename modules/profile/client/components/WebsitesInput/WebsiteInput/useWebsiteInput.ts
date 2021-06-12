@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IWebsiteInput } from "../../../../types";
 
@@ -6,9 +7,11 @@ export const useWebsiteInput = (
   onChange?: (websiteInput: Partial<IWebsiteInput>) => void
 ) => {
   const parsers: IConverterMap<IWebsiteInput> = {
-    dataKind: e => (e.value ? parseInt(e.value) : undefined),
+    dataKind: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
     website: null,
-    dataVisibility: e => (e.value ? parseInt(e.value) : undefined),
+    dataVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
   };
 
   return useCombinedInputs(parsers, initialWebsiteInput, onChange);

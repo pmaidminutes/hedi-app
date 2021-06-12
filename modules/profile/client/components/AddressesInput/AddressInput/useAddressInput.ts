@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IAddressInput } from "../../../../types";
 
@@ -6,14 +7,18 @@ export const useAddressInput = (
   onChange?: (addressInput: Partial<IAddressInput>) => void
 ) => {
   const parsers: IConverterMap<IAddressInput> = {
-    dataKind: e => (e.value ? parseInt(e.value) : undefined),
+    dataKind: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
     city: null,
-    postalCode: e => (e.value ? parseInt(e.value) : undefined),
-    cityVisibility: e => (e.value ? parseInt(e.value) : undefined),
+    postalCode: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
+    cityVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
     street: null,
     streetNumber: null,
     additionalInfo: null,
-    streetVisibility: e => (e.value ? parseInt(e.value) : undefined),
+    streetVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
   };
 
   return useCombinedInputs(parsers, initialAddressInput, onChange);

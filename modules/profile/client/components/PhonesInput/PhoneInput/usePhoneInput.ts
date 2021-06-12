@@ -1,3 +1,4 @@
+import { ChangeEvent } from "react";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IPhoneInput } from "../../../../types";
 
@@ -6,10 +7,13 @@ export const usePhoneInput = (
   onChange?: (phoneInput: Partial<IPhoneInput>) => void
 ) => {
   const parsers: IConverterMap<IPhoneInput> = {
-    dataKind: e => (e.value ? parseInt(e.value) : undefined),
+    dataKind: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
     phone: null,
-    phoneKind: e => (e.value ? parseInt(e.value) : undefined),
-    dataVisibility: e => (e.value ? parseInt(e.value) : undefined),
+    phoneKind: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
+    dataVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : undefined,
   };
 
   return useCombinedInputs(parsers, initialPhoneInput, onChange);

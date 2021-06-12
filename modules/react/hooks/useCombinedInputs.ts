@@ -3,17 +3,16 @@ import { setProperty } from "@/modules/common/utils";
 
 export interface IInputState<T> {
   value: T;
-  onChange: (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => void;
+  onChange: (e: any) => void;
 }
 
-type IElementValueFn<T> =
-  | null
-  | undefined
-  | ((target: HTMLInputElement | HTMLSelectElement) => Partial<T>[keyof T]);
+type IElementValueFn<T> = null | undefined | ((e: any) => Partial<T>[keyof T]);
 
 export type IConverterMap<T> = { [K in keyof T]?: IElementValueFn<T> };
 
-export type IInputStateMap<T> = { [K in keyof T]: IInputState<Partial<T>[K]> };
+export type IInputStateMap<T> = {
+  [K in keyof T]-?: IInputState<Partial<T>[K]>;
+};
 
 export function useCombinedInputs<T>(
   converters: IConverterMap<T>,
@@ -28,10 +27,8 @@ export function useCombinedInputs<T>(
 
   const inputStateMap = {} as IInputStateMap<T>;
   for (const [key, func] of Object.entries<IElementValueFn<T>>(converters)) {
-    const handleChange = (
-      e: ChangeEvent<HTMLInputElement | HTMLSelectElement>
-    ) => {
-      const value = func ? func(e.target) : e.target.value;
+    const handleChange = (e: ChangeEvent<HTMLSelectElement>) => {
+      const value = func ? func(e) : e.target?.value;
       setState(p => {
         const newState = { ...p, [key]: value };
         if (onChange) onChange(newState);
