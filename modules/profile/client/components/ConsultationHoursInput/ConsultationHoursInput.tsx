@@ -24,7 +24,7 @@ import {
 import { useInteractiveList } from "@/modules/react/hooks";
 
 export type IConsultationHoursInputProps = {
-  consultationHours?: Partial<IConsultationHourInput>[];
+  value?: Partial<IConsultationHourInput>[];
 } & IConsultationHoursInputDefinition &
   Partial<FormGroupProps>;
 
@@ -41,7 +41,7 @@ export interface IConsultationHoursInputDefinition {
 
 export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
   const {
-    consultationHours,
+    value,
     consultationHoursLabel,
     weekdayTitle,
     startTimeTitle,
@@ -57,7 +57,7 @@ export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(consultationHours);
+  } = useInteractiveList(value);
   return (
     <FormGroup
       legendText={<Label {...consultationHoursLabel} />}
@@ -83,11 +83,11 @@ export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {consultationHourInputs?.map((chi, i) => (
+              {consultationHourInputs?.map((value, i) => (
                 <ConsultationHourInput
                   {...consultationHourInputDefinition}
-                  key={`${i}${chi?.weekday}${chi?.availability}`}
-                  consultationHourInput={chi}
+                  key={`${i}${value?.weekday}${value?.availability}`}
+                  value={value}
                   onChange={item => handleItemChange(item, i)}>
                   <Button
                     {...removeButton}

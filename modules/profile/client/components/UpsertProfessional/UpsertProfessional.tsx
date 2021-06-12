@@ -111,7 +111,7 @@ export const UpsertProfessionalView = ({ content }: { content: IPage }) => {
 
       <div className="hedi--group hedi--group--consultation-hours">
         <ConsultationHoursInput
-          consultationHours={consultationHours}
+          value={consultationHours}
           {...consultationHoursInputDefinition}
         />
       </div>

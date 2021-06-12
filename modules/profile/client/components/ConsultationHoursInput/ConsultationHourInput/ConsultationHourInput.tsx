@@ -9,7 +9,7 @@ import { IConsultationHourInput } from "../../../../types";
 import { useConsultationHourInput } from "./useConsultationHourInput";
 
 export type IConsultationHourInputProps = {
-  consultationHourInput?: Partial<IConsultationHourInput>;
+  value?: Partial<IConsultationHourInput>;
 } & IConsultationHourInputDefinition &
   IConsultationHourInputConfig;
 
@@ -30,7 +30,7 @@ interface IConsultationHourInputConfig {
 
 export const ConsultationHourInput: React.FC<IConsultationHourInputProps> = props => {
   const {
-    consultationHourInput: initialConsultationHourInput,
+    value,
     weekdayTitle,
     weekdaySelect,
     startTimeTitle,
@@ -49,7 +49,7 @@ export const ConsultationHourInput: React.FC<IConsultationHourInputProps> = prop
     endTime,
     availability,
     state,
-  } = useConsultationHourInput(initialConsultationHourInput, onChange);
+  } = useConsultationHourInput(value, onChange);
   return (
     <TableRow>
       <TableCell data-th={weekdayTitle}>
