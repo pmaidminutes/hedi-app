@@ -13,13 +13,18 @@ import { WebsiteInput, IWebsiteInputDefinition } from "./WebsiteInput";
 export type IWebsitesInputProps = {
   value?: Partial<IWebsiteInput>[];
 } & IWebsitesInputDefinition &
-  Partial<FormGroupProps>;
+  IWebsitesInputConfig &
+  Partial<Omit<FormGroupProps, "onChange">>;
 
 export interface IWebsitesInputDefinition {
   websiteInputDefinition: IWebsiteInputDefinition;
   websitesLabel: ILabelComponent;
   addButton: IButtonComponent;
   removeButton: IButtonComponent;
+}
+
+interface IWebsitesInputConfig {
+  onChange?: (websites: Partial<IWebsiteInput>[]) => void;
 }
 
 export const WebsitesInput = (props: IWebsitesInputProps) => {
@@ -29,6 +34,7 @@ export const WebsitesInput = (props: IWebsitesInputProps) => {
     websitesLabel,
     addButton,
     removeButton,
+    onChange,
     ...formGroupProps
   } = props;
 
@@ -37,7 +43,7 @@ export const WebsitesInput = (props: IWebsitesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value);
+  } = useInteractiveList(value, onChange);
 
   return (
     <FormGroup legendText={<Label {...websitesLabel} />} {...formGroupProps}>
