@@ -13,13 +13,18 @@ import { PhoneInput, IPhoneInputDefinition } from "./PhoneInput";
 export type IPhonesInputProps = {
   value?: Partial<IPhoneInput>[];
 } & IPhonesInputDefinition &
-  Partial<FormGroupProps>;
+  IPhonesInputConfig &
+  Partial<Omit<FormGroupProps, "onChange">>;
 
 export interface IPhonesInputDefinition {
   phoneInputDefinition: IPhoneInputDefinition;
   phonesLabel: ILabelComponent;
   addButton: IButtonComponent;
   removeButton: IButtonComponent;
+}
+
+interface IPhonesInputConfig {
+  onChange?: (phones: Partial<IPhoneInput>[]) => void;
 }
 
 export const PhonesInput = (props: IPhonesInputProps) => {
@@ -29,6 +34,7 @@ export const PhonesInput = (props: IPhonesInputProps) => {
     phonesLabel,
     addButton,
     removeButton,
+    onChange,
     ...formGroupProps
   } = props;
 
@@ -37,7 +43,7 @@ export const PhonesInput = (props: IPhonesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value);
+  } = useInteractiveList(value, onChange);
 
   return (
     <FormGroup legendText={<Label {...phonesLabel} />} {...formGroupProps}>
