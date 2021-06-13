@@ -45,6 +45,9 @@ export function professionalToInput(
   professional: IProfessional
 ): IProfessionalInput {
   const {
+    prefix,
+    givenName,
+    familyName,
     addresses,
     phones,
     emails,
@@ -53,9 +56,11 @@ export function professionalToInput(
     consultationHours,
     profession,
     services,
-    ...rest
   } = professional;
   return {
+    prefix,
+    givenName,
+    familyName,
     addresses: addresses.map(addressToInput),
     phones: phones.map(phoneToInput),
     emails: emails.map(emailToInput),
@@ -64,6 +69,5 @@ export function professionalToInput(
     consultationHours: consultationHours.map(consultationHourToInput),
     profession: profession.index,
     services: services.map(s => s.route),
-    ...rest,
   };
 }

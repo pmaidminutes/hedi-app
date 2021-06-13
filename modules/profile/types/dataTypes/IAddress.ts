@@ -41,11 +41,24 @@ export interface IAddressInput {
 }
 
 export function addressToInput(address: IAddress): IAddressInput {
-  const { dataKind, cityVisibility, streetVisibility, ...rest } = address;
+  const {
+    dataKind,
+    city,
+    postalCode,
+    cityVisibility,
+    street,
+    streetNumber,
+    streetVisibility,
+    additionalInfo,
+  } = address;
   return {
     dataKind: dataKind.index,
+    city,
+    postalCode,
     cityVisibility: cityVisibility.index,
+    street,
+    streetNumber,
     streetVisibility: streetVisibility.index,
-    ...rest,
+    additionalInfo,
   };
 }
