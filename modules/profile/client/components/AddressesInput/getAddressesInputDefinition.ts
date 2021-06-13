@@ -15,12 +15,12 @@ export const getAddressesInputDefinition = (
     text: "Adressen",
   }),
   addButton: getButtonInstance(components, "addressAddButton", {
-    buttonKind: "button",
+    buttonKind: "primary",
     usage: "",
     text: "Adresse Hinzufügen",
   }),
   removeButton: getButtonInstance(components, "addressRemoveButton", {
-    buttonKind: "button",
+    buttonKind: "ghost",
     usage: "",
     text: "Adresse Entfernen",
   }),
