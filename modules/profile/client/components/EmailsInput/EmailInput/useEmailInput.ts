@@ -1,18 +1,20 @@
 import { ChangeEvent } from "react";
 import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
-import { IEmailInput } from "../../../../types";
+import { EmailInputDefault, IEmailInput } from "../../../../types";
 
 export const useEmailInput = (
-  initialEmailInput: IEmailInput,
+  initialValue?: IEmailInput,
+  defaultValue = EmailInputDefault,
   onChange?: (emailInput: IEmailInput) => void
 ) => {
   const parsers: IConverterMap<IEmailInput> = {
     dataKind: (e: ChangeEvent<HTMLSelectElement>) =>
-      e.target.value ? parseInt(e.target.value) : 0,
-    email: null,
+      e.target.value ? parseInt(e.target.value) : defaultValue.dataKind,
+    email: (e: ChangeEvent<HTMLInputElement>) =>
+      e.target.value ?? defaultValue.email,
     dataVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
-      e.target.value ? parseInt(e.target.value) : 0,
+      e.target.value ? parseInt(e.target.value) : defaultValue.dataVisibility,
   };
 
-  return useCombinedInputs(parsers, initialEmailInput, onChange);
+  return useCombinedInputs(parsers, initialValue ?? defaultValue, onChange);
 };

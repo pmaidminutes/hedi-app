@@ -7,7 +7,7 @@ import {
   ITextInputComponent,
   TextInput,
 } from "@/modules/components";
-import { IWebsiteInput, WebsiteInputDefault } from "../../../../types";
+import { IWebsiteInput } from "../../../../types";
 import { useWebsiteInput } from "./useWebsiteInput";
 
 export type IWebsiteInputProps = {
@@ -31,7 +31,8 @@ export const WebsiteInput: React.FC<IWebsiteInputProps> = props => {
   const { value, defaultValue, onChange, children, ...definition } = props;
 
   const { dataKind, website, dataVisibility } = useWebsiteInput(
-    value ?? defaultValue ?? WebsiteInputDefault,
+    value,
+    defaultValue,
     onChange
   );
 

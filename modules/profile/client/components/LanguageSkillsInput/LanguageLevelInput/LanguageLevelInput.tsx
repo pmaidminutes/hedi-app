@@ -1,9 +1,6 @@
 import { TableCell, TableRow } from "carbon-components-react";
 import { ISelectComponent, Select } from "@/modules/components";
-import {
-  ILanguageLevelInput,
-  LanguageLevelInputDefault,
-} from "../../../../types";
+import { ILanguageLevelInput } from "../../../../types";
 import { useLanguageLevelInput } from "./useLanguageLevelInput";
 
 export type ILanguageLevelInputProps = {
@@ -36,7 +33,8 @@ export const LanguageLevelInput: React.FC<ILanguageLevelInputProps> = props => {
   } = props;
 
   const { langcode, level, state } = useLanguageLevelInput(
-    value ?? defaultValue ?? LanguageLevelInputDefault,
+    value,
+    defaultValue,
     onChange
   );
   return (

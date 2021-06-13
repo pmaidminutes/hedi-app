@@ -1,16 +1,21 @@
 import { ChangeEvent } from "react";
 import { IConverterMap, useCombinedInputs } from "@/modules/react/hooks";
-import { ILanguageLevelInput } from "../../../../types";
+import {
+  ILanguageLevelInput,
+  LanguageLevelInputDefault,
+} from "../../../../types";
 
 export const useLanguageLevelInput = (
-  initialLanguageLevelInput: ILanguageLevelInput,
+  initialValue?: ILanguageLevelInput,
+  defaultValue = LanguageLevelInputDefault,
   onChange?: (languageLevelInput: ILanguageLevelInput) => void
 ) => {
   const parsers: IConverterMap<ILanguageLevelInput> = {
-    langcode: null,
+    langcode: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ?? defaultValue.langcode,
     level: (e: ChangeEvent<HTMLSelectElement>) =>
-      e.target.value ? parseInt(e.target.value) : 0,
+      e.target.value ? parseInt(e.target.value) : defaultValue.level,
   };
 
-  return useCombinedInputs(parsers, initialLanguageLevelInput, onChange);
+  return useCombinedInputs(parsers, initialValue ?? defaultValue, onChange);
 };

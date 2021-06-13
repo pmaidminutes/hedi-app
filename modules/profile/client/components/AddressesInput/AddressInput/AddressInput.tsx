@@ -9,7 +9,7 @@ import {
   INumberInputComponent,
   NumberInput,
 } from "@/modules/components";
-import { AddressInputDefault, IAddressInput } from "../../../../types";
+import { IAddressInput } from "../../../../types";
 import { useAddressInput } from "./useAddressInput";
 
 export type IAddressInputProps = {
@@ -46,7 +46,7 @@ export const AddressInput: React.FC<IAddressInputProps> = props => {
     streetNumber,
     streetVisibility,
     additionalInfo,
-  } = useAddressInput(value ?? defaultValue ?? AddressInputDefault, onChange);
+  } = useAddressInput(value, defaultValue, onChange);
 
   const {
     addressLabel,

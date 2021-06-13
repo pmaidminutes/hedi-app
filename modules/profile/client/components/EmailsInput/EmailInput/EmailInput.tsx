@@ -7,7 +7,7 @@ import {
   ITextInputComponent,
   TextInput,
 } from "@/modules/components";
-import { EmailInputDefault, IEmailInput } from "../../../../types";
+import { IEmailInput } from "../../../../types";
 import { useEmailInput } from "./useEmailInput";
 
 export type IEmailInputProps = {
@@ -31,7 +31,8 @@ export const EmailInput: React.FC<IEmailInputProps> = props => {
   const { value, defaultValue, onChange, children, ...definition } = props;
 
   const { dataKind, email, dataVisibility } = useEmailInput(
-    value ?? defaultValue ?? EmailInputDefault,
+    value,
+    defaultValue,
     onChange
   );
 
