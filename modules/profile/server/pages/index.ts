@@ -1,4 +1,4 @@
 export * from "./getProfilePage";
 export * from "./getProfileListPage";
 export * from "./getProfilePreviewPage";
-export * from "./getUpsertProfessionalPage";
+export * from "./getProfileEditPage";

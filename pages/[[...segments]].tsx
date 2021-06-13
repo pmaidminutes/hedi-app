@@ -39,6 +39,7 @@ import {
 } from "@/modules/profile/server";
 import {
   TryProfile,
+  TryProfileEdit,
   TryProfileList,
   TryProfilePreview,
 } from "@/modules/profile/client/components";
@@ -155,10 +156,10 @@ export default function segments(props: IPageProps<IPage>) {
         <TryLogin content={content} key="login" />
         <TryRegistration content={content} key="registration" />
 
-        <TryProfilePreview content={content} key="profilePreview" />
         <TryProfile content={content} key="profile" />
+        <TryProfileEdit content={content} key="profileEdit" />
+        <TryProfilePreview content={content} key="profilePreview" />
         <TryProfileList content={content} key="profileList" />
-        {/* <TryEditProfile content={content} key="editProfile" /> */}
 
         <TryFeedback content={content} key="feedback" />
 

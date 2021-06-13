@@ -13,6 +13,7 @@ import { getProfileTestLandingPage } from "@/modules/landingpage/server";
 import {
   getProfileListPage,
   getProfilePreviewPage,
+  getProfileEditPage,
 } from "@/modules/profile/server";
 import { getCategoryRootPage } from "@/modules/editorial/category/server";
 
@@ -26,6 +27,9 @@ export const getPageType = async (
       break;
     case "register":
       result = await getRegistrationPage(content);
+      break;
+    case "profileEdit":
+      result = await getProfileEditPage(content);
       break;
     case "profilePreview":
       result = await getProfilePreviewPage(content);
