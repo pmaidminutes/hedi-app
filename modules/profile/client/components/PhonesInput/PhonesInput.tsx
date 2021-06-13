@@ -11,7 +11,7 @@ import { IPhoneInput, PhoneInputDefault } from "../../../types";
 import { PhoneInput, IPhoneInputDefinition } from "./PhoneInput";
 
 export type IPhonesInputProps = {
-  value?: Partial<IPhoneInput>[];
+  value?: IPhoneInput[];
 } & IPhonesInputDefinition &
   IPhonesInputConfig &
   Partial<Omit<FormGroupProps, "onChange">>;
@@ -25,7 +25,7 @@ export interface IPhonesInputDefinition {
 
 interface IPhonesInputConfig {
   defaultItem?: IPhoneInput;
-  onChange?: (phones: Partial<IPhoneInput>[]) => void;
+  onChange?: (phones: IPhoneInput[]) => void;
 }
 
 export const PhonesInput = (props: IPhonesInputProps) => {
