@@ -25,6 +25,11 @@ export interface IConsultationHourInput {
   availability: number;
 }
 
+export const ConsultationHourInputDefault: IConsultationHourInput = {
+  weekday: 0,
+  availability: 0,
+};
+
 export function consultationHourToInput(
   consultationHour: IConsultationHour
 ): IConsultationHourInput {

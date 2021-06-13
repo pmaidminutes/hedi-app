@@ -13,6 +13,11 @@ export interface ILanguageLevelInput {
   level: number;
 }
 
+export const LanguageLevelInputDefault: ILanguageLevelInput = {
+  langcode: "de",
+  level: 0,
+};
+
 export function languageLevelToInput(
   languageLevel: ILanguageLevel
 ): ILanguageLevelInput {

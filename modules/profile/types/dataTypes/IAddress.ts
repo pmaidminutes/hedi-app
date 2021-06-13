@@ -40,6 +40,14 @@ export interface IAddressInput {
   additionalInfo?: string;
 }
 
+export const AddressInputDefault: IAddressInput = {
+  dataKind: 0,
+  city: "",
+  postalCode: 0,
+  cityVisibility: 0,
+  streetVisibility: 0,
+};
+
 export function addressToInput(address: IAddress): IAddressInput {
   const {
     dataKind,

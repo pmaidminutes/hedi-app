@@ -41,6 +41,18 @@ export interface IProfessionalInput extends IBusinessProfileInput {
   familyName?: string;
 }
 
+export const ProfessionalInputDefault: IProfessionalInput = {
+  givenName: "",
+  profession: 0,
+  addresses: [],
+  phones: [],
+  emails: [],
+  websites: [],
+  languageLevels: [],
+  consultationHours: [],
+  services: [],
+};
+
 export function professionalToInput(
   professional: IProfessional
 ): IProfessionalInput {

@@ -23,6 +23,12 @@ export interface IWebsiteInput {
   dataVisibility: number;
 }
 
+export const WebsiteInputDefault: IWebsiteInput = {
+  dataKind: 0,
+  website: "",
+  dataVisibility: 0,
+};
+
 export function websiteToInput(website: IWebsite): IWebsiteInput {
   return {
     dataKind: website.dataKind.index,

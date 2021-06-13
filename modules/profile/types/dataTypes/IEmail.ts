@@ -23,6 +23,12 @@ export interface IEmailInput {
   dataVisibility: number;
 }
 
+export const EmailInputDefault: IEmailInput = {
+  dataKind: 0,
+  email: "",
+  dataVisibility: 0,
+};
+
 export function emailToInput(email: IEmail): IEmailInput {
   return {
     dataKind: email.dataKind.index,

@@ -28,6 +28,13 @@ export interface IPhoneInput {
   dataVisibility: number;
 }
 
+export const PhoneInputDefault: IPhoneInput = {
+  dataKind: 0,
+  phone: "",
+  phoneKind: 0,
+  dataVisibility: 0,
+};
+
 export function phoneToInput(phone: IPhone): IPhoneInput {
   return {
     dataKind: phone.dataKind.index,
