@@ -7,7 +7,7 @@ import {
   Label,
 } from "@/modules/components";
 import { useInteractiveList } from "@/modules/react/hooks";
-import { IWebsiteInput } from "../../../types";
+import { IWebsiteInput, WebsiteInputDefault } from "../../../types";
 import { WebsiteInput, IWebsiteInputDefinition } from "./WebsiteInput";
 
 export type IWebsitesInputProps = {
@@ -24,6 +24,7 @@ export interface IWebsitesInputDefinition {
 }
 
 interface IWebsitesInputConfig {
+  defaultItem?: IWebsiteInput;
   onChange?: (websites: Partial<IWebsiteInput>[]) => void;
 }
 
@@ -34,6 +35,7 @@ export const WebsitesInput = (props: IWebsitesInputProps) => {
     websitesLabel,
     addButton,
     removeButton,
+    defaultItem,
     onChange,
     ...formGroupProps
   } = props;
@@ -43,7 +45,7 @@ export const WebsitesInput = (props: IWebsitesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value, onChange);
+  } = useInteractiveList(defaultItem ?? WebsiteInputDefault, value, onChange);
 
   return (
     <FormGroup legendText={<Label {...websitesLabel} />} {...formGroupProps}>

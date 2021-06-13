@@ -16,7 +16,7 @@ import {
   ILabelComponent,
   Label,
 } from "@/modules/components";
-import { ILanguageLevel } from "../../../types";
+import { ILanguageLevelInput, LanguageLevelInputDefault } from "../../../types";
 import {
   ILanguageLevelInputDefinition,
   LanguageLevelInput,
@@ -24,7 +24,7 @@ import {
 import { useInteractiveList } from "@/modules/react/hooks";
 
 export type ILanguageSkillsInputProps = {
-  value?: Partial<ILanguageLevel>[];
+  value?: Partial<ILanguageLevelInput>[];
 } & ILanguageSkillsInputDefinition &
   ILanguageSkillsInputConfig &
   Partial<Omit<FormGroupProps, "onChange">>;
@@ -39,7 +39,8 @@ export interface ILanguageSkillsInputDefinition {
 }
 
 interface ILanguageSkillsInputConfig {
-  onChange?: (languageLevels: Partial<ILanguageLevel>[]) => void;
+  defaultItem?: ILanguageLevelInput;
+  onChange?: (languageLevels: Partial<ILanguageLevelInput>[]) => void;
 }
 
 export const LanguageSkillsInput = (props: ILanguageSkillsInputProps) => {
@@ -51,6 +52,7 @@ export const LanguageSkillsInput = (props: ILanguageSkillsInputProps) => {
     languageLevelInputDefinition,
     addButton,
     removeButton,
+    defaultItem,
     onChange,
     ...formGroupProps
   } = props;
@@ -60,7 +62,11 @@ export const LanguageSkillsInput = (props: ILanguageSkillsInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value, onChange);
+  } = useInteractiveList(
+    defaultItem ?? LanguageLevelInputDefault,
+    value,
+    onChange
+  );
   return (
     <FormGroup
       legendText={<Label {...languageSkillsLabel} />}

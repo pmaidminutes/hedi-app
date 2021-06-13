@@ -16,7 +16,10 @@ import {
   ILabelComponent,
   Label,
 } from "@/modules/components";
-import { IConsultationHourInput } from "../../../types";
+import {
+  ConsultationHourInputDefault,
+  IConsultationHourInput,
+} from "../../../types";
 import {
   ConsultationHourInput,
   IConsultationHourInputDefinition,
@@ -41,6 +44,7 @@ export interface IConsultationHoursInputDefinition {
 }
 
 interface IConsultationHoursInputConfig {
+  defaultItem?: IConsultationHourInput;
   onChange?: (consultationHours: Partial<IConsultationHourInput>[]) => void;
 }
 
@@ -55,6 +59,7 @@ export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
     consultationHourInputDefinition,
     addButton,
     removeButton,
+    defaultItem,
     onChange,
     ...formGroupProps
   } = props;
@@ -63,7 +68,11 @@ export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value, onChange);
+  } = useInteractiveList(
+    defaultItem ?? ConsultationHourInputDefault,
+    value,
+    onChange
+  );
   return (
     <FormGroup
       legendText={<Label {...consultationHoursLabel} />}

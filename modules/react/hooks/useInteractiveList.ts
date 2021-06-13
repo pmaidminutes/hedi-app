@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 
 export const useInteractiveList = <T>(
+  defaultItem: T,
   initialList?: Partial<T>[],
   onChange?: (data: Partial<T>[]) => void
 ) => {
@@ -11,7 +12,7 @@ export const useInteractiveList = <T>(
   }, [initialList]);
 
   const handleAddClick = () => {
-    setList(prev => [...prev, {}]);
+    setList(prev => [...prev, defaultItem]);
   };
 
   const handleRemoveClick = (i: number) => {

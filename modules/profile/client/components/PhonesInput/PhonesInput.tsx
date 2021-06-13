@@ -7,7 +7,7 @@ import {
   Label,
 } from "@/modules/components";
 import { useInteractiveList } from "@/modules/react/hooks";
-import { IPhoneInput } from "../../../types";
+import { IPhoneInput, PhoneInputDefault } from "../../../types";
 import { PhoneInput, IPhoneInputDefinition } from "./PhoneInput";
 
 export type IPhonesInputProps = {
@@ -24,6 +24,7 @@ export interface IPhonesInputDefinition {
 }
 
 interface IPhonesInputConfig {
+  defaultItem?: IPhoneInput;
   onChange?: (phones: Partial<IPhoneInput>[]) => void;
 }
 
@@ -34,6 +35,7 @@ export const PhonesInput = (props: IPhonesInputProps) => {
     phonesLabel,
     addButton,
     removeButton,
+    defaultItem,
     onChange,
     ...formGroupProps
   } = props;
@@ -43,7 +45,7 @@ export const PhonesInput = (props: IPhonesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value, onChange);
+  } = useInteractiveList(defaultItem ?? PhoneInputDefault, value, onChange);
 
   return (
     <FormGroup legendText={<Label {...phonesLabel} />} {...formGroupProps}>

@@ -7,7 +7,7 @@ import {
   ILabelComponent,
   Label,
 } from "@/modules/components";
-import { IAddressInput } from "../../../types";
+import { AddressInputDefault, IAddressInput } from "../../../types";
 import { AddressInput, IAddressInputDefinition } from "./AddressInput";
 
 export type IAddressesInputProps = {
@@ -24,6 +24,7 @@ export interface IAddressesInputDefinition {
 }
 
 interface IAddressesInputConfig {
+  defaultItem?: IAddressInput;
   onChange?: (addresses: Partial<IAddressInput>[]) => void;
 }
 
@@ -34,6 +35,7 @@ export const AddressesInput = (props: IAddressesInputProps) => {
     addressesLabel,
     addButton,
     removeButton,
+    defaultItem,
     onChange,
     ...formGroupProps
   } = props;
@@ -43,7 +45,7 @@ export const AddressesInput = (props: IAddressesInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value, onChange);
+  } = useInteractiveList(defaultItem ?? AddressInputDefault, value, onChange);
 
   return (
     <FormGroup legendText={<Label {...addressesLabel} />} {...formGroupProps}>

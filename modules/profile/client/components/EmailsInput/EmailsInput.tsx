@@ -6,7 +6,7 @@ import {
   ILabelComponent,
   Label,
 } from "@/modules/components";
-import { IEmailInput } from "../../../types";
+import { EmailInputDefault, IEmailInput } from "../../../types";
 import { EmailInput, IEmailInputDefinition } from "./EmailInput";
 import { useInteractiveList } from "@/modules/react/hooks";
 
@@ -24,6 +24,7 @@ export interface IEmailsInputDefinition {
 }
 
 interface IEmailsInputConfig {
+  defaultItem?: IEmailInput;
   onChange?: (emails: Partial<IEmailInput>[]) => void;
 }
 
@@ -34,6 +35,7 @@ export const EmailsInput = (props: IEmailsInputProps) => {
     emailsLabel,
     addButton,
     removeButton,
+    defaultItem,
     onChange,
     ...formGroupProps
   } = props;
@@ -43,7 +45,7 @@ export const EmailsInput = (props: IEmailsInputProps) => {
     handleAddClick,
     handleRemoveClick,
     handleItemChange,
-  } = useInteractiveList(value, onChange);
+  } = useInteractiveList(defaultItem ?? EmailInputDefault, value, onChange);
 
   return (
     <FormGroup legendText={<Label {...emailsLabel} />} {...formGroupProps}>
