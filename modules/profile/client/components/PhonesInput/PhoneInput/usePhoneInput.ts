@@ -3,7 +3,7 @@ import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IPhoneInput } from "../../../../types";
 
 export const usePhoneInput = (
-  initialPhoneInput?: Partial<IPhoneInput>,
+  initialPhoneInput: Partial<IPhoneInput>,
   onChange?: (phoneInput: Partial<IPhoneInput>) => void
 ) => {
   const parsers: IConverterMap<IPhoneInput> = {

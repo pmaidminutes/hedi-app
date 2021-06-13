@@ -9,7 +9,7 @@ import {
   INumberInputComponent,
   NumberInput,
 } from "@/modules/components";
-import { IAddressInput } from "../../../../types";
+import { AddressInputDefault, IAddressInput } from "../../../../types";
 import { useAddressInput } from "./useAddressInput";
 
 export type IAddressInputProps = {
@@ -30,11 +30,12 @@ export interface IAddressInputDefinition {
 }
 
 export interface IAddressInputConfig {
+  defaultValue?: IAddressInput;
   onChange?: (addressInput: Partial<IAddressInput>) => void;
 }
 
 export const AddressInput: React.FC<IAddressInputProps> = props => {
-  const { value, onChange, children, ...definition } = props;
+  const { value, defaultValue, onChange, children, ...definition } = props;
 
   const {
     dataKind,
@@ -45,7 +46,7 @@ export const AddressInput: React.FC<IAddressInputProps> = props => {
     streetNumber,
     streetVisibility,
     additionalInfo,
-  } = useAddressInput(value, onChange);
+  } = useAddressInput(value ?? defaultValue ?? AddressInputDefault, onChange);
 
   const {
     addressLabel,

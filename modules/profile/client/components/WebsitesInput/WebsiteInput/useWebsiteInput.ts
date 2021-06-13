@@ -3,7 +3,7 @@ import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IWebsiteInput } from "../../../../types";
 
 export const useWebsiteInput = (
-  initialWebsiteInput?: Partial<IWebsiteInput>,
+  initialWebsiteInput: Partial<IWebsiteInput>,
   onChange?: (websiteInput: Partial<IWebsiteInput>) => void
 ) => {
   const parsers: IConverterMap<IWebsiteInput> = {

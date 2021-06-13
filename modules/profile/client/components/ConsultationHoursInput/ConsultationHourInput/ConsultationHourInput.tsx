@@ -5,7 +5,10 @@ import {
   ISelectComponent,
   Select,
 } from "@/modules/components";
-import { IConsultationHourInput } from "../../../../types";
+import {
+  ConsultationHourInputDefault,
+  IConsultationHourInput,
+} from "../../../../types";
 import { useConsultationHourInput } from "./useConsultationHourInput";
 
 export type IConsultationHourInputProps = {
@@ -25,6 +28,7 @@ export interface IConsultationHourInputDefinition {
 }
 
 interface IConsultationHourInputConfig {
+  defaultValue?: IConsultationHourInput;
   onChange?: (consultationHourInput: Partial<IConsultationHourInput>) => void;
 }
 
@@ -39,8 +43,9 @@ export const ConsultationHourInput: React.FC<IConsultationHourInputProps> = prop
     endTimeTextInput,
     availabilityTitle,
     availabilitySelect,
-    children,
+    defaultValue,
     onChange,
+    children,
   } = props;
 
   const {
@@ -49,7 +54,10 @@ export const ConsultationHourInput: React.FC<IConsultationHourInputProps> = prop
     endTime,
     availability,
     state,
-  } = useConsultationHourInput(value, onChange);
+  } = useConsultationHourInput(
+    value ?? defaultValue ?? ConsultationHourInputDefault,
+    onChange
+  );
   return (
     <TableRow>
       <TableCell data-th={weekdayTitle}>

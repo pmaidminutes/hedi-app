@@ -3,7 +3,7 @@ import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IAddressInput } from "../../../../types";
 
 export const useAddressInput = (
-  initialAddressInput?: Partial<IAddressInput>,
+  initialAddressInput: Partial<IAddressInput>,
   onChange?: (addressInput: Partial<IAddressInput>) => void
 ) => {
   const parsers: IConverterMap<IAddressInput> = {

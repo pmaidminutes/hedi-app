@@ -3,7 +3,7 @@ import { useCombinedInputs, IConverterMap } from "@/modules/react/hooks";
 import { IConsultationHourInput } from "../../../../types";
 
 export const useConsultationHourInput = (
-  initialConsultationHourInput?: Partial<IConsultationHourInput>,
+  initialConsultationHourInput: Partial<IConsultationHourInput>,
   onChange?: (consultationHourInput: Partial<IConsultationHourInput>) => void
 ) => {
   const parsers: IConverterMap<IConsultationHourInput> = {

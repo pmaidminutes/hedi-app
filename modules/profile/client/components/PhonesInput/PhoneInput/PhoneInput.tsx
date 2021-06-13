@@ -7,7 +7,7 @@ import {
   ITextInputComponent,
   TextInput,
 } from "@/modules/components";
-import { IPhoneInput } from "../../../../types";
+import { IPhoneInput, PhoneInputDefault } from "../../../../types";
 import { usePhoneInput } from "./usePhoneInput";
 
 export type IPhoneInputProps = {
@@ -24,14 +24,15 @@ export interface IPhoneInputDefinition {
 }
 
 export interface IPhoneInputConfig {
+  defaultValue?: IPhoneInput;
   onChange?: (phoneInput: Partial<IPhoneInput>) => void;
 }
 
 export const PhoneInput: React.FC<IPhoneInputProps> = props => {
-  const { value, onChange, children, ...definition } = props;
+  const { value, defaultValue, onChange, children, ...definition } = props;
 
   const { dataKind, phone, phoneKind, dataVisibility } = usePhoneInput(
-    value,
+    value ?? defaultValue ?? PhoneInputDefault,
     onChange
   );
 

@@ -7,7 +7,7 @@ import {
   ITextInputComponent,
   TextInput,
 } from "@/modules/components";
-import { IEmailInput } from "../../../../types";
+import { EmailInputDefault, IEmailInput } from "../../../../types";
 import { useEmailInput } from "./useEmailInput";
 
 export type IEmailInputProps = {
@@ -23,13 +23,17 @@ export interface IEmailInputDefinition {
 }
 
 export interface IEmailInputConfig {
+  defaultValue?: IEmailInput;
   onChange?: (emailInput: Partial<IEmailInput>) => void;
 }
 
 export const EmailInput: React.FC<IEmailInputProps> = props => {
-  const { value, onChange, children, ...definition } = props;
+  const { value, defaultValue, onChange, children, ...definition } = props;
 
-  const { dataKind, email, dataVisibility } = useEmailInput(value, onChange);
+  const { dataKind, email, dataVisibility } = useEmailInput(
+    value ?? defaultValue ?? EmailInputDefault,
+    onChange
+  );
 
   const {
     emailLabel,

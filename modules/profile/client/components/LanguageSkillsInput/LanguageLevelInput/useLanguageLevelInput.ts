@@ -3,7 +3,7 @@ import { IConverterMap, useCombinedInputs } from "@/modules/react/hooks";
 import { ILanguageLevelInput } from "../../../../types";
 
 export const useLanguageLevelInput = (
-  initiallanguageLevelInput?: Partial<ILanguageLevelInput>,
+  initialLanguageLevelInput: Partial<ILanguageLevelInput>,
   onChange?: (languageLevelInput: Partial<ILanguageLevelInput>) => void
 ) => {
   const parsers: IConverterMap<ILanguageLevelInput> = {
@@ -12,5 +12,5 @@ export const useLanguageLevelInput = (
       e.target.value ? parseInt(e.target.value) : undefined,
   };
 
-  return useCombinedInputs(parsers, initiallanguageLevelInput, onChange);
+  return useCombinedInputs(parsers, initialLanguageLevelInput, onChange);
 };
