@@ -9,7 +9,7 @@ import { IPhoneInputProps } from "./PhoneInput";
 export const getPhoneInputDefinition = (
   components: IComponent[]
 ): IPhoneInputProps => ({
-  phoneLabel: getLabelInstance(components, "phoneLabel", {
+  phoneLabel: getLabelInstance(components, "phone", {
     labelKind: "span",
     text: "Telefonnummer",
   }),

@@ -14,13 +14,13 @@ export const getWebsitesInputDefinition = (
     labelKind: "span",
     text: "Webseiten",
   }),
-  addButton: getButtonInstance(components, "addButton", {
+  addButton: getButtonInstance(components, "websiteAddButton", {
     buttonKind: "primary",
     usage: "",
     text: "Webseite hinzufügen",
   }),
-  removeButton: getButtonInstance(components, "removeButton", {
-    buttonKind: "primary",
+  removeButton: getButtonInstance(components, "websiteRemoveButton", {
+    buttonKind: "ghost",
     usage: "",
     text: "Webseite entfernen",
   }),

@@ -20,7 +20,7 @@ export const getUpsertProfessionalViewDefinition = (
   professionSelect: getSelectInstance(components, "professionSelect", {
     items: [],
   }),
-  nameLabel: getLabelInstance(components, "nameLabel", {
+  nameLabel: getLabelInstance(components, "name", {
     labelKind: "span",
     text: "Name",
   }),

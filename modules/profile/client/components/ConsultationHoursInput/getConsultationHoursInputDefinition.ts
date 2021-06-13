@@ -13,25 +13,28 @@ export const getConsultationHoursInputDefinition = (
     components
   );
   return {
-    consultationHoursLabel: getLabelInstance(
-      components,
-      "consultationHoursLabel",
-      { labelKind: "span", text: "Erreichbarkeit" }
-    )!,
+    consultationHoursLabel: getLabelInstance(components, "consultationHours", {
+      labelKind: "span",
+      text: "Erreichbarkeit",
+    })!,
     weekdayTitle: consultationHourInputDefinition.weekdayTitle,
     startTimeTitle: consultationHourInputDefinition.startTimeTitle,
     endTimeTitle: consultationHourInputDefinition.endTimeTitle,
     availabilityTitle: consultationHourInputDefinition.availabilityTitle,
     consultationHourInputDefinition,
-    addButton: getButtonInstance(components, "addButton", {
+    addButton: getButtonInstance(components, "consulationHourAddButton", {
       buttonKind: "primary",
       usage: "",
       text: "Zeiten hinzufügen",
     }),
-    removeButton: getButtonInstance(components, "removeButton", {
-      buttonKind: "primary",
-      usage: "",
-      text: "Entfernen",
-    }),
+    removeButton: getButtonInstance(
+      components,
+      "consultationHourRemoveButton",
+      {
+        buttonKind: "ghost",
+        usage: "",
+        text: "Entfernen",
+      }
+    ),
   };
 };

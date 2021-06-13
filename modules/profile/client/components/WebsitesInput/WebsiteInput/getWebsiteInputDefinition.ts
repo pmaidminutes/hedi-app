@@ -9,7 +9,7 @@ import { IWebsiteInputProps } from "./WebsiteInput";
 export const getWebsiteInputDefinition = (
   components: IComponent[]
 ): IWebsiteInputProps => ({
-  websiteLabel: getLabelInstance(components, "websiteLabel", {
+  websiteLabel: getLabelInstance(components, "website", {
     labelKind: "span",
     text: "Webseite",
   }),

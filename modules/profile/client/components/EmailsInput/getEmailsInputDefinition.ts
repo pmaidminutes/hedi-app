@@ -14,13 +14,13 @@ export const getEmailsInputDefinition = (
     labelKind: "span",
     text: "Emails",
   }),
-  addButton: getButtonInstance(components, "addButton", {
+  addButton: getButtonInstance(components, "emailAddButton", {
     buttonKind: "primary",
     usage: "",
     text: "Email hinzufügen",
   }),
-  removeButton: getButtonInstance(components, "removeButton", {
-    buttonKind: "primary",
+  removeButton: getButtonInstance(components, "emailRemoveButton", {
+    buttonKind: "ghost",
     usage: "",
     text: "Email entfernen",
   }),

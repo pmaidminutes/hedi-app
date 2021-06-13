@@ -9,7 +9,7 @@ import { IEmailInputProps } from "./EmailInput";
 export const getEmailInputDefinition = (
   components: IComponent[]
 ): IEmailInputProps => ({
-  emailLabel: getLabelInstance(components, "emailLabel", {
+  emailLabel: getLabelInstance(components, "email", {
     labelKind: "span",
     text: "Email",
   }),

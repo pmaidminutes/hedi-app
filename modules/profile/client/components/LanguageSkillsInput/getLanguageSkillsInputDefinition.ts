@@ -13,20 +13,20 @@ export const getLanguageSkillsInputDefinition = (
     components
   );
   return {
-    languageSkillsLabel: getLabelInstance(components, "languageSkillsLabel", {
+    languageSkillsLabel: getLabelInstance(components, "languageSkills", {
       labelKind: "span",
       text: "Sprachverständnis",
     }),
     languageTitle: languageLevelInputDefinition.languageTitle,
     levelTitle: languageLevelInputDefinition.levelTitle,
     languageLevelInputDefinition,
-    addButton: getButtonInstance(components, "addButton", {
+    addButton: getButtonInstance(components, "languageLevelAddButton", {
       buttonKind: "primary",
       usage: "",
       text: "Sprache hinzufügen",
     }),
-    removeButton: getButtonInstance(components, "removeButton", {
-      buttonKind: "primary",
+    removeButton: getButtonInstance(components, "languageLevelRemoveButton", {
+      buttonKind: "ghost",
       usage: "",
       text: "Sprache entfernen",
     }),

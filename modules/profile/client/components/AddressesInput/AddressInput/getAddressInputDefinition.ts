@@ -10,7 +10,7 @@ import { IAddressInputProps } from "./AddressInput";
 export const getAddressInputDefinition = (
   components: IComponent[]
 ): IAddressInputProps => ({
-  addressLabel: getLabelInstance(components, "addressLabel", {
+  addressLabel: getLabelInstance(components, "address", {
     labelKind: "span",
     text: "Adresse",
   }),

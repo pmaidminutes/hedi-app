@@ -14,13 +14,13 @@ export const getPhonesInputDefinition = (
     labelKind: "span",
     text: "Telefonnummern",
   }),
-  addButton: getButtonInstance(components, "addButton", {
+  addButton: getButtonInstance(components, "phoneAddButton", {
     buttonKind: "primary",
     usage: "",
     text: "Telefonnummer hinzufügen",
   }),
-  removeButton: getButtonInstance(components, "removeButton", {
-    buttonKind: "primary",
+  removeButton: getButtonInstance(components, "phoneRemoveButton", {
+    buttonKind: "ghost",
     usage: "",
     text: "Telefonnummer entfernen",
   }),
