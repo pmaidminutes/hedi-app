@@ -7,7 +7,7 @@ import {
 import { useLanguageLevelInput } from "./useLanguageLevelInput";
 
 export type ILanguageLevelInputProps = {
-  value?: Partial<ILanguageLevelInput>;
+  value?: ILanguageLevelInput;
 } & ILanguageLevelInputDefinition &
   ILanguageLevelInputConfig;
 
@@ -20,7 +20,7 @@ export interface ILanguageLevelInputDefinition {
 
 interface ILanguageLevelInputConfig {
   defaultValue?: ILanguageLevelInput;
-  onChange?: (languageLevelInput: Partial<ILanguageLevelInput>) => void;
+  onChange?: (languageLevelInput: ILanguageLevelInput) => void;
 }
 
 export const LanguageLevelInput: React.FC<ILanguageLevelInputProps> = props => {

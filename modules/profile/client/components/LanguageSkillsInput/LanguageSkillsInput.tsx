@@ -24,7 +24,7 @@ import {
 import { useInteractiveList } from "@/modules/react/hooks";
 
 export type ILanguageSkillsInputProps = {
-  value?: Partial<ILanguageLevelInput>[];
+  value?: ILanguageLevelInput[];
 } & ILanguageSkillsInputDefinition &
   ILanguageSkillsInputConfig &
   Partial<Omit<FormGroupProps, "onChange">>;
@@ -40,7 +40,7 @@ export interface ILanguageSkillsInputDefinition {
 
 interface ILanguageSkillsInputConfig {
   defaultItem?: ILanguageLevelInput;
-  onChange?: (languageLevels: Partial<ILanguageLevelInput>[]) => void;
+  onChange?: (languageLevels: ILanguageLevelInput[]) => void;
 }
 
 export const LanguageSkillsInput = (props: ILanguageSkillsInputProps) => {

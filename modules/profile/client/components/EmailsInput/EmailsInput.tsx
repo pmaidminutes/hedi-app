@@ -11,7 +11,7 @@ import { EmailInput, IEmailInputDefinition } from "./EmailInput";
 import { useInteractiveList } from "@/modules/react/hooks";
 
 export type IEmailsInputProps = {
-  value?: Partial<IEmailInput>[];
+  value?: IEmailInput[];
 } & IEmailsInputDefinition &
   IEmailsInputConfig &
   Partial<Omit<FormGroupProps, "onChange">>;
@@ -25,7 +25,7 @@ export interface IEmailsInputDefinition {
 
 interface IEmailsInputConfig {
   defaultItem?: IEmailInput;
-  onChange?: (emails: Partial<IEmailInput>[]) => void;
+  onChange?: (emails: IEmailInput[]) => void;
 }
 
 export const EmailsInput = (props: IEmailsInputProps) => {

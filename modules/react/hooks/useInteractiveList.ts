@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 
 export const useInteractiveList = <T>(
   defaultItem: T,
-  initialList?: Partial<T>[],
-  onChange?: (data: Partial<T>[]) => void
+  initialList?: T[],
+  onChange?: (data: T[]) => void
 ) => {
   const [list, setList] = useState(initialList ?? []);
 
@@ -24,7 +24,7 @@ export const useInteractiveList = <T>(
     });
   };
 
-  const handleItemChange = (item: Partial<T>, i: number) => {
+  const handleItemChange = (item: T, i: number) => {
     setList(prev => {
       prev[i] = item;
       const newState = [...prev];

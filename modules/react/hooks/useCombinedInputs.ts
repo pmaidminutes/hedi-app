@@ -6,23 +6,23 @@ export interface IInputState<T> {
   onChange: (e: any) => void;
 }
 
-type IElementValueFn<T> = null | undefined | ((e: any) => Partial<T>[keyof T]);
+type IElementValueFn<T> = null | undefined | ((e: any) => T[keyof T]);
 
 export type IConverterMap<T> = { [K in keyof T]?: IElementValueFn<T> };
 
 export type IInputStateMap<T> = {
-  [K in keyof T]-?: IInputState<Partial<T>[K]>;
+  [K in keyof T]-?: IInputState<T[K]>;
 };
 
 export function useCombinedInputs<T>(
   converters: IConverterMap<T>,
-  initial?: Partial<T>,
-  onChange?: (data: Partial<T>) => void
+  initial: T,
+  onChange?: (data: T) => void
 ) {
-  const [state, setState] = useState<Partial<T>>(initial ?? {});
+  const [state, setState] = useState<T>(initial);
 
   useEffect(() => {
-    setState(initial ?? {});
+    setState(initial);
   }, [initial]);
 
   const inputStateMap = {} as IInputStateMap<T>;

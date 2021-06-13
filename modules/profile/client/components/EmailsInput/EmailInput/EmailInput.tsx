@@ -11,7 +11,7 @@ import { EmailInputDefault, IEmailInput } from "../../../../types";
 import { useEmailInput } from "./useEmailInput";
 
 export type IEmailInputProps = {
-  value?: Partial<IEmailInput>;
+  value?: IEmailInput;
 } & IEmailInputDefinition &
   IEmailInputConfig;
 
@@ -24,7 +24,7 @@ export interface IEmailInputDefinition {
 
 export interface IEmailInputConfig {
   defaultValue?: IEmailInput;
-  onChange?: (emailInput: Partial<IEmailInput>) => void;
+  onChange?: (emailInput: IEmailInput) => void;
 }
 
 export const EmailInput: React.FC<IEmailInputProps> = props => {

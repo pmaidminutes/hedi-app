@@ -12,7 +12,7 @@ import {
 import { useConsultationHourInput } from "./useConsultationHourInput";
 
 export type IConsultationHourInputProps = {
-  value?: Partial<IConsultationHourInput>;
+  value?: IConsultationHourInput;
 } & IConsultationHourInputDefinition &
   IConsultationHourInputConfig;
 
@@ -29,7 +29,7 @@ export interface IConsultationHourInputDefinition {
 
 interface IConsultationHourInputConfig {
   defaultValue?: IConsultationHourInput;
-  onChange?: (consultationHourInput: Partial<IConsultationHourInput>) => void;
+  onChange?: (consultationHourInput: IConsultationHourInput) => void;
 }
 
 export const ConsultationHourInput: React.FC<IConsultationHourInputProps> = props => {

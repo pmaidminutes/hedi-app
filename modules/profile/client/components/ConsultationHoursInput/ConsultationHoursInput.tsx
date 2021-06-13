@@ -27,7 +27,7 @@ import {
 import { useInteractiveList } from "@/modules/react/hooks";
 
 export type IConsultationHoursInputProps = {
-  value?: Partial<IConsultationHourInput>[];
+  value?: IConsultationHourInput[];
 } & IConsultationHoursInputDefinition &
   IConsultationHoursInputConfig &
   Partial<Omit<FormGroupProps, "onChange">>;
@@ -45,7 +45,7 @@ export interface IConsultationHoursInputDefinition {
 
 interface IConsultationHoursInputConfig {
   defaultItem?: IConsultationHourInput;
-  onChange?: (consultationHours: Partial<IConsultationHourInput>[]) => void;
+  onChange?: (consultationHours: IConsultationHourInput[]) => void;
 }
 
 export const ConsultationHoursInput = (props: IConsultationHoursInputProps) => {

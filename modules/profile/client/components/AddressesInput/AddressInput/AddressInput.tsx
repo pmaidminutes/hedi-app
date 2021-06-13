@@ -13,7 +13,7 @@ import { AddressInputDefault, IAddressInput } from "../../../../types";
 import { useAddressInput } from "./useAddressInput";
 
 export type IAddressInputProps = {
-  value?: Partial<IAddressInput>;
+  value?: IAddressInput;
 } & IAddressInputDefinition &
   IAddressInputConfig;
 
@@ -31,7 +31,7 @@ export interface IAddressInputDefinition {
 
 export interface IAddressInputConfig {
   defaultValue?: IAddressInput;
-  onChange?: (addressInput: Partial<IAddressInput>) => void;
+  onChange?: (addressInput: IAddressInput) => void;
 }
 
 export const AddressInput: React.FC<IAddressInputProps> = props => {

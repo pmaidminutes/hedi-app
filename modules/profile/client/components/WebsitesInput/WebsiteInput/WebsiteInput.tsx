@@ -11,7 +11,7 @@ import { IWebsiteInput, WebsiteInputDefault } from "../../../../types";
 import { useWebsiteInput } from "./useWebsiteInput";
 
 export type IWebsiteInputProps = {
-  value?: Partial<IWebsiteInput>;
+  value?: IWebsiteInput;
 } & IWebsiteInputDefinition &
   IWebsiteInputConfig;
 
@@ -24,7 +24,7 @@ export interface IWebsiteInputDefinition {
 
 export interface IWebsiteInputConfig {
   defaultValue?: IWebsiteInput;
-  onChange?: (websiteInput: Partial<IWebsiteInput>) => void;
+  onChange?: (websiteInput: IWebsiteInput) => void;
 }
 
 export const WebsiteInput: React.FC<IWebsiteInputProps> = props => {

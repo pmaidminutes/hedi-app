@@ -11,7 +11,7 @@ import { AddressInputDefault, IAddressInput } from "../../../types";
 import { AddressInput, IAddressInputDefinition } from "./AddressInput";
 
 export type IAddressesInputProps = {
-  value?: Partial<IAddressInput>[];
+  value?: IAddressInput[];
 } & IAddressesInputDefinition &
   IAddressesInputConfig &
   Partial<Omit<FormGroupProps, "onChange">>;
@@ -25,7 +25,7 @@ export interface IAddressesInputDefinition {
 
 interface IAddressesInputConfig {
   defaultItem?: IAddressInput;
-  onChange?: (addresses: Partial<IAddressInput>[]) => void;
+  onChange?: (addresses: IAddressInput[]) => void;
 }
 
 export const AddressesInput = (props: IAddressesInputProps) => {

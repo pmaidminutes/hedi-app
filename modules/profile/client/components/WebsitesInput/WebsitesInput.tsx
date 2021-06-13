@@ -11,7 +11,7 @@ import { IWebsiteInput, WebsiteInputDefault } from "../../../types";
 import { WebsiteInput, IWebsiteInputDefinition } from "./WebsiteInput";
 
 export type IWebsitesInputProps = {
-  value?: Partial<IWebsiteInput>[];
+  value?: IWebsiteInput[];
 } & IWebsitesInputDefinition &
   IWebsitesInputConfig &
   Partial<Omit<FormGroupProps, "onChange">>;
@@ -25,7 +25,7 @@ export interface IWebsitesInputDefinition {
 
 interface IWebsitesInputConfig {
   defaultItem?: IWebsiteInput;
-  onChange?: (websites: Partial<IWebsiteInput>[]) => void;
+  onChange?: (websites: IWebsiteInput[]) => void;
 }
 
 export const WebsitesInput = (props: IWebsitesInputProps) => {
