@@ -1,6 +1,5 @@
 import {
   Form,
-  Button,
   FormGroup,
   Column,
   Row,
@@ -20,6 +19,8 @@ import {
   Select,
   ITextInputComponent,
   TextInput,
+  IButtonComponent,
+  Button,
 } from "@/modules/components";
 import { useUpsertProfessional } from "./useUpsertProfessional";
 import { getUpsertProfessionalViewDefinition } from "./getUpsertProfessionalViewDefinition";
@@ -59,6 +60,7 @@ export interface IUpsertProfessionalViewDefinition {
   websitesInputDefinition: IWebsitesInputDefinition;
   languageSkillsInputDefinition: ILanguageSkillsInputDefinition;
   consultationHoursInputDefinition: IConsultationHoursInputDefinition;
+  profileSaveButton: IButtonComponent;
 }
 
 // TODO handle upsertPersonal as well
@@ -96,6 +98,7 @@ export const ProfileEdit = ({
     websitesInputDefinition,
     languageSkillsInputDefinition,
     consultationHoursInputDefinition,
+    profileSaveButton,
   } = getUpsertProfessionalViewDefinition(content.components);
 
   return (
@@ -105,7 +108,8 @@ export const ProfileEdit = ({
       )} */}
 
       <Row className="hedi--group hedi--group--profile-type">
-        <FormGroup legendText={<h2>Tätigkeitsbereich</h2>}>
+        <FormGroup
+          legendText={<h2>{professionSelect.labelText ?? "Beruf"}</h2>}>
           <Select {...profession} {...professionSelect} />
         </FormGroup>
       </Row>
@@ -194,7 +198,7 @@ export const ProfileEdit = ({
             //     hideCloseButton
             //     style={{ width: "100%" }}
             //   />
-            <Button type="submit">Profil speichern</Button>
+            <Button {...profileSaveButton} />
           )}
         </Column>
       </Row>

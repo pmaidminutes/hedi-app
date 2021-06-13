@@ -1,4 +1,5 @@
 import {
+  getButtonInstance,
   getLabelInstance,
   getSelectInstance,
   getTextInputInstance,
@@ -44,4 +45,9 @@ export const getUpsertProfessionalViewDefinition = (
   consultationHoursInputDefinition: getConsultationHoursInputDefinition(
     components
   ),
+  profileSaveButton: getButtonInstance(components, "profileSaveButton", {
+    buttonKind: "primary",
+    usage: "",
+    text: "Profil speichern",
+  }),
 });
