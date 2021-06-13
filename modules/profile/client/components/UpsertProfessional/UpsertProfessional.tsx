@@ -56,25 +56,20 @@ export const UpsertProfessionalView = ({
   content: Pick<IPage, "lang" | "components">;
 }) => {
   const {
-    data: { success, errors, profile, route },
+    profession,
+    prefix,
+    givenName,
+    familyName,
+    addresses,
+    phones,
+    emails,
+    websites,
+    languageLevels,
+    consultationHours,
     isValidating,
     isSuccessfullySaved,
     handleSubmit,
   } = useUpsertProfessional(content.lang);
-
-  const {
-    prefix,
-    givenName = "",
-    familyName,
-    addresses = [],
-    phones = [],
-    emails = [],
-    websites = [],
-    languageLevels = [],
-    consultationHours = [],
-    profession = 0,
-    services,
-  } = profile ?? {};
 
   const {
     professionSelect,
@@ -98,7 +93,7 @@ export const UpsertProfessionalView = ({
 
       <Row className="hedi--group hedi--group--profile-type">
         <FormGroup legendText={<h2>Tätigkeitsbereich</h2>}>
-          <Select defaultValue={profession} {...professionSelect} />
+          <Select {...profession} {...professionSelect} />
         </FormGroup>
       </Row>
 
@@ -106,15 +101,15 @@ export const UpsertProfessionalView = ({
         <FormGroup legendText={<Label {...nameLabel} />}>
           <Row>
             <Column lg={2} md={2}>
-              <TextInput value={prefix} {...prefixTextInput} />
+              <TextInput {...prefix} {...prefixTextInput} />
             </Column>
             <Column lg={6} md={6}>
-              <TextInput value={givenName} {...givenNameTextInput} />
+              <TextInput {...givenName} {...givenNameTextInput} />
             </Column>
           </Row>
           <Row>
             <Column lg={6} md={6}>
-              <TextInput value={familyName} {...familyNameTextInput} />
+              <TextInput {...familyName} {...familyNameTextInput} />
             </Column>
           </Row>
         </FormGroup>
@@ -122,20 +117,20 @@ export const UpsertProfessionalView = ({
       <Seperator />
 
       <div className="hedi--group hedi--group--address">
-        <AddressesInput value={addresses} {...addressesInputDefinition} />
+        <AddressesInput {...addresses} {...addressesInputDefinition} />
       </div>
       <Seperator />
 
       <div className="hedi--group hedi--group--contact">
-        <PhonesInput value={phones} {...phonesInputDefinition} />
-        <EmailsInput value={emails} {...emailsInputDefinition} />
-        <WebsitesInput value={websites} {...websitesInputDefinition} />
+        <PhonesInput {...phones} {...phonesInputDefinition} />
+        <EmailsInput {...emails} {...emailsInputDefinition} />
+        <WebsitesInput {...websites} {...websitesInputDefinition} />
       </div>
       <Seperator />
 
       <div className="hedi--group hedi--group--consultation-hours">
         <ConsultationHoursInput
-          value={consultationHours}
+          {...consultationHours}
           {...consultationHoursInputDefinition}
         />
       </div>
@@ -143,7 +138,7 @@ export const UpsertProfessionalView = ({
 
       <div className="hedi--group hedi--group--language-skills">
         <LanguageSkillsInput
-          value={languageLevels}
+          {...languageLevels}
           {...languageSkillsInputDefinition}
         />
       </div>

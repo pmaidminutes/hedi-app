@@ -1,30 +1,38 @@
-import { FormEventHandler, useState } from "react";
+import { ChangeEvent, FormEventHandler, useState } from "react";
 import useSWR from "swr";
 import { useRouter } from "next/router";
+import { getUser } from "@/modules/auth/client";
 import { setProperty } from "@/modules/common/utils";
-import {
-  IProfessionalInput,
-  IUpsertProfessionalResponse,
-  professionalToInput,
-} from "../../../types";
-import { upsertProfessional } from "../../request";
+import { IProfessionalInput, ProfessionalInputDefault } from "../../../types";
+import { editProfessional } from "../../request";
+import { IConverterMap, useCombinedInputs } from "@/modules/react/hooks";
 
-export type UpsertProfessionalResponse = Omit<
-  IUpsertProfessionalResponse,
-  "profile"
-> & { profile: IProfessionalInput };
+export function useUpsertProfessional(lang: string) {
+  const [user, isLoading] = getUser();
+  const { data, error, isValidating, mutate } = useSWR(
+    user ? [user?.name] : null,
+    _ => editProfessional(undefined, lang)
+  );
 
-export function useUpsertProfessional(lang: string, username?: string | null) {
-  const { data, error, isValidating, mutate } = useSWR([username], _ =>
-    upsertProfessional(undefined, lang).then(resp => {
-      if (resp?.profile) {
-        const { profile, ...rest } = resp;
-        return {
-          profile: professionalToInput(profile),
-          ...rest,
-        };
-      } else return resp as UpsertProfessionalResponse | null;
-    })
+  const parsers: IConverterMap<IProfessionalInput> = {
+    profession: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target?.value
+        ? parseInt(e.target?.value)
+        : ProfessionalInputDefault.profession,
+    prefix: null,
+    givenName: (e: ChangeEvent<HTMLInputElement>) =>
+      e.target?.value ?? ProfessionalInputDefault.givenName,
+    familyName: null,
+    addresses: e => e,
+    phones: e => e,
+    emails: e => e,
+    websites: e => e,
+    consultationHours: e => e,
+    languageLevels: e => e,
+  };
+  const { state, ...inputStateMap } = useCombinedInputs(
+    parsers,
+    data?.profile ?? ProfessionalInputDefault
   );
 
   const router = useRouter();
@@ -32,32 +40,24 @@ export function useUpsertProfessional(lang: string, username?: string | null) {
 
   const handleSubmit: FormEventHandler<HTMLFormElement> = e => {
     e.preventDefault();
-    const form = new FormData(e.target as HTMLFormElement);
-    const profileInput = {} as IProfessionalInput;
-    const profileData = data?.profile;
-
-    if (false) {
+    // TODO validate inputs
+    const hasErrors = false;
+    if (!hasErrors) {
+      console.log(JSON.stringify(state, null, 2));
       mutate(
-        upsertProfessional(profileInput, lang).then(resp => {
+        editProfessional(state as IProfessionalInput, lang).then(resp => {
           if (resp?.success && resp?.route) {
             setIsSuccessfullySaved(true);
-            router.push(resp.route);
+            //router.push(resp.route);
           }
-          if (resp?.profile) {
-            const { profile, ...rest } = resp;
-            return {
-              profile: professionalToInput(profile),
-              ...rest,
-            };
-          } else return resp as UpsertProfessionalResponse | null;
+          return resp;
         })
       );
     }
   };
 
   return {
-    data:
-      data ?? ({ success: false, errors: {} } as UpsertProfessionalResponse),
+    ...inputStateMap,
     isValidating,
     isSuccessfullySaved,
     handleSubmit,
