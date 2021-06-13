@@ -8,9 +8,11 @@ import {
   InlineLoading,
   ToastNotification,
 } from "carbon-components-react";
+
+import { ITyped } from "@/modules/model";
+import { IPage } from "@/modules/page/types";
 import { Seperator } from "@/modules/common/components";
 
-import { IPage } from "@/modules/page/types";
 import {
   ILabelComponent,
   Label,
@@ -36,6 +38,15 @@ import {
   IWebsitesInputDefinition,
 } from "..";
 
+export const TryProfileEdit = ({
+  content,
+}: {
+  content: ITyped;
+}): JSX.Element | null => {
+  if (content.type !== "ProfileEdit") return null;
+  return <ProfileEdit content={content as IPage} />;
+};
+
 export interface IUpsertProfessionalViewDefinition {
   professionSelect: ISelectComponent;
   nameLabel: ILabelComponent;
@@ -50,7 +61,9 @@ export interface IUpsertProfessionalViewDefinition {
   consultationHoursInputDefinition: IConsultationHoursInputDefinition;
 }
 
-export const UpsertProfessionalView = ({
+// TODO handle upsertPersonal as well
+// seems too similar to implement in another View
+export const ProfileEdit = ({
   content,
 }: {
   content: Pick<IPage, "lang" | "components">;

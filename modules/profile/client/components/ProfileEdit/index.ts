@@ -1,2 +1,2 @@
-export * from "./UpsertProfessional";
+export * from "./ProfileEdit";
 export * from "./getUpsertProfessionalViewDefinition";

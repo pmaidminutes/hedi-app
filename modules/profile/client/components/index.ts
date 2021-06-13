@@ -15,3 +15,4 @@ export * from "./ConsultationHoursInput";
 export * from "./ProfileEntry";
 export * from "./ProfileList";
 export * from "./ProfilePreview";
+export * from "./ProfileEdit";

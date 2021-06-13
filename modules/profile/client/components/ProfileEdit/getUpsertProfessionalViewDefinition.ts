@@ -4,7 +4,7 @@ import {
   getTextInputInstance,
   IComponent,
 } from "@/modules/components";
-import { IUpsertProfessionalViewDefinition } from "./UpsertProfessional";
+import { IUpsertProfessionalViewDefinition } from "./ProfileEdit";
 import {
   getAddressesInputDefinition,
   getConsultationHoursInputDefinition,
