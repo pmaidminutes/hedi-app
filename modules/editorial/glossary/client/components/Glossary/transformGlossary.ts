@@ -1,4 +1,3 @@
-import { IGlossary } from "../../../types";
 import { useRouter } from "next/router";
 import { AssertClientSide } from "@/modules/common/utils";
 import { IGlossaryProps } from "./Glossary";
