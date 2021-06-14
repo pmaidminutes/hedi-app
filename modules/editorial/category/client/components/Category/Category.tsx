@@ -5,7 +5,6 @@ import { Row, Column } from "carbon-components-react";
 import { transformCategory, ICategoryProps } from "./transformCategory";
 export const Category = (props: ICategoryProps): JSX.Element => {
   const { articles, categories } = transformCategory(props);
-  console.log({ props });
   return (
     <>
       {categories ? (
