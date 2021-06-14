@@ -9,7 +9,7 @@ export interface INumberInputComponent extends IComponent {
   label?: HTML;
   isRequired?: boolean;
   helperText?: HTML;
-  value: number;
+  value?: number;
   min?: number;
   max?: number;
   ariaLabel?: string;
