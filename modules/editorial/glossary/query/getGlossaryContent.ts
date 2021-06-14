@@ -22,6 +22,5 @@ export async function getGlossaryContent(route: string): Promise<IGlossary> {
   );
 
   if (!glossary) throw new Error("Error while fetching Profile Page data");
-  console.log(glossary);
   return glossary as IGlossary;
 }
