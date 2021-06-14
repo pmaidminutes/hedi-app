@@ -12290,17 +12290,10 @@ span.bx--pagination__text {
     opacity: 1; }
   .bx--search-input:-ms-input-placeholder {
     color: #a8a8a8;
-<<<<<<< HEAD
     opacity: 1; }
   .bx--search-input::placeholder {
     color: #a8a8a8;
     opacity: 1; }
-=======
-    opacity: 1; }
-  .bx--search-input::placeholder {
-    color: #a8a8a8;
-    opacity: 1; }
->>>>>>> origin/main
   .bx--search-input::-ms-clear {
     display: none; }
 
@@ -14710,7 +14703,6 @@ a.bx--tabs__nav-link {
     @media screen and (prefers-contrast) {
       .bx--toolbar-search__btn:focus {
         outline-style: dotted; } }
-<<<<<<< HEAD
 
 .bx--toolbar-filter-icon {
   padding-right: 0;
@@ -14738,35 +14730,6 @@ a.bx--tabs__nav-link {
 .bx--toolbar-search:not(.bx--toolbar-search--active) .bx--search-input {
   border-bottom: none; }
 
-=======
-
-.bx--toolbar-filter-icon {
-  padding-right: 0;
-  padding-left: 0; }
-
-.bx--toolbar-menu__title {
-  font-size: 0.75rem;
-  font-weight: 400;
-  line-height: 1.34;
-  letter-spacing: 0.32px;
-  padding: 0.5rem 1.25rem;
-  font-weight: 600; }
-
-.bx--toolbar-menu__option {
-  padding: 0.5rem 1.25rem; }
-
-.bx--toolbar-menu__divider {
-  width: 100%;
-  border: 0;
-  border-top: 1px solid #e0e0e0; }
-
-.bx--radio-button-group {
-  border: none; }
-
-.bx--toolbar-search:not(.bx--toolbar-search--active) .bx--search-input {
-  border-bottom: none; }
-
->>>>>>> origin/main
 .bx--tooltip__label {
   font-size: 0.75rem;
   font-weight: 400;
@@ -16206,8 +16169,6 @@ a.bx--tabs__nav-link {
     bottom: -0.8125rem;
     transform: translate(-50%, 100%); }
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start .bx--assistive-text::after {
-<<<<<<< HEAD
-=======
     position: absolute;
     display: block;
     content: '';
@@ -16232,7 +16193,6 @@ a.bx--tabs__nav-link {
     left: 0;
     transform: translate(0, 100%); }
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center .bx--assistive-text::after {
->>>>>>> origin/main
     position: absolute;
     display: block;
     content: '';
@@ -16240,49 +16200,6 @@ a.bx--tabs__nav-link {
     width: 100%;
     height: 0.75rem;
     top: -0.75rem; }
-<<<<<<< HEAD
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start::before, .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start::after,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start .bx--assistive-text,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start + .bx--assistive-text {
-    bottom: 0;
-    left: 50%; }
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start::before {
-=======
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center::before, .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center::after,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center .bx--assistive-text,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center + .bx--assistive-text {
-    bottom: 0;
-    left: 50%; }
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center::before {
->>>>>>> origin/main
-    bottom: -0.5rem;
-    border-width: 0 0.25rem 0.3125rem 0.25rem;
-    border-color: transparent transparent #393939 transparent;
-    transform: translate(-50%, 100%); }
-<<<<<<< HEAD
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start::after,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start .bx--assistive-text,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-start + .bx--assistive-text {
-    bottom: -0.8125rem;
-    left: 0;
-    transform: translate(0, 100%); }
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center .bx--assistive-text::after {
-=======
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center::after,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center .bx--assistive-text,
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center + .bx--assistive-text {
-    bottom: -0.8125rem;
-    transform: translate(-50%, 100%); }
-  .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-end .bx--assistive-text::after {
->>>>>>> origin/main
-    position: absolute;
-    display: block;
-    content: '';
-    left: 0;
-    width: 100%;
-    height: 0.75rem;
-    top: -0.75rem; }
-<<<<<<< HEAD
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center::before, .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center::after,
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center .bx--assistive-text,
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-center + .bx--assistive-text {
@@ -16306,8 +16223,6 @@ a.bx--tabs__nav-link {
     width: 100%;
     height: 0.75rem;
     top: -0.75rem; }
-=======
->>>>>>> origin/main
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-end::before, .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-end::after,
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-end .bx--assistive-text,
   .bx--tooltip__trigger.bx--tooltip--bottom.bx--tooltip--align-end + .bx--assistive-text {
