@@ -14,14 +14,14 @@ export async function getGlossaryTerm(
       $lang: String
       $includeSelf: Boolean
     ) {
-      glossaryterms(routes: $routes, lang: $lang) {
+      glossaryTerms(routes: $routes, lang: $lang) {
         ${GlossaryTermGQL}
       }
     }
   `;
 
-  return serviceGQuery<{ glossaryterms: IGlossaryTerm[] }>(query, {
+  return serviceGQuery<{ glossaryTerms: IGlossaryTerm[] }>(query, {
     routes: [route],
     lang,
-  }).then(data => logAndNull(data)?.glossaryterms?.[0] ?? null);
+  }).then(data => logAndNull(data)?.glossaryTerms?.[0] ?? null);
 }

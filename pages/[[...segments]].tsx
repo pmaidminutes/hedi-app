@@ -64,8 +64,6 @@ import { PagePathsGQL, getPageType } from "@/modules/page/server";
 import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
-import { isIGlossary } from "@/modules/editorial/glossary/types";
-import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 // Registration
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {

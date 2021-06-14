@@ -3,7 +3,6 @@ import {
   TileAboveTheFoldContent,
   TileBelowTheFoldContent,
 } from "carbon-components-react";
-import { HTML } from "@/modules/react/html";
 import {
   transformGlossaryTerm,
   IGlossaryTermProps,
