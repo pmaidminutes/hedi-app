@@ -1,7 +1,7 @@
 import { useRouter } from "next/router";
 import { ChangeEvent, useState } from "react";
-import { IValidationFunction } from "../../../react/validation";
-import { getValidationErrorText } from "../../../react/validation/ValidationErrorMessages";
+import { IValidationFunction } from "@/modules/react/validation";
+import { getValidationErrorText } from "@/modules/react/validation/ValidationErrorMessages";
 
 export function useValidation<T>(
   value: T,
