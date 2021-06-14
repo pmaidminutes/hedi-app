@@ -58,14 +58,14 @@ import { CategoryPathsGQL } from "@/modules/editorial/category/query";
 import { getCategoryPage } from "@/modules/editorial/category/server/page";
 import { TryCategory } from "@/modules/editorial/category/client/components";
 // Glossary
-import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
-import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 // Page
 import { PagePathsGQL, getPageType } from "@/modules/page/server";
 import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
+import { isIGlossary } from "@/modules/editorial/glossary/types";
+import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 // Registration
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
@@ -167,7 +167,7 @@ export default function segments(props: IPageProps<IPage>) {
 
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
-        {/* <TryGlossary content={content} key="glossary" /> */}
+        <TryGlossary content={content} key="glossary" />
 
         {/* <TrySearch content={content} key="search" /> */}
         <TryPage content={content} key="page" />

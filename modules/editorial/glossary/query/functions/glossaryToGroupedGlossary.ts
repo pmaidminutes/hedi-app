@@ -1,22 +1,22 @@
-import { IGlossary, IGlossaryGrouped, IGlossaryTerm } from "../../types";
+import { IGlossary, IGlossaryKeyGroup, IGlossaryTerm } from "../../types";
 
-export function glossaryToGroupedGlossary(
+export async function glossaryToGroupedGlossary(
   glossary: IGlossary
-): IGlossaryGrouped {
-  const groupedEntries = glossary.terms.reduce(function (
-    glossaryArray: { [key: string]: IGlossaryTerm[] },
+): Promise<IGlossaryKeyGroup[]> {
+  const groupedEntries = glossary.glossaryTerms.reduce(function (
+    keyChar: { [keyChar: string]: IGlossaryTerm[] },
     term: IGlossaryTerm
   ) {
     const firstChar = term.label[0].toUpperCase();
-    (glossaryArray[firstChar] = glossaryArray[firstChar] || []).push(term);
-    return glossaryArray;
+    (keyChar[firstChar] = keyChar[firstChar] || []).push(term);
+    return keyChar;
   },
   {});
   const groups = Object.entries(groupedEntries)
-    .map(([key, terms]) => {
-      return { key, terms };
+    .map(([keyChar, terms]) => {
+      return { keyChar, terms };
     })
-    .sort((a, b) => a.key.localeCompare(b.key));
+    .sort((a, b) => a.keyChar.localeCompare(b.keyChar));
 
-  return { ...glossary, groups };
+  return groups as IGlossaryKeyGroup[];
 }

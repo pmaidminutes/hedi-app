@@ -14,6 +14,7 @@ import {
   getProfileListPage,
   getProfilePreviewPage,
 } from "@/modules/profile/server";
+import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 
 export const getPageType = async (
   content: IPage
@@ -43,6 +44,9 @@ export const getPageType = async (
       break;
     case "template":
       result = await getTemplate(content);
+      break;
+    case "glossary":
+      result = await getGlossaryPage(content);
       break;
     default:
       result = await getPagePage(content);

@@ -5,8 +5,8 @@ import { IGlossaryGroupProps, useGlossaryGroup } from "./useGlossaryGroup";
 
 export const GlossaryGroup = (props: IGlossaryGroupProps): JSX.Element => {
   const {
-    groupKey,
-    groupTerms,
+    glossaryKey,
+    glossaryTerms,
     translationLang,
     termUpdated,
   } = useGlossaryGroup(props);
@@ -14,10 +14,10 @@ export const GlossaryGroup = (props: IGlossaryGroupProps): JSX.Element => {
   return (
     <>
       <Row>
-        <Column>{groupKey}</Column>
+        <Column>{glossaryKey}</Column>
       </Row>
       <Row className="bx--row">
-        {groupTerms.map(term => (
+        {glossaryTerms.map(term => (
           <Column md={4} key={term.route}>
             <GlossaryTerm
               glossaryTerm={term}

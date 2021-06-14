@@ -12,6 +12,7 @@ import {
 export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   const {
     label,
+    body,
     entryId,
     isSelected,
     termClass,
@@ -36,7 +37,12 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
           </p>
         )}
       </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent></TileBelowTheFoldContent>
+      <TileBelowTheFoldContent>
+        <div
+          dangerouslySetInnerHTML={{
+            __html: body,
+          }}></div>
+      </TileBelowTheFoldContent>
     </ExpandableTile>
   );
 };
