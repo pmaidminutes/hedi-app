@@ -40,7 +40,7 @@ export const TryProfile = ({
 
 export interface IProfileViewDefinition {
   profileEntryDefinition: IProfileEntryDefinition;
-  profileEditButton?: IButtonComponent;
+  profileEditButton: IButtonComponent;
   contactDefinition: IContactDefinition;
   relatedProfilesDefinition: IRelatedProfilesDefinition;
 }
