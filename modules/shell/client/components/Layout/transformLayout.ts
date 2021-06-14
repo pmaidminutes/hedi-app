@@ -15,7 +15,7 @@ export function transformLayout(props: ILayoutProps) {
     posterImage,
     sideComponents,
     headline,
-    breadcrumbs
+    breadcrumbs,
   } = layout;
 
   const posterImgSrc = posterImage

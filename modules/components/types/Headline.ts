@@ -29,4 +29,3 @@ export const getHeadlineInstance = (
   id: string,
   fallback: Omit<IHeadlineComponent, "kind" | "id">
 ) => getComponentInstance("Headline", array, id, fallback);
-

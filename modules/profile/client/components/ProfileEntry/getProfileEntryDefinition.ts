@@ -5,9 +5,11 @@ export const getProfileEntryDefinition = (
   components: IComponent[]
 ): IProfileEntryDefinition => {
   return {
-    phoneTitle: findLabelInstance(components, "phoneTitle")?.text,
-    emailTitle: findLabelInstance(components, "emailTitle")?.text,
-    websiteTitle: findLabelInstance(components, "websiteTitle")?.text,
-    servicesTitle: findLabelInstance(components, "servicesTitle")?.text,
+    phoneTitle: findLabelInstance(components, "phone")?.text ?? "Telefonnummer",
+    emailTitle:
+      findLabelInstance(components, "email")?.text ?? "E-Mail Addresse",
+    websiteTitle: findLabelInstance(components, "website")?.text ?? "Webseite",
+    servicesTitle:
+      findLabelInstance(components, "services")?.text ?? "Angebote",
   };
 };

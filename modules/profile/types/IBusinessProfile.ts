@@ -2,8 +2,10 @@ import { EntityFields, IEntity } from "@/modules/model";
 import {
   IWebsite,
   WebsiteFields,
+  IWebsiteInput,
   IConsultationHour,
   ConsultationHourFields,
+  IConsultationHourInput,
   AddressFields,
 } from "./dataTypes";
 import {
@@ -12,7 +14,7 @@ import {
   IService,
   ServiceFields,
 } from "./taxonomyTypes";
-import { IProfile, ProfileFields } from "./IProfile";
+import { IProfile, IProfileInput, ProfileFields } from "./IProfile";
 import { AssociationTypeName, ProfessionalTypeName } from ".";
 
 export interface IBusinessProfile extends IProfile {
@@ -42,3 +44,10 @@ export const BusinessProfileLinkFields = `${EntityFields}
 addresses { ${AddressFields} }
 profession { ${ProfessionFields} }
 `;
+
+export interface IBusinessProfileInput extends IProfileInput {
+  websites: IWebsiteInput[];
+  consultationHours: IConsultationHourInput[];
+  profession: number;
+  services: string[];
+}

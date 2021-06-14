@@ -4,14 +4,14 @@ import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type SelectKind = "Select";
 
-export interface SelectOptions extends Omit<IEntity, "type"> {
+export interface SelectItem extends Omit<IEntity, "type"> {
   index?: number;
 }
 
 export interface ISelectComponent extends IComponent {
   id: string;
   kind: SelectKind;
-  items: SelectOptions[];
+  items: SelectItem[];
   defaultItem?: number;
   labelText?: HTML;
   helperText?: HTML;

@@ -43,7 +43,6 @@ export const ArticleGQL = gql`... on Article {
   components
 }`;
 
-
 export interface IArticleAction {
   icon: CarbonIconType;
   description: string;

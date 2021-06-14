@@ -7,7 +7,6 @@ export interface ICategoryEntryProps {
 export function transformCategoryEntry({ category }: ICategoryEntryProps) {
   const { image, label, route } = category;
 
-
   const transformedImage: IImageComponent = {
     alt: image?.alt || "",
     kind: "Image",
