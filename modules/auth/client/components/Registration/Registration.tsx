@@ -10,10 +10,9 @@ import {
   ValidatedTextInput,
 } from "@/modules/components";
 import { useRegistration } from "./useRegistration";
-import {
-  useValidationSummary,
-  ValidationSummary,
-} from "@/modules/validation/client";
+import { ValidationSummary } from "@/modules/react/validation";
+import { useValidationSummary } from "@/modules/react/hooks/useValidationSummary";
+
 export const Registration = ({ content }: { content: IRegistration }) => {
   const {
     username,

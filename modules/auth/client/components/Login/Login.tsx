@@ -10,14 +10,13 @@ import {
 import { ButtonHintLink } from "@/modules/common/components";
 import { Column, Form, Row, Loading } from "carbon-components-react";
 import { ArrowLeft16 } from "@carbon/icons-react";
-import {
-  useValidationSummary,
-  ValidationSummary,
-} from "@/modules/validation/client";
+
 import {
   requiredValidationFn,
   minLengthValidationFn,
+  ValidationSummary,
 } from "@/modules/react/validation";
+import { useValidationSummary } from "@/modules/react/hooks/useValidationSummary";
 
 export const Login = ({ content }: { content: ILogin }) => {
   const {
@@ -58,7 +57,7 @@ export const Login = ({ content }: { content: ILogin }) => {
             )}
             {password && !isLoggedIn && (
               <ValidatedTextInput
-                validateFn={[minLengthValidationFn(3),requiredValidationFn()]}
+                validateFn={[minLengthValidationFn(3), requiredValidationFn()]}
                 enableValidation
                 onValidation={texterror =>
                   setValidationError("password", texterror)

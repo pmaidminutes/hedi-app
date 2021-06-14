@@ -1,4 +1,3 @@
-import { ErrorMap } from "@/modules/model";
 import { useState } from "react";
 
 export const useValidationSummary = () => {

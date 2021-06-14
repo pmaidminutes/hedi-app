@@ -2,7 +2,7 @@ import React from "react";
 import { NumberInput } from "../NumberInput";
 import { requiredValidationFn } from "@/modules/react/validation";
 import { IValidatedNumberInputProps } from "@/modules/components/types/ValidatedNumberInput";
-import { useValidation } from "@/modules/validation/client";
+import { useValidation } from "@/modules/react/hooks";
 
 export const ValidatedNumberInput = React.forwardRef<
   HTMLInputElement,

@@ -1,5 +1,3 @@
-import { ErrorMap } from "@/modules/model";
-
 export const ValidationSummary = ({
   validationErrors,
 }: {

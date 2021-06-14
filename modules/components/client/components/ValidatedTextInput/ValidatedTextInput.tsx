@@ -1,8 +1,8 @@
 import React from "react";
 import { TextInput } from "../TextInput";
-import { useValidation } from "@/modules/validation/client/hooks/useValidation";
 import { IValidatedTextInputProps } from "@/modules/components/types";
 import { requiredValidationFn } from "@/modules/react/validation";
+import { useValidation } from "@/modules/react/hooks";
 
 export const ValidatedTextInput = React.forwardRef<
   HTMLInputElement,
