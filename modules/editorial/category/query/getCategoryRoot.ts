@@ -2,29 +2,45 @@ import { GraphQLClient } from "graphql-request";
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { CategoryEntryGQL, ICategory } from "../types";
 import { logAndFallback } from "@/modules/common/error";
+import { ArticleEntryGQL, IArticle } from "../../article/types";
 
-type CategoryRootResponse = {
+export type CategoryRoot = {
   categories: ICategory[];
+  articles: IArticle[];
 };
 
 export async function getCategoryRoot(
   lang: string,
   client?: GraphQLClient
-): Promise<ICategory[]> {
+): Promise<CategoryRoot> {
   const query = gql`
     query getCategoryRoot($lang: String!) {
+      articles(lang:$lang) {
+        ${ArticleEntryGQL}
+      }
       categories(lang: $lang) {
-${CategoryEntryGQL}
-parent
-    }}
+        ${CategoryEntryGQL}
+        parent
+      }
+    }
   `;
-  const { categories } = await serviceGQuery<CategoryRootResponse>(query, {
-    lang,
-  }).then(data =>
-    logAndFallback(data, { categories: [] } as CategoryRootResponse)
+  const { categories, articles } = await serviceGQuery<CategoryRoot>(
+    query,
+    {
+      lang,
+    }
+  ).then(data =>
+    logAndFallback(data, {
+      categories: [],
+      articles: [],
+    } as CategoryRoot)
   );
 
-  return filterRootCategories(categories);
+  const rootCategories = filterRootCategories(categories);
+
+
+
+  return { categories: rootCategories, articles: articles };
 }
 
 const filterRootCategories = (categories: ICategory[]): ICategory[] =>

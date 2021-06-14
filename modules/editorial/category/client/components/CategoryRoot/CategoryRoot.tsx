@@ -1,10 +1,13 @@
 import React from "react";
+import { ArticleEntry } from "@/modules/editorial/article/client";
 import { ICategoryEntry } from "../../../types";
-import { ICategoryProps } from "../Category/transformCategory";
 import { CategoryEntry } from "../CategoryEntry";
-import { transformCategoryRoot } from "./transformCategoryRoot";
-export const CategoryRoot = (props: ICategoryProps) => {
-  const { categories } = transformCategoryRoot(props);
+import {
+  ICategoryRootProps,
+  transformCategoryRoot,
+} from "./transformCategoryRoot";
+export const CategoryRoot = (props: ICategoryRootProps) => {
+  const { categories, articles } = transformCategoryRoot(props);
   return (
     <section>
       {categories.map((category, index) => (
@@ -13,6 +16,10 @@ export const CategoryRoot = (props: ICategoryProps) => {
           category={category as ICategoryEntry}
         />
       ))}
+      {articles &&
+        articles.map((article, index) => (
+          <ArticleEntry key={article.label + index} article={article} />
+        ))}
     </section>
   );
 };
