@@ -15,5 +15,9 @@ export const HTMLWithNextImage = ({ data, callbacks }: HTMLProps) => {
     return null;
   };
 
-  return <HTML data={data} callbacks={{ ...callbacks, img }} />;
+  return (
+    <p>
+      <HTML data={data} callbacks={{ ...callbacks, img }} />
+    </p>
+  );
 };
