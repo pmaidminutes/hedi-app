@@ -11,15 +11,15 @@ export interface IRelatedProfiles {
 }
 
 export interface IRelatedProfilesDefinition {
-  headline?: string;
+  relatedProfilesHeadline: string;
 }
 
 export const RelatedProfiles: React.FC<IRelatedProfilesProps> = props => {
-  const { headline, profileLinks } = props;
+  const { relatedProfilesHeadline, profileLinks } = props;
   return (
     <section className="hedi--related-profiles">
       <Grid>
-        <h3>{headline}</h3>
+        <h3>{relatedProfilesHeadline}</h3>
         <Row>
           {profileLinks.map((profile, index) => (
             <RelatedProfile key={index} {...profile} />

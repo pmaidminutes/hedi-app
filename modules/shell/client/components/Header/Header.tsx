@@ -46,7 +46,7 @@ export const Header = (props: IHeader) => {
           isActive={isExpanded}
         />
         {headerLinks &&
-          headerLinks.map((link:any, index:number) => {
+          headerLinks.map((link: any, index: number) => {
             if (isLink(link)) {
               return (
                 <HeaderMenuItem

@@ -5,6 +5,8 @@ export const getRelatedProfilesDefinition = (
   components: IComponent[]
 ): IRelatedProfilesDefinition => {
   return {
-    headline: findLabelInstance(components, "relatedProfilesHeadline")?.text,
+    relatedProfilesHeadline:
+      findLabelInstance(components, "relatedProfilesHeadline")?.text ??
+      "Verknüpfte Profile",
   };
 };

@@ -5,12 +5,12 @@ export const getContactDefinition = (
   components: IComponent[]
 ): IContactDefinition => {
   return {
-    phoneTitle: findLabelInstance(components, "phoneTitle")?.text,
-    emailTitle: findLabelInstance(components, "emailTitle")?.text,
-    websiteTitle: findLabelInstance(components, "websiteTitle")?.text,
-    consultationHoursHeadline: findLabelInstance(
-      components,
-      "consultationHoursHeadline"
-    )?.text,
+    phoneTitle: findLabelInstance(components, "phone")?.text ?? "Telefonnummer",
+    emailTitle:
+      findLabelInstance(components, "email")?.text ?? "E-Mail Addresse",
+    websiteTitle: findLabelInstance(components, "website")?.text ?? "Webseite",
+    consultationHoursHeadline:
+      findLabelInstance(components, "consultationHours")?.text ??
+      "Sprechzeiten",
   };
 };

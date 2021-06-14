@@ -1,7 +1,9 @@
 import { IComponent, IImageComponent, HTML } from "@/modules/components/types";
+import { IImage } from "@/modules/editorial/types";
 import { IPage } from "@/modules/page/types";
 import { ColumnDefaultProps } from "carbon-components-react";
 import React from "react";
+import { IBreadCrumbProps } from "../../BreadCrumb/transformBreadCrumb";
 
 export interface ILayout {
   sideComponents?: IComponent[];
@@ -15,10 +17,11 @@ export interface ILayout {
   posterImage?: IImageComponent | null;
   pageId?: string;
   headline?: HTML | null;
+  breadcrumbs?: IBreadCrumbProps;
 }
 
 export interface ILayoutProps extends ILayout {
-  content:  IPage;
+  content: IPage;
   children: React.ReactNode;
   layout: ILayout;
 }
@@ -30,4 +33,4 @@ export interface ILayoutBasicTemplate {
   narrow?: boolean;
 }
 
-export type PageLayout = "singleColumn" | "twoColumns";
+export type PageLayout = "singleColumn" | "twoColumns" | "editorial";

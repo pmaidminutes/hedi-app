@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type TextInputKind = "TextInput";
 
@@ -21,7 +22,11 @@ export const isTextInputInstance = (
   id: string
 ): obj is ITextInputComponent => isTextInput(obj) && obj.id === id;
 
-export const findTextInputInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isTextInput).find(item => item.id === id);
-  return element;
-};
+export const findTextInputInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<ITextInputComponent>("TextInput", array, id);
+
+export const getTextInputInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<ITextInputComponent, "kind" | "id">
+) => getComponentInstance("TextInput", array, id, fallback);

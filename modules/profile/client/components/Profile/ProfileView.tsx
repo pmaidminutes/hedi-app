@@ -39,10 +39,10 @@ export const TryProfile = ({
 };
 
 export interface IProfileViewDefinition {
-  profileEntryDefinition?: IProfileEntryDefinition;
-  profileEditButton?: IButtonComponent;
-  contactDefinition?: IContactDefinition;
-  relatedProfilesDefinition?: IRelatedProfilesDefinition;
+  profileEntryDefinition: IProfileEntryDefinition;
+  profileEditButton: IButtonComponent;
+  contactDefinition: IContactDefinition;
+  relatedProfilesDefinition: IRelatedProfilesDefinition;
 }
 
 export const ProfileView = ({ content }: { content: IProfileView }) => {

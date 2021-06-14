@@ -1,10 +1,13 @@
 import { IInlineNotificationComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { InlineNotificationProps } from "carbon-components-react";
+import { PartialBy } from "@/modules/common/utils";
 
-export interface IInlineNotificationProps
-  extends IInlineNotificationComponent,
-    Omit<InlineNotificationProps, "id" | "subtitle" | "title" | "kind"> {}
+export type IInlineNotificationProps = PartialBy<
+  IInlineNotificationComponent,
+  "kind"
+> &
+  Omit<InlineNotificationProps, "id" | "subtitle" | "title" | "kind">;
 
 export function transformInlineNotification(
   props: IInlineNotificationProps

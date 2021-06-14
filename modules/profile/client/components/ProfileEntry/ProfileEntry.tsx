@@ -10,10 +10,10 @@ export type IProfileEntryProps = IProfileEntry &
   IProfileEntryConfig;
 
 export interface IProfileEntryDefinition {
-  phoneTitle?: string;
-  emailTitle?: string;
-  websiteTitle?: string;
-  servicesTitle?: string;
+  phoneTitle: string;
+  emailTitle: string;
+  websiteTitle: string;
+  servicesTitle: string;
 }
 
 export interface IProfileEntryConfig {
@@ -49,20 +49,17 @@ export const ProfileEntry: React.FC<IProfileEntryProps> = (
             <div className="hedi--spacing">
               {phone && (
                 <p>
-                  <PhoneLink title={phoneTitle ?? "Telephone"} {...phone} />
+                  <PhoneLink title={phoneTitle} {...phone} />
                 </p>
               )}
               {email && (
                 <p>
-                  <EmailLink
-                    title={emailTitle ?? "E-Mail Address"}
-                    {...email}
-                  />
+                  <EmailLink title={emailTitle} {...email} />
                 </p>
               )}
               {website && (
                 <p>
-                  <WebLink title={websiteTitle ?? "Webseite"} {...website} />
+                  <WebLink title={websiteTitle} {...website} />
                 </p>
               )}
             </div>
@@ -70,7 +67,7 @@ export const ProfileEntry: React.FC<IProfileEntryProps> = (
               <TagList
                 tagType="blue"
                 //tags={services}
-                headline={servicesTitle ?? "Tätigkeiten"}></TagList>
+                headline={servicesTitle}></TagList>
             )}
           </div>
         </Column>

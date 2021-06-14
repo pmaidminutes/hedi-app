@@ -22,10 +22,10 @@ export interface IContact {
 }
 
 export interface IContactDefinition {
-  phoneTitle?: string;
-  emailTitle?: string;
-  websiteTitle?: string;
-  consultationHoursHeadline?: string;
+  phoneTitle: string;
+  emailTitle: string;
+  websiteTitle: string;
+  consultationHoursHeadline: string;
 }
 
 export type IContactProps = IContact & IContactDefinition;
@@ -44,19 +44,9 @@ export const Contact = (props: IContactProps): JSX.Element => {
         <PregnantWoman />
         <h3>{dataKind.label}</h3>
         {address && <Address {...address} />}
-        <p>
-          {phone && <PhoneLink title={phoneTitle ?? "Telephone"} {...phone} />}
-        </p>
-        <p>
-          {email && (
-            <EmailLink title={emailTitle ?? "E-Mail Address"} {...email} />
-          )}
-        </p>
-        <p>
-          {website && (
-            <WebLink title={websiteTitle ?? "Webseite"} {...website} />
-          )}
-        </p>
+        <p>{phone && <PhoneLink title={phoneTitle} {...phone} />}</p>
+        <p>{email && <EmailLink title={emailTitle} {...email} />}</p>
+        <p>{website && <WebLink title={websiteTitle} {...website} />}</p>
 
         {consultationHours && (
           <>

@@ -2,7 +2,7 @@ import { ErrorMap } from ".";
 
 export interface IMutationResponse {
   success: boolean;
-  errors: ErrorMap;
+  errors?: ErrorMap;
 }
 
 export const MutationResponseFields = `success
