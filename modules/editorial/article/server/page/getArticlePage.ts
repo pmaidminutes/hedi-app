@@ -6,16 +6,17 @@ export const getArticlePage = async (
   content: IArticle
 ): Promise<IArticle & IPageConfig> => {
   const layout: ILayout = {
-    pageLayout: "singleColumn",
+    pageLayout: "editorial",
     singleColumnProps: {
       sm: 4,
       md: { span: 6, offset: 1 },
       lg: { span: 8, offset: 4 },
     },
+    breadcrumbs: { ...content },
   };
 
   const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
+    useHeader: true,
     layout,
   };
   return {

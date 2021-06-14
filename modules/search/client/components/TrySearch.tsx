@@ -1,4 +1,3 @@
-
 import { ITyped } from "@/modules/model";
 import { SearchView } from "./SearchView";
 

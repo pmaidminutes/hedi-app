@@ -1,10 +1,10 @@
 import { ITextInputComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { TextInputProps } from "carbon-components-react";
+import { PartialBy } from "@/modules/common/utils";
 
-export interface ITextInputProps
-  extends ITextInputComponent,
-    Omit<TextInputProps, "helperText" | "labelText" | "type"> {}
+export type ITextInputProps = PartialBy<ITextInputComponent, "kind"> &
+  Omit<TextInputProps, "helperText" | "labelText" | "type">;
 
 export function transformTextInput(props: ITextInputProps): TextInputProps {
   const {

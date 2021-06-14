@@ -1,13 +1,16 @@
 import { IToastNotificationComponent } from "../../../types";
 import { ToastNotificationProps } from "carbon-components-react";
 import { HTML } from "@/modules/react/html";
+import { PartialBy } from "@/modules/common/utils";
 
-export interface IToastNotificationProps
-  extends IToastNotificationComponent,
-    Omit<
-      ToastNotificationProps,
-      "id" | "subtitle" | "title" | "kind" | "caption"
-    > {}
+export type IToastNotificationProps = PartialBy<
+  IToastNotificationComponent,
+  "kind"
+> &
+  Omit<
+    ToastNotificationProps,
+    "id" | "subtitle" | "title" | "kind" | "caption"
+  >;
 
 export function transformToastNotification(
   props: IToastNotificationProps

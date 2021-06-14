@@ -6,12 +6,16 @@ import {
 import {
   ILanguageLevel,
   LanguageLevelFields,
+  ILanguageLevelInput,
   IAddress,
   AddressFields,
+  IAddressInput,
   IPhone,
   PhoneFields,
+  IPhoneInput,
   IEmail,
   EmailFields,
+  IEmailInput,
 } from "./dataTypes";
 import { AssociationTypeName, PersonalTypeName, ProfessionalTypeName } from ".";
 
@@ -38,3 +42,11 @@ addresses { ${AddressFields} }
 phones { ${PhoneFields} }
 emails { ${EmailFields} }
 `;
+
+export interface IProfileInput {
+  //image: Image
+  languageLevels: ILanguageLevelInput[];
+  addresses: IAddressInput[];
+  phones: IPhoneInput[];
+  emails: IEmailInput[];
+}

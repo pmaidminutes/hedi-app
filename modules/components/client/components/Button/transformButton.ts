@@ -1,9 +1,10 @@
 import { IButtonComponent } from "../../../types";
 import { ButtonDefaultProps } from "carbon-components-react";
 import { HTML } from "@/modules/react/html";
-export interface IButtonProps
-  extends Omit<ButtonDefaultProps, "id" | "href">,
-    IButtonComponent {}
+import { PartialBy } from "@/modules/common/utils";
+
+export type IButtonProps = PartialBy<IButtonComponent, "kind" | "usage"> &
+  Omit<ButtonDefaultProps, "id" | "href">;
 
 export function transformButton(props: IButtonProps) {
   const {

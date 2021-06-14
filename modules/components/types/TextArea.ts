@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type TextAreaKind = "TextArea";
 
@@ -18,7 +19,11 @@ export const isTextAreaInstance = (
   id: string
 ): obj is ITextAreaComponent => isTextArea(obj) && obj.id === id;
 
-export const findTextAreaInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isTextArea).find(item => item.id === id);
-  return element;
-};
+export const findTextAreaInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<ITextAreaComponent>("TextArea", array, id);
+
+export const getTextAreaInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<ITextAreaComponent, "kind" | "id">
+) => getComponentInstance("TextArea", array, id, fallback);

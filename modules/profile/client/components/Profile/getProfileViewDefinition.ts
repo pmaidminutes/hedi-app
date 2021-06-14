@@ -1,4 +1,4 @@
-import { findButtonInstance, IComponent } from "@/modules/components/types";
+import { getButtonInstance, IComponent } from "@/modules/components/types";
 import { IProfileViewDefinition } from ".";
 import { getContactDefinition } from "../Contact";
 import { getProfileEntryDefinition } from "../ProfileEntry";
@@ -9,7 +9,11 @@ export const getProfileViewDefinition = (
 ): IProfileViewDefinition => {
   return {
     profileEntryDefinition: getProfileEntryDefinition(components),
-    profileEditButton: findButtonInstance(components, "profileEditButton"),
+    profileEditButton: getButtonInstance(components, "profileEditButton", {
+      buttonKind: "primary",
+      usage: "",
+      text: "Profil bearbeiten",
+    }),
     contactDefinition: getContactDefinition(components),
     relatedProfilesDefinition: getRelatedProfilesDefinition(components),
   };

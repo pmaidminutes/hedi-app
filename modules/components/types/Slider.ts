@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type SliderKind = "Slider";
 
@@ -16,10 +17,16 @@ export interface ISliderComponent extends IComponent {
 export const isSlider = (obj: IComponent): obj is ISliderComponent =>
   obj?.kind === "Slider";
 
-export const isSliderInstance = (obj: IComponent, id: string): obj is ISliderComponent =>
-  isSlider(obj) && obj.id === id;
+export const isSliderInstance = (
+  obj: IComponent,
+  id: string
+): obj is ISliderComponent => isSlider(obj) && obj.id === id;
 
-export const findSliderInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isSlider).find(item => item.id === id);
-  return element;
-};
+export const findSliderInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<ISliderComponent>("Slider", array, id);
+
+export const getSliderInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<ISliderComponent, "kind" | "id">
+) => getComponentInstance("Slider", array, id, fallback);
