@@ -41,7 +41,7 @@ export const TryProfile = ({
 export interface IProfileViewDefinition {
   profileEntryDefinition: IProfileEntryDefinition;
   profileEditButton?: IButtonComponent;
-  contactDefinition?: IContactDefinition;
+  contactDefinition: IContactDefinition;
   relatedProfilesDefinition?: IRelatedProfilesDefinition;
 }
 
