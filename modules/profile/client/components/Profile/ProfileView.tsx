@@ -42,7 +42,7 @@ export interface IProfileViewDefinition {
   profileEntryDefinition: IProfileEntryDefinition;
   profileEditButton?: IButtonComponent;
   contactDefinition: IContactDefinition;
-  relatedProfilesDefinition?: IRelatedProfilesDefinition;
+  relatedProfilesDefinition: IRelatedProfilesDefinition;
 }
 
 export const ProfileView = ({ content }: { content: IProfileView }) => {
