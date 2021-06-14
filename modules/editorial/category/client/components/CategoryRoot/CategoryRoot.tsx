@@ -1,12 +1,9 @@
 import React from "react";
 import { ArticleEntry } from "@/modules/editorial/article/client";
-import { ICategoryEntry } from "../../../types";
+import { ICategoryEntry, ICategoryRoot } from "../../../types";
 import { CategoryEntry } from "../CategoryEntry";
-import {
-  ICategoryRootProps,
-  transformCategoryRoot,
-} from "./transformCategoryRoot";
-export const CategoryRoot = (props: ICategoryRootProps) => {
+import { transformCategoryRoot } from "./transformCategoryRoot";
+export const CategoryRoot = (props: ICategoryRoot) => {
   const { categories, articles } = transformCategoryRoot(props);
   return (
     <section>

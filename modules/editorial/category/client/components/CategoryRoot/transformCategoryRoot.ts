@@ -1,10 +1,7 @@
-import { CategoryRoot } from "../../../query";
-export interface ICategoryRootProps {
-  content: CategoryRoot;
-}
+import { ICategoryRoot } from "../../../types";
 
-export function transformCategoryRoot(props: ICategoryRootProps) {
-  const { categories, articles } = props.content;
+export function transformCategoryRoot(props: ICategoryRoot) {
+  const { categories, articles } = props;
 
   return { categories, articles };
 }
