@@ -1,7 +1,7 @@
 import { ISelectComponent } from "../../../types";
 import { HTML } from "@/modules/react/html/HTML";
 import { SelectProps, SelectItemProps } from "carbon-components-react";
-import { PartialBy } from "@/modules/common/utils";
+import { convertToCarbonSize, PartialBy } from "@/modules/common/utils";
 
 export interface ISelectProps
   extends PartialBy<ISelectComponent, "kind">,
@@ -41,17 +41,3 @@ export function transformSelect(props: ISelectProps): ISelectAndItemsProps {
   };
 }
 
-// HACK carbon typing is not aligned with current online documentation.
-// our current version might be not up to date
-function convertToCarbonSize(
-  size?: "sm" | "md" | "lg"
-): "sm" | "xl" | undefined {
-  switch (size) {
-    case "lg":
-      return "xl";
-    case "md":
-      return undefined;
-    default:
-      return size;
-  }
-}

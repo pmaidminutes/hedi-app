@@ -92,3 +92,18 @@ export function transformStringToUrl(string: string) {
     ? string
     : `http://${string}`;
 }
+
+// HACK carbon typing is not aligned with current online documentation.
+// our current version might be not up to date
+export function convertToCarbonSize(
+  size?: "sm" | "md" | "lg"
+): "sm" | "xl" | undefined {
+  switch (size) {
+    case "lg":
+      return "xl";
+    case "md":
+      return undefined;
+    default:
+      return size;
+  }
+}

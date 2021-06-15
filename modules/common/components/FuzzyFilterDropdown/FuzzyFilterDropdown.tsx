@@ -1,9 +1,22 @@
-import React from 'react'
+import React from "react";
+import { ComboBox } from "carbon-components-react";
+import {
+  transformFuzzyFilterDropdown,
+  IFuzzyFilterProps,
+} from "./transformFuzzyFilterDropdown";
+import { useFuzzyFilter } from "./useFuzzyFilter";
 
-export const FuzzyFilterDropdown = () => {
+export const FuzzyFilterDropdown = (props: IFuzzyFilterProps) => {
+  const { items, ...rest } = transformFuzzyFilterDropdown(props);
+  const { fuzzyItems, handleInputChange } = useFuzzyFilter(items);
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <ComboBox
+      {...rest}
+      items={fuzzyItems}
+      itemToString={item => (item ? item.label : "")}
+      onInputChange={(inputValue: string | undefined) =>
+        handleInputChange(inputValue)
+      }
+    />
+  );
+};
