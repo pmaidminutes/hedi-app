@@ -1,30 +1,26 @@
-import { IGlossaryGroup } from "../../../types";
+import { IGlossaryKeyGroup, IGlossaryViewDefinition } from "../../../types";
 import { GlossaryGroup } from "../GlossaryGroup";
 import { transformGlossary } from "./transformGlossary";
 
-export type IGlossaryProps = IGlossaryGroup &
-  IGlossaryDefinition &
-  IGlossaryConfig;
-
-export interface IGlossaryDefinition {
-  // for now the entire page content is backend data
-}
+export type IGlossaryProps = IGlossaryViewDefinition & IGlossaryConfig;
 
 export interface IGlossaryConfig {}
 
 export const Glossary = ({ props }: { props: IGlossaryProps }): JSX.Element => {
-  const { keyGroups, defaultLocale, glossaryUrlTerm } = transformGlossary(
-    props
-  );
+  const {
+    glossaryKeyGroups,
+    defaultLocale,
+    glossaryUrlTerm,
+  } = transformGlossary(props);
 
   //TODO to include hash value to anchor on page load, hash in URL doesnt work
 
   return (
     <>
-      {keyGroups.map(keyGroup => (
+      {glossaryKeyGroups.map((glossarykeyGroup: IGlossaryKeyGroup) => (
         <GlossaryGroup
-          key={keyGroup.keyChar}
-          glossaryKeyGroup={keyGroup}
+          key={glossarykeyGroup.keyChar}
+          glossaryKeyGroup={glossarykeyGroup}
           translationLang={defaultLocale}
           selectedTerm={glossaryUrlTerm}
         />

@@ -4,7 +4,7 @@ import { IGlossaryProps } from "./Glossary";
 
 export function transformGlossary(props: IGlossaryProps) {
   const { defaultLocale } = useRouter();
-  const { keyGroups } = props;
+  const { glossaryKeyGroups } = props;
   const glossaryUrlTerm = AssertClientSide()
     ? window.location.hash.substr(1)
     : undefined;
@@ -23,5 +23,5 @@ export function transformGlossary(props: IGlossaryProps) {
     }
   }
 
-  return { keyGroups, defaultLocale, glossaryUrlTerm };
+  return { glossaryKeyGroups, defaultLocale, glossaryUrlTerm };
 }

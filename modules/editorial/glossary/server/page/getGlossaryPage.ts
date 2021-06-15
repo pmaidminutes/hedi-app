@@ -2,15 +2,18 @@ import { IPage } from "@/modules/page/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getGlossaryContent } from "../../query";
-import { glossaryToGroupedGlossary } from "../../query/functions";
-import { IGlossaryGroup } from "../../types";
+import { glossaryTermsToGlossaryKeyGroup } from "../../query/functions";
+import { IGlossaryKeyGroup } from "../../types";
 
+export type IGlossaryPage = IPage & {
+  glossaryKeyGroups: IGlossaryKeyGroup[];
+};
 export async function getGlossaryPage(
   content: IPage
-): Promise<IGlossaryGroup & IPageConfig> {
+): Promise<IGlossaryPage & IPageConfig> {
   content.type = "Glossary";
   const glossaryEntityWithTerms = await getGlossaryContent(content.route);
-  const glossaryGroup = await glossaryToGroupedGlossary(
+  const glossaryKeyGroups = await glossaryTermsToGlossaryKeyGroup(
     glossaryEntityWithTerms
   );
   const layout: ILayout = {
@@ -24,7 +27,7 @@ export async function getGlossaryPage(
 
   return {
     ...content,
-    keyGroups: glossaryGroup,
+    glossaryKeyGroups: glossaryKeyGroups,
     ...shell,
   };
 }

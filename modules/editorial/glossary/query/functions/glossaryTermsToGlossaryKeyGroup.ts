@@ -1,6 +1,6 @@
 import { IGlossary, IGlossaryKeyGroup, IGlossaryTerm } from "../../types";
 
-export async function glossaryToGroupedGlossary(
+export async function glossaryTermsToGlossaryKeyGroup(
   glossary: IGlossary
 ): Promise<IGlossaryKeyGroup[]> {
   const groupedEntries = glossary.glossaryTerms.reduce(function (
@@ -12,11 +12,11 @@ export async function glossaryToGroupedGlossary(
     return keyChar;
   },
   {});
-  const groups = Object.entries(groupedEntries)
+  const glossaryKeyGroups = Object.entries(groupedEntries)
     .map(([keyChar, terms]) => {
       return { keyChar, terms };
     })
     .sort((a, b) => a.keyChar.localeCompare(b.keyChar));
 
-  return groups as IGlossaryKeyGroup[];
+  return glossaryKeyGroups as IGlossaryKeyGroup[];
 }

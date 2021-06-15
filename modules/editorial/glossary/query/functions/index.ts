@@ -1,1 +1,1 @@
-export * from "./glossaryToGroupedGlossary";
+export * from "./glossaryTermsToGlossaryKeyGroup";
