@@ -7,16 +7,32 @@ import {
 import { useFuzzyFilter } from "./useFuzzyFilter";
 
 export const FuzzyFilterDropdown = (props: IFuzzyFilterProps) => {
-  const { items, ...rest } = transformFuzzyFilterDropdown(props);
-  const { fuzzyItems, handleInputChange } = useFuzzyFilter(items);
+  const {
+    items,
+    onChange,
+    value,
+    defaultValue,
+    ...rest
+  } = transformFuzzyFilterDropdown(props);
+  const {
+    fuzzyItems,
+    handleInputChange,
+    handleChange,
+    fuzzyValue,
+    initialValue,
+  } = useFuzzyFilter(items, onChange, value, defaultValue);
+  console.log({ fuzzyValue });
   return (
     <ComboBox
       {...rest}
       items={fuzzyItems}
-      itemToString={item => (item ? item.label : "")}
       onInputChange={(inputValue: string | undefined) =>
         handleInputChange(inputValue)
       }
+      onChange={({ selectedItem }) => {
+        if (selectedItem) handleChange(selectedItem);
+      }}
+      initialSelectedItem={initialValue}
     />
   );
 };

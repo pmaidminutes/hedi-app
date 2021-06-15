@@ -1,13 +1,32 @@
+import { SelectItem } from "@/modules/components";
 import { useState, useEffect } from "react";
-import { IItems } from "./transformFuzzyFilterDropdown";
 
-export function useFuzzyFilter(items: IItems[]) {
+const fallbackSelectItem = { label: "", route: "" };
+
+export function useFuzzyFilter(
+  items: SelectItem[],
+  onChange?: (item: SelectItem) => void,
+  value?: SelectItem,
+  defaultValue?: SelectItem
+) {
   const [fuzzyItems, setFuzzyItems] = useState(items);
+  const [fuzzyValue, setFuzzyValue] = useState<SelectItem>(
+    value ?? defaultValue ?? fallbackSelectItem
+  );
+  const [initialValue, setInitialValue] = useState(value ?? null);
   const [filter, setFilter] = useState<string>("");
 
   useEffect(() => {
     setFuzzyItems(items);
   }, [items]);
+
+  useEffect(() => {
+    setFuzzyValue(value ?? defaultValue ?? fallbackSelectItem);
+  }, [value, defaultValue]);
+
+  useEffect(() => {
+    setInitialValue(value ?? null);
+  }, [value]);
 
   useEffect(() => {
     filterFuzzyItems(filter);
@@ -31,9 +50,19 @@ export function useFuzzyFilter(items: IItems[]) {
     setFilter(inputValue);
   };
 
+  const handleChange = (value?: SelectItem) => {
+    console.log(value);
+    if (value && onChange) {
+      onChange(value);
+      setFuzzyValue(value);
+    }
+  };
 
   return {
     fuzzyItems,
     handleInputChange,
+    handleChange,
+    fuzzyValue,
+    initialValue
   };
 }

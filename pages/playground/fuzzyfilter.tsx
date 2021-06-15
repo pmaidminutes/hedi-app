@@ -5,23 +5,23 @@ import { Column, Grid, Row } from "carbon-components-react";
 
 const items = [
   {
-    id: "option-1",
+    route: "Kinderarzt",
     label: "Kinderarzt",
   },
   {
-    id: "option-2",
+    route: "Kinderärztin",
     label: "Kinderärztin",
   },
   {
-    id: "option-3",
+    route: "Pediatrist",
     label: "Pediatrist",
   },
   {
-    id: "option-4",
+    route: "Pediatristin",
     label: "Pediatristin",
   },
   {
-    id: "option-5",
+    route: "Nico",
     label: "Nico",
   },
 ];
@@ -33,11 +33,18 @@ const ffdata = {
   id: "Fuzzy",
 };
 
-const handleChange = () => {
-  console.log('change from playground')
-}
+const fuzzInit = { label: "Wähle was aus", route: "" };
 
 export default function FuzzyFilterPlayground() {
+  const [fuzz, setFuzz] = useState(  {
+    route: "Nico",
+    label: "Nico",
+  },);
+
+  const handleChange = (value: any) => {
+    if (value) setFuzz(value);
+  };
+
   return (
     <div>
       <Head>
@@ -50,7 +57,13 @@ export default function FuzzyFilterPlayground() {
           </Row>
           <Row>
             <Column>
-              <FuzzyFilterDropdown onChange={handleChange} items={items} {...ffdata} />
+              <FuzzyFilterDropdown
+                onChange={handleChange}
+                value={fuzz}
+                defaultValue={fuzzInit}
+                items={items}
+                {...ffdata}
+              />
             </Column>
           </Row>
         </Grid>

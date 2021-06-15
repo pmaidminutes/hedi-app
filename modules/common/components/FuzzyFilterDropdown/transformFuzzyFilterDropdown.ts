@@ -5,33 +5,29 @@ import { convertToCarbonSize } from "../../utils";
 export interface IItems extends Omit<SelectItem, "route"> {}
 
 export interface IFuzzyFilterProps
-  extends Pick<ISelectComponent,  "helperText" | "size">,
+  extends Pick<ISelectComponent, "helperText" | "size" | "items">,
     Omit<
       ComboBoxProps,
-      "helperText" | "size" | "items" | "labelText" | "onChange"
+      "helperText" | "size" | "labelText" | "placeholder" | "items" | "onChange" | "defaultValue" | "value"
     > {
-  onChange: (data: { selectedItem: SelectItem | null | undefined }) => void;
-  items: IItems[];
+  onChange?: (item: SelectItem) => void;
+  defaultValue?: SelectItem;
+  value?: SelectItem;
 }
 
 export function transformFuzzyFilterDropdown(props: IFuzzyFilterProps) {
-  const {
-    placeholder,
-    titleText,
-    helperText,
-    id,
-    items,
-    size,
-    onChange,
-  } = props;
+  const { titleText, helperText, id, items, size, onChange, defaultValue, value } = props;
 
   return {
+    placeholder: helperText || "Text",
     helperText,
     size: convertToCarbonSize(size),
-    placeholder,
     titleText,
     items: items || [],
     id,
     onChange,
+    ariaLabel: helperText || "Choose an item",
+    defaultValue,
+    value
   };
 }
