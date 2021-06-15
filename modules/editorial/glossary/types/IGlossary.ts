@@ -11,9 +11,6 @@ export interface IGlossary extends IEntityTranslated<IEntityLocalized> {
   glossaryTerms: IGlossaryTerm[];
 }
 
-export function isIGlossary(obj: any): obj is IGlossary {
-  return obj && obj.type === "Glossary";
-}
 export const GlossaryGQL = gql`
   ${EntityTranslatedFields}
   ${GlossaryTermGQL}
