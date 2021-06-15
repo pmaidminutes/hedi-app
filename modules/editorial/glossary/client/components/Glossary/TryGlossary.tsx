@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { IGlossary, IGlossaryGroup } from "../../../types";
+import { IGlossaryGroup } from "../../../types";
 import { Glossary } from "./Glossary";
 
 export const TryGlossary = ({

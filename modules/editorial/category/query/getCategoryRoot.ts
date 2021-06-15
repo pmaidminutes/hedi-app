@@ -1,27 +1,31 @@
-import { logAndNull } from "@/modules/common/error";
+import { GraphQLClient } from "graphql-request";
 import { gql, serviceGQuery } from "@/modules/graphql";
-import { ICategoryRoot, CategoryRootGQL } from "../types";
+import { CategoryEntryGQL, ICategory } from "../types";
+import { logAndFallback } from "@/modules/common/error";
+
+type CategoryRootResponse = {
+  categories: ICategory[];
+};
 
 export async function getCategoryRoot(
-  lang = "de"
-): Promise<ICategoryRoot | null> {
+  lang: string,
+  client?: GraphQLClient
+): Promise<ICategory[]> {
   const query = gql`
-    query getCategoryRoot($lang: String, $includeSelf: Boolean) {
-      categoryroot(lang: $lang) {
-        ${CategoryRootGQL}
-      }
-    }
+    query getCategoryRoot($lang: String!) {
+      categories(lang: $lang) {
+${CategoryEntryGQL}
+parent
+    }}
   `;
-
-  return serviceGQuery<{ categoryroot: ICategoryRoot | null }>(query, {
+  const { categories } = await serviceGQuery<CategoryRootResponse>(query, {
     lang,
-  }).then(data => hackRootTranslationRoutes(logAndNull(data)?.categoryroot));
+  }).then(data =>
+    logAndFallback(data, { categories: [] } as CategoryRootResponse)
+  );
+
+  return filterRootCategories(categories);
 }
 
-function hackRootTranslationRoutes(
-  root?: ICategoryRoot | null
-): ICategoryRoot | null {
-  if (!root) return null;
-  root.translations = root.translations.map(t => ({ ...t, route: "/" }));
-  return root;
-}
+const filterRootCategories = (categories: ICategory[]): ICategory[] =>
+  categories.filter(category => category.parent === 0);

@@ -1,4 +1,5 @@
 import { HTML, IComponent } from "./Component";
+import { findComponentInstance, getComponentInstance } from "./utils";
 
 export type HeadlineKind = "Headline";
 
@@ -16,7 +17,15 @@ export const isHeadlineInstance = (
   id: string
 ): obj is IHeadlineComponent => isHeadline(obj) && obj.id === id;
 
-export const findHeadlineInstance = (array: IComponent[], id: string) => {
-  const element = array.filter(isHeadline).find(item => item.id === id);
-  return element;
+export const findHeadlineInstance = (array: IComponent[], id: string) =>
+  findComponentInstance<IHeadlineComponent>("Headline", array, id);
+
+export const findAllHeadlineInstances = (array: IComponent[]) => {
+  return array.filter(isHeadline);
 };
+
+export const getHeadlineInstance = (
+  array: IComponent[],
+  id: string,
+  fallback: Omit<IHeadlineComponent, "kind" | "id">
+) => getComponentInstance("Headline", array, id, fallback);

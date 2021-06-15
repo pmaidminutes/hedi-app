@@ -39,6 +39,7 @@ import {
 } from "@/modules/profile/server";
 import {
   TryProfile,
+  TryProfileEdit,
   TryProfileList,
   TryProfilePreview,
 } from "@/modules/profile/client/components";
@@ -56,7 +57,10 @@ import { TryArticle } from "@/modules/editorial/article/client/components";
 import { CategoryGQL, isICategory } from "@/modules/editorial/category/types";
 import { CategoryPathsGQL } from "@/modules/editorial/category/query";
 import { getCategoryPage } from "@/modules/editorial/category/server/page";
-import { TryCategory } from "@/modules/editorial/category/client/components";
+import {
+  TryCategory,
+  TryCategoryRoot,
+} from "@/modules/editorial/category/client/components";
 // Glossary
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 // Page
@@ -150,10 +154,10 @@ export default function segments(props: IPageProps<IPage>) {
         <TryLogin content={content} key="login" />
         <TryRegistration content={content} key="registration" />
 
-        <TryProfilePreview content={content} key="profilePreview" />
         <TryProfile content={content} key="profile" />
+        <TryProfileEdit content={content} key="profileEdit" />
+        <TryProfilePreview content={content} key="profilePreview" />
         <TryProfileList content={content} key="profileList" />
-        {/* <TryEditProfile content={content} key="editProfile" /> */}
 
         <TryFeedback content={content} key="feedback" />
 
@@ -166,6 +170,8 @@ export default function segments(props: IPageProps<IPage>) {
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
         <TryGlossary content={content} key="glossary" />
+        <TryCategoryRoot content={content} key="categoryroot" />
+
 
         {/* <TrySearch content={content} key="search" /> */}
         <TryPage content={content} key="page" />

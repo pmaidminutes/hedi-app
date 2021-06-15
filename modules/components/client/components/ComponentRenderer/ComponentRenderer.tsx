@@ -10,6 +10,7 @@ import {
   isTextArea,
   isTextInput,
   isVideo,
+  isHeadline,
 } from "@/modules/components/types";
 import {
   TextArea,
@@ -22,6 +23,7 @@ import {
   DownloadFile,
   VideoPlayer,
   Svg,
+  Headline,
 } from "../index";
 import React from "react";
 interface IRendererProps {
@@ -36,6 +38,8 @@ export const ComponentRenderer = (props: IRendererProps) => {
         components.map((component, index) => {
           if (isLabel(component))
             return <Label key={component.kind + index} {...component} />;
+          if (isHeadline(component))
+            return <Headline key={component.kind + index} {...component} />;
           if (isBody(component))
             return <Body key={component.kind + index} {...component} />;
           if (isButton(component))

@@ -1,6 +1,5 @@
 import { Location } from "./LocationType";
 
-export interface coordinates {
+export interface IMapProps {
   locations: Location[];
-  currentLocation: Location;
 }
