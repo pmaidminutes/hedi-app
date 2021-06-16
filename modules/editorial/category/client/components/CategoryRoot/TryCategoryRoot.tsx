@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { ICategory } from "../../../types";
+import { ICategoryRoot } from "../../../types";
 import { CategoryRoot } from "./CategoryRoot";
 
 export const TryCategoryRoot = ({
@@ -8,5 +8,5 @@ export const TryCategoryRoot = ({
   content: ITyped;
 }): JSX.Element | null =>
   content.type === "CategoryRoot" ? (
-    <CategoryRoot content={content as ICategory} />
+    <CategoryRoot {...(content as ICategoryRoot)} />
   ) : null;

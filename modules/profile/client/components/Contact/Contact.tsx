@@ -41,7 +41,8 @@ export const Contact = (props: IContactProps): JSX.Element => {
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
       <Tile>
-        <PregnantWoman />
+        {/* TODO Inline SVG */}
+        {/* <PregnantWoman /> */}
         <h3>{dataKind.label}</h3>
         {address && <Address {...address} />}
         <p>{phone && <PhoneLink title={phoneTitle} {...phone} />}</p>

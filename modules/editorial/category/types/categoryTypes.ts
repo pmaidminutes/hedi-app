@@ -25,6 +25,7 @@ image { ${ImageGQL} }
 
 export interface ICategoryRoot extends IEntityTranslated<IEntityLocalized> {
   categories: ICategoryEntry[];
+  articles: IArticleEntry[]
 }
 
 export const CategoryRootGQL = gql`... on CategoryRoot {

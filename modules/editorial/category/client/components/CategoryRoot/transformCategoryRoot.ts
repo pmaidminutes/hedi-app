@@ -1,7 +1,7 @@
-import { ICategoryProps } from "../Category/transformCategory";
+import { ICategoryRoot } from "../../../types";
 
-export function transformCategoryRoot(props: ICategoryProps) {
-  const { categories } = props.content;
+export function transformCategoryRoot(props: ICategoryRoot) {
+  const { categories, articles } = props;
 
-  return { categories };
+  return { categories, articles };
 }

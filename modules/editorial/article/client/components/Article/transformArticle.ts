@@ -10,7 +10,7 @@ export interface IArticleProps {
 }
 export function transformArticle(props: IArticleProps) {
   const { content } = props;
-  const { label, components, category, appstyle } = content;
+  const { label, components, category, appstyle, route } = content;
 
   const headlines = findAllHeadlineInstances(components);
 
@@ -26,7 +26,7 @@ export function transformArticle(props: IArticleProps) {
   const anchors: ILinkComponent[] = headlines.map(headline => {
     return {
       kind: "Link",
-      href: "/#dummy",
+      href: `${route}#${headline.id || "id"}`,
       labelText: headline?.text || "kein Text",
     };
   });

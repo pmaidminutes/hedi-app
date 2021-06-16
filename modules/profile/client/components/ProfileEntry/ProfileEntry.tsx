@@ -38,7 +38,8 @@ export const ProfileEntry: React.FC<IProfileEntryProps> = (
     <section className={className}>
       <Row narrow={isNarrow}>
         <Column sm={4} md={2} lg={3} className="hedi--profile-entry-image">
-          <HediPerson />
+          {/* TODO svg */}
+          {/* <HediPerson /> */}
         </Column>
         <Column sm={4} md={6} lg={13}>
           <div className="hedi--profile-entry-content">

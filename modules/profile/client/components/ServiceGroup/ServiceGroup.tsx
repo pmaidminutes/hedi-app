@@ -12,7 +12,8 @@ export const ServiceGroup = (props: IServiceGroupProps) => {
     return (
       <section className="hedi--profile-services hedi--profile--tile">
         <Tile>
-          <BabyOnHand />
+          {/* TODO Svg */}
+          {/* <BabyOnHand /> */}
           <TagList
             headlineType={headlineType}
             tags={services}
