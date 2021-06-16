@@ -17,7 +17,9 @@ module.exports = {
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     if (!dev) {
       // ignore all files in a playground folder (tsx and api/ts)
-      config.plugins.push(new webpack.IgnorePlugin(/\/playground\//));
+      // TODO enable this, once we find a fix for the build error
+      // while this is not executed, remember to remove playground for any public build
+      //config.plugins.push(new webpack.IgnorePlugin({resourceRegExp: /\/playground\//}));
     }
     return config;
   },
