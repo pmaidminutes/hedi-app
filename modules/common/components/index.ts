@@ -5,5 +5,6 @@ export * from "./ButtonContainer";
 export * from "./ButtonHintText";
 export * from "./Seperator";
 export * from "./Rating";
+export * from "./SelectFieldVisibility";
 export * from "./Tag";
 export * from "./TagList";

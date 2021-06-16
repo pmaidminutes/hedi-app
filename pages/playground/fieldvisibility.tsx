@@ -1,4 +1,5 @@
 import { Column, Grid, Row } from "carbon-components-react";
+import { SelectFieldVisibility } from "@/modules/common/components";
 import Head from "next/head";
 
 export default function FieldPlayground() {
@@ -12,7 +13,9 @@ export default function FieldPlayground() {
           <h1>FieldAccess</h1>
         </Row>
         <Row>
-          <Column></Column>
+          <Column>
+            <SelectFieldVisibility />
+          </Column>
         </Row>
       </Grid>
     </div>
