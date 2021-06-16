@@ -1,7 +1,7 @@
 import { Row, Column } from "carbon-components-react";
 import { TagList } from "@/modules/common/components";
 
-import HediPerson from "./assets/hedi_person.svg";
+import { HediPerson } from "@/modules/svg";
 import { IProfileEntry } from "@/modules/profile/types";
 import { Address, EmailLink, PhoneLink, WebLink } from "..";
 
@@ -38,8 +38,7 @@ export const ProfileEntry: React.FC<IProfileEntryProps> = (
     <section className={className}>
       <Row narrow={isNarrow}>
         <Column sm={4} md={2} lg={3} className="hedi--profile-entry-image">
-          {/* TODO svg */}
-          {/* <HediPerson /> */}
+          <HediPerson />
         </Column>
         <Column sm={4} md={6} lg={13}>
           <div className="hedi--profile-entry-content">
