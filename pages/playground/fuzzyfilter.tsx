@@ -21,8 +21,8 @@ const items = [
     label: "Pediatristin",
   },
   {
-    route: "Nico",
-    label: "Nico",
+    route: "",
+    label: "Tier Ärztinh",
   },
 ];
 
@@ -36,10 +36,10 @@ const ffdata = {
 const fuzzInit = { label: "Wähle was aus", route: "" };
 
 export default function FuzzyFilterPlayground() {
-  const [fuzz, setFuzz] = useState(  {
+  const [fuzz, setFuzz] = useState({
     route: "Nico",
     label: "Nico",
-  },);
+  });
 
   const handleChange = (value: any) => {
     if (value) setFuzz(value);
@@ -60,7 +60,6 @@ export default function FuzzyFilterPlayground() {
               <FuzzyFilterDropdown
                 onChange={handleChange}
                 value={fuzz}
-                defaultValue={fuzzInit}
                 items={items}
                 {...ffdata}
               />

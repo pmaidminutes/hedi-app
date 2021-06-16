@@ -5,6 +5,7 @@ import {
   IFuzzyFilterProps,
 } from "./transformFuzzyFilterDropdown";
 import { useFuzzyFilter } from "./useFuzzyFilter";
+import { HTML } from "@/modules/react/html/HTML";
 
 export const FuzzyFilterDropdown = (props: IFuzzyFilterProps) => {
   const {
@@ -18,10 +19,9 @@ export const FuzzyFilterDropdown = (props: IFuzzyFilterProps) => {
     fuzzyItems,
     handleInputChange,
     handleChange,
-    fuzzyValue,
     initialValue,
+    filter,
   } = useFuzzyFilter(items, onChange, value, defaultValue);
-  console.log({ fuzzyValue });
   return (
     <ComboBox
       {...rest}
@@ -33,6 +33,26 @@ export const FuzzyFilterDropdown = (props: IFuzzyFilterProps) => {
         if (selectedItem) handleChange(selectedItem);
       }}
       initialSelectedItem={initialValue}
+      itemToElement={item => {
+        if (filter.length > 1) {
+          const regEx = new RegExp(filter, "gi");
+          const matches = item.label.match(regEx);
+          let boldened = item.label;
+          matches?.forEach(
+            part =>
+              (boldened = boldened.replace(
+                part,
+                "<strong>" + part + "</strong>"
+              ))
+          );
+          return (
+            <span>
+              <HTML data={boldened} />
+            </span>
+          );
+        }
+        return <span>{item.label}</span>;
+      }}
     />
   );
 };

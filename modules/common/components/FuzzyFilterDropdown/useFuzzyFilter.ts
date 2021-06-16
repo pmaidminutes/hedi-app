@@ -1,8 +1,8 @@
 import { SelectItem } from "@/modules/components";
 import { useState, useEffect } from "react";
-
 const fallbackSelectItem = { label: "", route: "" };
 
+// TODO make multiple search words possible
 export function useFuzzyFilter(
   items: SelectItem[],
   onChange?: (item: SelectItem) => void,
@@ -32,12 +32,12 @@ export function useFuzzyFilter(
     filterFuzzyItems(filter);
   }, [filter]);
 
-  const findWord = (word: string, str: string) => {
+  const hasWord = (word: string, str: string) => {
     return RegExp(word, "i").test(str);
   };
 
   const filterFuzzyItems = (value: string) => {
-    const newItems = items.filter(item => findWord(value, item.label));
+    const newItems = items.filter(item => hasWord(value, item.label));
     setFuzzyItems(newItems);
   };
 
@@ -51,7 +51,6 @@ export function useFuzzyFilter(
   };
 
   const handleChange = (value?: SelectItem) => {
-    console.log(value);
     if (value && onChange) {
       onChange(value);
       setFuzzyValue(value);
@@ -63,6 +62,7 @@ export function useFuzzyFilter(
     handleInputChange,
     handleChange,
     fuzzyValue,
-    initialValue
+    initialValue,
+    filter
   };
 }
