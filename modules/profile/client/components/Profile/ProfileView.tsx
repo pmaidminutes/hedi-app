@@ -101,7 +101,7 @@ export const ProfileView = ({ content }: { content: IProfileView }) => {
         />
       )}
       {/* {hasMap)
-          ? content.associations.map((entry: IProfile) => {
+          ? content.organisations.map((entry: IProfile) => {
               return <ProfileEntry profile={entry} key={entry.route} />;
             })
           : content.members.map((entry: IProfile) => {

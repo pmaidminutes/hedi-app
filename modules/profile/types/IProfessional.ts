@@ -20,7 +20,7 @@ export interface IProfessional extends IBusinessProfile {
   givenName: string;
   familyName?: string;
 
-  associations: IBusinessProfileLink[];
+  organisations: IBusinessProfileLink[];
 }
 
 export const ProfessionalTypeName = "Professional";
@@ -32,7 +32,7 @@ export function isIProfessional(obj: any): obj is IProfessional {
 export const ProfessionalGQL: string = gql`... on Professional {
   ${BusinessProfileFields}
   prefix givenName familyName
-  associations { ${BusinessProfileLinkFields} }
+  organisations { ${BusinessProfileLinkFields} }
 }`;
 
 export interface IProfessionalInput extends IBusinessProfileInput {
