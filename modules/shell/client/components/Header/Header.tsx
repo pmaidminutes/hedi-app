@@ -16,7 +16,7 @@ import {
 
 // import { GlobalSearchMenu } from "../GlobalSearchMenu";
 import { UserProfileMenu } from "../UserProfileMenu";
-import Logo from "./assets/hedi_logo_single_new.svg";
+import { Logo } from "@/modules/svg";
 import { isLink } from "@/modules/components/types";
 
 export const Header = (props: IHeader) => {
@@ -37,7 +37,7 @@ export const Header = (props: IHeader) => {
       <HeaderName prefix="" href={`/${locale}`}>
         <TooltipIcon tooltipText={backToHome}>
           {/* TODO SVG */}
-          {/* <Logo /> */}
+          <Logo />
         </TooltipIcon>
       </HeaderName>
       <HeaderNavigation aria-label="Navigation" style={{ display: "block" }}>
