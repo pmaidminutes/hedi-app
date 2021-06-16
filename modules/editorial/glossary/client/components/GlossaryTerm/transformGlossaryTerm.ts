@@ -8,7 +8,7 @@ export interface IGlossaryTermProps {
 
 export function transformGlossaryTerm(props: IGlossaryTermProps) {
   const { glossaryTerm, translationLang, isSelected } = props;
-  const { label } = glossaryTerm;
+  const { label, body } = glossaryTerm;
   const entryId = glossaryTerm.route.substring(
     glossaryTerm.route.lastIndexOf("/") + 1
   );
@@ -18,5 +18,5 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
 
   const termClass = isSelected ? "hedi-marked-word" : "";
 
-  return { label, entryId, isSelected, termClass, translation };
+  return { label, body, entryId, isSelected, termClass, translation };
 }

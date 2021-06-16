@@ -1,6 +1,6 @@
 import { ITyped } from "@/modules/model";
-import { IGlossaryGrouped } from "../../../types";
-import { Glossary } from "./Glossary";
+import { IGlossaryViewDefinition } from "../../../types";
+import { Glossary } from "..";
 
 export const TryGlossary = ({
   content,
@@ -8,5 +8,5 @@ export const TryGlossary = ({
   content: ITyped;
 }): JSX.Element | null =>
   content.type === "Glossary" ? (
-    <Glossary content={content as IGlossaryGrouped} />
+    <Glossary props={content as IGlossaryViewDefinition} />
   ) : null;

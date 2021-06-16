@@ -1,23 +1,23 @@
 import { useState, useEffect } from "react";
-import { IGlossaryGroup } from "../../../types";
+import { IGlossaryKeyGroup } from "../../../types";
 
 export interface IGlossaryGroupProps {
-  glossaryGroup: IGlossaryGroup;
+  glossaryKeyGroup: IGlossaryKeyGroup;
   translationLang?: string;
   selectedTerm?: string;
 }
 
 export function useGlossaryGroup(props: IGlossaryGroupProps) {
-  const { selectedTerm, translationLang, glossaryGroup } = props;
-  const { key, terms } = glossaryGroup;
+  const { selectedTerm, translationLang, glossaryKeyGroup } = props;
+  const { keyChar, terms } = glossaryKeyGroup;
   const [termUpdated, setTermUpdated] = useState("");
   useEffect(() => {
     setTermUpdated(selectedTerm ?? "");
   }, [selectedTerm]);
 
   return {
-    groupKey: key,
-    groupTerms: terms,
+    glossaryKey: keyChar,
+    glossaryTerms: terms,
     translationLang,
     termUpdated,
   };

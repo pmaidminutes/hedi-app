@@ -62,8 +62,6 @@ import {
   TryCategoryRoot,
 } from "@/modules/editorial/category/client/components";
 // Glossary
-import { GlossaryPathsGQL } from "@/modules/editorial/glossary/query";
-import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 import { TryGlossary } from "@/modules/editorial/glossary/client/components";
 // Page
 import { PagePathsGQL, getPageType } from "@/modules/page/server";
@@ -171,8 +169,9 @@ export default function segments(props: IPageProps<IPage>) {
 
         <TryArticle content={content} key="article" />
         <TryCategory content={content} key="category" />
+        <TryGlossary content={content} key="glossary" />
         <TryCategoryRoot content={content} key="categoryroot" />
-        {/* <TryGlossary content={content} key="glossary" /> */}
+
 
         {/* <TrySearch content={content} key="search" /> */}
         <TryPage content={content} key="page" />

@@ -1,13 +1,10 @@
-import { IGlossaryGrouped } from "../../../types";
 import { useRouter } from "next/router";
 import { AssertClientSide } from "@/modules/common/utils";
-export interface IGlossaryProps {
-  content: IGlossaryGrouped;
-}
+import { IGlossaryProps } from "./Glossary";
+
 export function transformGlossary(props: IGlossaryProps) {
   const { defaultLocale } = useRouter();
-  const { content } = props;
-  const { groups } = content;
+  const { glossaryKeyGroups } = props;
   const glossaryUrlTerm = AssertClientSide()
     ? window.location.hash.substr(1)
     : undefined;
@@ -26,5 +23,5 @@ export function transformGlossary(props: IGlossaryProps) {
     }
   }
 
-  return { groups, defaultLocale, glossaryUrlTerm };
+  return { glossaryKeyGroups, defaultLocale, glossaryUrlTerm };
 }
