@@ -1,7 +1,8 @@
 import { TagList } from "@/modules/common/components";
 import { Tile } from "carbon-components-react";
 import { transformServiceGroup } from "./transformServiceGroup";
-import BabyOnHand from "./assets/baby.svg";
+import { BabyOnHand } from "@/modules/svg";
+
 import { IServiceGroupProps } from "./IServiceGroupProps";
 
 export const ServiceGroup = (props: IServiceGroupProps) => {
@@ -12,8 +13,7 @@ export const ServiceGroup = (props: IServiceGroupProps) => {
     return (
       <section className="hedi--profile-services hedi--profile--tile">
         <Tile>
-          {/* TODO Svg */}
-          {/* <BabyOnHand /> */}
+          <BabyOnHand />
           <TagList
             headlineType={headlineType}
             tags={services}

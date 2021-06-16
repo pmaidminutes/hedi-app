@@ -36,7 +36,6 @@ export const Header = (props: IHeader) => {
     <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
       <HeaderName prefix="" href={`/${locale}`}>
         <TooltipIcon tooltipText={backToHome}>
-          {/* TODO SVG */}
           <Logo />
         </TooltipIcon>
       </HeaderName>
