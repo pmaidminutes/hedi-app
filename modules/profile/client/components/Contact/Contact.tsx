@@ -1,5 +1,5 @@
 import { Tile } from "carbon-components-react";
-import PregnantWoman from "./assets/pregnant.svg";
+import { PregnantPerson } from "@/modules/svg";
 import { Seperator } from "@/modules/common/components";
 import { IDataKind } from "@/modules/profile/types/taxonomyTypes";
 import {
@@ -41,8 +41,7 @@ export const Contact = (props: IContactProps): JSX.Element => {
   return (
     <section className="hedi--profile-contact hedi--profile--tile">
       <Tile>
-        {/* TODO Inline SVG */}
-        {/* <PregnantWoman /> */}
+        <PregnantPerson />
         <h3>{dataKind.label}</h3>
         {address && <Address {...address} />}
         <p>{phone && <PhoneLink title={phoneTitle} {...phone} />}</p>
