@@ -2,7 +2,7 @@ export interface IValidationFunction {
   name: string;
   fn: (T: any) => boolean;
 }
-
+// TODO add automatically if input is required from cms
 export const requiredValidationFn = <T>(): IValidationFunction => {
   return {
     name: "requiredValidationFn",

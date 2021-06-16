@@ -1,8 +1,8 @@
 import React from "react";
 import { NumberInput } from "../NumberInput";
-import { requiredValidationFn } from "@/modules/react/validation";
 import { IValidatedNumberInputProps } from "@/modules/components/types/ValidatedNumberInput";
 import { useValidation } from "@/modules/react/hooks";
+import { transformValidatedNumberInput } from "./transformValidatedNumberInput";
 
 export const ValidatedNumberInput = React.forwardRef<
   HTMLInputElement,
@@ -11,16 +11,14 @@ export const ValidatedNumberInput = React.forwardRef<
   const {
     onChange,
     onValidation,
-    enableValidation,
-    validateFn,
+    value,
+    validateFunction,
+    setDefaultEnableValidation,
     ...rest
-  } = props;
-
-  const validateFunction = validateFn || requiredValidationFn();
-  const setDefaultEnableValidation = enableValidation ?? true;
+  } = transformValidatedNumberInput(props);
 
   const { handleChange } = useValidation(
-    rest.value ?? "",
+    value,
     validateFunction,
     setDefaultEnableValidation,
     onChange,

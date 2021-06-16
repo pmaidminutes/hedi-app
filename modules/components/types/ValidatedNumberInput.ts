@@ -1,5 +1,4 @@
 import { IValidationFunction } from "@/modules/react/validation";
-import { NumberInputProps } from "carbon-components-react";
 import { INumberInputProps } from "../client/components/NumberInput/transformNumberInput";
 
 export interface IValidatedNumberInputProps extends INumberInputProps {

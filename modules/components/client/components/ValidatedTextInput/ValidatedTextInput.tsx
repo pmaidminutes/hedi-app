@@ -1,26 +1,24 @@
 import React from "react";
 import { TextInput } from "../TextInput";
 import { IValidatedTextInputProps } from "@/modules/components/types";
-import { requiredValidationFn } from "@/modules/react/validation";
 import { useValidation } from "@/modules/react/hooks";
+import { transformValidatedTextInput } from "./transformValidatedTextInput";
 
 export const ValidatedTextInput = React.forwardRef<
   HTMLInputElement,
   IValidatedTextInputProps
 >((props, ref) => {
   const {
+    value,
+    validateFunction,
+    enableValidationOrDefault,
     onChange,
     onValidation,
-    enableValidation,
-    validateFn,
     ...rest
-  } = props;
-
-  const validateFunction = validateFn || requiredValidationFn();
-  const enableValidationOrDefault = enableValidation ?? true;
+  } = transformValidatedTextInput(props);
 
   const { handleChange } = useValidation(
-    rest.value ?? "",
+    value,
     validateFunction,
     enableValidationOrDefault,
     onChange,
