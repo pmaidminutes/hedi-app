@@ -7,5 +7,5 @@ export * from "./IBusinessProfile";
 export * from "./IProfessional";
 export * from "./IUserProfile";
 export * from "./IUpsertProfessionalResponse";
-export * from "./IAssociation";
+export * from "./IOrganisation";
 export * from "./IProfileEntry";

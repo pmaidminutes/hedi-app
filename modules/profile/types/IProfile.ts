@@ -17,7 +17,11 @@ import {
   EmailFields,
   IEmailInput,
 } from "./dataTypes";
-import { AssociationTypeName, PersonalTypeName, ProfessionalTypeName } from ".";
+import {
+  OrganisationTypeName,
+  PersonalTypeName,
+  ProfessionalTypeName,
+} from ".";
 
 export interface IProfile extends IEntityTranslated<IEntityLocalized> {
   //image: Image
@@ -31,7 +35,7 @@ export function isIProfile(obj: any): obj is IProfile {
   const profileTypeNames = [
     PersonalTypeName,
     ProfessionalTypeName,
-    AssociationTypeName,
+    OrganisationTypeName,
   ];
   return obj && !!obj.type && profileTypeNames.includes(obj.type);
 }

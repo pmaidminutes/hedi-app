@@ -10,7 +10,7 @@ import { transformProfileToEntry } from "../../utils/transformProfileToEntry";
 
 type BusinessProfilesResponse = {
   professionals: IBusinessProfile[];
-  associations: IBusinessProfile[];
+  organisations: IBusinessProfile[];
 };
 
 export async function getProfileList(
@@ -20,7 +20,7 @@ export async function getProfileList(
   const query = gql`
     query getBusinessProfiles($lang: String!, $includeSelf: Boolean) {
       professionals(lang: $lang) { ${BusinessProfileFields} }
-      associations(lang: $lang) { ${BusinessProfileFields} }
+      organisations(lang: $lang) { ${BusinessProfileFields} }
     }
   `;
 
@@ -29,18 +29,18 @@ export async function getProfileList(
 
   const {
     professionals,
-    associations,
+    organisations,
   } = await serviceGQuery<BusinessProfilesResponse>(query, {
     lang,
   }).then(data =>
     logAndFallback(data, {
       professionals: [],
-      associations: [],
+      organisations: [],
     } as BusinessProfilesResponse)
   );
 
   const profiles = professionals
-    .concat(associations)
+    .concat(organisations)
     .sort((a, b) =>
       a.label.localeCompare(b.label, lang, { ignorePunctuation: true })
     );

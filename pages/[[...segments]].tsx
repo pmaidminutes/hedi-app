@@ -29,8 +29,8 @@ import { TryProfileTestLandingPage } from "@/modules/landingpage/client/componen
 
 // Profile
 import {
-  AssociationGQL,
   isIProfile,
+  OrganisationGQL,
   ProfessionalGQL,
 } from "@/modules/profile/types";
 import {
@@ -108,7 +108,7 @@ export const getStaticProps: GetStaticProps<
     CategoryGQL,
     PageGQL,
     ProfessionalGQL,
-    AssociationGQL,
+    OrganisationGQL,
   ];
   const entities = await getIEntitiesTranslated<IEntity>(
     gqlTypes,
@@ -171,7 +171,6 @@ export default function segments(props: IPageProps<IPage>) {
         <TryCategory content={content} key="category" />
         <TryGlossary content={content} key="glossary" />
         <TryCategoryRoot content={content} key="categoryroot" />
-
 
         {/* <TrySearch content={content} key="search" /> */}
         <TryPage content={content} key="page" />

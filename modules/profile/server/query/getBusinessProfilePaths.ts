@@ -3,5 +3,5 @@ import { EntityLocalizedFields } from "@/modules/model";
 
 export const BusinessProfilePathsGQL = gql`
   professionals(lang: $lang) { ${EntityLocalizedFields} }
-  associations(lang: $lang) { ${EntityLocalizedFields} }
+  organisations(lang: $lang) { ${EntityLocalizedFields} }
 `;

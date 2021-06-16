@@ -6,19 +6,19 @@ import {
   BusinessProfileLinkFields,
 } from "./IBusinessProfile";
 
-export interface IAssociation extends IBusinessProfile {
+export interface IOrganisation extends IBusinessProfile {
   name: string;
 
   professionals: IBusinessProfileLink[];
 }
 
-export const AssociationTypeName = "Association";
+export const OrganisationTypeName = "Organisation";
 
-export function isIAssociation(obj: any): obj is IAssociation {
-  return obj && obj?.type === AssociationTypeName;
+export function isIOrganisation(obj: any): obj is IOrganisation {
+  return obj && obj?.type === OrganisationTypeName;
 }
 
-export const AssociationGQL: string = gql`... on Association {
+export const OrganisationGQL: string = gql`... on Organisation {
   ${BusinessProfileFields}
   name
   professionals { ${BusinessProfileLinkFields} }
