@@ -1,9 +1,27 @@
 import React from "react";
-import { Locked32 } from "@carbon/icons-react";
-export const SelectFieldVisibility = () => {
+import { OverflowMenu } from "carbon-components-react";
+import { SelectFieldVisibilityItem } from "./SelectFieldVisibilityItem/";
+import {
+  ISelectFieldVisibilty,
+  transformSelectFieldVisibilty,
+} from "./transformSelectFieldVisibility";
+
+export const SelectFieldVisibility = (props: ISelectFieldVisibilty) => {
+  const { items, icon, value } = transformSelectFieldVisibilty(props);
   return (
-    <div>
-      <Locked32 />
-    </div>
+    <OverflowMenu
+      renderIcon={icon}
+      className="hedi--field-visibility"
+      selectorPrimaryFocus={".locked"}>
+      {items.map((item, index) => {
+        return (
+          <SelectFieldVisibilityItem
+            key={item.label + index}
+            value={value}
+            {...item}
+          />
+        );
+      })}
+    </OverflowMenu>
   );
 };
