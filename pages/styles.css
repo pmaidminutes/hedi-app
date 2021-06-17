@@ -18232,7 +18232,7 @@ h4 {
     padding: 0; }
   .hedi--field-visibility__item .bx--overflow-menu-options__option-content {
     white-space: normal; }
-  .hedi--field-visibility__item::before {
+  .hedi--field-visibility__item button::before {
     content: "";
     min-width: 2.5rem;
     width: 2.5rem;
@@ -18248,11 +18248,11 @@ h4 {
     background-color: honeydew; }
     .hedi--field-visibility__item.selected :hover {
       cursor: auto; }
-  .hedi--field-visibility__item.public::before {
+  .hedi--field-visibility__item.public button::before {
     background-image: url(/svg/earth--filled.svg); }
-  .hedi--field-visibility__item.connected::before {
+  .hedi--field-visibility__item.connected button::before {
     background-image: url(/svg/connect.svg); }
-  .hedi--field-visibility__item.locked::before {
+  .hedi--field-visibility__item.locked button::before {
     background-image: url(/svg/locked.svg); }
 
 .hedi-separator {
