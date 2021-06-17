@@ -5,9 +5,15 @@ import {
   ISelectFieldVisibilty,
   transformSelectFieldVisibilty,
 } from "./transformSelectFieldVisibility";
-
+import { useSelectFieldVisibility } from "./useSelectFieldVisibility";
 export const SelectFieldVisibility = (props: ISelectFieldVisibilty) => {
-  const { items, icon, value } = transformSelectFieldVisibilty(props);
+  const { items, value, onChange } = transformSelectFieldVisibilty(props);
+  const {
+    initialValue,
+    handleChange,
+    currentValue,
+    icon,
+  } = useSelectFieldVisibility(value, onChange);
   return (
     <OverflowMenu
       renderIcon={icon}
@@ -17,7 +23,8 @@ export const SelectFieldVisibility = (props: ISelectFieldVisibilty) => {
         return (
           <SelectFieldVisibilityItem
             key={item.label + index}
-            value={value}
+            value={currentValue || initialValue}
+            onChange={handleChange}
             {...item}
           />
         );
