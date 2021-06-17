@@ -12,7 +12,11 @@ export function transformSelectFieldVisibilityItem(
   let fieldClassName = `hedi--field-visibility__item`;
   if (index || index === 0) {
     fieldClassName = `${fieldClassName}${
-      index === 0 ? " public" : index === 1 ? " connected" : " locked"
+      index === 0
+        ? " public"
+        : index === 1
+        ? " registered-user"
+        : " connected-user"
     }`;
     if (value || value === 0) {
       fieldClassName = `${fieldClassName}${index === value ? " selected" : ""}`;

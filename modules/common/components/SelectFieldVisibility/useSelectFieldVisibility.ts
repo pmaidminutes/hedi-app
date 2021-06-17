@@ -4,6 +4,9 @@ import {
   Connect16,
   EarthFilled16,
   CarbonIconType,
+  UserAdmin16,
+  Collaborate16,
+  Events16,
 } from "@carbon/icons-react";
 
 const fallbackValue = 0;
@@ -35,5 +38,5 @@ export function useSelectFieldVisibility(
 }
 
 function getIcon(index: number) {
-  return index === 0 ? EarthFilled16 : index === 1 ? Connect16 : Locked16;
+  return index === 0 ? Events16 : index === 1 ? UserAdmin16 : Collaborate16;
 }
