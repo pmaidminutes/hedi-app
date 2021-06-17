@@ -15,6 +15,9 @@
     &.selected {
       border-left: 4px solid green;
       background-color: honeydew;
+      :hover {
+        cursor: auto;
+      }
     }
   }
   &__item.public::before {
