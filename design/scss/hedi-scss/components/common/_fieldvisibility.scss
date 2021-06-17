@@ -1,0 +1,44 @@
+.hedi--field-visibility {
+  &__item {
+    &::before {
+      content: "";
+      min-width: 2.5rem;
+      width: 2.5rem;
+      height: 2.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 16px;
+    }
+    &.selected {
+      border-left: 4px solid green;
+      background-color: honeydew;
+    }
+  }
+  &__item.public::before {
+    background-image: url(/svg/earth--filled.svg);
+  }
+  &__item.connected::before {
+    background-image: url(/svg/connect.svg);
+  }
+  &__item.locked::before {
+    background-image: url(/svg/locked.svg);
+  }
+}
+
+// &__item {
+//   width: 100%;
+//   display: flex;
+//   align-items: center;
+//   > div {
+//     width: 3.5rem;
+//     height: 2.5rem;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//   }
+//   svg {
+//     margin: 0 5px;
+// }
