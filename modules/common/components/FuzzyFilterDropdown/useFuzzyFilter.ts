@@ -1,16 +1,16 @@
-import { SelectItem } from "@/modules/components";
+import { ISelectItem } from "@/modules/components";
 import { useState, useEffect } from "react";
 const fallbackSelectItem = { label: "", route: "" };
 
 // TODO make multiple search words possible
 export function useFuzzyFilter(
-  items: SelectItem[],
-  onChange?: (item: SelectItem) => void,
-  value?: SelectItem,
-  defaultValue?: SelectItem
+  items: ISelectItem[],
+  onChange?: (item: ISelectItem) => void,
+  value?: ISelectItem,
+  defaultValue?: ISelectItem
 ) {
   const [fuzzyItems, setFuzzyItems] = useState(items);
-  const [fuzzyValue, setFuzzyValue] = useState<SelectItem>(
+  const [fuzzyValue, setFuzzyValue] = useState<ISelectItem>(
     value ?? defaultValue ?? fallbackSelectItem
   );
   const [initialValue, setInitialValue] = useState(value ?? null);
@@ -50,7 +50,7 @@ export function useFuzzyFilter(
     setFilter(inputValue);
   };
 
-  const handleChange = (value?: SelectItem) => {
+  const handleChange = (value?: ISelectItem) => {
     if (value && onChange) {
       onChange(value);
       setFuzzyValue(value);
@@ -63,6 +63,6 @@ export function useFuzzyFilter(
     handleChange,
     fuzzyValue,
     initialValue,
-    filter
+    filter,
   };
 }

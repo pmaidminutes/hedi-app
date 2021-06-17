@@ -39,7 +39,7 @@ export const FuzzyFilterDropdown = (props: IFuzzyFilterProps) => {
           const matches = item.label.match(regEx);
           let boldened = item.label;
           matches?.forEach(
-            part =>
+            (part: any) =>
               (boldened = boldened.replace(
                 part,
                 "<strong>" + part + "</strong>"

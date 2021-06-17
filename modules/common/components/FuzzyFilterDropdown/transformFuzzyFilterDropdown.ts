@@ -1,22 +1,38 @@
-import { ISelectComponent, SelectItem } from "@/modules/components";
+import { ISelectComponent, ISelectItem } from "@/modules/components";
 import { ComboBoxProps } from "carbon-components-react";
 import { convertToCarbonSize } from "../../utils";
 
-export interface IItems extends Omit<SelectItem, "route"> {}
+export interface IItems extends Omit<ISelectItem, "route"> {}
 
 export interface IFuzzyFilterProps
   extends Pick<ISelectComponent, "helperText" | "size" | "items">,
     Omit<
       ComboBoxProps,
-      "helperText" | "size" | "labelText" | "placeholder" | "items" | "onChange" | "defaultValue" | "value"
+      | "helperText"
+      | "size"
+      | "labelText"
+      | "placeholder"
+      | "items"
+      | "onChange"
+      | "defaultValue"
+      | "value"
     > {
-  onChange?: (item: SelectItem) => void;
-  defaultValue?: SelectItem;
-  value?: SelectItem;
+  onChange?: (item: ISelectItem) => void;
+  defaultValue?: ISelectItem;
+  value?: ISelectItem;
 }
 
 export function transformFuzzyFilterDropdown(props: IFuzzyFilterProps) {
-  const { titleText, helperText, id, items, size, onChange, defaultValue, value } = props;
+  const {
+    titleText,
+    helperText,
+    id,
+    items,
+    size,
+    onChange,
+    defaultValue,
+    value,
+  } = props;
 
   return {
     placeholder: helperText || "Text",
@@ -28,6 +44,6 @@ export function transformFuzzyFilterDropdown(props: IFuzzyFilterProps) {
     onChange,
     ariaLabel: helperText || "Choose an item",
     defaultValue,
-    value
+    value,
   };
 }
