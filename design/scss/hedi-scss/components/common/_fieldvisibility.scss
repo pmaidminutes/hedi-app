@@ -1,5 +1,15 @@
 .hedi--field-visibility {
+  position: relative;
+
   &__item {
+    .bx--overflow-menu-options__btn {
+      padding:0;
+    }
+
+    .bx--overflow-menu-options__option-content {
+      white-space: normal;
+    }
+
     &::before {
       content: "";
       min-width: 2.5rem;
