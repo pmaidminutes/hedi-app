@@ -7,26 +7,26 @@ import {
 
 export interface IAddress {
   dataKind: IDataKind;
+  dataVisibility: IDataVisibility;
   city: string;
   postalCode: number;
   latLongApprox: string;
-  cityVisibility: IDataVisibility;
+  detailsVisibility: IDataVisibility;
   street?: string;
   streetNumber?: string;
   latLong?: string;
-  streetVisibility: IDataVisibility;
   additionalInfo?: string;
 }
 
 export const AddressFields = `
 dataKind { ${DataKindFields} }
+dataVisibility { ${DataVisibilityFields} }
 city postalCode
 latLongApprox
-cityVisibility { ${DataVisibilityFields} }
 street streetNumber
 latLong
-streetVisibility { ${DataVisibilityFields} }
 additionalInfo
+detailsVisibility { ${DataVisibilityFields} }
 `;
 
 export interface IAddressInput {

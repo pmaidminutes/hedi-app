@@ -7,13 +7,13 @@ export const Address = (
     dataKind,
     city,
     postalCode,
-    cityVisibility,
+    dataVisibility,
     latLongApprox,
     street,
     streetNumber,
     additionalInfo,
     latLong,
-    streetVisibility,
+    detailsVisibility,
     ...rest
   } = props;
   // TODO dataKind
