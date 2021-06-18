@@ -10,11 +10,10 @@ export interface IAddress {
   dataVisibility: IDataVisibility;
   city: string;
   postalCode: number;
-  latLongApprox: string;
+  latLong: string;
   detailsVisibility: IDataVisibility;
   street?: string;
   streetNumber?: string;
-  latLong?: string;
   additionalInfo?: string;
 }
 
@@ -22,11 +21,10 @@ export const AddressFields = `
 dataKind { ${DataKindFields} }
 dataVisibility { ${DataVisibilityFields} }
 city postalCode
-latLongApprox
-street streetNumber
 latLong
-additionalInfo
 detailsVisibility { ${DataVisibilityFields} }
+street streetNumber
+additionalInfo
 `;
 
 export interface IAddressInput {

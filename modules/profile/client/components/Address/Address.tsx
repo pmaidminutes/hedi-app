@@ -8,7 +8,6 @@ export const Address = (
     city,
     postalCode,
     dataVisibility,
-    latLongApprox,
     street,
     streetNumber,
     additionalInfo,
