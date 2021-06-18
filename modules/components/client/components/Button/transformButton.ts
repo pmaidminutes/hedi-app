@@ -18,8 +18,6 @@ export function transformButton(props: IButtonProps) {
   } = props;
 
   return {
-    type:
-      usage === "submit" ? "submit" : usage === "reset" ? "reset" : "button",
     kind: buttonKind,
     text: text
       ? HTML({ data: text })
