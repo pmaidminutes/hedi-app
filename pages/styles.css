@@ -18255,12 +18255,31 @@ h4 {
   .hedi--field-visibility__item.connected-user button::before {
     background-image: url(/svg/collaborate.svg); }
 
-.hedi-separator {
+.hedi--separator {
   display: block;
   width: 100%;
-  border: 0;
-  border-top: 2px solid #dde1e6;
-  margin: 1.5rem 0; }
+  border-top: 1px;
+  border-style: solid;
+  border-color: #dde1e6;
+  margin: 1rem 0; }
+  .hedi--separator__dotted {
+    border-style: dotted; }
+  .hedi--separator__groove {
+    border-style: groove; }
+  .hedi--separator__double {
+    border-style: double; }
+  .hedi--separator__dashed {
+    border-style: dashed; }
+  .hedi--separator__blue {
+    border-color: #2A84C6; }
+  .hedi--separator__green {
+    border-color: #007362; }
+  .hedi--separator__orange {
+    border-color: #C94E1B; }
+  .hedi--separator__pink {
+    border-color: #E35C8D; }
+  .hedi--separator__purple {
+    border-color: #574E90; }
 
 .hedi__categoryentry a {
   text-decoration: none; }

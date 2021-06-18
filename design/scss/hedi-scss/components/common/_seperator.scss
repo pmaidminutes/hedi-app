@@ -1,8 +1,36 @@
-// TODO rename
-.hedi-separator {
+.hedi--separator {
   display: block;
   width: 100%;
-  border: 0;
-  border-top: 2px solid $cool-gray-20;
-  margin: $spacing-06 0;
+  border-top: 1px;
+  border-style: solid;
+  border-color: $cool-gray-20;
+  margin: $spacing-05 0;
+
+  &__dotted {
+    border-style: dotted;
+  }
+  &__groove {
+    border-style: groove;
+  }
+  &__double {
+    border-style: double;
+  }
+  &__dashed {
+    border-style: dashed;
+  }
+  &__blue {
+    border-color: $blue-primary;
+  }
+  &__green {
+    border-color: $green-primary;
+  }
+  &__orange {
+    border-color: $orange-primary;
+  }
+  &__pink {
+    border-color: $pink-primary;
+  }
+  &__purple {
+    border-color: $purple-primary;
+  }
 }
