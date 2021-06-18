@@ -26,7 +26,7 @@ export const getAddressInputDefinition = (
     "postalCodeNumberInput",
     {}
   ),
-  cityVisibilitySelect: getSelectInstance(components, "cityVisibilitySelect", {
+  dataVisibilitySelect: getSelectInstance(components, "dataVisibilitySelect", {
     items: [],
   }),
   streetTextInput: getTextInputInstance(components, "streetTextInput", {
@@ -43,9 +43,9 @@ export const getAddressInputDefinition = (
     "additionalInfoTextInput",
     { type: "text", labelText: "Adresszusatz" }
   ),
-  streetVisibilitySelect: getSelectInstance(
+  detailsVisibilitySelect: getSelectInstance(
     components,
-    "streetVisibilitySelect",
+    "detailsVisibilitySelect",
     { items: [] }
   ),
 });

@@ -14,16 +14,18 @@ export const useAddressInput = (
       e.target.value ?? defaultValue.city,
     postalCode: (e: ChangeEvent<HTMLSelectElement>) =>
       e.target.value ? parseInt(e.target.value) : defaultValue.postalCode,
-    cityVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
-      e.target.value ? parseInt(e.target.value) : defaultValue.cityVisibility,
+    dataVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value ? parseInt(e.target.value) : defaultValue.dataVisibility,
     street: (e: ChangeEvent<HTMLInputElement>) =>
       e.target.value ?? defaultValue.street,
     streetNumber: (e: ChangeEvent<HTMLInputElement>) =>
       e.target.value ?? defaultValue.streetNumber,
     additionalInfo: (e: ChangeEvent<HTMLInputElement>) =>
       e.target.value ?? defaultValue.additionalInfo,
-    streetVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
-      e.target.value ? parseInt(e.target.value) : defaultValue.streetVisibility,
+    detailsVisibility: (e: ChangeEvent<HTMLSelectElement>) =>
+      e.target.value
+        ? parseInt(e.target.value)
+        : defaultValue.detailsVisibility,
   };
 
   return useCombinedInputs(parsers, initialValue ?? defaultValue, onChange);

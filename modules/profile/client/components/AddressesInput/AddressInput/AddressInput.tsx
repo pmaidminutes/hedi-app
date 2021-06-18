@@ -19,14 +19,14 @@ export type IAddressInputProps = {
 
 export interface IAddressInputDefinition {
   addressLabel: ILabelComponent;
+  dataVisibilitySelect: ISelectComponent;
   dataKindSelect: ISelectComponent;
   cityTextInput: ITextInputComponent;
   postalCodeNumberInput: INumberInputComponent;
-  cityVisibilitySelect: ISelectComponent;
+  detailsVisibilitySelect: ISelectComponent;
   streetTextInput: ITextInputComponent;
   streetNumberTextInput: ITextInputComponent;
   additionalInfoTextInput: ITextInputComponent;
-  streetVisibilitySelect: ISelectComponent;
 }
 
 export interface IAddressInputConfig {
@@ -41,23 +41,23 @@ export const AddressInput: React.FC<IAddressInputProps> = props => {
     dataKind,
     city,
     postalCode,
-    cityVisibility,
+    dataVisibility,
     street,
     streetNumber,
-    streetVisibility,
+    detailsVisibility,
     additionalInfo,
   } = useAddressInput(value, defaultValue, onChange);
 
   const {
     addressLabel,
     dataKindSelect,
+    dataVisibilitySelect,
     cityTextInput,
     postalCodeNumberInput,
-    cityVisibilitySelect,
+    detailsVisibilitySelect,
     streetTextInput,
     streetNumberTextInput,
     additionalInfoTextInput,
-    streetVisibilitySelect,
   } = definition;
 
   return (
@@ -75,7 +75,7 @@ export const AddressInput: React.FC<IAddressInputProps> = props => {
           <NumberInput {...postalCode} {...postalCodeNumberInput} />
         </Column>
         <Column md={1} lg={1}>
-          <Select {...cityVisibility} {...cityVisibilitySelect} />
+          <Select {...dataVisibility} {...dataVisibilitySelect} />
         </Column>
       </Row>
       <Row>
@@ -91,7 +91,7 @@ export const AddressInput: React.FC<IAddressInputProps> = props => {
           <TextInput {...additionalInfo} {...additionalInfoTextInput} />
         </Column>
         <Column lg={1} md={1}>
-          <Select {...streetVisibility} {...streetVisibilitySelect} />
+          <Select {...detailsVisibility} {...detailsVisibilitySelect} />
         </Column>
       </Row>
       <Row>{children}</Row>
