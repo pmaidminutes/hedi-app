@@ -18256,17 +18256,9 @@ h4 {
   .hedi--field-visibility__item.connected-user button::before {
     background-image: url(/svg/collaborate.svg); }
 
-.hedi--hero-image__image {
-  min-width: 100%;
-  width: 100%;
-  height: auto; }
-  @supports ((-o-object-fit: cover) or (object-fit: cover)) {
-    .hedi--hero-image__image {
-      min-height: 200px;
-      -o-object-fit: cover;
-         object-fit: cover;
-      -o-object-position: center;
-         object-position: center; } }
+.hedi--hero-image {
+  height: 50vh;
+  position: relative; }
 
 .hedi--separator {
   display: block;

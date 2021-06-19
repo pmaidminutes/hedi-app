@@ -6,13 +6,16 @@ import { IImageComponent } from "@/modules/components";
 export const HeroImage = (props: IImageComponent) => {
   const { image, color } = transformHeroImage(props);
   return (
-    <div style={{ backgroundColor: color }} className="hedi--hero-image">
+    <div style={{ backgroundColor: color }}>
       <Grid className="hedi--grid__no-padding">
-        <Image
-          className="hedi--hero-image__image"
-          {...image}
-          layout="responsive"
-        />
+        <div className="hedi--hero-image">
+          <Image
+            className="hedi--hero-image__image"
+            {...image}
+            layout="fill"
+            objectFit="scale-down"
+          />
+        </div>
       </Grid>
     </div>
   );

@@ -7,5 +7,5 @@ export function transformHeroImage(image: IImageComponent) {
 
   const src = image ? process.env.NEXT_PUBLIC_ASSETS_URL + image.route : "";
 
-  return { color: color || "transparent", image: { src, alt, width, height } };
+  return { color: color || "transparent", image: { src, alt } };
 }
