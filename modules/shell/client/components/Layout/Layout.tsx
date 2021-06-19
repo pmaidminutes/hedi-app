@@ -30,9 +30,7 @@ export const Layout: React.FC<ILayoutProps> = props => {
 
   return (
     <div className={wrapperClass}>
-      {posterImage && posterImgSrc && (
-        <HeroImage color="green" image={posterImage} />
-      )}
+      {posterImage && posterImgSrc && <HeroImage {...posterImage} />}
       {pageLayout === "singleColumn" ? (
         <SingleColumn
           columnProps={single}

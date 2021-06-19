@@ -12,6 +12,7 @@ export interface IImageComponent extends IComponent {
   height: number;
   usage?: string;
   alt?: string;
+  color?: string;
 }
 
 export const isImage = (obj: IComponent): obj is IImageComponent =>
