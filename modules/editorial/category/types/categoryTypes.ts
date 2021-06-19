@@ -13,6 +13,7 @@ import {
   IArticleEntry,
 } from "@/modules/editorial/article/types";
 import { ImageGQL, IImage } from "@/modules/editorial/types";
+import { IComponent } from "@/modules/components";
 
 export interface ICategoryEntry extends IEntityLocalized {
   image?: IImage;
@@ -25,7 +26,8 @@ image { ${ImageGQL} }
 
 export interface ICategoryRoot extends IEntityTranslated<IEntityLocalized> {
   categories: ICategoryEntry[];
-  articles: IArticleEntry[]
+  articles: IArticleEntry[];
+  components: IComponent[];
 }
 
 export const CategoryRootGQL = gql`... on CategoryRoot {

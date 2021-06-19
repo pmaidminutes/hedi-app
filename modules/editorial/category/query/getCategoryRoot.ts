@@ -3,10 +3,12 @@ import { gql, serviceGQuery } from "@/modules/graphql";
 import { CategoryEntryGQL, ICategory } from "../types";
 import { logAndFallback } from "@/modules/common/error";
 import { ArticleEntryGQL, IArticle } from "../../article/types";
+import { IComponent } from "@/modules/components";
 
 export type CategoryRoot = {
   categories: ICategory[];
   articles: IArticle[];
+  components: IComponent[];
 };
 
 export async function getCategoryRoot(
@@ -22,25 +24,30 @@ export async function getCategoryRoot(
         ${CategoryEntryGQL}
         parent
       }
+      components
     }
   `;
-  const { categories, articles } = await serviceGQuery<CategoryRoot>(
-    query,
-    {
-      lang,
-    }
-  ).then(data =>
+  const {
+    categories,
+    articles,
+    components,
+  } = await serviceGQuery<CategoryRoot>(query, {
+    lang,
+  }).then(data =>
     logAndFallback(data, {
       categories: [],
       articles: [],
+      components: [],
     } as CategoryRoot)
   );
 
   const rootCategories = filterRootCategories(categories);
 
-
-
-  return { categories: rootCategories, articles: articles };
+  return {
+    categories: rootCategories,
+    articles: articles,
+    components: components,
+  };
 }
 
 const filterRootCategories = (categories: ICategory[]): ICategory[] =>
