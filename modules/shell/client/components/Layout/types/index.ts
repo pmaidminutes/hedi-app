@@ -33,4 +33,9 @@ export interface ILayoutBasicTemplate {
   narrow?: boolean;
 }
 
-export type PageLayout = "singleColumn" | "twoColumns" | "editorial" | "blank";
+export type PageLayout =
+  | "singleColumn"
+  | "twoColumns"
+  | "editorial"
+  | "blank"
+  | "category";
