@@ -10,7 +10,7 @@ export const getCategoryRootPage = async (
 ): Promise<CategoryRootPage & IPageConfig> => {
   content.type = "CategoryRoot";
   const layout: ILayout = {
-    pageLayout: "editorial",
+    pageLayout: "blank",
   };
 
   const data = await getCategoryRoot(content.lang);

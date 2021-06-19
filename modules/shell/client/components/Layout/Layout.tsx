@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
-import { SingleColumn, TwoColumns, Editorial } from "./templates";
+import { SingleColumn, TwoColumns, Editorial, Blank } from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
   const {
@@ -61,6 +61,10 @@ export const Layout: React.FC<ILayoutProps> = props => {
           condensed={condensed}>
           {children}
         </Editorial>
+      ) : pageLayout === "blank" ? (
+        <Blank headline={headline} groupClass={groupClass}>
+          {children}
+        </Blank>
       ) : null}
     </div>
   );
