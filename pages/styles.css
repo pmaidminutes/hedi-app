@@ -18267,6 +18267,15 @@ h4 {
   .hedi__categoryentry a h4 {
     color: red; }
 
+.hedi--outside-headline {
+  position: absolute;
+  transform: translateY(-100%); }
+  .hedi--outside-headline .hedi--titlegroup {
+    background-color: #f4f4f4;
+    margin-bottom: 0;
+    padding: 1rem 2rem;
+    position: relative; }
+
 .hedi--action-bar {
   align-items: center;
   display: flex;
@@ -18868,9 +18877,6 @@ html:lang(en) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx-
     height: auto;
     min-width: 80px;
     max-height: 250px; }
-
-.hedi--simple-page .hedi--titlegroup {
-  margin-bottom: 3rem; }
 
 .hedi--userfeedback-page p {
   margin-bottom: 0.5rem !important; }

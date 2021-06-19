@@ -1,1 +1,13 @@
 @import "./categoryentry";
+
+.hedi--outside-headline {
+  position: absolute;
+  transform: translateY(-100%);
+
+  .hedi--titlegroup {
+    background-color: $gray-10;
+    margin-bottom: 0;
+    padding: $spacing-05 $spacing-07;
+    position: relative;
+  }
+}
