@@ -1,10 +1,6 @@
 
 .hedi--simple-page {
-  .hedi--hero-image {
-    min-width: 100%;
-    width: 100%;
-    height: auto;
-  }
+
 
   .hedi--titlegroup {
     p {
@@ -12,13 +8,7 @@
     }
   }
 
-  @supports (object-fit: cover) {
-    .hedi--hero-image {
-      min-height: 200px;
-      object-fit: cover;
-      object-position: center;
-    }
-  }
+
 
   .hedi-app-page-image-wrapper {
     height: 100%;
