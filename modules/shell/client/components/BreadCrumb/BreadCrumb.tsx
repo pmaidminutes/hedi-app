@@ -13,25 +13,19 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   const { breadCrumbPath, isCurrentPage, lang } = transformBreadCrumb(props);
 
   return (
-    <Grid>
-      <Row>
-        <Column>
-          <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
-            <BreadcrumbItem href={`/${lang}`} isCurrentPage={isCurrentPage}>
-              Home
-            </BreadcrumbItem>
+    <Breadcrumb aria-label="breadcrumb" noTrailingSlash>
+      <BreadcrumbItem href={`/${lang}`} isCurrentPage={isCurrentPage}>
+        Home
+      </BreadcrumbItem>
 
-            {breadCrumbPath.map((crumb, index) => (
-              <BreadcrumbItem
-                key={crumb.label + index}
-                isCurrentPage={crumb.isCurrentPage}
-                href={crumb.route}>
-                {crumb.label}
-              </BreadcrumbItem>
-            ))}
-          </Breadcrumb>
-        </Column>
-      </Row>
-    </Grid>
+      {breadCrumbPath.map((crumb, index) => (
+        <BreadcrumbItem
+          key={crumb.label + index}
+          isCurrentPage={crumb.isCurrentPage}
+          href={crumb.route}>
+          {crumb.label}
+        </BreadcrumbItem>
+      ))}
+    </Breadcrumb>
   );
 };

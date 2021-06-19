@@ -1,7 +1,13 @@
 import Image from "next/image";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
-import { SingleColumn, TwoColumns, Editorial, Blank } from "./templates";
+import {
+  SingleColumn,
+  TwoColumns,
+  Editorial,
+  Blank,
+  Category,
+} from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
   const {
@@ -61,6 +67,13 @@ export const Layout: React.FC<ILayoutProps> = props => {
           condensed={condensed}>
           {children}
         </Editorial>
+      ) : pageLayout === "category" ? (
+        <Category
+          breadcrumbs={breadcrumbs}
+          headline={headline}
+          groupClass={groupClass}>
+          {children}
+        </Category>
       ) : pageLayout === "blank" ? (
         <Blank headline={headline} groupClass={groupClass}>
           {children}

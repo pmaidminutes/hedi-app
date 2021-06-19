@@ -7,7 +7,7 @@ export const getCategoryPage = async (
   content: ICategory
 ): Promise<ICategory & IPageConfig> => {
   const layout: ILayout = {
-    pageLayout: "editorial",
+    pageLayout: "category",
     posterImage: imageToImageComponent(content.image) || null,
     breadcrumbs: { ...content },
   };
