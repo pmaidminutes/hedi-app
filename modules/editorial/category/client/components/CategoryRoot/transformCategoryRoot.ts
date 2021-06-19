@@ -1,7 +1,11 @@
+import { findBodyInstance, findLabelInstance } from "@/modules/components";
 import { ICategoryRoot } from "../../../types";
 
 export function transformCategoryRoot(props: ICategoryRoot) {
-  const { categories, articles } = props;
+  const { categories, articles, components } = props;
 
-  return { categories, articles };
+  const headline = findLabelInstance(components, "headline");
+  const text = findBodyInstance(components, "introText");
+
+  return { categories, articles, headline, text };
 }
