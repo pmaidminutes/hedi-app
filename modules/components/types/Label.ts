@@ -22,7 +22,9 @@ export const findLabelInstance = (array: IComponent[], id: string) =>
   findComponentInstance<ILabelComponent>("Label", array, id);
 
 export const findHeadlineLabel = (array: IComponent[]) =>
-  array.filter(isLabel).find(item => item.labelKind == "h1");
+  array
+    .filter(isLabel)
+    .find(item => item.labelKind === "h1" && item.text === "main");
 
 export const getLabelInstance = (
   array: IComponent[],

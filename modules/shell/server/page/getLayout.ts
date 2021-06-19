@@ -19,6 +19,7 @@ import { IPage } from "../../../page/types";
 //    - will be used as posterImage
 // Label component of type "H1"
 //    - will be used for the main headline in the layout
+// CHANGED: will only be triggerd if the Kind "h1" AND text === "main"
 
 // ************************************************
 interface ILayoutProps extends Partial<Pick<IPage, "id" | "components">> {}
