@@ -6,6 +6,7 @@ import { transformCategoryRoot } from "./transformCategoryRoot";
 import { Column, Row, Grid } from "carbon-components-react";
 import { Label, Body } from "@/modules/components";
 import { SearchInput } from "@/modules/search/client/components";
+import { MainCategoryCardList } from "../MainCategoryCardList";
 export const CategoryRoot = (props: ICategoryRoot) => {
   console.log({ props });
   const { categories, articles, headline, text } = transformCategoryRoot(props);
@@ -39,6 +40,7 @@ export const CategoryRoot = (props: ICategoryRoot) => {
           </Grid>
         </Column>
       </Row>
+      <MainCategoryCardList {...props} />
       {/* MainCategoryCardList */}
       {/* {categories.map((category, index) => (
         <CategoryEntry
