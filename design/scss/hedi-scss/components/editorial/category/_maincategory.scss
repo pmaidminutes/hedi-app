@@ -1,0 +1,17 @@
+.hedi--main-category {
+  &__list {
+    margin: $spacing-07 0;
+    > div {
+      background-color: blueviolet;
+      margin-bottom: $spacing-05;
+    }
+  }
+
+  &__card {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    padding: 0 0 0 $spacing-07;
+    width: 100%;
+  }
+}

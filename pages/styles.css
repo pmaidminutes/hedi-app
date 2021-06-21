@@ -18307,6 +18307,19 @@ h4 {
   .hedi__categoryentry a h4 {
     color: red; }
 
+.hedi--main-category__list {
+  margin: 2rem 0; }
+  .hedi--main-category__list > div {
+    background-color: blueviolet;
+    margin-bottom: 1rem; }
+
+.hedi--main-category__card {
+  align-items: center;
+  display: flex;
+  height: 100%;
+  padding: 0 0 0 2rem;
+  width: 100%; }
+
 .hedi--outside-headline {
   position: absolute;
   transform: translateY(-100%); }
