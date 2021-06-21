@@ -18092,12 +18092,13 @@ h4 {
   margin-bottom: 0.25rem;
   margin-top: 0.125rem; }
 
-.hedi--col--grid-nest {
+.hedi--grid__no-padding, .hedi--col--grid-nest {
   padding-left: 0;
   padding-right: 0; }
-  .hedi--col--grid-nest .bx--grid {
-    padding-left: 1rem;
-    padding-right: 1rem; }
+
+.hedi--col--grid-nest .bx--grid {
+  padding-left: 1rem;
+  padding-right: 1rem; }
 
 .hedi-category-color--pregnancy {
   background-color: #2A84C6 !important; }
@@ -18254,6 +18255,10 @@ h4 {
     background-image: url(/svg/user--admin.svg); }
   .hedi--field-visibility__item.connected-user button::before {
     background-image: url(/svg/collaborate.svg); }
+
+.hedi--hero-image {
+  height: 50vh;
+  position: relative; }
 
 .hedi--separator {
   display: block;
@@ -18866,22 +18871,9 @@ html:lang(de) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx-
 html:lang(en) .hedi--scroll-to-top__bottom button.bx--btn.bx--btn--icon-only.bx--tooltip__trigger {
   bottom: 5rem; }
 
-.hedi--simple-page .hedi--hero-image {
-  min-width: 100%;
-  width: 100%;
-  height: auto; }
-
 .hedi--simple-page .hedi--titlegroup p {
   -webkit-margin-after: 1rem;
           margin-block-end: 1rem; }
-
-@supports ((-o-object-fit: cover) or (object-fit: cover)) {
-  .hedi--simple-page .hedi--hero-image {
-    min-height: 200px;
-    -o-object-fit: cover;
-       object-fit: cover;
-    -o-object-position: center;
-       object-position: center; } }
 
 .hedi--simple-page .hedi-app-page-image-wrapper {
   height: 100%;

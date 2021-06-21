@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroImage } from "@/modules/common/components";
 import { transformLayout } from "./transformLayout";
 import { ILayoutProps } from "./types";
 import {
@@ -29,16 +30,7 @@ export const Layout: React.FC<ILayoutProps> = props => {
 
   return (
     <div className={wrapperClass}>
-      {posterImage && posterImgSrc && (
-        <Image
-          className="hedi--hero-image"
-          src={posterImgSrc}
-          alt={posterImage.alt}
-          width={posterImage.width}
-          height={posterImage.height}
-          layout="responsive"
-        />
-      )}
+      {posterImage && posterImgSrc && <HeroImage {...posterImage} />}
       {pageLayout === "singleColumn" ? (
         <SingleColumn
           columnProps={single}

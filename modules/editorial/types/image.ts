@@ -11,4 +11,5 @@ export const ImageGQL = `... on Image {
   alt
   width
   height
+  color
 }`;
