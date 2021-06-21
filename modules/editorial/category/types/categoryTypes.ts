@@ -42,7 +42,7 @@ export interface ICategory
     IRouteLabeled {
   parent: number;
   articles: IArticleEntry[];
-  appstyle: string;
+  appStyle: string;
 }
 
 export function isICategory(obj: any): obj is ICategory {
@@ -54,7 +54,7 @@ ${EntityTranslatedFields}
 ${RouteLabelFields}
 image { ${ImageGQL} }
 parent
-appstyle
+appStyle
 categories { ${CategoryEntryGQL} }
 articles { ${ArticleEntryGQL} }
 }`;

@@ -26,7 +26,7 @@ export interface IArticle
     IAppStyled,
     IRouteLabeled {
   category: IEntity;
-  appstyle: string;
+  appStyle: string;
   components: IComponent[];
 }
 
@@ -38,7 +38,7 @@ export const ArticleGQL = gql`... on Article {
   ${EntityTranslatedFields}
   ${WithTagsFields}
   category { ${EntityFields} }
-  appstyle
+  appStyle
   ${RouteLabelFields}
   components
 }`;

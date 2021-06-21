@@ -8,7 +8,7 @@ import { useRouter } from "next/router";
 
 export interface IHeader extends Partial<IShellProps>, Partial<IAppStyled> {}
 export function transformHeader({
-  appstyle = "hedi-category-color--default",
+  appStyle = "hedi-category-color--default",
   languageSwitchLinks,
   header,
   userMenu,
@@ -29,7 +29,7 @@ export function transformHeader({
     : null;
 
   return {
-    appstyle,
+    appStyle,
     languageSwitchLinks,
     headerLinks: headerLinks?.components || null,
     userMenuLinks: userMenuLinks?.components || null,

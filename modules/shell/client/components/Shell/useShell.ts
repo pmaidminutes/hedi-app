@@ -8,7 +8,7 @@ import { usePageAccess } from "./usePageAccess";
 export function useShell(shell: Partial<IShellProps>) {
   const {
     useHeader,
-    appstyle,
+    appStyle,
     redirectUnAuthorized,
     layout,
     langDirections,
@@ -26,8 +26,8 @@ export function useShell(shell: Partial<IShellProps>) {
 
   useEffect(() => {
     // HACK use later on
-    // setHediStyle(appstyle ?? "");
-  }, [appstyle]);
+    // setHediStyle(appStyle ?? "");
+  }, [appStyle]);
 
   const { hasPageAccess } = usePageAccess(redirectUnAuthorized);
 
@@ -38,6 +38,6 @@ export function useShell(shell: Partial<IShellProps>) {
     pageLayout,
     layout,
     langDirections,
-    layoutHeadline
+    layoutHeadline,
   };
 }
