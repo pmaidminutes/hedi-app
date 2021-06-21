@@ -1,5 +1,6 @@
 import React from "react";
 import { ICategory, ICategoryEntry } from "../../../types";
+import { MainCategoryCard } from "./MainCategoryCard";
 
 export interface IMainCategoryCardList {
   categories: ICategoryEntry[];
@@ -9,10 +10,15 @@ export const MainCategoryCardList = (props: IMainCategoryCardList) => {
   const { categories } = props;
 
   return (
-    <div>
+    <div className="hedi--main-category__list">
       {categories.map((category, index) => {
-        console.log({ category }, index);
-        return <div>{category.label}</div>;
+        return (
+          <MainCategoryCard
+            key={category.label + index}
+            index={index}
+            category={category as ICategory}
+          />
+        );
       })}
     </div>
   );
