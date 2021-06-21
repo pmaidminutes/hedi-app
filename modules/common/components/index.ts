@@ -3,6 +3,7 @@ export * from "../../components/client/components/AudioPlayer";
 export * from "./BgImgContainer";
 export * from "./ButtonContainer";
 export * from "./ButtonHintText";
+export * from "./CopyToClipboard";
 export * from "./FuzzyFilterDropdown";
 export * from "./HeroImage";
 export * from "./Rating";
