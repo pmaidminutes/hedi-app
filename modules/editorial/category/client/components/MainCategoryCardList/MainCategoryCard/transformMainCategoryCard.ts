@@ -10,7 +10,7 @@ const biggerColumProps = { lg: 10, md: 5, sm: 2 };
 
 export function transformMainCategoryCard(props: IMainCategoryCard) {
   const { category, index } = props;
-  const { label, image } = category;
+  const { label, image, appStyle, route } = category;
   const rowIsEven = isEven(index);
 
   const firstColumnProps = isEven(index) ? biggerColumProps : smallerColumProps;
@@ -20,5 +20,13 @@ export function transformMainCategoryCard(props: IMainCategoryCard) {
 
   // const imgData = {alt: image?.alt, }
 
-  return { rowIsEven, firstColumnProps, secondColumnProps, label, image };
+  return {
+    rowIsEven,
+    firstColumnProps,
+    secondColumnProps,
+    label,
+    image,
+    appStyle,
+    route,
+  };
 }
