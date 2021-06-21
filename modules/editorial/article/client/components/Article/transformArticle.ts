@@ -10,7 +10,7 @@ export interface IArticleProps {
 }
 export function transformArticle(props: IArticleProps) {
   const { content } = props;
-  const { label, components, category, appstyle, route } = content;
+  const { label, components, category, appStyle, route } = content;
 
   const headlines = findAllHeadlineInstances(components);
 

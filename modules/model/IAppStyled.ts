@@ -1,3 +1,3 @@
 export interface IAppStyled {
-  appstyle: string;
+  appStyle: string;
 }

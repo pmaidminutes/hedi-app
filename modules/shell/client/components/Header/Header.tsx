@@ -21,7 +21,7 @@ import { isLink } from "@/modules/components/types";
 
 export const Header = (props: IHeader) => {
   const {
-    appstyle,
+    appStyle,
     languageSwitchLinks,
     headerLinks,
     userMenuLinks,
@@ -33,7 +33,7 @@ export const Header = (props: IHeader) => {
   const { isExpanded, toggleSideNav } = useSideNav();
 
   return (
-    <CarbonHeader className={`hedi--header ${appstyle}`} aria-label="header">
+    <CarbonHeader className={`hedi--header ${appStyle}`} aria-label="header">
       <HeaderName prefix="" href={`/${locale}`}>
         <TooltipIcon tooltipText={backToHome}>
           <Logo />

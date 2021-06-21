@@ -10,7 +10,7 @@ export function generateShellData(
 ): IShellProps {
   const {
     translations,
-    appstyle,
+    appStyle,
     useBreadCrumb,
     revalidate,
     useHeader,
@@ -36,7 +36,7 @@ export function generateShellData(
   if (useHeader) setProperty(shellProps, "useHeader", useHeader);
   if (redirectUnAuthorized)
     setProperty(shellProps, "redirectUnAuthorized", redirectUnAuthorized);
-  if (appstyle) setProperty(shellProps, "appstyle", appstyle);
+  if (appStyle) setProperty(shellProps, "appStyle", appStyle);
   if (revalidate) setProperty(shellProps, "revalidate", revalidate);
   if (useBreadCrumb) setProperty(shellProps, "useBreadCrumb", useBreadCrumb);
   if (layout) setProperty(shellProps, "layout", layout);
