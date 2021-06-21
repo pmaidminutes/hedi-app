@@ -4,6 +4,7 @@ import { CategoryEntryGQL, ICategory } from "../types";
 import { logAndFallback } from "@/modules/common/error";
 import { ArticleEntryGQL, IArticle } from "../../article/types";
 import { IComponent } from "@/modules/components";
+import { PageGQL } from "@/modules/page/types";
 
 export type CategoryRoot = {
   categories: ICategory[];
@@ -24,7 +25,6 @@ export async function getCategoryRoot(
         ${CategoryEntryGQL}
         parent
       }
-      components
     }
   `;
   const {
