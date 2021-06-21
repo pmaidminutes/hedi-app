@@ -11,7 +11,7 @@ export function transformCategoryEntry({ category }: ICategoryEntryProps) {
     alt: image?.alt || "",
     kind: "Image",
     route: image?.route || "/",
-    labelText: image?.label || "missing",
+    label: image?.label || "missing",
     width: image?.width || 1024,
     height: image?.height || 768,
   };
