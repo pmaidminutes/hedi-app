@@ -4,7 +4,8 @@ import {
   transformMainCategoryCard,
 } from "./transformMainCategoryCard";
 import { Column, Row } from "carbon-components-react";
-import { Image, Link } from "@/modules/components";
+import { Image } from "@/modules/components";
+import Link from "next/link";
 
 export const MainCategoryCard = (props: IMainCategoryCard) => {
   const {
@@ -13,29 +14,33 @@ export const MainCategoryCard = (props: IMainCategoryCard) => {
     secondColumnProps,
     label,
     image,
+    appStyle,
+    route,
   } = transformMainCategoryCard(props);
   return (
-    <div>
-      <Row>
-        <Column {...firstColumnProps}>
-          {rowIsEven ? (
-            <div className="hedi--main-category__card">
-              <span>{label}</span>
-            </div>
-          ) : (
-            image && <Image {...image} />
-          )}
-        </Column>
-        <Column {...secondColumnProps}>
-          {rowIsEven ? (
-            image && <Image {...image} />
-          ) : (
-            <div className="hedi--main-category__card">
-              <span>{label}</span>
-            </div>
-          )}
-        </Column>
-      </Row>
+    <div className={`${appStyle} hedi--main-category__card`}>
+      <Link href={route}>
+        <Row>
+          <Column {...firstColumnProps}>
+            {rowIsEven ? (
+              <div className="hedi--main-category__card--text">
+                <p>{label}</p>
+              </div>
+            ) : (
+              image && <Image {...image} />
+            )}
+          </Column>
+          <Column {...secondColumnProps}>
+            {rowIsEven ? (
+              image && <Image {...image} />
+            ) : (
+              <div className="hedi--main-category__card--text">
+                <p>{label}</p>
+              </div>
+            )}
+          </Column>
+        </Row>
+      </Link>
     </div>
   );
 };
