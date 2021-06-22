@@ -18,7 +18,7 @@ export const Article = (props: IArticleProps): JSX.Element => {
     <article>
       <Grid>
         <Row>
-          <Column lg={{ span: 10, offset: 2 }}>
+          <Column lg={{ span: 10, offset: 2 }} md={{ span: 6, offset: 1 }}>
             <ActionBar actions={actions} />
             {components && (
               <ComponentRenderer route={route} components={components} />
