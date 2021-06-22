@@ -7,7 +7,7 @@ export const Body = (props: IBodyProps) => {
 
   return (
     <p>
-      <HTML data={body} {...rest} />;
+      <HTML data={body} {...rest} />
     </p>
   );
 };
