@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
+// timeout in ms
+const timeout: number = 3000;
 
 export function useCopyToClipboard(text: string) {
   const [copyText, setCopyText] = useState(text);
+  const [hasNotification, setHasNotification] = useState(false);
 
   useEffect(() => {
     setCopyText(text);
@@ -9,8 +12,19 @@ export function useCopyToClipboard(text: string) {
 
   const addToClipboard = async () => {
     await navigator.clipboard.writeText(copyText);
-    alert("Text copied");
+    setHasNotification(true);
+    setTimeout(resetNotification, timeout);
+    // alert("Text copied");
   };
 
-  return { addToClipboard };
+  const resetNotification = () => {
+    setHasNotification(false);
+  };
+
+  const notificationData = {
+    timeout,
+    title: "Link wurde ins Clipboard kopiert",
+  };
+
+  return { addToClipboard, hasNotification, notificationData };
 }
