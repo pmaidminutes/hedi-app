@@ -18260,6 +18260,12 @@ h4 {
   height: 50vh;
   position: relative; }
 
+.hedi--notification__toast--absolute {
+  position: absolute;
+  right: 50%;
+  top: 3rem;
+  transform: translate(50%); }
+
 .hedi--separator {
   display: block;
   width: 100%;
