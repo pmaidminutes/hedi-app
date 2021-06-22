@@ -18227,8 +18227,12 @@ h4 {
         -webkit-margin-before: 1rem;
                 margin-block-start: 1rem; } }
 
-.hedi--copy-to-clipboard__icon:hover {
-  cursor: pointer; }
+.hedi--copy-to-clipboard {
+  margin: 0 1rem;
+  display: inline-flex;
+  align-items: center; }
+  .hedi--copy-to-clipboard__icon:hover {
+    cursor: pointer; }
 
 .hedi--field-visibility {
   position: relative; }

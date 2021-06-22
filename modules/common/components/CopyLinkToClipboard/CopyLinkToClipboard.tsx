@@ -1,13 +1,14 @@
 import React from "react";
 import { Button, ToastNotification } from "@/modules/components";
-import { Link32 } from "@carbon/icons-react";
+import { Link16, Link24, Link32 } from "@carbon/icons-react";
 import { useCopyToClipboard } from "./useCopyToClipboard";
 import {
   transformCopyLinkToClipboard,
   ICopyLinkToClipboard,
 } from "./transformCopyLinkToClipboard";
+import { ButtonSize } from "carbon-components-react";
 export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
-  const { transformedLink, type } = transformCopyLinkToClipboard(props);
+  const { transformedLink, type, size } = transformCopyLinkToClipboard(props);
   const {
     addToClipboard,
     hasNotification,
@@ -15,7 +16,7 @@ export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
   } = useCopyToClipboard(transformedLink);
 
   return (
-    <>
+    <div className="hedi--copy-to-clipboard">
       {type === "button" ? (
         <Button
           iconDescription="Copy to Clipboard"
@@ -25,10 +26,11 @@ export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
           onClick={() => addToClipboard()}
         />
       ) : (
-        <Link32
+        <div
           className="hedi--copy-to-clipboard__icon"
-          onClick={() => addToClipboard()}
-        />
+          onClick={() => addToClipboard()}>
+          {size === "sm" ? <Link16 /> : size === "md" ? <Link24 /> : <Link32 />}
+        </div>
       )}
       {hasNotification && (
         <ToastNotification
@@ -37,6 +39,6 @@ export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
           {...notificationData}
         />
       )}
-    </>
+    </div>
   );
 };

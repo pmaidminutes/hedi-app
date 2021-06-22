@@ -1,4 +1,7 @@
 .hedi--copy-to-clipboard {
+  margin: 0 $spacing-05;
+  display: inline-flex;
+  align-items: center;
   &__icon {
     &:hover {
       cursor: pointer;
