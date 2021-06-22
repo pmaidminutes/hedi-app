@@ -5,6 +5,7 @@ export * from "./ButtonContainer";
 export * from "./ButtonHintText";
 export * from "./CopyLinkToClipboard";
 export * from "./FuzzyFilterDropdown";
+export * from "./HeadlineWithLinkCopy";
 export * from "./HeroImage";
 export * from "./Rating";
 export * from "./SelectFieldVisibility";
