@@ -18227,6 +18227,9 @@ h4 {
         -webkit-margin-before: 1rem;
                 margin-block-start: 1rem; } }
 
+.hedi--copy-to-clipboard__icon:hover {
+  cursor: pointer; }
+
 .hedi--field-visibility {
   position: relative; }
   .hedi--field-visibility__item .bx--overflow-menu-options__btn {

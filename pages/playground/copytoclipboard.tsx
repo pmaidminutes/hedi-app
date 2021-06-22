@@ -1,12 +1,12 @@
 import Head from "next/head";
-import { useState } from "react";
 import { Column, Grid, Row } from "carbon-components-react";
 import { CopyLinkToClipboard } from "@/modules/common/components";
-import { linkSync } from "fs";
+import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
 
-const link = {
+const link: ICopyLinkToClipboard = {
   link: "www.aidminutes.com",
   id: "nico",
+  type: "icon",
 };
 
 export default function CopyToClipboardPlayground() {
