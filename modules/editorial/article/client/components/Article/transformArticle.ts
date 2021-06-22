@@ -37,5 +37,6 @@ export function transformArticle(props: IArticleProps) {
     headlines,
     actions,
     anchors,
+    route,
   };
 }
