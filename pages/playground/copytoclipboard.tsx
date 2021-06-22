@@ -4,7 +4,7 @@ import { CopyLinkToClipboard } from "@/modules/common/components";
 import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
 
 const link: ICopyLinkToClipboard = {
-  link: "www.aidminutes.com",
+  route: "www.aidminutes.com",
   id: "nico",
   size: "lg",
 };
