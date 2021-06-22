@@ -11,6 +11,7 @@ export const Article = (props: IArticleProps): JSX.Element => {
     headlines,
     actions,
     anchors,
+    route,
   } = transformArticle(props);
   // TODO needs rework when we know the finished layout
   return (
@@ -19,7 +20,9 @@ export const Article = (props: IArticleProps): JSX.Element => {
         <Row>
           <Column lg={{ span: 10, offset: 2 }}>
             <ActionBar actions={actions} />
-            {components && <ComponentRenderer components={components} />}
+            {components && (
+              <ComponentRenderer route={route} components={components} />
+            )}
           </Column>
           <Column lg={3} sm={0}>
             <Aside actions={actions} anchors={anchors} />
