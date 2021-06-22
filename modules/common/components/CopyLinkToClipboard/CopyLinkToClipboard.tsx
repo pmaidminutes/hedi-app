@@ -6,7 +6,6 @@ import {
   transformCopyLinkToClipboard,
   ICopyLinkToClipboard,
 } from "./transformCopyLinkToClipboard";
-import { ButtonSize } from "carbon-components-react";
 export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
   const { transformedLink, type, size } = transformCopyLinkToClipboard(props);
   const {
