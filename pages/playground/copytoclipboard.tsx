@@ -1,12 +1,12 @@
 import Head from "next/head";
-import { Column, Grid, Row } from "carbon-components-react";
+import { Column, Grid, Row, CopyButton } from "carbon-components-react";
 import { CopyLinkToClipboard } from "@/modules/common/components";
 import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
 
 const link: ICopyLinkToClipboard = {
   link: "www.aidminutes.com",
   id: "nico",
-  type: "icon",
+  size: "lg",
 };
 
 export default function CopyToClipboardPlayground() {
@@ -19,11 +19,10 @@ export default function CopyToClipboardPlayground() {
         <Grid>
           <Row>
             <h1>Copy To Clipboard</h1>
+            <CopyLinkToClipboard {...link} />
           </Row>
           <Row>
-            <Column>
-              <CopyLinkToClipboard {...link} />
-            </Column>
+            <Column></Column>
           </Row>
         </Grid>
       </main>
