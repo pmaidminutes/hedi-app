@@ -18263,6 +18263,9 @@ h4 {
   .hedi--field-visibility__item.connected-user button::before {
     background-image: url(/svg/collaborate.svg); }
 
+.hedi--headline-copy-link-to-clipboard {
+  display: flex; }
+
 .hedi--hero-image {
   height: 50vh;
   position: relative; }
