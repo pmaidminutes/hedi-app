@@ -12,7 +12,7 @@ export const getArticlePage = async (
     singleColumnProps: {
       sm: 4,
       md: { span: 6, offset: 1 },
-      lg: { span: 10, offset: 2 },
+      lg: { span: 10, offset: 3 },
     },
     breadcrumbs: { ...content },
     posterImage: imageToImageComponent(posterImage),

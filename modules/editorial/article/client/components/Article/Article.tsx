@@ -17,14 +17,11 @@ export const Article = (props: IArticleProps): JSX.Element => {
   return (
     <article>
       <Row>
-        <Column lg={{ span: 10, offset: 2 }} md={{ span: 6, offset: 1 }}>
+        <Column lg={{ span: 10, offset: 3 }} md={{ span: 6, offset: 1 }}>
           <ActionBar actions={actions} />
           {components && (
             <ComponentRenderer route={route} components={components} />
           )}
-        </Column>
-        <Column lg={3} sm={0}>
-          <Aside actions={actions} anchors={anchors} />
         </Column>
       </Row>
     </article>
