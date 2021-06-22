@@ -7,7 +7,7 @@ import {
   ICopyLinkToClipboard,
 } from "./transformCopyLinkToClipboard";
 export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
-  const { transformedLink } = transformCopyLinkToClipboard(props);
+  const { transformedLink, type } = transformCopyLinkToClipboard(props);
   const {
     addToClipboard,
     hasNotification,
@@ -16,13 +16,20 @@ export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
 
   return (
     <>
-      <Button
-        iconDescription="Copy to Clipboard"
-        buttonKind="ghost"
-        hasIconOnly
-        renderIcon={Link32}
-        onClick={() => addToClipboard()}
-      />
+      {type === "button" ? (
+        <Button
+          iconDescription="Copy to Clipboard"
+          buttonKind="ghost"
+          hasIconOnly
+          renderIcon={Link32}
+          onClick={() => addToClipboard()}
+        />
+      ) : (
+        <Link32
+          className="hedi--copy-to-clipboard__icon"
+          onClick={() => addToClipboard()}
+        />
+      )}
       {hasNotification && (
         <ToastNotification
           className="hedi--notification__toast--absolute"
