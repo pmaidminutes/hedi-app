@@ -1,14 +1,6 @@
-import { Map } from "@/modules/map/client/components/Map";
 import { SearchInput } from "@/modules/search/client/components";
 import { Seperator } from "@/modules/common/components";
-import {
-  Column,
-  Grid,
-  Loading,
-  Row,
-  Slider,
-  TextInput,
-} from "carbon-components-react";
+import { Column, Grid, Loading, Row } from "carbon-components-react";
 import React from "react";
 import { useSearchView, ISearchProps } from "./useSearchView";
 import { Filter } from "../Filter";
@@ -48,7 +40,7 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
           //TODO cannot have onchange need to use button to fetch location
           //or to find once the typing is finished
         }
-        <TextInput
+        {/* <TextInput
           helperText=" "
           id="location"
           invalidText="A valid value is required"
@@ -69,7 +61,7 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
           value={5}
           hideTextInput={true}
           onChange={({ value }) => handleDistanceChange(value)}
-        />
+        /> */}
       </div>
       <Filter types={filterTypes} handleFilter={handleFilter} />
       <Seperator />

@@ -52,7 +52,7 @@ export function useSearchView(props: ISearchProps) {
   const { content } = props;
 
   // TODO HACK added type to e, for preventing error
-  const resultsHeadline = content.elements.find(
+  const resultsHeadline = content.elements?.find(
     (e: any) => e.identifier === "results"
   )?.value;
 
