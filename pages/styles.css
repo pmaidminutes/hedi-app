@@ -18322,6 +18322,15 @@ h4 {
   margin: 2rem 0;
   padding: 0 4rem 0 0; }
 
+.hedi--article-page {
+  position: relative;
+  margin-top: -6rem;
+  background-color: #fff; }
+  .hedi--article-page .hedi--titlegroup {
+    margin-bottom: 0;
+    padding: 1rem 2rem;
+    position: relative; }
+
 @font-face {
   font-family: "Noto Arabic";
   font-weight: 300;
