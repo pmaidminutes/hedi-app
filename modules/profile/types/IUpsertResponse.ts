@@ -4,7 +4,7 @@ import { IOrganisation, OrganisationGQL } from "./IOrganisation";
 import { IPersonal, PersonalGQL } from "./IPersonal";
 import { IProfessional, ProfessionalGQL } from "./IProfessional";
 
-interface IUpsertProfileResponse<T> extends IMutationResponse {
+export interface IUpsertProfileResponse<T> extends IMutationResponse {
   profile?: T;
   route?: string;
 }
