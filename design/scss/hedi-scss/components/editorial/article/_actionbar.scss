@@ -14,8 +14,9 @@
     > svg {
       margin: 0 $spacing-02 0 0;
     }
-    &:not(:last-child) {
-      margin: 0 $spacing-06 0 0;
+    margin: 0 0 0 $spacing-06;
+    &:first-child{
+      margin: 0;
     }
   }
 
