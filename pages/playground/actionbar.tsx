@@ -1,7 +1,6 @@
 import Head from "next/head";
-import { Column, Grid, Row, CopyButton } from "carbon-components-react";
+import { Column, Grid, Row } from "carbon-components-react";
 import { ActionBar } from "@/modules/editorial/article/client";
-import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
 import { IArticleAction } from "@/modules/editorial/article/types";
 
 const actions: IArticleAction[] = [
