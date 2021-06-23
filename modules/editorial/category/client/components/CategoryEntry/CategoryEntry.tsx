@@ -11,11 +11,13 @@ export const CategoryEntry = (props: ICategoryEntryProps): JSX.Element => {
   const { route, image, label } = transformCategoryEntry(props);
 
   return (
-    <div className="hedi__categoryentry">
+    <div className="hedi--category-entry">
       <Link href={route} passHref>
         <a href={route}>
           {image && (
-            <div style={{ backgroundColor: image.color }}>
+            <div
+              className="hedi--category-entry__image-wrap"
+              style={{ backgroundColor: image.color }}>
               <AspectRatio ratio="2x1">
                 <Image {...image} />
               </AspectRatio>

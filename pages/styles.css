@@ -18286,11 +18286,15 @@ h4 {
   .hedi--separator__purple {
     border-color: #574E90; }
 
-.hedi__categoryentry a {
-  text-decoration: none; }
-  .hedi__categoryentry a h4 {
-     color: black; 
-  }
+.hedi--category-entry__list {
+  margin: 3rem 0; }
+
+.hedi--category-entry a {
+  text-decoration: none;
+  color: #000; }
+
+.hedi--category-entry__image-wrap {
+  padding: 1rem; }
 
 .hedi--outside-headline {
   position: absolute;
