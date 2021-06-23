@@ -9,8 +9,9 @@ import {
 
 export const CategoryEntry = (props: ICategoryEntryProps): JSX.Element => {
   const { route, image, label } = transformCategoryEntry(props);
+
   return (
-    <div className="">
+    <div className="hedi__categoryentry">
       <Link href={route} passHref>
         <a href={route}>
           {image && (

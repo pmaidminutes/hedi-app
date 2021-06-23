@@ -18289,7 +18289,8 @@ h4 {
 .hedi__categoryentry a {
   text-decoration: none; }
   .hedi__categoryentry a h4 {
-    color: red; }
+     color: black; 
+  }
 
 .hedi--outside-headline {
   position: absolute;
