@@ -18328,6 +18328,7 @@ h4 {
     font-size: 0.75rem;
     line-height: 1.34;
     letter-spacing: 0.32px;
+    cursor: pointer;
     display: flex; }
     .hedi--action-bar__item > svg {
       margin: 0 0.25rem 0 0; }

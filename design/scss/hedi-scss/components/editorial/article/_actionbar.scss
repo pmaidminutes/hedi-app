@@ -9,6 +9,7 @@
 
   &__item {
     @include carbon--type-style("helper-text-01");
+    cursor: pointer;
     display: flex;
     > svg {
       margin: 0 $spacing-02 0 0;
