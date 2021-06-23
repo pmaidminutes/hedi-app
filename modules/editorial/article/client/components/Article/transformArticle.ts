@@ -16,7 +16,13 @@ export function transformArticle(props: IArticleProps) {
   const handleShare = () => console.log("SHARE");
   const handleBookmark = () => console.log("BOOKMARK");
 
-  const actions: IArticleAction[] = [];
+  const actions: IArticleAction[] = [
+    {
+      type: "copylink",
+      description: "Link kopieren",
+      handler: () => {},
+    },
+  ];
 
   // TODO hier die links bauen
   const anchors: ILinkComponent[] = headlines.map(headline => {

@@ -10,9 +10,21 @@ import {
   Printer16,
   Language16,
 } from "@carbon/icons-react";
+import { CopyLinkToClipboard } from "@/modules/common/components";
 
 export const ActionBarItem = (props: IArticleAction) => {
   const { type, description, handler } = props;
+
+  if (type === "copylink") {
+    return (
+      <CopyLinkToClipboard
+        size="sm"
+        type="actionbaritem"
+        description="Limo trinken"
+      />
+    );
+  }
+
   return (
     <div className="hedi--action-bar__item" onClick={() => handler()}>
       {getIconByType(type)}
