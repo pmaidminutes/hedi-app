@@ -4,3 +4,4 @@ export * from "./getBusinessProfilePaths";
 export * from "./getProfileList";
 export * from "./upsertPersonalMutation";
 export * from "./upsertProfessionalMutation";
+export * from "./upsertOrganisationMutation";
