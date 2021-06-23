@@ -1,13 +1,18 @@
 import React from "react";
 import { Button, ToastNotification } from "@/modules/components";
-import { Link16, Link24, Link32 } from "@carbon/icons-react";
+import { Language16, Link16, Link24, Link32 } from "@carbon/icons-react";
 import { useCopyToClipboard } from "./useCopyToClipboard";
 import {
   transformCopyLinkToClipboard,
   ICopyLinkToClipboard,
 } from "./transformCopyLinkToClipboard";
 export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
-  const { transformedLink, type, size } = transformCopyLinkToClipboard(props);
+  const {
+    transformedLink,
+    type,
+    size,
+    description,
+  } = transformCopyLinkToClipboard(props);
   const {
     addToClipboard,
     hasNotification,
@@ -24,11 +29,17 @@ export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
           renderIcon={Link32}
           onClick={() => addToClipboard()}
         />
-      ) : (
+      ) : type === "icon" ? (
         <div
           className="hedi--copy-to-clipboard__icon"
           onClick={() => addToClipboard()}>
           {size === "sm" ? <Link16 /> : size === "md" ? <Link24 /> : <Link32 />}
+        </div>
+      ) : (
+        <div
+          className="hedi--action-bar__item"
+          onClick={() => addToClipboard()}>
+          <Language16 /> {description && description}
         </div>
       )}
       {hasNotification && (
