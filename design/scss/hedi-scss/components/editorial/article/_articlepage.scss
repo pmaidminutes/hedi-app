@@ -1,4 +1,11 @@
 .hedi--article-page {
+  p {
+    margin: $spacing-07 0;
+    &:first-of-type::first-letter {
+      font-size: $spacing-07;
+      line-height: $spacing-05;
+    }
+  }
   position: relative;
   margin-top: -$spacing-12;
   background-color: #fff;

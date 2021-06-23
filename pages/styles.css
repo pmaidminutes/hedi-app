@@ -18350,6 +18350,11 @@ h4 {
   position: relative;
   margin-top: -6rem;
   background-color: #fff; }
+  .hedi--article-page p {
+    margin: 2rem 0; }
+    .hedi--article-page p:first-of-type::first-letter {
+      font-size: 2rem;
+      line-height: 1rem; }
   .hedi--article-page .hedi--titlegroup {
     margin-bottom: 0;
     padding-top: 1rem;
