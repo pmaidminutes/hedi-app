@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @font-face {
   font-family: "Noto Arabic";
   font-weight: 300;
@@ -18273,7 +18274,7 @@ h4 {
   position: relative; }
 
 .hedi--notification__toast--absolute {
-  position: absolute;
+  position: fixed;
   right: 50%;
   top: 3rem;
   transform: translate(50%); }
@@ -18329,11 +18330,12 @@ h4 {
     line-height: 1.34;
     letter-spacing: 0.32px;
     cursor: pointer;
-    display: flex; }
+    display: flex;
+    margin: 0 0 0 1.5rem; }
     .hedi--action-bar__item > svg {
       margin: 0 0.25rem 0 0; }
-    .hedi--action-bar__item:not(:last-child) {
-      margin: 0 1.5rem 0 0; }
+    .hedi--action-bar__item:first-child {
+      margin: 0; }
   .hedi--action-bar .hedi--separator {
     margin: 0.5rem 0 0; }
 
@@ -19124,6 +19126,9 @@ html:lang(fa) .bx--btn--ghost .bx--btn__icon {
 
 .hidden {
   display: none; }
+
+.no-margin  {
+  margin: 0; }
 
 @media (min-width: 769px) {
   .mobile-only {
