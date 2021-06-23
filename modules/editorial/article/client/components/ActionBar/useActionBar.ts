@@ -5,15 +5,14 @@ export interface IActionBarProps {
   actions?: IActionBarAction[];
   children?: ReactChild;
 }
-
 export function useActionBar(props: IActionBarProps) {
   const { actions, children } = props;
   const [hasActionBar, setHasActionBar] = useState(
-    actions && actions.length > 0
+    (actions && actions.length > 0) || !!children
   );
 
   useEffect(() => {
-    setHasActionBar(actions && actions.length > 0);
+    setHasActionBar((actions && actions.length > 0) || !!children);
   }, [actions]);
 
   return {
