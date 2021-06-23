@@ -43,15 +43,3 @@ export const ArticleGQL = gql`... on Article {
   ${RouteLabelFields}
   components
 }`;
-
-export type ActionBarType =
-  | "audio"
-  | "bookmark"
-  | "share"
-  | "print"
-  | "language";
-export interface IArticleAction {
-  type: ActionBarType;
-  description: string;
-  handler: Function;
-}

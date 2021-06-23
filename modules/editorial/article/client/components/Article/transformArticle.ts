@@ -2,8 +2,8 @@ import {
   findAllHeadlineInstances,
   ILinkComponent,
 } from "@/modules/components/types";
-import { IArticle, IArticleAction } from "../../../types";
-
+import { IArticle } from "../../../types";
+import { IActionBarAction } from "@/modules/editorial/types";
 export interface IArticleProps {
   content: IArticle;
 }
@@ -16,7 +16,7 @@ export function transformArticle(props: IArticleProps) {
   const handleShare = () => console.log("SHARE");
   const handleBookmark = () => console.log("BOOKMARK");
 
-  const actions: IArticleAction[] = [
+  const actions: IActionBarAction[] = [
     // {
     //   type: "audio",
     //   description: "anhören",

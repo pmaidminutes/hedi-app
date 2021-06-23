@@ -1,7 +1,4 @@
-import {
-  ActionBarType,
-  IArticleAction,
-} from "@/modules/editorial/article/types";
+import { IActionBarAction, ActionBarType } from "@/modules/editorial/types";
 import React from "react";
 import {
   VolumeUp16,
@@ -12,7 +9,7 @@ import {
 } from "@carbon/icons-react";
 
 export interface IActionBarItem {
-  action: IArticleAction;
+  action: IActionBarAction;
 }
 
 export const ActionBarItem = (props: IActionBarItem) => {

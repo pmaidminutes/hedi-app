@@ -1,9 +1,9 @@
 import Head from "next/head";
 import { Column, Grid, Row } from "carbon-components-react";
 import { ActionBar } from "@/modules/editorial/article/client";
-import { IArticleAction } from "@/modules/editorial/article/types";
+import { IActionBarAction } from "@/modules/editorial/types";
 
-const actions: IArticleAction[] = [
+const actions: IActionBarAction[] = [
   {
     type: "share",
     description: "Teilen",
