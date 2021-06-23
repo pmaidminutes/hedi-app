@@ -18264,7 +18264,9 @@ h4 {
     background-image: url(/svg/collaborate.svg); }
 
 .hedi--headline-copy-link-to-clipboard {
-  display: flex; }
+  margin: 1.5rem 0; }
+  .hedi--headline-copy-link-to-clipboard > h2, .hedi--headline-copy-link-to-clipboard h3, .hedi--headline-copy-link-to-clipboard h4, .hedi--headline-copy-link-to-clipboard h5 {
+    display: inline; }
 
 .hedi--hero-image {
   height: 50vh;
@@ -18317,10 +18319,22 @@ h4 {
     position: relative; }
 
 .hedi--action-bar {
-  align-items: center;
-  display: flex;
-  margin: 2rem 0;
-  padding: 0 4rem 0 0; }
+  margin: 2rem 0; }
+  .hedi--action-bar__items {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end; }
+  .hedi--action-bar__item {
+    font-size: 0.75rem;
+    line-height: 1.34;
+    letter-spacing: 0.32px;
+    display: flex; }
+    .hedi--action-bar__item > svg {
+      margin: 0 0.25rem 0 0; }
+    .hedi--action-bar__item:not(:last-child) {
+      margin: 0 1.5rem 0 0; }
+  .hedi--action-bar .hedi--separator {
+    margin: 0.5rem 0 0; }
 
 .hedi--article-page {
   position: relative;
