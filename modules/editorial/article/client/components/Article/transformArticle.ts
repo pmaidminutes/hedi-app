@@ -2,7 +2,6 @@ import {
   findAllHeadlineInstances,
   ILinkComponent,
 } from "@/modules/components/types";
-import { Bookmark24, Share24 } from "@carbon/icons-react";
 import { IArticle, IArticleAction } from "../../../types";
 
 export interface IArticleProps {
@@ -17,10 +16,7 @@ export function transformArticle(props: IArticleProps) {
   const handleShare = () => console.log("SHARE");
   const handleBookmark = () => console.log("BOOKMARK");
 
-  const actions: IArticleAction[] = [
-    { icon: Share24, description: "Teilen", handler: handleShare },
-    { icon: Bookmark24, description: "Speichern", handler: handleBookmark },
-  ];
+  const actions: IArticleAction[] = [];
 
   // TODO hier die links bauen
   const anchors: ILinkComponent[] = headlines.map(headline => {
@@ -35,8 +31,8 @@ export function transformArticle(props: IArticleProps) {
     headline: label,
     components,
     headlines,
-    actions,
     anchors,
     route,
+    actions,
   };
 }

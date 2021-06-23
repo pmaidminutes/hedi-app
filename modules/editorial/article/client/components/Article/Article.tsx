@@ -1,18 +1,9 @@
-import { AudioPlayer } from "@/modules/common/components";
 import { transformArticle, IArticleProps } from "./transformArticle";
 import { ComponentRenderer } from "@/modules/components/client";
-import { Column, Grid, Row } from "carbon-components-react";
-import { Aside } from "../Aside";
+import { Column, Row } from "carbon-components-react";
 import { ActionBar } from "../ActionBar";
 export const Article = (props: IArticleProps): JSX.Element => {
-  const {
-    headline,
-    components,
-    headlines,
-    actions,
-    anchors,
-    route,
-  } = transformArticle(props);
+  const { components, actions, route } = transformArticle(props);
   // TODO needs rework when we know the finished layout
   return (
     <article>
