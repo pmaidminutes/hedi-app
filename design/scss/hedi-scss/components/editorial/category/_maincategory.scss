@@ -11,6 +11,11 @@
       cursor: pointer;
       filter: brightness(1.1);
     }
+    &--image-wrap {
+      > div {
+        display: block!important;
+      }
+    }
     &--text {
       align-items: center;
       color: #fff;

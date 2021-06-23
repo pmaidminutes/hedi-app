@@ -21,7 +21,11 @@ export const MainCategoryCard = (props: IMainCategoryCard) => {
     <div className={`${appStyle} hedi--main-category__card`}>
       <Link href={route}>
         <Row>
-          <Column {...firstColumnProps}>
+          <Column
+            {...firstColumnProps}
+            className={
+              rowIsEven ? "" : "hedi--main-category__card--image-wrap"
+            }>
             {rowIsEven ? (
               <div className="hedi--main-category__card--text">
                 <p>{label}</p>
@@ -30,7 +34,11 @@ export const MainCategoryCard = (props: IMainCategoryCard) => {
               image && <Image {...image} />
             )}
           </Column>
-          <Column {...secondColumnProps}>
+          <Column
+            {...secondColumnProps}
+            className={
+              rowIsEven ? "hedi--main-category__card--image-wrap" : ""
+            }>
             {rowIsEven ? (
               image && <Image {...image} />
             ) : (
