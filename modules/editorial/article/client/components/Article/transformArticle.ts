@@ -18,8 +18,8 @@ export function transformArticle(props: IArticleProps) {
 
   const actions: IArticleAction[] = [
     {
-      type: "copylink",
-      description: "Link kopieren",
+      type: "audio",
+      description: "anhören",
       handler: () => {},
     },
   ];
