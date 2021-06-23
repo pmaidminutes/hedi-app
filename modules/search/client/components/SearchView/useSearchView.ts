@@ -1,8 +1,9 @@
 import { IsIErrorResponse } from "@/modules/common/error";
+import { findLabelInstance } from "@/modules/components";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSearch } from "../../hooks";
-const filterTypes = ["articles", "profiles", "categories", "glossary"];
+const filterTypes = ["articles", "categories", "glossary"];
 
 export interface ISearchProps {
   // TODO type after removing app page
@@ -49,20 +50,15 @@ export function useSearchView(props: ISearchProps) {
     setFilter(filterText);
   };
 
-  const { content } = props;
-
-  // TODO HACK added type to e, for preventing error
-  const resultsHeadline = content.elements?.find(
-    (e: any) => e.identifier === "results"
-  )?.value;
+  const {
+    content,
+    content: { components },
+  } = props;
 
   let loading = true;
 
   const locale = router.locale ?? "de";
   const { defaultLocale } = router;
-
-  //TODO temporary feature
-  let errorMessage: string = "";
 
   const { data, error } = useSearch(
     queryText,
@@ -74,9 +70,8 @@ export function useSearchView(props: ISearchProps) {
 
   if (error) {
     console.log("for now error");
-    errorMessage = "No search Results";
   } else if (IsIErrorResponse(data)) {
-    errorMessage = data.errors.http ?? `Try again`;
+    // errorMessage?.text = data.errors.http ?? `Try again`;
   } else {
     loading = false;
   }
@@ -89,7 +84,7 @@ export function useSearchView(props: ISearchProps) {
     initialQueryText,
     loading,
     data: data ?? null,
-    errorMessage,
+    components,
     locale,
     defaultLocale,
     content,
@@ -97,6 +92,5 @@ export function useSearchView(props: ISearchProps) {
     locations,
     handleDistanceChange,
     filterTypes,
-    resultsHeadline,
   };
 }

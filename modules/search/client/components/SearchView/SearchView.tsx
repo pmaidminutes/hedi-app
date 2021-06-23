@@ -13,14 +13,13 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
     initialQueryText,
     loading,
     data,
-    errorMessage,
+    components,
     locale,
     defaultLocale,
     locations,
     handleDistanceChange,
     handleFilter,
     filterTypes,
-    resultsHeadline,
   } = useSearchView(props);
 
   return (
@@ -75,7 +74,7 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
         <Loading withOverlay={true} className={"some-class"} />
       ) : (
         <div>
-          <SearchResults results={data} headline={resultsHeadline} />
+          <SearchResults results={data} components={components} />
           {/* {locations?.length > 0 ? (
             <Map currentLocation={locations[0]} locations={locations} />
           ) : (
