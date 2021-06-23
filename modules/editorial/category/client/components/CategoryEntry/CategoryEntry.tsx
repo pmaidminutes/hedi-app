@@ -14,9 +14,11 @@ export const CategoryEntry = (props: ICategoryEntryProps): JSX.Element => {
       <Link href={route} passHref>
         <a href={route}>
           {image && (
-            <AspectRatio ratio="2x1">
-              <Image {...image} />
-            </AspectRatio>
+            <div style={{ backgroundColor: image.color }}>
+              <AspectRatio ratio="2x1">
+                <Image {...image} />
+              </AspectRatio>
+            </div>
           )}
           <h4
             dangerouslySetInnerHTML={{
