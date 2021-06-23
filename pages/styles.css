@@ -18112,6 +18112,15 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--pregnancy .hedi-auto-suggest {
     background-color: #2A84C6; }
+  .hedi-category-color--pregnancy article p::-moz-selection, .hedi-category-color--pregnancy article h1::-moz-selection, .hedi-category-color--pregnancy article h2::-moz-selection, .hedi-category-color--pregnancy article h3::-moz-selection, .hedi-category-color--pregnancy article h4::-moz-selection, .hedi-category-color--pregnancy article h5::-moz-selection {
+    background-color: #ECF0FF; }
+  .hedi-category-color--pregnancy article p::selection,
+  .hedi-category-color--pregnancy article h1::selection,
+  .hedi-category-color--pregnancy article h2::selection,
+  .hedi-category-color--pregnancy article h3::selection,
+  .hedi-category-color--pregnancy article h4::selection,
+  .hedi-category-color--pregnancy article h5::selection {
+    background-color: #ECF0FF; }
 
 .hedi-category-color--birth {
   background-color: #E35C8D !important; }
@@ -18119,6 +18128,15 @@ h4 {
     background-color: #FFEAEC; }
   .hedi-category-color--birth .hedi-auto-suggest {
     background-color: #E35C8D; }
+  .hedi-category-color--birth article p::-moz-selection, .hedi-category-color--birth article h1::-moz-selection, .hedi-category-color--birth article h2::-moz-selection, .hedi-category-color--birth article h3::-moz-selection, .hedi-category-color--birth article h4::-moz-selection, .hedi-category-color--birth article h5::-moz-selection {
+    background-color: #FFEAEC; }
+  .hedi-category-color--birth article p::selection,
+  .hedi-category-color--birth article h1::selection,
+  .hedi-category-color--birth article h2::selection,
+  .hedi-category-color--birth article h3::selection,
+  .hedi-category-color--birth article h4::selection,
+  .hedi-category-color--birth article h5::selection {
+    background-color: #FFEAEC; }
 
 .hedi-category-color--after-birth {
   background-color: #574E90 !important; }
@@ -18126,6 +18144,15 @@ h4 {
     background-color: #FBECFC; }
   .hedi-category-color--after-birth .hedi-auto-suggest {
     background-color: #574E90; }
+  .hedi-category-color--after-birth article p::-moz-selection, .hedi-category-color--after-birth article h1::-moz-selection, .hedi-category-color--after-birth article h2::-moz-selection, .hedi-category-color--after-birth article h3::-moz-selection, .hedi-category-color--after-birth article h4::-moz-selection, .hedi-category-color--after-birth article h5::-moz-selection {
+    background-color: #FBECFC; }
+  .hedi-category-color--after-birth article p::selection,
+  .hedi-category-color--after-birth article h1::selection,
+  .hedi-category-color--after-birth article h2::selection,
+  .hedi-category-color--after-birth article h3::selection,
+  .hedi-category-color--after-birth article h4::selection,
+  .hedi-category-color--after-birth article h5::selection {
+    background-color: #FBECFC; }
 
 .hedi-category-color--finances {
   background-color: #007362 !important; }
@@ -18133,6 +18160,15 @@ h4 {
     background-color: #D9F6F6; }
   .hedi-category-color--finances .hedi-auto-suggest {
     background-color: #007362; }
+  .hedi-category-color--finances article p::-moz-selection, .hedi-category-color--finances article h1::-moz-selection, .hedi-category-color--finances article h2::-moz-selection, .hedi-category-color--finances article h3::-moz-selection, .hedi-category-color--finances article h4::-moz-selection, .hedi-category-color--finances article h5::-moz-selection {
+    background-color: #D9F6F6; }
+  .hedi-category-color--finances article p::selection,
+  .hedi-category-color--finances article h1::selection,
+  .hedi-category-color--finances article h2::selection,
+  .hedi-category-color--finances article h3::selection,
+  .hedi-category-color--finances article h4::selection,
+  .hedi-category-color--finances article h5::selection {
+    background-color: #D9F6F6; }
 
 .hedi-category-color--advice {
   background-color: #C94E1B !important; }
@@ -18140,6 +18176,15 @@ h4 {
     background-color: #FFEDDF; }
   .hedi-category-color--advice .hedi-auto-suggest {
     background-color: #C94E1B; }
+  .hedi-category-color--advice article p::-moz-selection, .hedi-category-color--advice article h1::-moz-selection, .hedi-category-color--advice article h2::-moz-selection, .hedi-category-color--advice article h3::-moz-selection, .hedi-category-color--advice article h4::-moz-selection, .hedi-category-color--advice article h5::-moz-selection {
+    background-color: #FFEDDF; }
+  .hedi-category-color--advice article p::selection,
+  .hedi-category-color--advice article h1::selection,
+  .hedi-category-color--advice article h2::selection,
+  .hedi-category-color--advice article h3::selection,
+  .hedi-category-color--advice article h4::selection,
+  .hedi-category-color--advice article h5::selection {
+    background-color: #FFEDDF; }
 
 .hedi-category-color--root {
   background-color: #2A84C6 !important; }
@@ -18147,6 +18192,15 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--root .hedi-auto-suggest {
     background-color: #2A84C6; }
+  .hedi-category-color--root article p::-moz-selection, .hedi-category-color--root article h1::-moz-selection, .hedi-category-color--root article h2::-moz-selection, .hedi-category-color--root article h3::-moz-selection, .hedi-category-color--root article h4::-moz-selection, .hedi-category-color--root article h5::-moz-selection {
+    background-color: #ECF0FF; }
+  .hedi-category-color--root article p::selection,
+  .hedi-category-color--root article h1::selection,
+  .hedi-category-color--root article h2::selection,
+  .hedi-category-color--root article h3::selection,
+  .hedi-category-color--root article h4::selection,
+  .hedi-category-color--root article h5::selection {
+    background-color: #ECF0FF; }
 
 .hedi-category-color--default {
   background-color: #2A84C6 !important; }
@@ -18154,6 +18208,15 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--default .hedi-auto-suggest {
     background-color: #2A84C6; }
+  .hedi-category-color--default article p::-moz-selection, .hedi-category-color--default article h1::-moz-selection, .hedi-category-color--default article h2::-moz-selection, .hedi-category-color--default article h3::-moz-selection, .hedi-category-color--default article h4::-moz-selection, .hedi-category-color--default article h5::-moz-selection {
+    background-color: #ECF0FF; }
+  .hedi-category-color--default article p::selection,
+  .hedi-category-color--default article h1::selection,
+  .hedi-category-color--default article h2::selection,
+  .hedi-category-color--default article h3::selection,
+  .hedi-category-color--default article h4::selection,
+  .hedi-category-color--default article h5::selection {
+    background-color: #ECF0FF; }
 
 .hedi__audioplayer {
   width: 100%;

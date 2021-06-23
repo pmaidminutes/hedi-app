@@ -28,6 +28,19 @@ $light-color-map: (
     .hedi-auto-suggest {
       background-color: map-get($primary-color-map, $name);
     }
+    // TODO makeappstyle better
+    article {
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        &::selection {
+          background-color: map-get($light-color-map, $name);
+        }
+      }
+    }
   }
 }
 
