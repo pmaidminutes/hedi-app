@@ -1,17 +1,19 @@
 import { useState, useEffect, ReactChild } from "react";
-import { IArticleAction } from "../../../types";
+import { IActionBarAction } from "@/modules/editorial/types";
 
 export interface IActionBarProps {
-  actions?: IArticleAction[];
+  actions?: IActionBarAction[];
   children?: ReactChild;
 }
 
 export function useActionBar(props: IActionBarProps) {
   const { actions, children } = props;
-  const [hasActionBar, setHasActionBar] = useState(!!actions);
+  const [hasActionBar, setHasActionBar] = useState(
+    actions && actions.length > 0
+  );
 
   useEffect(() => {
-    setHasActionBar(!!actions);
+    setHasActionBar(actions && actions.length > 0);
   }, [actions]);
 
   return {
