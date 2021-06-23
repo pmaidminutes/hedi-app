@@ -10,7 +10,6 @@ import {
   WithTagsFields,
   IEntityTranslated,
 } from "@/modules/model";
-import { CarbonIconType } from "@carbon/icons-react";
 import { ICategoryEntry } from "../../category/types";
 import { CategoryEntryGQL } from "../../category/types/categoryEntry";
 
@@ -45,8 +44,14 @@ export const ArticleGQL = gql`... on Article {
   components
 }`;
 
+export type ActionBarType =
+  | "audio"
+  | "bookmark"
+  | "share"
+  | "print"
+  | "language";
 export interface IArticleAction {
-  icon: CarbonIconType;
+  type: ActionBarType;
   description: string;
   handler: Function;
 }
