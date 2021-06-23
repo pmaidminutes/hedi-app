@@ -22,9 +22,10 @@ import {
   PersonalTypeName,
   ProfessionalTypeName,
 } from ".";
+import { IImage, ImageGQL } from "@/modules/editorial/types";
 
 export interface IProfile extends IEntityTranslated<IEntityLocalized> {
-  //image: Image
+  image: IImage;
   languageLevels: ILanguageLevel[];
   addresses: IAddress[];
   phones: IPhone[];
@@ -41,6 +42,7 @@ export function isIProfile(obj: any): obj is IProfile {
 }
 
 export const ProfileFields = `${EntityTranslatedFields}
+image { ${ImageGQL} }
 languageLevels { ${LanguageLevelFields} }
 addresses { ${AddressFields} }
 phones { ${PhoneFields} }
