@@ -1,4 +1,3 @@
-@charset "UTF-8";
 @font-face {
   font-family: "Noto Arabic";
   font-weight: 300;
@@ -2833,8 +2832,10 @@ li.bx--accordion__item--disabled:last-of-type {
   text-decoration: underline; }
 
 .bx--link--sm {
+  font-family: "Roboto", "Noto Arabic", sans;
   font-size: 0.75rem;
-  line-height: 1.34;
+  font-weight: 300;
+  line-height: 1rem;
   letter-spacing: 0.32px; }
 
 .bx--link--lg {
@@ -4510,8 +4511,10 @@ input:not(output):not([data-invalid]):-moz-ui-invalid {
   margin-top: 0; }
 
 .bx--form__helper-text {
+  font-family: "Roboto", "Noto Arabic", sans;
   font-size: 0.75rem;
-  line-height: 1.34;
+  font-weight: 300;
+  line-height: 1rem;
   letter-spacing: 0.32px;
   z-index: 0;
   width: 100%;
@@ -11902,8 +11905,10 @@ span.bx--pagination__text {
   content: ''; }
 
 .bx--progress-bar__helper-text {
+  font-family: "Roboto", "Noto Arabic", sans;
   font-size: 0.75rem;
-  line-height: 1.34;
+  font-weight: 300;
+  line-height: 1rem;
   letter-spacing: 0.32px;
   margin-top: 0.25rem;
   color: #525252; }
@@ -18326,8 +18331,10 @@ h4 {
     display: flex;
     justify-content: flex-end; }
   .hedi--action-bar__item {
+    font-family: "Roboto", "Noto Arabic", sans;
     font-size: 0.75rem;
-    line-height: 1.34;
+    font-weight: 300;
+    line-height: 1rem;
     letter-spacing: 0.32px;
     cursor: pointer;
     display: flex;
@@ -18345,7 +18352,7 @@ h4 {
   background-color: #fff; }
   .hedi--article-page .hedi--titlegroup {
     margin-bottom: 0;
-    padding: 1rem 2rem;
+    padding-top: 1rem;
     position: relative; }
 
 @font-face {
@@ -19126,9 +19133,6 @@ html:lang(fa) .bx--btn--ghost .bx--btn__icon {
 
 .hidden {
   display: none; }
-
-.no-margin  {
-  margin: 0; }
 
 @media (min-width: 769px) {
   .mobile-only {
