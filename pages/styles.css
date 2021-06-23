@@ -18112,7 +18112,6 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--pregnancy .hedi-auto-suggest {
     background-color: #2A84C6; }
-<<<<<<< HEAD
   .hedi-category-color--pregnancy article p::-moz-selection, .hedi-category-color--pregnancy article h1::-moz-selection, .hedi-category-color--pregnancy article h2::-moz-selection, .hedi-category-color--pregnancy article h3::-moz-selection, .hedi-category-color--pregnancy article h4::-moz-selection, .hedi-category-color--pregnancy article h5::-moz-selection {
     background-color: #ECF0FF; }
   .hedi-category-color--pregnancy article p::selection,
@@ -18121,11 +18120,6 @@ h4 {
   .hedi-category-color--pregnancy article h3::selection,
   .hedi-category-color--pregnancy article h4::selection,
   .hedi-category-color--pregnancy article h5::selection {
-=======
-  .hedi-category-color--pregnancy article p::-moz-selection {
-    background-color: #ECF0FF; }
-  .hedi-category-color--pregnancy article p::selection {
->>>>>>> 983e0d6ecbe00289a634e7afd354db4ff270edfb
     background-color: #ECF0FF; }
 
 .hedi-category-color--birth {
@@ -18134,7 +18128,6 @@ h4 {
     background-color: #FFEAEC; }
   .hedi-category-color--birth .hedi-auto-suggest {
     background-color: #E35C8D; }
-<<<<<<< HEAD
   .hedi-category-color--birth article p::-moz-selection, .hedi-category-color--birth article h1::-moz-selection, .hedi-category-color--birth article h2::-moz-selection, .hedi-category-color--birth article h3::-moz-selection, .hedi-category-color--birth article h4::-moz-selection, .hedi-category-color--birth article h5::-moz-selection {
     background-color: #FFEAEC; }
   .hedi-category-color--birth article p::selection,
@@ -18143,11 +18136,6 @@ h4 {
   .hedi-category-color--birth article h3::selection,
   .hedi-category-color--birth article h4::selection,
   .hedi-category-color--birth article h5::selection {
-=======
-  .hedi-category-color--birth article p::-moz-selection {
-    background-color: #FFEAEC; }
-  .hedi-category-color--birth article p::selection {
->>>>>>> 983e0d6ecbe00289a634e7afd354db4ff270edfb
     background-color: #FFEAEC; }
 
 .hedi-category-color--after-birth {
@@ -18156,7 +18144,6 @@ h4 {
     background-color: #FBECFC; }
   .hedi-category-color--after-birth .hedi-auto-suggest {
     background-color: #574E90; }
-<<<<<<< HEAD
   .hedi-category-color--after-birth article p::-moz-selection, .hedi-category-color--after-birth article h1::-moz-selection, .hedi-category-color--after-birth article h2::-moz-selection, .hedi-category-color--after-birth article h3::-moz-selection, .hedi-category-color--after-birth article h4::-moz-selection, .hedi-category-color--after-birth article h5::-moz-selection {
     background-color: #FBECFC; }
   .hedi-category-color--after-birth article p::selection,
@@ -18165,11 +18152,6 @@ h4 {
   .hedi-category-color--after-birth article h3::selection,
   .hedi-category-color--after-birth article h4::selection,
   .hedi-category-color--after-birth article h5::selection {
-=======
-  .hedi-category-color--after-birth article p::-moz-selection {
-    background-color: #FBECFC; }
-  .hedi-category-color--after-birth article p::selection {
->>>>>>> 983e0d6ecbe00289a634e7afd354db4ff270edfb
     background-color: #FBECFC; }
 
 .hedi-category-color--finances {
@@ -18178,7 +18160,6 @@ h4 {
     background-color: #D9F6F6; }
   .hedi-category-color--finances .hedi-auto-suggest {
     background-color: #007362; }
-<<<<<<< HEAD
   .hedi-category-color--finances article p::-moz-selection, .hedi-category-color--finances article h1::-moz-selection, .hedi-category-color--finances article h2::-moz-selection, .hedi-category-color--finances article h3::-moz-selection, .hedi-category-color--finances article h4::-moz-selection, .hedi-category-color--finances article h5::-moz-selection {
     background-color: #D9F6F6; }
   .hedi-category-color--finances article p::selection,
@@ -18187,11 +18168,6 @@ h4 {
   .hedi-category-color--finances article h3::selection,
   .hedi-category-color--finances article h4::selection,
   .hedi-category-color--finances article h5::selection {
-=======
-  .hedi-category-color--finances article p::-moz-selection {
-    background-color: #D9F6F6; }
-  .hedi-category-color--finances article p::selection {
->>>>>>> 983e0d6ecbe00289a634e7afd354db4ff270edfb
     background-color: #D9F6F6; }
 
 .hedi-category-color--advice {
@@ -18200,7 +18176,6 @@ h4 {
     background-color: #FFEDDF; }
   .hedi-category-color--advice .hedi-auto-suggest {
     background-color: #C94E1B; }
-<<<<<<< HEAD
   .hedi-category-color--advice article p::-moz-selection, .hedi-category-color--advice article h1::-moz-selection, .hedi-category-color--advice article h2::-moz-selection, .hedi-category-color--advice article h3::-moz-selection, .hedi-category-color--advice article h4::-moz-selection, .hedi-category-color--advice article h5::-moz-selection {
     background-color: #FFEDDF; }
   .hedi-category-color--advice article p::selection,
@@ -18209,11 +18184,6 @@ h4 {
   .hedi-category-color--advice article h3::selection,
   .hedi-category-color--advice article h4::selection,
   .hedi-category-color--advice article h5::selection {
-=======
-  .hedi-category-color--advice article p::-moz-selection {
-    background-color: #FFEDDF; }
-  .hedi-category-color--advice article p::selection {
->>>>>>> 983e0d6ecbe00289a634e7afd354db4ff270edfb
     background-color: #FFEDDF; }
 
 .hedi-category-color--root {
@@ -18222,7 +18192,6 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--root .hedi-auto-suggest {
     background-color: #2A84C6; }
-<<<<<<< HEAD
   .hedi-category-color--root article p::-moz-selection, .hedi-category-color--root article h1::-moz-selection, .hedi-category-color--root article h2::-moz-selection, .hedi-category-color--root article h3::-moz-selection, .hedi-category-color--root article h4::-moz-selection, .hedi-category-color--root article h5::-moz-selection {
     background-color: #ECF0FF; }
   .hedi-category-color--root article p::selection,
@@ -18231,11 +18200,6 @@ h4 {
   .hedi-category-color--root article h3::selection,
   .hedi-category-color--root article h4::selection,
   .hedi-category-color--root article h5::selection {
-=======
-  .hedi-category-color--root article p::-moz-selection {
-    background-color: #ECF0FF; }
-  .hedi-category-color--root article p::selection {
->>>>>>> 983e0d6ecbe00289a634e7afd354db4ff270edfb
     background-color: #ECF0FF; }
 
 .hedi-category-color--default {
@@ -18244,7 +18208,6 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--default .hedi-auto-suggest {
     background-color: #2A84C6; }
-<<<<<<< HEAD
   .hedi-category-color--default article p::-moz-selection, .hedi-category-color--default article h1::-moz-selection, .hedi-category-color--default article h2::-moz-selection, .hedi-category-color--default article h3::-moz-selection, .hedi-category-color--default article h4::-moz-selection, .hedi-category-color--default article h5::-moz-selection {
     background-color: #ECF0FF; }
   .hedi-category-color--default article p::selection,
@@ -18253,11 +18216,6 @@ h4 {
   .hedi-category-color--default article h3::selection,
   .hedi-category-color--default article h4::selection,
   .hedi-category-color--default article h5::selection {
-=======
-  .hedi-category-color--default article p::-moz-selection {
-    background-color: #ECF0FF; }
-  .hedi-category-color--default article p::selection {
->>>>>>> 983e0d6ecbe00289a634e7afd354db4ff270edfb
     background-color: #ECF0FF; }
 
 .hedi__audioplayer {
