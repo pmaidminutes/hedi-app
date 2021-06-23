@@ -49,8 +49,7 @@ export type ActionBarType =
   | "bookmark"
   | "share"
   | "print"
-  | "language"
-  | "copylink";
+  | "language";
 export interface IArticleAction {
   type: ActionBarType;
   description: string;

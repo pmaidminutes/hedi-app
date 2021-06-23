@@ -4,15 +4,16 @@ import { Seperator } from "@/modules/common/components";
 import { ActionBarItem } from "./ActionBarItem";
 
 export const ActionBar = (props: IActionBarProps) => {
-  const { hasActionBar, actions } = useActionBar(props);
+  const { hasActionBar, actions, children } = useActionBar(props);
 
   if (!hasActionBar) return null;
   return (
     <div className="hedi--action-bar">
       <div className="hedi--action-bar__items">
         {actions?.map((action, index) => (
-          <ActionBarItem key={action.description + index} {...action} />
+          <ActionBarItem key={action.description + index} action={action} />
         ))}
+        {children && children}
       </div>
       <Seperator style="dashed" color="blue" />
     </div>
