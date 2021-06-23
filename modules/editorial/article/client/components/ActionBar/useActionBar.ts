@@ -1,12 +1,13 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, ReactChild } from "react";
 import { IArticleAction } from "../../../types";
 
 export interface IActionBarProps {
   actions?: IArticleAction[];
+  children?: ReactChild;
 }
 
 export function useActionBar(props: IActionBarProps) {
-  const { actions } = props;
+  const { actions, children } = props;
   const [hasActionBar, setHasActionBar] = useState(!!actions);
 
   useEffect(() => {
@@ -16,5 +17,6 @@ export function useActionBar(props: IActionBarProps) {
   return {
     hasActionBar,
     actions: actions === undefined ? null : actions,
+    children,
   };
 }
