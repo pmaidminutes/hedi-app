@@ -23,12 +23,15 @@ export function transformParamsToSolrRequestString(
     sfield: isLocationPresent ? "locs_lat_long" : "",
     pt: isLocationPresent ? `${location}` : "",
     d: isLocationPresent ? `${distance}` : "",
+    rows: "20", //TODO to implement pagination when required
+    // number of results at a time
   };
   enum solrTypeFields {
     articles = "ss_type:article",
     pages = "ss_type:page",
-    profiles = "ss_type:*_tmp",
+    //profiles = "ss_type:*_tmp",
     categories = "ss_vid:categories",
+    glossary = "ss_vid:glossary_term",
   }
   (<(keyof typeof solrTypeFields)[]>Object.keys(solrTypeFields)).map(
     key => (searchFilter = searchFilter.replace(key, solrTypeFields[key]))
