@@ -18300,6 +18300,9 @@ h4 {
   cursor: pointer;
   filter: brightness(1.1); }
 
+.hedi--main-category__card--image-wrap > div {
+  display: block !important; }
+
 .hedi--main-category__card--text {
   align-items: center;
   color: #fff;
