@@ -18397,6 +18397,9 @@ h4 {
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 0 2rem 0; }
+  @media (max-width: 769px) {
+    .hedi--action-bar {
+      top: 2rem; } }
   .hedi--action-bar__items {
     align-items: center;
     display: flex;

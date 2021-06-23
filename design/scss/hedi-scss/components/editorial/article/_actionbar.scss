@@ -8,6 +8,9 @@
   flex-direction: column;
   justify-content: flex-end;
   margin: 0 0 $spacing-07 0;
+  @media (max-width: 769px) {
+    top: $spacing-07;
+  }
 
   &__items {
     align-items: center;
