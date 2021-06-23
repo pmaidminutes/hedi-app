@@ -7,15 +7,19 @@ import {
   ILanguageLevel,
   LanguageLevelFields,
   ILanguageLevelInput,
+  languageLevelToInput,
   IAddress,
   AddressFields,
   IAddressInput,
+  addressToInput,
   IPhone,
   PhoneFields,
   IPhoneInput,
+  phoneToInput,
   IEmail,
   EmailFields,
   IEmailInput,
+  emailToInput,
 } from "./dataTypes";
 import {
   OrganisationTypeName,
@@ -55,4 +59,14 @@ export interface IProfileInput {
   addresses: IAddressInput[];
   phones: IPhoneInput[];
   emails: IEmailInput[];
+}
+
+export function profileToInput(profile: IProfile): IProfileInput {
+  const { addresses, phones, emails, languageLevels } = profile;
+  return {
+    addresses: addresses.map(addressToInput),
+    phones: phones.map(phoneToInput),
+    emails: emails.map(emailToInput),
+    languageLevels: languageLevels.map(languageLevelToInput),
+  };
 }
