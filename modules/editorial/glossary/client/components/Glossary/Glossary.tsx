@@ -1,6 +1,9 @@
 import { IGlossaryKeyGroup, IGlossaryViewDefinition } from "../../../types";
 import { GlossaryGroup } from "../GlossaryGroup";
 import { transformGlossary } from "./transformGlossary";
+import { transformGlossaryComponents } from "./transformGlossaryComponents";
+import { Label, Link } from "@/modules/components";
+import { Column, Row } from "carbon-components-react";
 
 export type IGlossaryProps = IGlossaryViewDefinition & IGlossaryConfig;
 
@@ -12,11 +15,28 @@ export const Glossary = ({ props }: { props: IGlossaryProps }): JSX.Element => {
     defaultLocale,
     glossaryUrlTerm,
   } = transformGlossary(props);
+  const { jumpComponent, groupAlphabetLinks } = transformGlossaryComponents(
+    props.components
+  );
 
   //TODO to include hash value to anchor on page load, hash in URL doesnt work
 
   return (
     <>
+      {jumpComponent && groupAlphabetLinks && (
+        <>
+          {" "}
+          <Label {...jumpComponent} />
+          {glossaryKeyGroups.map((glossarykeyAlphabet: IGlossaryKeyGroup) => (
+            <Link
+              {...groupAlphabetLinks}
+              key={glossarykeyAlphabet.keyChar}
+              labelText={glossarykeyAlphabet.keyChar}
+            />
+          ))}
+        </>
+      )}
+
       {glossaryKeyGroups.map((glossarykeyGroup: IGlossaryKeyGroup) => (
         <GlossaryGroup
           key={glossarykeyGroup.keyChar}
