@@ -17,11 +17,26 @@ export function transformArticle(props: IArticleProps) {
   const handleBookmark = () => console.log("BOOKMARK");
 
   const actions: IActionBarAction[] = [
-    // {
-    //   type: "audio",
-    //   description: "anhören",
-    //   handler: () => {},
-    // },
+    {
+      type: "audio",
+      description: "Artikel hören",
+      handler: () => {},
+    },
+    {
+      type: "share",
+      description: "Teilen",
+      handler: () => {},
+    },
+    {
+      type: "print",
+      description: "Drucken",
+      handler: () => {},
+    },
+    {
+      type: "language",
+      description: "Sprache ändern",
+      handler: () => {},
+    },
   ];
 
   // TODO hier die links bauen
