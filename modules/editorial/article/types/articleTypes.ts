@@ -13,10 +13,15 @@ import {
 import { ICategoryEntry } from "../../category/types";
 import { CategoryEntryGQL } from "../../category/types/categoryEntry";
 
-export interface IArticleEntry extends IEntityLocalized {}
+export interface IArticleEntry
+  extends IEntityLocalized,
+    IRouteLabeled,
+    IAppStyled {}
 
 export const ArticleEntryGQL = gql`... on Article {
 ${EntityLocalizedFields}
+${RouteLabelFields}
+appStyle
 }`;
 
 export interface IArticle

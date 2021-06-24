@@ -7,9 +7,12 @@ export function transformSolrResultToContentEntry(
 ): IContentEntry {
   const prefix = "tm_X3b_" + lang;
   const title = prefix + "_title";
-  const body = prefix + "_body";
+  const name = prefix + "_name";
+  const body = prefix + "_field_body_1";
+  const description = prefix + "_field_description";
+
   return {
-    contentTitle: entity[title],
+    contentTitle: entity[title] || entity[name],
     contentId: entity.id,
     contentBody: entity[body],
     search_api_id: entity.ss_search_api_id,
@@ -20,8 +23,8 @@ export function transformSolrResultToContentEntry(
       highlightedBody:
         highlightingContent[body] === undefined
           ? highlightingContent["voll"]
-          : highlightingContent[body],
-      highlightedTitle: highlightingContent[title],
+          : highlightingContent[body] || highlightingContent[description],
+      highlightedTitle: highlightingContent[title] || highlightingContent[name],
     },
   };
 }

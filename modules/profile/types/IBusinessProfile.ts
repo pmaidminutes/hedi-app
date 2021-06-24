@@ -3,9 +3,11 @@ import {
   IWebsite,
   WebsiteFields,
   IWebsiteInput,
+  websiteToInput,
   IConsultationHour,
   ConsultationHourFields,
   IConsultationHourInput,
+  consultationHourToInput,
   AddressFields,
 } from "./dataTypes";
 import {
@@ -14,7 +16,12 @@ import {
   IService,
   ServiceFields,
 } from "./taxonomyTypes";
-import { IProfile, IProfileInput, ProfileFields } from "./IProfile";
+import {
+  IProfile,
+  IProfileInput,
+  ProfileFields,
+  profileToInput,
+} from "./IProfile";
 import { OrganisationTypeName, ProfessionalTypeName } from ".";
 
 export interface IBusinessProfile extends IProfile {
@@ -50,4 +57,23 @@ export interface IBusinessProfileInput extends IProfileInput {
   consultationHours: IConsultationHourInput[];
   profession: number;
   services: string[];
+}
+
+export function businessProfileToInput(
+  businessProfile: IBusinessProfile
+): IBusinessProfileInput {
+  const {
+    websites,
+    consultationHours,
+    profession,
+    services,
+    ...profile
+  } = businessProfile;
+  return {
+    websites: websites.map(websiteToInput),
+    consultationHours: consultationHours.map(consultationHourToInput),
+    profession: profession.index,
+    services: services.map(s => s.route),
+    ...profileToInput(profile),
+  };
 }

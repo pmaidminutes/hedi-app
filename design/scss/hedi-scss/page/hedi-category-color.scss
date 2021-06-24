@@ -41,6 +41,9 @@ $light-color-map: (
         }
       }
     }
+    &--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link{
+      color: map-get($primary-color-map, $name)!important;
+    }
   }
 }
 

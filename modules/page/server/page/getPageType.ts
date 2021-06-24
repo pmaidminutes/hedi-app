@@ -18,6 +18,7 @@ import {
 
 import { getGlossaryPage } from "@/modules/editorial/glossary/server";
 import { getCategoryRootPage } from "@/modules/editorial/category/server";
+import { getSearchPage } from "@/modules/search/server";
 
 export const getPageType = async (
   content: IPage
@@ -57,6 +58,8 @@ export const getPageType = async (
     case "glossary":
       result = await getGlossaryPage(content);
       break;
+    case "search":
+      result = await getSearchPage(content);
     default:
       result = await getPagePage(content);
   }
