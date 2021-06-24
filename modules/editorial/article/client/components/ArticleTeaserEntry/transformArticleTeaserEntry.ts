@@ -23,5 +23,7 @@ export function transformArticleTeaserEntry(props: IArticleTeaser) {
     breadcrumbType: "withoutTitle",
   };
 
-  return { label, breadcrumbData, summary, image, route };
+  const src = image ? process.env.NEXT_PUBLIC_ASSETS_URL + image.route : "";
+
+  return { label, breadcrumbData, summary, image: { src }, route, src };
 }

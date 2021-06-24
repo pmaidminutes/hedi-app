@@ -9,6 +9,11 @@
       display: grid;
       grid-template-columns: 220px 1fr;
       column-gap: $spacing-07;
+      &--content {
+        p {
+          margin-top: $spacing-08;
+        }
+      }
     }
   }
 }

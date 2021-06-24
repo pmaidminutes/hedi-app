@@ -9,8 +9,8 @@ import {
 import Link from "next/link";
 import { BreadCrumb } from "@/modules/shell/client/components";
 import { transformArticleTeaserEntry } from "./transformArticleTeaserEntry";
-import { Body, Image } from "@/modules/components";
-
+import { Body } from "@/modules/components";
+import Image from "next/image";
 export const ArticleTeaserEntry = (props: IArticleTeaser) => {
   const {
     label,
@@ -26,12 +26,12 @@ export const ArticleTeaserEntry = (props: IArticleTeaser) => {
           <ClickableTile href={route} light={true}>
             <div className="hedi--article-teaser__entry--grid">
               <AspectRatio ratio="1x1">
-                {image && <Image {...image} />}
+                {image && <Image objectFit="cover" layout="fill" {...image} />}
               </AspectRatio>
 
-              <div>
+              <div className="hedi--article-teaser__entry--grid--content">
                 <BreadCrumb {...breadcrumbData} />
-                <h2>{label}</h2>
+                <h4>{label}</h4>
                 <Body {...summary} />
               </div>
             </div>

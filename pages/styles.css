@@ -18524,6 +18524,8 @@ h4 {
     grid-template-columns: 220px 1fr;
     -moz-column-gap: 2rem;
          column-gap: 2rem; }
+    .hedi--article-teaser__entry--grid--content p {
+      margin-top: 2.5rem; }
 
 @font-face {
   font-family: "Noto Arabic";
