@@ -7,7 +7,7 @@ export type ImageKind = "Image";
 export interface IImageComponent extends IComponent {
   kind: ImageKind;
   route: string;
-  labelText: HTML;
+  label: HTML;
   width: number;
   height: number;
   usage?: string;

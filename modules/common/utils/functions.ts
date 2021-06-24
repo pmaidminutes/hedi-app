@@ -107,3 +107,7 @@ export function convertToCarbonSize(
       return size;
   }
 }
+
+export function isEven(value: number) {
+  return value % 2 === 0 ? true : false;
+}

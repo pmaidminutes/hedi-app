@@ -1,0 +1,43 @@
+.hedi--main-category {
+  &__list {
+    margin: $spacing-07 0;
+    > div {
+      margin-bottom: $spacing-05;
+    }
+  }
+
+  &__card {
+    &:hover {
+      cursor: pointer;
+      filter: brightness(1.1);
+    }
+    &--image-wrap {
+      > div {
+        display: block!important;
+      }
+    }
+    &--text {
+      align-items: center;
+      color: #fff;
+      display: flex;
+      height: 100%;
+      padding: 0 $spacing-06;
+      width: 100%;
+      p {
+        // @include carbon--type-style("display-01");
+        font-size: 1.875rem;
+        font-weight: 400;
+        line-height: 1.2;
+        letter-spacing: 0;
+      }
+      @media (min-width: 672px) {
+        padding: 0 $spacing-07;
+        p {
+          font-size: 3.375rem;
+          font-weight: 300;
+          line-height: 1.185;
+        }
+      }
+    }
+  }
+}
