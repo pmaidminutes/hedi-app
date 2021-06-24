@@ -14,6 +14,7 @@ export function transformCategoryEntry({ category }: ICategoryEntryProps) {
     label: image?.label || "missing",
     width: image?.width || 1024,
     height: image?.height || 768,
+    color: image?.color,
   };
 
   return { route, image: transformedImage ?? null, label };
