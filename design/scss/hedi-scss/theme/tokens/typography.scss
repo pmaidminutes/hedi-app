@@ -74,13 +74,13 @@
   //   line-height: carbon--rem(16px),
   //   letter-spacing: 0.32px,
   // ) !global;
-  // $helper-text-01: (
-  //   font-family: carbon--font-family('sans'),
-  //   font-size: carbon--type-scale(1),
-  //   font-style: italic,
-  //   line-height: carbon--rem(16px),
-  //   letter-spacing: 0.32px,
-  // ) !global;
+  $helper-text-01: (
+    font-family: carbon--font-family('sans'),
+    font-size: 0.75rem,
+    font-weight: 300,
+    line-height: 1rem,
+    letter-spacing: 0.32px,
+  ) !global;
   // $body-short-01: (
   //   font-family: carbon--font-family('sans'),
   //   font-size: carbon--type-scale(2),

@@ -21,6 +21,7 @@ export function useCopyToClipboard(text: string) {
     setHasNotification(false);
   };
 
+  // TODO get Text from cms
   const notificationData = {
     timeout,
     title: "Link wurde ins Clipboard kopiert",

@@ -7,12 +7,36 @@ import {
   ICopyLinkToClipboard,
 } from "./transformCopyLinkToClipboard";
 export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
-  const { transformedLink, type, size } = transformCopyLinkToClipboard(props);
+  const {
+    transformedLink,
+    type,
+    size,
+    description,
+  } = transformCopyLinkToClipboard(props);
   const {
     addToClipboard,
     hasNotification,
     notificationData,
   } = useCopyToClipboard(transformedLink);
+  // TODO take out class and handle margin different
+  if (type === "actionbaritem") {
+    return (
+      <>
+        <div
+          className="hedi--action-bar__item hedi-action-bar__item--no-margin"
+          onClick={() => addToClipboard()}>
+          <Link16 /> {description && description}
+        </div>
+        {hasNotification && (
+          <ToastNotification
+            className="hedi--notification__toast--absolute"
+            notificationKind="info"
+            {...notificationData}
+          />
+        )}
+      </>
+    );
+  }
 
   return (
     <div className="hedi--copy-to-clipboard">
@@ -31,6 +55,7 @@ export const CopyLinkToClipboard = (props: ICopyLinkToClipboard) => {
           {size === "sm" ? <Link16 /> : size === "md" ? <Link24 /> : <Link32 />}
         </div>
       )}
+
       {hasNotification && (
         <ToastNotification
           className="hedi--notification__toast--absolute"
