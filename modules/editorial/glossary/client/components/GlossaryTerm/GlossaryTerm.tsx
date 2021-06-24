@@ -4,6 +4,8 @@ import {
   transformGlossaryTerm,
   IGlossaryTermProps,
 } from "./transformGlossaryTerm";
+import { CopyLinkToClipboard } from "@/modules/common/components";
+import { Column, Row } from "carbon-components-react";
 
 export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   const {
@@ -13,13 +15,25 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
     isSelected,
     termClass,
     translation,
+    route,
   } = transformGlossaryTerm(props);
 
   return (
     <>
-      <h2>
-        <HTML data={label} />
-      </h2>
+      <Row>
+        <Column>
+          <h2>
+            <HTML data={label} />
+          </h2>
+        </Column>
+        <Column style={{ maxWidth: "20%" }}>
+          <CopyLinkToClipboard
+            type="actionbaritem"
+            description="kopieren"
+            route={route}
+          />
+        </Column>
+      </Row>
       <div>
         {translation && (
           <p>
