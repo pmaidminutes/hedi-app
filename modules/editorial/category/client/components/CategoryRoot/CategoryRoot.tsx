@@ -1,9 +1,7 @@
 import React from "react";
-import { ArticleEntry } from "@/modules/editorial/article/client";
-import { ICategoryEntry, ICategoryRoot } from "../../../types";
-import { CategoryEntry } from "../CategoryEntry";
+import { ICategoryRoot } from "../../../types";
 import { transformCategoryRoot } from "./transformCategoryRoot";
-import { Column, Row, Grid } from "carbon-components-react";
+import { Column, Row } from "carbon-components-react";
 import { Label, Body } from "@/modules/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { MainCategoryCardList } from "../MainCategoryCardList";
@@ -12,7 +10,6 @@ export const CategoryRoot = (props: ICategoryRoot) => {
   const { categories, articles, headline, text } = transformCategoryRoot(props);
   return (
     <section>
-      {/* TODO spacing and check, why Headline got a p tag */}
       {headline && (
         <Row>
           <Column md={{ span: 4 }}>
