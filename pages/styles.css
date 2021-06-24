@@ -18106,6 +18106,8 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--pregnancy .hedi-auto-suggest {
     background-color: #2A84C6; }
+  .hedi-category-color--pregnancy--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+    color: #2A84C6 !important; }
 
 .hedi-category-color--birth {
   background-color: #E35C8D !important; }
@@ -18113,6 +18115,8 @@ h4 {
     background-color: #FFEAEC; }
   .hedi-category-color--birth .hedi-auto-suggest {
     background-color: #E35C8D; }
+  .hedi-category-color--birth--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+    color: #E35C8D !important; }
 
 .hedi-category-color--after-birth {
   background-color: #574E90 !important; }
@@ -18120,6 +18124,8 @@ h4 {
     background-color: #FBECFC; }
   .hedi-category-color--after-birth .hedi-auto-suggest {
     background-color: #574E90; }
+  .hedi-category-color--after-birth--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+    color: #574E90 !important; }
 
 .hedi-category-color--finances {
   background-color: #007362 !important; }
@@ -18127,6 +18133,8 @@ h4 {
     background-color: #D9F6F6; }
   .hedi-category-color--finances .hedi-auto-suggest {
     background-color: #007362; }
+  .hedi-category-color--finances--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+    color: #007362 !important; }
 
 .hedi-category-color--advice {
   background-color: #C94E1B !important; }
@@ -18134,6 +18142,8 @@ h4 {
     background-color: #FFEDDF; }
   .hedi-category-color--advice .hedi-auto-suggest {
     background-color: #C94E1B; }
+  .hedi-category-color--advice--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+    color: #C94E1B !important; }
 
 .hedi-category-color--root {
   background-color: #2A84C6 !important; }
@@ -18141,6 +18151,8 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--root .hedi-auto-suggest {
     background-color: #2A84C6; }
+  .hedi-category-color--root--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+    color: #2A84C6 !important; }
 
 .hedi-category-color--default {
   background-color: #2A84C6 !important; }
@@ -18148,6 +18160,8 @@ h4 {
     background-color: #ECF0FF; }
   .hedi-category-color--default .hedi-auto-suggest {
     background-color: #2A84C6; }
+  .hedi-category-color--default--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+    color: #2A84C6 !important; }
 
 .hedi__audioplayer {
   width: 100%;
@@ -18321,6 +18335,22 @@ h4 {
   display: flex;
   margin: 2rem 0;
   padding: 0 4rem 0 0; }
+
+.hedi--article-entry {
+  margin-bottom: 2rem;
+  padding: 0 2rem 0 1rem; }
+  .hedi--article-entry__content {
+    border-top: 1px solid #2A84C6; }
+  .hedi--article-entry .bx--breadcrumb {
+    margin: 0.75rem 0 0.5rem 0;
+    font-size: 0.75rem;
+    font-weight: 400;
+    line-height: 1.34;
+    letter-spacing: 0.32px; }
+  .hedi--article-entry h4 {
+    max-width: 66%;
+    height: 5.25rem;
+    margin-bottom: 2rem; }
 
 @font-face {
   font-family: "Noto Arabic";
@@ -18791,6 +18821,17 @@ html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
       float: left;
       -webkit-margin-end: 2rem;
               margin-inline-end: 2rem; }
+
+.hedi--breadcrumb .bx--link {
+  color: #161616; }
+
+.hedi--breadcrumb__graphical {
+  display: flex;
+  justify-content: flex-start;
+  margin: 1rem 0 0.5rem 0; }
+  .hedi--breadcrumb__graphical > div {
+    border: 3px solid #2A84C6;
+    width: 15px; }
 
 .hedi--footer {
   align-items: center;

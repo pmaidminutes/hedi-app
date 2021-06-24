@@ -1,0 +1,16 @@
+.hedi--article-entry {
+  margin-bottom: $spacing-07;
+  padding: 0 $spacing-07 0 $spacing-05;
+  &__content {
+    border-top: 1px solid $blue-primary;
+  }
+  .bx--breadcrumb {
+    margin: $spacing-04 0 $spacing-03 0;
+    @include carbon--type-style("label-01");
+  }
+  h4 {
+    max-width: 66%;
+    height: 5.25rem;
+    margin-bottom: $spacing-07;
+  }
+}
