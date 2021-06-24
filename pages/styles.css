@@ -18346,10 +18346,8 @@ h4 {
   .hedi--field-visibility__item.connected-user button::before {
     background-image: url(/svg/collaborate.svg); }
 
-.hedi--headline-copy-link-to-clipboard {
-  margin: 1.5rem 0; }
-  .hedi--headline-copy-link-to-clipboard > h2, .hedi--headline-copy-link-to-clipboard h3, .hedi--headline-copy-link-to-clipboard h4, .hedi--headline-copy-link-to-clipboard h5 {
-    display: inline; }
+.hedi--headline-copy-link-to-clipboard > h2, .hedi--headline-copy-link-to-clipboard h3, .hedi--headline-copy-link-to-clipboard h4, .hedi--headline-copy-link-to-clipboard h5 {
+  display: inline; }
 
 .hedi--hero-image {
   height: 50vh;
@@ -18513,6 +18511,34 @@ h4 {
     max-width: 66%;
     height: 5.25rem;
     margin-bottom: 2rem; }
+
+.hedi--glossary__group--title {
+  margin-top: 3rem; }
+
+.hedi--glossary__group--letter {
+  font-family: "Roboto Slab", "Noto Arabic", serif;
+  font-size: 4rem;
+  font-weight: 500;
+  color: #2A84C6; }
+
+.hedi--glossary__marked-word {
+  border-left: 4px solid #E18F60; }
+
+.hedi--glossary__marked-translation {
+  background-color: none;
+  color: #005D90;
+  margin: 0.5rem 0; }
+
+.hedi--alphabet-links {
+  font-family: "Roboto Slab", "Noto Arabic", serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.666em;
+  color: #2A84C6;
+  margin: 0 0 0 1rem; }
+  .hedi--alphabet-links--wrap {
+    display: flex;
+    justify-content: flex-end; }
 
 @font-face {
   font-family: "Noto Arabic";

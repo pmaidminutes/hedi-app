@@ -4,7 +4,10 @@ import {
   transformGlossaryTerm,
   IGlossaryTermProps,
 } from "./transformGlossaryTerm";
-import { CopyLinkToClipboard } from "@/modules/common/components";
+import {
+  CopyLinkToClipboard,
+  HeadlineWithLinkCopy,
+} from "@/modules/common/components";
 import { Column, Row } from "carbon-components-react";
 
 export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
@@ -16,29 +19,19 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
     termClass,
     translation,
     route,
+    headline,
   } = transformGlossaryTerm(props);
 
   return (
     <>
       <Row>
         <Column>
-          <h2>
-            <HTML data={label} />
-          </h2>
-        </Column>
-        <Column style={{ maxWidth: "20%" }}>
-          <CopyLinkToClipboard
-            type="actionbaritem"
-            description="kopieren"
-            route={route}
-          />
+          <HeadlineWithLinkCopy {...headline} />
         </Column>
       </Row>
       <div>
         {translation && (
-          <p>
-            <mark>{translation}</mark>
-          </p>
+          <p className="hedi--glossary__marked-translation">{translation}</p>
         )}
       </div>
 

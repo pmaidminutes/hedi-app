@@ -13,9 +13,10 @@ export const GlossaryGroup = (props: IGlossaryGroupProps): JSX.Element => {
 
   return (
     <>
-      <Row style={{ padding: "48px" }}></Row>
-      <Row>
-        <Column id={glossaryKey}>{glossaryKey}</Column>
+      <Row className="hedi--glossary__group--title">
+        <Column className="hedi--glossary__group--letter" id={glossaryKey}>
+          {glossaryKey}
+        </Column>
       </Row>
       <Seperator />
       <Row className="bx--row">

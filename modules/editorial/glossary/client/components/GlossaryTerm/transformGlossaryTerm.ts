@@ -1,3 +1,5 @@
+import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
+import { IHeadlineComponent } from "@/modules/components";
 import { IGlossaryTerm } from "../../../types";
 
 export interface IGlossaryTermProps {
@@ -16,7 +18,26 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
     term => term.lang === translationLang
   )?.label;
 
-  const termClass = isSelected ? "hedi-marked-word" : "";
+  const termClass = isSelected ? "hedi--glossary__marked-word" : "";
 
-  return { label, body, entryId, isSelected, termClass, translation, route };
+  const headline: IHeadlineComponent & ICopyLinkToClipboard = {
+    kind: "Headline",
+    headline: "h2",
+    text: label,
+    route,
+    type: "icon",
+    size: "sm",
+    id: label,
+  };
+
+  return {
+    label,
+    body,
+    entryId,
+    isSelected,
+    termClass,
+    translation,
+    route,
+    headline,
+  };
 }

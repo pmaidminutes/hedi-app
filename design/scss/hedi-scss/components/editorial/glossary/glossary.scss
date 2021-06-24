@@ -1,10 +1,37 @@
-.hedi--alphabet-links {
-  position: absolute;
+.hedi--glossary {
+  &__group {
+    &--title {
+      margin-top: $spacing-09;
+    }
+    &--letter {
+      font-family: carbon--font-family("serif");
+      font-size: 4rem;
+      font-weight: 500;
+      // TODO change against carbon variable or something
+      color: $blue-primary;
+    }
+  }
+  &__marked-word {
+    border-left: 4px solid $orange-40;
+  }
 
-//   font-family: Roboto Slab;
-//   font-style: normal;
-//   font-weight: normal;
-  font-size: 2rem;
-  letter-spacing: $spacing-04;
-  color: #2a84c6;
+  &__marked-translation {
+    background-color: none;
+    color: $blue-80;
+    margin: $spacing-03 0;
+  }
+}
+
+.hedi--alphabet-links {
+  font-family: carbon--font-family("serif");
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.666em;
+  color: $blue-primary;
+  margin: 0 0 0 $spacing-05;
+
+  &--wrap {
+    display: flex;
+    justify-content: flex-end;
+  }
 }

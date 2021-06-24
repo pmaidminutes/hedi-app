@@ -26,16 +26,17 @@ export const Glossary = ({ props }: { props: IGlossaryProps }): JSX.Element => {
       {jumpComponent && groupAlphabetLinks && (
         <>
           {" "}
-          <Label {...jumpComponent} />
-          {glossaryKeyGroups.map((glossarykeyAlphabet: IGlossaryKeyGroup) => (
-            <Link
-              style={{ padding: "20px", font: { size: "2rem" } }}
-              {...groupAlphabetLinks}
-              key={glossarykeyAlphabet.keyChar}
-              href={"#" + glossarykeyAlphabet.keyChar}
-              labelText={glossarykeyAlphabet.keyChar}
-            />
-          ))}
+          <div className="hedi--alphabet-links--wrap">
+            {glossaryKeyGroups.map((glossarykeyAlphabet: IGlossaryKeyGroup) => (
+              <Link
+                {...groupAlphabetLinks}
+                key={glossarykeyAlphabet.keyChar}
+                href={"#" + glossarykeyAlphabet.keyChar}
+                labelText={glossarykeyAlphabet.keyChar}
+                className="hedi--alphabet-links"
+              />
+            ))}
+          </div>
         </>
       )}
 
