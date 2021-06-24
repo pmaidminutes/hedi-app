@@ -1,0 +1,14 @@
+.hedi--article-teaser {
+  &__entry {
+    padding-bottom: $spacing-07;
+    margin-bottom: $spacing-07;
+    .bx--aspect-ratio {
+      max-width: 220px;
+    }
+    &--grid {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      column-gap: $spacing-07;
+    }
+  }
+}
