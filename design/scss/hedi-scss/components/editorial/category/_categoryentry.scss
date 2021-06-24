@@ -10,4 +10,20 @@
   &__image-wrap {
     padding: $spacing-05;
   }
+
+  @media (max-width: 769px) {
+    .hedi--category-entry {
+      &__image-wrap {
+        max-width: 100px;
+        margin: $spacing-05;
+        padding: $spacing-05;
+      }
+    }
+    a {
+      display: flex;
+    }
+    h4 {
+      padding: 50px 0;
+    }
+  }
 }
