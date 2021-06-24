@@ -18227,6 +18227,13 @@ h4 {
         -webkit-margin-before: 1rem;
                 margin-block-start: 1rem; } }
 
+.hedi--copy-to-clipboard {
+  margin: 0 1rem;
+  display: inline-flex;
+  align-items: center; }
+  .hedi--copy-to-clipboard__icon:hover {
+    cursor: pointer; }
+
 .hedi--field-visibility {
   position: relative; }
   .hedi--field-visibility__item .bx--overflow-menu-options__btn {
@@ -18256,9 +18263,18 @@ h4 {
   .hedi--field-visibility__item.connected-user button::before {
     background-image: url(/svg/collaborate.svg); }
 
+.hedi--headline-copy-link-to-clipboard {
+  display: flex; }
+
 .hedi--hero-image {
   height: 50vh;
   position: relative; }
+
+.hedi--notification__toast--absolute {
+  position: absolute;
+  right: 50%;
+  top: 3rem;
+  transform: translate(50%); }
 
 .hedi--separator {
   display: block;

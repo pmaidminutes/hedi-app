@@ -26,12 +26,14 @@ import {
   Headline,
 } from "../index";
 import React from "react";
+import { HeadlineWithLinkCopy } from "@/modules/common/components";
 interface IRendererProps {
   components: IComponent[];
+  route?: string;
 }
 
 export const ComponentRenderer = (props: IRendererProps) => {
-  const { components } = props;
+  const { components, route } = props;
   return (
     <>
       {components &&
@@ -39,7 +41,13 @@ export const ComponentRenderer = (props: IRendererProps) => {
           if (isLabel(component))
             return <Label key={component.kind + index} {...component} />;
           if (isHeadline(component))
-            return <Headline key={component.kind + index} {...component} />;
+            return (
+              <HeadlineWithLinkCopy
+                key={component.kind + index}
+                {...component}
+                route={route}
+              />
+            );
           if (isBody(component))
             return <Body key={component.kind + index} {...component} />;
           if (isButton(component))

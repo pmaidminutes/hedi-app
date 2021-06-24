@@ -45,8 +45,7 @@ import {
 } from "@/modules/profile/client/components";
 
 // Search
-// import { getSearchPage } from "@/modules/search/server/page";
-// import { TrySearch } from "@/modules/search/client/components";
+import { TrySearch } from "@/modules/search/client/components";
 
 // Article
 import { ArticleGQL, isIArticle } from "@/modules/editorial/article/types";
@@ -172,7 +171,7 @@ export default function segments(props: IPageProps<IPage>) {
         <TryGlossary content={content} key="glossary" />
         <TryCategoryRoot content={content} key="categoryroot" />
 
-        {/* <TrySearch content={content} key="search" /> */}
+        <TrySearch content={content} key="search" />
         <TryPage content={content} key="page" />
       </>
     </Shell>
