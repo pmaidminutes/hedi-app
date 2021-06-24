@@ -14,10 +14,15 @@ import {
 } from "@/modules/model";
 import { CarbonIconType } from "@carbon/icons-react";
 
-export interface IArticleEntry extends IEntityLocalized {}
+export interface IArticleEntry
+  extends IEntityLocalized,
+    IRouteLabeled,
+    IAppStyled {}
 
 export const ArticleEntryGQL = gql`... on Article {
 ${EntityLocalizedFields}
+${RouteLabelFields}
+appStyle
 }`;
 
 export interface IArticle
