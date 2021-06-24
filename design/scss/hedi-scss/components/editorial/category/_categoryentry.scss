@@ -1,8 +1,31 @@
-.hedi__categoryentry {
+.hedi--category-entry {
+  &__list {
+    margin: $spacing-09 0;
+  }
+
   a {
     text-decoration: none;
+    color: #000;
+  }
+
+  @media (min-width: 672px) {
+    &__image-wrap {
+      margin-bottom: $spacing-03;
+    }
+  }
+
+  @media (max-width: 672px) {
+    margin-bottom: $spacing-03;
+    &__image-wrap {
+      max-width: $spacing-12;
+      max-height: $spacing-12;
+    }
+    > a {
+      display: flex;
+      align-items: center;
+    }
     h4 {
-      color: red;
+      padding: 0 0 0 $spacing-05;
     }
   }
 }

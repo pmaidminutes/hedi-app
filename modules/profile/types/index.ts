@@ -6,6 +6,6 @@ export * from "./IPersonal";
 export * from "./IBusinessProfile";
 export * from "./IProfessional";
 export * from "./IUserProfile";
-export * from "./IUpsertProfessionalResponse";
+export * from "./IUpsertResponse";
 export * from "./IOrganisation";
 export * from "./IProfileEntry";
