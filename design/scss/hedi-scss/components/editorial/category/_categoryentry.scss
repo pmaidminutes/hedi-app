@@ -7,26 +7,25 @@
     text-decoration: none;
     color: #000;
   }
-  &__image-wrap {
-    padding: $spacing-05;
-    margin-top: $spacing-05;
+
+  @media (min-width: 672px) {
+    &__image-wrap {
+      margin-bottom: $spacing-03;
+    }
   }
 
   @media (max-width: 672px) {
-    .hedi--category-entry {
-      &__image-wrap {
-        max-width: 100px;
-        max-height: 100px;
-        margin: $spacing-05;
-        padding: $spacing-05;
-       
-      }
+    margin-bottom: $spacing-03;
+    &__image-wrap {
+      max-width: $spacing-12;
+      max-height: $spacing-12;
     }
-    a {
+    > a {
       display: flex;
+      align-items: center;
     }
     h4 {
-      padding: 50px 0;
+      padding: 0 0 0 $spacing-05;
     }
   }
 }
