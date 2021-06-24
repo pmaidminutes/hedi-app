@@ -15,7 +15,7 @@ export const GlossaryGroup = (props: IGlossaryGroupProps): JSX.Element => {
     <>
       <Row style={{ padding: "48px" }}></Row>
       <Row>
-        <Column>{glossaryKey}</Column>
+        <Column id={glossaryKey}>{glossaryKey}</Column>
       </Row>
       <Seperator />
       <Row className="bx--row">

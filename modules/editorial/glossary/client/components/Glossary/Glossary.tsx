@@ -29,8 +29,10 @@ export const Glossary = ({ props }: { props: IGlossaryProps }): JSX.Element => {
           <Label {...jumpComponent} />
           {glossaryKeyGroups.map((glossarykeyAlphabet: IGlossaryKeyGroup) => (
             <Link
+              style={{ padding: "20px", font: { size: "2rem" } }}
               {...groupAlphabetLinks}
               key={glossarykeyAlphabet.keyChar}
+              href={"#" + glossarykeyAlphabet.keyChar}
               labelText={glossarykeyAlphabet.keyChar}
             />
           ))}

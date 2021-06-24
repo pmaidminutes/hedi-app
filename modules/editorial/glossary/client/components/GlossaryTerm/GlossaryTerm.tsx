@@ -1,8 +1,5 @@
-import {
-  ExpandableTile,
-  TileAboveTheFoldContent,
-  TileBelowTheFoldContent,
-} from "carbon-components-react";
+import { HTML } from "@/modules/react/html";
+
 import {
   transformGlossaryTerm,
   IGlossaryTermProps,
@@ -20,13 +17,9 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
 
   return (
     <>
-      {termClass}
-      {"<--- to be removed"}
-      <h2
-        className={termClass}
-        dangerouslySetInnerHTML={{
-          __html: label,
-        }}></h2>
+      <h2>
+        <HTML data={label} />
+      </h2>
       <div>
         {translation && (
           <p>
@@ -35,10 +28,7 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
         )}
       </div>
 
-      <div
-        dangerouslySetInnerHTML={{
-          __html: body,
-        }}></div>
+      <HTML data={body} />
     </>
   );
 };
