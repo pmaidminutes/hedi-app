@@ -7,24 +7,29 @@ import {
   ILanguageLevel,
   LanguageLevelFields,
   ILanguageLevelInput,
+  languageLevelToInput,
   IAddress,
   AddressFields,
   IAddressInput,
+  addressToInput,
   IPhone,
   PhoneFields,
   IPhoneInput,
+  phoneToInput,
   IEmail,
   EmailFields,
   IEmailInput,
+  emailToInput,
 } from "./dataTypes";
 import {
   OrganisationTypeName,
   PersonalTypeName,
   ProfessionalTypeName,
 } from ".";
+import { IImage, ImageGQL } from "@/modules/editorial/types";
 
 export interface IProfile extends IEntityTranslated<IEntityLocalized> {
-  //image: Image
+  image: IImage;
   languageLevels: ILanguageLevel[];
   addresses: IAddress[];
   phones: IPhone[];
@@ -41,6 +46,7 @@ export function isIProfile(obj: any): obj is IProfile {
 }
 
 export const ProfileFields = `${EntityTranslatedFields}
+image { ${ImageGQL} }
 languageLevels { ${LanguageLevelFields} }
 addresses { ${AddressFields} }
 phones { ${PhoneFields} }
@@ -53,4 +59,14 @@ export interface IProfileInput {
   addresses: IAddressInput[];
   phones: IPhoneInput[];
   emails: IEmailInput[];
+}
+
+export function profileToInput(profile: IProfile): IProfileInput {
+  const { addresses, phones, emails, languageLevels } = profile;
+  return {
+    addresses: addresses.map(addressToInput),
+    phones: phones.map(phoneToInput),
+    emails: emails.map(emailToInput),
+    languageLevels: languageLevels.map(languageLevelToInput),
+  };
 }

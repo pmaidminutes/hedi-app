@@ -24,6 +24,7 @@ export async function getCategoryRoot(
       categories(lang: $lang) {
         ${CategoryEntryGQL}
         parent
+        appStyle
       }
     }
   `;

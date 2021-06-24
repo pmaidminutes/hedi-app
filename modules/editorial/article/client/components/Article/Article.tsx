@@ -1,31 +1,27 @@
-import { AudioPlayer } from "@/modules/common/components";
 import { transformArticle, IArticleProps } from "./transformArticle";
 import { ComponentRenderer } from "@/modules/components/client";
-import { Column, Grid, Row } from "carbon-components-react";
-import { Aside } from "../Aside";
+import { Column, Row } from "carbon-components-react";
 import { ActionBar } from "../ActionBar";
+import { CopyLinkToClipboard } from "@/modules/common/components";
 export const Article = (props: IArticleProps): JSX.Element => {
-  const {
-    headline,
-    components,
-    headlines,
-    actions,
-    anchors,
-  } = transformArticle(props);
+  const { components, actions, route } = transformArticle(props);
   // TODO needs rework when we know the finished layout
   return (
     <article>
-      <Grid>
-        <Row>
-          <Column lg={{ span: 10, offset: 2 }}>
-            <ActionBar actions={actions} />
-            {components && <ComponentRenderer components={components} />}
-          </Column>
-          <Column lg={3} sm={0}>
-            <Aside actions={actions} anchors={anchors} />
-          </Column>
-        </Row>
-      </Grid>
+      <Row>
+        <Column lg={{ span: 10, offset: 3 }} md={{ span: 6, offset: 1 }}>
+          <ActionBar actions={actions}>
+            <CopyLinkToClipboard
+              type="actionbaritem"
+              description="Link kopieren"
+              route={route}
+            />
+          </ActionBar>
+          {components && (
+            <ComponentRenderer route={route} components={components} />
+          )}
+        </Column>
+      </Row>
     </article>
   );
 };

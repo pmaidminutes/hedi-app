@@ -62,7 +62,7 @@ export const solrSearchAPI: NextApiHandler<
         //     })
         //   );
         //   break;
-        case "categories":
+        case "category":
           promises.push(
             getCategory(route).then(category => {
               if (category)
@@ -71,12 +71,12 @@ export const solrSearchAPI: NextApiHandler<
             })
           );
           break;
-        case "glossaryterm":
+        case "glossary_term":
           promises.push(
             getGlossaryTerm(route).then(glossary => {
               if (glossary) {
                 glossary.label = highlight.highlightedTitle ?? glossary.label;
-                // glossary.body = highlightedBody ?? glossary.body;
+                glossary.body = highlightedBody ?? glossary.body;
               }
               return glossary;
             })

@@ -5,5 +5,9 @@ import { HTML } from "@/modules/react/html";
 export const Body = (props: IBodyProps) => {
   const { body, ...rest } = transformBody(props);
 
-  return <HTML data={body} {...rest} />;
+  return (
+    <p>
+      <HTML data={body} {...rest} />
+    </p>
+  );
 };

@@ -1,18 +1,11 @@
 import { gql } from "@/modules/graphql";
 import {
-  addressToInput,
-  consultationHourToInput,
-  emailToInput,
-  languageLevelToInput,
-  phoneToInput,
-  websiteToInput,
-} from "./dataTypes";
-import {
   IBusinessProfile,
   BusinessProfileFields,
   IBusinessProfileLink,
   BusinessProfileLinkFields,
   IBusinessProfileInput,
+  businessProfileToInput,
 } from "./IBusinessProfile";
 
 export interface IProfessional extends IBusinessProfile {
@@ -56,30 +49,11 @@ export const ProfessionalInputDefault: IProfessionalInput = {
 export function professionalToInput(
   professional: IProfessional
 ): IProfessionalInput {
-  const {
-    prefix,
-    givenName,
-    familyName,
-    addresses,
-    phones,
-    emails,
-    websites,
-    languageLevels,
-    consultationHours,
-    profession,
-    services,
-  } = professional;
+  const { prefix, givenName, familyName, ...businessProfile } = professional;
   return {
     prefix,
     givenName,
     familyName,
-    addresses: addresses.map(addressToInput),
-    phones: phones.map(phoneToInput),
-    emails: emails.map(emailToInput),
-    websites: websites.map(websiteToInput),
-    languageLevels: languageLevels.map(languageLevelToInput),
-    consultationHours: consultationHours.map(consultationHourToInput),
-    profession: profession.index,
-    services: services.map(s => s.route),
+    ...businessProfileToInput(businessProfile),
   };
 }

@@ -1,3 +1,4 @@
+export * from "./Article";
 export * from "./Blank";
 export * from "./Category";
 export * from "./Editorial";

@@ -1,8 +1,6 @@
 import { IComponent } from "@/modules/components/types";
 import { gql } from "@/modules/graphql";
 import {
-  EntityFields,
-  IEntity,
   IEntityLocalized,
   EntityLocalizedFields,
   IAppStyled,
@@ -12,12 +10,18 @@ import {
   WithTagsFields,
   IEntityTranslated,
 } from "@/modules/model";
-import { CarbonIconType } from "@carbon/icons-react";
+import { ICategoryEntry } from "../../category/types";
+import { CategoryEntryGQL } from "../../category/types/categoryEntry";
 
-export interface IArticleEntry extends IEntityLocalized {}
+export interface IArticleEntry
+  extends IEntityLocalized,
+    IRouteLabeled,
+    IAppStyled {}
 
 export const ArticleEntryGQL = gql`... on Article {
 ${EntityLocalizedFields}
+${RouteLabelFields}
+appStyle
 }`;
 
 export interface IArticle
@@ -25,7 +29,7 @@ export interface IArticle
     IEntityTranslated<IEntityLocalized>,
     IAppStyled,
     IRouteLabeled {
-  category: IEntity;
+  category: ICategoryEntry;
   appStyle: string;
   components: IComponent[];
 }
@@ -37,14 +41,10 @@ export function isIArticle(obj: any): obj is IArticle {
 export const ArticleGQL = gql`... on Article {
   ${EntityTranslatedFields}
   ${WithTagsFields}
-  category { ${EntityFields} }
+  category{
+    ${CategoryEntryGQL}
+}
   appStyle
   ${RouteLabelFields}
   components
 }`;
-
-export interface IArticleAction {
-  icon: CarbonIconType;
-  description: string;
-  handler: Function;
-}

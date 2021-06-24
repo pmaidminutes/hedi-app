@@ -1,5 +1,4 @@
 import { IComponent, IImageComponent, HTML } from "@/modules/components/types";
-import { IImage } from "@/modules/editorial/types";
 import { IPage } from "@/modules/page/types";
 import { ColumnDefaultProps } from "carbon-components-react";
 import React from "react";
@@ -38,4 +37,5 @@ export type PageLayout =
   | "twoColumns"
   | "editorial"
   | "blank"
-  | "category";
+  | "category"
+  | "article";

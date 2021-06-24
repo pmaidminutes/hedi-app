@@ -8,6 +8,7 @@ import {
   Editorial,
   Blank,
   Category,
+  Article,
 } from "./templates";
 
 export const Layout: React.FC<ILayoutProps> = props => {
@@ -70,6 +71,16 @@ export const Layout: React.FC<ILayoutProps> = props => {
         <Blank headline={headline} groupClass={groupClass}>
           {children}
         </Blank>
+      ) : pageLayout === "article" ? (
+        <Article
+          breadcrumbs={breadcrumbs}
+          columnProps={single}
+          headline={headline}
+          groupClass={groupClass}
+          narrow={narrow}
+          condensed={condensed}>
+          {children}
+        </Article>
       ) : null}
     </div>
   );

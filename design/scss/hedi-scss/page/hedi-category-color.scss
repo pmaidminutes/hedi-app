@@ -18,6 +18,15 @@ $light-color-map: (
   root: $blue-10,
   default: $blue-10,
 );
+$slightlylighter-color-map: (
+  pregnancy: $blue-50,
+  birth: $pink-40,
+  after-birth: $purple-70,
+  finances: $green-60,
+  advice: $orange-50,
+  root: $blue-50,
+  default: $blue-50,
+);
 
 @mixin colorClass($name) {
   &--#{$name} {
@@ -27,6 +36,22 @@ $light-color-map: (
     }
     .hedi-auto-suggest {
       background-color: map-get($primary-color-map, $name);
+    }
+    // TODO makeappstyle better
+    article {
+      p,
+      h1,
+      h2,
+      h3,
+      h4,
+      h5 {
+        &::selection {
+          background-color: map-get($light-color-map, $name);
+        }
+      }
+    }
+    &--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link{
+      color: map-get($primary-color-map, $name)!important;
     }
   }
 }
