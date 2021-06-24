@@ -19,29 +19,26 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   } = transformGlossaryTerm(props);
 
   return (
-    <ExpandableTile
-      title={label}
-      id={entryId}
-      tabIndex={0}
-      expanded={isSelected}>
-      <TileAboveTheFoldContent>
-        <h2
-          className={termClass}
-          dangerouslySetInnerHTML={{
-            __html: label,
-          }}></h2>
+    <>
+      {termClass}
+      {"<--- to be removed"}
+      <h2
+        className={termClass}
+        dangerouslySetInnerHTML={{
+          __html: label,
+        }}></h2>
+      <div>
         {translation && (
           <p>
             <mark>{translation}</mark>
           </p>
         )}
-      </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: body,
-          }}></div>
-      </TileBelowTheFoldContent>
-    </ExpandableTile>
+      </div>
+
+      <div
+        dangerouslySetInnerHTML={{
+          __html: body,
+        }}></div>
+    </>
   );
 };

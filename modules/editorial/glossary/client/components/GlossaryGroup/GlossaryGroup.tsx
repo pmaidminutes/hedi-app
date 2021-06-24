@@ -13,9 +13,11 @@ export const GlossaryGroup = (props: IGlossaryGroupProps): JSX.Element => {
 
   return (
     <>
+      <Row style={{ padding: "48px" }}></Row>
       <Row>
         <Column>{glossaryKey}</Column>
       </Row>
+      <Seperator />
       <Row className="bx--row">
         {glossaryTerms.map(term => (
           <Column md={4} key={term.route}>
@@ -23,14 +25,12 @@ export const GlossaryGroup = (props: IGlossaryGroupProps): JSX.Element => {
               glossaryTerm={term}
               translationLang={translationLang}
               isSelected={
-                termUpdated !== "" &&
-                term.route.endsWith(termUpdated, term.route.length)
+                termUpdated !== "" && term.route.endsWith(termUpdated)
               }
             />
           </Column>
         ))}
       </Row>
-      <Seperator />
     </>
   );
 };

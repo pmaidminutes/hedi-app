@@ -1,10 +1,7 @@
 import { gql, serviceGQuery } from "@/modules/graphql";
 import { GlossaryGQL, IGlossary, IGlossaryTerm } from "../types";
-import { getLangByRoute } from "@/modules/common/utils";
 import { logAndFallback } from "@/modules/common/error";
-export async function getGlossaryContent(route: string): Promise<IGlossary> {
-  const lang = getLangByRoute(route);
-
+export async function getGlossaryContent(lang: string): Promise<IGlossary> {
   const query = gql`
     query getGlossary(
       $lang: String

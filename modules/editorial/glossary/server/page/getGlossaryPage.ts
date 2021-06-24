@@ -3,30 +3,36 @@ import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPageConfig } from "@/modules/shell/types";
 import { getGlossaryContent } from "../../query";
 import { glossaryTermsToGlossaryKeyGroup } from "../../query/functions";
-import { IGlossaryKeyGroup } from "../../types";
+import { getGlossaryDefinition } from "../../query/getGlossaryDefinition";
+import { IGlossaryKeyGroup, IGlossaryTerm } from "../../types";
 
 export type IGlossaryPage = IPage & {
   glossaryKeyGroups: IGlossaryKeyGroup[];
 };
+
 export async function getGlossaryPage(
-  content: IPage
+  content: Omit<IGlossaryTerm, "body">
 ): Promise<IGlossaryPage & IPageConfig> {
-  content.type = "Glossary";
-  const glossaryEntityWithTerms = await getGlossaryContent(content.route);
+  const lang = content.lang;
+  const glossaryEntityWithTerms = await getGlossaryContent(lang);
   const glossaryKeyGroups = await glossaryTermsToGlossaryKeyGroup(
     glossaryEntityWithTerms
   );
+
+  const glossaryContent = await getGlossaryDefinition(lang);
+
+  glossaryContent.type = "Glossary";
   const layout: ILayout = {
     pageLayout: "singleColumn",
   };
-
+  //const shell = getLayout(content);
   const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
+    useHeader: true,
     layout,
   };
 
   return {
-    ...content,
+    ...glossaryContent,
     glossaryKeyGroups: glossaryKeyGroups,
     ...shell,
   };

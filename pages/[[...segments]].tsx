@@ -68,6 +68,11 @@ import { PagePathsGQL, getPageType } from "@/modules/page/server";
 import { TryPage } from "@/modules/page/client/components";
 import { PageGQL, isIPage, IPage } from "@/modules/page/types";
 import { TryTemplate } from "@/modules/template/client";
+import { getGlossaryPage } from "@/modules/editorial/glossary/server";
+import {
+  GlossaryTermGQL,
+  isIGlossaryTerm,
+} from "@/modules/editorial/glossary/types";
 // Registration
 
 export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
@@ -85,7 +90,6 @@ export const getStaticPaths: GetStaticPaths<ISegmentParam> = async context => {
     paths.push(...(await getSegmentsPaths(pathQueries, lang)));
   }
   paths.push(...landingPagePaths);
-
   return { paths, fallback: "blocking" };
 };
 
@@ -106,6 +110,7 @@ export const getStaticProps: GetStaticProps<
   const gqlTypes = [
     ArticleGQL,
     CategoryGQL,
+    GlossaryTermGQL,
     PageGQL,
     ProfessionalGQL,
     OrganisationGQL,
@@ -121,7 +126,8 @@ export const getStaticProps: GetStaticProps<
   if (isIArticle(generic)) generic = await getArticlePage(generic);
   if (isICategory(generic)) generic = await getCategoryPage(generic);
   if (isIProfile(generic)) generic = await getProfilePage(generic);
-
+  if (isIGlossaryTerm(generic)) generic = await getGlossaryPage(generic);
+  //Glossary should work for url with terms or without terms in url
   content = generic;
 
   // this is the only one which doesn't rely on the generic content query because our cms currently cannot resolve this path
