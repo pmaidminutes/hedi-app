@@ -18302,10 +18302,28 @@ h4 {
   .hedi--separator__purple {
     border-color: #574E90; }
 
-.hedi__categoryentry a {
-  text-decoration: none; }
-  .hedi__categoryentry a h4 {
-    color: red; }
+.hedi--category-entry__list {
+  margin: 3rem 0; }
+
+.hedi--category-entry a {
+  text-decoration: none;
+  color: #000; }
+
+@media (min-width: 672px) {
+  .hedi--category-entry__image-wrap {
+    margin-bottom: 0.5rem; } }
+
+@media (max-width: 672px) {
+  .hedi--category-entry {
+    margin-bottom: 0.5rem; }
+    .hedi--category-entry__image-wrap {
+      max-width: 6rem;
+      max-height: 6rem; }
+    .hedi--category-entry > a {
+      display: flex;
+      align-items: center; }
+    .hedi--category-entry h4 {
+      padding: 0 0 0 1rem; } }
 
 .hedi--outside-headline {
   position: absolute;

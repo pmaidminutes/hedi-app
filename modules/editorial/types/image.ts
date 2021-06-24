@@ -4,6 +4,7 @@ export interface IImage extends IFile {
   alt: string;
   width: number;
   height: number;
+  color: string;
 }
 
 export const ImageGQL = `... on Image {
