@@ -7,6 +7,7 @@ import { Column, Row, Grid } from "carbon-components-react";
 import { Label, Body } from "@/modules/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { MainCategoryCardList } from "../MainCategoryCardList";
+import { ArticleEntryList } from "@/modules/editorial/article/client/components/ArticleEntryList";
 export const CategoryRoot = (props: ICategoryRoot) => {
   const { categories, articles, headline, text } = transformCategoryRoot(props);
   return (
@@ -32,20 +33,8 @@ export const CategoryRoot = (props: ICategoryRoot) => {
         </Column>
       </Row>
 
-      <MainCategoryCardList {...props} />
-
-      {/* MainCategoryCardList */}
-      {/* {categories.map((category, index) => (
-        <CategoryEntry
-          key={category.label + index}
-          category={category as ICategoryEntry}
-        />
-      ))} */}
-      {/* ArticleEntryList */}
-      {/* {articles &&
-        articles.map((article, index) => (
-          <ArticleEntry key={article.label + index} article={article} />
-        ))} */}
+      {categories && <MainCategoryCardList categories={categories} />}
+      {articles && <ArticleEntryList articles={articles} />}
     </section>
   );
 };
