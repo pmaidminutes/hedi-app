@@ -37,9 +37,9 @@ $slightlylighter-color-map: (
     .hedi-auto-suggest {
       background-color: map-get($primary-color-map, $name);
     }
-    // &:hover {
-    //   background-color: map-get($slightlylighter-color-map, $name) !important;
-    // }
+    &--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link{
+      color: map-get($primary-color-map, $name)!important;
+    }
   }
 }
 

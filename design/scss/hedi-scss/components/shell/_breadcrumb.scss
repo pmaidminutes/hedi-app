@@ -1,0 +1,15 @@
+.hedi--breadcrumb {
+  .bx--link {
+    color: $gray-100;
+  }
+
+  &__graphical {
+    display: flex;
+    justify-content: flex-start;
+    margin: $spacing-05 0 $spacing-03 0;
+    > div {
+      border: 3px solid $blue-primary;
+      width: 15px;
+    }
+  }
+}
