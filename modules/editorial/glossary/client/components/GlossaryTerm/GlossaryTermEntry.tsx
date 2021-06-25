@@ -1,22 +1,11 @@
 import Link from "next/link";
 import { HTML } from "@/modules/react/html";
 
-import {
-  transformGlossaryTerm,
-  IGlossaryTermProps,
-} from "./transformGlossaryTerm";
+import { transformGlossaryTerm, IGlossaryTermProps } from "..";
 import { ClickableTile } from "carbon-components-react";
 
 export const GlossaryTermEntry = (props: IGlossaryTermProps): JSX.Element => {
-  const {
-    label,
-    body,
-    entryId,
-    isSelected,
-    termClass,
-    translation,
-    route,
-  } = transformGlossaryTerm(props);
+  const { label, body, translation, route } = transformGlossaryTerm(props);
 
   return (
     <>
@@ -27,13 +16,7 @@ export const GlossaryTermEntry = (props: IGlossaryTermProps): JSX.Element => {
               <h2>
                 <HTML data={label} />
               </h2>
-              <div>
-                {translation && (
-                  <p>
-                    <mark>{translation}</mark>
-                  </p>
-                )}
-              </div>
+              <div>{translation && <p>{translation}</p>}</div>
               <HTML data={body} />
             </ClickableTile>
           </Link>

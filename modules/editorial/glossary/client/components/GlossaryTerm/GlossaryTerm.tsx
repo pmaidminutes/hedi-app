@@ -1,13 +1,7 @@
 import { HTML } from "@/modules/react/html";
 
-import {
-  transformGlossaryTerm,
-  IGlossaryTermProps,
-} from "./transformGlossaryTerm";
-import {
-  CopyLinkToClipboard,
-  HeadlineWithLinkCopy,
-} from "@/modules/common/components";
+import { transformGlossaryTerm, IGlossaryTermProps } from "..";
+import { HeadlineWithLinkCopy } from "@/modules/common/components";
 import { Column, Row } from "carbon-components-react";
 
 export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
@@ -23,7 +17,7 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   } = transformGlossaryTerm(props);
 
   return (
-    <>
+    <div className={termClass}>
       <Row>
         <Column>
           <HeadlineWithLinkCopy {...headline} />
@@ -36,6 +30,6 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
       </div>
 
       <HTML data={body} />
-    </>
+    </div>
   );
 };

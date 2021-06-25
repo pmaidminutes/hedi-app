@@ -1,4 +1,5 @@
 import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
+import { AssertClientSide } from "@/modules/common/utils";
 import { IHeadlineComponent } from "@/modules/components";
 import { IGlossaryTerm } from "../../../types";
 
@@ -11,9 +12,10 @@ export interface IGlossaryTermProps {
 export function transformGlossaryTerm(props: IGlossaryTermProps) {
   const { glossaryTerm, translationLang, isSelected } = props;
   const { label, body, route } = glossaryTerm;
-  const entryId = glossaryTerm.route.substring(
-    glossaryTerm.route.lastIndexOf("/") + 1
-  );
+  const entryId = AssertClientSide()
+    ? window.location.hash.substr(1)
+    : undefined;
+
   const translation = glossaryTerm.translations.find(
     term => term.lang === translationLang
   )?.label;
