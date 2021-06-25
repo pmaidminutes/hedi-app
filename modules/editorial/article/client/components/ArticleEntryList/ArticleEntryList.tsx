@@ -11,13 +11,12 @@ export const ArticleEntryList = (props: IArticleEntryList) => {
   if (type === "oneColumn") {
     return (
       <div className="hedi--article-entry-list hedi--article-entry-list__one-column">
-        <Row>
-          <Column>
-            <h3>{headline}</h3>
-          </Column>
-        </Row>
+        <Column>
+          <h3>{headline}</h3>
+        </Column>
+
         {articles.map(article => (
-          <Row>
+          <Row narrow>
             <Column sm={4} md={4} lg={8} key={article.route}>
               <ArticleEntry article={article} />
             </Column>
