@@ -9,13 +9,13 @@ export const ScrollToTop = (props: IScroll): JSX.Element => {
     isVisible,
     isAtTheBottom,
   } = useScrollToTop(props);
-  const { buttonText } = transformScrollToTop();
+  const { buttonText, colorClass } = transformScrollToTop(props);
 
   return (
     <div
       className={`hedi--scroll-to-top${
         isAtTheBottom ? " hedi--scroll-to-top__bottom" : ""
-      }`}>
+      }${colorClass}`}>
       {isVisible ? (
         <Button
           hasIconOnly

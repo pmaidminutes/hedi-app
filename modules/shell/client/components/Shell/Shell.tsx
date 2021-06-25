@@ -48,7 +48,7 @@ export const Shell: React.FC<IPageProps<IPage>> = props => {
               )}
             </Content>
             <Footer {...shell} />
-            <ScrollToTop />
+            <ScrollToTop appStyle={hediStyle} />
           </>
         ) : (
           <Loading />
