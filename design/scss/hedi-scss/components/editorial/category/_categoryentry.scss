@@ -1,4 +1,7 @@
 .hedi--category-entry {
+  &:hover {
+    filter: brightness(1.1);
+  }
   &__list {
     margin: $spacing-09 0;
   }
