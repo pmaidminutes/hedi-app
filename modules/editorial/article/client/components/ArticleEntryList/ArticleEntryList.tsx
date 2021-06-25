@@ -16,7 +16,7 @@ export const ArticleEntryList = (props: IArticleEntryList) => {
       <>
         {articles.map(article => (
           <Row>
-            <Column sm={4} md={4} lg={6} key={article.route}>
+            <Column sm={4} md={4} lg={8} key={article.route}>
               <ArticleEntry article={article} />
             </Column>
           </Row>
