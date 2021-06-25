@@ -16,7 +16,9 @@ import { CategoryEntryGQL } from "../../category/types/categoryEntry";
 export interface IArticleEntry
   extends IEntityLocalized,
     IRouteLabeled,
-    IAppStyled {}
+    IAppStyled {
+  summary: string;
+}
 
 export const ArticleEntryGQL = gql`... on Article {
 ${EntityLocalizedFields}
