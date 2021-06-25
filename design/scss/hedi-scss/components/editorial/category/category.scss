@@ -1,10 +1,10 @@
 @import "./categoryentry";
 @import "./maincategory";
 .hedi--outside-headline {
+  background-color: #fff;
   position: absolute;
-  transform: translateY(-100%);
+  transform: translateY(-100%) translateX($spacing-07);
   .hedi--titlegroup {
-    background-color: $gray-10;
     margin-bottom: 0;
     padding: $spacing-05 $spacing-07;
     position: relative;
