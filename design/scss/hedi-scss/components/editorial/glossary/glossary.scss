@@ -22,6 +22,14 @@
   }
 }
 
+.hedi--alphabet-label {
+  font-family: carbon--font-family("serif");
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.666em;
+  color: black;
+  margin: 0 0 0 $spacing-05; }
+
 .hedi--alphabet-links {
   font-family: carbon--font-family("serif");
   font-weight: 400;
