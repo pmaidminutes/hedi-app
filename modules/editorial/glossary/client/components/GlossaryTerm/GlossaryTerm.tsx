@@ -6,6 +6,7 @@ import { Column, Row } from "carbon-components-react";
 
 export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   const {
+    glossaryTermId,
     label,
     body,
     entryId,
@@ -17,7 +18,7 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   } = transformGlossaryTerm(props);
 
   return (
-    <div className={termClass}>
+    <div className={termClass} id={glossaryTermId}>
       <Row>
         <Column>
           <HeadlineWithLinkCopy {...headline} />

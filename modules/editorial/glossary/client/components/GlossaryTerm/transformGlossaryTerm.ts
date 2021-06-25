@@ -21,7 +21,7 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
   )?.label;
 
   const termClass = isSelected ? "hedi--glossary__marked-word" : "";
-
+  const glossaryTermId = route.split("/").pop();
   const headline: IHeadlineComponent & ICopyLinkToClipboard = {
     kind: "Headline",
     headline: "h2",
@@ -29,10 +29,11 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
     route,
     type: "icon",
     size: "sm",
-    id: label,
+    id: glossaryTermId,
   };
 
   return {
+    glossaryTermId,
     label,
     body,
     entryId,
