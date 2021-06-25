@@ -20,7 +20,7 @@ export function transformGlossaryGroupComponents(props: IGlossaryProps) {
       kind: "Label",
       labelKind: "h3",
       text: alphabet,
-      id: alphabet,
+      id: alphabet + "label",
       className: "hedi--alphabet-label",
     };
 
@@ -28,7 +28,7 @@ export function transformGlossaryGroupComponents(props: IGlossaryProps) {
       kind: "Link",
       href: "#" + alphabet,
       labelText: alphabet,
-      id: alphabet,
+      id: alphabet + "link",
     };
     alphabetLinks.push(
       keyAlphabetArray.indexOf(alphabet) != -1 ? linkObject : labelObject

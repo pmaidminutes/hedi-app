@@ -24,7 +24,7 @@ export const Glossary = ({ props }: { props: IGlossaryProps }): JSX.Element => {
           <div className="hedi--alphabet-links--wrap">
             {alphabetLinks.map((alphabetComponent: IComponent) =>
               isLabel(alphabetComponent) ? (
-                <Label {...alphabetComponent} />
+                <Label {...alphabetComponent} id={alphabetComponent.id} />
               ) : isLink(alphabetComponent) ? (
                 <Link {...alphabetComponent} className="hedi--alphabet-links" />
               ) : (
