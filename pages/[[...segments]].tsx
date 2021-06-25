@@ -105,7 +105,6 @@ export const getStaticProps: GetStaticProps<
   const gqlTypes = [
     ArticleGQL,
     CategoryGQL,
-    GlossaryTermGQL,
     PageGQL,
     ProfessionalGQL,
     OrganisationGQL,
