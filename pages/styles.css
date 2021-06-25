@@ -18536,6 +18536,15 @@ h4 {
   line-height: 1.666em;
   color: #2A84C6;
   margin: 0 0 0 1rem; }
+
+  .hedi--alphabet-label {
+    font-family: "Roboto Slab", "Noto Arabic", serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.666em;
+    color: black;
+    margin: 0 0 0 1rem; }
+    
   .hedi--alphabet-links--wrap {
     display: flex;
     justify-content: flex-end; }
