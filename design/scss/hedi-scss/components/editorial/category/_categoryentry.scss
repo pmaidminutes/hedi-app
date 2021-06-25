@@ -12,6 +12,9 @@
     &__image-wrap {
       margin-bottom: $spacing-03;
     }
+    .bx--aspect-ratio {
+      padding: 1rem;
+    }
   }
 
   @media (max-width: 672px) {
