@@ -10,6 +10,7 @@ import {
   WithTagsFields,
   IEntityTranslated,
 } from "@/modules/model";
+import { IPage } from "@/modules/page/types";
 import { ICategoryEntry } from "../../category/types";
 import { CategoryEntryGQL } from "../../category/types/categoryEntry";
 
@@ -23,6 +24,10 @@ ${EntityLocalizedFields}
 ${RouteLabelFields}
 appStyle
 }`;
+
+export interface IArticleView extends IArticle {
+  uiComponents: IComponent[];
+}
 
 export interface IArticle
   extends IArticleEntry,

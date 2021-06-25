@@ -1,3 +1,15 @@
 @import "./actionbar";
 @import "./articlepage";
 @import "./articleentry";
+
+article {
+  a,.bx--link {
+    text-decoration: underline;
+  }
+}
+
+.hedi--article {
+  &__back-to-root--link {
+    margin: $spacing-08 0;
+  }
+}
