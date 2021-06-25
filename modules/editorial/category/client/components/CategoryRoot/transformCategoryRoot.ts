@@ -1,4 +1,8 @@
-import { findBodyInstance, findLabelInstance } from "@/modules/components";
+import {
+  findBodyInstance,
+  findLabelInstance,
+  findTextInputInstance,
+} from "@/modules/components";
 import { ICategoryRoot } from "../../../types";
 
 export function transformCategoryRoot(props: ICategoryRoot) {
@@ -6,6 +10,15 @@ export function transformCategoryRoot(props: ICategoryRoot) {
 
   const headline = findLabelInstance(components, "headline");
   const text = findBodyInstance(components, "introText");
+  const articleEntryListHeadline = findLabelInstance(components, "allArticles");
+  const searchInput = findTextInputInstance(components, "search");
 
-  return { categories, articles, headline, text };
+  return {
+    categories,
+    articles,
+    headline,
+    text,
+    allArticlesHeadline: articleEntryListHeadline?.text,
+    searchPlaceholder: searchInput?.placeholder,
+  };
 }
