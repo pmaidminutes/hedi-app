@@ -10,7 +10,7 @@ export const ArticleEntryList = (props: IArticleEntryList) => {
   const { articles, type, headline } = transformArticleEntryList(props);
   if (type === "oneColumn") {
     return (
-      <>
+      <div className="hedi--article-entry-list hedi--article-entry-list__one-column">
         <Row>
           <Column>
             <h3>{headline}</h3>
@@ -23,16 +23,18 @@ export const ArticleEntryList = (props: IArticleEntryList) => {
             </Column>
           </Row>
         ))}
-      </>
+      </div>
     );
   }
   return (
-    <Row>
-      {articles?.map(article => (
-        <Column sm={4} md={4} lg={6} key={article.route}>
-          <ArticleEntry withGraphicalBreadcrumb={true} article={article} />
-        </Column>
-      ))}
-    </Row>
+    <div className="hedi--article-entry-list hedi--article-entry-list__one-column">
+      <Row>
+        {articles?.map(article => (
+          <Column sm={4} md={4} lg={8} key={article.route}>
+            <ArticleEntry withGraphicalBreadcrumb={true} article={article} />
+          </Column>
+        ))}
+      </Row>
+    </div>
   );
 };
