@@ -61,13 +61,24 @@
 
 @font-face {
   font-family: "Roboto Slab";
-  src: url("../public/fonts/robotoslab/RobotoSlab-VariableFont_wght.woff2")
+  src: url("../public/fonts/robotoslab/RobotoSlab-Light.woff2")
       format("woff2"),
-    url("../public/fonts/robotoslab/RobotoSlab-VariableFont_wght.woff")
+    url("../public/fonts/robotoslab/RobotoSlab-Light.woff")
       format("woff"),
-    url("../public/fonts/robotoslab/RobotoSlab-VariableFont_wght.ttf")
+    url("../public/fonts/robotoslab/RobotoSlab-Light.ttf")
       format("truetype");
-  font-weight: 300 400;
+  font-weight: 300;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Roboto Slab";
+  src: url("../public/fonts/robotoslab/RobotoSlab-Regular.woff2")
+      format("woff2"),
+    url("../public/fonts/robotoslab/RobotoSlab-Regular.woff")
+      format("woff"),
+    url("../public/fonts/robotoslab/RobotoSlab-Regular.ttf")
+      format("truetype");
+  font-weight: 400;
   font-style: normal;
 }
 
