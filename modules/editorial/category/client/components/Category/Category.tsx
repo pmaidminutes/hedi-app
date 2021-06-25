@@ -13,6 +13,12 @@ export const Category = (props: ICategoryProps): JSX.Element => {
     <>
       {categories ? <CategoryEntryList categories={categories} /> : null}
 
+      {hasSubCategories && (
+        <Column>
+          <Seperator style="dashed" color="gray" />
+        </Column>
+      )}
+
       {articles ? (
         <>
           <ArticleEntryList
