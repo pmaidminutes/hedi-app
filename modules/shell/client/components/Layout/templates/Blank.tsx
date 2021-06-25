@@ -6,5 +6,7 @@ export const Blank: React.FC<
     columnProps?: ColumnDefaultProps;
   }
 > = ({ children, groupClass }) => (
-  <Grid>{children && <div className={groupClass}>{children}</div>}</Grid>
+  <Grid className="hedi--page-grid">
+    {children && <div className={groupClass}>{children}</div>}
+  </Grid>
 );
