@@ -15,7 +15,6 @@ export const Category = (props: ICategoryProps): JSX.Element => {
 
       {articles ? (
         <>
-          <Seperator />
           <ArticleEntryList
             type={hasSubCategories ? "oneColumn" : "twoColumns"}
             articles={articles}
