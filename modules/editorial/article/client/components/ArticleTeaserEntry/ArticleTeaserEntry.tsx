@@ -25,14 +25,18 @@ export const ArticleTeaserEntry = (props: IArticleTeaser) => {
         <Link href={route} passHref>
           <ClickableTile href={route} light={true}>
             <div className="hedi--article-teaser__entry--grid">
-              <AspectRatio ratio="1x1">
+              <AspectRatio
+                ratio="1x1"
+                className="hedi--article-teaser__entry--grid--image">
                 {image && <Image objectFit="cover" layout="fill" {...image} />}
               </AspectRatio>
 
               <div className="hedi--article-teaser__entry--grid--content">
                 <BreadCrumb {...breadcrumbData} />
                 <h4>{label}</h4>
-                <Body {...summary} />
+                <div className="hedi--article-teaser__entry--grid--content--text-wrap">
+                  <Body {...summary} />
+                </div>
               </div>
             </div>
           </ClickableTile>

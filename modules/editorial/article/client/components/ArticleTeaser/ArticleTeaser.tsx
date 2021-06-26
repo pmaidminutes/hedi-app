@@ -8,7 +8,7 @@ export interface IArticleTeaserProps {
 export const ArticleTeaser = (props: IArticleTeaserProps) => {
   const { articles, headline } = props;
   return (
-    <div>
+    <div className="hedi--article-teaser">
       <h2>{headline}</h2>
       {articles.map((article, index) => (
         <ArticleTeaserEntry key={article.label + index} {...article} />
