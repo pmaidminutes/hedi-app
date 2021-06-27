@@ -19,11 +19,8 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
 
   return (
     <div className={termClass} id={glossaryTermId}>
-      <Row>
-        <Column>
-          <HeadlineWithLinkCopy {...headline} />
-        </Column>
-      </Row>
+      <HeadlineWithLinkCopy {...headline} />
+
       <div>
         {translation && (
           <p className="hedi--glossary__marked-translation">{translation}</p>

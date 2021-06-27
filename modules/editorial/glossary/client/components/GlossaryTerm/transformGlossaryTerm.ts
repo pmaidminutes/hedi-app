@@ -20,7 +20,9 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
     term => term.lang === translationLang
   )?.label;
 
-  const termClass = isSelected ? "hedi--glossary__marked-word" : "";
+  const termClass = isSelected
+    ? "hedi--glossary-term hedi--glossary-term__marked-word"
+    : "hedi--glossary-term";
   const glossaryTermId = route.split("/").pop();
   const headline: IHeadlineComponent & ICopyLinkToClipboard = {
     kind: "Headline",

@@ -1,4 +1,8 @@
 .hedi--glossary {
+  &-page .bx--grid {
+    background-color: #fff;
+    padding-top: $spacing-07;
+  }
   &__group {
     &--title {
       margin-top: $spacing-09;
@@ -11,14 +15,20 @@
       color: $blue-primary;
     }
   }
-  &__marked-word {
-    border-left: 4px solid $orange-40;
-  }
+  &-term {
+    margin-bottom: $spacing-07;
+    .hedi--headline-copy-link-to-clipboard {
+      margin-bottom: $spacing-03;
+    }
+    &__marked-word {
+      border-left: 4px solid $orange-40;
+    }
 
-  &__marked-translation {
-    background-color: none;
-    color: $blue-80;
-    margin: $spacing-03 0;
+    &__marked-translation {
+      background-color: none;
+      color: $blue-80;
+      margin: $spacing-03 0;
+    }
   }
 }
 
@@ -27,8 +37,12 @@
   font-weight: 400;
   font-size: 1.5rem;
   line-height: 1.666em;
-  color: black;
-  margin: 0 0 0 $spacing-05; }
+  color: $gray-40;
+  margin: 0 0 0 $spacing-05;
+  &--disabled:hover {
+    cursor: not-allowed;
+  }
+}
 
 .hedi--alphabet-links {
   font-family: carbon--font-family("serif");

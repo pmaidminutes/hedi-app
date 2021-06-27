@@ -18,10 +18,10 @@ export function transformGlossaryGroupComponents(props: IGlossaryProps) {
   alphabetsArray.forEach((alphabet: string) => {
     const labelObject: ILabelComponent = {
       kind: "Label",
-      labelKind: "h3",
+      labelKind: "span",
       text: alphabet,
       id: alphabet + "_label",
-      className: "hedi--alphabet-label",
+      className: "hedi--alphabet-label hedi--alphabet-label--disabled",
     };
 
     const linkObject: ILinkComponent = {
