@@ -18,6 +18,7 @@ export const ArticleTeaserEntry = (props: IArticleTeaser) => {
     summary,
     image,
     route,
+    background,
   } = transformArticleTeaserEntry(props);
   return (
     <Row className="hedi--article-teaser__entry">
@@ -27,7 +28,8 @@ export const ArticleTeaserEntry = (props: IArticleTeaser) => {
             <div className="hedi--article-teaser__entry--grid">
               <AspectRatio
                 ratio="1x1"
-                className="hedi--article-teaser__entry--grid--image">
+                className="hedi--article-teaser__entry--grid--image"
+                style={{ backgroundColor: background }}>
                 {image && (
                   <Image
                     objectFit="cover"

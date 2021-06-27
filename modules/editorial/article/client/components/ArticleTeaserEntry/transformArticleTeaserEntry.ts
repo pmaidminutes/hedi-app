@@ -25,5 +25,13 @@ export function transformArticleTeaserEntry(props: IArticleTeaser) {
 
   const src = image ? process.env.NEXT_PUBLIC_ASSETS_URL + image.route : "";
 
-  return { label, breadcrumbData, summary, image: { src }, route, src };
+  return {
+    label,
+    breadcrumbData,
+    summary,
+    image: { src },
+    route,
+    src,
+    background: image?.color || "transparent",
+  };
 }
