@@ -20,7 +20,6 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
     appStyle,
     backLink,
   } = transformBreadCrumb(props);
-  console.log({ backLink });
   if (breadcrumbType === "graphical") {
     return (
       <div className={`hedi--breadcrumb__graphical`}>
