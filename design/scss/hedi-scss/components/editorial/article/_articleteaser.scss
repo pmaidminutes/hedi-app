@@ -8,8 +8,15 @@
     .bx--tile {
       border-bottom: 1px solid $gray-50;
     }
-    .bx--aspect-ratio {
-      max-width: 220px;
+    @media (min-width: 672px) {
+      .bx--aspect-ratio {
+        max-width: 220px;
+      }
+    }
+    @media (max-width: 672px) {
+      .bx--aspect-ratio {
+        max-height: 180px;
+      }
     }
     &--grid {
       display: grid;
