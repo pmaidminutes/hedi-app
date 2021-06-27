@@ -14,3 +14,7 @@ export const GlossaryTermGQL = gql`... on GlossaryTerm {
 ${EntityTranslatedFields}
 body
 }`;
+
+export function isIGlossaryTerm(obj: any): obj is IGlossaryTerm {
+  return obj && obj.type === "GlossaryTerm";
+}

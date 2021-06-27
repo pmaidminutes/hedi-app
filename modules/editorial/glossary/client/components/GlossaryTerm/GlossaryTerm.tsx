@@ -1,47 +1,33 @@
-import {
-  ExpandableTile,
-  TileAboveTheFoldContent,
-  TileBelowTheFoldContent,
-} from "carbon-components-react";
-import {
-  transformGlossaryTerm,
-  IGlossaryTermProps,
-} from "./transformGlossaryTerm";
+import { HTML } from "@/modules/react/html";
+
+import { transformGlossaryTerm, IGlossaryTermProps } from "..";
+import { HeadlineWithLinkCopy } from "@/modules/common/components";
+import { Column, Row } from "carbon-components-react";
 
 export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   const {
+    glossaryTermId,
     label,
     body,
     entryId,
     isSelected,
     termClass,
     translation,
+    route,
+    headline,
   } = transformGlossaryTerm(props);
 
   return (
-    <ExpandableTile
-      title={label}
-      id={entryId}
-      tabIndex={0}
-      expanded={isSelected}>
-      <TileAboveTheFoldContent>
-        <h2
-          className={termClass}
-          dangerouslySetInnerHTML={{
-            __html: label,
-          }}></h2>
+    <div className={termClass} id={glossaryTermId}>
+      <HeadlineWithLinkCopy {...headline} />
+
+      <div>
         {translation && (
-          <p>
-            <mark>{translation}</mark>
-          </p>
+          <p className="hedi--glossary__marked-translation">{translation}</p>
         )}
-      </TileAboveTheFoldContent>
-      <TileBelowTheFoldContent>
-        <div
-          dangerouslySetInnerHTML={{
-            __html: body,
-          }}></div>
-      </TileBelowTheFoldContent>
-    </ExpandableTile>
+      </div>
+
+      <HTML data={body} />
+    </div>
   );
 };

@@ -1,12 +1,14 @@
 import { IGlossaryKeyGroup, IGlossaryViewDefinition } from "../../../types";
 import { GlossaryGroup } from "../GlossaryGroup";
-import { transformGlossary } from "./transformGlossary";
+import { transformGlossary, transformGlossaryGroupComponents } from "..";
+import { IComponent, isLabel, isLink, Label, Link } from "@/modules/components";
 
 export type IGlossaryProps = IGlossaryViewDefinition & IGlossaryConfig;
 
 export interface IGlossaryConfig {}
 
 export const Glossary = ({ props }: { props: IGlossaryProps }): JSX.Element => {
+  const { alphabetLinks } = transformGlossaryGroupComponents(props);
   const {
     glossaryKeyGroups,
     defaultLocale,
@@ -17,6 +19,25 @@ export const Glossary = ({ props }: { props: IGlossaryProps }): JSX.Element => {
 
   return (
     <>
+      {alphabetLinks && (
+        <>
+          <div className="hedi--alphabet-links--wrap">
+            {alphabetLinks.map((alphabetComponent: IComponent) =>
+              isLabel(alphabetComponent) ? (
+                <Label
+                  {...alphabetComponent}
+                  id={alphabetComponent.text + "_label"}
+                />
+              ) : isLink(alphabetComponent) ? (
+                <Link {...alphabetComponent} className="hedi--alphabet-links" />
+              ) : (
+                ""
+              )
+            )}
+          </div>
+        </>
+      )}
+
       {glossaryKeyGroups.map((glossarykeyGroup: IGlossaryKeyGroup) => (
         <GlossaryGroup
           key={glossarykeyGroup.keyChar}

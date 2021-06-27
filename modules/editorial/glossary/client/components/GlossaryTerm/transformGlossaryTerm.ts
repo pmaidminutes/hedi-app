@@ -1,3 +1,6 @@
+import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
+import { AssertClientSide } from "@/modules/common/utils";
+import { IHeadlineComponent } from "@/modules/components";
 import { IGlossaryTerm } from "../../../types";
 
 export interface IGlossaryTermProps {
@@ -8,15 +11,38 @@ export interface IGlossaryTermProps {
 
 export function transformGlossaryTerm(props: IGlossaryTermProps) {
   const { glossaryTerm, translationLang, isSelected } = props;
-  const { label, body } = glossaryTerm;
-  const entryId = glossaryTerm.route.substring(
-    glossaryTerm.route.lastIndexOf("/") + 1
-  );
+  const { label, body, route } = glossaryTerm;
+  const entryId = AssertClientSide()
+    ? window.location.hash.substr(1)
+    : undefined;
+
   const translation = glossaryTerm.translations.find(
     term => term.lang === translationLang
   )?.label;
 
-  const termClass = isSelected ? "hedi-marked-word" : "";
+  const termClass = isSelected
+    ? "hedi--glossary-term hedi--glossary-term__marked-word"
+    : "hedi--glossary-term";
+  const glossaryTermId = route.split("/").pop();
+  const headline: IHeadlineComponent & ICopyLinkToClipboard = {
+    kind: "Headline",
+    headline: "h2",
+    text: label,
+    route,
+    type: "icon",
+    size: "sm",
+    id: glossaryTermId,
+  };
 
-  return { label, body, entryId, isSelected, termClass, translation };
+  return {
+    glossaryTermId,
+    label,
+    body,
+    entryId,
+    isSelected,
+    termClass,
+    translation,
+    route,
+    headline,
+  };
 }
