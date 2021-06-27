@@ -12,6 +12,10 @@ export function transformCategoryRoot(props: ICategoryRoot) {
   const text = findBodyInstance(components, "introText");
   const articleEntryListHeadline = findLabelInstance(components, "allArticles");
   const searchInput = findTextInputInstance(components, "search");
+  const recommendedArticlesHeadline = findLabelInstance(
+    components,
+    "headlineRecommendedArticles"
+  );
 
   return {
     categories,
@@ -21,5 +25,7 @@ export function transformCategoryRoot(props: ICategoryRoot) {
     allArticlesHeadline: articleEntryListHeadline?.text,
     searchPlaceholder: searchInput?.placeholder,
     recommendedArticles,
+    recommendedArticlesHeadline:
+      recommendedArticlesHeadline?.text || "Topics to start with",
   };
 }

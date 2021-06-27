@@ -18,6 +18,7 @@ export const CategoryRoot = (props: ICategoryRoot) => {
     recommendedArticles,
     allArticlesHeadline,
     searchPlaceholder,
+    recommendedArticlesHeadline,
   } = transformCategoryRoot(props);
   return (
     <section className="hedi--category-root">
@@ -44,9 +45,14 @@ export const CategoryRoot = (props: ICategoryRoot) => {
           />
         </Column>
       </Row>
-
-      <ArticleTeaser headline="Überschrift" articles={recommendedArticles} />
       {categories && <MainCategoryCardList categories={categories} />}
+
+      {recommendedArticles && (
+        <ArticleTeaser
+          headline={recommendedArticlesHeadline}
+          articles={recommendedArticles}
+        />
+      )}
       {articles && (
         <ArticleEntryList headline={allArticlesHeadline} articles={articles} />
       )}
