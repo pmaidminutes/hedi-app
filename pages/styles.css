@@ -18580,11 +18580,26 @@ h4 {
     height: 5.25rem;
     margin-bottom: 2rem; }
 
+<<<<<<< HEAD
+.hedi--article-teaser__entry {
+  padding-bottom: 2rem;
+  margin-bottom: 2rem; }
+  .hedi--article-teaser__entry .bx--aspect-ratio {
+    max-width: 220px; }
+  .hedi--article-teaser__entry--grid {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    -moz-column-gap: 2rem;
+         column-gap: 2rem; }
+    .hedi--article-teaser__entry--grid--content p {
+      margin-top: 2.5rem; }
+=======
 article a, article .bx--link {
   text-decoration: underline; }
 
 .hedi--article__back-to-root--link {
   margin: 2.5rem 0; }
+>>>>>>> origin/main
 
 @font-face {
   font-family: "Noto Arabic";

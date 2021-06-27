@@ -1,4 +1,4 @@
-import { IComponent } from "@/modules/components/types";
+import { IBodyComponent, IComponent } from "@/modules/components/types";
 import { gql } from "@/modules/graphql";
 import {
   IEntityLocalized,
@@ -13,6 +13,12 @@ import {
 import { IPage } from "@/modules/page/types";
 import { ICategoryEntry } from "../../category/types";
 import { CategoryEntryGQL } from "../../category/types/categoryEntry";
+import { IImage } from "../../types";
+
+export interface IArticleTeaser extends IArticleEntry {
+  image?: IImage;
+  summary?: IBodyComponent;
+}
 
 export interface IArticleEntry
   extends IEntityLocalized,

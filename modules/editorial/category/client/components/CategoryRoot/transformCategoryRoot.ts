@@ -6,7 +6,7 @@ import {
 import { ICategoryRoot } from "../../../types";
 
 export function transformCategoryRoot(props: ICategoryRoot) {
-  const { categories, articles, components } = props;
+  const { categories, articles, components, recommendedArticles } = props;
 
   const headline = findLabelInstance(components, "headline");
   const text = findBodyInstance(components, "introText");
@@ -20,5 +20,6 @@ export function transformCategoryRoot(props: ICategoryRoot) {
     text,
     allArticlesHeadline: articleEntryListHeadline?.text,
     searchPlaceholder: searchInput?.placeholder,
+    recommendedArticles,
   };
 }
