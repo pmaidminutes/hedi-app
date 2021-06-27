@@ -35,6 +35,9 @@
 .bx--content-switcher-btn {
   background-color: $ui-01;
 }
+.bx--overflow-menu--open {
+  background-color: transparent!important;
+}
 
 // OVERWRITES für RTL Context
 @include ltr-only() {
