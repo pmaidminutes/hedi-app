@@ -6,6 +6,7 @@ export interface IScroll {
   behavior?: ScrollBehavior;
   left?: number;
   top?: number;
+  appStyle?: string;
 }
 export function useScrollToTop({
   left = 0,

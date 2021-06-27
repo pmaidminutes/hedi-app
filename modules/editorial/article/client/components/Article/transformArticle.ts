@@ -1,20 +1,30 @@
 import {
   findAllHeadlineInstances,
+  findLinkInstance,
   ILinkComponent,
 } from "@/modules/components/types";
-import { IArticle } from "../../../types";
+import { IArticleView } from "../../../types";
 import { IActionBarAction } from "@/modules/editorial/types";
 export interface IArticleProps {
-  content: IArticle;
+  content: IArticleView;
 }
 export function transformArticle(props: IArticleProps) {
   const { content } = props;
-  const { label, components, category, appStyle, route } = content;
+  const {
+    label,
+    components,
+    category,
+    appStyle,
+    route,
+    uiComponents,
+  } = content;
 
   const headlines = findAllHeadlineInstances(components);
 
   const handleShare = () => console.log("SHARE");
   const handleBookmark = () => console.log("BOOKMARK");
+
+  const backLink = findLinkInstance(uiComponents, "backLink");
 
   const actions: IActionBarAction[] = [
     {
@@ -55,5 +65,6 @@ export function transformArticle(props: IArticleProps) {
     anchors,
     route,
     actions,
+    backLink,
   };
 }

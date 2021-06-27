@@ -10,16 +10,17 @@ import {
   ArticleTeaser,
 } from "@/modules/editorial/article/client/components/";
 export const CategoryRoot = (props: ICategoryRoot) => {
-  console.log({ props });
   const {
     categories,
     articles,
     headline,
     text,
     recommendedArticles,
+    allArticlesHeadline,
+    searchPlaceholder,
   } = transformCategoryRoot(props);
   return (
-    <section>
+    <section className="hedi--category-root">
       {headline && (
         <Row>
           <Column md={{ span: 4 }}>
@@ -36,13 +37,19 @@ export const CategoryRoot = (props: ICategoryRoot) => {
       )}
       <Row>
         <Column md={{ span: 4, offset: 4 }}>
-          <SearchInput onQueryChanged={() => console.log("query changed")} />
+          <SearchInput
+            light={true}
+            onQueryChanged={() => console.log("query changed")}
+            placeHolderText={searchPlaceholder}
+          />
         </Column>
       </Row>
 
       <ArticleTeaser headline="Überschrift" articles={recommendedArticles} />
       {categories && <MainCategoryCardList categories={categories} />}
-      {articles && <ArticleEntryList articles={articles} />}
+      {articles && (
+        <ArticleEntryList headline={allArticlesHeadline} articles={articles} />
+      )}
     </section>
   );
 };

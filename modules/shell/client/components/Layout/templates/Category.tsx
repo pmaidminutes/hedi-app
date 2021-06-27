@@ -17,7 +17,7 @@ export const Category: React.FC<
   columnProps,
   breadcrumbs,
 }) => (
-  <Grid>
+  <Grid className="hedi--page-grid hedi--page-grid__category">
     <Row narrow={true} className="hedi--outside-headline">
       <div className="hedi--titlegroup">
         {breadcrumbs && <BreadCrumb {...breadcrumbs} />}

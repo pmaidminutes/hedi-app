@@ -1,3 +1,4 @@
+import { ILinkComponent } from "@/modules/components";
 import {
   IAppStyled,
   IEntity,
@@ -10,10 +11,11 @@ export type BreadcrumbType = "standard" | "withoutTitle" | "graphical";
 export interface IBreadCrumbProps extends IRouteLabeled, ILocalized, IEntity {
   breadcrumbType?: BreadcrumbType;
   appStyle?: string;
+  backLink?: ILinkComponent;
 }
 
 export function transformBreadCrumb(props: IBreadCrumbProps) {
-  const { lang, breadcrumbType, appStyle } = props;
+  const { lang, breadcrumbType, appStyle, backLink } = props;
 
   const breadCrumbPath = constructBreadCrumbPathData(props);
   // TODO only works for SSG
@@ -30,5 +32,7 @@ export function transformBreadCrumb(props: IBreadCrumbProps) {
     lang,
     breadcrumbType: breadcrumbType !== undefined ? breadcrumbType : "standard",
     breadcrumbClass,
+    appStyle,
+    backLink: backLink || null,
   };
 }

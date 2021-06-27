@@ -2,3 +2,15 @@
 @import "./articlepage";
 @import "./articleentry";
 @import "./articleteaser";
+
+article {
+  a,.bx--link {
+    text-decoration: underline;
+  }
+}
+
+.hedi--article {
+  &__back-to-root--link {
+    margin: $spacing-08 0;
+  }
+}

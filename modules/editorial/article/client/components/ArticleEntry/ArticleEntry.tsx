@@ -11,18 +11,18 @@ export const ArticleEntry = (props: IArticleEntryProps): JSX.Element => {
   const { label, route, breadcrumbData } = transformArticleEntry(props);
   return (
     <div className="hedi--article-entry">
-      <div className="hedi--article-entry__content">
-        <Link href={route} passHref>
-          <ClickableTile href={route} light={true}>
+      <Link href={route} passHref>
+        <ClickableTile href={route} light={true}>
+          <div className="hedi--article-entry__content">
             <BreadCrumb {...breadcrumbData} />
             {/* TODO: check if h4 is right for hierachy */}
             <h4
               dangerouslySetInnerHTML={{
                 __html: label,
               }}></h4>
-          </ClickableTile>
-        </Link>
-      </div>
+          </div>
+        </ClickableTile>
+      </Link>
     </div>
   );
 };
