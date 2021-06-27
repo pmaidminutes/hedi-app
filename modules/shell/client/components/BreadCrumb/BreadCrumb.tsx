@@ -6,6 +6,7 @@ import {
   BreadcrumbItem,
   Column,
 } from "carbon-components-react";
+import { ArrowLeft16 } from "@carbon/icons-react";
 
 export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   props: IBreadCrumbProps
@@ -16,12 +17,14 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
     lang,
     breadcrumbType,
     breadcrumbClass,
+    appStyle,
+    backLink,
   } = transformBreadCrumb(props);
-
+  console.log({ backLink });
   if (breadcrumbType === "graphical") {
     return (
-      <div className="hedi--breadcrumb__graphical">
-        <div />
+      <div className={`hedi--breadcrumb__graphical`}>
+        <div className={`${appStyle}--stroke`} />
       </div>
     );
   }
@@ -31,9 +34,14 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
       aria-label="breadcrumb"
       noTrailingSlash
       className={breadcrumbClass}>
-      {/* <BreadcrumbItem href={`/${lang}`} isCurrentPage={isCurrentPage}>
-        Home
-      </BreadcrumbItem> */}
+      {backLink !== null ? (
+        <>
+          <ArrowLeft16 />
+          <BreadcrumbItem href={backLink?.href}>
+            {backLink?.labelText}
+          </BreadcrumbItem>
+        </>
+      ) : null}
 
       {breadCrumbPath.map((crumb, index) => {
         if (breadcrumbType === "withoutTitle") {

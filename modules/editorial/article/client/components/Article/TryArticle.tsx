@@ -1,5 +1,5 @@
 import { ITyped } from "@/modules/model";
-import { IArticle } from "../../../types";
+import { IArticleView } from "../../../types";
 import { Article } from "./Article";
 
 export const TryArticle = ({
@@ -7,4 +7,6 @@ export const TryArticle = ({
 }: {
   content: ITyped;
 }): JSX.Element | null =>
-  content.type === "Article" ? <Article content={content as IArticle} /> : null;
+  content.type === "Article" ? (
+    <Article content={content as IArticleView} />
+  ) : null;

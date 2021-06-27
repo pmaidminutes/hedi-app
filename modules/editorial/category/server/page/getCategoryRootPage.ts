@@ -1,9 +1,9 @@
 import { IPageConfig } from "@/modules/shell/types";
 import { ILayout } from "@/modules/shell/client/components/Layout/types";
 import { IPage } from "@/modules/page/types";
-import { CategoryRoot, getCategoryRoot } from "../../query";
+import { CategoryRootProps, getCategoryRoot } from "../../query";
 
-export type CategoryRootPage = IPage & CategoryRoot;
+export type CategoryRootPage = IPage & CategoryRootProps;
 
 export const getCategoryRootPage = async (
   content: IPage

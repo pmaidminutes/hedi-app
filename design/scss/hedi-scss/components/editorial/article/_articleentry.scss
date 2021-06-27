@@ -1,9 +1,23 @@
-.hedi--article-entry {
-  margin-bottom: $spacing-07;
-  padding: 0 $spacing-07 0 $spacing-05;
-  &__content {
-    border-top: 1px solid $blue-primary;
+.hedi--article-entry-list{
+  margin: $spacing-07 0;
+  &__one-column{
+    margin: $spacing-10 0 $spacing-07 0;
+    .bx--row:nth-child(2){
+      .hedi--article-entry__content {
+        border-top: none;
+      }
+    }
   }
+}
+
+.hedi--article-entry {
+  margin-bottom: $spacing-05;
+  &__content {
+    width: calc(100% - 3rem);
+    margin: 0 0 0 $spacing-05;
+    border-top: 1px solid $gray-50;
+  }
+
   .bx--breadcrumb {
     margin: $spacing-04 0 $spacing-03 0;
     @include carbon--type-style("label-01");

@@ -15,7 +15,7 @@ export const ActionBar = (props: IActionBarProps) => {
         ))}
         {children && children}
       </div>
-      <Seperator style="dashed" color="blue" />
+      <Seperator style="dashed" color="gray" />
     </div>
   );
 };

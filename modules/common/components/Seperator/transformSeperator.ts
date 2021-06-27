@@ -1,6 +1,6 @@
 export interface ISeperator {
   style?: "dotted" | "groove" | "double" | "dashed";
-  color?: "blue" | "green" | "orange" | "pink" | "purple";
+  color?: "blue" | "green" | "orange" | "pink" | "purple" | "gray";
 }
 
 export function transformSeperator(props: ISeperator) {
