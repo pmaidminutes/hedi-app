@@ -45,6 +45,10 @@ $slightlylighter-color-map: (
         }
       }
     }
+    &--main-category__card {
+      background-color: map-get($primary-color-map, $name);
+    }
+
     .hedi-article-container {
       background-color: map-get($light-color-map, $name);
     }
