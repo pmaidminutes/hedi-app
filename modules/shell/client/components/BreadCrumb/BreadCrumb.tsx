@@ -36,7 +36,9 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
       {backLink !== null ? (
         <>
           <ArrowLeft16 />
-          <BreadcrumbItem href={backLink?.href}>
+          <BreadcrumbItem
+            className="hedi--breadcrumb__back-link"
+            href={backLink?.href}>
             {backLink?.labelText}
           </BreadcrumbItem>
         </>
