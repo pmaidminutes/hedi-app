@@ -1,6 +1,9 @@
 import { ICategory } from "../../types";
 import { IPageConfig } from "@/modules/shell/types";
-import { ILayout } from "@/modules/shell/client/components/Layout/types";
+import {
+  ILayout,
+  PageType,
+} from "@/modules/shell/client/components/Layout/types";
 import {
   findLinkInstance,
   imageToImageComponent,
@@ -25,10 +28,13 @@ export const getCategoryPage = async (
     backLink,
   };
 
+  const pageType: PageType = content.parent === 0 ? "Category" : "Subcategory";
+
   const layout: ILayout = {
     pageLayout: "category",
     posterImage: imageToImageComponent(content.image) || null,
     breadcrumbs: { ...breadcrumb },
+    pageType,
   };
   const shell: IPageConfig = {
     useHeader: true,

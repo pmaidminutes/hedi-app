@@ -1,11 +1,13 @@
-import { IImageComponent } from "@/modules/components";
+import { IImageProps } from "@/modules/components";
 
-export function transformHeroImage(image: IImageComponent) {
-  let containerClass = "hedi--hero-image";
+export function transformHeroImage(image: IImageProps) {
+  const { color, layout, objectFit, objectPosition } = image;
 
-  const { alt, width, height, color } = image;
-
-  const src = image ? process.env.NEXT_PUBLIC_ASSETS_URL + image.route : "";
-
-  return { color: color || "transparent", image: { src, alt } };
+  return {
+    color: color || "transparent",
+    image,
+    layout: layout || "fill",
+    objectFit: objectFit || "cover",
+    objectPosition: objectPosition || "center center",
+  };
 }
