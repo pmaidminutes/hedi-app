@@ -43,6 +43,7 @@ export const getCategoryPage = async (
 
   return {
     ...content,
+    components,
     ...shell,
   };
 };
