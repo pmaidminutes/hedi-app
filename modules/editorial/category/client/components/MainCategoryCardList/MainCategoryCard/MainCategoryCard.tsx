@@ -52,7 +52,7 @@ export const MainCategoryCard = (props: IMainCategoryCard) => {
                 <Image
                   layout="fill"
                   objectFit="cover"
-                  objectPosition="top left"
+                  objectPosition="top right"
                   {...image}
                 />
               )

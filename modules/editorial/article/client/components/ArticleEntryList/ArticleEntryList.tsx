@@ -15,8 +15,8 @@ export const ArticleEntryList = (props: IArticleEntryList) => {
           <h3>{headline}</h3>
         </Column>
 
-        {articles.map(article => (
-          <Row narrow>
+        {articles.map((article, index) => (
+          <Row narrow key={article.label + index}>
             <Column sm={4} md={4} lg={8} key={article.route}>
               <ArticleEntry article={article} />
             </Column>
@@ -28,7 +28,7 @@ export const ArticleEntryList = (props: IArticleEntryList) => {
   return (
     <div className="hedi--article-entry-list hedi--article-entry-list__one-column">
       <Row>
-        {articles?.map(article => (
+        {articles?.map((article, index) => (
           <Column sm={4} md={4} lg={8} key={article.route}>
             <ArticleEntry withGraphicalBreadcrumb={true} article={article} />
           </Column>
