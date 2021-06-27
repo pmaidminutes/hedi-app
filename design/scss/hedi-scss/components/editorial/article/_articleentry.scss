@@ -1,7 +1,7 @@
 .hedi--article-entry-list{
-  margin: $spacing-07 0;
+  margin: $spacing-07 0 ;
   &__one-column{
-    margin: $spacing-10 0 $spacing-07 0;
+    margin: $spacing-10 0 0;
     .bx--row:nth-child(2){
       .hedi--article-entry__content {
         border-top: none;
