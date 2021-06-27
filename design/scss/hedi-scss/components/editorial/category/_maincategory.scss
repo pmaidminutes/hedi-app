@@ -7,11 +7,16 @@
   }
 
   &__card {
+    height: 280px;
+    > .bx--row {
+      height: 100%;
+    }
     &:hover {
       cursor: pointer;
       filter: brightness(1.1);
     }
     &--image-wrap {
+      position: relative;
       > div {
         display: block!important;
       }
