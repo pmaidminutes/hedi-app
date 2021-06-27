@@ -9,7 +9,6 @@ import {
   IArticleTeaser,
 } from "../../article/types";
 import { IBodyComponent, IComponent, isBody } from "@/modules/components";
-import { PageGQL } from "@/modules/page/types";
 
 export type CategoryRoot = {
   categories: ICategory[];
