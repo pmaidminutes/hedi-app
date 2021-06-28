@@ -1,7 +1,7 @@
 import { IBreadCrumbProps } from "@/modules/shell/client/components/BreadCrumb/transformBreadCrumb";
-import { IArticleTeaser } from "../../../types";
+import { IArticleEntry } from "../../../types";
 
-export function transformArticleTeaserEntry(props: IArticleTeaser) {
+export function transformArticleTeaserEntry(props: IArticleEntry) {
   const {
     label,
     route,

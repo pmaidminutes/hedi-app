@@ -1,5 +1,5 @@
 import React from "react";
-import { IArticleTeaser } from "../../../types";
+import { IArticleEntry } from "../../../types";
 import {
   Row,
   Column,
@@ -11,7 +11,7 @@ import { BreadCrumb } from "@/modules/shell/client/components";
 import { transformArticleTeaserEntry } from "./transformArticleTeaserEntry";
 import { Body } from "@/modules/components";
 import Image from "next/image";
-export const ArticleTeaserEntry = (props: IArticleTeaser) => {
+export const ArticleTeaserEntry = (props: IArticleEntry) => {
   const {
     label,
     breadcrumbData,
