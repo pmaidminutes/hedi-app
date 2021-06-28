@@ -17,7 +17,6 @@ export function transformLayout(props: ILayoutProps) {
     sideComponents,
     headline,
     breadcrumbs,
-    pageType,
   } = layout;
 
   const image = posterImage as IImageProps;
@@ -30,11 +29,6 @@ export function transformLayout(props: ILayoutProps) {
   } ${customKey !== undefined ? `hedi--${customKey}` : ""}`;
 
   const groupClass = `hedi--group hedi--group--${id}`;
-
-  if (pageType) {
-    image.objectFit = pageType === "Category" ? "cover" : "scale-down";
-    image.objectPosition = pageType === "Category" ? "top center" : "center";
-  }
 
   return {
     right,

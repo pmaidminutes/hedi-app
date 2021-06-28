@@ -17,7 +17,6 @@ export interface ILayout {
   pageId?: string;
   headline?: HTML | null;
   breadcrumbs?: IBreadCrumbProps;
-  pageType?: PageType;
 }
 
 export interface ILayoutProps extends ILayout {
@@ -40,5 +39,3 @@ export type PageLayout =
   | "blank"
   | "category"
   | "article";
-
-export type PageType = "Article" | "Category" | "Subcategory";

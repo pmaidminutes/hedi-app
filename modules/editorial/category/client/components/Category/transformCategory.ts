@@ -10,7 +10,6 @@ export function transformCategory(props: ICategoryProps) {
   const { categories, articles, label, image, appStyle, components } = content;
   const articleEntryListHeadline = findLabelInstance(components, "allArticles");
 
-  console.log({ components });
   return {
     categories: categories?.length > 0 ? categories : null,
     articles: articles?.length > 0 ? articles : null,

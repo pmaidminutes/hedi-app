@@ -34,7 +34,6 @@ export const getArticlePage = async (
     },
     breadcrumbs: { ...breadcrumb },
     posterImage: imageToImageComponent(posterImage),
-    pageType: "Article",
   };
 
   const shell: IPageConfig = {
