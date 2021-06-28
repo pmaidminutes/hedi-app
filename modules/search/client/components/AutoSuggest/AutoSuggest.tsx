@@ -9,17 +9,22 @@ export const AutoSuggest: React.FunctionComponent<ISuggestProps> = (
   const { data, handleSuggestSelected } = useAutoSuggest(props);
 
   return (
-    <>
-      <UnorderedList role="listbox" id="suggestion-list">
+    <div className="hedi--search__auto-suggest--wrap">
+      <UnorderedList
+        role="listbox"
+        id="suggestion-list"
+        className="hedi--search__auto-suggest">
         {data &&
           data.map((suggestedResult: ISuggestEntry, index: any) => (
-            <ListItem
-              key={index}
-              onClick={() => handleSuggestSelected(suggestedResult.term)}>
-              <HTML data={suggestedResult.term} />
-            </ListItem>
+            <div>
+              <ListItem
+                key={index}
+                onClick={() => handleSuggestSelected(suggestedResult.term)}>
+                <HTML data={suggestedResult.term} />
+              </ListItem>
+            </div>
           ))}
       </UnorderedList>
-    </>
+    </div>
   );
 };
