@@ -23,7 +23,7 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
   } = useSearchView(props);
 
   return (
-    <Grid>
+    <div className="hedi--search-view">
       <Row>
         <Column>
           <SearchInput
@@ -82,6 +82,6 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
           )} */}
         </div>
       )}
-    </Grid>
+    </div>
   );
 };

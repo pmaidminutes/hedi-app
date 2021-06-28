@@ -12,8 +12,7 @@ export const getSearchPage = async (
   };
 
   const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
-
+    useHeader: true,
     layout,
   };
 

@@ -19312,6 +19312,10 @@ html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
       -webkit-margin-end: 2rem;
               margin-inline-end: 2rem; }
 
+.hedi--group--search__grid {
+  background-color: #fff;
+  min-height: 40vh; }
+
 .hedi--breadcrumb__back-link {
   margin: 0 0.5rem; }
 
