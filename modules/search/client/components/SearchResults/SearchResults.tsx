@@ -2,7 +2,7 @@ import React from "react";
 import { Row, Column } from "carbon-components-react";
 import { Label, InlineNotification } from "@/modules/components";
 import { useSearchResults, ISearchResultProps } from "./useSearchResults";
-import { ArticleEntrySearch } from "@/modules/editorial/article/client/components";
+import { ArticleTeaserEntry } from "@/modules/editorial/article/client/components";
 import { IArticleEntry } from "@/modules/editorial/article/types";
 import { GlossaryTermEntry } from "@/modules/editorial/glossary/client/components";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
@@ -34,8 +34,8 @@ export const SearchResults = (props: ISearchResultProps) => {
           switch (result.type) {
             case "Article":
               return (
-                <ArticleEntrySearch
-                  article={result as IArticleEntry}
+                <ArticleTeaserEntry
+                  {...(result as IArticleEntry)}
                   key={result.label + index}
                 />
               );
