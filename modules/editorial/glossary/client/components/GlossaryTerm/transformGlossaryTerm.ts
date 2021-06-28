@@ -33,7 +33,10 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
     size: "sm",
     id: glossaryTermId,
   };
-
+  const modifiedRoute = route.replace(
+    "/" + glossaryTermId,
+    "#" + glossaryTermId
+  );
   return {
     glossaryTermId,
     label,
@@ -42,7 +45,7 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
     isSelected,
     termClass,
     translation,
-    route,
+    route: modifiedRoute,
     headline,
   };
 }
