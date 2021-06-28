@@ -1,6 +1,9 @@
 .hedi--breadcrumb {
+  &__back-link{
+    margin: 0 $spacing-03;
+  }
   .bx--link {
-    color: $gray-100;
+    color: $gray-100!important;
   }
 
   &__graphical {
@@ -8,8 +11,7 @@
     justify-content: flex-start;
     margin: $spacing-05 0 $spacing-03 0;
     > div {
-      border: 3px solid $blue-primary;
-      width: 15px;
+      width: 16px;
     }
   }
 }

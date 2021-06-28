@@ -1,0 +1,60 @@
+.hedi--glossary {
+  &-page .bx--grid {
+    background-color: #fff;
+    padding-top: $spacing-07;
+  }
+  &__group {
+    &--title {
+      margin-top: $spacing-09;
+    }
+    &--letter {
+      font-family: carbon--font-family("serif");
+      font-size: 4rem;
+      font-weight: 500;
+      // TODO change against carbon variable or something
+      color: $blue-primary;
+    }
+  }
+  &-term {
+    margin-bottom: $spacing-07;
+    .hedi--headline-copy-link-to-clipboard {
+      margin-bottom: $spacing-03;
+    }
+    &__marked-word {
+      border-left: 4px solid $orange-40;
+    }
+
+    &__marked-translation {
+      background-color: none;
+      color: $blue-80;
+      margin: $spacing-03 0;
+    }
+  }
+}
+
+.hedi--alphabet-label {
+  font-family: carbon--font-family("serif");
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.666em;
+  color: $gray-40;
+  margin: 0 0 0 $spacing-05;
+  &--disabled:hover {
+    cursor: not-allowed;
+  }
+}
+
+.hedi--alphabet-links {
+  font-family: carbon--font-family("serif");
+  font-weight: 400;
+  font-size: 1.5rem;
+  line-height: 1.666em;
+  color: $blue-primary;
+  margin: 0 0 0 $spacing-05;
+
+  &--wrap {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+}

@@ -1,3 +1,4 @@
+import { findLabelInstance } from "@/modules/components";
 import { ICategory } from "../../../types";
 
 export interface ICategoryProps {
@@ -6,7 +7,8 @@ export interface ICategoryProps {
 
 export function transformCategory(props: ICategoryProps) {
   const { content } = props;
-  const { categories, articles, label, image, appStyle } = content;
+  const { categories, articles, label, image, appStyle, components } = content;
+  const articleEntryListHeadline = findLabelInstance(components, "allArticles");
 
   return {
     categories: categories?.length > 0 ? categories : null,
@@ -14,5 +16,6 @@ export function transformCategory(props: ICategoryProps) {
     headline: label,
     image,
     appStyle,
+    articleEntryListHeadline: articleEntryListHeadline?.text,
   };
 }

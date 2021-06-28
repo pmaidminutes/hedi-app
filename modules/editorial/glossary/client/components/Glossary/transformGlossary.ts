@@ -10,9 +10,7 @@ export function transformGlossary(props: IGlossaryProps) {
     : undefined;
 
   if (glossaryUrlTerm) {
-    // Use the hash to find the first element with that id
     const element = document.querySelector(glossaryUrlTerm);
-
     if (element) {
       // Smooth scroll to that elment
       element.scrollIntoView({

@@ -7,18 +7,26 @@ import { transformCategory, ICategoryProps } from "./transformCategory";
 import { ArticleEntryList } from "@/modules/editorial/article/client";
 import { useSubCategories } from "./useSubCategories";
 export const Category = (props: ICategoryProps): JSX.Element => {
-  const { articles, categories } = transformCategory(props);
+  const { articles, categories, articleEntryListHeadline } = transformCategory(
+    props
+  );
   const { hasSubCategories } = useSubCategories(categories);
   return (
     <>
       {categories ? <CategoryEntryList categories={categories} /> : null}
 
+      {hasSubCategories && (
+        <Column>
+          <Seperator style="dashed" color="gray" />
+        </Column>
+      )}
+
       {articles ? (
         <>
-          <Seperator />
           <ArticleEntryList
             type={hasSubCategories ? "oneColumn" : "twoColumns"}
             articles={articles}
+            headline={articleEntryListHeadline}
           />
         </>
       ) : null}

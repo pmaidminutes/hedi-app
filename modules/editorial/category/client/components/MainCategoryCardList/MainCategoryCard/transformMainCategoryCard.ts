@@ -5,8 +5,8 @@ export interface IMainCategoryCard {
   index: number;
 }
 
-const smallerColumProps = { lg: 6, md: 3, sm: 2 };
-const biggerColumProps = { lg: 10, md: 5, sm: 2 };
+const smallerColumProps = { lg: 4, md: 2, sm: 2 };
+const biggerColumProps = { lg: 12, md: 6, sm: 2 };
 
 export function transformMainCategoryCard(props: IMainCategoryCard) {
   const { category, index } = props;

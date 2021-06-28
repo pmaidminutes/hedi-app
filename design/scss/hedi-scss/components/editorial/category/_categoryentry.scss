@@ -1,4 +1,7 @@
 .hedi--category-entry {
+  &:hover {
+    filter: brightness(1.1);
+  }
   &__list {
     margin: $spacing-09 0;
   }
@@ -11,6 +14,9 @@
   @media (min-width: 672px) {
     &__image-wrap {
       margin-bottom: $spacing-03;
+    }
+    .bx--aspect-ratio {
+      padding: 1rem;
     }
   }
 

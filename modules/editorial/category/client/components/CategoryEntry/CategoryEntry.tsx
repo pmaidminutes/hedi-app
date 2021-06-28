@@ -23,10 +23,10 @@ export const CategoryEntry = (props: ICategoryEntryProps): JSX.Element => {
               </AspectRatio>
             </div>
           )}
-          <h4
+          <h3
             dangerouslySetInnerHTML={{
               __html: label,
-            }}></h4>
+            }}></h3>
         </a>
       </Link>
     </div>

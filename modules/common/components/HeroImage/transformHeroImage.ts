@@ -1,11 +1,25 @@
-import { IImageComponent } from "@/modules/components";
+import { IImageProps } from "@/modules/components";
 
-export function transformHeroImage(image: IImageComponent) {
-  let containerClass = "hedi--hero-image";
+export function transformHeroImage(image: IImageProps) {
+  const { color, layout, objectFit, objectPosition, width, height } = image;
 
-  const { alt, width, height, color } = image;
+  const ratio: number = width / height;
+  const transformedObjectfit = objectFit || getObjectFitByRatio(ratio);
+  const transformedObjectPos =
+    objectPosition || getObjectPositionByRatio(ratio);
 
-  const src = image ? process.env.NEXT_PUBLIC_ASSETS_URL + image.route : "";
+  return {
+    color: color || "transparent",
+    image,
+    layout: layout || "fill",
+    objectFit: transformedObjectfit,
+    objectPosition: transformedObjectPos,
+  };
+}
 
-  return { color: color || "transparent", image: { src, alt } };
+function getObjectFitByRatio(ratio: number) {
+  return ratio > 1.8 ? "cover" : "scale-down";
+}
+function getObjectPositionByRatio(ratio: number) {
+  return ratio > 1.8 ? "top center" : "center";
 }

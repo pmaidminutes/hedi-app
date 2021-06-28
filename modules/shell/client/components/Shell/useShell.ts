@@ -26,7 +26,7 @@ export function useShell(shell: Partial<IShellProps>) {
 
   useEffect(() => {
     // HACK use later on
-    setHediStyle(appStyle ?? "");
+    setHediStyle(appStyle ?? "hedi-category-color--default");
   }, [appStyle]);
 
   const { hasPageAccess } = usePageAccess(redirectUnAuthorized);

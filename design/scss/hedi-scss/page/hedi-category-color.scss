@@ -28,14 +28,47 @@ $slightlylighter-color-map: (
   default: $blue-50,
 );
 
+// TODO seperate this into smaller parts
 @mixin colorClass($name) {
   &--#{$name} {
-    background-color: map-get($primary-color-map, $name) !important;
+    header,
+    footer {
+      background-color: map-get($primary-color-map, $name) !important;
+
+      .bx--header__menu-item,
+      button {
+        &:hover {
+          background-color: map-get(
+            $slightlylighter-color-map,
+            $name
+          ) !important;
+        }
+      }
+    }
+    &--main-category__card {
+      background-color: map-get($primary-color-map, $name);
+    }
+
     .hedi-article-container {
       background-color: map-get($light-color-map, $name);
     }
     .hedi-auto-suggest {
       background-color: map-get($primary-color-map, $name);
+    }
+
+    &--stroke {
+      border: 2px solid map-get($primary-color-map, $name);
+    }
+    &--scroll-to-top {
+      > button {
+        background-color: map-get($primary-color-map, $name) !important;
+        &:hover {
+          background-color: map-get(
+            $slightlylighter-color-map,
+            $name
+          ) !important;
+        }
+      }
     }
     // TODO makeappstyle better
     article {
@@ -50,8 +83,8 @@ $slightlylighter-color-map: (
         }
       }
     }
-    &--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link{
-      color: map-get($primary-color-map, $name)!important;
+    &--article-entry__breadcrumb .hedi--breadcrumb__main-category .bx--link {
+      color: map-get($primary-color-map, $name) !important;
     }
   }
 }

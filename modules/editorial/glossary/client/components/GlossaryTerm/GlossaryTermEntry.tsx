@@ -1,15 +1,11 @@
 import Link from "next/link";
 import { HTML } from "@/modules/react/html";
-import { HeadlineWithLinkCopy } from "@/modules/common/components";
 
+import { transformGlossaryTerm, IGlossaryTermProps } from "..";
 import { ClickableTile } from "carbon-components-react";
-import {
-  IGlossaryTermProps,
-  transformGlossaryTerm,
-} from "./transformGlossaryTerm";
 
 export const GlossaryTermEntry = (props: IGlossaryTermProps): JSX.Element => {
-  const { body, route, headline } = transformGlossaryTerm(props);
+  const { label, body, translation, route } = transformGlossaryTerm(props);
 
   return (
     <>
@@ -17,7 +13,10 @@ export const GlossaryTermEntry = (props: IGlossaryTermProps): JSX.Element => {
         <div className="hedi--article-entry__content">
           <Link href={route} passHref>
             <ClickableTile href={route} light={true}>
-              <HeadlineWithLinkCopy {...headline} />
+              <h2>
+                <HTML data={label} />
+              </h2>
+              <div>{translation && <p>{translation}</p>}</div>
               <HTML data={body} />
             </ClickableTile>
           </Link>

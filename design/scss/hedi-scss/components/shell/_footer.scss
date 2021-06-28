@@ -3,25 +3,31 @@
   background-color: transparent;
   display: flex;
   justify-content: flex-end;
-  margin: $spacing-05 0;
   padding: 0 $spacing-07;
 
-  svg {
-    fill: $cool-gray-60;
+  &__nav {
+    @extend .bx--header__nav;
+    &::before {
+      display: none;
+    }
   }
-  a, .bx--link {
-    font-size: 1rem;
-    background-color:transparent;
-    color: $cool-gray-40;
-    padding: 0.5rem;
-    transition:  background-color 110ms cubic-bezier(0, 0, 0.38, 0.9);
-    text-decoration: none;
+  &__menu-bar {
+    @extend .bx--header__menu-bar;
+  }
+  &__menu-item {
+    @extend .bx--header__menu-item;
+    color: $ui-02!important;
+    text-decoration: none!important;
     &:hover {
-      background-color:$hover-ui;
+      color: $ui-02
     }
-    
-    &:not(:last-child){
-      margin-right: $spacing-07;
-    }
+  }
+
+  span {
+    @extend .bx--text-truncate--end;
+  }
+
+  svg {
+    fill: $ui-02;
   }
 }

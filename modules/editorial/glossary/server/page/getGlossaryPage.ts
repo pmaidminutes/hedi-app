@@ -8,20 +8,22 @@ import { IGlossaryKeyGroup } from "../../types";
 export type IGlossaryPage = IPage & {
   glossaryKeyGroups: IGlossaryKeyGroup[];
 };
+
 export async function getGlossaryPage(
   content: IPage
 ): Promise<IGlossaryPage & IPageConfig> {
-  content.type = "Glossary";
-  const glossaryEntityWithTerms = await getGlossaryContent(content.route);
+  const lang = content.lang;
+  const glossaryEntityWithTerms = await getGlossaryContent(lang);
   const glossaryKeyGroups = await glossaryTermsToGlossaryKeyGroup(
     glossaryEntityWithTerms
   );
+
+  content.type = "Glossary";
   const layout: ILayout = {
     pageLayout: "singleColumn",
   };
-
   const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
+    useHeader: true,
     layout,
   };
 
