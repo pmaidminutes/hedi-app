@@ -1,0 +1,10 @@
+.hedi--search__auto-suggest {
+  @extend .bx--list-box__menu;
+
+  > div {
+    @extend .bx--list-box__menu-item;
+  }
+  li {
+    @extend .bx--list-box__menu-item__option;
+  }
+}
