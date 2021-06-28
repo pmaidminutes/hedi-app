@@ -22,9 +22,11 @@ export function transformSolrResultToContentEntry(
       contentId: entity.id,
       highlightedBody:
         highlightingContent[body] === undefined
-          ? highlightingContent["voll"]
-          : highlightingContent[body] || highlightingContent[description],
-      highlightedTitle: highlightingContent[title] || highlightingContent[name],
+          ? highlightingContent["voll"]?.pop()
+          : highlightingContent[body]?.pop() ||
+            highlightingContent[description]?.pop(),
+      highlightedTitle:
+        highlightingContent[title]?.pop() || highlightingContent[name]?.pop(),
     },
   };
 }

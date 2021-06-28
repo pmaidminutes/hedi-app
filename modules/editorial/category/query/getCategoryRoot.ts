@@ -6,7 +6,7 @@ import {
   ArticleEntryGQL,
   ArticleGQL,
   IArticle,
-  IArticleTeaser,
+  IArticleEntry,
 } from "../../article/types";
 import { IBodyComponent, IComponent, isBody } from "@/modules/components";
 
@@ -21,7 +21,7 @@ export type CategoryRootProps = {
   categories: ICategory[];
   articles: IArticle[];
   components: IComponent[];
-  recommendedArticles: IArticleTeaser[];
+  recommendedArticles: IArticleEntry[];
 };
 
 export async function getCategoryRoot(

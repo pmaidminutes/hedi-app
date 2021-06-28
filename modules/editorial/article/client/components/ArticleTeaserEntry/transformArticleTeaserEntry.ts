@@ -1,7 +1,7 @@
 import { IBreadCrumbProps } from "@/modules/shell/client/components/BreadCrumb/transformBreadCrumb";
-import { IArticleTeaser } from "../../../types";
+import { IArticleEntry } from "../../../types";
 
-export function transformArticleTeaserEntry(props: IArticleTeaser) {
+export function transformArticleTeaserEntry(props: IArticleEntry) {
   const {
     label,
     route,
@@ -23,15 +23,16 @@ export function transformArticleTeaserEntry(props: IArticleTeaser) {
     breadcrumbType: "withoutTitle",
   };
 
-  const src = image ? process.env.NEXT_PUBLIC_ASSETS_URL + image.route : "";
+  const gridClass =
+    image !== undefined ? "hedi--article-teaser__entry--grid" : undefined;
 
   return {
     label,
     breadcrumbData,
     summary,
-    image: { src },
+    image,
     route,
-    src,
     background: image?.color || "transparent",
+    gridClass,
   };
 }

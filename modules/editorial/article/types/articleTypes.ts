@@ -15,15 +15,13 @@ import { ICategoryEntry } from "../../category/types";
 import { CategoryEntryGQL } from "../../category/types/categoryEntry";
 import { IImage } from "../../types";
 
-export interface IArticleTeaser extends IArticleEntry {
-  image?: IImage;
-  summary?: IBodyComponent;
-}
-
 export interface IArticleEntry
   extends IEntityLocalized,
     IRouteLabeled,
-    IAppStyled {}
+    IAppStyled {
+  image?: IImage;
+  summary?: IBodyComponent;
+}
 
 export const ArticleEntryGQL = gql`... on Article {
 ${EntityLocalizedFields}

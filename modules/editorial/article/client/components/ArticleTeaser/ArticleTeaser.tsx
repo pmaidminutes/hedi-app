@@ -1,8 +1,8 @@
 import React from "react";
-import { IArticleTeaser } from "../../../types";
+import { IArticleEntry } from "../../../types";
 import { ArticleTeaserEntry } from "../ArticleTeaserEntry";
 export interface IArticleTeaserProps {
-  articles: IArticleTeaser[];
+  articles: IArticleEntry[];
   headline: string;
 }
 export const ArticleTeaser = (props: IArticleTeaserProps) => {

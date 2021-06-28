@@ -1,4 +1,3 @@
-import { HTML } from "@/modules/react/html";
 import { Column, ColumnDefaultProps, Grid, Row } from "carbon-components-react";
 import { ILayoutBasicTemplate } from "../types";
 
@@ -7,7 +6,7 @@ export const SingleColumn: React.FC<
     columnProps?: ColumnDefaultProps;
   }
 > = ({ headline, condensed, narrow, children, groupClass, columnProps }) => (
-  <Grid>
+  <Grid className={`${groupClass}__grid`}>
     <Row condensed={condensed} narrow={narrow}>
       <Column {...columnProps} className="hedi--titlegroup">
         <h1>{headline}</h1>
