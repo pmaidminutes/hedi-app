@@ -23,15 +23,16 @@ export function transformArticleTeaserEntry(props: IArticleEntry) {
     breadcrumbType: "withoutTitle",
   };
 
-  const src = image ? process.env.NEXT_PUBLIC_ASSETS_URL + image.route : "";
+  const gridClass =
+    image !== undefined ? "hedi--article-teaser__entry--grid" : undefined;
 
   return {
     label,
     breadcrumbData,
     summary,
-    image: { src },
+    image,
     route,
-    src,
     background: image?.color || "transparent",
+    gridClass,
   };
 }
