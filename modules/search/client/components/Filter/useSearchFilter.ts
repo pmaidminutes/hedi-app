@@ -1,7 +1,8 @@
+import { ILabelComponent } from "@/modules/components";
 import { useState, useEffect } from "react";
 
 export interface ISearchFilterProps {
-  types: string[];
+  types: ILabelComponent[];
   handleFilter: Function;
 }
 

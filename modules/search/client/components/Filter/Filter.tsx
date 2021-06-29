@@ -9,15 +9,16 @@ export const Filter = (props: ISearchFilterProps) => {
   );
   return (
     <div className="hedi--search__filter">
-      {types.map((type, index) => (
-        <Checkbox
-          onChange={e => handleChange(e, type)}
-          id={type}
-          key={type + index}
-          labelText={type}
-          checked={activeFilters.includes(type)}
-        />
-      ))}
+      {types &&
+        types.map((type, index) => (
+          <Checkbox
+            onChange={e => handleChange(e, type.id)}
+            id={type.id || ""}
+            key={type.id || "" + index}
+            labelText={type.text || "bl"}
+            checked={activeFilters.includes(type.id || "articles")}
+          />
+        ))}
       <Button
         renderIcon={FilterReset16}
         // TODO description
