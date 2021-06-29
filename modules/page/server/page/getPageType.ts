@@ -60,6 +60,7 @@ export const getPageType = async (
       break;
     case "search":
       result = await getSearchPage(content);
+      break;
     default:
       result = await getPagePage(content);
   }
