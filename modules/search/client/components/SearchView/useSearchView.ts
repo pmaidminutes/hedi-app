@@ -1,9 +1,13 @@
 import { IsIErrorResponse } from "@/modules/common/error";
-import { findLabelInstance } from "@/modules/components";
+import {
+  findGroupInstance,
+  ILabelComponent,
+  isLabel,
+} from "@/modules/components";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import { useSearch } from "../../hooks";
-const filterTypes = ["articles", "categories", "glossary"];
+// const filterTypes = ["articles", "categories", "glossary"];
 
 export interface ISearchProps {
   // TODO type after removing app page
@@ -60,6 +64,14 @@ export function useSearchView(props: ISearchProps) {
   const locale = router.locale ?? "de";
   const { defaultLocale } = router;
 
+  const filterTypes = findGroupInstance(components, "filter");
+
+  let filterLabel: ILabelComponent[] = [];
+  if (filterTypes)
+    filterTypes.components.forEach(a => {
+      if (isLabel(a)) filterLabel.push(a);
+    });
+
   const { data, error } = useSearch(
     queryText,
     locale,
@@ -91,6 +103,6 @@ export function useSearchView(props: ISearchProps) {
     handleLocation,
     locations,
     handleDistanceChange,
-    filterTypes,
+    filterTypes: filterLabel,
   };
 }
