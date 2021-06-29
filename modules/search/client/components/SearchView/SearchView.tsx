@@ -73,7 +73,7 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
       {loading && !data ? (
         <Loading withOverlay={true} className={"some-class"} />
       ) : (
-        <div>
+        <div className="hedi--search__results">
           <SearchResults results={data} components={components} />
           {/* {locations?.length > 0 ? (
             <Map currentLocation={locations[0]} locations={locations} />

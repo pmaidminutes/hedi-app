@@ -1,0 +1,12 @@
+.hedi--search__results {
+  mark {
+    background-color: $orange-20;
+  }
+
+  .hedi--article-teaser__entry--grid--content {
+    max-width: 66%;
+  }
+  .hedi--article-teaser__entry--grid--content--text-wrap {
+    margin-top: $spacing-05;
+  }
+}
