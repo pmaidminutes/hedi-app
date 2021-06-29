@@ -25,7 +25,7 @@ export function transformInlineNotification(
     kind: notificationKind,
     title,
     subtitle: HTML({ data: subtitle }),
-    lowContrast: lowContrast || true,
-    hideCloseButton: hideCloseButton || true,
+    lowContrast: lowContrast ?? true,
+    hideCloseButton: hideCloseButton ?? true,
   };
 }
