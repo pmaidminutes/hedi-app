@@ -11,6 +11,7 @@ import { BreadCrumb } from "@/modules/shell/client/components";
 import { Image } from "@/modules/components";
 import { transformArticleTeaserEntry } from "./transformArticleTeaserEntry";
 import { Body } from "@/modules/components";
+import { HTMLWithNextImage } from "@/modules/react/html/HTMLWithNextImage";
 
 export const ArticleTeaserEntry = (props: IArticleEntry) => {
   const {
@@ -44,7 +45,9 @@ export const ArticleTeaserEntry = (props: IArticleEntry) => {
 
               <div className="hedi--article-teaser__entry--grid--content">
                 <BreadCrumb {...breadcrumbData} />
-                <h4>{label}</h4>
+                <h4>
+                  <HTMLWithNextImage data={label} />
+                </h4>
                 <div className="hedi--article-teaser__entry--grid--content--text-wrap">
                   <Body {...summary} />
                 </div>
