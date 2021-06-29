@@ -18593,6 +18593,9 @@ h4 {
   .hedi--separator__gray {
     border-color: #8d8d8d; }
 
+.hedi--titlegroup {
+  margin-top: 1rem; }
+
 .hedi--category-entry:hover {
   filter: brightness(1.1); }
 
@@ -19302,15 +19305,28 @@ html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
 .hedi--search__filter {
   padding: 1rem 0;
   display: flex;
-  align-items: center; }
+  align-items: center;
+  justify-content: flex-end; }
   .hedi--search__filter .bx--form-item.bx--checkbox-wrapper:first-of-type {
     margin-top: 0; }
+  .hedi--search__filter > * {
+    flex: none;
+    margin: 0 0 0 2rem; }
   .hedi--search__filter fieldset {
     height: 100%; }
     .hedi--search__filter fieldset > div {
       float: left;
       -webkit-margin-end: 2rem;
               margin-inline-end: 2rem; }
+
+.hedi--search__results mark {
+  background-color: #F7CEB2; }
+
+.hedi--search__results .hedi--article-teaser__entry--grid--content {
+  max-width: 66%; }
+
+.hedi--search__results .hedi--article-teaser__entry--grid--content--text-wrap {
+  margin-top: 1rem; }
 
 .hedi--group--search__grid {
   background-color: #fff;
