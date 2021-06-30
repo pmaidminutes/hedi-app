@@ -5,9 +5,6 @@
       margin-top: $spacing-09;
     }
     margin-bottom: $spacing-07;
-    .bx--tile {
-      border-bottom: 1px solid $gray-50;
-    }
     @media (min-width: 672px) {
       .bx--aspect-ratio {
         max-width: 220px;
@@ -23,7 +20,6 @@
       grid-template-areas: "image text";
       grid-template-columns: 220px 1fr;
       column-gap: $spacing-07;
-      margin-bottom: $spacing-05;
       @media (max-width: 672px) {
         grid-template-areas:
           "image"
@@ -43,6 +39,9 @@
         grid-area: text;
         &--text-wrap {
           margin-top: $spacing-08;
+          @media (min-width: 672px) {
+            max-width: 66%;
+          }
         }
         // HACK line-clamp still is experimental
         p {

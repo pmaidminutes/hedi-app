@@ -12,6 +12,7 @@ import { Image } from "@/modules/components";
 import { transformArticleTeaserEntry } from "./transformArticleTeaserEntry";
 import { Body } from "@/modules/components";
 import { HTMLWithNextImage } from "@/modules/react/html/HTMLWithNextImage";
+import { Seperator } from "@/modules/common/components";
 
 export const ArticleTeaserEntry = (props: IArticleEntry) => {
   const {
@@ -24,7 +25,7 @@ export const ArticleTeaserEntry = (props: IArticleEntry) => {
     gridClass,
   } = transformArticleTeaserEntry(props);
   return (
-    <Row className="hedi--article-teaser__entry">
+    <Row narrow className="hedi--article-teaser__entry">
       <Column sm={4} md={6} lg={12}>
         <Link href={route} passHref>
           <ClickableTile href={route} light={true}>
@@ -49,12 +50,16 @@ export const ArticleTeaserEntry = (props: IArticleEntry) => {
                   <HTMLWithNextImage data={label} />
                 </h4>
                 <div className="hedi--article-teaser__entry--grid--content--text-wrap">
-                  <Body {...summary} />
+                  {/* TODO remove p tags after Body is migrated with p tag */}
+                  <p>
+                    <Body {...summary} />
+                  </p>
                 </div>
               </div>
             </div>
           </ClickableTile>
         </Link>
+        <Seperator color="gray" />
       </Column>
     </Row>
   );
