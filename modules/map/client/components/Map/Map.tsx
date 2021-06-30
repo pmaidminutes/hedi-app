@@ -11,7 +11,8 @@ export default function Map(props: IMapProps) {
   const { marker } = useMarker(mapLocations);
   const { firstPosition, mapBounds } = usePositions(mapLocations);
   const [center, setCenter] = useState(mapBounds);
-
+  const markerRef = useRef(null);
+  const [map, setMap] = useState<LeafletMap | null>(null);
   useEffect(() => {
     setCenter(mapBounds);
   }, [mapBounds]);
@@ -24,7 +25,10 @@ export default function Map(props: IMapProps) {
       <MapContainer
         bounds={center}
         scrollWheelZoom={false}
-        center={firstPosition}>
+        center={firstPosition}
+        whenCreated={m => {
+          setMap(m);
+        }}>
         <TileLayer
           attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
           url={process.env.NEXT_PUBLIC_MAP_OSM || ""}
@@ -38,7 +42,13 @@ export default function Map(props: IMapProps) {
 
         {marker.map(markerValue => {
           return (
-            <Marker {...markerValue}>
+            <Marker
+              {...markerValue}
+              eventHandlers={{
+                dblclick: e => {
+                  map?.flyTo(e.latlng, 13);
+                },
+              }}>
               <Popup>{markerValue.key}</Popup>
             </Marker>
           );
