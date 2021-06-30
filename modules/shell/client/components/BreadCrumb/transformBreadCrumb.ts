@@ -22,9 +22,18 @@ export function transformBreadCrumb(props: IBreadCrumbProps) {
   const isCurrentPage = breadCrumbPath.length === 0;
 
   const className = "hedi--breadcrumb";
+  const backLinkClassName = `hedi--breadcrumb__back-link`;
+  const backLinkBreadrcumbClass = appStyle
+    ? `hedi--breadcrumb__main-category ${backLinkClassName}`
+    : backLinkClassName;
+
   const breadcrumbClass = appStyle
     ? `${className} ${appStyle}--article-entry__breadcrumb`
     : className;
+
+  const breadcrumbItemClass = isCurrentPage
+    ? ""
+    : "hedi--breadcrumb__main-category";
 
   return {
     breadCrumbPath,
@@ -34,5 +43,7 @@ export function transformBreadCrumb(props: IBreadCrumbProps) {
     breadcrumbClass,
     appStyle,
     backLink: backLink || null,
+    backLinkBreadrcumbClass,
+    breadcrumbItemClass,
   };
 }
