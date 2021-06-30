@@ -45,7 +45,7 @@ export const solrSearchAPI: NextApiHandler<
             getArticle(route).then(article => {
               if (article) {
                 article.label = highlight.highlightedTitle ?? article.label;
-                article.summary = { kind: "Body", body: highlightedBody };
+                article.summary = highlightedBody;
               }
               return article;
             })
