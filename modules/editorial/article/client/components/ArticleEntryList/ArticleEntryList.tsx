@@ -18,7 +18,12 @@ export const ArticleEntryList = (props: IArticleEntryListProps) => {
   return (
     <div className="hedi--article-entry-list">
       {headline && (
-        <h2 className="hedi--article-entry-list__headline">{headline}</h2>
+        <Row>
+          <Column>
+            {/* TODO headline type from cms */}
+            <h2 className="hedi--article-entry-list__headline">{headline}</h2>
+          </Column>
+        </Row>
       )}
       {entryType === "normal-neighbours" ? (
         <Row narrow>
