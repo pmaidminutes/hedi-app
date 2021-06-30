@@ -4,7 +4,7 @@
   border-top: 1px;
   border-style: solid;
   border-color: $cool-gray-20;
-  margin: $spacing-05 0;
+  margin-bottom: $spacing-05;
 
   &__dotted {
     border-style: dotted;
@@ -35,5 +35,17 @@
   }
   &__gray {
     border-color: $gray-50;
+  }
+
+  @media (min-width: 672px) {
+    &__s {
+      margin-bottom: $spacing-07;
+    }
+    &__m {
+      margin-bottom: $spacing-09;
+    }
+    &__l {
+      margin-bottom: $spacing-11;
+    }
   }
 }
