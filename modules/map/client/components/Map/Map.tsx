@@ -16,7 +16,6 @@ export default function Map(props: IMapProps) {
     setCenter(mapBounds);
   }, [mapBounds]);
 
-
   // TODO automatic zoom to right bound, when number of location change
   // TODO zoom in on marker, when clicked
 
@@ -30,6 +29,13 @@ export default function Map(props: IMapProps) {
           attribution="&copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors"
           url={process.env.NEXT_PUBLIC_MAP_OSM || ""}
         />
+        <MapConsumer>
+          {map => {
+            map.fitBounds(marker.map(p => p.position));
+            return null;
+          }}
+        </MapConsumer>
+
         {marker.map(markerValue => {
           return (
             <Marker {...markerValue}>
