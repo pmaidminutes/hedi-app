@@ -1,45 +1,58 @@
-import { ICopyLinkToClipboard } from "@/modules/common/components/CopyLinkToClipboard/transformCopyLinkToClipboard";
-import { IHeadlineComponent } from "@/modules/components";
-import { IRouteLabeled } from "@/modules/model";
-import { BreadcrumbType } from "@/modules/shell/client/components/BreadCrumb/transformBreadCrumb";
+import { IBreadCrumbProps } from "@/modules/shell/client/components/BreadCrumb/transformBreadCrumb";
 import { IArticleEntry } from "../../../types";
+import { EntryType } from "../ArticleEntryList";
 
-export interface IArticleEntryProps {
-  article: IArticleEntry;
-  withGraphicalBreadcrumb?: boolean;
+export interface IArticleEntryProps extends IArticleEntry {
+  entryType: EntryType;
 }
-export function transformArticleEntry({
-  article,
-  withGraphicalBreadcrumb,
-}: IArticleEntryProps) {
-  const { label, route, type, lang, routelabel, appStyle, summary } = article;
-  const headline: IHeadlineComponent & ICopyLinkToClipboard = {
-    kind: "Headline",
-    headline: "h2",
-    text: label ?? "",
-    route,
-    type: "icon",
-    size: "sm",
-    id: label,
-  };
-  const breadcrumbType: BreadcrumbType =
-    withGraphicalBreadcrumb !== undefined && withGraphicalBreadcrumb === true
-      ? "graphical"
-      : "withoutTitle";
-  // TODO check if breadcrumb type works here for all cases
-  return {
+
+export function transformArticleEntry(props: IArticleEntryProps) {
+  const {
     label,
     route,
+    routelabel,
+    appStyle,
+    lang,
+    type,
     summary,
-    breadcrumbData: {
-      label,
-      routelabel,
-      route,
-      type,
-      lang,
-      appStyle,
-      breadcrumbType,
-    },
-    headline,
+    image,
+    entryType,
+  } = props;
+
+  const breadcrumbData: IBreadCrumbProps = {
+    label,
+    routelabel,
+    lang,
+    route,
+    type,
+    appStyle,
+    breadcrumbType:
+      entryType === "normal-neighbours" ? "graphical" : "withoutTitle",
+  };
+
+  const gridClass =
+    image !== undefined ? "hedi--article-entry__grid" : undefined;
+
+  const entryClass = `hedi--article-entry${
+    entryType === "full" ? " hedi--article-entry--full" : ""
+  }`;
+
+  const textwrapClass = `hedi--article-entry__grid--content__text-wrap${
+    entryType === "full"
+      ? " hedi--article-entry__grid--content__text-wrap--full"
+      : ""
+  }`;
+
+  return {
+    label,
+    breadcrumbData,
+    summary,
+    image,
+    route,
+    background: image?.color || "transparent",
+    gridClass,
+    entryType,
+    entryClass,
+    textwrapClass,
   };
 }
