@@ -45,7 +45,7 @@ export default function Map(props: IMapProps) {
             <Marker
               {...markerValue}
               eventHandlers={{
-                dblclick: e => {
+                click: e => {
                   map?.flyTo(e.latlng, 13);
                 },
               }}>
