@@ -99,7 +99,7 @@ export const getStaticProps: GetStaticProps<
   let content: (IEntity & IPageConfig) | null = null;
 
   if (isLandingPageRoute(route)) {
-    route = "/landingPage";
+    route = `/${lang}/editorial-start`;
   }
 
   const gqlTypes = [
