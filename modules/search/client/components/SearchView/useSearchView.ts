@@ -79,12 +79,13 @@ export function useSearchView(props: ISearchProps) {
     distance,
     filter
   );
+  if (!queryText) {
+    loading = false;
+  }
 
-  if (error) {
+  if (error || IsIErrorResponse(data)) {
     console.log("for now error");
-  } else if (IsIErrorResponse(data)) {
-    // errorMessage?.text = data.errors.http ?? `Try again`;
-  } else {
+  } else if (data) {
     loading = false;
   }
 

@@ -24,10 +24,10 @@ export const SearchInput: React.FunctionComponent<ISearchInputProps> = props => 
         {...searchProps}
       />
 
-      <AutoSuggest
+      {/* <AutoSuggest
         query={suggestQuery}
         onSuggestSelect={handleSuggestSelected}
-      />
+      /> */}
     </>
   );
 };
