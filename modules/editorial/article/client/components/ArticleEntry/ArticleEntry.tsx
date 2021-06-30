@@ -6,6 +6,7 @@ import {
   transformArticleEntry,
   IArticleEntryProps,
 } from "./transformArticleEntry";
+import { Seperator } from "@/modules/common/components";
 
 export const ArticleEntry = (props: IArticleEntryProps): JSX.Element => {
   const { label, route, breadcrumbData } = transformArticleEntry(props);
@@ -23,6 +24,7 @@ export const ArticleEntry = (props: IArticleEntryProps): JSX.Element => {
           </div>
         </ClickableTile>
       </Link>
+      <Seperator color="gray" />
     </div>
   );
 };
