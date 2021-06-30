@@ -10,12 +10,14 @@ export interface ICategoryEntryList {
 export const CategoryEntryList = (props: ICategoryEntryList) => {
   const { categories } = props;
   return (
-    <Row className="hedi--category-entry__list">
-      {categories.map(category => (
-        <Column {...{ sm: 4, md: 3, lg: 4 }} key={category.route}>
-          <CategoryEntry category={category} />
-        </Column>
-      ))}
-    </Row>
+    <div className="hedi--category-entry-list">
+      <Row narrow>
+        {categories.map(category => (
+          <Column {...{ sm: 4, md: 3, lg: 4 }} key={category.route}>
+            <CategoryEntry category={category} />
+          </Column>
+        ))}
+      </Row>
+    </div>
   );
 };
