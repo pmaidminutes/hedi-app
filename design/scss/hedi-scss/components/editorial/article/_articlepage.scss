@@ -1,4 +1,8 @@
 .hedi--article-page {
+  background-color: #fff;
+  margin-top: -$spacing-12;
+  padding-bottom: $spacing-12;
+  position: relative;
   p {
     margin: $spacing-07 0;
     &:first-of-type::first-letter {
@@ -6,9 +10,6 @@
       line-height: $spacing-05;
     }
   }
-  position: relative;
-  margin-top: -$spacing-12;
-  background-color: #fff;
   .hedi--titlegroup {
     margin-bottom: 0;
     padding-top: $spacing-05;
