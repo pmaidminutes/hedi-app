@@ -5,10 +5,7 @@ import { Column, Row } from "carbon-components-react";
 import { Label, Body } from "@/modules/components";
 import { SearchInput } from "@/modules/search/client/components";
 import { MainCategoryCardList } from "../MainCategoryCardList";
-import {
-  ArticleEntryList,
-  ArticleTeaser,
-} from "@/modules/editorial/article/client/components/";
+import { ArticleEntryList } from "@/modules/editorial/article/client/components/";
 export const CategoryRoot = (props: ICategoryRoot) => {
   const {
     categories,
@@ -48,13 +45,18 @@ export const CategoryRoot = (props: ICategoryRoot) => {
       {categories && <MainCategoryCardList categories={categories} />}
 
       {recommendedArticles && (
-        <ArticleTeaser
+        <ArticleEntryList
+          entryType="full"
           headline={recommendedArticlesHeadline}
           articles={recommendedArticles}
         />
       )}
       {articles && (
-        <ArticleEntryList headline={allArticlesHeadline} articles={articles} />
+        <ArticleEntryList
+          headline={allArticlesHeadline || "Headline"}
+          articles={articles}
+          entryType="minimal"
+        />
       )}
     </section>
   );
