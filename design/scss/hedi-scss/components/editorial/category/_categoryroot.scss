@@ -1,3 +1,9 @@
 .hedi--category-root {
-  padding-top:$spacing-07;
+  padding-top: $spacing-07;
+
+  &__intro-text {
+    @media (min-width: 672px) {
+      margin-bottom: $spacing-13;
+    }
+  }
 }

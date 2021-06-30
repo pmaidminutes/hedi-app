@@ -27,7 +27,7 @@ export const CategoryRoot = (props: ICategoryRoot) => {
         </Row>
       )}
       {text && (
-        <Row>
+        <Row className="hedi--category-root__intro-text">
           <Column md={{ span: 4 }}>
             <Body {...text} />
           </Column>
