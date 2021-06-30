@@ -1,0 +1,10 @@
+.hedi--link {
+  &-glossary_term {
+    &::before {
+      content: "ⓘ";
+      margin: 0px 2px 0px 0px;
+      font-size: .9rem;
+      display: inline-block;
+    }
+  }
+}
