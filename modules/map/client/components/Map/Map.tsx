@@ -1,6 +1,13 @@
 import "leaflet/dist/leaflet.css";
-import React from "react";
-import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import React, { useRef } from "react";
+import {
+  MapConsumer,
+  MapContainer,
+  Marker,
+  Popup,
+  TileLayer,
+} from "react-leaflet";
+import { Map as LeafletMap } from "leaflet";
 import { IMapProps } from "../../../types";
 import { useMarker, usePositions, useLocations } from "./hooks/";
 import { useState, useEffect } from "react";
