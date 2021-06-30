@@ -46,19 +46,19 @@ export const SearchResults = (props: ISearchResultProps) => {
                   key={result.route + index}
                 />
               );
-            case "Category":
-              categoryBlocks.push(
-                <Column>
-                  <CategoryEntry category={result} key={result.route + index} />
-                </Column>
-              );
+            // case "Category":
+            //   categoryBlocks.push(
+            //     <Column>
+            //       <CategoryEntry category={result} key={result.route + index} />
+            //     </Column>
+            //   );
           }
         })}
-      <Row>
+      {/* <Row>
         {categoryBlocks?.map((categoryBlock: JSX.Element) => {
           return categoryBlock;
         })}
-      </Row>
+      </Row> */}
     </>
   );
 };
