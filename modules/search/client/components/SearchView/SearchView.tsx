@@ -70,8 +70,8 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
         //TODO should check for  empty array - even if there is no result will get loading overlay
         //data
       }
-      {loading && !data ? (
-        <Loading withOverlay={true} className={"some-class"} />
+      {loading ? (
+        <Loading withOverlay={false} className={"some-class"} />
       ) : (
         <div className="hedi--search__results">
           <SearchResults results={data} components={components} />
