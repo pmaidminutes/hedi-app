@@ -19332,6 +19332,11 @@ html:lang(fa) .hedi--profile-list .hedi--profile-entry + svg {
   background-color: #fff;
   min-height: 40vh; }
 
+.hedi--search__loading {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: center; }
+
 .hedi--breadcrumb__back-link {
   margin: 0 0.5rem; }
 
