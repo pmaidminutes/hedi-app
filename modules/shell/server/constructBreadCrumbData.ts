@@ -14,7 +14,7 @@ export function constructBreadCrumbPathData(
     const { route, routelabel, type, label, lang } = props;
     let basePath = "/" + lang;
 
-    if (type === "Category" || type === "Article") {
+    if (type === "Category" || type === "Article" || type === "Search") {
       let pathArray = routeToSegments(route);
 
       const names =
