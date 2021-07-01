@@ -23,7 +23,9 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
 
       <div>
         {translation && (
-          <p className="hedi--glossary__marked-translation">{translation}</p>
+          <p className="hedi--glossary-term__marked-translation">
+            {translation}
+          </p>
         )}
       </div>
 
