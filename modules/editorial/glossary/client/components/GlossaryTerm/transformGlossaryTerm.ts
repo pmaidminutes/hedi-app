@@ -24,17 +24,18 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
     ? "hedi--glossary-term hedi--glossary-term__marked-word"
     : "hedi--glossary-term";
   const glossaryTermId = route.split("/").pop();
+  const glossaryTermWithSlash = "/" + glossaryTermId;
   const headline: IHeadlineComponent & ICopyLinkToClipboard = {
     kind: "Headline",
     headline: "h2",
     text: label,
-    route,
+    route: route.replace(glossaryTermWithSlash, ""),
     type: "icon",
     size: "sm",
     id: glossaryTermId,
   };
-  const modifiedRoute = route.replace(
-    "/" + glossaryTermId,
+  const routeWithAnchor = route.replace(
+    glossaryTermWithSlash,
     "#" + glossaryTermId
   );
   return {
@@ -45,7 +46,7 @@ export function transformGlossaryTerm(props: IGlossaryTermProps) {
     isSelected,
     termClass,
     translation,
-    route: modifiedRoute,
+    route: routeWithAnchor,
     headline,
   };
 }
