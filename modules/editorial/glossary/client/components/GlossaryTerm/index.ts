@@ -1,3 +1,3 @@
 export * from "./GlossaryTerm";
-export * from "./GlossaryTermEntry";
+export * from "./GlossaryTermClickable";
 export * from "./transformGlossaryTerm";

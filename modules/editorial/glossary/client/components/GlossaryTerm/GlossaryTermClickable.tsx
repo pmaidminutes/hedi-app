@@ -1,9 +1,12 @@
 import Link from "next/link";
-import { HTML } from "@/modules/react/html";
 
-import { transformGlossaryTerm, IGlossaryTermProps } from "..";
+import { transformGlossaryTerm, IGlossaryTermProps, GlossaryTerm } from "..";
+import { IGlossaryTerm } from "../../../types";
+
 import { Row, Column, ClickableTile } from "carbon-components-react";
-export const GlossaryTermEntry = (props: IGlossaryTermProps): JSX.Element => {
+export const GlossaryTermClickable = (
+  props: IGlossaryTermProps
+): JSX.Element => {
   const { label, body, translation, route } = transformGlossaryTerm(props);
 
   return (
@@ -13,13 +16,9 @@ export const GlossaryTermEntry = (props: IGlossaryTermProps): JSX.Element => {
           <Link href={route} passHref>
             <ClickableTile href={route} light={true}>
               <div className="hedi--article-teaser__entry--grid--content">
-                <h4>
-                  <HTML data={label} />
-                </h4>
-                <div>{translation && <p>{translation}</p>}</div>
-                <div className="hedi--article-teaser__entry--grid--content--text-wrap">
-                  <HTML data={body} />
-                </div>
+                <GlossaryTerm
+                  glossaryTerm={props.glossaryTerm as IGlossaryTerm}
+                />
               </div>
             </ClickableTile>
           </Link>

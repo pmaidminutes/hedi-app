@@ -2,7 +2,6 @@ import { HTML } from "@/modules/react/html";
 
 import { transformGlossaryTerm, IGlossaryTermProps } from "..";
 import { HeadlineWithLinkCopy } from "@/modules/common/components";
-import { Column, Row } from "carbon-components-react";
 
 export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
   const {
@@ -16,7 +15,6 @@ export const GlossaryTerm = (props: IGlossaryTermProps): JSX.Element => {
     route,
     headline,
   } = transformGlossaryTerm(props);
-
   return (
     <div className={termClass} id={glossaryTermId}>
       <HeadlineWithLinkCopy {...headline} />

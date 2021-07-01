@@ -1,12 +1,11 @@
 import React from "react";
-import { Row, Column } from "carbon-components-react";
+
 import { Label, InlineNotification } from "@/modules/components";
 import { useSearchResults, ISearchResultProps } from "./useSearchResults";
 import { ArticleTeaserEntry } from "@/modules/editorial/article/client/components";
 import { IArticleEntry } from "@/modules/editorial/article/types";
-import { GlossaryTermEntry } from "@/modules/editorial/glossary/client/components";
+import { GlossaryTermClickable } from "@/modules/editorial/glossary/client/components";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
-import { CategoryEntry } from "@/modules/editorial/category/client/components";
 import { transformSearchComponents } from ".";
 export const SearchResults = (props: ISearchResultProps) => {
   const { results, hasError } = useSearchResults(props);
@@ -41,24 +40,13 @@ export const SearchResults = (props: ISearchResultProps) => {
               );
             case "GlossaryTerm":
               return (
-                <GlossaryTermEntry
+                <GlossaryTermClickable
                   glossaryTerm={result as IGlossaryTerm}
                   key={result.route + index}
                 />
               );
-            // case "Category":
-            //   categoryBlocks.push(
-            //     <Column>
-            //       <CategoryEntry category={result} key={result.route + index} />
-            //     </Column>
-            //   );
           }
         })}
-      {/* <Row>
-        {categoryBlocks?.map((categoryBlock: JSX.Element) => {
-          return categoryBlock;
-        })}
-      </Row> */}
     </>
   );
 };
