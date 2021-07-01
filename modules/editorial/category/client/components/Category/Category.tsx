@@ -16,17 +16,19 @@ export const Category = (props: ICategoryProps): JSX.Element => {
       {categories ? <CategoryEntryList categories={categories} /> : null}
 
       {hasSubCategories && (
-        <Column>
-          <Seperator style="dashed" color="gray" />
-        </Column>
+        <Row narrow>
+          <Column>
+            <Seperator type="l" style="dashed" color="gray" />
+          </Column>
+        </Row>
       )}
 
       {articles ? (
         <>
           <ArticleEntryList
-            type={hasSubCategories ? "oneColumn" : "twoColumns"}
+            entryType={hasSubCategories ? "minimal" : "normal-neighbours"}
             articles={articles}
-            headline={articleEntryListHeadline}
+            headline={hasSubCategories ? articleEntryListHeadline : undefined}
           />
         </>
       ) : null}

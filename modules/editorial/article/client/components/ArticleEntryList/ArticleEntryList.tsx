@@ -1,39 +1,49 @@
 import React from "react";
+import { ArticleEntry } from "../ArticleEntry";
 import { Row, Column } from "carbon-components-react";
-import { ArticleEntry } from "@/modules/editorial/article/client/components";
+
 import {
+  IArticleEntryListProps,
   transformArticleEntryList,
-  IArticleEntryList,
 } from "./transformArticleEntryList";
 
-export const ArticleEntryList = (props: IArticleEntryList) => {
-  const { articles, type, headline } = transformArticleEntryList(props);
-  if (type === "oneColumn") {
-    return (
-      <div className="hedi--article-entry-list hedi--article-entry-list__one-column">
-        <Column>
-          <h3>{headline}</h3>
-        </Column>
+export const ArticleEntryList = (props: IArticleEntryListProps) => {
+  const {
+    articles,
+    headline,
+    entryType,
+    columnProps,
+  } = transformArticleEntryList(props);
 
-        {articles.map((article, index) => (
-          <Row narrow key={article.label + index}>
-            <Column sm={4} md={4} lg={8} key={article.route}>
-              <ArticleEntry article={article} />
-            </Column>
-          </Row>
-        ))}
-      </div>
-    );
-  }
   return (
-    <div className="hedi--article-entry-list hedi--article-entry-list__one-column">
-      <Row>
-        {articles?.map((article, index) => (
-          <Column sm={4} md={4} lg={8} key={article.route}>
-            <ArticleEntry withGraphicalBreadcrumb={true} article={article} />
+    <div className="hedi--article-entry-list">
+      {headline && (
+        <Row>
+          <Column>
+            {/* TODO headline type from cms */}
+            <h2 className="hedi--article-entry-list__headline">{headline}</h2>
           </Column>
-        ))}
-      </Row>
+        </Row>
+      )}
+      {entryType === "normal-neighbours" ? (
+        <Row narrow>
+          {articles.map((article, index) => (
+            <Column {...columnProps} key={article.label + index}>
+              <ArticleEntry entryType={entryType} {...article} />
+            </Column>
+          ))}
+        </Row>
+      ) : (
+        <>
+          {articles.map((article, index) => (
+            <Row narrow key={article.label + index}>
+              <Column {...columnProps}>
+                <ArticleEntry entryType={entryType} {...article} />
+              </Column>
+            </Row>
+          ))}
+        </>
+      )}{" "}
     </div>
   );
 };

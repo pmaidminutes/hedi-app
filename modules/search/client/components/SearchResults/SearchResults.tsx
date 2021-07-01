@@ -2,7 +2,7 @@ import React from "react";
 
 import { Label, InlineNotification } from "@/modules/components";
 import { useSearchResults, ISearchResultProps } from "./useSearchResults";
-import { ArticleTeaserEntry } from "@/modules/editorial/article/client/components";
+import { ArticleEntry } from "@/modules/editorial/article/client/components";
 import { IArticleEntry } from "@/modules/editorial/article/types";
 import { GlossaryTermClickable } from "@/modules/editorial/glossary/client/components";
 import { IGlossaryTerm } from "@/modules/editorial/glossary/types";
@@ -33,7 +33,8 @@ export const SearchResults = (props: ISearchResultProps) => {
           switch (result.type) {
             case "Article":
               return (
-                <ArticleTeaserEntry
+                <ArticleEntry
+                  entryType="normal"
                   {...(result as IArticleEntry)}
                   key={result.label + index}
                 />

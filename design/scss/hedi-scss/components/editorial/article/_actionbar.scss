@@ -13,9 +13,14 @@
   }
 
   &__items {
-    align-items: center;
-    display: flex;
-    justify-content: flex-end;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 1rem;
+    @media (min-width: 672px) {
+      align-items: center;
+      display: flex;
+      justify-content: flex-end;
+    }
   }
 
   &__item {
@@ -25,9 +30,11 @@
     > svg {
       margin: 0 $spacing-02 0 0;
     }
-    margin: 0 0 0 $spacing-06;
-    &:first-child {
-      margin: 0;
+    @media (min-width: 672px) {
+      margin: 0 0 0 $spacing-06;
+      &:first-child {
+        margin: 0;
+      }
     }
   }
 

@@ -19,6 +19,8 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
     breadcrumbClass,
     appStyle,
     backLink,
+    backLinkBreadrcumbClass,
+    breadcrumbItemClass,
   } = transformBreadCrumb(props);
   if (breadcrumbType === "graphical") {
     return (
@@ -37,7 +39,7 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
         <>
           <ArrowLeft16 />
           <BreadcrumbItem
-            className="hedi--breadcrumb__back-link"
+            className={backLinkBreadrcumbClass}
             href={backLink?.href}>
             {backLink?.labelText}
           </BreadcrumbItem>
@@ -49,7 +51,11 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
           if (index + 1 !== breadCrumbPath.length) {
             return (
               <BreadcrumbItem
-                className={index === 0 ? "hedi--breadcrumb__main-category" : ""}
+                className={
+                  index + 1 !== breadCrumbPath.length
+                    ? "hedi--breadcrumb__main-category"
+                    : ""
+                }
                 key={crumb.label + index}
                 isCurrentPage={crumb.isCurrentPage}
                 href={crumb.route}>
@@ -60,7 +66,11 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
         } else {
           return (
             <BreadcrumbItem
-              className={index === 0 ? "hedi--breadcrumb__main-category" : ""}
+              className={
+                index + 1 !== breadCrumbPath.length
+                  ? "hedi--breadcrumb__main-category"
+                  : ""
+              }
               key={crumb.label + index}
               isCurrentPage={crumb.isCurrentPage}
               href={crumb.route}>

@@ -5,6 +5,9 @@
   min-height: 90vh;
 }
 
+.bx--header {
+  border-bottom: none;
+}
 .bx--row {
   @media (max-width: 769px) {
     // HACK
@@ -36,7 +39,7 @@
   background-color: $ui-01;
 }
 .bx--overflow-menu--open {
-  background-color: transparent!important;
+  background-color: transparent !important;
 }
 
 // OVERWRITES für RTL Context

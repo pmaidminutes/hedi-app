@@ -9,9 +9,7 @@ export const getProfilePage = async (
   const { components } = await getProfileDefinition(content.lang);
 
   const shell: IPageConfig = {
-    useHeader: "AUTHORIZED",
-    redirectUnAuthorized: "/" + content.lang,
-    revalidate: 1,
+    useHeader: true,
   };
 
   return {

@@ -8,7 +8,7 @@ import {
   IArticle,
   IArticleEntry,
 } from "../../article/types";
-import { IBodyComponent, IComponent, isBody } from "@/modules/components";
+import { IComponent } from "@/modules/components";
 
 export type CategoryRoot = {
   categories: ICategory[];
@@ -68,9 +68,7 @@ export async function getCategoryRoot(
       routelabel: article.routelabel,
       appStyle: article.appStyle,
       image: article.category.image,
-      summary: article.components.find(component =>
-        isBody(component)
-      ) as IBodyComponent,
+      summary: article.summary || "",
     };
   });
 

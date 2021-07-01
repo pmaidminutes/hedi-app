@@ -14,12 +14,15 @@ module.exports = {
       'testassets.projekt-hedi.de',
     ],
   },
+  // HACK build with webpack 4 as long as ignore plugin doesn't work with v5
+  webpack5: process.env.NODE_ENV === 'development',
   webpack: (config, { buildId, dev, isServer, defaultLoaders, webpack }) => {
     if (!dev) {
       // ignore all files in a playground folder (tsx and api/ts)
       // TODO enable this, once we find a fix for the build error
       // while this is not executed, remember to remove playground for any public build
       //config.plugins.push(new webpack.IgnorePlugin({resourceRegExp: /\/playground\//}));
+      config.plugins.push(new webpack.IgnorePlugin(/\/playground\//));
     }
     return config;
   },

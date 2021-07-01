@@ -1,14 +1,9 @@
-
 .hedi--simple-page {
-
-
   .hedi--titlegroup {
     p {
       margin-block-end: $spacing-05;
     }
   }
-
-
 
   .hedi-app-page-image-wrapper {
     height: 100%;
@@ -32,10 +27,13 @@
   }
 
   ul {
-    @extend .bx--list--unordered;
+    line-height: $spacing-06;
+    font-size: $spacing-05;
+    // TODO choose sign
+    list-style: "\2714" outside;
   }
 
   li {
-    @extend .bx--list__item;
+
   }
 }

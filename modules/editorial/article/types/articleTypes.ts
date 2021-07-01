@@ -20,13 +20,14 @@ export interface IArticleEntry
     IRouteLabeled,
     IAppStyled {
   image?: IImage;
-  summary?: IBodyComponent;
+  summary?: string;
 }
 
 export const ArticleEntryGQL = gql`... on Article {
 ${EntityLocalizedFields}
 ${RouteLabelFields}
 appStyle
+summary
 }`;
 
 export interface IArticleView extends IArticle {
@@ -41,6 +42,7 @@ export interface IArticle
   category: ICategoryEntry;
   appStyle: string;
   components: IComponent[];
+  summary?: string;
 }
 
 export function isIArticle(obj: any): obj is IArticle {
@@ -56,4 +58,5 @@ export const ArticleGQL = gql`... on Article {
   appStyle
   ${RouteLabelFields}
   components
+  summary
 }`;
