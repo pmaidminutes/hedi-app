@@ -71,7 +71,12 @@ export const SearchView = (props: ISearchProps): JSX.Element => {
         //data
       }
       {loading ? (
-        <Loading withOverlay={false} className={"some-class"} />
+        <div className="hedi--search__loading">
+          <Loading
+            withOverlay={false}
+            className={"hedi--search__loading-indicator"}
+          />
+        </div>
       ) : (
         <div className="hedi--search__results">
           <SearchResults results={data} components={components} />
