@@ -85,6 +85,7 @@ export function useSearchView(props: ISearchProps) {
 
   if (error || IsIErrorResponse(data)) {
     console.log("for now error");
+    loading = false;
   } else if (data) {
     loading = false;
   }
