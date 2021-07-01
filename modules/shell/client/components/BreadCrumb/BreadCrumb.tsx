@@ -11,6 +11,7 @@ import { ArrowLeft16 } from "@carbon/icons-react";
 export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
   props: IBreadCrumbProps
 ): JSX.Element => {
+  console.log({ props });
   const {
     breadCrumbPath,
     isCurrentPage,
@@ -22,6 +23,7 @@ export const BreadCrumb: React.FunctionComponent<IBreadCrumbProps> = (
     backLinkBreadrcumbClass,
     breadcrumbItemClass,
   } = transformBreadCrumb(props);
+  console.log({ breadCrumbPath });
   if (breadcrumbType === "graphical") {
     return (
       <div className={`hedi--breadcrumb__graphical`}>
